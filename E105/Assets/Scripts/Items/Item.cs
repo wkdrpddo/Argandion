@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using ItemCodeToIndex;
 
 [System.Serializable]
 public class ItemObject
@@ -48,9 +49,12 @@ public class Item : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("test");
+        Debug.Log(itemCode);
+        Debug.Log(ItemIndexArray.getInstance().arr[itemCode]);
         string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/ItemTable.json");
         var itemData = JsonHelper.FromJson<ItemObject>(jsonString);
-        itemObject = itemData[itemCode - 1];
+        itemObject = itemData[ItemIndexArray.getInstance().arr[itemCode]];
         Debug.Log(itemObject.Name);
     }
 }
