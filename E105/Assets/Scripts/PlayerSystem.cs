@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerSystem : MonoBehaviour
 {
     public GameObject _SystemManager;
@@ -12,6 +13,8 @@ public class PlayerSystem : MonoBehaviour
     public GameObject _wheat;
     private GameObject _nearBiome;
     private GameObject _nearObject;
+    private ItemObject _nearItem;
+    public Inventory _theInventory;
 
     public float[,] _equipList = new float[,] {{300,1,1.5f,0},{301,3,0.8f,0.8f},{302,4,0.8f,0.8f},{303,2,1.5f,0},{304,5,0.6f,0.6f}};
     public GameObject[] _equipment = new GameObject[5];
@@ -27,8 +30,11 @@ public class PlayerSystem : MonoBehaviour
     private float _movedDelay;
     private bool _setHand=false;
     private bool _onSoil=false;
+
     private bool _nearCrops = false;
     private bool _readyToHarvest = false;
+
+    private bool _nearDroppedItem = false;
     public float _gold;
 
     // Start is called before the first frame update
@@ -122,6 +128,14 @@ public class PlayerSystem : MonoBehaviour
         if (_onSoil && Input.GetButtonDown("fff") && !_nearCrops) {
             Instantiate(_wheat, _character.position, _character.rotation);
         }
+
+        if (_nearDroppedItem && Input.GetButtonDown("fff")) {
+            Item item = _nearObject.GetComponent<Item>();
+            ItemObject itemObject = item.itemObject;
+            if(itemObject != null) {
+                _theInventory.AcquireItem(itemObject);
+            }
+        }
     }
 
     void watering() {
@@ -149,6 +163,11 @@ public class PlayerSystem : MonoBehaviour
             _readyToHarvest = true;
             _nearObject = other.gameObject;
         }
+
+        if (other.gameObject.CompareTag("droppedItem")){
+            _nearObject = other.gameObject;
+            _nearDroppedItem = true;
+        }
     }
 
     void OnTriggerExit(Collider other) {
@@ -166,6 +185,11 @@ public class PlayerSystem : MonoBehaviour
             _nearCrops = false;
             _readyToHarvest = false;
             _nearObject = null;
+        }
+
+        if (other.gameObject.CompareTag("droppedItem")){
+            _nearObject = null;
+            _nearDroppedItem = false;
         }
     }
 }
