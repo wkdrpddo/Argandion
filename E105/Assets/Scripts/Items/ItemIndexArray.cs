@@ -8,14 +8,12 @@ namespace ItemCodeToIndex
 {
     public class ItemIndexArray
     {
-        private static ItemIndexArray instance = null;
 
-        public int[] arr;
+        //아이템코드 - 아이템인덱스 배열
+        public static int[] arr = new int[510];
 
-        private ItemIndexArray()
-        {
-            arr = new int[510];
-
+        //Static code block in c#
+        static ItemIndexArray(){
             arr[1] = 0;
             arr[2] = 1;
             arr[3] = 2;
@@ -106,15 +104,6 @@ namespace ItemCodeToIndex
             arr[503] = 87;
             arr[504] = 88;
             arr[505] = 89;
-
-        }
-
-        public static ItemIndexArray getInstance()
-        {
-            if (instance == null)
-                instance = new ItemIndexArray();
-
-            return instance;
         }
     }
 }

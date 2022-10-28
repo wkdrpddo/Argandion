@@ -51,10 +51,10 @@ public class Item : MonoBehaviour
     {
         Debug.Log("test");
         Debug.Log(itemCode);
-        Debug.Log(ItemIndexArray.getInstance().arr[itemCode]);
+        Debug.Log(ItemIndexArray.arr[itemCode]);
         string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/ItemTable.json");
         var itemData = JsonHelper.FromJson<ItemObject>(jsonString);
-        itemObject = itemData[ItemIndexArray.getInstance().arr[itemCode]];
+        itemObject = itemData[ItemIndexArray.arr[itemCode]];
         Debug.Log(itemObject.Name);
     }
 }
