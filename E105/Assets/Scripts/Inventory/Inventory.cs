@@ -56,7 +56,7 @@ public class Inventory : MonoBehaviour
                 if (slots[i].item != null)  // null 이라면 slots[i].item.itemName 할 때 런타임 에러 나서
                 {
                     if (slots[i].item.Name == _item.Name)
-                    {
+                    {   
                         slots[i].SetSlotCount(_count);
                         return;
                     }
@@ -76,9 +76,5 @@ public class Inventory : MonoBehaviour
                 Debug.Log("꽉찼엉");
             }
         }
-    }
-
-    public void asdf() {
-        Debug.Log("Hi");
     }
 }

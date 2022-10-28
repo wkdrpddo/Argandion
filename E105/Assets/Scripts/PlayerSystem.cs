@@ -168,6 +168,12 @@ public class PlayerSystem : MonoBehaviour
             _nearObject = other.gameObject;
             _nearDroppedItem = true;
         }
+
+        if (other.gameObject.CompareTag("carpentor")){
+            _nearObject = other.gameObject;
+            CombCarpentor combCarpentor = _nearObject.GetComponent<CombCarpentor>();
+            combCarpentor.Hello();
+        }
     }
 
     void OnTriggerExit(Collider other) {
@@ -190,6 +196,10 @@ public class PlayerSystem : MonoBehaviour
         if (other.gameObject.CompareTag("droppedItem")){
             _nearObject = null;
             _nearDroppedItem = false;
+        }
+
+        if (other.gameObject.CompareTag("carpentor")){
+            _nearObject = null;
         }
     }
 }

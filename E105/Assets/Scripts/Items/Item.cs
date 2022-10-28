@@ -51,6 +51,5 @@ public class Item : MonoBehaviour
         string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/ItemTable.json");
         var itemData = JsonHelper.FromJson<ItemObject>(jsonString);
         itemObject = itemData[itemCode - 1];
-        Debug.Log(itemObject.Name);
     }
 }
