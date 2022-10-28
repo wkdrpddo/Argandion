@@ -168,7 +168,9 @@ public class PlayerSystem : MonoBehaviour
             _nearObject = other.gameObject;
             _nearDroppedItem = true;
         }
+    }
 
+    void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("carpentor")){
             _nearObject = other.gameObject;
             CombCarpentor combCarpentor = _nearObject.GetComponent<CombCarpentor>();

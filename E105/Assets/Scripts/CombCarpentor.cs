@@ -24,6 +24,9 @@ public class CombCarpentor : MonoBehaviour
     public GameObject go_SlotsParent;
     public CombRecipe[] mydata;
 
+    private int[] myItems = new int[25];
+    private int[] howItems = new int[25];
+
     private Slot[] slots;
 
     void Start()
@@ -36,11 +39,23 @@ public class CombCarpentor : MonoBehaviour
 
     public void Hello()
     {
+        myItems = new int[25];
+        howItems = new int[25];
+        
         foreach(Slot slot in slots) {
             if (slot.itemCount >0) {
-                Debug.Log(slot.item.Name +"은" + slot.itemCount + "개 있당~");
+                for (int i=0; i < 25; i++) {
+                    if (myItems[i] == 0 || myItems[i] == slot.item.ItemCode){
+                        myItems[i] = slot.item.ItemCode;
+                        howItems[i] += slot.itemCount;
+                        break;
+                    }
+                }
             }
         }
+
+        Debug.Log(myItems[0]);
+        Debug.Log(howItems[0]);
     }
 
     // void canMake()
