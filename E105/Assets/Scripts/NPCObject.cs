@@ -2,26 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class NPCObject : MonoBehaviour
 {
     // Start is called before the first frame update
-    public bool usekey_status = false;
-    public Transform Player;
+
+    public bool _useKey_status = false;
+    public Transform _Player;
+    private Animator _animator;
+    public GameObject _PlayerObject;
+    public GameObject _UI;
+    public bool _talk;
 
     void Start()
     {
-        
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(usekey_status && Input.GetButtonDown("usekey"))
+        if(_useKey_status && Input.GetButtonDown("interactionKey"))
         {
-            Debug.Log("z 키 입력");
-            this.transform.LookAt(Player);
+            _animator.SetTrigger("move");
+            this.transform.LookAt(_Player);
+            Debug.Log("UI 띄우기");
+           
+            _PlayerObject.GetComponent<PlayerSystem>()._canMove = false;
+            _UI.SetActive(true);
         }
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,10 +38,9 @@ public class NPCObject : MonoBehaviour
         if (other.tag == "Player")
         {
             Debug.Log("플레이어 들어옴");
-            usekey_status = true;
+            _useKey_status = true;
            
         }
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -40,7 +48,7 @@ public class NPCObject : MonoBehaviour
         if (other.tag == "Player")
         {
             Debug.Log("플레이어 나감");
-            usekey_status = false;
+            _useKey_status = false;
            
         }
     }
