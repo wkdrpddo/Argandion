@@ -1,102 +1,1509 @@
 {
-  "Items" : [
+  "Items": [
     {
-    "ItemCode" : 1,
-    "Name": "나뭇가지",
-    "Category": "목재",
-    "BuyCost": null,
-    "SellCost": 5
-    },
-    {
-      "ItemCode" : 2,
-      "Name": "경목재",
+      "ItemCode": 1,
       "Category": "목재",
+      "Name": "나뭇가지",
       "BuyCost": null,
-      "SellCost": 200
+      "SellCost": 5,
+      "Desc": "나무에서 떨어진 나뭇가지"
     },
     {
-      "ItemCode" : 3,
-      "Name": "돌",
-      "Category": "석재", 
+      "ItemCode": 2,
+      "Category": "목재",
+      "Name": "연목재",
       "BuyCost": null,
-      "SellCost": 2
+      "SellCost": 200,
+      "Desc": "우수한 아름다움을 갖춘 부드러운 목재"
     },
     {
-      "ItemCode" : 4,
-      "Name": "철괴",
+      "ItemCode": 3,
+      "Category": "목재",
+      "Name": "경목재",
+      "BuyCost": null,
+      "SellCost": 200,
+      "Desc": "우수한 내구성을 갖춘 단단한 목재"
+    },
+    {
+      "ItemCode": 4,
+      "Category": "목재",
+      "Name": "판자",
+      "BuyCost": 750,
+      "SellCost": 250,
+      "Desc": "도구를 만들거나 건물을 짓는데 사용하는 가공된 목재",
+      "RequirementsDesc": "연목재 or 경목재 2",
+      "Requirements": [
+        {
+          "ItemCode": 2,
+          "Quantity": 2
+        },
+        {
+          "ItemCode": 3,
+          "Quantity": 2
+        }
+      ]
+    },
+    {
+      "ItemCode": 10,
       "Category": "석재",
+      "Name": "돌",
       "BuyCost": null,
-      "SellCost": 200
+      "SellCost": 2,
+      "Desc": "바위에서 떨어진 돌조각"
     },
     {
-      "ItemCode" : 5,
-      "Name": "동물 가죽",
+      "ItemCode": 11,
+      "Category": "석재",
+      "Name": "철광석",
+      "BuyCost": null,
+      "SellCost": 50,
+      "Desc": "제련하지 않은 철이 포함된 광물"
+    },
+    {
+      "ItemCode": 12,
+      "Category": "석재",
+      "Name": "철괴",
+      "BuyCost": null,
+      "SellCost": 200,
+      "Desc": "여러가지에 사용되는 순수한 철 주괴",
+      "RequirementsDesc": "철광석 5",
+      "Requirements": [
+        {
+          "ItemCode": 11,
+          "Quantity": 5
+        }
+      ]
+    },
+    {
+      "ItemCode": 13,
+      "Category": "석재",
+      "Name": "금광석",
+      "BuyCost": null,
+      "SellCost": 175,
+      "Desc": "제련하지 않은 금이 포함된 광물"
+    },
+    {
+      "ItemCode": 14,
+      "Category": "석재",
+      "Name": "금괴",
+      "BuyCost": null,
+      "SellCost": 500,
+      "Desc": "여러가지에 사용되어 높은 가치를 지닌 순수한 금 주괴",
+      "RequirementsDesc": "금광석 5",
+      "Requirements": [
+        {
+          "ItemCode": 13,
+          "Quantity": 5
+        }
+      ]
+    },
+    {
+      "ItemCode": 15,
+      "Category": "석재",
+      "Name": "드라우프",
+      "BuyCost": null,
+      "SellCost": 300,
+      "Desc": "어떤 금속보다 가볍고 단단한 희소한 광물"
+    },
+    {
+      "ItemCode": 16,
+      "Category": "석재",
+      "Name": "드라우프니르",
+      "BuyCost": null,
+      "SellCost": 750,
+      "Desc": "높은 내구성을 가진 깨끗하게 가공된 순수한 드라우프",
+      "RequirementsDesc": "드라우프 3",
+      "Requirements": [
+        {
+          "ItemCode": 15,
+          "Quantity": 3
+        }
+      ]
+    },
+    {
+      "ItemCode": 20,
       "Category": "가죽",
+      "Name": "동물의 가죽",
       "BuyCost": null,
-      "SellCost": 20
+      "SellCost": 20,
+      "Desc": "동물에게서 나오는 기본 가죽"
     },
     {
-      "ItemCode" : 6,
+      "ItemCode": 21,
+      "Category": "가죽",
       "Name": "부드러운 가죽",
-      "Category": "가죽",
       "BuyCost": null,
-      "SellCost": 50
+      "SellCost": 50,
+      "Desc": "촉감이 부드럽고 좋은 동물 가죽"
     },
     {
-      "ItemCode" : 7,
+      "ItemCode": 22,
+      "Category": "가죽",
       "Name": "거친 가죽",
-      "Category": "가죽",
       "BuyCost": null,
-      "SellCost": 50
+      "SellCost": 20,
+      "Desc": "내구성이 좋고 두꺼운 거친 동물 가죽"
     },
     {
-      "ItemCode" : 8,
-      "Name": "채소",
+      "ItemCode": 100,
       "Category": "식량",
-      "BuyCost": 35,
-      "SellCost": 55
+      "Name": "갈색버섯",
+      "BuyCost": null,
+      "SellCost": 10,
+      "Desc": "흔하게 볼 수 있는 갈색버섯. 구우면 맛있어보인다.",
+      "Effect": {
+        "Health": 2,
+        "Energy": 0
+      }
     },
     {
-      "ItemCode" : 9,
-      "Name": "고기",
+      "ItemCode": 101,
       "Category": "식량",
-      "BuyCost": 75,
-      "SellCost": 25
+      "Name": "빨간버섯",
+      "BuyCost": null,
+      "SellCost": 10,
+      "Desc": "화려하지만 먹을 수 있는 식용버섯. 독성은 없어보인다.",
+      "Effect": {
+        "Health": 0,
+        "Energy": 1
+      }
     },
     {
-      "ItemCode" : 10,
+      "ItemCode": 102,
+      "Category": "식량",
       "Name": "독버섯",
-      "Category": "식량",
       "BuyCost": null,
-      "SellCost": 15
+      "SellCost": 15,
+      "Desc": "화려하게 생겼지만 독성을 가진 위험한 버섯",
+      "Effect": {
+        "Health": -5,
+        "Energy": -5
+      }
     },
     {
-      "ItemCode" : 11,
+      "ItemCode": 103,
+      "Category": "식량",
+      "Name": "작은 고기",
+      "BuyCost": 75,
+      "SellCost": 25,
+      "Desc": "작은 동물에게서 얻을 수 있는 신선한 고기",
+      "Effect": {
+        "Health": 3,
+        "Energy": 2
+      }
+    },
+    {
+      "ItemCode": 104,
+      "Category": "식량",
+      "Name": "고기",
+      "BuyCost": 75,
+      "SellCost": 25,
+      "Desc": "모든 동물에게서 얻을 수 있는 고기",
+      "Effect": {
+        "Health": 4,
+        "Energy": 3
+      }
+    },
+    {
+      "ItemCode": 105,
+      "Category": "식량",
+      "Name": "두툼 고기",
+      "BuyCost": 75,
+      "SellCost": 25,
+      "Desc": "커다란 동물에게서 얻을 수 있는 신선한 고기",
+      "Effect": {
+        "Health": 5,
+        "Energy": 3
+      }
+    },
+    {
+      "ItemCode": 106,
+      "Category": "식량",
+      "Name": "생선",
+      "BuyCost": 100,
+      "SellCost": 35,
+      "Desc": "호수에서 낚아올린 맛있어보이는 물고기",
+      "Effect": {
+        "Health": 3,
+        "Energy": 4
+      }
+    },
+    {
+      "ItemCode": 107,
+      "Category": "식량",
+      "Name": "사과",
+      "BuyCost": null,
+      "SellCost": 15,
+      "Desc": "아삭한 식감이 살아있는 신선한 사과",
+      "Effect": {
+        "Health": 2,
+        "Energy": 1
+      }
+    },
+    {
+      "ItemCode": 108,
+      "Category": "식량",
+      "Name": "바나나",
+      "BuyCost": null,
+      "SellCost": 15,
+      "Desc": "부드럽고 달달한 샛노란 과일",
+      "Effect": {
+        "Health": 1,
+        "Energy": 2
+      }
+    },
+    {
+      "ItemCode": 109,
+      "Category": "식량",
+      "Name": "블루베리",
+      "BuyCost": null,
+      "SellCost": 10,
+      "Desc": "자연에서 자라는 새콤달콤한 열매",
+      "Effect": {
+        "Health": 0,
+        "Energy": 1
+      }
+    },
+    {
+      "ItemCode": 110,
+      "Category": "식량",
+      "Name": "우유",
+      "BuyCost": 50,
+      "SellCost": 15,
+      "Desc": "소에게서 얻을 수 있는 신선한 음료",
+      "Effect": {
+        "Health": 3,
+        "Energy": 2
+      }
+    },
+    {
+      "ItemCode": 111,
+      "Category": "식량",
+      "Name": "계란",
+      "BuyCost": 30,
+      "SellCost": 10,
+      "Desc": "닭이 낳은 건강한 단백질 보충원",
+      "Effect": {
+        "Health": 3,
+        "Energy": 3
+      }
+    },
+    {
+      "ItemCode": 112,
+      "Category": "식량",
+      "Name": "밀",
+      "BuyCost": 15,
+      "SellCost": 25,
+      "Desc": "빵에 주로 사용되는 작물",
+      "Effect": {
+        "Health": 4,
+        "Energy": 2
+      }
+    },
+    {
+      "ItemCode": 113,
+      "Category": "식량",
+      "Name": "쌀(벼)",
+      "BuyCost": 25,
+      "SellCost": 60,
+      "Desc": "주식으로 이용하는 작물",
+      "Effect": {
+        "Health": 5,
+        "Energy": 2
+      }
+    },
+    {
+      "ItemCode": 114,
+      "Category": "식량",
+      "Name": "양파",
+      "BuyCost": 25,
+      "SellCost": 60,
+      "Desc": "맵지만 달달한 봄철 작물",
+      "Effect": {
+        "Health": 0,
+        "Energy": 3
+      }
+    },
+    {
+      "ItemCode": 115,
+      "Category": "식량",
+      "Name": "양상추",
+      "BuyCost": 25,
+      "SellCost": 70,
+      "Desc": "잎이 아삭아삭하고 맛있는 봄/가을 작물",
+      "Effect": {
+        "Health": 1,
+        "Energy": 3
+      }
+    },
+    {
+      "ItemCode": 116,
+      "Category": "식량",
+      "Name": "토마토",
+      "BuyCost": 35,
+      "SellCost": 65,
+      "Desc": "빨갛고 즙이 풍부한 여름철 작물",
+      "Effect": {
+        "Health": 2,
+        "Energy": 2
+      }
+    },
+    {
+      "ItemCode": 117,
+      "Category": "식량",
+      "Name": "옥수수",
+      "BuyCost": 35,
+      "SellCost": 45,
+      "Desc": "달달하고 맛있는 여름철 작물",
+      "Effect": {
+        "Health": 3,
+        "Energy": 2
+      }
+    },
+    {
+      "ItemCode": 118,
+      "Category": "식량",
+      "Name": "감자",
+      "BuyCost": 35,
+      "SellCost": 55,
+      "Desc": "부드럽고 포만감이 높은 여름철 작물",
+      "Effect": {
+        "Health": 4,
+        "Energy": 1
+      }
+    },
+    {
+      "ItemCode": 119,
+      "Category": "식량",
+      "Name": "호박",
+      "BuyCost": 35,
+      "SellCost": 225,
+      "Desc": "달고 커다란 가을철 작물",
+      "Effect": {
+        "Health": 5,
+        "Energy": 5
+      }
+    },
+    {
+      "ItemCode": 120,
+      "Category": "식량",
+      "Name": "빵",
+      "BuyCost": 55,
+      "SellCost": 45,
+      "Desc": "고소하고 부드러운 하얀 빵",
+      "RequirementsDesc": "밀 + 우유 2",
+      "Requirements": [
+        {
+          "ItemCode": 112,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 110,
+          "Quantity": 2
+        }
+      ],
+      "Effect": {
+        "Health": 15,
+        "Energy": 10
+      }
+    },
+    {
+      "ItemCode": 121,
+      "Category": "식량",
+      "Name": "생선구이",
+      "BuyCost": 35,
+      "SellCost": 30,
+      "Desc": "단지 생선을 구웠을 뿐이지만 맛있음",
+      "RequirementsDesc": "생선",
+      "Requirements": [
+        {
+          "ItemCode": 106,
+          "Quantity": 1
+        }
+      ],
+      "Effect": {
+        "Health": 10,
+        "Energy": 7
+      }
+    },
+    {
+      "ItemCode": 122,
+      "Category": "식량",
+      "Name": "꼬치구이",
+      "BuyCost": 140,
+      "SellCost": 120,
+      "Desc": "고기와 옥수수를 꼬치에 끼워 구워낸 요리",
+      "RequirementsDesc": "고기 2 + 옥수수 2",
+      "Requirements": [
+        {
+          "ItemCode": 104,
+          "Quantity": 2
+        },
+        {
+          "ItemCode": 117,
+          "Quantity": 2
+        }
+      ],
+      "Effect": {
+        "Health": 25,
+        "Energy": 20
+      }
+    },
+    {
+      "ItemCode": 123,
+      "Category": "식량",
+      "Name": "스튜",
+      "BuyCost": 175,
+      "SellCost": 150,
+      "Desc": "우유와 고기, 감자로 포만감과 맛을 모두 충족해주는 요리",
+      "RequirementsDesc": "작은 고기 2  + 우유 + 감자 2",
+      "Requirements": [
+        {
+          "ItemCode": 103,
+          "Quantity": 2
+        },
+        {
+          "ItemCode": 110,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 118,
+          "Quantity": 2
+        }
+      ],
+      "Effect": {
+        "Health": 30,
+        "Energy": 20,
+        "Duration" : 60
+      }
+    },
+    {
+      "ItemCode": 124,
+      "Category": "식량",
+      "Name": "주먹밥",
+      "BuyCost": 120,
+      "SellCost": 100,
+      "Desc": "쌀로 지은 밥을 쥐었을 뿐이지만 맛과 포만감 모두 우수",
+      "RequirementsDesc": "쌀 2",
+      "Requirements": [
+        {
+          "ItemCode": 113,
+          "Quantity": 2
+        }
+      ],
+      "Effect": {
+        "Health": 20,
+        "Energy": 15
+      }
+    },
+    {
+      "ItemCode": 125,
+      "Category": "식량",
+      "Name": "버섯볶음",
+      "BuyCost": 140,
+      "SellCost": 115,
+      "Desc": "버섯과 양파를 함께 볶아낸 간단한 요리",
+      "RequirementsDesc": "빨간버섯 2 + 양파 2",
+      "Requirements": [
+        {
+          "ItemCode": 101,
+          "Quantity": 2
+        },
+        {
+          "ItemCode": 114,
+          "Quantity": 2
+        }
+      ],
+      "Effect": {
+        "Health": 0,
+        "Energy": 10,
+        "Duration": 60
+      }
+    },
+    {
+      "ItemCode": 126,
+      "Category": "식량",
+      "Name": "스테이크",
+      "BuyCost": 195,
+      "SellCost": 160,
+      "Desc": "다양한 재료로 든든하고 호화로운 한 접시",
+      "RequirementsDesc": "두툼고기 + 옥수수 + 양파 + 빵 + 갈색버섯",
+      "Requirements": [
+        {
+          "ItemCode": 100,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 105,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 114,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 120,
+          "Quantity": 1
+        }
+      ],
+      "Effect": {
+        "Health": 40,
+        "Energy": 40,
+        "Duration": 180
+      }
+    },
+    {
+      "ItemCode": 127,
+      "Category": "식량",
+      "Name": "호박파이",
+      "BuyCost": 285,
+      "SellCost": 250,
+      "Desc": "달고 바삭한 간식",
+      "RequirementsDesc": "호박 + 밀 2 + 계란",
+      "Requirements": [
+        {
+          "ItemCode": 111,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 112,
+          "Quantity": 2
+        },
+        {
+          "ItemCode": 119,
+          "Quantity": 1
+        }
+      ],
+      "Effect": {
+        "Health": 40,
+        "Energy": 40
+      }
+    },
+    {
+      "ItemCode": 128,
+      "Category": "식량",
+      "Name": "사과주스",
+      "BuyCost": 30,
+      "SellCost": 25,
+      "Desc": "달고 시원한 과일 음료",
+      "RequirementsDesc": "사과 2",
+      "Requirements": [
+        {
+          "ItemCode": 107,
+          "Quantity": 2
+        }
+      ],
+      "Effect": {
+        "Health": 8,
+        "Energy": 8,
+        "Duration": 120
+      }
+    },
+    {
+      "ItemCode": 129,
+      "Category": "식량",
+      "Name": "블루베리주스",
+      "BuyCost": 40,
+      "SellCost": 30,
+      "Desc": "새콤달콤한 베리로 만든 음료",
+      "RequirementsDesc": "블루베리 4",
+      "Requirements": [
+        {
+          "ItemCode": 109,
+          "Quantity": 4
+        }
+      ],
+      "Effect": {
+        "Health": 4,
+        "Energy": 4,
+        "Duration":120
+      }
+    },
+    {
+      "ItemCode": 130,
+      "Category": "식량",
+      "Name": "바나나쉐이크",
+      "BuyCost": 45,
+      "SellCost": 35,
+      "Desc": "바나나와 우유를 섞어 만든 달달하고 든든한 음료",
+      "RequirementsDesc": "바나나 2 + 우유",
+      "Requirements": [
+        {
+          "ItemCode": 108,
+          "Quantity": 2
+        },
+        {
+          "ItemCode": 110,
+          "Quantity": 1
+        }
+      ],
+      "Effect": {
+        "Health": 10,
+        "Energy": 10,
+        "Duration":120
+      }
+    },
+    {
+      "ItemCode": 131,
+      "Category": "식량",
+      "Name": "샌드위치",
+      "BuyCost": 295,
+      "SellCost": 260,
+      "Desc": "부드러운 빵 사이에 다양한 재료를 채워넣은 요리",
+      "RequirementsDesc": "빵 2 + 양상추 + 토마토 + 작은 고기 2",
+      "Requirements": [
+        {
+          "ItemCode": 103,
+          "Quantity": 2
+        },
+        {
+          "ItemCode": 115,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 116,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 120,
+          "Quantity": 2
+        }
+      ],
+      "Effect": {
+        "Health": 30,
+        "Energy": 30
+      }
+    },
+    {
+      "ItemCode": 132,
+      "Category": "식량",
+      "Name": "샐러드",
+      "BuyCost": 200,
+      "SellCost": 165,
+      "Desc": "가볍게 즐길 수 있는 신선한 샐러드",
+      "RequirementsDesc": "양상추 + 토마토 + 옥수수 + 계란 2",
+      "Requirements": [
+        {
+          "ItemCode": 111,
+          "Quantity": 2
+        },
+        {
+          "ItemCode": 115,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 116,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 117,
+          "Quantity": 1
+        }
+      ],
+      "Effect": {
+        "Health": 15,
+        "Energy": 30
+      }
+    },
+    {
+      "ItemCode": 50,
+      "Category": "꽃",
+      "Name": "루피너스",
+      "BuyCost": null,
+      "SellCost": null,
+      "Desc": "생명의 기운을 가득 머금은 꽃"
+    },
+    {
+      "ItemCode": 51,
+      "Category": "꽃",
+      "Name": "비올라",
+      "BuyCost": null,
+      "SellCost": null,
+      "Desc": "흙의 기운을 가득 머금은 꽃"
+    },
+    {
+      "ItemCode": 52,
+      "Category": "꽃",
+      "Name": "그레빌레아",
+      "BuyCost": null,
+      "SellCost": null,
+      "Desc": "불의 기운을 가득 머금은 꽃"
+    },
+    {
+      "ItemCode": 53,
+      "Category": "꽃",
+      "Name": "프리뮬라",
+      "BuyCost": null,
+      "SellCost": null,
+      "Desc": "바람의 기운을 가득 머금은 꽃"
+    },
+    {
+      "ItemCode": 54,
+      "Category": "꽃",
+      "Name": "로벨리아",
+      "BuyCost": null,
+      "SellCost": null,
+      "Desc": "물의 기운을 가득 머금은 꽃"
+    },
+    {
+      "ItemCode": 55,
+      "Category": "꽃",
+      "Name": "온시디움",
+      "BuyCost": null,
+      "SellCost": null,
+      "Desc": "풀의 기운을 가득 머금은 꽃"
+    },
+    {
+      "ItemCode": 56,
+      "Category": "꽃",
+      "Name": "디키탈리스",
+      "BuyCost": null,
+      "SellCost": null,
+      "Desc": "빛의 기운을 가득 머금은 꽃"
+    },
+    {
+      "ItemCode": 300,
+      "Category": "장비",
+      "Name": "채집용 돌 칼",
+      "BuyCost": null,
+      "SellCost": null,
+      "Desc": "야생에서 채집을 하기 위한 도구"
+    },
+    {
+      "ItemCode": 301,
+      "Category": "장비",
+      "Name": "돌 도끼",
+      "BuyCost": null,
+      "SellCost": null,
+      "Desc": "벌목을 위한 도구"
+    },
+    {
+      "ItemCode": 302,
+      "Category": "장비",
+      "Name": "돌 곡괭이",
+      "BuyCost": null,
+      "SellCost": null,
+      "Desc": "채광을 위한 도구"
+    },
+    {
+      "ItemCode": 303,
+      "Category": "장비",
+      "Name": "돌 괭이",
+      "BuyCost": null,
+      "SellCost": null,
+      "Desc": "농사를 하기 위한 도구"
+    },
+    {
+      "ItemCode": 304,
+      "Category": "장비",
+      "Name": "연습용 검",
+      "BuyCost": null,
+      "SellCost": null,
+      "Desc": "그냥 쓸만한 무기"
+    },
+    {
+      "ItemCode": 305,
+      "Category": "장비",
+      "Name": "채집용 철 칼",
+      "BuyCost": 7500,
+      "SellCost": 2500,
+      "Desc": "단단함이 더해진 채집도구",
+      "RequirementsDesc": "경목재 6 + 철괴 8 + 돌 50 + 부드러운 가죽 15",
+      "Requirements": [
+        {
+          "ItemCode": 3,
+          "Quantity": 6
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 50
+        },
+        {
+          "ItemCode": 12,
+          "Quantity": 8
+        },
+        {
+          "ItemCode": 21,
+          "Quantity": 15
+        }
+      ]
+    },
+    {
+      "ItemCode": 306,
+      "Category": "장비",
+      "Name": "철 도끼",
+      "BuyCost": 9500,
+      "SellCost": 3300,
+      "Desc": "단단함이 더해진 벌목도구",
+      "RequirementsDesc": "경목재 8 + 철괴 10 + 돌 75 + 부드러운 가죽 20",
+      "Requirements": [
+        {
+          "ItemCode": 3,
+          "Quantity": 8
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 75
+        },
+        {
+          "ItemCode": 12,
+          "Quantity": 10
+        },
+        {
+          "ItemCode": 21,
+          "Quantity": 20
+        }
+      ]
+    },
+    {
+      "ItemCode": 307,
+      "Category": "장비",
+      "Name": "철 곡괭이",
+      "BuyCost": 9500,
+      "SellCost": 3300,
+      "Desc": "단단함이 더해진 채광도구",
+      "RequirementsDesc": "경목재 8 + 철괴 10 + 돌 75 + 부드러운 가죽 20",
+      "Requirements": [
+        {
+          "ItemCode": 3,
+          "Quantity": 8
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 75
+        },
+        {
+          "ItemCode": 12,
+          "Quantity": 10
+        },
+        {
+          "ItemCode": 21,
+          "Quantity": 20
+        }
+      ]
+    },
+    {
+      "ItemCode": 308,
+      "Category": "장비",
+      "Name": "철 괭이",
+      "BuyCost": 7500,
+      "SellCost": 2500,
+      "Desc": "단단함이 더해진 농사도구",
+      "RequirementsDesc": "경목재 6 + 철괴 8 + 돌 50 + 부드러운 가죽 15",
+      "Requirements": [
+        {
+          "ItemCode": 3,
+          "Quantity": 6
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 50
+        },
+        {
+          "ItemCode": 12,
+          "Quantity": 8
+        },
+        {
+          "ItemCode": 21,
+          "Quantity": 15
+        }
+      ]
+    },
+    {
+      "ItemCode": 309,
+      "Category": "장비",
+      "Name": "철 검",
+      "BuyCost": 10000,
+      "SellCost": 3500,
+      "Desc": "단단함이 더해진 무기",
+      "RequirementsDesc": "경목재 10 + 철괴 10 + 돌 75 + 부드러운 가죽 15",
+      "Requirements": [
+        {
+          "ItemCode": 3,
+          "Quantity": 10
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 75
+        },
+        {
+          "ItemCode": 12,
+          "Quantity": 10
+        },
+        {
+          "ItemCode": 21,
+          "Quantity": 15
+        }
+      ]
+    },
+    {
+      "ItemCode": 310,
+      "Category": "장비",
+      "Name": "채집용 금 칼",
+      "BuyCost": 20000,
+      "SellCost": 6000,
+      "Desc": "금장식이 들어간 고급진 채집도구",
+      "RequirementsDesc": "연목재 14 + 금괴 10 + 돌 150 + 부드러운 가죽 25",
+      "Requirements": [
+        {
+          "ItemCode": 2,
+          "Quantity": 14
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 150
+        },
+        {
+          "ItemCode": 14,
+          "Quantity": 10
+        },
+        {
+          "ItemCode": 21,
+          "Quantity": 25
+        }
+      ]
+    },
+    {
+      "ItemCode": 311,
+      "Category": "장비",
+      "Name": "금 도끼",
+      "BuyCost": 22500,
+      "SellCost": 6500,
+      "Desc": "금으로 도금된 벌목용 도끼",
+      "RequirementsDesc": "연목재 18 + 금괴 12 + 돌 200 + 부드러운 가죽 35",
+      "Requirements": [
+        {
+          "ItemCode": 2,
+          "Quantity": 18
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 200
+        },
+        {
+          "ItemCode": 14,
+          "Quantity": 12
+        },
+        {
+          "ItemCode": 21,
+          "Quantity": 35
+        }
+      ]
+    },
+    {
+      "ItemCode": 312,
+      "Category": "장비",
+      "Name": "금 곡괭이",
+      "BuyCost": 22500,
+      "SellCost": 6500,
+      "Desc": "금을 더 찾을 수 있을 듯한 느낌을 주는 곡괭이",
+      "RequirementsDesc": "연목재 18 + 금괴 12 + 돌 200 + 부드러운 가죽 35",
+      "Requirements": [
+        {
+          "ItemCode": 2,
+          "Quantity": 18
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 200
+        },
+        {
+          "ItemCode": 14,
+          "Quantity": 12
+        },
+        {
+          "ItemCode": 21,
+          "Quantity": 35
+        }
+      ]
+    },
+    {
+      "ItemCode": 313,
+      "Category": "장비",
+      "Name": "금 괭이",
+      "BuyCost": 20000,
+      "SellCost": 6000,
+      "Desc": "금으로 장식된 가벼운 괭이",
+      "RequirementsDesc": "연목재 14 + 금괴 10 + 돌 150 + 부드러운 가죽 25",
+      "Requirements": [
+        {
+          "ItemCode": 2,
+          "Quantity": 14
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 150
+        },
+        {
+          "ItemCode": 14,
+          "Quantity": 10
+        },
+        {
+          "ItemCode": 21,
+          "Quantity": 25
+        }
+      ]
+    },
+    {
+      "ItemCode": 314,
+      "Category": "장비",
+      "Name": "금 검",
+      "BuyCost": 22500,
+      "SellCost": 7000,
+      "Desc": "금으로 칠해진 날카로운 무기",
+      "RequirementsDesc": "연목재 20 + 금괴 12 + 돌 150 + 부드러운 가죽 30",
+      "Requirements": [
+        {
+          "ItemCode": 2,
+          "Quantity": 20
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 150
+        },
+        {
+          "ItemCode": 14,
+          "Quantity": 12
+        },
+        {
+          "ItemCode": 21,
+          "Quantity": 30
+        }
+      ]
+    },
+    {
+      "ItemCode": 315,
+      "Category": "장비",
+      "Name": "채집용 드라우프 칼",
+      "BuyCost": 45000,
+      "SellCost": 11000,
+      "Desc": "드라우프니르를 사용한 프리미엄 채집도구",
+      "RequirementsDesc": "경목재 15 + 연목재 15 + 드라우프니르 10 + 돌 300 + 나뭇가지 180 + 거친 가죽 50",
+      "Requirements": [
+        {
+          "ItemCode": 1,
+          "Quantity": 180
+        },
+        {
+          "ItemCode": 2,
+          "Quantity": 15
+        },
+        {
+          "ItemCode": 3,
+          "Quantity": 15
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 300
+        },
+        {
+          "ItemCode": 16,
+          "Quantity": 10
+        },
+        {
+          "ItemCode": 22,
+          "Quantity": 50
+        }
+      ]
+    },
+    {
+      "ItemCode": 316,
+      "Category": "장비",
+      "Name": "드라우프 도끼",
+      "BuyCost": 45000,
+      "SellCost": 11000,
+      "Desc": "드라우프니르가 들어간 프리미엄 도끼",
+      "RequirementsDesc": "경목재 15 + 연목재 15 + 드라우프니르 10 + 돌 300 + 나뭇가지 180 + 거친 가죽 50",
+      "Requirements": [
+        {
+          "ItemCode": 1,
+          "Quantity": 180
+        },
+        {
+          "ItemCode": 2,
+          "Quantity": 15
+        },
+        {
+          "ItemCode": 3,
+          "Quantity": 15
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 300
+        },
+        {
+          "ItemCode": 16,
+          "Quantity": 10
+        },
+        {
+          "ItemCode": 22,
+          "Quantity": 50
+        }
+      ]
+    },
+    {
+      "ItemCode": 317,
+      "Category": "장비",
+      "Name": "드라우프 곡괭이",
+      "BuyCost": 45000,
+      "SellCost": 11000,
+      "Desc": "드라우프니르가 들어간 프리미엄 곡괭이",
+      "RequirementsDesc": "경목재 15 + 연목재 15 + 드라우프니르 10 + 돌 300 + 나뭇가지 180 + 거친 가죽 50",
+      "Requirements": [
+        {
+          "ItemCode": 1,
+          "Quantity": 180
+        },
+        {
+          "ItemCode": 2,
+          "Quantity": 15
+        },
+        {
+          "ItemCode": 3,
+          "Quantity": 15
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 300
+        },
+        {
+          "ItemCode": 16,
+          "Quantity": 10
+        },
+        {
+          "ItemCode": 22,
+          "Quantity": 50
+        }
+      ]
+    },
+    {
+      "ItemCode": 318,
+      "Category": "장비",
+      "Name": "드라우프 괭이",
+      "BuyCost": 45000,
+      "SellCost": 11000,
+      "Desc": "드라우프니르가 들어간 프리미엄 괭이",
+      "RequirementsDesc": "경목재 15 + 연목재 15 + 드라우프니르 10 + 돌 300 + 나뭇가지 180 + 거친 가죽 50",
+      "Requirements": [
+        {
+          "ItemCode": 1,
+          "Quantity": 180
+        },
+        {
+          "ItemCode": 2,
+          "Quantity": 15
+        },
+        {
+          "ItemCode": 3,
+          "Quantity": 15
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 300
+        },
+        {
+          "ItemCode": 16,
+          "Quantity": 10
+        },
+        {
+          "ItemCode": 22,
+          "Quantity": 50
+        }
+      ]
+    },
+    {
+      "ItemCode": 319,
+      "Category": "장비",
+      "Name": "드라우프 검",
+      "BuyCost": 45000,
+      "SellCost": 11000,
+      "Desc": "드라우프니르로 만든 최상급 무기",
+      "RequirementsDesc": "경목재 15 + 연목재 15 + 드라우프니르 10 + 돌 300 + 나뭇가지 180 + 거친 가죽 50",
+      "Requirements": [
+        {
+          "ItemCode": 1,
+          "Quantity": 180
+        },
+        {
+          "ItemCode": 2,
+          "Quantity": 15
+        },
+        {
+          "ItemCode": 3,
+          "Quantity": 15
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 300
+        },
+        {
+          "ItemCode": 16,
+          "Quantity": 10
+        },
+        {
+          "ItemCode": 22,
+          "Quantity": 50
+        }
+      ]
+    },
+    {
+      "ItemCode": 320,
+      "Category": "장비",
+      "Name": "낚싯대",
+      "BuyCost": null,
+      "SellCost": null,
+      "Desc": "낚시를 하기 위한 도구"
+    },
+    {
+      "ItemCode": 321,
+      "Category": "장비",
+      "Name": "고급 낚싯대",
+      "BuyCost": 10000,
+      "SellCost": null,
+      "Desc": "단단함이 더해진 낚시도구"
+    },
+    {
+      "ItemCode": 322,
+      "Category": "장비",
+      "Name": "최고급 낚싯대",
+      "BuyCost": 25000,
+      "SellCost": null,
+      "Desc": "유려한 외관에 튼튼한 낚시도구"
+    },
+    {
+      "ItemCode": 323,
+      "Category": "장비",
       "Name": "덫",
-      "Category": "장비",
       "BuyCost": 5000,
-      "SellCost": 500
+      "SellCost": 500,
+      "Desc": "작은 동물을 잡기 위한 덫",
+      "RequirementsDesc": "경목재 5 + 철괴 3",
+      "Requirements": [
+        {
+          "ItemCode": 3,
+          "Quantity": 5
+        },
+        {
+          "ItemCode": 12,
+          "Quantity": 3
+        }
+      ]
     },
     {
-      "ItemCode" : 12,
+      "ItemCode": 324,
+      "Category": "장비",
       "Name": "그물 덫",
-      "Category": "장비",
       "BuyCost": 5000,
-      "SellCost": 500
+      "SellCost": 500,
+      "Desc": "큰 동물을 잡기 위한 덫",
+      "RequirementsDesc": "돌 20 + 나뭇가지 30 + 동물 가죽 10 + 부드러운 가죽 3 + 거친 가죽 3",
+      "Requirements": [
+        {
+          "ItemCode": 1,
+          "Quantity": 30
+        },
+        {
+          "ItemCode": 10,
+          "Quantity": 20
+        },
+        {
+          "ItemCode": 20,
+          "Quantity": 10
+        },
+        {
+          "ItemCode": 21,
+          "Quantity": 3
+        },
+        {
+          "ItemCode": 22,
+          "Quantity": 3
+        }
+      ]
     },
     {
-      "ItemCode" : 13,
+      "ItemCode": 400,
+      "Category": "옷",
+      "Name": "능률의 후드",
+      "BuyCost": 270,
+      "SellCost": 60,
+      "Desc": "작업 능률을 올려주는 후드",
+      "RequirementsDesc": "양털 7 + 동물의 가죽 3",
+      "Requirements": [
+        {
+          "ItemCode": 20,
+          "Quantity": 3
+        },
+        {
+          "ItemCode": 505,
+          "Quantity": 7
+        }
+      ]
+    },
+    {
+      "ItemCode": 401,
+      "Category": "옷",
+      "Name": "괴력의 조끼",
+      "BuyCost": 500,
+      "SellCost": 150,
+      "Desc": "장착하면 힘이 세지는 조끼",
+      "RequirementsDesc": "양털 5 + 부드러운 가죽 3",
+      "Requirements": [
+        {
+          "ItemCode": 21,
+          "Quantity": 3
+        },
+        {
+          "ItemCode": 505,
+          "Quantity": 5
+        }
+      ]
+    },
+    {
+      "ItemCode": 402,
+      "Category": "옷",
+      "Name": "견고한 바지",
+      "BuyCost": 480,
+      "SellCost": 140,
+      "Desc": "탄탄한 착용감의 바지",
+      "RequirementsDesc": "양털 4 + 부드러운 가죽 2 + 거친 가죽 1",
+      "Requirements": [
+        {
+          "ItemCode": 21,
+          "Quantity": 2
+        },
+        {
+          "ItemCode": 22,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 505,
+          "Quantity": 4
+        }
+      ]
+    },
+    {
+      "ItemCode": 403,
+      "Category": "옷",
+      "Name": "바람의 부츠",
+      "BuyCost": 1500,
+      "SellCost": 500,
+      "Desc": "이동속도를 높여주는 유용한 신발",
+      "RequirementsDesc": "양털 3 + 거친 가죽 2 + 금괴",
+      "Requirements": [
+        {
+          "ItemCode": 14,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 22,
+          "Quantity": 2
+        },
+        {
+          "ItemCode": 505,
+          "Quantity": 3
+        }
+      ]
+    },
+    {
+      "ItemCode": 404,
+      "Category": "옷",
+      "Name": "엘프의 신발",
+      "BuyCost": 900,
+      "SellCost": 200,
+      "Desc": "엘프의 디버프 해제 마법이 담겨있는 신발",
+      "RequirementsDesc": "양털 + 거친 가죽 + 철괴",
+      "Requirements": [
+        {
+          "ItemCode": 12,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 22,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 505,
+          "Quantity": 1
+        }
+      ]
+    },
+    {
+      "ItemCode": 500,
+      "Category": "기타",
       "Name": "덫 미끼",
-      "Category": "기타",
       "BuyCost": 125,
-      "SellCost": null
+      "SellCost": null,
+      "Desc": "덫을 설치할 때 필요한 미끼",
+      "RequirementsDesc": "채소1 + 독버섯1",
+      "Requirements": [
+        {
+          "ItemCode": 102,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 114,
+          "Quantity": 1
+        }
+      ]
     },
     {
-      "ItemCode" : 14,
-      "Name": "그물 덫 미끼",
+      "ItemCode": 501,
       "Category": "기타",
+      "Name": "그물 덫 미끼",
       "BuyCost": 150,
-      "SellCost": null
+      "SellCost": null,
+      "Desc": "그물 덫을 설치할 때 필요한 미끼",
+      "RequirementsDesc": "고기1 + 독버섯1",
+      "Requirements": [
+        {
+          "ItemCode": 102,
+          "Quantity": 1
+        },
+        {
+          "ItemCode": 104,
+          "Quantity": 1
+        }
+      ]
+    },
+    {
+      "ItemCode": 502,
+      "Category": "기타",
+      "Name": "떡밥",
+      "BuyCost": 5,
+      "SellCost": 2,
+      "Desc": "낚시에 사용하는 기본적인 미끼"
+    },
+    {
+      "ItemCode": 503,
+      "Category": "기타",
+      "Name": "지렁이",
+      "BuyCost": 7,
+      "SellCost": 3,
+      "Desc": "물고기가 금방 낚이는 고급 미끼"
+    },
+    {
+      "ItemCode": 503,
+      "Category": "기타",
+      "Name": "지렁이",
+      "BuyCost": 7,
+      "SellCost": 3,
+      "Desc": "물고기가 금방 낚이는 고급 미끼"
+    },
+    {
+      "ItemCode": 504,
+      "Category": "기타",
+      "Name": "새우",
+      "BuyCost": 10,
+      "SellCost": 5,
+      "Desc": "물고기가 가장 좋아하는 최고급 미끼"
+    },
+    {
+      "ItemCode": 505,
+      "Category": "기타",
+      "Name": "양털",
+      "BuyCost": 15,
+      "SellCost": 5,
+      "Desc": "옷 제작에 사용되는 포근한 양털"
     }
   ]
 }
