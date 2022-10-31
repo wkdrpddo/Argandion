@@ -22,7 +22,8 @@ public class CombRecipes
 public class CombCarpentor : MonoBehaviour
 {   
     public GameObject go_SlotsParent;
-    public CombRecipe[] mydata;
+    public CombRecipe[] myData;
+    public GameObject item;
 
     private int[] myItems = new int[25];
     private int[] howItems = new int[25];
@@ -34,7 +35,8 @@ public class CombCarpentor : MonoBehaviour
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
         string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/CombinationTable.json");
         var combDatas = JsonHelper.FromJson<CombRecipe>(jsonString);
-        mydata = combDatas;
+        myData = combDatas;
+        // Debug.Log(item.GetComponent<Item>().FindName(4));
     }
 
     public void Hello()
@@ -44,7 +46,7 @@ public class CombCarpentor : MonoBehaviour
         
         foreach(Slot slot in slots) {
             if (slot.itemCount >0) {
-                for (int i=0; i < 25; i++) {
+                for (int i=0; i < 12; i++) {
                     if (myItems[i] == 0 || myItems[i] == slot.item.ItemCode){
                         myItems[i] = slot.item.ItemCode;
                         howItems[i] += slot.itemCount;
@@ -54,14 +56,40 @@ public class CombCarpentor : MonoBehaviour
             }
         }
 
-        Debug.Log(myItems[0]);
-        Debug.Log(howItems[0]);
+        foreach(CombRecipe rec in myData) {
+            
+        }
     }
 
-    // void canMake()
-    // {
-    //     foreach(CombRecipe combData in mydata) {
+    int CanMake(CombRecipe rec, int[] myItems, int[] howItems)
+    {
+        int howM1 = 0;
+        int howM2 = 0;
 
-    //     }
-    // }
+        for (int i=0; i<12; i++) {
+            if (myItems[i] == rec.Material1) {
+                howM1 = myItems[i] / rec.Cost1;
+                if (howM1 == 0) {
+                    return 0;
+                }
+                break;
+            }
+        }
+
+        for (int i=0; i<12; i++) {
+            if (myItems[i] == rec.Material2) {
+                howM2 = myItems[i] / rec.Cost2;
+                if (howM2 == 0) {
+                    return 0;
+                }
+                break;
+            }
+        }
+
+        if( howM1 < howM2  ) {
+            return howM1;
+        } else {
+            return howM2;
+        }
+    }
 }
