@@ -15,6 +15,7 @@ public class PlayerSystem : MonoBehaviour
     private GameObject _nearObject;
     private ItemObject _nearItem;
     public Inventory _theInventory;
+    public Chest _theChest;
 
     public float[,] _equipList = new float[,] {{300,1,1.5f,0},{301,3,0.8f,0.8f},{302,4,0.8f,0.8f},{303,2,1.5f,0},{304,5,0.6f,0.6f}};
     public GameObject[] _equipment = new GameObject[5];
@@ -31,11 +32,17 @@ public class PlayerSystem : MonoBehaviour
     private bool _setHand=false;
     private bool _onSoil=false;
 
+    private bool _nearChest = false;
     private bool _nearCrops = false;
     private bool _readyToHarvest = false;
     private bool _nearCarpentor = false;
     private bool _nearDroppedItem = false;
     public float _gold;
+
+    public int chestIdx = 0;
+    public int chestCount = 1;
+    public int invenIdx = 0;
+    public int invenCount = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -141,6 +148,19 @@ public class PlayerSystem : MonoBehaviour
             CombCarpentor combCarpentor = _nearObject.GetComponent<CombCarpentor>();
             combCarpentor.Trade(2,2);
         }
+
+        if (_nearChest && Input.GetButtonDown("fff")) {
+            ItemObject item = _theInventory.StoreItem(invenIdx, -invenCount);
+            Debug.Log(item);
+            _theChest.PutItem(item, invenCount);
+        }
+
+        if (_nearChest && Input.GetButtonDown("water")) {
+            ItemObject item = _theChest.TakeItem(chestIdx, -chestCount);
+            Debug.Log("햇당");
+            Debug.Log(item);
+            _theInventory.AcquireItem(item, chestCount);
+        }
     }
 
     void watering() {
@@ -172,6 +192,11 @@ public class PlayerSystem : MonoBehaviour
         if (other.gameObject.CompareTag("droppedItem")){
             _nearObject = other.gameObject;
             _nearDroppedItem = true;
+        }
+
+        if (other.gameObject.CompareTag("chest")){
+            _nearObject = other.gameObject;
+            _nearChest = true;
         }
     }
 
@@ -209,6 +234,11 @@ public class PlayerSystem : MonoBehaviour
         if (other.gameObject.CompareTag("carpentor")){
             _nearObject = null;
             _nearCarpentor = false;
+        }
+
+        if (other.gameObject.CompareTag("chest")){
+            _nearObject = null;
+            _nearChest = false;
         }
     }
 }

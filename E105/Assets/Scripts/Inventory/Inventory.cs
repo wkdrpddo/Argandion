@@ -18,34 +18,34 @@ public class Inventory : MonoBehaviour
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
     }
 
-    void Update()
-    {
-        TryOpenInventory();
-    }
+    // void Update()
+    // {
+    //     TryOpenInventory();
+    // }
 
-    private void TryOpenInventory()
-    {
-        if(Input.GetKeyDown(KeyCode.I))
-        {
-            invectoryActivated = !invectoryActivated;
+    // private void TryOpenInventory()
+    // {
+    //     if(Input.GetKeyDown(KeyCode.I))
+    //     {
+    //         invectoryActivated = !invectoryActivated;
 
-            if (invectoryActivated)
-                OpenInventory();
-            else
-                CloseInventory();
+    //         if (invectoryActivated)
+    //             OpenInventory();
+    //         else
+    //             CloseInventory();
 
-        }
-    }
+    //     }
+    // }
 
-    private void OpenInventory()
-    {
-        go_InventoryBase.SetActive(true);
-    }
+    // private void OpenInventory()
+    // {
+    //     go_InventoryBase.SetActive(true);
+    // }
 
-    private void CloseInventory()
-    {
-        go_InventoryBase.SetActive(false);
-    }
+    // private void CloseInventory()
+    // {
+    //     go_InventoryBase.SetActive(false);
+    // }
 
     public void AcquireItem(ItemObject _item, int _count = 1)
     {
@@ -82,5 +82,11 @@ public class Inventory : MonoBehaviour
                 Debug.Log("꽉찼엉");
             }
         }
+    }
+
+    public ItemObject StoreItem(int idx, int _count = 1)
+    {
+        slots[idx].SetSlotCount(_count);
+        return slots[idx].item;
     }
 }
