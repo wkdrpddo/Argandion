@@ -30,14 +30,14 @@ public class MakeBuildingFence : MonoBehaviour
     }
 
 
-    // public void checkPurification()
-    // {
-    //     // 정화 판정
-    //     if (_systemManager._purification(_sectorNum))
-    //     {
-    //         Destory(gameObject);
-    //     }
-    // }
+    public void checkPurification()
+    {
+        // 정화 판정
+        if (_systemManager._purification[_sectorNum])
+        {
+            Destroy(gameObject);
+        }
+    }
 
 
     public void setValue()
