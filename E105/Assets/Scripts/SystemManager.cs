@@ -21,6 +21,7 @@ public class SystemManager : MonoBehaviour
     static int _sector_size=8;
     public bool[] _purification = new bool[_sector_size];
     public GameObject[] _sector = new GameObject[_sector_size];
+    public SectorObject _sectorTest;
 
     public int[,] _timezone = new int[,] {{6,7,18,19},{6,6,19,20},{6,7,18,19},{7,8,18,19}};
     // Start is called before the first frame update
@@ -40,7 +41,7 @@ public class SystemManager : MonoBehaviour
     {
         TimeSystem();
     }
-    
+
     private void UpdateWeather(int index)
     {
         Debug.Log("계절이 바뀌었습니다.");
@@ -63,6 +64,7 @@ public class SystemManager : MonoBehaviour
                 if (_hour >= 23) {
                 _hour = 6;
                 _day += 1;
+                DayEnd();
 
                     if (_day>=29) {
                         _day -= 28;
@@ -96,5 +98,10 @@ public class SystemManager : MonoBehaviour
         else if (_timezone[_weather,3]<=_hour) {
             _light.transform.rotation = Quaternion.Euler(200,-30,_light.transform.rotation.z);
         }
+    }
+
+    private void DayEnd()
+    {
+        _sectorTest.DayEnd();
     }
 }
