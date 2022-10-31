@@ -7,10 +7,6 @@ public class NPCManager : MonoBehaviour
     public bool[] NPC_open = new bool[8];
 
     [SerializeField] private GameObject[] NPC = new GameObject[8];
-
-    
-
-
     
     // Start is called before the first frame update
     void Start()
@@ -29,7 +25,6 @@ public class NPCManager : MonoBehaviour
                 NPC[i].SetActive(false);
             }
         }
-
 
     }
 }
