@@ -55,10 +55,16 @@ public class Inventory : MonoBehaviour
             {
                 if (slots[i].item != null)  // null 이라면 slots[i].item.itemName 할 때 런타임 에러 나서
                 {
-                    if (slots[i].item.Name == _item.Name)
-                    {   
-                        slots[i].SetSlotCount(_count);
-                        return;
+                    if (slots[i].item.Name == _item.Name && slots[i].itemCount < 99) {
+                        if (slots[i].itemCount + _count <= 99 ) {
+                            slots[i].SetSlotCount(_count);
+                            return;
+                        } else {
+                            int temp = slots[i].itemCount;
+                            slots[i].SetSlotCount( 99-slots[i].itemCount );
+                            AcquireItem(_item, _count + temp - 99);
+                            return;
+                        }
                     }
                 }
             }

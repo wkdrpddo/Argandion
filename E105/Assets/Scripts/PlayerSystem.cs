@@ -33,7 +33,7 @@ public class PlayerSystem : MonoBehaviour
 
     private bool _nearCrops = false;
     private bool _readyToHarvest = false;
-
+    private bool _nearCarpentor = false;
     private bool _nearDroppedItem = false;
     public float _gold;
 
@@ -136,6 +136,11 @@ public class PlayerSystem : MonoBehaviour
                 _theInventory.AcquireItem(itemObject);
             }
         }
+
+        if (_nearCarpentor && Input.GetButtonDown("fff")) {
+            CombCarpentor combCarpentor = _nearObject.GetComponent<CombCarpentor>();
+            combCarpentor.Trade(2,2);
+        }
     }
 
     void watering() {
@@ -173,6 +178,7 @@ public class PlayerSystem : MonoBehaviour
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("carpentor")){
             _nearObject = other.gameObject;
+            _nearCarpentor = true;
             CombCarpentor combCarpentor = _nearObject.GetComponent<CombCarpentor>();
             combCarpentor.Hello();
         }
@@ -202,6 +208,7 @@ public class PlayerSystem : MonoBehaviour
 
         if (other.gameObject.CompareTag("carpentor")){
             _nearObject = null;
+            _nearCarpentor = false;
         }
     }
 }

@@ -29,22 +29,22 @@ public class Slot : MonoBehaviour
 
         if(item.Category != "장비")
         {
-            go_CountImage.SetActive(true);
-            text_Count.text = itemCount.ToString();
+            // go_CountImage.SetActive(true);
+            // text_Count.text = itemCount.ToString();
         }
         else
         {
             text_Count.text = "0";
-            go_CountImage.SetActive(false);
+            // go_CountImage.SetActive(false);
         }
 
-        SetColor(1);
+        // SetColor(1);
     }
 
     public void SetSlotCount(int _count)
     {
         itemCount += _count;
-        text_Count.text = itemCount.ToString();
+        // text_Count.text = itemCount.ToString();
 
         if (itemCount <= 0)
             ClearSlot();
@@ -54,10 +54,10 @@ public class Slot : MonoBehaviour
     {
         item = null;
         itemCount = 0;
-        itemImage.sprite = null;
-        SetColor(0);
+        // itemImage.sprite = null;
+        // SetColor(0);
 
-        text_Count.text = "0";
-        go_CountImage.SetActive(false);
+        // text_Count.text = "0";
+        // go_CountImage.SetActive(false);
     }
 }
