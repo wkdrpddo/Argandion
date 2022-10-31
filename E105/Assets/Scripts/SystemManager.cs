@@ -19,9 +19,11 @@ public class SystemManager : MonoBehaviour
     public int _purification_sector;
 
     static int _sector_size=8;
+    public int _purification_size;
     public bool[] _purification = new bool[_sector_size];
     public GameObject[] _sector = new GameObject[_sector_size];
     public SectorObject _sectorTest;
+    public GameObject[] _randomNPC = new GameObject[2];
 
     public int[,] _timezone = new int[,] {{6,7,18,19},{6,6,19,20},{6,7,18,19},{7,8,18,19}};
     // Start is called before the first frame update
@@ -102,6 +104,70 @@ public class SystemManager : MonoBehaviour
 
     private void DayEnd()
     {
-        _sectorTest.DayEnd();
+        // _sectorTest.DayEnd();
+        int npc1_position = RandomPurification();
+        int npc2_position = RandomPurification();
+
+        // //순례자, 음악가 랜덤위치 생성
+        _randomNPC[0].transform.position = NPCRandomPosition(npc1_position);
+        _randomNPC[1].transform.position = NPCRandomPosition(npc2_position);        
+
+    }
+
+    //정화된 구역 중에서 랜덤 한 구역 정하기
+    private int RandomPurification()
+    {
+        int[] region = new int[8];  //정화된 지역
+        _purification_size=0;
+
+        for(int i=0; i<8; i++)
+        {
+            if(_purification[i]){
+
+                region[_purification_size] = i;
+                _purification_size++;
+                
+            }
+        }
+
+        int rand = Random.Range(0,_purification_size);
+        
+        return region[rand];
+    }
+
+    //선택된 지역중 랜덤 좌표
+    private Vector3 NPCRandomPosition(int region)
+    {
+        Vector3 position = new Vector3(0,0,0);
+
+        switch(region){
+            case 0 :  
+                position = new Vector3(Random.Range(0.0f, 60.0f), 0.0f, Random.Range(225.0f, 275.0f));
+                break;
+            case 1 : 
+                position = new Vector3(Random.Range(87.0f, 202.0f), 0.0f, Random.Range(193.0f, 264.0f));
+                break;
+            case 2 : 
+                position = new Vector3(Random.Range(193.0f, 233.0f), 0.0f, Random.Range(200.0f, 256.0f));
+                break;
+            case 3 : 
+                position = new Vector3(Random.Range(33.0f, 79.0f), 0.0f, Random.Range(110.0f, 162.0f));
+                break;
+            case 4 : 
+                position = new Vector3(Random.Range(80.0f, 192.0f), 0.0f, Random.Range(110.0f, 200.0f));
+                break;
+            case 5 : 
+                position = new Vector3(Random.Range(193.0f, 251.0f), 0.0f, Random.Range(120.0f, 200.0f));
+                break;
+            case 6 : 
+                position = new Vector3(Random.Range(0.0f, 166.0f), 0.0f, Random.Range(38.0f, 110.0f));
+                break;
+            case 7 : 
+                position = new Vector3(Random.Range(180.0f, 194.0f), 0.0f, Random.Range(81.0f, 110.0f));
+                break;
+        }
+
+        return position;
+
     }
 }
