@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class QuestButton : MonoBehaviour
 {
-    public int idx;
-
+    // 퀘스트 오브젝트 제거를 위한 함수
     public void destroyed()
     {
         MenuPanel obj = this.GetComponentInParent<MenuPanel>();
