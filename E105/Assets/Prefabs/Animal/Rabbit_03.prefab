@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7133063736925244577
+--- !u!1 &3017798353785245878
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7133063736925244582}
-  - component: {fileID: 7133063736925244583}
+  - component: {fileID: 3017798353785560598}
+  - component: {fileID: 3017798353799047820}
   m_Layer: 0
   m_Name: SM_Rabbit_03
   m_TagString: Untagged
@@ -17,28 +17,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7133063736925244582
+--- !u!4 &3017798353785560598
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7133063736925244577}
+  m_GameObject: {fileID: 3017798353785245878}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.037214093, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7133063737033204430}
+  m_Father: {fileID: 3017798353785465990}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!137 &7133063736925244583
+--- !u!137 &3017798353799047820
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7133063736925244577}
+  m_GameObject: {fileID: 3017798353785245878}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,7 +85,7 @@ SkinnedMeshRenderer:
     m_Center: {x: 9.313226e-10, y: 0.015617857, z: 0.030101143}
     m_Extent: {x: 0.01857657, y: 0.056069247, z: 0.054667853}
   m_DirtyAABB: 0
---- !u!1 &7133063737033204425
+--- !u!1 &3017798353785430100
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,46 +93,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7133063737033204430}
-  - component: {fileID: 7133063737033204019}
-  - component: {fileID: 7133063737033204018}
-  - component: {fileID: 7133063737033204429}
-  - component: {fileID: 7133063737033204428}
-  - component: {fileID: 7133063737033204431}
+  - component: {fileID: 3017798353785465990}
+  - component: {fileID: 3017798353794881942}
+  - component: {fileID: 3017798353785430186}
+  - component: {fileID: 3017798353785430187}
+  - component: {fileID: 3017798353785430185}
   m_Layer: 0
-  m_Name: Rabbit_3
-  m_TagString: Untagged
+  m_Name: Rabbit_03
+  m_TagString: Rabbit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7133063737033204430
+--- !u!4 &3017798353785465990
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7133063737033204425}
-  m_LocalRotation: {x: -0, y: -0.9717112, z: -0, w: -0.23617235}
-  m_LocalPosition: {x: -3.76, y: 0, z: -0.46}
+  m_GameObject: {fileID: 3017798353785430100}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.628, y: 0, z: 4.66}
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7133063736925244582}
+  - {fileID: 3017798353785560598}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -207.321, z: 0}
---- !u!95 &7133063737033204019
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &3017798353794881942
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7133063737033204425}
+  m_GameObject: {fileID: 3017798353785430100}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0904c2f7f32114047ad477fc14eb29c2, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0a90ea4955f026d478b3281cff053298, type: 2}
+  m_Controller: {fileID: 9100000, guid: 44f1586436876d142b0afe36ef71a9cc, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -142,68 +141,54 @@ Animator:
   m_HasTransformHierarchy: 0
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!143 &7133063737033204018
-CharacterController:
+--- !u!54 &3017798353785430186
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7133063737033204425}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
+  m_GameObject: {fileID: 3017798353785430100}
   serializedVersion: 2
-  m_Height: 0.1
-  m_Radius: 0.1
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.111, z: 0}
---- !u!65 &7133063737033204429
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!65 &3017798353785430187
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7133063737033204425}
+  m_GameObject: {fileID: 3017798353785430100}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.05203105, y: 0.11209385, z: 0.112471335}
-  m_Center: {x: -0.0005602966, y: 0.055402447, z: 0.034396883}
---- !u!114 &7133063737033204428
+  m_Size: {x: 0.04241802, y: 0.11102186, z: 0.14218278}
+  m_Center: {x: -0.00018728845, y: 0.05561878, z: 0.01577029}
+--- !u!114 &3017798353785430185
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7133063737033204425}
+  m_GameObject: {fileID: 3017798353785430100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01897ae0afb46794d88a3dc2d9386348, type: 3}
+  m_Script: {fileID: 11500000, guid: 12c08a10614b2744d8fbeda05b63d2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 1
-  turnSpeed: 2
-  minIdleTime: 0
-  maxIdleTime: 0.5
-  wanderRange: 100
-  showGizmos: 0
---- !u!114 &7133063737033204431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7133063737033204425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef59d471b6c7d2345b3caea42d38a6d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animalHp: 100
-  _decreaseHp: 30
-  _sword: {fileID: 0}
-  _wander: {fileID: 7133063737033204428}
+  animalName: Rabbit
+  hp: 2
+  walkSpeed: 2
+  runSpeed: 10
+  walkTime: 10
+  waitTime: 4
+  runTime: 5
+  anim: {fileID: 3017798353794881942}
+  rigid: {fileID: 3017798353785430186}
+  boxCol: {fileID: 3017798353785430187}
