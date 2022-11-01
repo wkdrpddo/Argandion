@@ -18,6 +18,8 @@ public class MakeBuildingFence : MonoBehaviour
 
     public SystemManager _systemManager;
 
+    public Material _icon;
+
 
     void Start()
     {
@@ -89,6 +91,8 @@ public class MakeBuildingFence : MonoBehaviour
         }
 
         // 표지판 생성
-        Instantiate(_sign, new Vector3(_colliderCenter.x, 0, _colliderCenter.z - _colliderSize.z / 2 - 0.5f), Quaternion.Euler(0, -180, 0), _fences.transform);
+        GameObject sign = Instantiate(_sign, new Vector3(_colliderCenter.x, -0.5f, _colliderCenter.z - _colliderSize.z / 2 - 0.5f), Quaternion.Euler(0, -180, 0), _fences.transform);
+        // 아이콘 바꾸기
+        sign.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = _icon;
     }
 }
