@@ -12,7 +12,7 @@ public class PlayerSystem : MonoBehaviour
     public Animator _playerAnimator;
 
     private GameObject _nearObject;
-    private Crafting _crafting;
+    private InteractionUI _interactionUi;
 
     public float[,] _equipList = new float[,] { { 300, 1, 1.5f, 0 }, { 301, 3, 0.8f, 0.8f }, { 302, 4, 0.8f, 0.8f }, { 303, 2, 1.5f, 0 }, { 304, 5, 0.6f, 0.6f } };
     public GameObject[] _equipment = new GameObject[5];
@@ -146,7 +146,7 @@ public class PlayerSystem : MonoBehaviour
         {
             if (_nearObject.tag == "CraftingTable")
             {
-                Crafting crafting = _nearObject.GetComponent<Crafting>();
+                InteractionUI crafting = _nearObject.GetComponent<InteractionUI>();
 
                 if (crafting._open)
                 {
@@ -178,7 +178,7 @@ public class PlayerSystem : MonoBehaviour
     {
         if (other.tag == "CraftingTable")
         {
-            Crafting crafting = _nearObject.GetComponent<Crafting>();
+            InteractionUI crafting = _nearObject.GetComponent<InteractionUI>();
             crafting.Exit();
             _nearObject = null;
         }
@@ -187,21 +187,23 @@ public class PlayerSystem : MonoBehaviour
     public void changeHealth(float value)
     {
         _health -= value;
-        if (_health <= 0) {
+        if (_health <= 0)
+        {
             _health = 0;
             playerDeath();
         }
-        _UIManager.setHealthBar(_health/_health_max);
+        _UIManager.setHealthBar(_health / _health_max);
     }
 
     public void changeEnergy(float value)
     {
         _stamina -= value;
-        if (_stamina <= 0) {
+        if (_stamina <= 0)
+        {
             _stamina = 0;
             playerDeath();
         }
-        _UIManager.setEnergyBar(_stamina/_stamina_max);
+        _UIManager.setEnergyBar(_stamina / _stamina_max);
     }
 
     private void playerDeath()

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crafting : MonoBehaviour
+public class InteractionUI : MonoBehaviour
 {
     public RectTransform _uiGroup;
     public string _tableName;
