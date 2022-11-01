@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Wheat1 : MonoBehaviour
 {
-    float nextPhaseTime = 3f;
-    float updateTime = 0.0f;
+    float nextPhaseDay = 2;
+    float updateDay = 0;
     bool onWet;
     public GameObject wheat2;
     public Transform wheat1;
@@ -20,23 +20,28 @@ public class Wheat1 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void growUp()
     {
         if (onWet) {
-            if(updateTime > nextPhaseTime)
-            {
+            updateDay +=1;
+            if (updateDay >= nextPhaseDay) {
                 Instantiate(wheat2, wheat1.position, wheat1.rotation);
                 Destroy(gameObject);
-                Debug.Log("다 자랐다!");
             }
-            else
-            {
-                if (_buffManager.whiteSpirit) {
-                    Debug.Log("버프 적용중!");
-                }
-                updateTime += Time.deltaTime * (_buffManager.whiteSpirit ? 1.2f : 1);
-                Debug.Log(updateTime);
-            }
+            // if(update > nextPhaseTime)
+            // {
+            //     Instantiate(wheat2, wheat1.position, wheat1.rotation);
+            //     Destroy(gameObject);
+            //     Debug.Log("다 자랐다!");
+            // }
+            // else
+            // {
+            //     if (_buffManager.whiteSpirit) {
+            //         Debug.Log("버프 적용중!");
+            //     }
+            //     updateTime += Time.deltaTime * (_buffManager.whiteSpirit ? 1.2f : 1);
+            //     Debug.Log(updateTime);
+            // }
         }
     }
 

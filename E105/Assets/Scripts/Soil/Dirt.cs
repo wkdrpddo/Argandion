@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Dirt : MonoBehaviour
 {
-    float wateredTime;
+    public int watered;
+    public int minusWater;
+    private GameObject[] _nearObjects;
     ParticleSystem particleObject;
 
     void Start()
@@ -12,14 +14,17 @@ public class Dirt : MonoBehaviour
         particleObject = GetComponent<ParticleSystem>();
     }
 
-    void Update()
+    void newDay()
     {
         if (gameObject.tag == "wateredDirt")
         {
-            wateredTime -= Time.deltaTime;
-            if (wateredTime < 0.0f) {
+            watered -= minusWater;
+            if (watered < 0) {
+                watered = 0;
                 gameObject.tag = "dirt";
                 particleObject.Stop();
+            } else {
+                
             }
         }
     }
@@ -27,7 +32,20 @@ public class Dirt : MonoBehaviour
     public void Water()
     {
         gameObject.tag = "wateredDirt";
-        wateredTime = 50f;
+        watered = 1500;
         particleObject.Play();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("wheat")) {
+            minusWater += 20;
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (other.gameObject.CompareTag("wheat")) {
+            minusWater -= 20;
+        }
     }
 }
