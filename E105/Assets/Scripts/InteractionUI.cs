@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractionUI : MonoBehaviour
 {
     public RectTransform _uiGroup;
-    public string _tableName;
+    public string _objectName;
 
     public PlayerSystem _enterPlayer;
 
@@ -14,7 +14,7 @@ public class InteractionUI : MonoBehaviour
 
     public void Enter()
     {
-        Debug.Log("Enter");
+        Debug.Log("Call Enter()");
         _uiGroup.anchoredPosition = Vector3.zero; // UI 위치 이동
         _open = true;
         _enterPlayer._canMove = false;
@@ -22,7 +22,7 @@ public class InteractionUI : MonoBehaviour
 
     public void Exit()
     {
-        Debug.Log("Exit");
+        Debug.Log("Call Exit()");
         _uiGroup.anchoredPosition = Vector3.down * _downSize; // UI 위치 이동
         _open = false;
         _enterPlayer._canMove = true;

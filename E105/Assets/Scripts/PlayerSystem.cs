@@ -144,7 +144,8 @@ public class PlayerSystem : MonoBehaviour
     {
         if (_ikDown && _nearObject != null)
         {
-            if (_nearObject.tag == "CraftingTable")
+            Debug.Log(_nearObject.tag);
+            if (_nearObject.tag == "CraftingTable" || _nearObject.tag == "Sign")
             {
                 InteractionUI crafting = _nearObject.GetComponent<InteractionUI>();
 
@@ -167,16 +168,22 @@ public class PlayerSystem : MonoBehaviour
     // 일단 참고한 거 대로 만들어 봄
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "CraftingTable")
+        Debug.Log(other.tag); // 왜 안 뜸 열받아
+        if (other.tag == "CraftingTable" || other.tag == "Sign")
         {
             _nearObject = other.gameObject;
             // Debug.Log("작업 영역");
         }
     }
 
+    // private void OnCollisionEnter(Collider other)
+    // {
+    //     Debug.Log(other.tag);
+    // }
+
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "CraftingTable")
+        if (other.tag == "CraftingTable" || other.tag == "Sign")
         {
             InteractionUI crafting = _nearObject.GetComponent<InteractionUI>();
             crafting.Exit();
