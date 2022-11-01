@@ -28,16 +28,22 @@ public class GridSystem : MonoBehaviour
 
     public void DayEnd()
     {
-        // Check_Tree();
-        Check_Branch();
-        Check_Stone();
+        Check_Tree();
+        // Check_Branch();
+        // Check_Stone();
+        // Check_Ore();
+        TreeObject[] trees = this.GetComponentsInChildren<TreeObject>();
+        foreach (var tree in trees)
+        {
+            tree.DayEnd();
+        }
     }
 
     private void Check_Tree()
     {
         if (_Sector._tree_remain < _Sector._tree_max)
         {
-            float rnd = Random.Range(0f,100f);
+            float rnd = Random.Range(0f,1f);
             if (rnd <= _tree_spawn_percent)
             {
                 Spawn_Tree();
@@ -53,18 +59,18 @@ public class GridSystem : MonoBehaviour
     private void Spawn_Tree()
     {
         Debug.Log("나무가 생성됨!");
-        _tree_spawn_percent = _Sector._tree_spawn_base_percent;
-        _Sector._tree_remain += 1;
         Vector3 pos = new Vector3(_base_transform.position.x+Random.Range(-5f,5f),_base_transform.position.y+0.5f,_base_transform.position.z+Random.Range(-5f,5f));
         int cnt = 0;
-        while (cnt < 24)
+        while (cnt < 24 && _Sector._tree_remain < _Sector._tree_max)
         {
-            _buffer = Physics.OverlapBox(pos,new Vector3(0.5f,0.5f,0.5f));
+            _buffer = Physics.OverlapBox(center:pos,halfExtents:new Vector3(0.5f,0.5f,0.5f),new Quaternion(),layerMask:1<<7);
                 Debug.Log(_buffer.Length);
                 if (_buffer.Length==0)
                 {
                     int treenum = Random.Range(0,8);
-                    Instantiate(_trees[treenum],pos,new Quaternion());
+                    Instantiate(_trees[treenum],pos,new Quaternion(),gameObject.transform);
+                    _Sector._tree_remain += 1;
+                    _tree_spawn_percent = _Sector._tree_spawn_base_percent;
                     break;
                 }
                 else
@@ -80,18 +86,18 @@ public class GridSystem : MonoBehaviour
     private void Check_Branch()
     {
         float srnd = Random.Range(0f,1f);
-        if (srnd < _Sector._branch_spawn_base_percent)
+        if (srnd <= _Sector._branch_spawn_base_percent)
         {
             int rnd = Random.Range(0,_Sector._branch_type_factor[2]);
-            if (rnd <= _Sector._branch_type_factor[0])
+            if (rnd < _Sector._branch_type_factor[0])
             {
                 Spawn_Branch(3);
             }
-            else if (rnd <= _Sector._branch_type_factor[1])
+            else if (rnd < _Sector._branch_type_factor[1])
             {
                 Spawn_Branch(4);
             }
-            else if (rnd <= _Sector._branch_type_factor[2])
+            else if (rnd < _Sector._branch_type_factor[2])
             {
                 Spawn_Branch(5);
             }
@@ -131,24 +137,24 @@ public class GridSystem : MonoBehaviour
     private void Check_Stone()
     {
         float srnd = Random.Range(0f,1f);
-        if (srnd < _Sector._stone_spawn_base_percent)
+        if (srnd <= _Sector._stone_spawn_base_percent)
         {
             int rnd = Random.Range(0,_Sector._stone_type_factor[2]);
-            if (rnd <= _Sector._stone_type_factor[0])
+            if (rnd < _Sector._stone_type_factor[0])
             {
                 Spawn_Stone(2);
             }
-            else if (rnd <= _Sector._stone_type_factor[1])
+            else if (rnd < _Sector._stone_type_factor[1])
             {
                 Spawn_Stone(3);
             }
-            else if (rnd <= _Sector._stone_type_factor[2])
+            else if (rnd < _Sector._stone_type_factor[2])
             {
                 Spawn_Stone(4);
             }
         }
-        
     }
+
     private void Spawn_Stone(int count)
     {
         while (count>0)
@@ -164,6 +170,67 @@ public class GridSystem : MonoBehaviour
                     Instantiate(_stone,pos,new Quaternion());
                     count -= 1;
                     break;
+                }
+                else
+                {
+                    float new_x = pos.x + ((cnt+1)%2)*Mathf.Pow(-1,cnt/2);
+                    float new_z = pos.z + (cnt%2)*Mathf.Pow(-1,cnt/2);
+                    pos = new Vector3(new_x,pos.y,new_z);
+                    cnt += 1;
+                }
+            }
+            if (cnt >= 24) {
+                count -= 1;
+            }
+        }
+    }
+
+    private void Check_Ore()
+    {
+        float srnd = Random.Range(0f,1f);
+        if (srnd <= _Sector._ore_spawn_base_percent)
+        {
+            int rnd = Random.Range(0,_Sector._ore_count_factor[1]);
+            if (rnd < _Sector._ore_count_factor[0])
+            {
+                Spawn_Ore(1);
+            }
+            else if (rnd < _Sector._ore_count_factor[1])
+            {
+                Spawn_Ore(2);
+            }
+        }
+    }
+
+    private void Spawn_Ore(int count)
+    {
+        while (count>0)
+        {
+            Vector3 pos = new Vector3(_base_transform.position.x+Random.Range(-5f,5f),_base_transform.position.y+0.5f,_base_transform.position.z+Random.Range(-5f,5f));
+            int cnt = 0;
+            while (cnt < 24)
+            {
+                _buffer = Physics.OverlapBox(pos,new Vector3(0.5f,0.5f,0.5f));
+                Debug.Log(_buffer.Length);
+                if (_buffer.Length==0)
+                {
+                    int rnd = Random.Range(0,_Sector._ore_type_factor[2]);
+                    if (rnd < _Sector._ore_type_factor[0])
+                    {
+                        Instantiate(_ores[0],pos,new Quaternion());
+                        count -= 1;
+                        break;
+                    }
+                    else if (rnd < _Sector._ore_type_factor[1])
+                    {
+                        Instantiate(_ores[1],pos,new Quaternion());
+                        count -= 1;
+                        break;
+                    }
+                    else if (rnd < _Sector._ore_type_factor[2])
+                    {
+                        Instantiate(_ores[2], pos, new Quaternion());
+                    }
                 }
                 else
                 {
