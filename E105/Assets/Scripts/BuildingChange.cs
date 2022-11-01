@@ -7,19 +7,21 @@ public class BuildingChange : MonoBehaviour
     public GameObject[] _buildings = new GameObject[3];
     public bool _underConstruction;
     public int _phase = -1;
-    public MakeBuildingFence _fences;
+    public MakeBuildingFence _makeFences;
 
+    public GameObject _constructionSet;
+    public GameObject _buildingPlace;
 
     // 테스트용 변수
-    public bool _buildStart;
+    public bool _buildStartTest;
 
     // 테스트용 update();
     void Update()
     {
-        if (_buildStart)
+        if (_buildStartTest)
         {
             BuildStart();
-            _buildStart = false;
+            _buildStartTest = false; // 테스트용 변수
         }
 
     }
@@ -27,10 +29,16 @@ public class BuildingChange : MonoBehaviour
     // 상호작용해서 건축 시작하기
     public void BuildStart()
     {
+        // construction 위치 => 수정하기 편하게 변수화
+        float constructionX = _buildingPlace.transform.position.x + -2.39f;
+        float constructionY = _buildingPlace.transform.position.y + -9.42f;
+        float constructionZ = _buildingPlace.transform.position.z + 2.38f;
         _underConstruction = true; // 건축 시작
         _phase = 0; // 0단계
         // 중간 건축 생성
-        Instantiate(gameObject, new Vector3(_fences._colliderCenter.x, 0, _fences._colliderCenter.z), Quaternion.identity);
+        Debug.Log(_makeFences._colliderCenter);
+        Instantiate(_constructionSet, new Vector3(constructionX, constructionY, constructionZ), Quaternion.identity, _buildingPlace.transform);
+        Destroy(_makeFences._fences);
     }
 
     // 하루 끝

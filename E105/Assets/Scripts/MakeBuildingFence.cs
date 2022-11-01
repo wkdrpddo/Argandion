@@ -6,6 +6,7 @@ public class MakeBuildingFence : MonoBehaviour
 {
     public GameObject[] _Fence = new GameObject[5];
     public GameObject _sign;
+    public GameObject _fences;
 
     private Vector3 _colliderSize;
     public Vector3 _colliderCenter;
@@ -42,8 +43,8 @@ public class MakeBuildingFence : MonoBehaviour
         _colliderSize = _collider.size;
         _colliderCenter = _collider.bounds.center;
 
-        Debug.Log(_colliderSize);
-        Debug.Log(_colliderCenter);
+        // Debug.Log(_colliderSize);
+        // Debug.Log(_colliderCenter);
 
         // fench 최대 사이즈 설정
         Vector3 fence0Size = _Fence[0].GetComponent<BoxCollider>().size;
@@ -70,8 +71,8 @@ public class MakeBuildingFence : MonoBehaviour
         int cnt = 0;
         while (cnt < xCnt)
         {
-            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x + _colliderSize.x / 2 - cnt * (_fenceSizeMax.x + xGap), 0, _colliderCenter.z + _colliderSize.z / 2), Quaternion.identity, this.transform);
-            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x + _colliderSize.x / 2 - cnt * (_fenceSizeMax.x + xGap), 0, _colliderCenter.z - _colliderSize.z / 2), Quaternion.identity, this.transform);
+            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x + _colliderSize.x / 2 - cnt * (_fenceSizeMax.x + xGap), 0, _colliderCenter.z + _colliderSize.z / 2), Quaternion.identity, _fences.transform);
+            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x + _colliderSize.x / 2 - cnt * (_fenceSizeMax.x + xGap), 0, _colliderCenter.z - _colliderSize.z / 2), Quaternion.identity, _fences.transform);
             cnt++;
         }
 
@@ -82,12 +83,12 @@ public class MakeBuildingFence : MonoBehaviour
         cnt = 0;
         while (cnt < zCnt)
         {
-            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x + _colliderSize.x / 2, 0, _colliderCenter.z + _colliderSize.z / 2 - cnt * (_fenceSizeMax.x + zGap)), Quaternion.Euler(0, -90, 0), this.transform);
-            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x - _colliderSize.x / 2, 0, _colliderCenter.z + _colliderSize.z / 2 - cnt * (_fenceSizeMax.x + zGap)), Quaternion.Euler(0, -90, 0), this.transform);
+            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x + _colliderSize.x / 2, 0, _colliderCenter.z + _colliderSize.z / 2 - cnt * (_fenceSizeMax.x + zGap)), Quaternion.Euler(0, -90, 0), _fences.transform);
+            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x - _colliderSize.x / 2, 0, _colliderCenter.z + _colliderSize.z / 2 - cnt * (_fenceSizeMax.x + zGap)), Quaternion.Euler(0, -90, 0), _fences.transform);
             cnt++;
         }
 
         // 표지판 생성
-        Instantiate(_sign, new Vector3(_colliderCenter.x, -0.8f, _colliderCenter.z), Quaternion.Euler(0, -180, 0), this.transform);
+        Instantiate(_sign, new Vector3(_colliderCenter.x, 0, _colliderCenter.z - _colliderSize.z / 2 - 0.5f), Quaternion.Euler(0, -180, 0), _fences.transform);
     }
 }
