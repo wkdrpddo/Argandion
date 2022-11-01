@@ -8,7 +8,7 @@ public class MakeBuildingFence : MonoBehaviour
     public GameObject _sign;
 
     private Vector3 _colliderSize;
-    private Vector3 _colliderCenter;
+    public Vector3 _colliderCenter;
     private Vector3 _fenceSizeMax;
 
     public BoxCollider _collider;
@@ -20,13 +20,8 @@ public class MakeBuildingFence : MonoBehaviour
 
     void Start()
     {
-
         setValue();
         makeFence();
-
-
-
-
     }
 
 
@@ -59,9 +54,9 @@ public class MakeBuildingFence : MonoBehaviour
         // _fenceSizeMax.y = (fence0Size.y > fence1Size.y) ? fence0Size.y : (fence1Size.y > fence2Size.y ? fence1Size.y : fence2Size.y);
         _fenceSizeMax.z = (fence0Size.z > fence1Size.z) ? fence0Size.z : (fence1Size.z > fence2Size.z ? fence1Size.z : fence2Size.z);
 
-        Debug.Log(fence0Size);
-        Debug.Log(fence1Size);
-        Debug.Log(fence2Size);
+        // Debug.Log(fence0Size);
+        // Debug.Log(fence1Size);
+        // Debug.Log(fence2Size);
 
 
     }
