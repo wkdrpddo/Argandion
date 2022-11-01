@@ -16,6 +16,7 @@ public class PlayerSystem : MonoBehaviour
     private ItemObject _nearItem;
     public Inventory _theInventory;
     public Chest _theChest;
+    public BuffManager _buffManager;
 
     public float[,] _equipList = new float[,] {{300,1,1.5f,0},{301,3,0.8f,0.8f},{302,4,0.8f,0.8f},{303,2,1.5f,0},{304,5,0.6f,0.6f}};
     public GameObject[] _equipment = new GameObject[5];
@@ -32,11 +33,13 @@ public class PlayerSystem : MonoBehaviour
     private bool _setHand=false;
     private bool _onSoil=false;
 
+    private bool _nearSpirit = false;
     private bool _nearChest = false;
     private bool _nearCrops = false;
     private bool _readyToHarvest = false;
     private bool _nearCarpentor = false;
     private bool _nearDroppedItem = false;
+    
     public float _gold;
 
     public int chestIdx = 0;
@@ -122,6 +125,12 @@ public class PlayerSystem : MonoBehaviour
         }
     }
 
+    private Vector3 nearSoil(Vector3 pos) {
+        float tempz = (int)pos.z + (pos.z>0 ? 0.5f : -0.5f);
+        float tempx = (int)pos.x + (pos.x>0 ? 0.5f : -0.5f);
+        return new Vector3(tempx,pos.y,tempz);
+    }
+
     void fff() {
         if(_readyToHarvest && Input.GetButtonDown("fff")) {
             Wheat3 wheat = _nearObject.GetComponent<Wheat3>();
@@ -133,7 +142,7 @@ public class PlayerSystem : MonoBehaviour
         }
 
         if (_onSoil && Input.GetButtonDown("fff") && !_nearCrops) {
-            Instantiate(_wheat, _character.position, _character.rotation);
+            Instantiate(_wheat, nearSoil(_character.position), _character.rotation);
         }
 
         if (_nearDroppedItem && Input.GetButtonDown("fff")) {
@@ -160,6 +169,24 @@ public class PlayerSystem : MonoBehaviour
             Debug.Log("햇당");
             Debug.Log(item);
             _theInventory.AcquireItem(item, chestCount);
+        }
+
+        if (_nearSpirit && Input.GetButtonDown("fff")) {
+            if ( _buffManager._isFlowerBuffActived ) {
+                Debug.Log("이미 다른버프가 발동중이라구!");
+            } else {
+                ItemObject item = _theInventory.StoreItem(0, -1);
+                if ( item.Category == "꽃") {
+                    SpiritBuff spirit = _nearObject.GetComponent<SpiritBuff>();
+                    spirit.Spirit(item);
+                    _buffManager._isFlowerBuffActived = true;
+                } else if ( item.ItemCode == 0 ) {
+                    Debug.Log("아무것도 없는데?");
+                } else {
+                    _theInventory.AcquireItem(item, 1);
+                    Debug.Log("이건뭐야?"); 
+                }
+            }
         }
     }
 
@@ -197,6 +224,11 @@ public class PlayerSystem : MonoBehaviour
         if (other.gameObject.CompareTag("chest")){
             _nearObject = other.gameObject;
             _nearChest = true;
+        }
+
+        if (other.gameObject.CompareTag("spirit")){
+            _nearObject = other.gameObject;
+            _nearSpirit = true;
         }
     }
 
@@ -239,6 +271,11 @@ public class PlayerSystem : MonoBehaviour
         if (other.gameObject.CompareTag("chest")){
             _nearObject = null;
             _nearChest = false;
+        }
+
+        if (other.gameObject.CompareTag("spirit")){
+            _nearObject = null;
+            _nearSpirit = false;
         }
     }
 }

@@ -85,8 +85,9 @@ public class Inventory : MonoBehaviour
     }
 
     public ItemObject StoreItem(int idx, int _count = 1)
-    {
+    {   
+        ItemObject returnedItem = slots[idx].item;
         slots[idx].SetSlotCount(_count);
-        return slots[idx].item;
+        return returnedItem;
     }
 }

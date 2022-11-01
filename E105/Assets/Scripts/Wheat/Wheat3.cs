@@ -7,21 +7,14 @@ public class Wheat3 : MonoBehaviour
     public GameObject wheatOnField;
     public Transform wheat3;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    Vector3 aboveSoil(Vector3 pos) {
+        return new Vector3(pos.x, pos.y + 1, pos.z); 
     }
 
     public void Harvested()
     {
         Destroy(gameObject);
-        Instantiate(wheatOnField, wheat3.position, wheat3.rotation);
+        Instantiate(wheatOnField, aboveSoil(wheat3.position), wheat3.rotation);
         Debug.Log("수확했당!");
     }
 }

@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Wheat2 : MonoBehaviour
 {
-    float nextPhaseTime = 10f;
+    float nextPhaseTime = 3f;
     float updateTime = 0.0f;
     bool onWet;
     public GameObject wheat3;
     public Transform wheat2;
+    public GameObject _buffManagerObject;
+    private BuffManager _buffManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        _buffManagerObject = GameObject.Find("BuffManager");
+        _buffManager = _buffManagerObject.GetComponent<BuffManager>();
     }
 
     // Update is called once per frame
@@ -27,7 +31,8 @@ public class Wheat2 : MonoBehaviour
             }
             else
             {
-                updateTime += Time.deltaTime;
+                updateTime += Time.deltaTime * (_buffManager.whiteSpirit ? 1.2f : 1);
+                Debug.Log(updateTime);
             }
         }
     }

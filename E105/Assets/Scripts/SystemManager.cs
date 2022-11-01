@@ -14,6 +14,8 @@ public class SystemManager : MonoBehaviour
     public float _hour_time_changemeter=1000;
     public GameObject _light;
     public GameObject MapObject;
+    public PlayerSystem _player;
+    public BuffManager _buffManager;
 
     static int _sector_size=8;
     public bool[] _purification = new bool[_sector_size];
@@ -60,10 +62,18 @@ public class SystemManager : MonoBehaviour
                 if (_hour >= 23) {
                 _hour = 6;
                 _day += 1;
+                if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day) {
+                    _buffManager.FlowerBuffEnd();
+                    Debug.Log("꽃 버프 종료!");
+                }
 
                     if (_day>=29) {
                         _day -= 28;
                         _month += 1;
+                        if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day) {
+                            _buffManager.FlowerBuffEnd();
+                            Debug.Log("꽃 버프 종료!");
+                        }
 
                         if (_month >= 9) {
                             _month -= 8;
