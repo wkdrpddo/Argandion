@@ -14,7 +14,6 @@ public class PlayerSystem : MonoBehaviour
     public GameObject _wheat;
 
     private GameObject _nearBiome;
-    private GameObject _nearObject;
     public Inventory _theInventory;
     public Chest _theChest;
     public BuffManager _buffManager;
@@ -35,6 +34,7 @@ public class PlayerSystem : MonoBehaviour
     private float _delayedTimer;
     private float _movedDelay;
     private bool _setHand = false;
+    private bool _onSoil=false;
     public bool _canMove = true;
 
 
@@ -392,13 +392,6 @@ public class PlayerSystem : MonoBehaviour
         }
 
         if (other.gameObject.CompareTag("droppedItem")){
-            _nearObject = null;
-        }
-
-        if (other.tag == "CraftingTable")
-        {
-            Crafting crafting = _nearObject.GetComponent<Crafting>();
-            crafting.Exit();
             _nearObject = null;
         }
 
