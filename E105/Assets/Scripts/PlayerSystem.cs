@@ -10,10 +10,11 @@ public class PlayerSystem : MonoBehaviour
     public Transform _character;
     public Rigidbody _rigid;
     public Animator _playerAnimator;
+
     public GameObject _wheat;
+
     private GameObject _nearBiome;
     private GameObject _nearObject;
-    private ItemObject _nearItem;
     public Inventory _theInventory;
     public Chest _theChest;
     public BuffManager _buffManager;
@@ -33,12 +34,13 @@ public class PlayerSystem : MonoBehaviour
     private bool _setHand=false;
     private bool _onSoil=false;
 
+    private bool _nearAlter = false;
     private bool _nearSpirit = false;
     private bool _nearChest = false;
     private bool _nearCrops = false;
     private bool _readyToHarvest = false;
     private bool _nearCarpentor = false;
-    private bool _nearDroppedItem = false;
+    private bool _nearItem = false;
     
     public float _gold;
 
@@ -133,8 +135,8 @@ public class PlayerSystem : MonoBehaviour
 
     void fff() {
         if(_readyToHarvest && Input.GetButtonDown("fff")) {
-            Wheat3 wheat = _nearObject.GetComponent<Wheat3>();
-            wheat.Harvested();
+            Harvested harvested = _nearObject.GetComponent<Harvested>();
+            harvested.Harvesting();
             _nearCrops = false;
             _nearObject = null;
             _readyToHarvest = false;
@@ -145,7 +147,7 @@ public class PlayerSystem : MonoBehaviour
             Instantiate(_wheat, nearSoil(_character.position), _character.rotation);
         }
 
-        if (_nearDroppedItem && Input.GetButtonDown("fff")) {
+        if (_nearItem && Input.GetButtonDown("fff")) {
             Item item = _nearObject.GetComponent<Item>();
             ItemObject itemObject = item.itemObject;
             if(itemObject != null) {
@@ -188,6 +190,16 @@ public class PlayerSystem : MonoBehaviour
                 }
             }
         }
+
+        if (_nearAlter && Input.GetButtonDown("fff")) {
+            ItemObject item = _theInventory.StoreItem(0,0);
+            if (item.Category == "꽃") {
+                PrayBuff pray = _nearObject.GetComponent<PrayBuff>();
+                pray.Pray(item);
+            } else {
+                Debug.Log("꽃가져와");
+            }
+        }
     }
 
     void watering() {
@@ -204,22 +216,27 @@ public class PlayerSystem : MonoBehaviour
             _nearBiome = other.gameObject;
         }
 
-        if (other.gameObject.CompareTag("wheat"))
+        if (other.gameObject.CompareTag("crop"))
         {
             _nearCrops = true;
         }
 
-        if (other.gameObject.CompareTag("wheatCrop"))
+        if (other.gameObject.CompareTag("harvested"))
         {
             _nearCrops = true;
             _readyToHarvest = true;
             _nearObject = other.gameObject;
         }
 
-        if (other.gameObject.CompareTag("droppedItem")){
+        if (other.gameObject.CompareTag("item")){
             _nearObject = other.gameObject;
-            _nearDroppedItem = true;
+            _nearItem = true;
         }
+
+        // if (other.gameObject.CompareTag("droppedItem")){
+        //     _nearObject = other.gameObject;
+        //     _nearDroppedItem = true;
+        // }
 
         if (other.gameObject.CompareTag("chest")){
             _nearObject = other.gameObject;
@@ -230,6 +247,11 @@ public class PlayerSystem : MonoBehaviour
             _nearObject = other.gameObject;
             _nearSpirit = true;
         }
+
+        if (other.gameObject.CompareTag("alter")){
+            _nearObject = other.gameObject;
+            _nearAlter = true;
+        }
     }
 
     void OnTriggerEnter(Collider other) {
@@ -239,6 +261,13 @@ public class PlayerSystem : MonoBehaviour
             CombCarpentor combCarpentor = _nearObject.GetComponent<CombCarpentor>();
             combCarpentor.Hello();
         }
+
+        if (other.gameObject.CompareTag("droppedItem")){
+            _nearObject = other.gameObject;
+            DroppedItem item = _nearObject.GetComponent<DroppedItem>();
+            _theInventory.AcquireItem(item.itemObject, 1);
+            Destroy(_nearObject);
+        }
     }
 
     void OnTriggerExit(Collider other) {
@@ -247,20 +276,20 @@ public class PlayerSystem : MonoBehaviour
             _nearBiome = null;
         }
 
-        if (other.gameObject.CompareTag("wheat")){
+        if (other.gameObject.CompareTag("crop")){
             _nearCrops = false;
         }
 
-        if (other.gameObject.CompareTag("wheatCrop"))
+        if (other.gameObject.CompareTag("harvested"))
         {
             _nearCrops = false;
             _readyToHarvest = false;
             _nearObject = null;
         }
 
-        if (other.gameObject.CompareTag("droppedItem")){
+        if (other.gameObject.CompareTag("item")){
             _nearObject = null;
-            _nearDroppedItem = false;
+            _nearItem = false;
         }
 
         if (other.gameObject.CompareTag("carpentor")){
@@ -276,6 +305,15 @@ public class PlayerSystem : MonoBehaviour
         if (other.gameObject.CompareTag("spirit")){
             _nearObject = null;
             _nearSpirit = false;
+        }
+
+        if (other.gameObject.CompareTag("alter")){
+            _nearObject = null;
+            _nearAlter = false;
+        }
+
+        if (other.gameObject.CompareTag("droppedItem")){
+            _nearObject = null;
         }
     }
 }

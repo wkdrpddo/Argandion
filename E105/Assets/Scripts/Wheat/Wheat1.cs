@@ -20,7 +20,7 @@ public class Wheat1 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void growUp()
+    public void growUp()
     {
         if (onWet) {
             updateDay +=1;

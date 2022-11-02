@@ -36,7 +36,7 @@ public class SpiritBuff : MonoBehaviour
     }
     
     public void RedSpirit(){
-        buffManager.whiteSpirit = true;
+        buffManager.redSpirit = true;
         buffManager._flowerBuffTargetDay = systemManager._day + 3;
         buffManager._flowerBuffTargetMonth = systemManager._month;
         if (buffManager._flowerBuffTargetDay > 28) {
@@ -50,7 +50,7 @@ public class SpiritBuff : MonoBehaviour
     }
     
     public void PinkSpirit(){
-        buffManager.whiteSpirit = true;
+        buffManager.pinkSpirit = true;
         buffManager._flowerBuffTargetDay = systemManager._day + 3;
         buffManager._flowerBuffTargetMonth = systemManager._month;
         if (buffManager._flowerBuffTargetDay > 28) {
@@ -64,7 +64,7 @@ public class SpiritBuff : MonoBehaviour
     }
     
     public void YellowSpirit(){
-        buffManager.whiteSpirit = true;
+        buffManager.yellowSpirit = true;
         buffManager._flowerBuffTargetDay = systemManager._day + 3;
         buffManager._flowerBuffTargetMonth = systemManager._month;
         if (buffManager._flowerBuffTargetDay > 28) {
@@ -78,7 +78,7 @@ public class SpiritBuff : MonoBehaviour
     }
     
     public void SkySpirit(){
-        buffManager.whiteSpirit = true;
+        buffManager.skySpirit = true;
         buffManager._flowerBuffTargetDay = systemManager._day + 3;
         buffManager._flowerBuffTargetMonth = systemManager._month;
         if (buffManager._flowerBuffTargetDay > 28) {

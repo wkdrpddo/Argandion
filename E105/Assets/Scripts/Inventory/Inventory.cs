@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] 
     private GameObject go_SlotsParent;  // Slot들의 부모인 Grid Setting 
 
-    private Slot[] slots;  // 슬롯들 배열
+    public Slot[] slots;  // 슬롯들 배열
 
     void Start()
     {
@@ -87,7 +87,9 @@ public class Inventory : MonoBehaviour
     public ItemObject StoreItem(int idx, int _count = 1)
     {   
         ItemObject returnedItem = slots[idx].item;
-        slots[idx].SetSlotCount(_count);
+        if (_count != 0){
+            slots[idx].SetSlotCount(_count);
+        }
         return returnedItem;
     }
 }

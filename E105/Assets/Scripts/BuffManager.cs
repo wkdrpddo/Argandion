@@ -15,8 +15,8 @@ public class BuffManager : MonoBehaviour
     public bool redPray = false;
     public bool pinkSpirit = false;
     public bool pinkPray = false;
-    public bool yeloowSpirit = false;
-    public bool yeloowPray = false;
+    public bool yellowSpirit = false;
+    public bool yellowPray = false;
     public bool skySpirit = false;
     public bool skyPray = false;
 
@@ -37,8 +37,8 @@ public class BuffManager : MonoBehaviour
         redPray = false;
         pinkSpirit = false;
         pinkPray = false;
-        yeloowSpirit = false;
-        yeloowPray = false;
+        yellowSpirit = false;
+        yellowPray = false;
         skySpirit = false;
         skyPray = false;
     }
