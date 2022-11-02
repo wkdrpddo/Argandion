@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingPanel : MonoBehaviour
+public class OptionPanel : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -21,5 +21,10 @@ public class SettingPanel : MonoBehaviour
     {
         UIManager ui = this.GetComponentInParent<UIManager>();
         ui.pressedESC();
+    }
+
+    public void exitPaneltoButton()
+    {
+        gameObject.SetActive(false);
     }
 }
