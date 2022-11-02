@@ -7,6 +7,7 @@ public class MakeBuildingFence : MonoBehaviour
     public GameObject[] _Fence = new GameObject[5];
     public GameObject _sign;
     public GameObject _fences;
+    public RectTransform _uiSet;
 
     private Vector3 _colliderSize;
     public Vector3 _colliderCenter;
@@ -19,6 +20,8 @@ public class MakeBuildingFence : MonoBehaviour
     public SystemManager _systemManager;
 
     public Material _icon;
+
+
 
 
     void Start()
@@ -94,5 +97,8 @@ public class MakeBuildingFence : MonoBehaviour
         GameObject sign = Instantiate(_sign, new Vector3(_colliderCenter.x, -0.5f, _colliderCenter.z - _colliderSize.z / 2 - 0.5f), Quaternion.Euler(0, -180, 0), _fences.transform);
         // 아이콘 바꾸기
         sign.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = _icon;
+        //  
+        sign.GetComponent<InteractionUI>()._uiGroup = _uiSet;
+
     }
 }

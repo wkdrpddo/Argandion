@@ -108,7 +108,7 @@ public class BuildingChange : MonoBehaviour
             // float _fBuildingY = _buildingPlace.transform.position.y;
             // float _fBuildingZ = _buildingPlace.transform.position.z + -3.29f;
 
-            Instantiate(_buildingFinish, new Vector3(_buildingPlace.transform.position.x + _fBuildingX, 0, _buildingPlace.transform.position.z + _fBuildingZ), Quaternion.Euler(0, _fBuildingRotY, 0), _buildingPlace.transform.parent.gameObject.transform);
+            Instantiate(_buildingFinish, new Vector3(_buildingPlace.transform.position.x + _fBuildingX, _fBuildingY, _buildingPlace.transform.position.z + _fBuildingZ), Quaternion.Euler(0, _fBuildingRotY, 0), _buildingPlace.transform.parent.gameObject.transform);
             return;
         }
         // 중간 건축물 바꾸기
