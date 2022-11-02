@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour
+public class ChestSlot : MonoBehaviour
 {
     public int idx;
     public ItemObject item;
@@ -35,7 +35,7 @@ public class Slot : MonoBehaviour
         }
         else
         {
-            text_Count.text = "0";
+            // text_Count.text = "0";
             // go_CountImage.SetActive(false);
         }
 

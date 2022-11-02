@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
-public class WheatItem : MonoBehaviour
-{   
+public class DroppedItem : MonoBehaviour
+{
     private Rigidbody rigid;
     private Transform trans;
+    private BoxCollider box;
+    public int itemCode;
+    public ItemObject itemObject;
 
     // Start is called before the first frame update
     void Start()
@@ -13,6 +17,9 @@ public class WheatItem : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         trans = GetComponent<Transform>();
         rigid.AddForce(Vector3.up * 1.5f, ForceMode.Impulse);
+        string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/ItemTable.json");
+        var itemData = JsonHelper.FromJson<ItemObject>(jsonString);
+        itemObject = itemData[itemCode];
     }
 
     // Update is called once per frame

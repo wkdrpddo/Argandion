@@ -11,6 +11,14 @@ public class PlayerSystem : MonoBehaviour
     public Rigidbody _rigid;
     public Animator _playerAnimator;
 
+    public GameObject _wheat;
+
+    private GameObject _nearBiome;
+    private GameObject _nearObject;
+    public Inventory _theInventory;
+    public Chest _theChest;
+    public BuffManager _buffManager;
+
     private GameObject _nearObject;
     private Crafting _crafting;
 
@@ -29,7 +37,24 @@ public class PlayerSystem : MonoBehaviour
     private bool _setHand = false;
     public bool _canMove = true;
 
+
     private bool _ikDown;
+
+    private bool _nearAlter = false;
+    private bool _nearSpirit = false;
+    private bool _nearChest = false;
+    private bool _nearCrops = false;
+    private bool _readyToHarvest = false;
+    private bool _nearCarpentor = false;
+    private bool _nearItem = false;
+    
+    public float _gold;
+
+
+    public int chestIdx = 0;
+    public int chestCount = 1;
+    public int invenIdx = 0;
+    public int invenCount = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -138,8 +163,6 @@ public class PlayerSystem : MonoBehaviour
         }
     }
 
-
-
     private void Interaction()
     {
         if (_ikDown && _nearObject != null)
@@ -157,32 +180,217 @@ public class PlayerSystem : MonoBehaviour
                     crafting.Enter();
                 }
             }
-            _ikDown = false;
+        }
+    }
+
+    private Vector3 nearSoil(Vector3 pos) {
+        float tempz = (int)pos.z + (pos.z>0 ? 0.5f : -0.5f);
+        float tempx = (int)pos.x + (pos.x>0 ? 0.5f : -0.5f);
+        return new Vector3(tempx,pos.y,tempz);
+    }
+
+    void fff() {
+        if(_readyToHarvest && Input.GetButtonDown("fff")) {
+            Harvested harvested = _nearObject.GetComponent<Harvested>();
+            harvested.Harvesting();
+            _nearCrops = false;
+            _nearObject = null;
+            _readyToHarvest = false;
+            return ;
         }
 
+        if (_onSoil && Input.GetButtonDown("fff") && !_nearCrops) {
+            Instantiate(_wheat, nearSoil(_character.position), _character.rotation);
+        }
+
+        if (_nearItem && Input.GetButtonDown("fff")) {
+            Item item = _nearObject.GetComponent<Item>();
+            ItemObject itemObject = item.itemObject;
+            if(itemObject != null) {
+                _theInventory.AcquireItem(itemObject);
+            }
+        }
+
+
+        if (_nearCarpentor && Input.GetButtonDown("fff")) {
+            CombCarpentor combCarpentor = _nearObject.GetComponent<CombCarpentor>();
+            combCarpentor.Trade(2,2);
+        }
+
+        if (_nearChest && Input.GetButtonDown("fff")) {
+            ItemObject item = _theInventory.StoreItem(invenIdx, -invenCount);
+            Debug.Log(item);
+            _theChest.PutItem(item, invenCount);
+        }
+
+        if (_nearChest && Input.GetButtonDown("water")) {
+            ItemObject item = _theChest.TakeItem(chestIdx, -chestCount);
+            Debug.Log("햇당");
+            Debug.Log(item);
+            _theInventory.AcquireItem(item, chestCount);
+        }
+
+        if (_nearSpirit && Input.GetButtonDown("fff")) {
+            if ( _buffManager._isFlowerBuffActived ) {
+                Debug.Log("이미 다른버프가 발동중이라구!");
+            } else {
+                ItemObject item = _theInventory.StoreItem(0, -1);
+                if ( item.Category == "꽃") {
+                    SpiritBuff spirit = _nearObject.GetComponent<SpiritBuff>();
+                    spirit.Spirit(item);
+                    _buffManager._isFlowerBuffActived = true;
+                } else if ( item.ItemCode == 0 ) {
+                    Debug.Log("아무것도 없는데?");
+                } else {
+                    _theInventory.AcquireItem(item, 1);
+                    Debug.Log("이건뭐야?"); 
+                }
+            }
+        }
+
+        if (_nearAlter && Input.GetButtonDown("fff")) {
+            ItemObject item = _theInventory.StoreItem(0,0);
+            if (item.Category == "꽃") {
+                PrayBuff pray = _nearObject.GetComponent<PrayBuff>();
+                pray.Pray(item);
+            } else {
+                Debug.Log("꽃가져와");
+            }
+        }
+
+    }
+    void watering() {
+        if (_onSoil && Input.GetButtonDown("water") ) {
+            Debug.Log("물줬당");
+            Dirt dirt = _nearBiome.GetComponent<Dirt>();
+            dirt.Water();
+        }
+    }
+
+    void OnTriggerStay(Collider other) {
+        if (other.gameObject.CompareTag("dirt") || other.gameObject.CompareTag("wateredDirt")){
+            _onSoil = true;
+            _nearBiome = other.gameObject;
+        }
+
+        if (other.gameObject.CompareTag("crop"))
+        {
+            _nearCrops = true;
+        }
+
+        if (other.gameObject.CompareTag("harvested"))
+        {
+            _nearCrops = true;
+            _readyToHarvest = true;
+            _nearObject = other.gameObject;
+        }
+
+        if (other.gameObject.CompareTag("item")){
+            _nearObject = other.gameObject;
+            _nearItem = true;
+        }
+
+        // if (other.gameObject.CompareTag("droppedItem")){
+        //     _nearObject = other.gameObject;
+        //     _nearDroppedItem = true;
+        // }
+
+        if (other.gameObject.CompareTag("chest")){
+            _nearObject = other.gameObject;
+            _nearChest = true;
+        }
+
+        if (other.gameObject.CompareTag("spirit")){
+            _nearObject = other.gameObject;
+            _nearSpirit = true;
+        }
+
+        if (other.gameObject.CompareTag("alter")){
+            _nearObject = other.gameObject;
+            _nearAlter = true;
+        }
     }
 
 
 
-    // 일단 참고한 거 대로 만들어 봄
-    private void OnTriggerEnter(Collider other)
-    {
+    void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("carpentor")){
+            _nearObject = other.gameObject;
+            _nearCarpentor = true;
+            CombCarpentor combCarpentor = _nearObject.GetComponent<CombCarpentor>();
+            combCarpentor.Hello();
+        }
+
+        if (other.gameObject.CompareTag("droppedItem")){
+            _nearObject = other.gameObject;
+            DroppedItem item = _nearObject.GetComponent<DroppedItem>();
+            _theInventory.AcquireItem(item.itemObject, 1);
+            Destroy(_nearObject);
+        }
+
         if (other.tag == "CraftingTable")
         {
             _nearObject = other.gameObject;
             // Debug.Log("작업 영역");
         }
+
     }
 
-    private void OnTriggerExit(Collider other)
-    {
+    void OnTriggerExit(Collider other) {
+        if (other.gameObject.CompareTag("dirt")) {
+            _onSoil = false;
+            _nearBiome = null;
+        }
+
+        if (other.gameObject.CompareTag("crop")){
+            _nearCrops = false;
+        }
+
+        if (other.gameObject.CompareTag("harvested"))
+        {
+            _nearCrops = false;
+            _readyToHarvest = false;
+            _nearObject = null;
+        }
+
+        if (other.gameObject.CompareTag("item")){
+            _nearObject = null;
+            _nearItem = false;
+        }
+
+        if (other.gameObject.CompareTag("carpentor")){
+            _nearObject = null;
+            _nearCarpentor = false;
+        }
+
+        if (other.gameObject.CompareTag("chest")){
+            _nearObject = null;
+            _nearChest = false;
+        }
+
+        if (other.gameObject.CompareTag("spirit")){
+            _nearObject = null;
+            _nearSpirit = false;
+        }
+
+        if (other.gameObject.CompareTag("alter")){
+            _nearObject = null;
+            _nearAlter = false;
+        }
+
+        if (other.gameObject.CompareTag("droppedItem")){
+            _nearObject = null;
+        }
+
         if (other.tag == "CraftingTable")
         {
             Crafting crafting = _nearObject.GetComponent<Crafting>();
             crafting.Exit();
             _nearObject = null;
         }
+
     }
+
 
     public void changeHealth(float value)
     {
