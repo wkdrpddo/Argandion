@@ -20,7 +20,7 @@ public class PlayerSystem : MonoBehaviour
     public BuffManager _buffManager;
 
     private GameObject _nearObject;
-    private Crafting _crafting;
+    private InteractionUI _interactionUi;
 
     public float[,] _equipList = new float[,] { { 300, 1, 1.5f, 0 }, { 301, 3, 0.8f, 0.8f }, { 302, 4, 0.8f, 0.8f }, { 303, 2, 1.5f, 0 }, { 304, 5, 0.6f, 0.6f } };
     public GameObject[] _equipment = new GameObject[5];
@@ -167,9 +167,10 @@ public class PlayerSystem : MonoBehaviour
     {
         if (_ikDown && _nearObject != null)
         {
-            if (_nearObject.tag == "CraftingTable")
+            Debug.Log("Interaction(): " + _nearObject.tag);
+            if (_nearObject.tag == "CraftingTable" || _nearObject.tag == "Sign")
             {
-                Crafting crafting = _nearObject.GetComponent<Crafting>();
+                InteractionUI crafting = _nearObject.GetComponent<InteractionUI>();
 
                 if (crafting._open)
                 {
@@ -180,8 +181,11 @@ public class PlayerSystem : MonoBehaviour
                     crafting.Enter();
                 }
             }
+            _ikDown = false;
         }
+
     }
+
 
     private Vector3 nearSoil(Vector3 pos) {
         float tempz = (int)pos.z + (pos.z>0 ? 0.5f : -0.5f);
@@ -328,15 +332,24 @@ public class PlayerSystem : MonoBehaviour
             Destroy(_nearObject);
         }
 
-        if (other.tag == "CraftingTable")
+        Debug.Log("OnTriggerEnter(): " + other.tag);
+        if (other.tag == "CraftingTable" || other.tag == "Sign")
         {
             _nearObject = other.gameObject;
             // Debug.Log("작업 영역");
         }
 
+
     }
 
     void OnTriggerExit(Collider other) {
+        if (other.tag == "CraftingTable" || other.tag == "Sign")
+        {
+            InteractionUI crafting = _nearObject.GetComponent<InteractionUI>();
+            crafting.Exit();
+            _nearObject = null;
+        }
+
         if (other.gameObject.CompareTag("dirt")) {
             _onSoil = false;
             _nearBiome = null;
