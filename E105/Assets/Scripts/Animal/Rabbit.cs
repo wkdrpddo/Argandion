@@ -146,7 +146,6 @@ public class Rabbit : MonoBehaviour
                 return;
             }
             Run(_targetPos);
-
         }
     }
 
@@ -158,10 +157,9 @@ public class Rabbit : MonoBehaviour
         anim.SetBool("Walking", isWalking);
         anim.SetBool("Running", isRunning);
 
-
-        //죽는 애니메이션(없어서 회전시키기)
-        Vector3 _rotation = Vector3.Lerp(transform.eulerAngles, new Vector3(0f, 0f, -90f), 0.9f);
-        transform.rotation = Quaternion.Euler(_rotation);
+        //죽는 애니메이션(일단 없음)
+        // Vector3 _rotation = Vector3.Lerp(transform.eulerAngles, new Vector3(0f, 0f, -90f), 0.9f);
+        // transform.rotation = Quaternion.Euler(_rotation);
 
         isDead = true;
     }

@@ -18,6 +18,7 @@ public class Wolf : MonoBehaviour
     private bool isWalking; //걷는중인지 아닌지
     private bool isRunning;  //뛰는중인지 아닌지
     private bool isChasing; //추격중인지 아닌지
+    private bool isAttacking; //공격중
     private bool isDead;  //죽었는지 아닌지
 
     [SerializeField] private float walkTime;  //얼마동안 걸을지
@@ -25,6 +26,12 @@ public class Wolf : MonoBehaviour
     [SerializeField] private float idleTime;  //idle 시간
     [SerializeField] private float chaseTime;  //추격시간
     private float currentTime;
+
+    [SerializeField] private float attackDamage;  
+    [SerializeField] private float attackDelay;  
+    [SerializeField] private LayerMask targetMask;  
+    
+    
 
     //필요한 컴포넌트
     [SerializeField] private Animator anim;
@@ -49,19 +56,20 @@ public class Wolf : MonoBehaviour
             Move();
             ElapseTime();  
         }
-        if(isChasing)
-        {
-            nav.SetDestination(playerPos.position);
-            
-        }
     }
 
     private void Move()
     {
+
         if(isWalking)
         {
-            nav.SetDestination(this.transform.position + destination * 5f);
+            nav.SetDestination(this.transform.position + destination * 5f);  //이동할땐 랜덤지역으로 이동
         }
+        if(isChasing && !isAttacking)
+        {
+            nav.SetDestination(playerPos.position);   //쫒을때는 플레이어를 목적지로 설정
+        }
+
     }
 
 
@@ -71,19 +79,21 @@ public class Wolf : MonoBehaviour
         if(isAction)
         {
             currentTime -= Time.deltaTime;
-            if(currentTime <= 0 && !isChasing)
+            if(currentTime <= 0 && !isAttacking)
             {
                 //다음 랜덤 행동 개시
                 ReSet();
+                StopCoroutine(AttackCoroutine());
             }
         }
-
     }
 
     private void ReSet()
     {
         isWalking = false;
         isRunning = false;
+        isChasing = false;
+        isAttacking = false;
         isAction = true;
         nav.speed = walkSpeed;
         nav.ResetPath();
@@ -135,20 +145,7 @@ public class Wolf : MonoBehaviour
         nav.speed = walkSpeed;
     }
 
-    private void Chase(Vector3 _targetPos)
-    {
-        // isWalking = false;
-        isChasing = true;
-        // currentTime = chaseTime;
-        //destination = _targetPos;
-        nav.speed = runSpeed;
-        isRunning = true;
-        anim.SetBool("Running", isRunning);
-        //nav.SetDestination(destination);
-
-    }
-
-    public void Damage(int _dmg, Vector3 _targetPos)
+    public void Damage(int _dmg)
     {
         if(!isDead)
         {
@@ -160,20 +157,84 @@ public class Wolf : MonoBehaviour
                 return;
             }
 
-            Chase(_targetPos);
-        }     
+            Chase();
+        }
     }
+
+    private void Chase()
+    {
+        if(!isDead)
+        {
+            currentTime = chaseTime;
+            isChasing = true;
+            isWalking = false;
+            isRunning = true;
+            nav.speed = runSpeed;
+            anim.SetBool("Walking", isWalking);
+            anim.SetBool("Running", isRunning);
+
+            if(!isDead && Vector3.Distance(this.transform.position, playerPos.position) <= 3f)
+            {
+                Debug.Log("늑대가 플레이어 공격 시도");
+                if(!isAttacking) {
+                    StartCoroutine(AttackCoroutine());
+                }
+            }
+        }
+        
+    }
+
+    IEnumerator AttackCoroutine(){
+
+
+        Debug.Log("AttackCoroutine 호출");
+
+        isAttacking = true;
+        //nav.ResetPath();
+        isChasing = false;
+        anim.SetBool("Running", isChasing);
+            
+        // yield return new WaitForSeconds(0.5f);
+        transform.LookAt(playerPos);
+        anim.SetTrigger("Attack");
+        // yield return new WaitForSeconds(0.1f);
+
+        RaycastHit _hit;
+        if(Physics.Raycast(transform.position + Vector3.up, transform.forward, out _hit, 3, targetMask))
+        {
+            Debug.Log("플레이어 적중!");
+        }
+        else{
+            Debug.Log("플레이어 빗나감");
+        }
+
+
+        yield return new WaitForSeconds(attackDelay);
+        isAttacking = false;
+
+        if(hp <= 0)
+        {
+            Dead();
+        }
+
+        Chase();
+
+    }
+
 
     private void Dead()
     {
+        isAction = false;
+        isDead = true;
         isWalking = false;
         isRunning = false;
+        isChasing = false;
+        isAttacking = false;
 
         anim.SetBool("Walking", isWalking);
         anim.SetBool("Running", isRunning);
-        anim.SetTrigger("Death");
 
-        isDead = true;
+        anim.SetTrigger("Death");
     }
 
 }

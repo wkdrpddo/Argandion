@@ -31,7 +31,7 @@ public class HitController : MonoBehaviour
         else if(other.tag == "Wolf")
         {
             Debug.Log("늑대 충돌");
-            other.transform.GetComponent<Wolf>().Damage(1, transform.position);
+            other.transform.GetComponent<Wolf>().Damage(1);
         }
 
 
