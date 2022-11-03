@@ -7,13 +7,14 @@ public class NPCObject : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public bool _useKey_status = false;
+    public bool _useKey_status;
     private Animator _animator;
     public GameObject _PlayerObject;
     public GameObject _conversationUI;
 
     void Start()
     {
+        _useKey_status= false;
         _animator = GetComponent<Animator>();
         _conversationUI.SetActive(false);
     }
