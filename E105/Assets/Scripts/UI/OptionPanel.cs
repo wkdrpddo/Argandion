@@ -17,14 +17,9 @@ public class OptionPanel : MonoBehaviour
 
     }
 
-    public void exitPanel()
+    public void handelPanel()
     {
         UIManager ui = this.GetComponentInParent<UIManager>();
         ui.pressedESC();
-    }
-
-    public void exitPaneltoButton()
-    {
-        gameObject.SetActive(false);
     }
 }
