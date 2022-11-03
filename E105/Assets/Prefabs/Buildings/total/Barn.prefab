@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5858234237281382442
+--- !u!1 &5773293775547578598
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5858234237281382445}
-  m_Layer: 0
-  m_Name: Fences
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5858234237281382445
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5858234237281382442}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5858234237564468084}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5858234237564468085
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5858234237564468084}
-  - component: {fileID: 5858234237564467849}
-  - component: {fileID: 5858234237564468086}
-  - component: {fileID: 5858234237564468087}
+  - component: {fileID: 5773293775547578599}
+  - component: {fileID: 5773293775547578650}
+  - component: {fileID: 5773293775547578597}
+  - component: {fileID: 5773293775547578596}
   m_Layer: 0
   m_Name: BarnPlace
   m_TagString: Untagged
@@ -50,42 +19,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5858234237564468084
+--- !u!4 &5773293775547578599
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5858234237564468085}
+  m_GameObject: {fileID: 5773293775547578598}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 4.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5858234237281382445}
-  m_Father: {fileID: 7900020930029702776}
+  - {fileID: 5773293775795467198}
+  m_Father: {fileID: 7850053666758282731}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5858234237564467849
+--- !u!65 &5773293775547578650
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5858234237564468085}
+  m_GameObject: {fileID: 5773293775547578598}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 15.3, y: 11.7, z: 14.1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5858234237564468086
+--- !u!114 &5773293775547578597
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5858234237564468085}
+  m_GameObject: {fileID: 5773293775547578598}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 677861d127ed5a84489802c1e9aa35a6, type: 3}
@@ -98,29 +67,29 @@ MonoBehaviour:
   - {fileID: 4372575617666527159, guid: 5dea9538c437654489c267b8645de5bf, type: 3}
   - {fileID: 480766987207316448, guid: 80e88887acafb27458017b6b06bf7fa2, type: 3}
   _sign: {fileID: 7668791435407771678, guid: b37a29c0563bea447bfd375f90a73da0, type: 3}
-  _fences: {fileID: 5858234237281382442}
+  _fences: {fileID: 5773293775795467193}
   _uiSet: {fileID: 0}
   _colliderCenter: {x: 0, y: 0, z: 0}
   _collider: {fileID: 0}
   _sectorNum: 5
   _systemManager: {fileID: 0}
   _icon: {fileID: 2100000, guid: 3342f18525882504497a1233bce1e0fa, type: 2}
---- !u!114 &5858234237564468087
+--- !u!114 &5773293775547578596
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5858234237564468085}
+  m_GameObject: {fileID: 5773293775547578598}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27761491c0d73e84381f411841c089d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _phase: -1
-  _makeFences: {fileID: 5858234237564468086}
+  _makeFences: {fileID: 5773293775547578597}
   _constructionPrefab: {fileID: 4183928036268282107, guid: d4887389482eb2247a8c5d569bfe3535, type: 3}
-  _buildingPlace: {fileID: 5858234237564468085}
+  _buildingPlace: {fileID: 5773293775547578598}
   _buildingFinish: {fileID: 6178598049237299746, guid: 58493adadca676041abc50992dc99226, type: 3}
   _constructionX: 0
   _constructionY: -4.05
@@ -131,7 +100,7 @@ MonoBehaviour:
   _fBuildingRotY: 90
   _fulfillTest: 0
   _dayEndTest: 0
---- !u!1 &7900020930029702777
+--- !u!1 &5773293775795467193
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,7 +108,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7900020930029702776}
+  - component: {fileID: 5773293775795467198}
+  m_Layer: 0
+  m_Name: Fences
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5773293775795467198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5773293775795467193}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5773293775547578599}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7850053666758282730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7850053666758282731}
   m_Layer: 0
   m_Name: Barn
   m_TagString: Untagged
@@ -147,19 +147,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7900020930029702776
+--- !u!4 &7850053666758282731
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7900020930029702777}
+  m_GameObject: {fileID: 7850053666758282730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.6, y: 0, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5858234237564468084}
+  - {fileID: 5773293775547578599}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
