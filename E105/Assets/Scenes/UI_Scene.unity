@@ -1131,7 +1131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688403955753452926, guid: b5068e3c69c1657469d62b6a6f27b7d9, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2688403955753452926, guid: b5068e3c69c1657469d62b6a6f27b7d9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3728,8 +3728,11 @@ MonoBehaviour:
   _hour_time_changemeter: 120000
   _light: {fileID: 2138222493}
   MapObject: {fileID: 118334711}
+  _player: {fileID: 0}
+  _buffManager: {fileID: 0}
   _development_level: 0
   _purification_sector: 0
+  _purification_size: 0
   _purification: 0000000000000000
   _sector:
   - {fileID: 0}
@@ -3741,6 +3744,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _sectorTest: {fileID: 1240022319}
+  _randomNPC:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1460709325
 Transform:
   m_ObjectHideFlags: 0
@@ -5357,7 +5363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4388383215679704, guid: e377b882a13405d4b9d5c3e8e747595e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4388383215679704, guid: e377b882a13405d4b9d5c3e8e747595e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5665,7 +5671,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1230940059759135
 GameObject:
@@ -5939,6 +5945,14 @@ PrefabInstance:
     - target: {fileID: 867288031136213700, guid: ca054349b69f35649bbbf6763cca0ab4, type: 3}
       propertyPath: m_Name
       value: UIManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 867288031538318491, guid: ca054349b69f35649bbbf6763cca0ab4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -5.090027
+      objectReference: {fileID: 0}
+    - target: {fileID: 867288031538318491, guid: ca054349b69f35649bbbf6763cca0ab4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -5.0899963
       objectReference: {fileID: 0}
     - target: {fileID: 867288031917605623, guid: ca054349b69f35649bbbf6763cca0ab4, type: 3}
       propertyPath: m_AnchorMax.x
@@ -6241,6 +6255,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6394119387755124409, guid: 2018bcac01cdb484ebd447a439eae9b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 90.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394119387755124409, guid: 2018bcac01cdb484ebd447a439eae9b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394119387755124409, guid: 2018bcac01cdb484ebd447a439eae9b1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394119387755124410, guid: 2018bcac01cdb484ebd447a439eae9b1, type: 3}
+      propertyPath: _interactRadius
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2018bcac01cdb484ebd447a439eae9b1, type: 3}
 --- !u!1001 &2406143786928718531
@@ -6373,6 +6403,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: red_mushroom_3D
       objectReference: {fileID: 0}
+    - target: {fileID: 7270698940561318827, guid: 30dadce0fdb05fa4c9c12e670a8c50e0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8047200838084933905, guid: 30dadce0fdb05fa4c9c12e670a8c50e0, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -6391,15 +6425,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8047200838084933905, guid: 30dadce0fdb05fa4c9c12e670a8c50e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 103.03
       objectReference: {fileID: 0}
     - target: {fileID: 8047200838084933905, guid: 30dadce0fdb05fa4c9c12e670a8c50e0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 10.04
       objectReference: {fileID: 0}
     - target: {fileID: 8047200838084933905, guid: 30dadce0fdb05fa4c9c12e670a8c50e0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -8.46
       objectReference: {fileID: 0}
     - target: {fileID: 8047200838084933905, guid: 30dadce0fdb05fa4c9c12e670a8c50e0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6499,6 +6533,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: brown_mushroom_3D
       objectReference: {fileID: 0}
+    - target: {fileID: 2610710488771178527, guid: 8b10b02565f87794088fb1c2f45593c9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3418456382719388325, guid: 8b10b02565f87794088fb1c2f45593c9, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -6517,11 +6555,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3418456382719388325, guid: 8b10b02565f87794088fb1c2f45593c9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 87.38
       objectReference: {fileID: 0}
     - target: {fileID: 3418456382719388325, guid: 8b10b02565f87794088fb1c2f45593c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 17.7
       objectReference: {fileID: 0}
     - target: {fileID: 3418456382719388325, guid: 8b10b02565f87794088fb1c2f45593c9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6696,15 +6734,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2477015556045079247, guid: ef94a314cf33e4a45ac574a1ca9ef93e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 89.16
       objectReference: {fileID: 0}
     - target: {fileID: 2477015556045079247, guid: ef94a314cf33e4a45ac574a1ca9ef93e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 16.83
       objectReference: {fileID: 0}
     - target: {fileID: 2477015556045079247, guid: ef94a314cf33e4a45ac574a1ca9ef93e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -6.52
       objectReference: {fileID: 0}
     - target: {fileID: 2477015556045079247, guid: ef94a314cf33e4a45ac574a1ca9ef93e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6737,6 +6775,10 @@ PrefabInstance:
     - target: {fileID: 2966728846417549429, guid: ef94a314cf33e4a45ac574a1ca9ef93e, type: 3}
       propertyPath: m_Name
       value: poison_mushroom_3D
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966728846417549429, guid: ef94a314cf33e4a45ac574a1ca9ef93e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef94a314cf33e4a45ac574a1ca9ef93e, type: 3}

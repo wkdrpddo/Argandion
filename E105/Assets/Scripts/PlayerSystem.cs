@@ -8,11 +8,8 @@ public class PlayerSystem : MonoBehaviour
     public UIManager _UIManager;
     public Transform _camera;
     public Transform _character;
-    public Rigidbody _rigid;
     public Animator _playerAnimator;
-
     public GameObject _wheat;
-
     private GameObject _nearBiome;
     public Inventory _theInventory;
     public Chest _theChest;
@@ -21,7 +18,8 @@ public class PlayerSystem : MonoBehaviour
     private GameObject _nearObject;
     private InteractionUI _interactionUi;
 
-    public float[,] _equipList = new float[,] { { 300, 1, 1.5f, 0 }, { 301, 3, 0.8f, 0.8f }, { 302, 4, 0.8f, 0.8f }, { 303, 2, 1.5f, 0 }, { 304, 5, 0.6f, 0.6f } };
+    // { itemcode, 장비코드(0그외 1채집 2도끼 3곡괭이 4괭이 5검 6낚싯대), 이동불가 시간, 작업시간}
+    public float[,] _equipList = new float[,] { { 300, 1, 1.5f, 0, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 10, 0, 0, 0, 20}, { 20,0 ,0 ,0, 10} };
     public GameObject[] _equipment = new GameObject[5];
     public int _equipItem = 0;
 
@@ -36,7 +34,6 @@ public class PlayerSystem : MonoBehaviour
     private bool _setHand = false;
     private bool _onSoil=false;
     public bool _canMove = true;
-
 
     private bool _ikDown;
 
@@ -55,10 +52,17 @@ public class PlayerSystem : MonoBehaviour
     public int chestCount = 1;
     public int invenIdx = 0;
     public int invenCount = 1;
+    public float _interactRadius;
+    private Rigidbody rb;
+    private Vector3 speed;
+
+    private Collider[] _colset;
+    private bool _canInteract;
 
     // Start is called before the first frame update
     void Start()
     {
+        rb = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -69,8 +73,6 @@ public class PlayerSystem : MonoBehaviour
         changeItem();
         checkHand();
         Interaction();
-
-
     }
 
     void GetInput()
@@ -82,18 +84,28 @@ public class PlayerSystem : MonoBehaviour
     {
         Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         bool _MoveMag = moveInput.magnitude != 0;
+        if (!_MoveMag)
+        {
+            speed = moveInput * 0;
+            rb.velocity = (speed);
+        }
         if (_movedDelay <= 0 && _canMove && _MoveMag)
+        // if (_movedDelay <= 0 && _canMove)
         {
             Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.y).normalized;
             if (Input.GetAxisRaw("run") != 0)
             {
-                transform.position += moveDir * Time.deltaTime * _runspeed;
+                // transform.position += moveDir * Time.deltaTime * _runspeed;
+                speed = moveDir * _runspeed;
+                rb.velocity = (speed);
                 _playerAnimator.SetInteger("action", 2);
 
             }
             else
             {
-                transform.position += moveDir * Time.deltaTime * _walkspeed;
+                // transform.position += moveDir * Time.deltaTime * _walkspeed;
+                speed = moveDir * _walkspeed;
+                rb.velocity = (speed);
                 _playerAnimator.SetInteger("action", 1);
             }
             _character.forward = moveDir;
@@ -163,29 +175,48 @@ public class PlayerSystem : MonoBehaviour
         }
     }
 
+    // private void Interaction()
+    // {
+    //     if (_ikDown && _nearObject != null)
+    //     {
+    //         Debug.Log("Interaction(): " + _nearObject.tag);
+    //         if (_nearObject.tag == "CraftingTable" || _nearObject.tag == "Sign")
+    //         {
+    //             InteractionUI crafting = _nearObject.GetComponent<InteractionUI>();
+
+    //             if (crafting._open)
+    //             {
+    //                 crafting.Exit();
+    //             }
+    //             else
+    //             {
+    //                 crafting.Enter();
+    //             }ㅉㅉ
+    //         }
+    //         _ikDown = false;
+    //     }
+
+    // }
+
     private void Interaction()
     {
-        if (_ikDown && _nearObject != null)
+        if (Input.GetButtonDown("interactionKey"))
         {
-            Debug.Log("Interaction(): " + _nearObject.tag);
-            if (_nearObject.tag == "CraftingTable" || _nearObject.tag == "Sign")
+            Vector3 pos = new Vector3(this.transform.position.x,this.transform.position.y,this.transform.position.z);
+            _colset = Physics.OverlapSphere(pos,_interactRadius,layerMask:1601);
+            foreach(var col in _colset)
             {
-                InteractionUI crafting = _nearObject.GetComponent<InteractionUI>();
-
-                if (crafting._open)
+                if (col.TryGetComponent(out Interactable inter))
                 {
-                    crafting.Exit();
-                }
-                else
-                {
-                    crafting.Enter();
+                    // 이런 형태로 작성
+                    // if (col.TryGetComponent(out NPCObject npc))
+                    // {
+                    //     npc.Interaction();
+                    // }
                 }
             }
-            _ikDown = false;
         }
-
     }
-
 
     private Vector3 nearSoil(Vector3 pos) {
         float tempz = (int)pos.z + (pos.z>0 ? 0.5f : -0.5f);
