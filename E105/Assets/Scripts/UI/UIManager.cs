@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
 
 
     // 저장 데이터
+    public int conversationNPC = 0;
     public Slider _healthbar;
     public Slider _energybar;
     public SystemManager _systemmanager;
@@ -46,6 +47,11 @@ public class UIManager : MonoBehaviour
         if (Input.GetButtonDown("optionKey"))
         {
             pressedESC();
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            _inventorypanel.SetActive(true);
         }
     }
 
@@ -77,12 +83,22 @@ public class UIManager : MonoBehaviour
 
     public void OnInventoryPanel()
     {
+        stopControllPlayer();
         _inventorypanel.SetActive(true);
     }
 
-    public void OnConversationPanel()
+    public void OnConversationPanel(int value)
     {
-        _conversationpanel.SetActive(true);
+        switch (_conversationpanel.GetComponent<ConversationPanel>().conversationCount)
+        {
+            case -1:
+                _conversationpanel.GetComponent<ConversationPanel>().setConversationNPC(value);
+                _conversationpanel.SetActive(true);
+                break;
+            case 0:
+                _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
+                break;
+        }
     }
 
     public void OnCreateCharacter()
@@ -148,6 +164,17 @@ public class UIManager : MonoBehaviour
             }
             _playersystem._canMove = true;
         }
+    }
+
+    // 플레이어 조작 정지
+    private void stopControllPlayer()
+    {
+        _playersystem._canMove = false;
+    }
+
+    public void runControllPlayer()
+    {
+        _playersystem._canMove = true;
     }
 
     // 게임 종료

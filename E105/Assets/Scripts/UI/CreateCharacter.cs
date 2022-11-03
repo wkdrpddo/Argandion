@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CreateCharacter : MonoBehaviour
 {
+    public GameObject _baseuipanel;
     public Sprite unselectedMan;
     public Sprite selectedMan;
     public Sprite unselectedWoman;
@@ -34,6 +35,7 @@ public class CreateCharacter : MonoBehaviour
 
     public void gameStart()
     {
+        _baseuipanel.SetActive(true);
         gameObject.SetActive(false);
     }
     // Start is called before the first frame update
