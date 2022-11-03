@@ -110,7 +110,6 @@ GameObject:
   - component: {fileID: 7516204001823161147}
   - component: {fileID: 5721036593887686747}
   - component: {fileID: 7934378783781106479}
-  - component: {fileID: 3980099352295437359}
   - component: {fileID: -4135221642658556651}
   m_Layer: 0
   m_Name: Sign 5
@@ -196,21 +195,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.79, y: 4.02, z: 0.88}
-  m_Center: {x: -0.0004444867, y: 1.05, z: -0.32}
---- !u!135 &3980099352295437359
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7668791435407771678}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: -0.0004444867, y: 0.4, z: -0.028304726}
+  m_Size: {x: 0.79, y: 4.02, z: 1.57}
+  m_Center: {x: 0, y: 1.05, z: -0.43}
 --- !u!114 &-4135221642658556651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +209,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9585edb38f7d6c47b4ce046e1b1aa1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiGroup: {fileID: 4004842235338936491, guid: fe9e31935e68a7b45b0040f054da2de9, type: 3}
-  _objectName: 
-  _enterPlayer: {fileID: 1715147231216080885, guid: 2018bcac01cdb484ebd447a439eae9b1, type: 3}
-  _open: 0

@@ -74,7 +74,7 @@ public class BuildingChange : MonoBehaviour
         // _underConstruction = true; // 건축 시작
         _constructionSet = Instantiate(_constructionPrefab, new Vector3(_buildingPlace.transform.position.x + _constructionX, _buildingPlace.transform.position.y + _constructionY, _buildingPlace.transform.position.z + _constructionZ), Quaternion.identity, _buildingPlace.transform);
         Destroy(_makeFences._fences);
-        // Destroy(gameObject.GetComponent<BoxCollider>());
+        Destroy(gameObject.GetComponent<BoxCollider>());
 
     }
 
