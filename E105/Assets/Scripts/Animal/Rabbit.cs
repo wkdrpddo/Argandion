@@ -19,9 +19,11 @@ public class Rabbit : MonoBehaviour
     private bool isRunning; //뛰는중인지 아닌지
     private bool isDead;  //죽었는지 아닌지
 
-    [SerializeField] private float walkTime;  //얼마동안 걸을지
     [SerializeField] private float waitTime;  //대기시간
-    [SerializeField] private float runTime;  //대기시간
+    [SerializeField] private float idleTime;
+    [SerializeField] private float eatTime;
+    [SerializeField] private float walkTime;  //얼마동안 걸을지
+    [SerializeField] private float runTime;
     private float currentTime;
 
     //필요한 컴포넌트
@@ -41,16 +43,16 @@ public class Rabbit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isDead)
+        if (!isDead)
         {
             Move();
-            ElapseTime();  
+            ElapseTime();
         }
     }
 
     private void Move()
     {
-        if(isWalking || isRunning )
+        if (isWalking || isRunning)
         {
             nav.SetDestination(this.transform.position + destination * 5f);
         }
@@ -60,10 +62,10 @@ public class Rabbit : MonoBehaviour
     //시간 경과 함수
     private void ElapseTime()
     {
-        if(isAction)
+        if (isAction)
         {
             currentTime -= Time.deltaTime;
-            if(currentTime <= 0)
+            if (currentTime <= 0)
             {
                 //다음 랜덤 행동 개시
                 ReSet();
@@ -81,7 +83,7 @@ public class Rabbit : MonoBehaviour
         nav.ResetPath();
         anim.SetBool("Walking", isWalking);
         anim.SetBool("Running", isRunning);
-        destination = new Vector3(Random.Range(-10f,10f), 0f, Random.Range(-10f,10f)).normalized;
+        destination = new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(-10f, 10f)).normalized;
         RandomAction();
     }
 
@@ -89,43 +91,40 @@ public class Rabbit : MonoBehaviour
     {
         isAction = true;
 
-        int _random = Random.Range(0,10); //Idle, 풀뜯기, 걷기
+        int _random = Random.Range(0, 10); //Idle, eat, walk
 
-        if(_random >= 0 && _random <=1)  // 2/10 확률
-            Wait();
-        else if(_random >= 2 && _random <=4 )  // 3/10 확률
+        if (_random >= 0 && _random <= 1)  // 2/10 확률
+            Idle();
+        else if (_random >= 2 && _random <= 4)  // 3/10 확률
             Eat();
-        else if(_random >= 5 && _random <=9)  // 5/10 확률
+        else if (_random >= 5 && _random <= 9)  // 5/10 확률
             TryWalk();
-        
+
     }
 
-    private void Wait()
+    private void Idle()
     {
-        currentTime = waitTime;
+        currentTime = idleTime;
         anim.SetTrigger("Idle");
     }
 
     private void Eat()
     {
-        currentTime = waitTime;
+        currentTime = eatTime;
         anim.SetTrigger("Eat");
 
     }
 
     private void TryWalk()
     {
+        nav.speed = walkSpeed;
         isWalking = true;
         anim.SetBool("Walking", isWalking);
         currentTime = walkTime;
-        nav.speed = walkSpeed;
-
     }
 
     private void Run(Vector3 _targetPos)
     {
-        destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
-
         currentTime = runTime;
         isWalking = false;
         isRunning = true;
@@ -133,14 +132,15 @@ public class Rabbit : MonoBehaviour
         anim.SetBool("Walking", isWalking);
         anim.SetBool("Running", isRunning);
 
+        destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
     }
 
     public void Damage(int _dmg, Vector3 _targetPos)
     {
-        if(!isDead)
+        if (!isDead)
         {
             hp -= _dmg;
-            if(hp<=0)
+            if (hp <= 0)
             {
                 Dead();
                 return;
@@ -156,10 +156,6 @@ public class Rabbit : MonoBehaviour
 
         anim.SetBool("Walking", isWalking);
         anim.SetBool("Running", isRunning);
-
-        //죽는 애니메이션(일단 없음)
-        // Vector3 _rotation = Vector3.Lerp(transform.eulerAngles, new Vector3(0f, 0f, -90f), 0.9f);
-        // transform.rotation = Quaternion.Euler(_rotation);
 
         isDead = true;
     }

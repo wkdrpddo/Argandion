@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Wolf : MonoBehaviour
+public class Bear : MonoBehaviour
 {
     [SerializeField] private string animalName; //동물의 이름
     [SerializeField] private int hp;
@@ -21,9 +21,8 @@ public class Wolf : MonoBehaviour
     private bool isAttacking; //공격중
     private bool isDead;  //죽었는지 아닌지
 
-    [SerializeField] private float waitTime;  //대기시간 
+    [SerializeField] private float waitTime;
     [SerializeField] private float idleTime;
-    [SerializeField] private float howlTime;
     [SerializeField] private float walkTime;  //얼마동안 걸을지
     [SerializeField] private float chaseTime;  //추격시간
     private float currentTime;
@@ -33,14 +32,12 @@ public class Wolf : MonoBehaviour
     [SerializeField] private LayerMask targetMask;
 
 
-
     //필요한 컴포넌트
     [SerializeField] private Animator anim;
     [SerializeField] private Rigidbody rigid;
     [SerializeField] private BoxCollider boxCol;
     private NavMeshAgent nav;
     [SerializeField] private Transform playerPos;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -73,18 +70,16 @@ public class Wolf : MonoBehaviour
 
     }
 
-
-    //시간 경과 함수
     private void ElapseTime()
     {
         if (isAction)
         {
             currentTime -= Time.deltaTime;
-            if (currentTime <= 0 && !isAttacking)
+            if (currentTime <= 0 && !isAttacking)    ////////////isAttacking 빼보기
             {
                 //다음 랜덤 행동 개시
                 ReSet();
-                StopCoroutine(AttackCoroutine());
+                StopCoroutine(AttackCoroutine());   ///////이거 빼보기
             }
         }
     }
@@ -108,27 +103,18 @@ public class Wolf : MonoBehaviour
     {
         isAction = true;
 
-        int _random = Random.Range(0, 10); //대기, idle, 하울링, 걷기
+        int _random = Random.Range(0, 10); //idle, 걷기
 
-        if (_random == 0)  // 1/10 확률
+        if (_random >= 0 && _random <= 1)  // 2/10 확률
             Idle();
-        else if (_random >= 1 && _random <= 2) // 2/10 확률
-            Howling();
-        else if (_random >= 3 && _random <= 9) // 7/10 확률
+        else if (_random >= 2 && _random <= 9) // 8/10 확률
             TryWalk();
-
     }
 
     private void Idle()
     {
         currentTime = idleTime;
         anim.SetTrigger("Idle");
-    }
-
-    private void Howling()
-    {
-        currentTime = howlTime;
-        anim.SetTrigger("Howl");
     }
 
     private void TryWalk()
@@ -169,19 +155,17 @@ public class Wolf : MonoBehaviour
 
             if (!isDead && Vector3.Distance(this.transform.position, playerPos.position) <= 3f)
             {
-                Debug.Log("늑대가 플레이어 공격 시도");
+                Debug.Log("곰이 플레이어 공격 시도");
                 if (!isAttacking)
                 {
                     StartCoroutine(AttackCoroutine());
                 }
             }
         }
-
     }
 
     IEnumerator AttackCoroutine()
     {
-
 
         Debug.Log("AttackCoroutine 호출");
 
@@ -205,14 +189,12 @@ public class Wolf : MonoBehaviour
             Debug.Log("플레이어 빗나감");
         }
 
-
         yield return new WaitForSeconds(attackDelay);
         isAttacking = false;
 
         Chase();
 
     }
-
 
     private void Dead()
     {
@@ -228,5 +210,6 @@ public class Wolf : MonoBehaviour
 
         anim.SetTrigger("Death");
     }
+
 
 }

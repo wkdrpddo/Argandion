@@ -19,9 +19,9 @@ public class Deer : MonoBehaviour
     private bool isRunning; //뛰는중인지 아닌지
     private bool isDead;  //죽었는지 아닌지
 
-    [SerializeField] private float walkTime;  //얼마동안 걸을지
     [SerializeField] private float waitTime;  //대기시간 
     [SerializeField] private float eatTime;   //먹는시간
+    [SerializeField] private float walkTime;  //얼마동안 걸을지
     [SerializeField] private float runTime;  //뛰는시간
     private float currentTime;
 
@@ -42,16 +42,16 @@ public class Deer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isDead)
+        if (!isDead)
         {
             Move();
-            ElapseTime();  
+            ElapseTime();
         }
     }
 
     private void Move()
     {
-        if(isWalking || isRunning )
+        if (isWalking || isRunning)
         {
             nav.SetDestination(this.transform.position + destination * 5f);
         }
@@ -61,10 +61,10 @@ public class Deer : MonoBehaviour
     //시간 경과 함수
     private void ElapseTime()
     {
-        if(isAction)
+        if (isAction)
         {
             currentTime -= Time.deltaTime;
-            if(currentTime <= 0)
+            if (currentTime <= 0)
             {
                 //다음 랜덤 행동 개시
                 ReSet();
@@ -82,7 +82,7 @@ public class Deer : MonoBehaviour
         nav.ResetPath();
         anim.SetBool("Walking", isWalking);
         anim.SetBool("Running", isRunning);
-        destination = new Vector3(Random.Range(-10f,10f), 0f, Random.Range(-10f,10f)).normalized;
+        destination = new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(-10f, 10f)).normalized;
         RandomAction();
     }
 
@@ -90,20 +90,13 @@ public class Deer : MonoBehaviour
     {
         isAction = true;
 
-        int _random = Random.Range(0,10); //대기, 먹기, 걷기
+        int _random = Random.Range(0, 10); // eat, walk
 
-        if(_random == 0)   // 1/10 활률 
-            Wait();
-        else if(_random >= 1 && _random <= 2)  // 2/10 확률
+        if (_random >= 0 && _random <= 1)   // 2/10 활률 
             Eat();
-        else if(_random >= 3 && _random <= 9)  // 6/10 확률
+        else if (_random >= 2 && _random <= 9)  // 8/10 확률
             TryWalk();
-        
-    }
 
-    private void Wait()
-    {
-        currentTime = waitTime;
     }
 
     private void Eat()
@@ -114,16 +107,14 @@ public class Deer : MonoBehaviour
 
     private void TryWalk()
     {
+        nav.speed = walkSpeed;
+        currentTime = walkTime;
         isWalking = true;
         anim.SetBool("Walking", isWalking);
-        currentTime = walkTime;
-        nav.speed = walkSpeed;
     }
 
     private void Run(Vector3 _targetPos)
     {
-        destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
-
         currentTime = runTime;
         isWalking = false;
         isRunning = true;
@@ -131,22 +122,23 @@ public class Deer : MonoBehaviour
         anim.SetBool("Walking", isWalking);
         anim.SetBool("Running", isRunning);
 
+        destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
     }
 
     public void Damage(int _dmg, Vector3 _targetPos)
     {
-        if(!isDead)
+        if (!isDead)
         {
             hp -= _dmg;
 
-            if(hp<=0)
+            if (hp <= 0)
             {
                 Dead();
                 return;
             }
 
             Run(_targetPos);
-        }     
+        }
     }
 
     private void Dead()

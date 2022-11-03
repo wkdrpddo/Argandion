@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6269637229083648639
+--- !u!1 &3570192267505366779
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,12 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6269637229083912845}
-  - component: {fileID: 6269637229090980523}
-  - component: {fileID: 6269637229090980519}
-  - component: {fileID: 6269637229090980520}
-  - component: {fileID: 6269637229090980521}
-  - component: {fileID: 6269637229090980522}
+  - component: {fileID: 3570192267505366753}
+  - component: {fileID: 3570192267505366758}
+  - component: {fileID: 3570192267505366759}
+  - component: {fileID: 3570192267505366756}
+  - component: {fileID: 3570192267505366757}
+  - component: {fileID: 3570192267505366778}
   m_Layer: 0
   m_Name: Rabbit_01
   m_TagString: Rabbit
@@ -21,30 +21,30 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6269637229083912845
+--- !u!4 &3570192267505366753
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6269637229083648639}
+  m_GameObject: {fileID: 3570192267505366779}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.474, y: 0.082, z: 6.761}
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6269637229083952785}
+  - {fileID: 3570192268100736811}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &6269637229090980523
+--- !u!95 &3570192267505366758
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6269637229083648639}
+  m_GameObject: {fileID: 3570192267505366779}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0904c2f7f32114047ad477fc14eb29c2, type: 3}
   m_Controller: {fileID: 9100000, guid: 44f1586436876d142b0afe36ef71a9cc, type: 2}
@@ -57,35 +57,37 @@ Animator:
   m_HasTransformHierarchy: 0
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6269637229090980519
+--- !u!114 &3570192267505366759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6269637229083648639}
+  m_GameObject: {fileID: 3570192267505366779}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12c08a10614b2744d8fbeda05b63d2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animalName: Rabbit
-  hp: 5
+  hp: 3
   walkSpeed: 1
   runSpeed: 2
+  waitTime: 1
+  idleTime: 4
+  eatTime: 4
   walkTime: 10
-  waitTime: 4
   runTime: 5
-  anim: {fileID: 6269637229090980523}
-  rigid: {fileID: 6269637229090980520}
-  boxCol: {fileID: 6269637229090980521}
---- !u!54 &6269637229090980520
+  anim: {fileID: 3570192267505366758}
+  rigid: {fileID: 3570192267505366756}
+  boxCol: {fileID: 3570192267505366757}
+--- !u!54 &3570192267505366756
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6269637229083648639}
+  m_GameObject: {fileID: 3570192267505366779}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -95,26 +97,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!65 &6269637229090980521
+--- !u!65 &3570192267505366757
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6269637229083648639}
+  m_GameObject: {fileID: 3570192267505366779}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.064409815, y: 0.12253561, z: 0.14587665}
   m_Center: {x: 0.000046349, y: 0.06137567, z: 0.0001488924}
---- !u!195 &6269637229090980522
+--- !u!195 &3570192267505366778
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6269637229083648639}
+  m_GameObject: {fileID: 3570192267505366779}
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.03
@@ -130,7 +132,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!1 &6269637229083883887
+--- !u!1 &3570192268100736808
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,8 +140,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6269637229083952785}
-  - component: {fileID: 6269637229095397537}
+  - component: {fileID: 3570192268100736811}
+  - component: {fileID: 3570192268100736810}
   m_Layer: 0
   m_Name: SM_Rabbit_01
   m_TagString: Untagged
@@ -147,28 +149,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6269637229083952785
+--- !u!4 &3570192268100736811
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6269637229083883887}
+  m_GameObject: {fileID: 3570192268100736808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.037214093, z: -0.033275984}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6269637229083912845}
+  m_Father: {fileID: 3570192267505366753}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!137 &6269637229095397537
+--- !u!137 &3570192268100736810
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6269637229083883887}
+  m_GameObject: {fileID: 3570192268100736808}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
