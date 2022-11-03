@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HouseChonge : MonoBehaviour
+public class HouseChange : MonoBehaviour
 {
     public SystemManager _systemManager;
 

@@ -21,13 +21,10 @@ public class MakeBuildingFence : MonoBehaviour
 
     public Material _icon;
 
-
-
-
     void Start()
     {
         setValue();
-        makeFence();
+        makeFence(); // 테스트 용
     }
 
 
