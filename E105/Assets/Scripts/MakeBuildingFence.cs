@@ -92,8 +92,8 @@ public class MakeBuildingFence : MonoBehaviour
         GameObject sign = Instantiate(_sign, new Vector3(_colliderCenter.x, -0.5f, _colliderCenter.z - _colliderSize.z / 2 - 0.5f), Quaternion.Euler(0, -180, 0), _fences.transform.parent.gameObject.transform);
         // 아이콘 바꾸기
         sign.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = _icon;
-        //  
-        sign.GetComponent<InteractionUI>()._uiGroup = _uiSet;
+        // 표지판 상호작용 
+        // sign.GetComponent<InteractionUI>()._uiGroup = _uiSet;
 
     }
 }
