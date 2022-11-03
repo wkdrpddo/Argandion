@@ -63,8 +63,6 @@ public class MakeBuildingFence : MonoBehaviour
         // Debug.Log(fence0Size);
         // Debug.Log(fence1Size);
         // Debug.Log(fence2Size);
-
-
     }
 
     public void makeFence()
