@@ -5,7 +5,8 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public static bool invectoryActivated = false;  // 인벤토리 활성화 여부.
-
+    public int gold = 500000; // 현재 소유 골드
+    
     [SerializeField]
     private GameObject go_InventoryBase; // Inventory_Base 이미지
     [SerializeField] 
@@ -46,6 +47,41 @@ public class Inventory : MonoBehaviour
     // {
     //     go_InventoryBase.SetActive(false);
     // }
+    public bool CheckInven(ItemObject _item, int _count = 1, bool _sec = false)
+    {   
+        if (!_sec) {
+            if(_item.Category != "장비")
+            {
+                for (int i = 0; i < slots.Length; i++)
+                {
+                    if (slots[i].item != null)  // null 이라면 slots[i].item.itemName 할 때 런타임 에러 나서
+                    {
+                        if (slots[i].item.Name == _item.Name && slots[i].itemCount < 99) {
+                            if (slots[i].itemCount + _count <= 99 ) {
+                                return true;
+                            } else {
+                                return CheckInven(_item, _count, true);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].itemCount == 0)
+            {
+                return true;
+            }
+
+            if ( i + 1 == slots.Length) {
+                return false;
+            }
+        }
+
+        return false;
+    }
 
     public void AcquireItem(ItemObject _item, int _count = 1)
     {
