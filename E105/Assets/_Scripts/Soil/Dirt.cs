@@ -6,7 +6,7 @@ public class Dirt : MonoBehaviour
 {
     public int watered;
     public int minusWater;
-    private GameObject[] _nearObjects;
+    public GameObject[] _nearObjects = new GameObject[25];
     ParticleSystem particleObject;
     public SystemManager _system;
     public int temp;
@@ -33,7 +33,8 @@ public class Dirt : MonoBehaviour
     {  
         if (gameObject.tag == "wateredDirt")
         {
-            _nearObjects = GameObject.FindGameObjectsWithTag("crop");
+            // _nearObjects = GameObject.FindGameObjectsWithTag("crop");
+            Debug.Log("물빠짐!");
             watered -= minusWater;
             if (_buff.bluePray) {
                 watered += 25 * _nearObjects.Length;
@@ -44,7 +45,7 @@ public class Dirt : MonoBehaviour
                 particleObject.Stop();
             } else {
                 for (int i = 0; i < _nearObjects.Length; i++){
-                    if ( _nearObjects[i].GetComponent<Crop>() != null ) {
+                    if ( _nearObjects[i] != null ) {
                         Crop crop = _nearObjects[i].GetComponent<Crop>();
                         crop.growUp();
                     }
@@ -62,16 +63,27 @@ public class Dirt : MonoBehaviour
         particleObject.Play();
     }
 
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.gameObject.CompareTag("wheat")) {
-    //         minusWater += 20;
-    //     }
-    // }
+    void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("crop"))
+        {
+            if (!other.gameObject.GetComponent<Crop>().isIn) {
+                for (int idx = 0; idx < 25; idx ++) {
+                    if (_nearObjects[idx] == null) {
+                        Debug.Log(idx + "에 넣었어!");
+                        _nearObjects[idx] = other.gameObject;
+                        other.gameObject.GetComponent<Crop>().isIn = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
-    // private void OnTriggerExit(Collider other) {
-    //     if (other.gameObject.CompareTag("wheat")) {
-    //         minusWater -= 20;
-    //     }
-    // }
+    public void CropGrowUp(GameObject crop) {
+        for (int idx = 0; idx < 25; idx ++) {
+            if(_nearObjects[idx] == crop) {
+                _nearObjects[idx] = null;
+            }
+        }
+    }
 }
