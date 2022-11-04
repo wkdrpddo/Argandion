@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildEventPanel : MonoBehaviour
+public class CraftingPanel : MonoBehaviour
 {
     private UIManager ui;
 
