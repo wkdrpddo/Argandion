@@ -7,7 +7,18 @@ public class PropGravity : MonoBehaviour
     public Collider _collider;
     public Rigidbody _rigidbody;
 
-    private void OnTriggerEnter(Collider other)
+    void Start()
     {
+        _collider = gameObject.GetComponent<Collider>();
+        _rigidbody = gameObject.GetComponent<Rigidbody>();
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer == 0)
+        {
+            _rigidbody.useGravity = false;
+            _rigidbody.isKinematic = true;
+        }
     }
 }
