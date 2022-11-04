@@ -30,7 +30,7 @@ public class MakeBuildingFence : MonoBehaviour
     void Start()
     {
         // 오브젝트 변수 설정
-        // _systemManager = GameObject.Find("SystemManager");
+        _systemManager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         // 함수 호출
         setValue();
         makeFence(); // 테스트 용
