@@ -28,6 +28,8 @@ public class BuildingChange : MonoBehaviour
     // building finish y 회전값
     public float _fBuildingRotY;
 
+    public MakeSign _makeSign;
+
 
     // ==================================================== 지울 위치 (시작) ==================================
 
@@ -73,6 +75,16 @@ public class BuildingChange : MonoBehaviour
         // }
         // _underConstruction = true; // 건축 시작
         _constructionSet = Instantiate(_constructionPrefab, new Vector3(_buildingPlace.transform.position.x + _constructionX, _buildingPlace.transform.position.y + _constructionY, _buildingPlace.transform.position.z + _constructionZ), Quaternion.identity, _buildingPlace.transform);
+
+        // sign 만들기
+        BoxCollider signZ = _constructionSet.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<BoxCollider>();
+        // Debug.Log("consX: " + _constructionX);
+        // Debug.Log("sizeZ: " + signZ.size.z);
+        // Debug.Log("centerZ: " + signZ.center.z);
+
+        _makeSign.makeSign(gameObject.transform.position.x, gameObject.transform.parent.position.y, gameObject.transform.position.z - signZ.size.z - 0.8f, _constructionSet.transform, _makeFences._icon);
+
+        // 펜스 지우기
         Destroy(_makeFences._fences);
         Destroy(gameObject.GetComponent<BoxCollider>());
 
@@ -107,6 +119,11 @@ public class BuildingChange : MonoBehaviour
     {
         _constructionSet.transform.GetChild(_phase - 2).gameObject.SetActive(false);
         _constructionSet.transform.GetChild(_phase - 1).gameObject.SetActive(true);
+        BoxCollider signZ = _constructionSet.transform.GetChild(_phase - 1).gameObject.transform.GetChild(0).gameObject.GetComponent<BoxCollider>();
+        // Debug.Log(signZ.size.z);
+        // Debug.Log(signZ.size.z);
+
+        _makeSign.moveSign(gameObject.transform.position.x, gameObject.transform.position.z - signZ.size.z / 2 - 0.8f);
     }
 
     // 최종 건축물로 바꾸기

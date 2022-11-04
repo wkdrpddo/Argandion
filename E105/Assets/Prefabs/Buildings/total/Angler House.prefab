@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7635448613355930220
+--- !u!1 &8275540313106337860
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7635448613355930221}
-  - component: {fileID: 7635448613355930216}
-  - component: {fileID: 7635448613355930223}
-  - component: {fileID: 7635448613355930222}
+  - component: {fileID: 8275540313106337861}
+  - component: {fileID: 8275540313106337857}
+  - component: {fileID: 8275540313106337856}
+  - component: {fileID: 8275540313106337863}
+  - component: {fileID: 8275540313106337862}
   m_Layer: 0
   m_Name: AnglerHousePlace
   m_TagString: Untagged
@@ -19,42 +20,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7635448613355930221
+--- !u!4 &8275540313106337861
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7635448613355930220}
+  m_GameObject: {fileID: 8275540313106337860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 4.0299997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7635448613424503900}
-  m_Father: {fileID: 7635448613601631254}
+  - {fileID: 8275540313138408342}
+  m_Father: {fileID: 8275540314083697196}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7635448613355930216
+--- !u!65 &8275540313106337857
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7635448613355930220}
+  m_GameObject: {fileID: 8275540313106337860}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 14.5, y: 9.3, z: 9.8}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7635448613355930223
+--- !u!114 &8275540313106337856
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7635448613355930220}
+  m_GameObject: {fileID: 8275540313106337860}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 677861d127ed5a84489802c1e9aa35a6, type: 3}
@@ -66,30 +67,30 @@ MonoBehaviour:
   - {fileID: 480766987207316448, guid: 80e88887acafb27458017b6b06bf7fa2, type: 3}
   - {fileID: 4372575617666527159, guid: 5dea9538c437654489c267b8645de5bf, type: 3}
   - {fileID: 480766987207316448, guid: 80e88887acafb27458017b6b06bf7fa2, type: 3}
-  _sign: {fileID: 7668791435407771678, guid: b37a29c0563bea447bfd375f90a73da0, type: 3}
-  _fences: {fileID: 7635448613424503971}
+  _fences: {fileID: 8275540313138408341}
   _uiSet: {fileID: 0}
   _colliderCenter: {x: 0, y: 0, z: 0}
   _collider: {fileID: 0}
   _sectorNum: 2
   _systemManager: {fileID: 0}
   _icon: {fileID: 2100000, guid: c536adad5f2b9414c88186c13832ea22, type: 2}
---- !u!114 &7635448613355930222
+  _makeSign: {fileID: 8275540313106337862}
+--- !u!114 &8275540313106337863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7635448613355930220}
+  m_GameObject: {fileID: 8275540313106337860}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27761491c0d73e84381f411841c089d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _phase: -1
-  _makeFences: {fileID: 7635448613355930223}
+  _makeFences: {fileID: 8275540313106337856}
   _constructionPrefab: {fileID: 392288130409970835, guid: 9f9f76bf7563b3b4aba4eeeded1e79a1, type: 3}
-  _buildingPlace: {fileID: 7635448613355930220}
+  _buildingPlace: {fileID: 8275540313106337860}
   _buildingFinish: {fileID: 8807359019507454764, guid: 079bc123c99943c4aaa22231dcd5ea13, type: 3}
   _constructionX: 0
   _constructionY: -4.05
@@ -98,9 +99,23 @@ MonoBehaviour:
   _fBuildingY: 0
   _fBuildingZ: -3.29
   _fBuildingRotY: 90
+  _makeSign: {fileID: 8275540313106337862}
   _fulfillTest: 0
   _dayEndTest: 0
---- !u!1 &7635448613424503971
+--- !u!114 &8275540313106337862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8275540313106337860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fa17e6820cadd84f95312ccffdf3904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _signPrefab: {fileID: 7668791435407771678, guid: b37a29c0563bea447bfd375f90a73da0, type: 3}
+--- !u!1 &8275540313138408341
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +123,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7635448613424503900}
+  - component: {fileID: 8275540313138408342}
   m_Layer: 0
   m_Name: Fences
   m_TagString: Untagged
@@ -116,22 +131,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7635448613424503900
+--- !u!4 &8275540313138408342
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7635448613424503971}
+  m_GameObject: {fileID: 8275540313138408341}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7635448613355930221}
+  m_Father: {fileID: 8275540313106337861}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7635448613601631253
+--- !u!1 &8275540314083697187
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,7 +154,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7635448613601631254}
+  - component: {fileID: 8275540314083697196}
   m_Layer: 0
   m_Name: Angler House
   m_TagString: Untagged
@@ -147,19 +162,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7635448613601631254
+--- !u!4 &8275540314083697196
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7635448613601631253}
+  m_GameObject: {fileID: 8275540314083697187}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.32, y: 0, z: 24.83}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7635448613355930221}
+  - {fileID: 8275540313106337861}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

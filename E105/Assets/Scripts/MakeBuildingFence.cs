@@ -5,7 +5,7 @@ using UnityEngine;
 public class MakeBuildingFence : MonoBehaviour
 {
     public GameObject[] _Fence = new GameObject[5];
-    public GameObject _sign;
+    // public GameObject _sign;
     public GameObject _fences;
     public RectTransform _uiSet;
 
@@ -20,6 +20,8 @@ public class MakeBuildingFence : MonoBehaviour
     public SystemManager _systemManager;
 
     public Material _icon;
+
+    public MakeSign _makeSign;
 
     void Start()
     {
@@ -64,6 +66,8 @@ public class MakeBuildingFence : MonoBehaviour
 
     public void makeFence()
     {
+        float fencePositionY = gameObject.transform.parent.position.y;
+
         // 위쪽 밑쪽
         int xCnt = (int)(_colliderSize.x / _fenceSizeMax.x);
         float xGap = (_colliderSize.x % _fenceSizeMax.x) / (xCnt - 1);
@@ -71,8 +75,8 @@ public class MakeBuildingFence : MonoBehaviour
         int cnt = 0;
         while (cnt < xCnt)
         {
-            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x + _colliderSize.x / 2 - cnt * (_fenceSizeMax.x + xGap), 0, _colliderCenter.z + _colliderSize.z / 2), Quaternion.identity, _fences.transform);
-            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x + _colliderSize.x / 2 - cnt * (_fenceSizeMax.x + xGap), 0, _colliderCenter.z - _colliderSize.z / 2), Quaternion.identity, _fences.transform);
+            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x + _colliderSize.x / 2 - cnt * (_fenceSizeMax.x + xGap), fencePositionY, _colliderCenter.z + _colliderSize.z / 2), Quaternion.identity, _fences.transform);
+            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x + _colliderSize.x / 2 - cnt * (_fenceSizeMax.x + xGap), fencePositionY, _colliderCenter.z - _colliderSize.z / 2), Quaternion.identity, _fences.transform);
             cnt++;
         }
 
@@ -83,17 +87,28 @@ public class MakeBuildingFence : MonoBehaviour
         cnt = 0;
         while (cnt < zCnt)
         {
-            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x + _colliderSize.x / 2, 0, _colliderCenter.z + _colliderSize.z / 2 - cnt * (_fenceSizeMax.x + zGap)), Quaternion.Euler(0, -90, 0), _fences.transform);
-            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x - _colliderSize.x / 2, 0, _colliderCenter.z + _colliderSize.z / 2 - cnt * (_fenceSizeMax.x + zGap)), Quaternion.Euler(0, -90, 0), _fences.transform);
+            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x + _colliderSize.x / 2, fencePositionY, _colliderCenter.z + _colliderSize.z / 2 - cnt * (_fenceSizeMax.x + zGap)), Quaternion.Euler(0, -90, 0), _fences.transform);
+            Instantiate(_Fence[Random.Range(0, 5)], new Vector3(_colliderCenter.x - _colliderSize.x / 2, fencePositionY, _colliderCenter.z + _colliderSize.z / 2 - cnt * (_fenceSizeMax.x + zGap)), Quaternion.Euler(0, -90, 0), _fences.transform);
             cnt++;
         }
 
+        // Debug.Log(gameObject);
+        // Debug.Log("콜라이더 y: " + _colliderCenter.y);
+        // Debug.Log("중앙: " + (_colliderCenter.y - gameObject.transform.position.y));
+
         // 표지판 생성
-        GameObject sign = Instantiate(_sign, new Vector3(_colliderCenter.x, -0.5f, _colliderCenter.z - _colliderSize.z / 2 - 0.5f), Quaternion.Euler(0, -180, 0), _fences.transform.parent.gameObject.transform);
+        _makeSign.makeSign(_colliderCenter.x, fencePositionY, _colliderCenter.z - _colliderSize.z / 2 - 0.5f, _fences.transform, _icon);
+        // _makeSign.makeSign(_colliderCenter.x, -0.5f, _colliderCenter.z - _colliderSize.z / 2 - 0.5f);
+        // 표지판 생성
+        // GameObject sign = Instantiate(_sign, new Vector3(, , ), Quaternion.Euler(0, -180, 0), );
         // 아이콘 바꾸기
-        sign.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = _icon;
+        // sign.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = _icon;
         // 표지판 상호작용 
         // sign.GetComponent<InteractionUI>()._uiGroup = _uiSet;
+
+        // _fence 움직이기
+        // _fences.transform.position = new Vector3(_fences.transform.position.x, _colliderCenter.y - gameObject.transform.position.y, _fences.transform.position.z);
+        // Debug.Log(_fences.transform.position.y);
 
     }
 }
