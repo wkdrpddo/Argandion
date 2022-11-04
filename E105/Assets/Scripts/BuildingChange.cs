@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class BuildingChange : MonoBehaviour
 {
-
-    // public bool _underConstruction;
     public int _phase = 0; // 0: fence, 1: 자재, 2: 돌담, 3: 벽, 4: 완성
+
+    // 스크립트
     public MakeBuildingFence _makeFences;
+    public MakeSign _makeSign;
 
+    // 게임 오브젝트
     public GameObject _constructionPrefab;
-    public GameObject _buildingPlace;
     public GameObject _buildingFinish;
-
     private GameObject _constructionSet;
 
     // construction 위치
@@ -27,9 +27,6 @@ public class BuildingChange : MonoBehaviour
 
     // building finish y 회전값
     public float _fBuildingRotY;
-
-    public MakeSign _makeSign;
-
 
     // ==================================================== 지울 위치 (시작) ==================================
 
@@ -57,37 +54,20 @@ public class BuildingChange : MonoBehaviour
 
     // ==================================================== 지울 위치 (끝) ==================================
 
-    // 상호작용해서 건축 시작하기
+    // 상호작용해서 건축 시작하기 => 자재 건축물 넣기
     public void BuildStart()
     {
-        // if (!_underConstruction)
-        // {
-        //     // _constructionX = _buildingPlace.transform.position.x + -2.39f;
-        //     // _constructionY = _buildingPlace.transform.position.y + -9.42f;
-        //     // _constructionZ = _buildingPlace.transform.position.z + 2.38f;
-        //     _underConstruction = true; // 건축 시작
-        //     _phase = 1; // 1단계 (펜스에서 자재)
-        //                 // 중간 건축 생성
-        //                 // Debug.Log(_makeFences._colliderCenter);
-        //     _constructionSet = Instantiate(_constructionPrefab, new Vector3(_buildingPlace.transform.position.x + _constructionX, _buildingPlace.transform.position.y + _constructionY, _buildingPlace.transform.position.z + _constructionZ), Quaternion.identity, _buildingPlace.transform);
-        //     // Debug.Log(_constructionSet);
-        //     Destroy(_makeFences._fences);
-        // }
-        // _underConstruction = true; // 건축 시작
-        _constructionSet = Instantiate(_constructionPrefab, new Vector3(_buildingPlace.transform.position.x + _constructionX, _buildingPlace.transform.position.y + _constructionY, _buildingPlace.transform.position.z + _constructionZ), Quaternion.identity, _buildingPlace.transform);
+        // 건축 과정 건축물 만들기
+        _constructionSet = Instantiate(_constructionPrefab, new Vector3(gameObject.transform.position.x + _constructionX, gameObject.transform.position.y + _constructionY, gameObject.transform.position.z + _constructionZ), Quaternion.identity, gameObject.transform);
 
-        // sign 만들기
-        BoxCollider signZ = _constructionSet.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<BoxCollider>();
-        // Debug.Log("consX: " + _constructionX);
-        // Debug.Log("sizeZ: " + signZ.size.z);
-        // Debug.Log("centerZ: " + signZ.center.z);
-
-        _makeSign.makeSign(gameObject.transform.position.x, gameObject.transform.parent.position.y, gameObject.transform.position.z - signZ.size.z - 0.8f, _constructionSet.transform, _makeFences._icon);
+        // build 1 Collider 가지고 있는 Object
+        GameObject floor = _constructionSet.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+        // 표지판 만들기
+        _makeSign.makeSign(gameObject.transform.position.x, gameObject.transform.parent.position.y, gameObject.transform.position.z - floor.GetComponent<BoxCollider>().size.z * floor.transform.localScale.z / 2, _constructionSet.transform, _makeFences._icon);
 
         // 펜스 지우기
         Destroy(_makeFences._fences);
         Destroy(gameObject.GetComponent<BoxCollider>());
-
     }
 
     // 하루 끝
@@ -107,7 +87,6 @@ public class BuildingChange : MonoBehaviour
             case 4:
                 FinishConstruction();
                 Destroy(_constructionSet);
-                // _underConstruction = false;
                 Destroy(gameObject);
                 break;
         }
@@ -119,17 +98,14 @@ public class BuildingChange : MonoBehaviour
     {
         _constructionSet.transform.GetChild(_phase - 2).gameObject.SetActive(false);
         _constructionSet.transform.GetChild(_phase - 1).gameObject.SetActive(true);
-        BoxCollider signZ = _constructionSet.transform.GetChild(_phase - 1).gameObject.transform.GetChild(0).gameObject.GetComponent<BoxCollider>();
-        // Debug.Log(signZ.size.z);
-        // Debug.Log(signZ.size.z);
-
-        _makeSign.moveSign(gameObject.transform.position.x, gameObject.transform.position.z - signZ.size.z / 2 - 0.8f);
+        BoxCollider boxCollider = _constructionSet.transform.GetChild(_phase - 1).gameObject.transform.GetChild(0).gameObject.GetComponent<BoxCollider>();
+        _makeSign.moveSign(gameObject.transform.position.x, gameObject.transform.position.z - boxCollider.size.z / 2 - 0.8f);
     }
 
     // 최종 건축물로 바꾸기
     void FinishConstruction()
     {
-        Instantiate(_buildingFinish, new Vector3(_buildingPlace.transform.position.x + _fBuildingX, gameObject.transform.parent.position.y + _fBuildingY, _buildingPlace.transform.position.z + _fBuildingZ), Quaternion.Euler(0, _fBuildingRotY, 0), _buildingPlace.transform.parent.gameObject.transform);
+        Instantiate(_buildingFinish, new Vector3(gameObject.transform.position.x + _fBuildingX, gameObject.transform.parent.position.y + _fBuildingY, gameObject.transform.position.z + _fBuildingZ), Quaternion.Euler(0, _fBuildingRotY, 0), gameObject.transform.parent.gameObject.transform);
     }
 
 

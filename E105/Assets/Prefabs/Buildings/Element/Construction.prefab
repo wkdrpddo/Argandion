@@ -167,8 +167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _phase: -1
   _makeFences: {fileID: 0}
+  _makeSign: {fileID: 0}
   _constructionPrefab: {fileID: 0}
-  _buildingPlace: {fileID: 0}
   _buildingFinish: {fileID: 0}
   _constructionX: 0
   _constructionY: 0
@@ -177,7 +177,6 @@ MonoBehaviour:
   _fBuildingY: 0
   _fBuildingZ: 0
   _fBuildingRotY: 0
-  _makeSign: {fileID: 0}
   _fulfillTest: 0
   _dayEndTest: 0
 --- !u!114 &5630781908891789438
@@ -2161,7 +2160,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4.3, y: 7, z: 4.17}
-  m_Center: {x: -0.00000047683716, y: 6, z: 0}
+  m_Center: {x: 0, y: 6, z: 0}
 --- !u!1 &3583351302010664782
 GameObject:
   m_ObjectHideFlags: 0
