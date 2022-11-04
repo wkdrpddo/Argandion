@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.I))
         {
-            _inventorypanel.SetActive(true);
+            OnInventoryPanel();
         }
     }
 
@@ -63,21 +63,25 @@ public class UIManager : MonoBehaviour
 
     public void OnCraftingPanel()
     {
+        stopControllPlayer();
         _craftingpanel.SetActive(true);
     }
 
     public void OnCookingPanel()
     {
+        stopControllPlayer();
         _cookingpanel.SetActive(true);
     }
 
     public void OnBuildEventPanel()
     {
+        stopControllPlayer();
         _buildeventpanel.SetActive(true);
     }
 
     public void OnStoragePanel()
     {
+        stopControllPlayer();
         _storagepanel.SetActive(true);
     }
 
