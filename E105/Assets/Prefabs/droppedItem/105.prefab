@@ -103,6 +103,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 64754305303812432, guid: 4c36be13aadd36c4f81a3efe8d156d00, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c36be13aadd36c4f81a3efe8d156d00, type: 3}
 --- !u!4 &5118316288315480803 stripped
@@ -115,6 +119,35 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1450205895226170, guid: 4c36be13aadd36c4f81a3efe8d156d00, type: 3}
   m_PrefabInstance: {fileID: 5118582912789012085}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &4529090760775452784
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5120024322115644751}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1940074921
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5120024322115644751}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.42104185, y: 0.1287758, z: 0.20734535}
+  m_Center: {x: -0.0051307306, y: 0.004953468, z: 0.00038499385}
 --- !u!114 &1940074922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,16 +167,3 @@ MonoBehaviour:
     Category: 
     BuyCost: 0
     SellCost: 0
---- !u!65 &1940074921
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5120024322115644751}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.42104185, y: 0.1287758, z: 0.20734535}
-  m_Center: {x: -0.0051307306, y: 0.004953468, z: 0.00038499385}

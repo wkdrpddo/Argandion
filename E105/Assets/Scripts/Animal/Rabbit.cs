@@ -32,6 +32,17 @@ public class Rabbit : MonoBehaviour
     [SerializeField] private BoxCollider boxCol;
     private NavMeshAgent nav;
 
+
+    [SerializeField] private GameObject items;  //동물의 가죽
+    //Item
+    [SerializeField] private GameObject item20;  //동물의 가죽
+    [SerializeField] private GameObject item21;   //부드러운 가죽
+    [SerializeField] private GameObject item103;   //작은 고기
+    [SerializeField] private GameObject item104;   //고기
+
+     
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -158,5 +169,16 @@ public class Rabbit : MonoBehaviour
         anim.SetBool("Running", isRunning);
 
         isDead = true;
+
+        Destroy(this.gameObject, 1f);
+        Item();
+    }
+
+    private void Item()
+    {
+        Instantiate(item20, this.transform.position + new Vector3(Random.Range(-2,2),0f,Random.Range(-2,2)), Quaternion.identity).transform.parent = items.transform;
+        Instantiate(item21, this.transform.position + new Vector3(Random.Range(-2,2),0f,Random.Range(-2,2)), Quaternion.identity).transform.parent = items.transform;
+        Instantiate(item103, this.transform.position + new Vector3(Random.Range(-2,2),0f,Random.Range(-2,2)), Quaternion.identity).transform.parent = items.transform;
+        Instantiate(item104, this.transform.position + new Vector3(Random.Range(-2,2),0f,Random.Range(-2,2)), Quaternion.identity).transform.parent = items.transform;
     }
 }
