@@ -12,7 +12,7 @@ public class BuyingSmith : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/BuyingSmith.json");
+        string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/BuyingSmith.json");
         var buyDatas = JsonHelper.FromJson<Product>(jsonString);
         myData = buyDatas;
     }

@@ -52,14 +52,14 @@ public class Item : MonoBehaviour
         Debug.Log("test");
         Debug.Log(itemCode);
         Debug.Log(ItemIndexArray.arr[itemCode]);
-        string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/ItemTable.json");
+        string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/ItemTable2.json");
         var itemData = JsonHelper.FromJson<ItemObject>(jsonString);
         itemObject = itemData[itemCode];
     }
 
     public string FindName(int idx)
     {   
-        string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/ItemTable.json");
+        string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/ItemTable2.json");
         var itemData = JsonHelper.FromJson<ItemObject>(jsonString);
         itemObject = itemData[idx];
         return itemObject.Name;
@@ -67,7 +67,7 @@ public class Item : MonoBehaviour
 
     public ItemObject FindItem(int idx)
     {
-        string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/ItemTable.json");
+        string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/ItemTable2.json");
         var itemData = JsonHelper.FromJson<ItemObject>(jsonString);
         itemObject = itemData[idx];
         return itemObject;

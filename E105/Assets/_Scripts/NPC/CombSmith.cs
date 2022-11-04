@@ -19,7 +19,7 @@ public class CombSmith : MonoBehaviour
     void Start()
     {
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
-        string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/CombSmith.json");
+        string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/CombSmith.json");
         var combDatas = JsonHelper.FromJson<CombRecipe>(jsonString);
         myData = combDatas;
     }

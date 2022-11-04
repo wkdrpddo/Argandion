@@ -43,7 +43,7 @@ public class CombCarpentor : MonoBehaviour
     void Start()
     {
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
-        string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/CombCarpentor.json");
+        string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/CombCarpentor.json");
         var combDatas = JsonHelper.FromJson<CombRecipe>(jsonString);
         myData = combDatas;
     }
