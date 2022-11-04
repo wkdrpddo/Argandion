@@ -51,7 +51,7 @@ public class ConversationPanel : MonoBehaviour
                 _npcname.text = "사냥꾼";
                 break;
             case 7:
-                _npcname.text = "음악갸";
+                _npcname.text = "음악가";
                 break;
             case 8:
                 _npcname.text = "순례자";

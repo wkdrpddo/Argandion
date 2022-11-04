@@ -44,6 +44,7 @@ public class Bear : MonoBehaviour
         nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
         currentTime = waitTime;
         isAction = true;
+        playerPos = GameObject.Find("PlayerObject").transform;
     }
 
     // Update is called once per frame

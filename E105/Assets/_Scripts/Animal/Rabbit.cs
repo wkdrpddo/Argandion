@@ -176,9 +176,32 @@ public class Rabbit : MonoBehaviour
 
     private void Item()
     {
-        Instantiate(item20, this.transform.position + new Vector3(Random.Range(-2,2),0f,Random.Range(-2,2)), Quaternion.identity).transform.parent = items.transform;
-        Instantiate(item21, this.transform.position + new Vector3(Random.Range(-2,2),0f,Random.Range(-2,2)), Quaternion.identity).transform.parent = items.transform;
-        Instantiate(item103, this.transform.position + new Vector3(Random.Range(-2,2),0f,Random.Range(-2,2)), Quaternion.identity).transform.parent = items.transform;
-        Instantiate(item104, this.transform.position + new Vector3(Random.Range(-2,2),0f,Random.Range(-2,2)), Quaternion.identity).transform.parent = items.transform;
+        int random_index = Random.Range(1,3);
+        for( int i=0; i<random_index; i++)  //동물의 가죽
+        {
+            Instantiate(item20, this.transform.position + new Vector3(Random.Range(-2f,2f),1f,Random.Range(-2f,2f)), Quaternion.identity).transform.parent = items.transform;
+        }
+
+        random_index = Random.Range(0,3);
+        if(random_index > 0){
+            for( int i=0; i<random_index; i++)  //부드러운 가죽
+            {
+                Instantiate(item21, this.transform.position + new Vector3(Random.Range(-2f,2f),1f,Random.Range(-2f,2f)), Quaternion.identity).transform.parent = items.transform;
+            }
+        }
+
+        random_index = Random.Range(1,3);
+        for( int i=0; i<random_index; i++)  // 작은고기
+        {
+            Instantiate(item103, this.transform.position + new Vector3(Random.Range(-2f,2f),1f,Random.Range(-2f,2f)), Quaternion.identity).transform.parent = items.transform;
+        }
+        
+        random_index = Random.Range(0,2);
+        if(random_index > 0){
+            for( int i=0; i<random_index; i++)  // 고기
+            {
+                Instantiate(item104, this.transform.position + new Vector3(Random.Range(-2f,2f),1f,Random.Range(-2f,2f)), Quaternion.identity).transform.parent = items.transform;
+            }
+        }
     }
 }

@@ -45,6 +45,7 @@ public class Wolf : MonoBehaviour
     void Start()
     {
         nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        playerPos = GameObject.Find("PlayerObject").transform;
         currentTime = waitTime;
         isAction = true;
     }

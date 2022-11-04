@@ -5,53 +5,68 @@ using UnityEngine;
 
 public class NPCObject : MonoBehaviour
 {
-    // Start is called before the first frame update
 
-    // public bool _useKey_status;
     private Animator _animator;
-    public GameObject _PlayerObject;
-    // public GameObject _conversationUI;
+    private GameObject _PlayerObject;
+    private GameObject _UIManager;
 
     void Start()
     {
-        // _useKey_status= false;
         _animator = GetComponent<Animator>();
-        //_conversationUI.SetActive(false);
+        _PlayerObject = GameObject.Find("PlayerObject");
+        _UIManager = GameObject.Find("UIManager");
     }
 
     // Update is called once per frame
     void Update()
     {
-        //NPCInteraction();
+        
     }
 
     public void Interaction()
     {
         _animator.SetTrigger("move");
         this.transform.LookAt(_PlayerObject.transform);
-            
-        ConversationStart();
-        // if(_useKey_status && Input.GetButtonDown("interactionKey"))
-        // {
-        //     _animator.SetTrigger("move");
-        //     this.transform.LookAt(_PlayerObject.transform);
-            
-        //     ConversationStart();
-        // }
+        
+        //ConversationStart();
     }
 
     public void ConversationStart()
     {
-        _PlayerObject.GetComponent<PlayerSystem>()._canMove = false;
-        // -----------------------------------> UI 담당자랑 얘기 대화    ->  NPC 대화 UI 창 오픈 함수 호출
-        //_conversationUI.SetActive(true);
+        switch(this.name)
+        {
+            case "NPC1" :
+                _UIManager.GetComponent<UIManager>().OnConversationPanel(1);
+                break;
+            case "NPC2" :
+                _UIManager.GetComponent<UIManager>().OnConversationPanel(2);
+                break;
+            case "NPC3" :
+                _UIManager.GetComponent<UIManager>().OnConversationPanel(3);
+                break;
+            case "NPC4" :
+                _UIManager.GetComponent<UIManager>().OnConversationPanel(4);
+                break;
+            case "NPC5" :
+                _UIManager.GetComponent<UIManager>().OnConversationPanel(5);
+                break;
+            case "NPC6" :
+                _UIManager.GetComponent<UIManager>().OnConversationPanel(6);
+                break;
+            case "NPC7" :
+                _UIManager.GetComponent<UIManager>().OnConversationPanel(7);
+                break;
+            case "NPC8" :
+                _UIManager.GetComponent<UIManager>().OnConversationPanel(8);
+                break;
+        }
+
+
     }
 
     public void ConversationEnd()
     {
-        // -----------------------------------> UI 담당자랑 얘기 대화    ->  NPC 대화 UI 창 닫기 버튼 누르면  해당 함수 호출
-        //_conversationUI.SetActive(false);
-        _PlayerObject.GetComponent<PlayerSystem>()._canMove = true;
+
     }
 
 }
