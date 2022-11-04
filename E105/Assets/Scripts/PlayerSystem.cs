@@ -58,6 +58,8 @@ public class PlayerSystem : MonoBehaviour
 
     private Collider[] _colset;
     private bool _canInteract;
+    public int _onAir=0;
+    public float _gravity;
 
     // Start is called before the first frame update
     void Start()
@@ -86,17 +88,28 @@ public class PlayerSystem : MonoBehaviour
         bool _MoveMag = moveInput.magnitude != 0;
         if (!_MoveMag)
         {
-            speed = moveInput * 0;
+            // speed = moveInput * 0;
+            speed.Set(moveInput.x * 0, 0,moveInput.y * 0);
+            if (_onAir==0)
+            {
+                speed.y = -_gravity;
+            }
             rb.velocity = (speed);
         }
         if (_movedDelay <= 0 && _canMove && _MoveMag)
         // if (_movedDelay <= 0 && _canMove)
         {
             Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.y).normalized;
+            _character.forward = moveDir;
             if (Input.GetAxisRaw("run") != 0)
             {
                 // transform.position += moveDir * Time.deltaTime * _runspeed;
                 speed = moveDir * _runspeed;
+                // speed.y = -1f;
+                if (_onAir==0)
+                {
+                    speed.y = -_gravity;
+                }
                 rb.velocity = (speed);
                 _playerAnimator.SetInteger("action", 2);
 
@@ -105,10 +118,14 @@ public class PlayerSystem : MonoBehaviour
             {
                 // transform.position += moveDir * Time.deltaTime * _walkspeed;
                 speed = moveDir * _walkspeed;
+                // speed.y = -1f;
+                if (_onAir==0)
+                {
+                    speed.y = -_gravity;
+                }
                 rb.velocity = (speed);
                 _playerAnimator.SetInteger("action", 1);
             }
-            _character.forward = moveDir;
         }
         else
         {
@@ -216,6 +233,15 @@ public class PlayerSystem : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void StopActionTime(float timer)
+    {
+        _delayedTimer = timer;
+    }
+    public void StopMoveTime(float timer)
+    {
+        _movedDelay = timer;
     }
 
     private Vector3 nearSoil(Vector3 pos) {
