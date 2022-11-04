@@ -1417,7 +1417,7 @@ GameObject:
   - component: {fileID: 392288130409970832}
   - component: {fileID: 392288130409970833}
   m_Layer: 0
-  m_Name: Construction
+  m_Name: Construction_col
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1453,15 +1453,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27761491c0d73e84381f411841c089d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buildings:
-  - {fileID: 3583351303717148964}
-  - {fileID: 3655433728295620941}
-  - {fileID: 0}
-  _underConstruction: 0
   _phase: -1
   _makeFences: {fileID: 0}
-  _constructionSet: {fileID: 0}
-  _buildStart: 0
+  _constructionPrefab: {fileID: 0}
+  _buildingPlace: {fileID: 0}
+  _buildingFinish: {fileID: 0}
+  _constructionX: 0
+  _constructionY: 0
+  _constructionZ: 0
+  _fBuildingX: 0
+  _fBuildingY: 0
+  _fBuildingZ: 0
+  _fBuildingRotY: 0
+  _fulfillTest: 0
+  _dayEndTest: 0
 --- !u!1 &834541537829806969
 GameObject:
   m_ObjectHideFlags: 0
@@ -4075,7 +4080,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3655433728295620940
 Transform:
   m_ObjectHideFlags: 0

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class BuildingChange : MonoBehaviour
 {
+    public int _phase = 0; // 0: fence, 1: 자재, 2: 돌담, 3: 벽, 4: 완성
 
-    public bool _underConstruction;
-    public int _phase = -1;
+    // 스크립트
     public MakeBuildingFence _makeFences;
+    public MakeSign _makeSign;
 
+    // 게임 오브젝트
     public GameObject _constructionPrefab;
-    public GameObject _buildingPlace;
     public GameObject _buildingFinish;
-
     private GameObject _constructionSet;
 
     // construction 위치
@@ -28,21 +28,20 @@ public class BuildingChange : MonoBehaviour
     // building finish y 회전값
     public float _fBuildingRotY;
 
-
     // ==================================================== 지울 위치 (시작) ==================================
 
     // 테스트용 변수
-    public bool _buildStartTest;
+    public bool _fulfillTest;
     public bool _dayEndTest;
 
     // 테스트용 update();
     void Update()
     {
-        if (_buildStartTest)
+        if (_fulfillTest)
         {
-            Debug.Log("buildStart");
-            _buildStartTest = false; // 테스트용 변수
-            BuildStart();
+            Debug.Log("condition fulfill");
+            _fulfillTest = false; // 테스트용 변수
+            _phase = 1;
         }
         if (_dayEndTest)
         {
@@ -55,22 +54,20 @@ public class BuildingChange : MonoBehaviour
 
     // ==================================================== 지울 위치 (끝) ==================================
 
-    // 상호작용해서 건축 시작하기
+    // 상호작용해서 건축 시작하기 => 자재 건축물 넣기
     public void BuildStart()
     {
-        if (!_underConstruction)
-        {
-            // _constructionX = _buildingPlace.transform.position.x + -2.39f;
-            // _constructionY = _buildingPlace.transform.position.y + -9.42f;
-            // _constructionZ = _buildingPlace.transform.position.z + 2.38f;
-            _underConstruction = true; // 건축 시작
-            _phase = 1; // 1단계 (펜스에서 자재)
-                        // 중간 건축 생성
-                        // Debug.Log(_makeFences._colliderCenter);
-            _constructionSet = Instantiate(_constructionPrefab, new Vector3(_buildingPlace.transform.position.x + _constructionX, _buildingPlace.transform.position.y + _constructionY, _buildingPlace.transform.position.z + _constructionZ), Quaternion.identity, _buildingPlace.transform);
-            // Debug.Log(_constructionSet);
-            Destroy(_makeFences._fences);
-        }
+        // 건축 과정 건축물 만들기
+        _constructionSet = Instantiate(_constructionPrefab, new Vector3(gameObject.transform.position.x + _constructionX, gameObject.transform.position.y + _constructionY, gameObject.transform.position.z + _constructionZ), Quaternion.identity, gameObject.transform);
+
+        // build 1 Collider 가지고 있는 Object
+        GameObject floor = _constructionSet.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+        // 표지판 만들기
+        _makeSign.makeSign(gameObject.transform.position.x, gameObject.transform.parent.position.y, gameObject.transform.position.z - floor.GetComponent<BoxCollider>().size.z * floor.transform.localScale.z / 2, _constructionSet.transform, _makeFences._icon);
+
+        // 펜스 지우기
+        Destroy(_makeFences._fences);
+        Destroy(gameObject.GetComponent<BoxCollider>());
     }
 
     // 하루 끝
@@ -78,42 +75,37 @@ public class BuildingChange : MonoBehaviour
     // 건축 마지막 날이면 Destory()
     public void DayEnd()
     {
-        if (_underConstruction)
+        switch (_phase)
         {
-            // 자재에서 돌 벽, 돌 벽에서 벽
-            if (_phase == 1 || _phase == 2)
-            {
-                updateObject(_phase++);
-            }
-            // 벽에서 완성
-            else if (_phase == 3)
-            {
-                updateObject(_phase);
+            case 1:
+                BuildStart();
+                break;
+            case 2:
+            case 3:
+                UpdateObject();
+                break;
+            case 4:
+                FinishConstruction();
                 Destroy(_constructionSet);
-                _underConstruction = false;
                 Destroy(gameObject);
-            }
+                break;
         }
+        _phase++;
     }
 
-    // 건물 오브젝트 바꾸기 (현재 단계 들어옴)
-    public void updateObject(int index)
+    // 중간 건축물 바꾸기
+    void UpdateObject()
     {
-        // Debug.Log("index: " + index);
-        // 최종 건축물로 바꾸기
-        if (index == 3)
-        {
-            // finish building 위치 => 수정하기 편하게 변수화
-            // float _fBuildingX = _buildingPlace.transform.position.x + 3.51f;
-            // float _fBuildingY = _buildingPlace.transform.position.y;
-            // float _fBuildingZ = _buildingPlace.transform.position.z + -3.29f;
+        _constructionSet.transform.GetChild(_phase - 2).gameObject.SetActive(false);
+        _constructionSet.transform.GetChild(_phase - 1).gameObject.SetActive(true);
+        BoxCollider boxCollider = _constructionSet.transform.GetChild(_phase - 1).gameObject.transform.GetChild(0).gameObject.GetComponent<BoxCollider>();
+        _makeSign.moveSign(gameObject.transform.position.x, gameObject.transform.position.z - boxCollider.size.z / 2 - 0.8f);
+    }
 
-            Instantiate(_buildingFinish, new Vector3(_buildingPlace.transform.position.x + _fBuildingX, _fBuildingY, _buildingPlace.transform.position.z + _fBuildingZ), Quaternion.Euler(0, _fBuildingRotY, 0), _buildingPlace.transform.parent.gameObject.transform);
-            return;
-        }
-        // 중간 건축물 바꾸기
-        _constructionSet.transform.GetChild(index - 1).gameObject.SetActive(false);
-        _constructionSet.transform.GetChild(index).gameObject.SetActive(true);
+    // 최종 건축물로 바꾸기
+    void FinishConstruction()
+    {
+        Instantiate(_buildingFinish, new Vector3(gameObject.transform.position.x + _fBuildingX, gameObject.transform.parent.position.y + _fBuildingY, gameObject.transform.position.z + _fBuildingZ), Quaternion.Euler(0, _fBuildingRotY, 0), gameObject.transform.parent.gameObject.transform);
     }
 
 

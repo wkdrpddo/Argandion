@@ -4,34 +4,36 @@ using UnityEngine;
 
 public class InteractionUI : MonoBehaviour
 {
-    public RectTransform _uiGroup;
-    public string _objectName;
+    // 안 씀 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    public PlayerSystem _enterPlayer;
+    // public RectTransform _uiGroup;
+    // public string _objectName;
 
-    private int _downSize = 1300;
-    public bool _open;
+    // public PlayerSystem _enterPlayer;
 
-    private void Start()
-    {
-        _enterPlayer = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
-    }
+    // private int _downSize = 1300;
+    // public bool _open;
 
-    public void Enter()
-    {
-        Debug.Log("Call Enter()");
-        _enterPlayer._canMove = false;
-        _uiGroup.anchoredPosition = Vector3.zero; // UI 위치 이동
-        _open = true;
+    // private void Start()
+    // {
+    //     _enterPlayer = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
+    // }
 
-    }
+    // public void Enter()
+    // {
+    //     Debug.Log("Call Enter()");
+    //     _enterPlayer._canMove = false;
+    //     _uiGroup.anchoredPosition = Vector3.zero; // UI 위치 이동
+    //     _open = true;
 
-    public void Exit()
-    {
-        Debug.Log("Call Exit()");
-        _enterPlayer._canMove = true;
-        _uiGroup.anchoredPosition = Vector3.down * _downSize; // UI 위치 이동
-        _open = false;
+    // }
 
-    }
+    // public void Exit()
+    // {
+    //     Debug.Log("Call Exit()");
+    //     _enterPlayer._canMove = true;
+    //     _uiGroup.anchoredPosition = Vector3.down * _downSize; // UI 위치 이동
+    //     _open = false;
+
+    // }
 }
