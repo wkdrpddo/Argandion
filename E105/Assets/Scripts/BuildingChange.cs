@@ -129,7 +129,7 @@ public class BuildingChange : MonoBehaviour
     // 최종 건축물로 바꾸기
     void FinishConstruction()
     {
-        Instantiate(_buildingFinish, new Vector3(_buildingPlace.transform.position.x + _fBuildingX, _fBuildingY, _buildingPlace.transform.position.z + _fBuildingZ), Quaternion.Euler(0, _fBuildingRotY, 0), _buildingPlace.transform.parent.gameObject.transform);
+        Instantiate(_buildingFinish, new Vector3(_buildingPlace.transform.position.x + _fBuildingX, gameObject.transform.parent.position.y + _fBuildingY, _buildingPlace.transform.position.z + _fBuildingZ), Quaternion.Euler(0, _fBuildingRotY, 0), _buildingPlace.transform.parent.gameObject.transform);
     }
 
 
