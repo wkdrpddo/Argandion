@@ -77,6 +77,7 @@ public class UIManager : MonoBehaviour
     {
         stopControllPlayer();
         _buildeventpanel.SetActive(true);
+
     }
 
     public void OnStoragePanel()

@@ -90,7 +90,7 @@ public class MakeBuildingFence : MonoBehaviour
         }
 
         // 표지판 생성
-        _makeSign.makeSign(_colliderCenter.x, fencePositionY, _colliderCenter.z - _colliderSize.z / 2 - 0.12f, _fences.transform, _icon);
+        _makeSign.makeSign(_colliderCenter.x, fencePositionY, _colliderCenter.z - _colliderSize.z / 2 - 0.12f, _fences.transform, _icon, true, _sectorNum);
 
     }
 }
