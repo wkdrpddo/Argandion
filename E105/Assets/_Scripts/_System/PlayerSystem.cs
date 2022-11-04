@@ -233,6 +233,10 @@ public class PlayerSystem : MonoBehaviour
                     {
                         signInteraciton.Interaction();
                     }
+                    if (col.TryGetComponent(out CraftingTableInteraction craftingTableInteraction))
+                    {
+                        craftingTableInteraction.Interaction();
+                    }
                 }
             }
         }
