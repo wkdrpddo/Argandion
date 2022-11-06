@@ -229,6 +229,10 @@ public class PlayerSystem : MonoBehaviour
                     // {
                     //     npc.Interaction();
                     // }
+                    if (col.TryGetComponent(out NPCObject npc))
+                    {
+                        npc.Interaction();
+                    }
                 }
             }
         }
