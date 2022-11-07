@@ -40,6 +40,7 @@ public class UIManager : MonoBehaviour
     private int selectCharacter = -1;
     private bool isPressESC = false;
     private bool isGameStart = false;
+    private bool isMyHome = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -126,7 +127,7 @@ public class UIManager : MonoBehaviour
         }
         if (Input.GetButtonDown("mapKey"))
         {
-            if (isGameStart)
+            if (isGameStart && !isMyHome)
             {
                 OnMapUIPanel();
             }
@@ -183,6 +184,7 @@ public class UIManager : MonoBehaviour
             else
             {
                 int randomNum = Random.Range(1, 11);
+                // int randomNum = 1;
                 switch (conversationCnt)
                 {
                     case -1:
@@ -287,6 +289,11 @@ public class UIManager : MonoBehaviour
         _notificationpanel.SetActive(true);
     }
 
+    public void OnTradeModal(string name, string iconName, int maxCnt, int checkMod, int cost)
+    {
+        _trademodal.GetComponent<TradeModal>().setModal(name, iconName, maxCnt, checkMod, cost);
+    }
+
     // ======================= UI 호출 함수 End
 
     // 캐릭터 선택 관련 함수
@@ -358,10 +365,31 @@ public class UIManager : MonoBehaviour
         _nowequip.transform.SetLocalPositionAndRotation(new Vector3((num - 1) * 31 + 2, 0, 0), rotateZero);
     }
 
+    // 집인지 확인하는 코드
+    public void setIsHome(bool value)
+    {
+        isMyHome = value;
+        _baseuipanel.transform.GetChild(2).gameObject.SetActive(!value);
+    }
+
+    // 소지금 관련
+    public int getPlayerGlod()
+    {
+        return 0;
+        // return _systemmanager.getPlayerGold();
+    }
+
     // 게임 시작 종료
     public void setGameState(bool value)
     {
+        // _systemmanager.setGameState(value);
         isGameStart = value;
+    }
+
+    public bool getGameState()
+    {
+        // return _systemmanager.getGameState();
+        return isGameStart;
     }
 
     public void QuitGame()
