@@ -17,8 +17,9 @@ public class SignInteraction : MonoBehaviour
     {
         if (_interactable)
         {
-            // _uiManager.OnBuildEventPanel(_sectorNum);
-            // _uiManager.OnBuildEventPanel();
+
+            _uiManager.OnBuildEventPanel(_sectorNum);
+
         }
     }
 }

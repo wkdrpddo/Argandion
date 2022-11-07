@@ -5,16 +5,21 @@ using UnityEngine;
 public class CookingInteraction : MonoBehaviour
 {
     public UIManager _uiManager;
-    // public CameraManager _cameraManager;
+
+    public CameraSystem _cameraSystem;
 
     void Start()
     {
         _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
-        // _cameraManager = GameObject.Find("CameraManager").GetComponent<CameraManager>();
+
+        _cameraSystem = GameObject.Find("CameraSystem").GetComponent<CameraSystem>();
+
     }
     public void Interaction()
     {
         _uiManager.OnCookingPanel();
-        // _cameraManager.CookingCamera();
+
+        _cameraSystem.CookingCamera();
+
     }
 }
