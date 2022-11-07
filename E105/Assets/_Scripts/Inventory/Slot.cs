@@ -43,8 +43,9 @@ public class Slot : MonoBehaviour
     }
 
     private void LoadImage(int idx)
-    {
-        byte[] byteTexture = System.IO.File.ReadAllBytes("C:/Users/SSAFY/Desktop/E1058/S07P31E105/E105/Assets/Data/Image/37002.png");
+    {   
+        int sdfs = 37002;
+        byte[] byteTexture = System.IO.File.ReadAllBytes(Application.dataPath + $"/Data/Image/{sdfs}.png");
         Texture2D texture = new Texture2D(0,0);
         texture.LoadImage(byteTexture);
 
