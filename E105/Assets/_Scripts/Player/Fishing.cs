@@ -26,6 +26,14 @@ public class Fishing : MonoBehaviour
 
     public Inventory theInventory;
     public Item item;
+    public GameObject _buffManagerObject;
+    private BuffManager _buff;
+
+    void Start()
+    {
+        _buffManagerObject = GameObject.Find("BuffManager");
+        _buff = _buffManagerObject.GetComponent<BuffManager>();
+    }
 
     void Update() {
         if (isFishing) {
@@ -90,6 +98,10 @@ public class Fishing : MonoBehaviour
                     waitingTime = waitingTime / baitEffect[idx];
                     break;
                 }
+            }
+
+            if( _buff.bluePray ) {
+                waitingTime /= 2.0f;
             }
 
             Debug.Log(waitingTime);
