@@ -7,36 +7,104 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     // Panel var
-    public GameObject _optionpanel;
-    public GameObject _optionfrommain;
-    public GameObject _mapuipanel;
-    public GameObject _createcharacter;
-    public GameObject _conversationpanel;
-    public GameObject _inventorypanel;
-    public GameObject _transactionpanel;
-    public GameObject _cookingpanel;
-    public GameObject _craftingpanel;
-    public GameObject _buildeventpanel;
-    public GameObject _storagepanel;
-    public GameObject _trademodal;
-    public GameObject _mainpage;
+    private GameObject _optionpanel;
+    private GameObject _optionfrommain;
+    private GameObject _mapuipanel;
+    private GameObject _createcharacter;
+    private GameObject _conversationpanel;
+    private GameObject _inventorypanel;
+    private GameObject _transactionpanel;
+    private GameObject _cookingpanel;
+    private GameObject _craftingpanel;
+    private GameObject _buildeventpanel;
+    private GameObject _storagepanel;
+    private GameObject _trademodal;
+    private GameObject _mainpage;
+    private GameObject _transactionanimalpanel;
+    private GameObject _baseuipanel;
+    private GameObject _notificationpanel;
 
-
-    // 저장 데이터
-    public int conversationNPC = 0;
-    public Slider _healthbar;
-    public Slider _energybar;
-    public SystemManager _systemmanager;
-    public RectTransform _timer;
-    private int selectCharacter = -1;
-    private bool isPressESC = false;
-    public PlayerSystem _playersystem;
     public GameObject _eventAnnounce;
     public TextMeshProUGUI _announceText;
+
+    private GameObject _nowequip;
+
+    private SystemManager _systemmanager;
+    private PlayerSystem _playersystem;
+    private Slider _healthbar;
+    private Slider _energybar;
+    public RectTransform _timer;
+    // 저장 데이터
+    public Quaternion rotateZero = Quaternion.Euler(new Vector3(0, 0, 0));     // 회전값 기본값 세팅
+    public int conversationNPC = 0;
+    private int selectCharacter = -1;
+    private bool isPressESC = false;
+    private bool isGameStart = false;
     // Start is called before the first frame update
     void Start()
     {
+        isGameStart = false;
 
+        GameObject.Find("SoundManager").GetComponent<SoundManager>()._optionpanel = GameObject.Find("OptionPanel");
+        GameObject.Find("SoundManager").GetComponent<SoundManager>()._optionpanelfrommain = GameObject.Find("OptionPanelFromMainPage");
+
+        _systemmanager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
+        _playersystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
+
+        _mainpage = GameObject.Find("MainPagePanel");
+
+        _optionpanel = GameObject.Find("OptionPanel");
+        _optionpanel.SetActive(false);
+
+        _optionfrommain = GameObject.Find("OptionPanelFromMainPage");
+        _optionfrommain.SetActive(false);
+
+        _mapuipanel = GameObject.Find("MapUIPanel");
+        _mapuipanel.SetActive(false);
+
+        _createcharacter = GameObject.Find("CreateCharacter");
+        _createcharacter.SetActive(false);
+
+        _conversationpanel = GameObject.Find("ConversationPanel");
+        _conversationpanel.SetActive(false);
+
+        _inventorypanel = GameObject.Find("InventoryPanel");
+        _inventorypanel.SetActive(false);
+
+        _transactionpanel = GameObject.Find("TransactionPanel");
+        _transactionpanel.SetActive(false);
+
+        _cookingpanel = GameObject.Find("CookingPanel");
+        _cookingpanel.SetActive(false);
+
+        _craftingpanel = GameObject.Find("CraftingPanel");
+        _craftingpanel.SetActive(false);
+
+        _storagepanel = GameObject.Find("StoragePanel");
+        _storagepanel.SetActive(false);
+
+        _buildeventpanel = GameObject.Find("BuildEventPanel");
+        _buildeventpanel.SetActive(false);
+
+        _trademodal = GameObject.Find("TradeModal");
+        _trademodal.SetActive(false);
+
+        _transactionanimalpanel = GameObject.Find("TransactionAnimalPanel");
+        _transactionanimalpanel.SetActive(false);
+
+        _notificationpanel = GameObject.Find("NotificationPanel");
+        _notificationpanel.SetActive(false);
+
+        _baseuipanel = GameObject.Find("BaseUIPanel");
+        _healthbar = GameObject.Find("HealthSlider").GetComponent<Slider>();
+        _energybar = GameObject.Find("EnergySlider").GetComponent<Slider>();
+        _baseuipanel.SetActive(false);
+
+        _eventAnnounce = GameObject.Find("EventUIAnnounce");
+        _announceText = _eventAnnounce.GetComponentInChildren<TextMeshProUGUI>();
+        _eventAnnounce.SetActive(false);
+
+        _nowequip = GameObject.Find("NowEquip");
     }
 
     // Update is called once per frame
@@ -49,16 +117,100 @@ public class UIManager : MonoBehaviour
             pressedESC();
         }
 
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetButtonDown("InventoryKey"))
         {
-            OnInventoryPanel();
+            if (isGameStart)
+            {
+                OnInventoryPanel();
+            }
+        }
+        if (Input.GetButtonDown("mapKey"))
+        {
+            if (isGameStart)
+            {
+                OnMapUIPanel();
+            }
+        }
+
+        // if (Input.GetButtonDown("interactionKey") && _conversationpanel.GetComponent<ConversationPanel>().getIsOn())
+        // {
+        //     _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
+        // }
+        if (Input.GetButtonDown("interactionKey"))
+        {
+            // test buildEvent
+            if (_buildeventpanel.GetComponent<BuildEventPanel>().isOnPanel)
+            {
+                _buildeventpanel.GetComponent<BuildEventPanel>().closeWindow();
+            }
+            else
+            {
+                int random = Random.Range(1, 7);
+                OnBuildEventPanel(random);
+            }
+
+            // // test conversation
+            // int conversationCnt = _conversationpanel.GetComponent<ConversationPanel>().getConversationCnt();
+            // if (_conversationpanel.GetComponent<ConversationPanel>().getIsConversation())
+            // {
+            //     _conversationpanel.GetComponent<ConversationPanel>().conversation();
+            // }
+            // else
+            // {
+            //     switch (conversationCnt)
+            //     {
+            //         case -1:
+            //             OnConversationPanel(1);
+            //             break;
+            //         case 0:
+            //             _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
+            //             break;
+            //         case 1:
+            //             _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
+            //             break;
+            //     }
+            // }
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            // test conversation
+            int conversationCnt = _conversationpanel.GetComponent<ConversationPanel>().getConversationCnt();
+            if (_conversationpanel.GetComponent<ConversationPanel>().getIsConversation())
+            {
+                _conversationpanel.GetComponent<ConversationPanel>().conversation();
+            }
+            else
+            {
+                int randomNum = Random.Range(1, 11);
+                switch (conversationCnt)
+                {
+                    case -1:
+                        OnConversationPanel(randomNum);
+                        break;
+                    case 0:
+                        _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
+                        break;
+                    case 1:
+                        _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
+                        break;
+                }
+            }
         }
     }
 
     // ======================== UI 호출 함수 Start
     public void OnTransactionPanel()
     {
-        _transactionpanel.SetActive(true);
+        _transactionpanel.GetComponent<TransactionPanel>().OnPanel(conversationNPC);
+        conversationNPC = 0;
+        _conversationpanel.GetComponent<ConversationPanel>().resetConversationPanel();
+        stopControllPlayer();
+    }
+
+    public void OnTransactionAnimalPanel()
+    {
+        _transactionanimalpanel.SetActive(true);
     }
 
     public void OnCraftingPanel()
@@ -73,10 +225,10 @@ public class UIManager : MonoBehaviour
         _cookingpanel.SetActive(true);
     }
 
-    public void OnBuildEventPanel()
+    public void OnBuildEventPanel(int value)
     {
         stopControllPlayer();
-        _buildeventpanel.SetActive(true);
+        _buildeventpanel.GetComponent<BuildEventPanel>().OnPanel(value);
     }
 
     public void OnStoragePanel()
@@ -87,22 +239,21 @@ public class UIManager : MonoBehaviour
 
     public void OnInventoryPanel()
     {
-        stopControllPlayer();
-        _inventorypanel.SetActive(true);
+        if (_inventorypanel.activeSelf)
+        {
+            runControllPlayer();
+        }
+        else
+        {
+            stopControllPlayer();
+        }
+        _inventorypanel.GetComponent<InventoryPanel>().handlePanel();
     }
 
     public void OnConversationPanel(int value)
     {
-        switch (_conversationpanel.GetComponent<ConversationPanel>().conversationCount)
-        {
-            case -1:
-                _conversationpanel.GetComponent<ConversationPanel>().setConversationNPC(value);
-                _conversationpanel.SetActive(true);
-                break;
-            case 0:
-                _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
-                break;
-        }
+        _conversationpanel.GetComponent<ConversationPanel>().setConversationNPC(value);
+        stopControllPlayer();
     }
 
     public void OnCreateCharacter()
@@ -113,7 +264,27 @@ public class UIManager : MonoBehaviour
     public void OnMainPagePanel()
     {
         _mainpage.SetActive(true);
-        _mainpage.GetComponent<MainPagePanel>().setIsGameStart(false);
+        isGameStart = false;
+    }
+
+    public void OnMapUIPanel()
+    {
+        if (isGameStart)
+        {
+            if (_mapuipanel.activeSelf)
+            {
+                _mapuipanel.SetActive(false);
+            }
+            else
+            {
+                _mapuipanel.SetActive(true);
+            }
+        }
+    }
+
+    public void OnNotificationPanel()
+    {
+        _notificationpanel.SetActive(true);
     }
 
     // ======================= UI 호출 함수 End
@@ -146,7 +317,7 @@ public class UIManager : MonoBehaviour
 
         if (isPressESC)
         {
-            if (_mainpage.GetComponent<MainPagePanel>().getIsGameStart())
+            if (isGameStart)
             {
                 _optionpanel.SetActive(true);
             }
@@ -158,7 +329,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            if (_mainpage.GetComponent<MainPagePanel>().getIsGameStart())
+            if (isGameStart)
             {
                 _optionpanel.SetActive(false);
             }
@@ -181,7 +352,18 @@ public class UIManager : MonoBehaviour
         _playersystem._canMove = true;
     }
 
-    // 게임 종료
+    // 퀵슬롯 변경 함수
+    public void setEquipPointer(int num)
+    {
+        _nowequip.transform.SetLocalPositionAndRotation(new Vector3((num - 1) * 31 + 2, 0, 0), rotateZero);
+    }
+
+    // 게임 시작 종료
+    public void setGameState(bool value)
+    {
+        isGameStart = value;
+    }
+
     public void QuitGame()
     {
         UnityEditor.EditorApplication.isPlaying = false;

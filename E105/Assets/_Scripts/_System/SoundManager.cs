@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    public int Sound_Background = 50;
-    public int Sound_Effect = 50;
+    private int Sound_Background = 20;
+    private int Sound_Effect = 20;
 
     // option panal
     public GameObject _optionpanel;
@@ -25,9 +25,14 @@ public class SoundManager : MonoBehaviour
         _optionpanel.transform.Find("EffectSlider").gameObject.GetComponent<Slider>().value = Sound_Effect;
         _optionpanelfrommain.transform.Find("EffectSlider").gameObject.GetComponent<Slider>().value = Sound_Effect;
     }
+
     // Start is called before the first frame update
     void Start()
     {
+        _optionpanel.transform.Find("BackgroundSlider").gameObject.GetComponent<Slider>().value = Sound_Background;
+        _optionpanelfrommain.transform.Find("BackgroundSlider").gameObject.GetComponent<Slider>().value = Sound_Background;
+        _optionpanel.transform.Find("EffectSlider").gameObject.GetComponent<Slider>().value = Sound_Effect;
+        _optionpanelfrommain.transform.Find("EffectSlider").gameObject.GetComponent<Slider>().value = Sound_Effect;
 
     }
 

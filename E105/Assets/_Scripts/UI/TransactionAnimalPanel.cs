@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class OptionPanel : MonoBehaviour
+public class TransactionAnimalPanel : MonoBehaviour
 {
+    public void clickBuyChicken()
+    {
+
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -15,16 +18,5 @@ public class OptionPanel : MonoBehaviour
     void Update()
     {
 
-    }
-
-    public void setSound()
-    {
-
-    }
-
-    public void handelPanel()
-    {
-        UIManager ui = this.GetComponentInParent<UIManager>();
-        ui.pressedESC();
     }
 }
