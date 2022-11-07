@@ -10,20 +10,25 @@ public class CookingInteraction : MonoBehaviour
 
     void Start()
     {
-        // _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _cameraSystem = GameObject.Find("PlayerObject").GetComponent<CameraSystem>();
     }
     public void Interaction()
     {
+        // Debug.Log("요리 인터렉션");
         _uiManager.OnCookingPanel();
         _shelfParent = gameObject.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject;
-
+        // 테스트용 코드
+        // Invoke("CookingStart", 1);
     }
     public void CookingStart()
     {
+        // Debug.Log("요리 시작");
         _cameraSystem.CookingCamera();
         _shelfParent.transform.GetChild(2).gameObject.SetActive(false);
         _shelfParent.transform.GetChild(3).gameObject.SetActive(false);
+        // 테스트용 코드
+        // Invoke("CookingEnd", 2);
     }
     public void CookingEnd()
     {

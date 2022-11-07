@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     private GameObject _conversationpanel;
     private GameObject _inventorypanel;
     private GameObject _transactionpanel;
-    private GameObject _cookingpanel;
+    [SerializeField] private GameObject _cookingpanel;
     private GameObject _craftingpanel;
     private GameObject _buildeventpanel;
     private GameObject _storagepanel;
@@ -46,8 +46,8 @@ public class UIManager : MonoBehaviour
     {
         isGameStart = false;
 
-        GameObject.Find("SoundManager").GetComponent<SoundManager>()._optionpanel = GameObject.Find("OptionPanel");
-        GameObject.Find("SoundManager").GetComponent<SoundManager>()._optionpanelfrommain = GameObject.Find("OptionPanelFromMainPage");
+        // GameObject.Find("SoundManager").GetComponent<SoundManager>()._optionpanel = GameObject.Find("OptionPanel");
+        // GameObject.Find("SoundManager").GetComponent<SoundManager>()._optionpanelfrommain = GameObject.Find("OptionPanelFromMainPage");
 
         _systemmanager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         _playersystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
@@ -137,41 +137,41 @@ public class UIManager : MonoBehaviour
         // {
         //     _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
         // }
-        if (Input.GetButtonDown("interactionKey"))
-        {
-            // test buildEvent
-            if (_buildeventpanel.GetComponent<BuildEventPanel>().isOnPanel)
-            {
-                _buildeventpanel.GetComponent<BuildEventPanel>().closeWindow();
-            }
-            else
-            {
-                int random = Random.Range(1, 7);
-                OnBuildEventPanel(random);
-            }
+        // if (Input.GetButtonDown("interactionKey"))
+        // {
+        //     // test buildEvent
+        //     if (_buildeventpanel.GetComponent<BuildEventPanel>().isOnPanel)
+        //     {
+        //         _buildeventpanel.GetComponent<BuildEventPanel>().closeWindow();
+        //     }
+        //     else
+        //     {
+        //         int random = Random.Range(1, 7);
+        //         OnBuildEventPanel(random);
+        //     }
 
-            // // test conversation
-            // int conversationCnt = _conversationpanel.GetComponent<ConversationPanel>().getConversationCnt();
-            // if (_conversationpanel.GetComponent<ConversationPanel>().getIsConversation())
-            // {
-            //     _conversationpanel.GetComponent<ConversationPanel>().conversation();
-            // }
-            // else
-            // {
-            //     switch (conversationCnt)
-            //     {
-            //         case -1:
-            //             OnConversationPanel(1);
-            //             break;
-            //         case 0:
-            //             _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
-            //             break;
-            //         case 1:
-            //             _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
-            //             break;
-            //     }
-            // }
-        }
+        //     // // test conversation
+        //     // int conversationCnt = _conversationpanel.GetComponent<ConversationPanel>().getConversationCnt();
+        //     // if (_conversationpanel.GetComponent<ConversationPanel>().getIsConversation())
+        //     // {
+        //     //     _conversationpanel.GetComponent<ConversationPanel>().conversation();
+        //     // }
+        //     // else
+        //     // {
+        //     //     switch (conversationCnt)
+        //     //     {
+        //     //         case -1:
+        //     //             OnConversationPanel(1);
+        //     //             break;
+        //     //         case 0:
+        //     //             _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
+        //     //             break;
+        //     //         case 1:
+        //     //             _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
+        //     //             break;
+        //     //     }
+        //     // }
+        // }
 
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -223,6 +223,8 @@ public class UIManager : MonoBehaviour
 
     public void OnCookingPanel()
     {
+        Debug.Log("쿠킹패널 열기");
+        Debug.Log(_cookingpanel);
         stopControllPlayer();
         _cookingpanel.SetActive(true);
     }

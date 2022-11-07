@@ -11,7 +11,7 @@ public class OnAir : MonoBehaviour
     }
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.layer==0 || other.gameObject.layer==10)
+        if (other.gameObject.layer == 0 || other.gameObject.layer == 10)
         {
             _playerSystem._onAir += 1;
         }
@@ -19,7 +19,7 @@ public class OnAir : MonoBehaviour
 
     void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.layer==0 || other.gameObject.layer==10)
+        if (other.gameObject.layer == 0 || other.gameObject.layer == 10)
         {
             _playerSystem._onAir -= 1;
         }
@@ -27,7 +27,7 @@ public class OnAir : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer==0 || other.gameObject.layer==10)
+        if (other.gameObject.layer == 0 || other.gameObject.layer == 10)
         {
             _playerSystem._onAir += 1;
         }
@@ -35,7 +35,7 @@ public class OnAir : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer==0 || other.gameObject.layer==10)
+        if (other.gameObject.layer == 0 || other.gameObject.layer == 10)
         {
             _playerSystem._onAir -= 1;
         }
