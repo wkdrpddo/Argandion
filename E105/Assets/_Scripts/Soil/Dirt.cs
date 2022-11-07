@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Dirt : MonoBehaviour
 {
+    private int howMany;
     public int watered;
     public int minusWater;
+    public int temp;
     public GameObject[] _nearObjects = new GameObject[25];
     ParticleSystem particleObject;
+
     public SystemManager _system;
-    public int temp;
     public GameObject _buffManagerObject;
     private BuffManager _buff;
+
 
     void Start()
     {
@@ -33,11 +36,10 @@ public class Dirt : MonoBehaviour
     {  
         if (gameObject.tag == "wateredDirt")
         {
-            // _nearObjects = GameObject.FindGameObjectsWithTag("crop");
             Debug.Log("물빠짐!");
             watered -= minusWater;
             if (_buff.bluePray) {
-                watered += 25 * _nearObjects.Length;
+                watered += 25 * howMany;
             }
             if (watered < 0) {
                 watered = 0;
@@ -72,6 +74,7 @@ public class Dirt : MonoBehaviour
                         Debug.Log(idx + "에 넣었어!");
                         _nearObjects[idx] = other.gameObject;
                         other.gameObject.GetComponent<Crop>().isIn = true;
+                        howMany +=1;
                         break;
                     }
                 }
@@ -83,6 +86,8 @@ public class Dirt : MonoBehaviour
         for (int idx = 0; idx < 25; idx ++) {
             if(_nearObjects[idx] == crop) {
                 _nearObjects[idx] = null;
+                howMany -=1;
+                break;
             }
         }
     }
