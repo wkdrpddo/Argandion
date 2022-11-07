@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3611822421796064638
+--- !u!1 &4564719196251261226
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,63 +8,62 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4130950911495395268}
-  - component: {fileID: 5203975594065403214}
-  - component: {fileID: 1079683459851311201}
-  - component: {fileID: 2963149936886918315}
-  - component: {fileID: 5203975594065403215}
+  - component: {fileID: 3752328896113464208}
+  - component: {fileID: 5007680133014133018}
+  - component: {fileID: 269416449402592309}
+  - component: {fileID: 2619370522510174463}
+  - component: {fileID: 5007680133014133019}
   m_Layer: 0
-  m_Name: RabbitHole
+  m_Name: DeerHole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!4 &4130950911495395268
+--- !u!4 &3752328896113464208
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3611822421796064638}
+  m_GameObject: {fileID: 4564719196251261226}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21.9, y: -0.19444472, z: 3.75}
+  m_LocalPosition: {x: 4.477355, y: -0.99888945, z: 12.280714}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5203975594065403214
+--- !u!114 &5007680133014133018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3611822421796064638}
+  m_GameObject: {fileID: 4564719196251261226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ced570c6a8711a4bae9a7846ad23ccc, type: 3}
+  m_Script: {fileID: 11500000, guid: eaf5a915a7633864d9e5c7d867a4673b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rabbit1: {fileID: 46987768899458066, guid: 19e73a9208a4fb74eaa114df6c3fd8b7, type: 3}
-  rabbit2: {fileID: 3633685016805357021, guid: 5664fa555c0091543b03425b6c9657c1, type: 3}
-  rabbit3: {fileID: 3532343274708905525, guid: 36ac845a2cb80194b89b61487d373aa3, type: 3}
---- !u!33 &1079683459851311201
+  animal: {fileID: 9220930600122839901, guid: 1f5e1a5f78676674ebb13d2011af9482, type: 3}
+  num: 3
+--- !u!33 &269416449402592309
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3611822421796064638}
+  m_GameObject: {fileID: 4564719196251261226}
   m_Mesh: {fileID: -3223099230931610567, guid: 870334e976177ab46b854f5c2dc1fd5f, type: 3}
---- !u!23 &2963149936886918315
+--- !u!23 &2619370522510174463
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3611822421796064638}
+  m_GameObject: {fileID: 4564719196251261226}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -100,13 +99,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5203975594065403215
+--- !u!64 &5007680133014133019
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3611822421796064638}
+  m_GameObject: {fileID: 4564719196251261226}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
