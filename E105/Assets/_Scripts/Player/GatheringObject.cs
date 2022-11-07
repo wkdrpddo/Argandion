@@ -19,6 +19,7 @@ public class GatheringObject : MonoBehaviour
         {
             Vector3 Direction = (_ps.gameObject.transform.position - this.gameObject.transform.position).normalized;
             _ps._character.forward = Direction;
+            _ps._playerAnimator.SetInteger("action", 10);
             StartCoroutine(StopPlayer(time));
         }
     }
@@ -31,6 +32,7 @@ public class GatheringObject : MonoBehaviour
 
     private void gatheringItem()
     {
+        _ps._playerAnimator.SetInteger("action", 0);
         _inventory.AcquireItem(_item.FindItem(_itemCode),1);
     }
 }
