@@ -12,7 +12,7 @@ public class BuyingDesigner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/BuyingDesigner.json");
+        string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/BuyingDesigner.json");
         var buyDatas = JsonHelper.FromJson<Product>(jsonString);
         myData = buyDatas;
     }

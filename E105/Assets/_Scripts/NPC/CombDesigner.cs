@@ -19,7 +19,7 @@ public class CombDesigner : MonoBehaviour
     void Start()
     {
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
-        string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/CombDesigner.json");
+        string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/CombDesigner.json");
         var combDatas = JsonHelper.FromJson<CombRecipe>(jsonString);
         myData = combDatas;
     }

@@ -38,12 +38,21 @@ public class Bear : MonoBehaviour
     [SerializeField] private BoxCollider boxCol;
     private NavMeshAgent nav;
     [SerializeField] private Transform playerPos;
+
+    [SerializeField] private GameObject items;  
+    //Item
+    [SerializeField] private GameObject item20;  //동물의 가죽
+    [SerializeField] private GameObject item22;   //거친 가죽
+    [SerializeField] private GameObject item104;   //고기
+    [SerializeField] private GameObject item105;   //두툼고기
+
     // Start is called before the first frame update
     void Start()
     {
         nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
         currentTime = waitTime;
         isAction = true;
+        playerPos = GameObject.Find("PlayerObject").transform;
     }
 
     // Update is called once per frame
@@ -209,6 +218,40 @@ public class Bear : MonoBehaviour
         anim.SetBool("Running", isRunning);
 
         anim.SetTrigger("Death");
+
+        Destroy(this.gameObject, 1f);
+        Item();
+    }
+
+    private void Item()
+    {
+        int random_index = Random.Range(2,5);
+        for( int i=0; i<random_index; i++)  //동물의 가죽
+        {
+            Instantiate(item20, this.transform.position + new Vector3(Random.Range(-2f,2f),1f,Random.Range(-2f,2f)), Quaternion.identity).transform.parent = items.transform;
+        }
+
+        random_index = Random.Range(2,4);
+        if(random_index > 0){
+            for( int i=0; i<random_index; i++)  //거친 가죽
+            {
+                Instantiate(item22, this.transform.position + new Vector3(Random.Range(-2f,2f),1f,Random.Range(-2f,2f)), Quaternion.identity).transform.parent = items.transform;
+            }
+        }
+
+        random_index = Random.Range(1,4);
+        for( int i=0; i<random_index; i++)  // 고기
+        {
+            Instantiate(item104, this.transform.position + new Vector3(Random.Range(-2f,2f),1f,Random.Range(-2f,2f)), Quaternion.identity).transform.parent = items.transform;
+        }
+        
+        random_index = Random.Range(1,4);
+        if(random_index > 0){
+            for( int i=0; i<random_index; i++)  // 고기
+            {
+                Instantiate(item105, this.transform.position + new Vector3(Random.Range(-2f,2f),1f,Random.Range(-2f,2f)), Quaternion.identity).transform.parent = items.transform;
+            }
+        }
     }
 
 

@@ -30,11 +30,12 @@ public class Crop : MonoBehaviour
     public GameObject _buffManagerObject;
     private BuffManager _buff;
     private int[] extraDays = {0,1};
-
+    public bool isIn = false;
+    
     // Start is called before the first frame update
     void Start()
     {
-        string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/CropsTable.json");
+        string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/CropsTable.json");
         var cropData = JsonHelper.FromJson<CropObject>(jsonString);
         cropObject = cropData[cropCode];
         _buffManagerObject = GameObject.Find("BuffManager");
@@ -47,12 +48,13 @@ public class Crop : MonoBehaviour
         if (updateDay >= cropObject.NextPhaseDay) {
             Dirt dirt = nearSoil.GetComponent<Dirt>();
             dirt.minusWater -= cropObject.Water;
+            dirt.CropGrowUp(gameObject);
             Instantiate(nextCrop, self.position, self.rotation);
             Destroy(gameObject);
         }
     }
 
-     void OnTriggerEnter(Collider other) {
+    void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("wateredDirt"))
         {
             nearSoil = other.gameObject;

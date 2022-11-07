@@ -20,7 +20,7 @@ public class CombHunter : MonoBehaviour
     void Start()
     {
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
-        string jsonString = File.ReadAllText(Application.dataPath + "/Scripts/CombHunter.json");
+        string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/CombHunter.json");
         var combDatas = JsonHelper.FromJson<CombRecipe>(jsonString);
         myData = combDatas;
     }

@@ -6,28 +6,21 @@ using UnityEngine.UI;
 
 public class MainPagePanel : MonoBehaviour
 {
-    private bool isGameStart;
     private UIManager ui;
 
     void Start()
     {
-        isGameStart = false;
         ui = this.GetComponentInParent<UIManager>();
-    }
-
-    public bool getIsGameStart()
-    {
-        return isGameStart;
     }
 
     public void setIsGameStart(bool value)
     {
-        isGameStart = value;
+        ui.setGameState(value);
     }
 
     public void gameStart()
     {
-        isGameStart = true;
+        setIsGameStart(true);
         gameObject.SetActive(false);
         ui.OnCreateCharacter();
     }

@@ -17,6 +17,11 @@ public class OptionPanel : MonoBehaviour
 
     }
 
+    public void setSound()
+    {
+
+    }
+
     public void handelPanel()
     {
         UIManager ui = this.GetComponentInParent<UIManager>();
