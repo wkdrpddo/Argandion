@@ -8,10 +8,9 @@ using ItemCodeToIndex;
 public class ItemObject
 {
     public int ItemCode;
-    public string Name;
     public string Category;
-    public int BuyCost;
-    public int SellCost;
+    public string Name;
+    public string Desc;
 }
 
 [System.Serializable]
@@ -32,7 +31,7 @@ public static class JsonHelper
     {
         Wrapper<T> wrapper = new Wrapper<T>();
         wrapper.Items = array;
-        return  UnityEngine.JsonUtility.ToJson(wrapper);
+        return UnityEngine.JsonUtility.ToJson(wrapper);
     }
 
     [System.Serializable]
@@ -43,7 +42,7 @@ public static class JsonHelper
 }
 
 public class Item : MonoBehaviour
-{   
+{
     public int itemCode;
     public ItemObject itemObject;
 
@@ -58,7 +57,7 @@ public class Item : MonoBehaviour
     }
 
     public string FindName(int idx)
-    {   
+    {
         string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/ItemTable2.json");
         var itemData = JsonHelper.FromJson<ItemObject>(jsonString);
         itemObject = itemData[ItemIndexArray.arr[idx]];

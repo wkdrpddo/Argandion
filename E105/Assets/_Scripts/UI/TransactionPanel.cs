@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+[System.Serializable]
+public class buyingObject
+{
+    public int Result;
+    public int Cost;
+}
 
 public class TransactionPanel : MonoBehaviour
 {
@@ -10,20 +19,29 @@ public class TransactionPanel : MonoBehaviour
         2. 목수 [공방]
         3. 호수지기 [호수]
         4. 대장장이 [대장간]
-        5. 목장지기
         6. 사냥꾼 [사냥꾼 오두막]
     */
     public GameObject storeItemCard;
 
-    public string jsonStringBase;
-    public string jsonInputString;
-    public string jsonString;
-    public ItemObject[] itemData;
-    private ItemObject itemObject;
+    private GameObject ScrollContent;
+    private UIManager ui;
+    private Item _itemmanager;
+
+    private string jsonStringBase;
+    private string jsonInputString;
+    private string jsonString;
+    private buyingObject[] itemData;
+    public buyingObject buyingObject;
+    public ItemObject itemObject;
+
+    public Sprite[] spr;
 
     void Start()
     {
         jsonStringBase = Application.dataPath + "/Data/Json";
+        _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();
+        ScrollContent = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).gameObject;
+        ui = gameObject.GetComponentInParent<UIManager>();
     }
 
     public void OnPanel(int value)
@@ -37,7 +55,7 @@ public class TransactionPanel : MonoBehaviour
         switch (value)
         {
             case 1:
-                jsonInputString = "/BuyingDesigner.json";
+                jsonInputString = jsonStringBase + "/BuyingDesigner.json";
                 break;
             case 2:
                 jsonInputString = jsonStringBase + "/BuyingCarpentor.json";
@@ -48,15 +66,31 @@ public class TransactionPanel : MonoBehaviour
             case 4:
                 jsonInputString = jsonStringBase + "/BuyingSmith.json";
                 break;
-            case 5:
-                // jsonInputString = jsonStringBase + "/BuyingDesigner.json";
-                break;
             case 6:
                 jsonInputString = jsonStringBase + "/BuyingHunter.json";
                 break;
         }
 
-        jsonString = File.ReadAllText(jsonStringBase + jsonInputString);
-        itemData = JsonHelper.FromJson<ItemObject>(jsonString);
+        jsonString = File.ReadAllText(jsonInputString);
+        itemData = JsonHelper.FromJson<buyingObject>(jsonString);
+
+        for (int i = 0; i < itemData.Length; i++)
+        {
+            buyingObject = itemData[i];
+            itemObject = _itemmanager.FindItem(buyingObject.Result);
+
+            GameObject productBtn = Instantiate(storeItemCard, ScrollContent.transform);
+            RectTransform productBtnRect = productBtn.GetComponent<RectTransform>();
+            productBtnRect.SetLocalPositionAndRotation(new Vector3(0, -10 - i * 50, 0), ui.rotateZero);
+            Debug.Log("여기까지? 00");
+            productBtn.transform.GetChild(0).GetComponent<Image>().sprite = Resources.LoadAll<Sprite>("Sprites/" + itemObject.ItemCode)[0];
+            Debug.Log("여기까지? 01");
+            productBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemObject.Name;
+            Debug.Log("여기까지? 02");
+            productBtn.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = buyingObject.Cost.ToString();
+            Debug.Log("여기까지? 03");
+            productBtn.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = itemObject.Desc;
+            Debug.Log("여기까지? 04");
+        }
     }
 }
