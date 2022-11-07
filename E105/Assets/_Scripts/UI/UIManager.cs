@@ -90,11 +90,11 @@ public class UIManager : MonoBehaviour
         _trademodal = GameObject.Find("TradeModal");
         _trademodal.SetActive(false);
 
-        _transactionanimalpanel = GameObject.Find("TransactionAnimalPanel");
-        _transactionanimalpanel.SetActive(false);
+        // _transactionanimalpanel = GameObject.Find("TransactionAnimalPanel");
+        // _transactionanimalpanel.SetActive(false);
 
-        _notificationpanel = GameObject.Find("NotificationPanel");
-        _notificationpanel.SetActive(false);
+        // _notificationpanel = GameObject.Find("NotificationPanel");
+        // _notificationpanel.SetActive(false);
 
         _baseuipanel = GameObject.Find("BaseUIPanel");
         _healthbar = GameObject.Find("HealthSlider").GetComponent<Slider>();

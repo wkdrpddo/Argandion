@@ -15,11 +15,11 @@ public class CookingInteraction : MonoBehaviour
     }
     public void Interaction()
     {
-        // Debug.Log("요리 인터렉션");
+        Debug.Log("요리 인터렉션");
         _uiManager.OnCookingPanel();
         _shelfParent = gameObject.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject;
         // 테스트용 코드
-        // Invoke("CookingStart", 1);
+        // Invoke("CookingStart", 2);
     }
     public void CookingStart()
     {
