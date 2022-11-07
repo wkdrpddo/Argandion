@@ -31,7 +31,7 @@ public class Harvested : MonoBehaviour
             many = Mathf.RoundToInt(manyFloat);
         }
         for (int i = 0; i < many; i++) {
-            Instantiate(cropOnField, aboveSoil(self.position), self.rotation);
+            Instantiate(cropOnField, this.transform.position + new Vector3(Random.Range(-2f,2f),1f,Random.Range(-2f,2f)), self.rotation);
         }
     }
 }

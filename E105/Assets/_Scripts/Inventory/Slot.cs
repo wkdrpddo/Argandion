@@ -26,7 +26,7 @@ public class Slot : MonoBehaviour
     {
         item = _item;
         itemCount = _count;
-        // itemImage.sprite = item.itemImage;
+        LoadImage(item.ItemCode);
 
         if(item.Category != "장비")
         {
@@ -35,11 +35,21 @@ public class Slot : MonoBehaviour
         }
         else
         {
-            text_Count.text = "0";
+            // text_Count.text = "0";
             // go_CountImage.SetActive(false);
         }
 
-        // SetColor(1);
+        SetColor(1);
+    }
+
+    private void LoadImage(int idx)
+    {
+        byte[] byteTexture = System.IO.File.ReadAllBytes("C:/Users/SSAFY/Desktop/E1058/S07P31E105/E105/Assets/Data/Image/37002.png");
+        Texture2D texture = new Texture2D(0,0);
+        texture.LoadImage(byteTexture);
+
+        Rect rect = new Rect(0,0, texture.width, texture.height);
+        itemImage.sprite = Sprite.Create(texture, rect, new Vector2(0.5f, 0.5f));
     }
 
     public void SetSlotCount(int _count)
@@ -55,8 +65,8 @@ public class Slot : MonoBehaviour
     {
         item = null;
         itemCount = 0;
-        // itemImage.sprite = null;
-        // SetColor(0);
+        itemImage.sprite = null;
+        SetColor(0);
 
         // text_Count.text = "0";
         // go_CountImage.SetActive(false);

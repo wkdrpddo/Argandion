@@ -71,7 +71,7 @@ public class SystemManager : MonoBehaviour
                 _hour = 6;
                 _day += 1;
 
-                DayEnd();
+                // DayEnd();
 
                 if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
                 {

@@ -6,7 +6,8 @@ public class Inventory : MonoBehaviour
 {
     public static bool invectoryActivated = false;  // 인벤토리 활성화 여부.
     public int gold = 500000; // 현재 소유 골드
-    
+    private RectTransform uiGroup;
+
     [SerializeField]
     private GameObject go_InventoryBase; // Inventory_Base 이미지
     [SerializeField] 
@@ -17,36 +18,39 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
+        uiGroup = gameObject.GetComponent<RectTransform>();
     }
 
-    // void Update()
-    // {
-    //     TryOpenInventory();
-    // }
+    void Update()
+    {
+        TryOpenInventory();
+    }
 
-    // private void TryOpenInventory()
-    // {
-    //     if(Input.GetKeyDown(KeyCode.I))
-    //     {
-    //         invectoryActivated = !invectoryActivated;
+    private void TryOpenInventory()
+    {
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            invectoryActivated = !invectoryActivated;
 
-    //         if (invectoryActivated)
-    //             OpenInventory();
-    //         else
-    //             CloseInventory();
+            if (invectoryActivated)
+                OpenInventory();
+            else
+                CloseInventory();
 
-    //     }
-    // }
+        }
+    }
 
-    // private void OpenInventory()
-    // {
-    //     go_InventoryBase.SetActive(true);
-    // }
+    private void OpenInventory()
+    {
+        // go_InventoryBase.SetActive(true);
+        uiGroup.anchoredPosition = Vector3.zero;
+    }
 
-    // private void CloseInventory()
-    // {
-    //     go_InventoryBase.SetActive(false);
-    // }
+    private void CloseInventory()
+    {
+        // go_InventoryBase.SetActive(false);
+        uiGroup.anchoredPosition = Vector3.down * 1000;
+    }
     public bool CheckInven(ItemObject _item, int _count = 1, bool _sec = false)
     {   
         if (!_sec) {

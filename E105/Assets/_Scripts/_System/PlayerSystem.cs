@@ -78,6 +78,8 @@ public class PlayerSystem : MonoBehaviour
         changeItem();
         checkHand();
         Interaction();
+        watering();
+        fff();
     }
 
     void GetBuff() {
@@ -270,7 +272,7 @@ public class PlayerSystem : MonoBehaviour
     }
 
     void fff() {
-        if(_readyToHarvest && Input.GetButtonDown("fff")) {
+        if(_readyToHarvest && Input.GetKeyDown(KeyCode.F)) {
             Harvested harvested = _nearObject.GetComponent<Harvested>();
             harvested.Harvesting();
             _nearCrops = false;
@@ -279,11 +281,11 @@ public class PlayerSystem : MonoBehaviour
             return ;
         }
 
-        if (_onSoil && Input.GetButtonDown("fff") && !_nearCrops) {
+        if (_onSoil && Input.GetKeyDown(KeyCode.F) && !_nearCrops) {
             Instantiate(_wheat, nearSoil(_character.position), _character.rotation);
         }
 
-        if (_nearItem && Input.GetButtonDown("fff")) {
+        if (_nearItem && Input.GetKeyDown(KeyCode.F)) {
             Item item = _nearObject.GetComponent<Item>();
             ItemObject itemObject = item.itemObject;
             if(itemObject != null) {
@@ -303,7 +305,7 @@ public class PlayerSystem : MonoBehaviour
             _theChest.PutItem(item, invenCount);
         }
 
-        if (_nearChest && Input.GetButtonDown("water")) {
+        if (_nearChest && Input.GetKeyDown(KeyCode.G)) {
             ItemObject item = _theChest.TakeItem(chestIdx, -chestCount);
             Debug.Log("햇당");
             Debug.Log(item);
@@ -340,7 +342,7 @@ public class PlayerSystem : MonoBehaviour
 
     }
     void watering() {
-        if (_onSoil && Input.GetButtonDown("water") ) {
+        if (_onSoil && Input.GetKeyDown(KeyCode.G) ) {
             Debug.Log("물줬당");
             Dirt dirt = _nearBiome.GetComponent<Dirt>();
             dirt.Water();
