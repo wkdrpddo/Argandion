@@ -73,22 +73,22 @@ public class SystemManager : MonoBehaviour
 
                 DayEnd();
 
-                if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
-                {
-                    _buffManager.FlowerBuffEnd();
-                    Debug.Log("꽃 버프 종료!");
-                }
+                // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
+                // {
+                //     _buffManager.FlowerBuffEnd();
+                //     Debug.Log("꽃 버프 종료!");
+                // }
 
 
                 if (_day >= 29)
                 {
                     _day -= 28;
                     _month += 1;
-                    if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
-                    {
-                        _buffManager.FlowerBuffEnd();
-                        Debug.Log("꽃 버프 종료!");
-                    }
+                    // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
+                    // {
+                    //     _buffManager.FlowerBuffEnd();
+                    //     Debug.Log("꽃 버프 종료!");
+                    // }
 
                     if (_month >= 9)
                     {

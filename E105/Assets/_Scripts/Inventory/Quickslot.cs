@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-public class Inventory : MonoBehaviour
+public class Quickslot : MonoBehaviour
 {
     [SerializeField]
     private GameObject go_InventoryBase; // Inventory_Base 이미지
@@ -12,21 +11,11 @@ public class Inventory : MonoBehaviour
 
     public Slot[] slots;  // 슬롯들 배열
 
-    public int gold;
-    private UIManager ui;
-
     void Start()
     {
-        ui = gameObject.GetComponentInParent<UIManager>();
-
         go_InventoryBase = transform.GetChild(0).gameObject;
         go_SlotsParent = transform.GetChild(0).GetChild(0).gameObject;
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
-
-        gold = 5000;
-
-        transform.parent.GetChild(2).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = gold.ToString();
-        ui.setGold(gold);
     }
 
     // 인벤토리에 빈 공간이 있는지 확인

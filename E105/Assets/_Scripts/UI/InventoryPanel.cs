@@ -5,18 +5,16 @@ using TMPro;
 
 public class InventoryPanel : MonoBehaviour
 {
-    private Inventory _inventory;
-    private string money;
+    private UIManager ui;
     public void handlePanel()
     {
         gameObject.SetActive(!gameObject.activeSelf);
+        ui.OnInventory(1);
     }
     // Start is called before the first frame update
     void Start()
     {
-        _inventory = GameObject.Find("InventoryManager").GetComponent<Inventory>();
-        money = _inventory.gold.ToString();
-        transform.GetChild(1).GetChild(5).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = money;
+        ui = gameObject.GetComponentInParent<UIManager>();
     }
 
     // Update is called once per frame

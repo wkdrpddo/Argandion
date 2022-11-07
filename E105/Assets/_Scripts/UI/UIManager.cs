@@ -7,21 +7,27 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     // Panel var
+    private GameObject _mainpage;
+    private GameObject _baseuipanel;
     private GameObject _optionpanel;
     private GameObject _optionfrommain;
     private GameObject _mapuipanel;
+
     private GameObject _createcharacter;
+
     private GameObject _conversationpanel;
-    private GameObject _inventorypanel;
-    private GameObject _transactionpanel;
-    private GameObject _cookingpanel;
+
     private GameObject _craftingpanel;
+    private GameObject _cookingpanel;
     private GameObject _buildeventpanel;
+
+    private GameObject _transactionanimalpanel;
+    private GameObject _transactionpanel;
+    private GameObject _inventorypanel;
     private GameObject _storagepanel;
     private GameObject _trademodal;
-    private GameObject _mainpage;
-    private GameObject _transactionanimalpanel;
-    private GameObject _baseuipanel;
+    private GameObject _inventory;
+
     private GameObject _notificationpanel;
 
     public GameObject _eventAnnounce;
@@ -41,6 +47,21 @@ public class UIManager : MonoBehaviour
     private bool isPressESC = false;
     private bool isGameStart = false;
     private bool isMyHome = false;
+
+
+
+    private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>();
+
+    public Sprite getItemIcon(int key)
+    {
+        if (Dic.ContainsKey(key))
+        {
+            return Dic[key];
+        }
+        Sprite icon = Resources.Load<Sprite>("Sprites/" + key);
+        Dic.Add(key, icon);
+        return icon;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +74,11 @@ public class UIManager : MonoBehaviour
         _playersystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
 
         _mainpage = GameObject.Find("MainPagePanel");
+
+        _baseuipanel = GameObject.Find("BaseUIPanel");
+        _healthbar = GameObject.Find("HealthSlider").GetComponent<Slider>();
+        _energybar = GameObject.Find("EnergySlider").GetComponent<Slider>();
+        _baseuipanel.SetActive(false);
 
         _optionpanel = GameObject.Find("OptionPanel");
         _optionpanel.SetActive(false);
@@ -69,37 +95,35 @@ public class UIManager : MonoBehaviour
         _conversationpanel = GameObject.Find("ConversationPanel");
         _conversationpanel.SetActive(false);
 
-        _inventorypanel = GameObject.Find("InventoryPanel");
-        _inventorypanel.SetActive(false);
-
-        _transactionpanel = GameObject.Find("TransactionPanel");
-        _transactionpanel.SetActive(false);
-
         _cookingpanel = GameObject.Find("CookingPanel");
         _cookingpanel.SetActive(false);
 
         _craftingpanel = GameObject.Find("CraftingPanel");
         _craftingpanel.SetActive(false);
 
-        _storagepanel = GameObject.Find("StoragePanel");
-        _storagepanel.SetActive(false);
-
         _buildeventpanel = GameObject.Find("BuildEventPanel");
         _buildeventpanel.SetActive(false);
-
-        _trademodal = GameObject.Find("TradeModal");
-        _trademodal.SetActive(false);
 
         _transactionanimalpanel = GameObject.Find("TransactionAnimalPanel");
         _transactionanimalpanel.SetActive(false);
 
+        _transactionpanel = GameObject.Find("TransactionPanel");
+        _transactionpanel.SetActive(false);
+
+        _inventorypanel = GameObject.Find("InventoryPanel");
+        _inventorypanel.SetActive(false);
+
+        _storagepanel = GameObject.Find("StoragePanel");
+        _storagepanel.SetActive(false);
+
+        _trademodal = GameObject.Find("TradeModal");
+        _trademodal.SetActive(false);
+
+        _inventory = GameObject.Find("Inventory");
+        _inventory.SetActive(false);
+
         _notificationpanel = GameObject.Find("NotificationPanel");
         _notificationpanel.SetActive(false);
-
-        _baseuipanel = GameObject.Find("BaseUIPanel");
-        _healthbar = GameObject.Find("HealthSlider").GetComponent<Slider>();
-        _energybar = GameObject.Find("EnergySlider").GetComponent<Slider>();
-        _baseuipanel.SetActive(false);
 
         _eventAnnounce = GameObject.Find("EventUIAnnounce");
         _announceText = _eventAnnounce.GetComponentInChildren<TextMeshProUGUI>();
@@ -205,14 +229,18 @@ public class UIManager : MonoBehaviour
     public void OnTransactionPanel()
     {
         _transactionpanel.GetComponent<TransactionPanel>().OnPanel(conversationNPC);
-        conversationNPC = 0;
         _conversationpanel.GetComponent<ConversationPanel>().resetConversationPanel();
+        conversationNPC = 0;
         stopControllPlayer();
+        OnInventory(2);
     }
 
     public void OnTransactionAnimalPanel()
     {
-        _transactionanimalpanel.SetActive(true);
+        _transactionanimalpanel.GetComponent<TransactionAnimalPanel>().onPanel();
+        _conversationpanel.GetComponent<ConversationPanel>().resetConversationPanel();
+        conversationNPC = 0;
+        stopControllPlayer();
     }
 
     public void OnCraftingPanel()
@@ -292,6 +320,31 @@ public class UIManager : MonoBehaviour
     public void OnTradeModal(string name, string iconName, int maxCnt, int checkMod, int cost)
     {
         _trademodal.GetComponent<TradeModal>().setModal(name, iconName, maxCnt, checkMod, cost);
+    }
+
+    public void closeTradeModal()
+    {
+        _trademodal.GetComponent<TradeModal>().closeModal();
+    }
+
+    public void OnInventory(int value)
+    {
+        switch (value)
+        {
+            case 1:
+                _inventory.GetComponent<RectTransform>().SetLocalPositionAndRotation(new Vector3(110, -30, 0), rotateZero);
+                break;
+            case 2:
+                _inventory.GetComponent<RectTransform>().SetLocalPositionAndRotation(new Vector3(110, -15.06f, 0), rotateZero);
+                break;
+            case 3:
+                _inventory.GetComponent<RectTransform>().SetLocalPositionAndRotation(new Vector3(-211.66f, -5.58f, 0), rotateZero);
+                _inventory.transform.GetChild(1).GetComponent<Image>().color = new Color(225, 225, 225, 0);
+                _inventory.transform.GetChild(1).GetChild(1).GetComponent<Image>().color = new Color(225, 225, 225, 0);
+                _inventory.transform.GetChild(1).GetChild(2).GetComponent<Image>().color = new Color(225, 225, 225, 0);
+                break;
+        }
+        _inventory.SetActive(!_inventory.activeSelf);
     }
 
     // ======================= UI 호출 함수 End
@@ -377,6 +430,11 @@ public class UIManager : MonoBehaviour
     {
         return 0;
         // return _systemmanager.getPlayerGold();
+    }
+
+    public void setGold(int gold)
+    {
+        // _transactionanimalpanel.transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = gold.ToString();
     }
 
     // 게임 시작 종료

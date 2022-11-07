@@ -34,8 +34,6 @@ public class TransactionPanel : MonoBehaviour
     public buyingObject buyingObject;
     public ItemObject itemObject;
 
-    public Sprite[] spr;
-
     void Start()
     {
         jsonStringBase = Application.dataPath + "/Data/Json";
@@ -81,16 +79,30 @@ public class TransactionPanel : MonoBehaviour
 
             GameObject productBtn = Instantiate(storeItemCard, ScrollContent.transform);
             RectTransform productBtnRect = productBtn.GetComponent<RectTransform>();
-            productBtnRect.SetLocalPositionAndRotation(new Vector3(0, -10 - i * 50, 0), ui.rotateZero);
-            Debug.Log("여기까지? 00");
-            productBtn.transform.GetChild(0).GetComponent<Image>().sprite = Resources.LoadAll<Sprite>("Sprites/" + itemObject.ItemCode)[0];
-            Debug.Log("여기까지? 01");
+
+            Debug.Log(productBtnRect.anchoredPosition);
+            productBtnRect.SetLocalPositionAndRotation(new Vector3(7.5f, -10 - i * 50, 0), ui.rotateZero);
+            Debug.Log(productBtn.GetComponent<RectTransform>().position);
+
+            productBtn.transform.GetChild(0).GetComponent<Image>().sprite = ui.getItemIcon(itemObject.ItemCode);
             productBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemObject.Name;
-            Debug.Log("여기까지? 02");
             productBtn.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = buyingObject.Cost.ToString();
-            Debug.Log("여기까지? 03");
             productBtn.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = itemObject.Desc;
-            Debug.Log("여기까지? 04");
         }
+    }
+
+    public void closeTransaction()
+    {
+        RectTransform[] selectObjectList = ScrollContent.GetComponentsInChildren<RectTransform>();
+        for (int i = 1; i < selectObjectList.Length; i++)
+        {
+            if (selectObjectList[i] != ScrollContent.GetComponent<RectTransform>())
+            {
+                Destroy(selectObjectList[i].gameObject);
+            }
+        }
+
+        gameObject.SetActive(false);
+        ui.OnInventory(2);
     }
 }
