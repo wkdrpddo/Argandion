@@ -11,7 +11,6 @@ public class OnAir : MonoBehaviour
     }
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("플레이어 Enter");
         if (other.gameObject.layer==0 || other.gameObject.layer==10)
         {
             _playerSystem._onAir += 1;
@@ -20,7 +19,6 @@ public class OnAir : MonoBehaviour
 
     void OnCollisionExit(Collision other)
     {
-        Debug.Log("플레이어 Exit");
         if (other.gameObject.layer==0 || other.gameObject.layer==10)
         {
             _playerSystem._onAir -= 1;
@@ -29,17 +27,14 @@ public class OnAir : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("플레이어 Enter!");
         if (other.gameObject.layer==0 || other.gameObject.layer==10)
         {
-            Debug.Log("ww");
             _playerSystem._onAir += 1;
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        Debug.Log("플레이어 Exit!");
         if (other.gameObject.layer==0 || other.gameObject.layer==10)
         {
             _playerSystem._onAir -= 1;

@@ -13,14 +13,25 @@ public class GatheringObject : MonoBehaviour
 
     // Update is called once per frame
 
+    void Start()
+    {
+        _ps = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
+    }
+
     public void Interaction(float time)
     {
-        if(_inventory.CheckInven(_item.FindItem(_itemCode),1))
+        // if(_inventory.CheckInven(_item.FindItem(_itemCode),1))
+        if (true)
         {
-            Vector3 Direction = (_ps.gameObject.transform.position - this.gameObject.transform.position).normalized;
+            Debug.Log("this is true");
+            Debug.Log(_ps.gameObject.transform.position);
+            Debug.Log(gameObject.transform.position);
+            Vector3 Direction = (gameObject.transform.position - _ps.gameObject.transform.position);
+            Direction.y = 0;
+            Direction = Direction.normalized;
             _ps._character.forward = Direction;
             _ps._playerAnimator.SetInteger("action", 10);
-            StartCoroutine(StopPlayer(time));
+            // StartCoroutine(StopPlayer(time));
         }
     }
 
