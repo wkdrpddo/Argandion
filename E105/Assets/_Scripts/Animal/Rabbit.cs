@@ -33,7 +33,7 @@ public class Rabbit : MonoBehaviour
     private NavMeshAgent nav;
 
 
-    [SerializeField] private GameObject items;  //동물의 가죽
+    [SerializeField] private GameObject items;  
     //Item
     [SerializeField] private GameObject item20;  //동물의 가죽
     [SerializeField] private GameObject item21;   //부드러운 가죽
