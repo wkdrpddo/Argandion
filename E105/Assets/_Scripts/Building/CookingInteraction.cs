@@ -6,6 +6,7 @@ public class CookingInteraction : MonoBehaviour
 {
     public UIManager _uiManager;
     public CameraSystem _cameraSystem;
+    private GameObject _shelfParent;
 
     void Start()
     {
@@ -15,6 +16,19 @@ public class CookingInteraction : MonoBehaviour
     public void Interaction()
     {
         _uiManager.OnCookingPanel();
+        shelfParent = gameObject.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject;
+
+    }
+    public void CookingStart()
+    {
         _cameraSystem.CookingCamera();
+        shelfParent.GetChild(2).gameObject.SetActive(false);
+        shelfParent.GetChild(3).gameObject.SetActive(false);
+    }
+    public void CookingEnd()
+    {
+        _cameraSystem.ResetCamera();
+        shelfParent.GetChild(2).gameObject.SetActive(true);
+        shelfParent.GetChild(3).gameObject.SetActive(true);
     }
 }
