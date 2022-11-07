@@ -18,7 +18,7 @@ public class PlayerSystem : MonoBehaviour
     private GameObject _nearObject;
 
     // { itemcode, 장비코드(0그외 1채집 2도끼 3곡괭이 4괭이 5검 6낚싯대), 이동불가 시간, 작업시간}
-    public float[,] _equipList = new float[,] { { 300, 1, 1.5f, 0, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 10, 0, 0, 0, 20}, { 20,0 ,0 ,0, 10} };
+    public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 10, 0, 0, 0, 20}, { 20,0 ,0 ,0, 10} };
     public GameObject[] _equipment = new GameObject[5];
     public int _equipItem = 0;
 
@@ -128,6 +128,7 @@ public class PlayerSystem : MonoBehaviour
         }
         else
         {
+            rb.velocity = new Vector3(0,0,0);
             _playerAnimator.SetInteger("action", 0);
             _movedDelay -= Time.deltaTime;
             _movedDelay = Mathf.Max(0, _movedDelay);
@@ -157,22 +158,27 @@ public class PlayerSystem : MonoBehaviour
         if (Input.GetAxisRaw("equip1") == 1)
         {
             _equipItem = 0;
+            _UIManager.setEquipPointer(1);
         }
         else if (Input.GetAxisRaw("equip2") == 1)
         {
             _equipItem = 1;
+            _UIManager.setEquipPointer(2);
         }
         else if (Input.GetAxisRaw("equip3") == 1)
         {
             _equipItem = 2;
+            _UIManager.setEquipPointer(3);
         }
         else if (Input.GetAxisRaw("equip4") == 1)
         {
             _equipItem = 3;
+            _UIManager.setEquipPointer(4);
         }
         else if (Input.GetAxisRaw("equip5") == 1)
         {
             _equipItem = 4;
+            _UIManager.setEquipPointer(5);
         }
     }
 
@@ -219,7 +225,7 @@ public class PlayerSystem : MonoBehaviour
         if (Input.GetButtonDown("interactionKey"))
         {
             Vector3 pos = new Vector3(this.transform.position.x,this.transform.position.y,this.transform.position.z);
-            _colset = Physics.OverlapSphere(pos,_interactRadius,layerMask:1601);
+            _colset = Physics.OverlapSphere(pos,_interactRadius,layerMask:1633);
             foreach(var col in _colset)
             {
                 if (col.TryGetComponent(out Interactable inter))
@@ -232,6 +238,14 @@ public class PlayerSystem : MonoBehaviour
                     if (col.TryGetComponent(out NPCObject npc))
                     {
                         npc.Interaction();
+                    }
+                    if (_equipList[_equipItem,0] == 1 && col.TryGetComponent(out GatheringObject Gat))
+                    {
+                        Debug.Log("버..섯?");
+                        Debug.Log(Gat);
+                        Gat.Interaction(_equipList[_equipItem,1]);
+                        _delayedTimer = _equipList[_equipItem, 2];
+                        _movedDelay = _equipList[_equipItem, 3];
                     }
                 }
             }

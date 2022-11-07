@@ -9,8 +9,8 @@ public class CookingInteraction : MonoBehaviour
 
     void Start()
     {
-        _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
-        _cameraSystem = GameObject.Find("CameraSystem").GetComponent<CameraSystem>();
+        // _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        _cameraSystem = GameObject.Find("PlayerObject").GetComponent<CameraSystem>();
     }
     public void Interaction()
     {
