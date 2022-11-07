@@ -13,8 +13,7 @@ public class PlayerSystem : MonoBehaviour
     private GameObject _nearBiome;
     public Inventory _theInventory;
     public Chest _theChest;
-    public GameObject _buffManagerObject;
-    private BuffManager _buff;
+    public BuffManager _buffManager;
 
     private GameObject _nearObject;
 
@@ -25,9 +24,9 @@ public class PlayerSystem : MonoBehaviour
 
     public float _walkspeed;
     public float _runspeed;
-    public float _health_max = 100.0f;
+    public float _health_max;
     public float _health;
-    public float _stamina_max = 100.0f;
+    public float _stamina_max;
     public float _stamina;
     private float _delayedTimer;
     private float _movedDelay;
@@ -65,35 +64,16 @@ public class PlayerSystem : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        _buffManagerObject = GameObject.Find("BuffManager");
-        _buff = _buffManagerObject.GetComponent<BuffManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetBuff();
         GetInput();
         Move();
         changeItem();
         checkHand();
         Interaction();
-    }
-
-    void GetBuff()
-    {
-        if ( _buff.pinkPray ) {
-            _health_max = 200.0f;
-            _stamina_max = 150.0f;
-        } else {
-            if ( _health > _health_max ) {
-                _health = _health_max;
-            }
-
-            if ( _stamina > _stamina_max ) {
-                _stamina = _stamina_max;
-            }
-        }
     }
 
     void GetInput()
@@ -123,7 +103,7 @@ public class PlayerSystem : MonoBehaviour
             if (Input.GetAxisRaw("run") != 0)
             {
                 // transform.position += moveDir * Time.deltaTime * _runspeed;
-                speed = moveDir * _runspeed * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
+                speed = moveDir * _runspeed;
                 // speed.y = -1f;
                 if (_onAir==0)
                 {
@@ -136,10 +116,7 @@ public class PlayerSystem : MonoBehaviour
             else
             {
                 // transform.position += moveDir * Time.deltaTime * _walkspeed;
-                speed = moveDir * _runspeed * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
-                if (_buff.skyPray || _buff.skySpirit) {
-                    speed *= 1.3f;
-                }
+                speed = moveDir * _walkspeed;
                 // speed.y = -1f;
                 if (_onAir==0)
                 {
@@ -252,10 +229,9 @@ public class PlayerSystem : MonoBehaviour
                     // {
                     //     npc.Interaction();
                     // }
-
                     if (col.TryGetComponent(out NPCObject npc))
                     {
-                        npc.Interaction();                       
+                        npc.Interaction();
                     }
                 }
             }
@@ -319,14 +295,14 @@ public class PlayerSystem : MonoBehaviour
         }
 
         if (_nearSpirit && Input.GetButtonDown("fff")) {
-            if ( _buff._isFlowerBuffActived ) {
+            if ( _buffManager._isFlowerBuffActived ) {
                 Debug.Log("이미 다른버프가 발동중이라구!");
             } else {
                 ItemObject item = _theInventory.StoreItem(0, -1);
                 if ( item.Category == "꽃") {
                     SpiritBuff spirit = _nearObject.GetComponent<SpiritBuff>();
                     spirit.Spirit(item);
-                    _buff._isFlowerBuffActived = true;
+                    _buffManager._isFlowerBuffActived = true;
                 } else if ( item.ItemCode == 0 ) {
                     Debug.Log("아무것도 없는데?");
                 } else {
@@ -487,7 +463,7 @@ public class PlayerSystem : MonoBehaviour
 
     public void changeEnergy(float value)
     {
-        _stamina -= value * (_buff.pinkPray ? 0.8f : 1.0f) * (_buff.pinkSpirit ? 0.8f : 1.0f);
+        _stamina -= value;
         if (_stamina <= 0) {
             _stamina = 0;
             playerDeath();
