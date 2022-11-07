@@ -63,7 +63,7 @@ public class BuildingChange : MonoBehaviour
         // build 1 Collider 가지고 있는 Object
         GameObject floor = _constructionSet.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
         // 표지판 만들기
-        _makeSign.makeSign(gameObject.transform.position.x, gameObject.transform.parent.position.y, gameObject.transform.position.z - floor.GetComponent<BoxCollider>().size.z * floor.transform.localScale.z / 2, _constructionSet.transform, _makeFences._icon);
+        _makeSign.makeSign(gameObject.transform.position.x, gameObject.transform.parent.position.y, gameObject.transform.position.z - floor.GetComponent<BoxCollider>().size.z * floor.transform.localScale.z / 2, _constructionSet.transform, _makeFences._icon, false, 0);
 
         // 펜스 지우기
         Destroy(_makeFences._fences);

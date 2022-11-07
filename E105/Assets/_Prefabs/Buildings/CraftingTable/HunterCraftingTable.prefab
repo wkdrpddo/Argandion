@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6364094775916263977}
   - component: {fileID: 6352591293931146993}
   - component: {fileID: 6344518074296376827}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SM_Prop_Market_Stall_05_Dressing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,10 +95,10 @@ GameObject:
   - component: {fileID: 6351894463883176417}
   - component: {fileID: 6343922740539156721}
   - component: {fileID: 6393716982907598997}
-  - component: {fileID: 6367575954231641612}
-  - component: {fileID: 6367575954231641613}
-  m_Layer: 0
-  m_Name: Hunt Crafting Table
+  - component: {fileID: 2393405549221963149}
+  - component: {fileID: 3165443078324247761}
+  m_Layer: 10
+  m_Name: HunterCraftingTable
   m_TagString: CraftingTable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,15 +111,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6366165111599367611}
-  m_LocalRotation: {x: -0, y: 0.87919456, z: -0, w: 0.47646308}
-  m_LocalPosition: {x: 6.75, y: 0.008934021, z: 0.91}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6364094775916263977}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 123.091, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6351894463883176417
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -184,20 +184,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43293600691566356, guid: 173e2886f1f2a164bbe72c0473dd241d, type: 2}
---- !u!135 &6367575954231641612
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6366165111599367611}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3
-  m_Center: {x: 0.5, y: 0, z: 0}
---- !u!114 &6367575954231641613
+--- !u!114 &2393405549221963149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,10 +193,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 6366165111599367611}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9585edb38f7d6c47b4ce046e1b1aa1c, type: 3}
+  m_Script: {fileID: 11500000, guid: e474ae330fa99ff48953c33d7a701857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiGroup: {fileID: 0}
-  _tableName: hunt
-  _enterPlayer: {fileID: 0}
-  _open: 0
+--- !u!114 &3165443078324247761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6366165111599367611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d20d4308e65db7f4596470d73458b57b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiManager: {fileID: 0}
+  _sectorNum: 7

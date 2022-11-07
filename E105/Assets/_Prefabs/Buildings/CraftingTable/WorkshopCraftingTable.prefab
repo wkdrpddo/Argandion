@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 7555836159019886983}
   - component: {fileID: 7561625902051558171}
   - component: {fileID: 7513621029532266979}
-  - component: {fileID: 7539922245380523218}
-  - component: {fileID: 7539922245380523221}
-  m_Layer: 0
-  m_Name: Workshop CraftingTable
+  - component: {fileID: 1965444908204438686}
+  - component: {fileID: 6436693693427551882}
+  m_Layer: 10
+  m_Name: WorkshopCraftingTable
   m_TagString: CraftingTable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,14 +28,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7541111190555323499}
-  m_LocalRotation: {x: -0, y: 0.8815542, z: -0, w: 0.47208276}
-  m_LocalPosition: {x: -4.15, y: 0, z: 3.76}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 123.661, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7555836159019886983
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -100,20 +100,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43352362141619686, guid: 63978be6d1b70f647af2809c8f5d054b, type: 2}
---- !u!135 &7539922245380523218
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7541111190555323499}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.6
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7539922245380523221
+--- !u!114 &1965444908204438686
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,10 +109,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 7541111190555323499}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9585edb38f7d6c47b4ce046e1b1aa1c, type: 3}
+  m_Script: {fileID: 11500000, guid: e474ae330fa99ff48953c33d7a701857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiGroup: {fileID: 0}
-  _tableName: workshop
-  _enterPlayer: {fileID: 0}
-  _open: 0
+--- !u!114 &6436693693427551882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7541111190555323499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d20d4308e65db7f4596470d73458b57b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiManager: {fileID: 0}
+  _sectorNum: 2

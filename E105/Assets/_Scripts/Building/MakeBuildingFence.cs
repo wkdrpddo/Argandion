@@ -30,7 +30,7 @@ public class MakeBuildingFence : MonoBehaviour
     void Start()
     {
         // 오브젝트 변수 설정
-        // _systemManager = GameObject.Find("SystemManager");
+        _systemManager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         // 함수 호출
         setValue();
         makeFence(); // 테스트 용
@@ -90,7 +90,7 @@ public class MakeBuildingFence : MonoBehaviour
         }
 
         // 표지판 생성
-        _makeSign.makeSign(_colliderCenter.x, fencePositionY, _colliderCenter.z - _colliderSize.z / 2 - 0.12f, _fences.transform, _icon);
+        _makeSign.makeSign(_colliderCenter.x, fencePositionY, _colliderCenter.z - _colliderSize.z / 2 - 0.12f, _fences.transform, _icon, true, _sectorNum);
 
     }
 }
