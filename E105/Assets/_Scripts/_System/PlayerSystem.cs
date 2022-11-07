@@ -252,10 +252,20 @@ public class PlayerSystem : MonoBehaviour
                         _delayedTimer = _equipList[_equipItem, 2];
                         _movedDelay = _equipList[_equipItem, 3];
                     }
+                    // building쪽 ==============
                     if (col.TryGetComponent(out CookingInteraction cookingInteraction))
                     {
                         cookingInteraction.Interaction();
                     }
+                    if (col.TryGetComponent(out SleepInteraction sleepInteraction))
+                    {
+                        sleepInteraction.Interaction();
+                    }
+                    if (col.TryGetComponent(out TeleportationHome teleportationHome))
+                    {
+                        teleportationHome.Interaction();
+                    }
+                    // ===========================
                 }
             }
         }
