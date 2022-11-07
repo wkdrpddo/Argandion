@@ -104,8 +104,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 64754305303812432, guid: 4c36be13aadd36c4f81a3efe8d156d00, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64754305303812432, guid: 4c36be13aadd36c4f81a3efe8d156d00, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 110140371418876832, guid: 4c36be13aadd36c4f81a3efe8d156d00, type: 3}
+      propertyPath: itemObject.Name
+      value: "\uB450\uD23C \uACE0\uAE30"
+      objectReference: {fileID: 0}
+    - target: {fileID: 110140371418876832, guid: 4c36be13aadd36c4f81a3efe8d156d00, type: 3}
+      propertyPath: itemObject.Category
+      value: "\uC2DD\uB7C9"
+      objectReference: {fileID: 0}
+    - target: {fileID: 110140371418876832, guid: 4c36be13aadd36c4f81a3efe8d156d00, type: 3}
+      propertyPath: itemObject.ItemCode
+      value: 105
+      objectReference: {fileID: 0}
+    - target: {fileID: 110140371418876832, guid: 4c36be13aadd36c4f81a3efe8d156d00, type: 3}
+      propertyPath: itemObject.SellCost
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c36be13aadd36c4f81a3efe8d156d00, type: 3}
@@ -143,27 +163,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5120024322115644751}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.42104185, y: 0.1287758, z: 0.20734535}
   m_Center: {x: -0.0051307306, y: 0.004953468, z: 0.00038499385}
---- !u!114 &1940074922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5120024322115644751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21ea60305974a5c49b3b01ec7a2afdf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemCode: 105
-  itemObject:
-    ItemCode: 0
-    Name: 
-    Category: 
-    BuyCost: 0
-    SellCost: 0

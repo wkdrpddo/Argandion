@@ -104,8 +104,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 64917885759234738, guid: 7ada432aa5d5d6742a270de336774eb9, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64917885759234738, guid: 7ada432aa5d5d6742a270de336774eb9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64917885759234738, guid: 7ada432aa5d5d6742a270de336774eb9, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7981854311263807629, guid: 7ada432aa5d5d6742a270de336774eb9, type: 3}
+      propertyPath: itemCode
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7981854311263807629, guid: 7ada432aa5d5d6742a270de336774eb9, type: 3}
+      propertyPath: itemObject.Name
+      value: "\uB3D9\uBB3C\uC758 \uAC00\uC8FD"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7981854311263807629, guid: 7ada432aa5d5d6742a270de336774eb9, type: 3}
+      propertyPath: itemObject.Category
+      value: "\uAC00\uC8FD"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7981854311263807629, guid: 7ada432aa5d5d6742a270de336774eb9, type: 3}
+      propertyPath: itemObject.ItemCode
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7981854311263807629, guid: 7ada432aa5d5d6742a270de336774eb9, type: 3}
+      propertyPath: itemObject.SellCost
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ada432aa5d5d6742a270de336774eb9, type: 3}
@@ -124,7 +152,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -138,30 +166,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5680580686211250023}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.8684906, y: 0.009999995, z: 0.9418825}
   m_Center: {x: 0.0015517324, y: 0.0049999976, z: -0.03239377}
---- !u!114 &1930620986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5680580686211250023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21ea60305974a5c49b3b01ec7a2afdf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemCode: 20
-  itemObject:
-    ItemCode: 0
-    Name: 
-    Category: 
-    BuyCost: 0
-    SellCost: 0
 --- !u!4 &5683172815206846523 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4418925997143882, guid: 7ada432aa5d5d6742a270de336774eb9, type: 3}

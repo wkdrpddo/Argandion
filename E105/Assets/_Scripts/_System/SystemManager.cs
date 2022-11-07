@@ -23,7 +23,7 @@ public class SystemManager : MonoBehaviour
     static int _sector_size = 8;
     public int _purification_size;
     public bool[] _purification = new bool[_sector_size];
-    public GameObject[] _sector = new GameObject[_sector_size];
+    public GameObject[] _sector = new GameObject[_sector_size+2];
     public SectorObject _sectorTest;
     public GameObject[] _randomNPC = new GameObject[2];
 
@@ -73,22 +73,22 @@ public class SystemManager : MonoBehaviour
 
                 DayEnd();
 
-                if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
-                {
-                    _buffManager.FlowerBuffEnd();
-                    Debug.Log("꽃 버프 종료!");
-                }
+                // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
+                // {
+                //     _buffManager.FlowerBuffEnd();
+                //     Debug.Log("꽃 버프 종료!");
+                // }
 
 
                 if (_day >= 29)
                 {
                     _day -= 28;
                     _month += 1;
-                    if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
-                    {
-                        _buffManager.FlowerBuffEnd();
-                        Debug.Log("꽃 버프 종료!");
-                    }
+                    // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
+                    // {
+                    //     _buffManager.FlowerBuffEnd();
+                    //     Debug.Log("꽃 버프 종료!");
+                    // }
 
                     if (_month >= 9)
                     {
@@ -129,14 +129,18 @@ public class SystemManager : MonoBehaviour
 
     private void DayEnd()
     {
-        // _sectorTest.DayEnd();
+
         int npc1_position = RandomPurification();
         int npc2_position = RandomPurification();
 
         // //순례자, 음악가 랜덤위치 생성
         _randomNPC[0].transform.position = NPCRandomPosition(npc1_position);
         _randomNPC[1].transform.position = NPCRandomPosition(npc2_position);
-
+        SectorObject[] sec = MapObject.GetComponentsInChildren<SectorObject>();
+        foreach(var se in sec)
+        {
+            se.DayEnd();
+        }
     }
 
     //정화된 구역 중에서 랜덤 한 구역 정하기
