@@ -91,7 +91,7 @@ public class PlayerSystem : MonoBehaviour
                 _health = _health_max;
             }
             if (_stamina > _stamina_max) {
-                _stamina = _stamina;
+                _stamina = _stamina_max; 
             }
         }
     }

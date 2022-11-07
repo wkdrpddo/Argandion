@@ -101,7 +101,7 @@ public class Fishing : MonoBehaviour
             }
 
             if( _buff.bluePray ) {
-                waitingTime * 0.5f;
+                waitingTime *= 0.5f;
             }
 
             Debug.Log(waitingTime);
