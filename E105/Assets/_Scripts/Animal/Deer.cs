@@ -159,8 +159,8 @@ public class Deer : MonoBehaviour
         anim.SetTrigger("Death");
 
         isDead = true;
-        Destroy(this.gameObject, 1f);
         
+        Destroy(this.gameObject, 1f);
         Item();
     }
 
