@@ -36,42 +36,45 @@ public class WeatherManager : MonoBehaviour
 
     public void SetWeather(int season)
     {
-        if (season == 0) {
+        if (season == 0) { // 봄은 무난하다
             SetSpring();
-        } else if (season == 1) {
-            if( !while5 ){
+        } else if (season == 1) { // 여름의 경우
+            if( !while5 ){ // 태풍중이 아니라면 날씨를 정해준다
                 SetSummer();
-            } else if ( how5 < 2) {
+            } else if ( how5 < 2) { // 태풍 둘쨋날 (how5 == 1) 이면 여전히 날씨는 태풍
                 systemManager._weather = 5;
                 how5 += 1;
                 return ;
-            } else {
+            } else { // 태풍 마지막날엔 비가 내리고, 태풍이 끝나고 , 태풍후 변수를 true로 바꿔준다.
                 systemManager._weather = 1;
                 while5 = false;
+                after5 = true;
                 return ;
             }
-        } else if (season == 2) {
-            if( !while5 ){
+        } else if (season == 2) { // 가을의 경우
+            if( !while5 ){ // 태풍중이 아니라면 날씨를 정해준다
                 SetFall();
-            } else if ( how5 < 2) {
+            } else if ( how5 < 2) { // 태풍 둘쨋날 (how5 == 1) 이면 여전히 날씨는 태풍
                 systemManager._weather = 5;
                 how5 += 1;
                 return ;
-            } else {
+            } else { // 태풍 마지막날엔 비가 내리고, 태풍이 끝나고 , 태풍 후 변수를 true로 바꿔준다.
                 systemManager._weather = 1;
                 while5 = false;
+                after5 = true;
                 return ;
             }
-        } else if (season == 3) {
-            if( !while4 ){
+        } else if (season == 3) { // 겨울의 경우
+            if( !while4 ){ // 폭설 중이 아니라면 날씨를 정해준다.
                 SetWinter();
-            } else if ( how4 < 2) {
+            } else if ( how4 < 2) { // 폭설 둘쨋날 (how4 == 1) 이면 여전히 날씨는 폭설
                 systemManager._weather = 4;
                 how4 += 1;
                 return ;
-            } else {
+            } else { // 폭설 마지막날엔 비가 내리고, 폭설이 끝나고, 폭설 후 변수를 true로 바꿔준다.
                 systemManager._weather = 1;
                 while4 = false;
+                after4 = true;
                 return ;
             }
         }
@@ -109,6 +112,10 @@ public class WeatherManager : MonoBehaviour
                 cumulative += summer[i];
                 if(randomValue <= cumulative) {
                     systemManager._weather = summerIdx[i];
+                    if (summerIdx[i] == 5) {
+                        while5 = true;
+                        how5 += 1;
+                    }
                     return ;
                 }
             }
@@ -133,6 +140,10 @@ public class WeatherManager : MonoBehaviour
                 cumulative += fall[i];
                 if(randomValue <= cumulative) {
                     systemManager._weather = fallIdx[i];
+                    if (fallIdx[i] == 5) {
+                        while5 = true;
+                        how5 += 1;
+                    }
                     return ;
                 }
             }
@@ -157,6 +168,10 @@ public class WeatherManager : MonoBehaviour
                 cumulative += winter[i];
                 if(randomValue <= cumulative) {
                     systemManager._weather = winterIdx[i];
+                    if (winterIdx[i] == 4) {
+                        while4 = true;
+                        how4 += 1;
+                    }
                     return ;
                 }
             }
