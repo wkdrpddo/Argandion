@@ -10,14 +10,14 @@ public class Inventory : MonoBehaviour
 
     [SerializeField]
     private GameObject go_InventoryBase; // Inventory_Base 이미지
-    [SerializeField] 
+    [SerializeField]
     private GameObject go_SlotsParent;  // Slot들의 부모인 Grid Setting 
 
     public Slot[] slots;  // 슬롯들 배열
 
     void Start()
     {
-        slots = go_SlotsParent.GetComponentsInChildren<Slot>();
+        // slots = go_SlotsParent.GetComponentsInChildren<Slot>();
         uiGroup = gameObject.GetComponent<RectTransform>();
     }
 
@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour
 
     private void TryOpenInventory()
     {
-        if(Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             invectoryActivated = !invectoryActivated;
 
@@ -52,18 +52,23 @@ public class Inventory : MonoBehaviour
         uiGroup.anchoredPosition = Vector3.down * 1000;
     }
     public bool CheckInven(ItemObject _item, int _count = 1, bool _sec = false)
-    {   
-        if (!_sec) {
-            if(_item.Category != "장비")
+    {
+        if (!_sec)
+        {
+            if (_item.Category != "장비")
             {
                 for (int i = 0; i < slots.Length; i++)
                 {
                     if (slots[i].item != null)  // null 이라면 slots[i].item.itemName 할 때 런타임 에러 나서
                     {
-                        if (slots[i].item.Name == _item.Name && slots[i].itemCount < 99) {
-                            if (slots[i].itemCount + _count <= 99 ) {
+                        if (slots[i].item.Name == _item.Name && slots[i].itemCount < 99)
+                        {
+                            if (slots[i].itemCount + _count <= 99)
+                            {
                                 return true;
-                            } else {
+                            }
+                            else
+                            {
                                 return CheckInven(_item, _count, true);
                             }
                         }
@@ -79,7 +84,8 @@ public class Inventory : MonoBehaviour
                 return true;
             }
 
-            if ( i + 1 == slots.Length) {
+            if (i + 1 == slots.Length)
+            {
                 return false;
             }
         }
@@ -89,19 +95,23 @@ public class Inventory : MonoBehaviour
 
     public void AcquireItem(ItemObject _item, int _count = 1)
     {
-        if(_item.Category != "장비")
+        if (_item.Category != "장비")
         {
             for (int i = 0; i < slots.Length; i++)
             {
                 if (slots[i].item != null)  // null 이라면 slots[i].item.itemName 할 때 런타임 에러 나서
                 {
-                    if (slots[i].item.Name == _item.Name && slots[i].itemCount < 99) {
-                        if (slots[i].itemCount + _count <= 99 ) {
+                    if (slots[i].item.Name == _item.Name && slots[i].itemCount < 99)
+                    {
+                        if (slots[i].itemCount + _count <= 99)
+                        {
                             slots[i].SetSlotCount(_count);
                             return;
-                        } else {
+                        }
+                        else
+                        {
                             int temp = slots[i].itemCount;
-                            slots[i].SetSlotCount( 99-slots[i].itemCount );
+                            slots[i].SetSlotCount(99 - slots[i].itemCount);
                             AcquireItem(_item, _count + temp - 99);
                             return;
                         }
@@ -118,16 +128,18 @@ public class Inventory : MonoBehaviour
                 return;
             }
 
-            if ( i + 1 == slots.Length) {
+            if (i + 1 == slots.Length)
+            {
                 Debug.Log("꽉찼엉");
             }
         }
     }
 
     public ItemObject StoreItem(int idx, int _count = 1)
-    {   
+    {
         ItemObject returnedItem = slots[idx].item;
-        if (_count != 0){
+        if (_count != 0)
+        {
             slots[idx].SetSlotCount(_count);
         }
         return returnedItem;
