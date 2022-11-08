@@ -29,10 +29,14 @@ public class WeatherManager : MonoBehaviour
     private bool while5 = false; // 태풍 중 (태풍-태풍-비를 구현하기 위한 변수)
     private int how5 = 0; // 태풍 몇일째인지 (태풍-태풍-비를 구현하기 위한 변수)
 
-    private int rainyMonth = 0;
-    private int rainyDay = 0;
-    private int coldWindMonth = 0;
-    private int coldWindDay = 0;
+    public int rainyMonth = 0;
+    public int rainyDay = 0;
+    public int coldWindMonth = 0;
+    public int coldWindDay = 0;
+
+    private void Start() {
+        SetYearEvent();
+    }
 
     public void SetWeather(int season)
     {
@@ -178,8 +182,33 @@ public class WeatherManager : MonoBehaviour
         }
     }
 
-    private void SetYearEvent()
+    private void inRainySeason()
     {
+        
+    }
 
+    private void SetYearEvent()
+    {   
+        // 변수 초기화
+        after4 = false;
+        while4 = false; 
+        how4 = 0; 
+        after5 = false; 
+        while5 = false; 
+        how5 = 0;
+        
+        // 장마, 한파 날짜 정해주기
+        rainyMonth = Random.Range(2,4);
+        if (rainyMonth == 2) {
+            rainyDay = Random.Range(1,29);
+        } else {
+            rainyDay = Random.Range(1,23);
+        }
+        coldWindMonth = Random.Range(6,8);
+        if (coldWindMonth == 6) {
+            coldWindDay = Random.Range(1,29);
+        } else {
+            coldWindDay = Random.Range(1,16);
+        }
     }
 }
