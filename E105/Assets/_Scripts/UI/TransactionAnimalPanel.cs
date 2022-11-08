@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TransactionAnimalPanel : MonoBehaviour
 {
-    private Inventory inven;
     // private 
     private UIManager ui;
     private bool isOnPanel;
@@ -68,12 +68,25 @@ public class TransactionAnimalPanel : MonoBehaviour
         return isOnPanel;
     }
 
+    public void onPanel()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void closePanel()
+    {
+        gameObject.SetActive(false);
+        ui.closeTradeModal();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        inven = GameObject.Find("InventoryManager").GetComponent<Inventory>();
         isOnPanel = false;
         ui = gameObject.GetComponentInParent<UIManager>();
+
+        Debug.Log("==============" + transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text);
+        transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGlod().ToString();
     }
 
     // Update is called once per frame
