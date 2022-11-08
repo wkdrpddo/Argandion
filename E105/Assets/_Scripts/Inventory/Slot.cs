@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour
+public class Slot : MonoBehaviour, IPointerClickHandler
 {
     public int idx;
     public ItemObject item;
     public int itemCount;
     public Image itemImage;
+    public Food foodManager;
 
     [SerializeField]
     private Text text_Count;
     [SerializeField]
     private GameObject go_CountImage;
+
+    // private void Update() {
+    //     ItemUse();
+    // }
 
     private void SetColor(float _alpha)
     {
@@ -71,5 +77,34 @@ public class Slot : MonoBehaviour
 
         // text_Count.text = "0";
         // go_CountImage.SetActive(false);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if(eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (item.ItemCode == 0) {
+                Debug.Log("아이템이 업ㅇ서용");
+            } else {
+                if (item.Category == "식량") {
+                    foodManager.UseFood(item.ItemCode);
+                    SetSlotCount(-1);
+                }
+            }
+            // if (item != null)
+            // {
+            //     if(item.itemType == Item.ItemType.Equipment)
+            //     {
+            //         // 장착
+            //         StartCoroutine(theWeaponManager.ChangeWeaponCoroutine(item.weaponType, item.itemName));
+            //     }
+            //     else
+            //     {
+            //         // 소비
+            //         Debug.Log(item.itemName + " 을 사용했습니다.");
+            //         SetSlotCount(-1);
+            //     }
+            // }
+        }
     }
 }

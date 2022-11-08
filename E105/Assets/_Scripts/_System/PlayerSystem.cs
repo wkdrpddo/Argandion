@@ -475,8 +475,10 @@ public class PlayerSystem : MonoBehaviour
         if (_health <= 0) {
             _health = 0;
             playerDeath();
+        } else if ( _health == _health_max ) {
+            _health = _health_max;
         }
-        _UIManager.setHealthBar(_health/_health_max);
+        // _UIManager.setHealthBar(_health/_health_max);
     }
 
     public void changeEnergy(float value)
@@ -485,8 +487,10 @@ public class PlayerSystem : MonoBehaviour
         if (_stamina <= 0) {
             _stamina = 0;
             playerDeath();
+        } else if ( _stamina == _stamina_max ) {
+            _stamina = _stamina_max;
         }
-        _UIManager.setEnergyBar(_stamina/_stamina_max);
+        // _UIManager.setEnergyBar(_stamina/_stamina_max);
     }
 
     private void playerDeath()
