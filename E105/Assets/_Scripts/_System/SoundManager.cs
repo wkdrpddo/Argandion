@@ -27,14 +27,15 @@ public class SoundManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-        _optionpanel.transform.Find("BackgroundSlider").gameObject.GetComponent<Slider>().value = Sound_Background;
-        _optionpanelfrommain.transform.Find("BackgroundSlider").gameObject.GetComponent<Slider>().value = Sound_Background;
-        _optionpanel.transform.Find("EffectSlider").gameObject.GetComponent<Slider>().value = Sound_Effect;
-        _optionpanelfrommain.transform.Find("EffectSlider").gameObject.GetComponent<Slider>().value = Sound_Effect;
+    // void Start()
+    // {
+    //     Debug.Log(_optionpanel);
+    //     _optionpanel.transform.Find("BackgroundSlider").gameObject.GetComponent<Slider>().value = Sound_Background;
+    //     _optionpanelfrommain.transform.Find("BackgroundSlider").gameObject.GetComponent<Slider>().value = Sound_Background;
+    //     _optionpanel.transform.Find("EffectSlider").gameObject.GetComponent<Slider>().value = Sound_Effect;
+    //     _optionpanelfrommain.transform.Find("EffectSlider").gameObject.GetComponent<Slider>().value = Sound_Effect;
 
-    }
+    // }
 
     // Update is called once per frame
     void Update()

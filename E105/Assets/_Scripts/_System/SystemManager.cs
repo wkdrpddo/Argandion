@@ -6,12 +6,15 @@ public class SystemManager : MonoBehaviour
 {
     public int _month;
     public int _day;
+    public int _season;
     public int _weather;
     public int _hour_display;
     public int _minute_display;
     private int _hour;
     private float _minute;
+    private bool _game_state = false;
     public float _hour_time_changemeter = 1000;
+    private int _player_gold;
     public GameObject _light;
     public GameObject MapObject;
     public PlayerSystem _player;
@@ -23,8 +26,9 @@ public class SystemManager : MonoBehaviour
     static int _sector_size = 8;
     public int _purification_size;
     public bool[] _purification = new bool[_sector_size];
-    public GameObject[] _sector = new GameObject[_sector_size];
+    public GameObject[] _sector = new GameObject[_sector_size + 2];
     public SectorObject _sectorTest;
+    private SectorObject[] _sectors;
     public GameObject[] _randomNPC = new GameObject[2];
 
     public int[,] _timezone = new int[,] { { 6, 7, 18, 19 }, { 6, 6, 19, 20 }, { 6, 7, 18, 19 }, { 7, 8, 18, 19 } };
@@ -33,11 +37,14 @@ public class SystemManager : MonoBehaviour
     {
         _month = 1;
         _day = 1;
+        _season = 0;
         _weather = 0;
         _hour = 6;
         _hour_display = 6;
         _minute = 0;
         _minute_display = 0;
+        _player = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
+        _sectors = MapObject.GetComponentsInChildren<SectorObject>();
     }
 
     // Update is called once per frame
@@ -46,10 +53,10 @@ public class SystemManager : MonoBehaviour
         TimeSystem();
     }
 
-    private void UpdateWeather(int index)
+    private void UpdateSeason(int index)
     {
         Debug.Log("계절이 바뀌었습니다.");
-        _weather = index;
+        _season = index;
         MapObject.GetComponent<MapObject>().UpdateFieldManager(index);
     }
 
@@ -71,24 +78,24 @@ public class SystemManager : MonoBehaviour
                 _hour = 6;
                 _day += 1;
 
-                DayEnd();
+                // DayEnd();
 
-                if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
-                {
-                    _buffManager.FlowerBuffEnd();
-                    Debug.Log("꽃 버프 종료!");
-                }
+                // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
+                // {
+                //     _buffManager.FlowerBuffEnd();
+                //     Debug.Log("꽃 버프 종료!");
+                // }
 
 
                 if (_day >= 29)
                 {
                     _day -= 28;
                     _month += 1;
-                    if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
-                    {
-                        _buffManager.FlowerBuffEnd();
-                        Debug.Log("꽃 버프 종료!");
-                    }
+                    // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
+                    // {
+                    //     _buffManager.FlowerBuffEnd();
+                    //     Debug.Log("꽃 버프 종료!");
+                    // }
 
                     if (_month >= 9)
                     {
@@ -96,7 +103,7 @@ public class SystemManager : MonoBehaviour
                     }
                     if (_month % 2 == 1)
                     {
-                        UpdateWeather(_month / 2);
+                        UpdateSeason(_month / 2);
                     }
                 }
             }
@@ -105,23 +112,23 @@ public class SystemManager : MonoBehaviour
         _minute_display = ((int)_minute);
         _hour_display = _hour;
 
-        if (_hour < _timezone[_weather, 0])
+        if (_hour < _timezone[_season, 0])
         {
             _light.transform.rotation = Quaternion.Euler(-10, -30, _light.transform.rotation.z);
         }
-        else if (_timezone[_weather, 0] <= _hour && _hour < _timezone[_weather, 1])
+        else if (_timezone[_season, 0] <= _hour && _hour < _timezone[_season, 1])
         {
             _light.transform.rotation = Quaternion.Euler(-10 + _minute, -30, _light.transform.rotation.z);
         }
-        else if (_timezone[_weather, 1] <= _hour && _hour < _timezone[_weather, 2])
+        else if (_timezone[_season, 1] <= _hour && _hour < _timezone[_season, 2])
         {
             _light.transform.rotation = Quaternion.Euler(50, -30, _light.transform.rotation.z);
         }
-        else if (_timezone[_weather, 2] <= _hour && _hour < _timezone[_weather, 3])
+        else if (_timezone[_season, 2] <= _hour && _hour < _timezone[_season, 3])
         {
             _light.transform.rotation = Quaternion.Euler(50 + _minute * 2.5f, -30, _light.transform.rotation.z);
         }
-        else if (_timezone[_weather, 3] <= _hour)
+        else if (_timezone[_season, 3] <= _hour)
         {
             _light.transform.rotation = Quaternion.Euler(200, -30, _light.transform.rotation.z);
         }
@@ -129,7 +136,15 @@ public class SystemManager : MonoBehaviour
 
     private void DayEnd()
     {
+
+        // 모든 SectorObject의 DayEnd 동작
+        foreach (var sector in _sectors)
+        {
+            sector.DayEnd();
+        }
+
         // _sectorTest.DayEnd();
+
         int npc1_position = RandomPurification();
         int npc2_position = RandomPurification();
 
@@ -137,6 +152,40 @@ public class SystemManager : MonoBehaviour
         _randomNPC[0].transform.position = NPCRandomPosition(npc1_position);
         _randomNPC[1].transform.position = NPCRandomPosition(npc2_position);
 
+
+        // 필드의 동물, 떨어진 아이템, 매일 새로 생성되는 자원 제거
+        GameObject[] rabbits = GameObject.FindGameObjectsWithTag("Rabbit");
+        GameObject[] deers = GameObject.FindGameObjectsWithTag("Deer");
+        GameObject[] wolfs = GameObject.FindGameObjectsWithTag("Wolf");
+        GameObject[] bears = GameObject.FindGameObjectsWithTag("Bear");
+        GameObject[] items = GameObject.FindGameObjectsWithTag("droppedItem");
+        GameObject[] props = GameObject.FindGameObjectsWithTag("resource");
+
+        foreach (var r in rabbits)
+        {
+            Destroy(r);
+        }
+        foreach (var d in deers)
+        {
+            Destroy(d);
+        }
+        foreach (var w in wolfs)
+        {
+            Destroy(w);
+        }
+        foreach (var b in bears)
+        {
+            Destroy(b);
+        }
+        foreach (var i in items)
+        {
+            Destroy(i);
+        }
+        foreach (var p in props)
+        {
+            Destroy(p);
+
+        }
     }
 
     //정화된 구역 중에서 랜덤 한 구역 정하기
@@ -196,5 +245,30 @@ public class SystemManager : MonoBehaviour
 
         return position;
 
+    }
+
+    public void setGameState(bool value)
+    {
+        _game_state = value;
+    }
+
+    public bool getGameState()
+    {
+        return _game_state;
+    }
+
+    public void setPlayerGold(int value)
+    {
+        _player_gold = value;
+    }
+
+    public int getPlayerGold()
+    {
+        return _player_gold;
+    }
+
+    public void addPlayerGold(int value)
+    {
+        _player_gold += value;
     }
 }

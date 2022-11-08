@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: df6903a69e558db4da011b048c39225a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 957b1480fa693d64391a27fe499ce8cc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1410,7 +1410,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2727374114733050889}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2560478426636096362}
+        m_TargetAssemblyTypeName: TransactionAnimalPanel, Assembly-CSharp
+        m_MethodName: callCellModal
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2727374114769243020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1930,7 +1942,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2727374115012717608}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2560478426636096362}
+        m_TargetAssemblyTypeName: TransactionAnimalPanel, Assembly-CSharp
+        m_MethodName: callCellModal
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2727374115075325074
 GameObject:
   m_ObjectHideFlags: 0
@@ -2336,7 +2360,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4ddc3387528ea074b9ff2252f163bfa8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee613c7c1bc0252469fb0507ded260cd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2567,7 +2591,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: df6903a69e558db4da011b048c39225a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 957b1480fa693d64391a27fe499ce8cc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3474,7 +3498,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2727374115659507361}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2560478426636096362}
+        m_TargetAssemblyTypeName: TransactionAnimalPanel, Assembly-CSharp
+        m_MethodName: callCellModal
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2727374115659965704
 GameObject:
   m_ObjectHideFlags: 0
@@ -4114,7 +4150,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 89bfa1b53bd09f442911de58fe66efd1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 744d323678932cb45b2ea26a94327c3e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4556,7 +4592,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4ddc3387528ea074b9ff2252f163bfa8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee613c7c1bc0252469fb0507ded260cd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5324,7 +5360,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 89bfa1b53bd09f442911de58fe66efd1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 744d323678932cb45b2ea26a94327c3e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5852,6 +5888,18 @@ PrefabInstance:
     - target: {fileID: 1795787526645945133, guid: a4bab3047a3dfa843837c25cf6d82e53, type: 3}
       propertyPath: m_Name
       value: BtnExit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1795787526645945135, guid: a4bab3047a3dfa843837c25cf6d82e53, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2560478426636096362}
+    - target: {fileID: 1795787526645945135, guid: a4bab3047a3dfa843837c25cf6d82e53, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: closePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1795787526645945135, guid: a4bab3047a3dfa843837c25cf6d82e53, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TransactionAnimalPanel, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4bab3047a3dfa843837c25cf6d82e53, type: 3}
