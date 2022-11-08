@@ -8,10 +8,26 @@ public class CookingInteraction : MonoBehaviour
     public CameraSystem _cameraSystem;
     private GameObject _shelfParent;
 
+    public bool start;
+    public bool end;
+
     void Start()
     {
         _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _cameraSystem = GameObject.Find("PlayerObject").GetComponent<CameraSystem>();
+    }
+    void Update()
+    {
+        if (start)
+        {
+            CookingStart();
+            start = false;
+        }
+        if (end)
+        {
+            CookingEnd();
+            end = false;
+        }
     }
     public void Interaction()
     {

@@ -274,7 +274,13 @@ public class PlayerSystem : MonoBehaviour
                     }
                     if (col.TryGetComponent(out TeleportationHome teleportationHome))
                     {
+                        Debug.Log("이동 인식");
                         teleportationHome.Interaction();
+                    }
+                    if (col.TryGetComponent(out ChestInteraction chestInteraction))
+                    {
+                        Debug.Log("상자 인식");
+                        chestInteraction.Interaction();
                     }
                     // ===========================
                 }
