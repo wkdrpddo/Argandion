@@ -150,7 +150,12 @@ public class PlayerSystem : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector3(0,0,0);
+            speed = new Vector3(0,0,0);
+            if (_onAir==0)
+                {
+                    speed.y = -_gravity;
+                }
+            rb.velocity = (speed);
             _playerAnimator.SetInteger("action", 0);
             _movedDelay -= Time.deltaTime;
             _movedDelay = Mathf.Max(0, _movedDelay);
@@ -494,6 +499,7 @@ public class PlayerSystem : MonoBehaviour
         }
 
         if (other.gameObject.CompareTag("droppedItem")){
+            Debug.Log("아이템 가까이에 있음");
             _nearObject = other.gameObject;
             DroppedItem item = _nearObject.GetComponent<DroppedItem>();
             _theInventory.AcquireItem(item.itemObject, 1);

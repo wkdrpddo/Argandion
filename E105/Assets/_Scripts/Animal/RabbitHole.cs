@@ -15,7 +15,7 @@ public class RabbitHole : MonoBehaviour
     {
         for (int i = 0; i < num; i++)
         {
-            Instantiate(rabbit1, transform.position, Quaternion.identity).transform.parent = this.transform;
+            Instantiate(rabbit1, transform.position, Quaternion.identity).transform.parent = GameObject.Find("Animals").transform;
 
         }
 

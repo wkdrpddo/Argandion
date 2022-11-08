@@ -12,7 +12,7 @@ public class AnimalHole : MonoBehaviour
     {
         for (int i = 0; i < num; i++)
         {   
-            Instantiate(animal, transform.position, Quaternion.identity).transform.parent = this.transform;
+            Instantiate(animal, transform.position, Quaternion.identity).transform.parent = GameObject.Find("Animals").transform;
         }
         
     }

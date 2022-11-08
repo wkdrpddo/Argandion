@@ -21,16 +21,22 @@ public class DroppedItem : MonoBehaviour
         string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/ItemTable2.json");
         var itemData = JsonHelper.FromJson<ItemObject>(jsonString);
         itemObject = itemData[ItemIndexArray.arr[itemCode]];
+
+        
     }
 
-    // Update is called once per frame
+    // Update is called once per frame 
     void Update()
     {
         transform.Rotate(Vector3.up * 100 * Time.deltaTime);
-        if (trans.position.y < 0.1f)
-        {
-            trans.position = new Vector3(trans.position.x, 0.1f, trans.position.z);
-        }
+
+        // if (trans.position.y < 0.1f)
+        // {
+        //     trans.position = new Vector3(trans.position.x, 0.1f, trans.position.z);
+        // }
+        
     }
+
+
 
 }

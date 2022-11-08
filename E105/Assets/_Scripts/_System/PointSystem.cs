@@ -115,7 +115,7 @@ public class PointSystem : MonoBehaviour
         Vector3 pos = new Vector3(_base_transform.position.x, _base_transform.position.y, _base_transform.position.z);
         for (int i = 0; i < count; i++)
         {
-            Instantiate(_animals[index], pos, new Quaternion());
+            Instantiate(_animals[index], pos, new Quaternion()).transform.parent = GameObject.Find("Animals").transform;
         }
     }
 }
