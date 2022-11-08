@@ -44,7 +44,7 @@ public class SystemManager : MonoBehaviour
         _minute = 0;
         _minute_display = 0;
         _player = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
-        _sectors = MapObject.GetComponentsInChildren<SectorObject>();
+        // _sectors = MapObject.GetComponentsInChildren<SectorObject>();
     }
 
     // Update is called once per frame
@@ -137,7 +137,7 @@ public class SystemManager : MonoBehaviour
     private void DayEnd()
     {
         // 모든 SectorObject의 DayEnd 동작
-        foreach(var sector in _sectors)
+        foreach (var sector in _sectors)
         {
             sector.DayEnd();
         }
@@ -158,27 +158,27 @@ public class SystemManager : MonoBehaviour
         GameObject[] items = GameObject.FindGameObjectsWithTag("droppedItem");
         GameObject[] props = GameObject.FindGameObjectsWithTag("resource");
 
-        foreach(var r in rabbits)
+        foreach (var r in rabbits)
         {
             Destroy(r);
         }
-        foreach(var d in deers)
+        foreach (var d in deers)
         {
             Destroy(d);
         }
-        foreach(var w in wolfs)
+        foreach (var w in wolfs)
         {
             Destroy(w);
         }
-        foreach(var b in bears)
+        foreach (var b in bears)
         {
             Destroy(b);
         }
-        foreach(var i in items)
+        foreach (var i in items)
         {
             Destroy(i);
         }
-        foreach(var p in props)
+        foreach (var p in props)
         {
             Destroy(p);
         }

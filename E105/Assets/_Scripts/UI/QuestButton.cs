@@ -5,11 +5,11 @@ using UnityEngine;
 public class QuestButton : MonoBehaviour
 {
     // 퀘스트 오브젝트 제거를 위한 함수
-    public void destroyed()
-    {
-        MenuPanel obj = this.GetComponentInParent<MenuPanel>();
-        obj.deleteObject(gameObject);
-    }
+    // public void destroyed()
+    // {
+    //     EventPanel obj = this.GetComponentInParent<EventPanel>();
+    //     obj.deleteObject(gameObject);
+    // }
     // Start is called before the first frame update
     void Start()
     {
