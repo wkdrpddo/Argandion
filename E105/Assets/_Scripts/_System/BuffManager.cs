@@ -45,14 +45,4 @@ public class BuffManager : MonoBehaviour
         skySpirit = false;
         skyPray = false;
     }
-
-    public void Thirsty()
-    {
-        notThirsty = false;
-    }
-
-    public void Hungry()
-    {
-        isFull = false;
-    }
 }

@@ -29,9 +29,6 @@ public class Food : MonoBehaviour
 
     private int stewCount = 0;
     private int mushroomCount = 0;
-    // private int steak = 126;
-    // private int sandwich = 131;
-
 
     void Start()
     {
