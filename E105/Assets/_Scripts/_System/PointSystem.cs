@@ -23,7 +23,7 @@ public class PointSystem : MonoBehaviour
 
     public void DayEnd()
     {
-        Debug.Log("Point sys dayend");
+        // Debug.Log("Point sys dayend");
         switch (_isDen)
         {
             case 0:
