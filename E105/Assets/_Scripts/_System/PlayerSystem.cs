@@ -13,13 +13,14 @@ public class PlayerSystem : MonoBehaviour
     private GameObject _nearBiome;
     public Inventory _theInventory;
     public Chest _theChest;
-    public BuffManager _buffManager;
+    public GameObject _buffManagerObject;
+    private BuffManager _buff;
 
     private GameObject _nearObject;
 
-    // { itemcode, 장비코드(0그외 1채집 2도끼 3곡괭이 4괭이 5검 6낚싯대), 이동불가 시간, 작업시간}
-    public float[,] _equipList = new float[,] { { 300, 1, 1.5f, 0, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 10, 0, 0, 0, 20}, { 20,0 ,0 ,0, 10} };
-    public GameObject[] _equipment = new GameObject[5];
+    // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대), 이동불가 시간, 작업시간}
+    public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 10, 0, 0, 0, 20}, { 20,0 ,0 ,0, 10} };
+    public GameObject[] _equipment = new GameObject[7];
     public int _equipItem = 0;
 
     public float _walkspeed;
@@ -64,16 +65,37 @@ public class PlayerSystem : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        _buffManagerObject = GameObject.Find("BuffManager");
+        _buff = _buffManagerObject.GetComponent<BuffManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        GetBuff();
         GetInput();
         Move();
         changeItem();
         checkHand();
         Interaction();
+        watering();
+        fff();
+    }
+
+    void GetBuff() {
+        if (_buff.pinkPray) {
+            _health_max = 200;
+            _stamina_max = 150;
+        } else {
+            _health_max = 100;
+            _stamina_max = 100;
+            if (_health > _health_max) {
+                _health = _health_max;
+            }
+            if (_stamina > _stamina_max) {
+                _stamina = _stamina_max; 
+            }
+        }
     }
 
     void GetInput()
@@ -103,7 +125,7 @@ public class PlayerSystem : MonoBehaviour
             if (Input.GetAxisRaw("run") != 0)
             {
                 // transform.position += moveDir * Time.deltaTime * _runspeed;
-                speed = moveDir * _runspeed;
+                speed = moveDir * _runspeed * ( _buff.skyPray ? 1.3f : 1.0f ) * ( _buff.skySpirit ? 1.3f : 1.0f );
                 // speed.y = -1f;
                 if (_onAir==0)
                 {
@@ -116,7 +138,7 @@ public class PlayerSystem : MonoBehaviour
             else
             {
                 // transform.position += moveDir * Time.deltaTime * _walkspeed;
-                speed = moveDir * _walkspeed;
+                speed = moveDir * _runspeed * ( _buff.skyPray ? 1.3f : 1.0f ) * ( _buff.skySpirit ? 1.3f : 1.0f );
                 // speed.y = -1f;
                 if (_onAir==0)
                 {
@@ -128,6 +150,7 @@ public class PlayerSystem : MonoBehaviour
         }
         else
         {
+            rb.velocity = new Vector3(0,0,0);
             _playerAnimator.SetInteger("action", 0);
             _movedDelay -= Time.deltaTime;
             _movedDelay = Mathf.Max(0, _movedDelay);
@@ -139,9 +162,40 @@ public class PlayerSystem : MonoBehaviour
                 _playerAnimator.SetInteger("action", ((int)_equipList[_equipItem, 1]));
                 _delayedTimer = _equipList[_equipItem, 2];
                 _movedDelay = _equipList[_equipItem, 3];
-                Debug.Log(((int)_equipList[_equipItem, 1]));
                 _equipment[_equipItem].SetActive(true);
                 _setHand = true;
+            }
+
+            if (_equipList[_equipItem, 1] == 4)
+            {
+                Collider[] ores = Physics.OverlapBox(new Vector3(_character.position.x,_character.position.y,_character.position.z)+(_character.forward * 0.5f),new Vector3(0.5f,0.5f,0.5f));
+                foreach(var ore in ores)
+                {
+                    if (ore.tag == "Ore")
+                    {
+                        ore.gameObject.TryGetComponent(out OreObject O);
+                        {
+                            O.Damaged(15);
+                        }
+                    }
+                }
+            }
+
+            if (_equipList[_equipItem, 1] == 3)
+            {
+                // Debug.Log(_character.forward);
+                Vector3 pos = new Vector3(_character.position.x,_character.position.y,_character.position.z)+(_character.forward * 0.5f);
+                Collider[] trees = Physics.OverlapBox(pos,new Vector3(0.5f,0.5f,0.5f));
+                foreach(var tree in trees)
+                {
+                    if (tree.gameObject.layer == 7)
+                    {
+                        tree.gameObject.TryGetComponent(out TreeObject T);
+                        {
+                            T.Damaged(15);
+                        }
+                    }
+                }
             }
         }
         else
@@ -157,22 +211,37 @@ public class PlayerSystem : MonoBehaviour
         if (Input.GetAxisRaw("equip1") == 1)
         {
             _equipItem = 0;
+            _UIManager.setEquipPointer(1);
         }
         else if (Input.GetAxisRaw("equip2") == 1)
         {
             _equipItem = 1;
+            _UIManager.setEquipPointer(2);
         }
         else if (Input.GetAxisRaw("equip3") == 1)
         {
             _equipItem = 2;
+            _UIManager.setEquipPointer(3);
         }
         else if (Input.GetAxisRaw("equip4") == 1)
         {
             _equipItem = 3;
+            _UIManager.setEquipPointer(4);
         }
         else if (Input.GetAxisRaw("equip5") == 1)
         {
             _equipItem = 4;
+            _UIManager.setEquipPointer(5);
+        }
+        else if (Input.GetAxisRaw("equip6") == 1)
+        {
+            _equipItem = 5;
+            _UIManager.setEquipPointer(6);
+        }
+        else if (Input.GetAxisRaw("equip7") == 1)
+        {
+            _equipItem = 6;
+            _UIManager.setEquipPointer(7);
         }
     }
 
@@ -219,7 +288,7 @@ public class PlayerSystem : MonoBehaviour
         if (Input.GetButtonDown("interactionKey"))
         {
             Vector3 pos = new Vector3(this.transform.position.x,this.transform.position.y,this.transform.position.z);
-            _colset = Physics.OverlapSphere(pos,_interactRadius,layerMask:1601);
+            _colset = Physics.OverlapSphere(pos,_interactRadius,layerMask:1633);
             foreach(var col in _colset)
             {
                 if (col.TryGetComponent(out Interactable inter))
@@ -233,6 +302,45 @@ public class PlayerSystem : MonoBehaviour
                     {
                         npc.Interaction();
                     }
+                    if (_equipList[_equipItem,0] == 1 && col.TryGetComponent(out GatheringObject Gat))
+                    {
+                        Debug.Log("버..섯?");
+                        Debug.Log(Gat);
+                        Gat.Interaction(_equipList[_equipItem,1]);
+                        _delayedTimer = _equipList[_equipItem, 2];
+                        _movedDelay = _equipList[_equipItem, 3];
+                    }
+                    // building쪽 ==============
+                    if (col.TryGetComponent(out SignInteraction signInteraction))
+                    {
+                        Debug.Log("표지판 인식");
+                        signInteraction.Interaction();
+                    }
+                    if (col.TryGetComponent(out CraftingTableInteraction craftingTableInteraction))
+                    {
+                        Debug.Log("제작대 인식");
+                        craftingTableInteraction.Interaction();
+                    }
+                    if (col.TryGetComponent(out CookingInteraction cookingInteraction))
+                    {
+                        Debug.Log("주방 인식");
+                        cookingInteraction.Interaction();
+                    }
+                    if (col.TryGetComponent(out SleepInteraction sleepInteraction))
+                    {
+                        sleepInteraction.Interaction();
+                    }
+                    if (col.TryGetComponent(out TeleportationHome teleportationHome))
+                    {
+                        Debug.Log("이동 인식");
+                        teleportationHome.Interaction();
+                    }
+                    if (col.TryGetComponent(out ChestInteraction chestInteraction))
+                    {
+                        Debug.Log("상자 인식");
+                        chestInteraction.Interaction();
+                    }
+                    // ===========================
                 }
             }
         }
@@ -254,7 +362,7 @@ public class PlayerSystem : MonoBehaviour
     }
 
     void fff() {
-        if(_readyToHarvest && Input.GetButtonDown("fff")) {
+        if(_readyToHarvest && Input.GetKeyDown(KeyCode.F)) {
             Harvested harvested = _nearObject.GetComponent<Harvested>();
             harvested.Harvesting();
             _nearCrops = false;
@@ -263,11 +371,11 @@ public class PlayerSystem : MonoBehaviour
             return ;
         }
 
-        if (_onSoil && Input.GetButtonDown("fff") && !_nearCrops) {
+        if (_onSoil && Input.GetKeyDown(KeyCode.F) && !_nearCrops) {
             Instantiate(_wheat, nearSoil(_character.position), _character.rotation);
         }
 
-        if (_nearItem && Input.GetButtonDown("fff")) {
+        if (_nearItem && Input.GetKeyDown(KeyCode.F)) {
             Item item = _nearObject.GetComponent<Item>();
             ItemObject itemObject = item.itemObject;
             if(itemObject != null) {
@@ -287,7 +395,7 @@ public class PlayerSystem : MonoBehaviour
             _theChest.PutItem(item, invenCount);
         }
 
-        if (_nearChest && Input.GetButtonDown("water")) {
+        if (_nearChest && Input.GetKeyDown(KeyCode.G)) {
             ItemObject item = _theChest.TakeItem(chestIdx, -chestCount);
             Debug.Log("햇당");
             Debug.Log(item);
@@ -295,14 +403,14 @@ public class PlayerSystem : MonoBehaviour
         }
 
         if (_nearSpirit && Input.GetButtonDown("fff")) {
-            if ( _buffManager._isFlowerBuffActived ) {
+            if ( _buff._isFlowerBuffActived ) {
                 Debug.Log("이미 다른버프가 발동중이라구!");
             } else {
                 ItemObject item = _theInventory.StoreItem(0, -1);
                 if ( item.Category == "꽃") {
                     SpiritBuff spirit = _nearObject.GetComponent<SpiritBuff>();
                     spirit.Spirit(item);
-                    _buffManager._isFlowerBuffActived = true;
+                    _buff._isFlowerBuffActived = true;
                 } else if ( item.ItemCode == 0 ) {
                     Debug.Log("아무것도 없는데?");
                 } else {
@@ -324,7 +432,7 @@ public class PlayerSystem : MonoBehaviour
 
     }
     void watering() {
-        if (_onSoil && Input.GetButtonDown("water") ) {
+        if (_onSoil && Input.GetKeyDown(KeyCode.G) ) {
             Debug.Log("물줬당");
             Dirt dirt = _nearBiome.GetComponent<Dirt>();
             dirt.Water();
@@ -392,7 +500,7 @@ public class PlayerSystem : MonoBehaviour
             Destroy(_nearObject);
         }
 
-        Debug.Log("OnTriggerEnter(): " + other.tag);
+        // Debug.Log("OnTriggerEnter(): " + other.tag);
         if (other.tag == "CraftingTable" || other.tag == "Sign")
         {
             _nearObject = other.gameObject;
@@ -457,18 +565,22 @@ public class PlayerSystem : MonoBehaviour
         if (_health <= 0) {
             _health = 0;
             playerDeath();
+        } else if ( _health == _health_max ) {
+            _health = _health_max;
         }
-        _UIManager.setHealthBar(_health/_health_max);
+        // _UIManager.setHealthBar(_health/_health_max);
     }
 
     public void changeEnergy(float value)
     {
-        _stamina -= value;
+        _stamina -= value * (_buff.pinkPray ? 0.8f : 1.0f) * (_buff.pinkSpirit ? 0.8f : 1.0f);
         if (_stamina <= 0) {
             _stamina = 0;
             playerDeath();
+        } else if ( _stamina == _stamina_max ) {
+            _stamina = _stamina_max;
         }
-        _UIManager.setEnergyBar(_stamina/_stamina_max);
+        // _UIManager.setEnergyBar(_stamina/_stamina_max);
     }
 
     private void playerDeath()

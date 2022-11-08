@@ -6,6 +6,11 @@ public class HouseChange : MonoBehaviour
 {
     public SystemManager _systemManager;
 
+    void Start()
+    {
+        _systemManager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
+    }
+
     // ==================================================== 지울 위치 (시작) ==================================
 
     // 테스트용 변수

@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class Inventory : MonoBehaviour
 {
+    public static bool invectoryActivated = false;  // 인벤토리 활성화 여부.
+    public int gold = 500000; // 현재 소유 골드
+    private RectTransform uiGroup;
+
     [SerializeField]
     private GameObject go_InventoryBase; // Inventory_Base 이미지
     [SerializeField]
@@ -12,20 +15,42 @@ public class Inventory : MonoBehaviour
 
     public Slot[] slots;  // 슬롯들 배열
 
-    private UIManager ui;
-
     void Start()
     {
-        ui = gameObject.GetComponentInParent<UIManager>();
-
-        go_InventoryBase = transform.GetChild(0).gameObject;
-        go_SlotsParent = transform.GetChild(0).GetChild(0).gameObject;
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
-
-        transform.parent.GetChild(2).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGold().ToString();
+        uiGroup = gameObject.GetComponent<RectTransform>();
     }
 
-    // 인벤토리에 빈 공간이 있는지 확인
+    void Update()
+    {
+        TryOpenInventory();
+    }
+
+    private void TryOpenInventory()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            invectoryActivated = !invectoryActivated;
+
+            if (invectoryActivated)
+                OpenInventory();
+            else
+                CloseInventory();
+
+        }
+    }
+
+    private void OpenInventory()
+    {
+        // go_InventoryBase.SetActive(true);
+        uiGroup.anchoredPosition = Vector3.zero;
+    }
+
+    private void CloseInventory()
+    {
+        // go_InventoryBase.SetActive(false);
+        uiGroup.anchoredPosition = Vector3.down * 1000;
+    }
     public bool CheckInven(ItemObject _item, int _count = 1, bool _sec = false)
     {
         if (!_sec)
@@ -68,7 +93,6 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    // 인벤토리에 아이템 추가
     public void AcquireItem(ItemObject _item, int _count = 1)
     {
         if (_item.Category != "장비")

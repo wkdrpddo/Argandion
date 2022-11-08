@@ -8,9 +8,11 @@ using ItemCodeToIndex;
 public class ItemObject
 {
     public int ItemCode;
-    public string Category;
     public string Name;
-    public string Desc;
+    public string Category;
+    public int BuyCost;
+    public int SellCost;
+    public Sprite ItemImage;
 }
 
 [System.Serializable]
@@ -31,7 +33,7 @@ public static class JsonHelper
     {
         Wrapper<T> wrapper = new Wrapper<T>();
         wrapper.Items = array;
-        return UnityEngine.JsonUtility.ToJson(wrapper);
+        return  UnityEngine.JsonUtility.ToJson(wrapper);
     }
 
     [System.Serializable]
@@ -42,7 +44,7 @@ public static class JsonHelper
 }
 
 public class Item : MonoBehaviour
-{
+{   
     public int itemCode;
     public ItemObject itemObject;
 
@@ -54,10 +56,24 @@ public class Item : MonoBehaviour
         string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/ItemTable2.json");
         var itemData = JsonHelper.FromJson<ItemObject>(jsonString);
         itemObject = itemData[ItemIndexArray.arr[itemCode]];
+        LoadImage(itemCode);
+        Debug.Log("----");
+        Debug.Log(itemObject.Name);
+        Debug.Log("----");
+    }
+
+    private void LoadImage(int idx)
+    {
+        byte[] byteTexture = System.IO.File.ReadAllBytes("C:/Users/SSAFY/Desktop/E1058/S07P31E105/E105/Assets/Data/Image/37002.png");
+        Texture2D texture = new Texture2D(0,0);
+        texture.LoadImage(byteTexture);
+
+        Rect rect = new Rect(0,0, texture.width, texture.height);
+        itemObject.ItemImage = Sprite.Create(texture, rect, new Vector2(0.5f, 0.5f));
     }
 
     public string FindName(int idx)
-    {
+    {   
         string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/ItemTable2.json");
         var itemData = JsonHelper.FromJson<ItemObject>(jsonString);
         itemObject = itemData[ItemIndexArray.arr[idx]];

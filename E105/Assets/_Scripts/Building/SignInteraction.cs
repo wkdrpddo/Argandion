@@ -15,8 +15,10 @@ public class SignInteraction : MonoBehaviour
 
     public void Interaction()
     {
+        Debug.Log("표지판 인터렉션 콜");
         if (_interactable)
         {
+            Debug.Log("인터렉터블");
             _uiManager.OnBuildEventPanel(_sectorNum);
         }
     }

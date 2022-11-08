@@ -161,6 +161,7 @@ public class UIManager : MonoBehaviour
         // {
         //     _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
         // }
+
         if (Input.GetButtonDown("interactionKey"))
         {
             // test buildEvent
@@ -187,32 +188,32 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            // test conversation
-            int conversationCnt = _conversationpanel.GetComponent<ConversationPanel>().getConversationCnt();
-            if (_conversationpanel.GetComponent<ConversationPanel>().getIsConversation())
-            {
-                _conversationpanel.GetComponent<ConversationPanel>().conversation();
-            }
-            else
-            {
-                int randomNum = Random.Range(1, 11);
-                // int randomNum = 1;
-                switch (conversationCnt)
-                {
-                    case -1:
-                        OnConversationPanel(randomNum);
-                        break;
-                    case 0:
-                        _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
-                        break;
-                    case 1:
-                        _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
-                        break;
-                }
-            }
-        }
+        // if (Input.GetKeyDown(KeyCode.C))
+        // {
+        //     // test conversation
+        //     int conversationCnt = _conversationpanel.GetComponent<ConversationPanel>().getConversationCnt();
+        //     if (_conversationpanel.GetComponent<ConversationPanel>().getIsConversation())
+        //     {
+        //         _conversationpanel.GetComponent<ConversationPanel>().conversation();
+        //     }
+        //     else
+        //     {
+        //         int randomNum = Random.Range(1, 11);
+        //         // int randomNum = 1;
+        //         switch (conversationCnt)
+        //         {
+        //             case -1:
+        //                 OnConversationPanel(randomNum);
+        //                 break;
+        //             case 0:
+        //                 _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
+        //                 break;
+        //             case 1:
+        //                 _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
+        //                 break;
+        //         }
+        //     }
+        // }
     }
 
     // ======================== UI 호출 함수 Start
