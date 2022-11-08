@@ -23,7 +23,7 @@ public class TreeObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.layer);
+        // Debug.Log(other.gameObject.layer);
         if (other.gameObject.layer == 0)
         {
             Debug.Log("충돌 판정");

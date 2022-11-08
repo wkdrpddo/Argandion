@@ -17,9 +17,9 @@ public class PlayerSystem : MonoBehaviour
 
     private GameObject _nearObject;
 
-    // { itemcode, 장비코드(0그외 1채집 2도끼 3곡괭이 4괭이 5검 6낚싯대), 이동불가 시간, 작업시간}
+    // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대), 이동불가 시간, 작업시간}
     public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 10, 0, 0, 0, 20}, { 20,0 ,0 ,0, 10} };
-    public GameObject[] _equipment = new GameObject[5];
+    public GameObject[] _equipment = new GameObject[7];
     public int _equipItem = 0;
 
     public float _walkspeed;
@@ -140,9 +140,40 @@ public class PlayerSystem : MonoBehaviour
                 _playerAnimator.SetInteger("action", ((int)_equipList[_equipItem, 1]));
                 _delayedTimer = _equipList[_equipItem, 2];
                 _movedDelay = _equipList[_equipItem, 3];
-                Debug.Log(((int)_equipList[_equipItem, 1]));
                 _equipment[_equipItem].SetActive(true);
                 _setHand = true;
+            }
+
+            if (_equipList[_equipItem, 1] == 4)
+            {
+                Collider[] ores = Physics.OverlapBox(new Vector3(_character.position.x,_character.position.y,_character.position.z)+(_character.forward * 0.5f),new Vector3(0.5f,0.5f,0.5f));
+                foreach(var ore in ores)
+                {
+                    if (ore.tag == "Ore")
+                    {
+                        ore.gameObject.TryGetComponent(out OreObject O);
+                        {
+                            O.Damaged(15);
+                        }
+                    }
+                }
+            }
+
+            if (_equipList[_equipItem, 1] == 3)
+            {
+                // Debug.Log(_character.forward);
+                Vector3 pos = new Vector3(_character.position.x,_character.position.y,_character.position.z)+(_character.forward * 0.5f);
+                Collider[] trees = Physics.OverlapBox(pos,new Vector3(0.5f,0.5f,0.5f));
+                foreach(var tree in trees)
+                {
+                    if (tree.gameObject.layer == 7)
+                    {
+                        tree.gameObject.TryGetComponent(out TreeObject T);
+                        {
+                            T.Damaged(15);
+                        }
+                    }
+                }
             }
         }
         else
@@ -179,6 +210,16 @@ public class PlayerSystem : MonoBehaviour
         {
             _equipItem = 4;
             _UIManager.setEquipPointer(5);
+        }
+        else if (Input.GetAxisRaw("equip6") == 1)
+        {
+            _equipItem = 5;
+            _UIManager.setEquipPointer(6);
+        }
+        else if (Input.GetAxisRaw("equip7") == 1)
+        {
+            _equipItem = 6;
+            _UIManager.setEquipPointer(7);
         }
     }
 
@@ -406,7 +447,7 @@ public class PlayerSystem : MonoBehaviour
             Destroy(_nearObject);
         }
 
-        Debug.Log("OnTriggerEnter(): " + other.tag);
+        // Debug.Log("OnTriggerEnter(): " + other.tag);
         if (other.tag == "CraftingTable" || other.tag == "Sign")
         {
             _nearObject = other.gameObject;

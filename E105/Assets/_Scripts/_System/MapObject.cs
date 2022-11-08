@@ -11,22 +11,18 @@ public class MapObject : MonoBehaviour
         SectorObject = GameObject.FindGameObjectsWithTag("sector");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void UpdateFieldManager(int index)
     {
         foreach (var obj in SectorObject) {
             ObjectReplacer[] SectorProps;
             SectorProps = obj.GetComponentsInChildren<ObjectReplacer>();
-            Debug.Log(obj);
-            Debug.Log(SectorProps);
             foreach (var prop in SectorProps) {
                 prop.updateObject(index);
             }
         }
+    }
+
+    public void ChangePurifier(int index)
+    {
     }
 }
