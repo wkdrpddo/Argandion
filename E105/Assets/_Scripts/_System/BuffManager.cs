@@ -20,14 +20,17 @@ public class BuffManager : MonoBehaviour
     public bool skySpirit = false;
     public bool skyPray = false;
 
-    public bool isDringkingMilk = false; // 우유에 들어감
-    public bool isEatingBread = false; // 빵에 들어감
-
-
     public bool isFull = false; // 스테이크에 들어감
     public bool notThirsty = false; // 음료에 들어감
+    public bool eatSandwich = false;
+    public bool eatBread = false;
+    public bool eatMilk = false;
 
-    public void FlowerBuffEnd() {
+    public void FlowerBuffEnd() 
+    {
+        Debug.Log("버프끗");
+        _flowerBuffTargetMonth = 0;
+        _flowerBuffTargetDay= 0;
         _isFlowerBuffActived = false;
         whiteSpirit = false;
         whitePray = false;
@@ -41,5 +44,15 @@ public class BuffManager : MonoBehaviour
         yellowPray = false;
         skySpirit = false;
         skyPray = false;
+    }
+
+    public void Thirsty()
+    {
+        notThirsty = false;
+    }
+
+    public void Hungry()
+    {
+        isFull = false;
     }
 }

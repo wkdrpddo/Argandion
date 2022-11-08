@@ -5,22 +5,30 @@ using UnityEngine;
 public class PrayBuff : MonoBehaviour
 {
     public SystemManager systemManager;
-    public BuffManager buffManager;
+    public GameObject _buffManagerObject;
+    private BuffManager buffManager;
     public Inventory _theInventory;
     
     public int tempDay;
+    public int tempMonth;
     public bool todayPray = false;
     public int flowerIdx = 0;
     public int prayDay = 0;
 
     void Start() {
         tempDay = systemManager._day;
+        _buffManagerObject = GameObject.Find("BuffManager");
+        buffManager = _buffManagerObject.GetComponent<BuffManager>();
     }
 
     void Update() {
         if (tempDay != systemManager._day) {
             NewDay();
             tempDay = systemManager._day;
+        }
+
+        if (buffManager._flowerBuffTargetMonth == systemManager._month && buffManager._flowerBuffTargetDay == systemManager._day) {
+            buffManager.FlowerBuffEnd();
         }
     }
 

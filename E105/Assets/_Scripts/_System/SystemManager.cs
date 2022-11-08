@@ -10,7 +10,7 @@ public class SystemManager : MonoBehaviour
     public int _weather;
     public int _hour_display;
     public int _minute_display;
-    private int _hour;
+    public int _hour;
     private float _minute;
     private bool _game_state = false;
     public float _hour_time_changemeter = 1000;
@@ -18,7 +18,6 @@ public class SystemManager : MonoBehaviour
     public GameObject _light;
     public GameObject MapObject;
     public PlayerSystem _player;
-    public BuffManager _buffManager;
 
     public int _development_level;  // 1부터
     public int _purification_sector;
@@ -80,22 +79,10 @@ public class SystemManager : MonoBehaviour
 
                 // DayEnd();
 
-                // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
-                // {
-                //     _buffManager.FlowerBuffEnd();
-                //     Debug.Log("꽃 버프 종료!");
-                // }
-
-
                 if (_day >= 29)
                 {
                     _day -= 28;
                     _month += 1;
-                    // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
-                    // {
-                    //     _buffManager.FlowerBuffEnd();
-                    //     Debug.Log("꽃 버프 종료!");
-                    // }
 
                     if (_month >= 9)
                     {

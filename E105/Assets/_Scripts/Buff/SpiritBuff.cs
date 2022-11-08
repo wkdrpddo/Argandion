@@ -5,7 +5,13 @@ using UnityEngine;
 public class SpiritBuff : MonoBehaviour
 {   
     public SystemManager systemManager;
-    public BuffManager buffManager;
+    public GameObject _buffManagerObject;
+    private BuffManager buffManager;
+
+    private void Start() {
+        _buffManagerObject = GameObject.Find("BuffManager");
+        buffManager = _buffManagerObject.GetComponent<BuffManager>();
+    }
 
     public void Spirit(ItemObject item) {
         if (item.ItemCode == 21) {
