@@ -26,7 +26,7 @@ public class SystemManager : MonoBehaviour
     static int _sector_size = 8;
     public int _purification_size;
     public bool[] _purification = new bool[_sector_size];
-    public GameObject[] _sector = new GameObject[_sector_size];
+    public GameObject[] _sector = new GameObject[_sector_size + 2];
     public SectorObject _sectorTest;
     private SectorObject[] _sectors;
     public GameObject[] _randomNPC = new GameObject[2];
@@ -78,7 +78,7 @@ public class SystemManager : MonoBehaviour
                 _hour = 6;
                 _day += 1;
 
-                DayEnd();
+                // DayEnd();
 
                 // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
                 // {
@@ -136,6 +136,7 @@ public class SystemManager : MonoBehaviour
 
     private void DayEnd()
     {
+
         // 모든 SectorObject의 DayEnd 동작
         foreach (var sector in _sectors)
         {
@@ -143,12 +144,14 @@ public class SystemManager : MonoBehaviour
         }
 
         // _sectorTest.DayEnd();
+
         int npc1_position = RandomPurification();
         int npc2_position = RandomPurification();
 
         // //순례자, 음악가 랜덤위치 생성
         _randomNPC[0].transform.position = NPCRandomPosition(npc1_position);
         _randomNPC[1].transform.position = NPCRandomPosition(npc2_position);
+
 
         // 필드의 동물, 떨어진 아이템, 매일 새로 생성되는 자원 제거
         GameObject[] rabbits = GameObject.FindGameObjectsWithTag("Rabbit");
@@ -181,6 +184,7 @@ public class SystemManager : MonoBehaviour
         foreach (var p in props)
         {
             Destroy(p);
+
         }
     }
 

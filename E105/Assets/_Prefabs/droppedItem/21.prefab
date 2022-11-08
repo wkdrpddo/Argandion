@@ -103,9 +103,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23634110189860616, guid: a8761a642ebc59c40ad2bacbd2f83921, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64065964918443174, guid: a8761a642ebc59c40ad2bacbd2f83921, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 64065964918443174, guid: a8761a642ebc59c40ad2bacbd2f83921, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2849104928008667287, guid: a8761a642ebc59c40ad2bacbd2f83921, type: 3}
+      propertyPath: itemCode
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2849104928008667287, guid: a8761a642ebc59c40ad2bacbd2f83921, type: 3}
+      propertyPath: itemObject.Name
+      value: "\uBD80\uB4DC\uB7EC\uC6B4 \uAC00\uC8FD"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2849104928008667287, guid: a8761a642ebc59c40ad2bacbd2f83921, type: 3}
+      propertyPath: itemObject.Category
+      value: "\uAC00\uC8FD"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2849104928008667287, guid: a8761a642ebc59c40ad2bacbd2f83921, type: 3}
+      propertyPath: itemObject.ItemCode
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2849104928008667287, guid: a8761a642ebc59c40ad2bacbd2f83921, type: 3}
+      propertyPath: itemObject.SellCost
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8761a642ebc59c40ad2bacbd2f83921, type: 3}
@@ -143,27 +171,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7011718370662942452}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.31053165, y: 0.023000002, z: 0.460253}
   m_Center: {x: -0.0057594627, y: 0.011500001, z: 0.008069545}
---- !u!114 &1152650522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7011718370662942452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21ea60305974a5c49b3b01ec7a2afdf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemCode: 21
-  itemObject:
-    ItemCode: 0
-    Name: 
-    Category: 
-    BuyCost: 0
-    SellCost: 0
