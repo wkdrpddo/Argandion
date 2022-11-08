@@ -104,8 +104,32 @@ PrefabInstance:
       value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 64131671475114446, guid: fdea8bad00ed7af49b37b4417652bd75, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64131671475114446, guid: fdea8bad00ed7af49b37b4417652bd75, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7737494109489549771, guid: fdea8bad00ed7af49b37b4417652bd75, type: 3}
+      propertyPath: itemCode
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7737494109489549771, guid: fdea8bad00ed7af49b37b4417652bd75, type: 3}
+      propertyPath: itemObject.Name
+      value: "\uAC70\uCE5C \uAC00\uC8FD"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7737494109489549771, guid: fdea8bad00ed7af49b37b4417652bd75, type: 3}
+      propertyPath: itemObject.Category
+      value: "\uAC00\uC8FD"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7737494109489549771, guid: fdea8bad00ed7af49b37b4417652bd75, type: 3}
+      propertyPath: itemObject.ItemCode
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7737494109489549771, guid: fdea8bad00ed7af49b37b4417652bd75, type: 3}
+      propertyPath: itemObject.SellCost
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdea8bad00ed7af49b37b4417652bd75, type: 3}
@@ -143,27 +167,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7645786207470995592}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.5534572, y: 0.49716073, z: 0.13039431}
   m_Center: {x: 0.022592485, y: -0.20939371, z: 0.00019281103}
---- !u!114 &597512021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7645786207470995592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21ea60305974a5c49b3b01ec7a2afdf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemCode: 22
-  itemObject:
-    ItemCode: 0
-    Name: 
-    Category: 
-    BuyCost: 0
-    SellCost: 0

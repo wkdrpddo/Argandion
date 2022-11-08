@@ -26,7 +26,7 @@ public class SystemManager : MonoBehaviour
     static int _sector_size = 8;
     public int _purification_size;
     public bool[] _purification = new bool[_sector_size];
-    public GameObject[] _sector = new GameObject[_sector_size];
+    public GameObject[] _sector = new GameObject[_sector_size + 2];
     public SectorObject _sectorTest;
     private SectorObject[] _sectors;
     public GameObject[] _randomNPC = new GameObject[2];
@@ -136,19 +136,22 @@ public class SystemManager : MonoBehaviour
 
     private void DayEnd()
     {
+
         // 모든 SectorObject의 DayEnd 동작
-        foreach(var sector in _sectors)
+        foreach (var sector in _sectors)
         {
             sector.DayEnd();
         }
 
         // _sectorTest.DayEnd();
+
         int npc1_position = RandomPurification();
         int npc2_position = RandomPurification();
 
         // //순례자, 음악가 랜덤위치 생성
         _randomNPC[0].transform.position = NPCRandomPosition(npc1_position);
         _randomNPC[1].transform.position = NPCRandomPosition(npc2_position);
+
 
         // 필드의 동물, 떨어진 아이템, 매일 새로 생성되는 자원 제거
         GameObject[] rabbits = GameObject.FindGameObjectsWithTag("Rabbit");
@@ -158,29 +161,30 @@ public class SystemManager : MonoBehaviour
         GameObject[] items = GameObject.FindGameObjectsWithTag("droppedItem");
         GameObject[] props = GameObject.FindGameObjectsWithTag("resource");
 
-        foreach(var r in rabbits)
+        foreach (var r in rabbits)
         {
             Destroy(r);
         }
-        foreach(var d in deers)
+        foreach (var d in deers)
         {
             Destroy(d);
         }
-        foreach(var w in wolfs)
+        foreach (var w in wolfs)
         {
             Destroy(w);
         }
-        foreach(var b in bears)
+        foreach (var b in bears)
         {
             Destroy(b);
         }
-        foreach(var i in items)
+        foreach (var i in items)
         {
             Destroy(i);
         }
-        foreach(var p in props)
+        foreach (var p in props)
         {
             Destroy(p);
+
         }
     }
 
