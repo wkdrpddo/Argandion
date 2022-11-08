@@ -14,11 +14,14 @@ public class EventPanel : MonoBehaviour
     // private Quaternion rotateZero = Quaternion.Euler(new Vector3(0, 0, 0));     // 회전값 기본값 세팅
 
     public GameObject _eventIconPrefab; // 미리 끌어서 넣기
-    public GameObject _spiritPanel; // 미리 끌어서 넣기
-    public GameObject _weatherPanel; // 미리 끌어서 넣기
+    public GameObject _otherPanel; // 미리 끌어서 넣기
     public GameObject _foodPanel; // 미리 끌어서 넣기
+    // public GameObject _spiritPanel; // 미리 끌어서 넣기
+    // public GameObject _foodPanel; // 미리 끌어서 넣기
 
     // public EventIcon _eventIcon;
+
+    private bool _onSpiritBuff;
 
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>(); // 아이콘 이미지
 
@@ -27,6 +30,34 @@ public class EventPanel : MonoBehaviour
     public bool _setTest;
     void Start()
     {
+        // setEventIcon(1);
+        // setEventIcon(2);
+        // setEventIcon(3);
+        // setEventIcon(4);
+        // setEventIcon(5);
+        // setEventIcon(6);
+        // setEventIcon(7);
+        // setEventIcon(50);
+        // setEventIcon(51);
+        // setEventIcon(52);
+        // setEventIcon(53);
+        // setEventIcon(54);
+        // setEventIcon(55);
+        // setEventIcon(56);
+        setEventIcon(100);
+        setEventIcon(101);
+        setEventIcon(102);
+        setEventIcon(103);
+        setEventIcon(104);
+        setEventIcon(105);
+        setEventIcon(106);
+        // setEventIcon(1);
+        // setEventIcon(2);
+        // setEventIcon(3);
+        // setEventIcon(4);
+        // setEventIcon(5);
+        // setEventIcon(6);
+        // setEventIcon(7);
 
         // setEventRain();
         // setEventRain();
@@ -46,8 +77,6 @@ public class EventPanel : MonoBehaviour
         if (_setTest)
         {
             setEventIcon(50);
-            setEventIcon(1);
-            setEventIcon(100);
             _setTest = false;
         }
     }
@@ -63,9 +92,18 @@ public class EventPanel : MonoBehaviour
     // panel 활성화
     private void activePanel()
     {
-        int wCnt = _weatherPanel.transform.childCount;
-        int sCnt = _spiritPanel.transform.childCount;
         int fCnt = _foodPanel.transform.childCount;
+        // int wCnt = _weatherPanel.transform.childCount;
+        // int wCnt = _weatherPanel.transform.childCount;
+        int oCnt = _otherPanel.transform.childCount;
+        if (oCnt == 0)
+        {
+            _otherPanel.SetActive(false);
+        }
+        else
+        {
+            _otherPanel.SetActive(true);
+        }
         if (fCnt == 0)
         {
             _foodPanel.SetActive(false);
@@ -73,22 +111,6 @@ public class EventPanel : MonoBehaviour
         else
         {
             _foodPanel.SetActive(true);
-        }
-        if (sCnt == 0)
-        {
-            _spiritPanel.SetActive(false);
-        }
-        else
-        {
-            _spiritPanel.SetActive(true);
-        }
-        if (wCnt == 0)
-        {
-            _weatherPanel.SetActive(false);
-        }
-        else
-        {
-            _weatherPanel.SetActive(true);
         }
 
     }
@@ -103,16 +125,26 @@ public class EventPanel : MonoBehaviour
         { // 음식
             Debug.Log("음식");
             icon = Instantiate(_eventIconPrefab, _foodPanel.transform);
+            // icon = Instantiate(_eventIconPrefab, _foodPanel.transform);
         }
         else if (imgNum >= 50)
         { // 날씨
             Debug.Log("날씨");
-            icon = Instantiate(_eventIconPrefab, _weatherPanel.transform);
+            icon = Instantiate(_eventIconPrefab, _otherPanel.transform);
         }
         else
         { // 정령
-            Debug.Log("정령");
-            icon = Instantiate(_eventIconPrefab, _spiritPanel.transform);
+            if (!_onSpiritBuff)
+            {
+                Debug.Log("정령");
+                icon = Instantiate(_eventIconPrefab, _otherPanel.transform);
+                icon.transform.SetAsFirstSibling();
+                _onSpiritBuff = true;
+            }
+            else
+            {
+                return;
+            }
         }
         Debug.Log(icon);
         // 아이콘 이름 변경
@@ -120,12 +152,12 @@ public class EventPanel : MonoBehaviour
         Debug.Log(icon.name);
         // 아이콘 이미지 변경
         Sprite iconImg = getIconImg(imgNum);
-        icon.GetComponent<Image>().sprite = iconImg;
+        icon.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = iconImg;
         // 아이콘 번호 부여
         icon.GetComponent<EventIcon>()._iconNum = imgNum;
         Debug.Log(icon.GetComponent<EventIcon>()._iconNum);
         // panel 부분 활성화/비활성화
-        // activePanel();
+        activePanel();
 
     }
 
