@@ -21,7 +21,7 @@ public class EventPanel : MonoBehaviour
 
     // public EventIcon _eventIcon;
 
-    private bool _onSpiritBuff;
+    public bool _onSpiritBuff;
 
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>(); // 아이콘 이미지
 
@@ -29,6 +29,8 @@ public class EventPanel : MonoBehaviour
     // 테스트용 코드
     public bool _setTest;
     public bool _delTest;
+    public int _testNum;
+
     void Start()
     {
         // setEventIcon(1);
@@ -72,17 +74,17 @@ public class EventPanel : MonoBehaviour
         // setQuest();
     }
 
-    // Update is called once per frame
+    // 테스트용 업데이트
     void Update()
     {
         if (_setTest)
         {
-            setEventIcon(1);
+            setEventIcon(_testNum);
             _setTest = false;
         }
         if (_delTest)
         {
-            delEventIcon(1);
+            delEventIcon(_testNum);
             _delTest = false;
         }
     }
@@ -124,6 +126,8 @@ public class EventPanel : MonoBehaviour
     }
 
     // 아이콘 생성 및 이미지 변경
+    // 정령 버프 중이면 나중에 들어온 걸로 교체
+    // 계절이랑 음식은 시간 안 띄우니까 나중에 들어온 거 무시 => delete 함수 콜할 때 시간 리셋만 해주면 될 듯
     public void setEventIcon(int imgNum)
     {
         // Debug.Log("셋 이벤트 콜");
@@ -132,27 +136,39 @@ public class EventPanel : MonoBehaviour
         if (imgNum >= 100)
         { // 음식
             // Debug.Log("음식");
-            icon = Instantiate(_eventIconPrefab, _foodPanel.transform);
-            // icon = Instantiate(_eventIconPrefab, _foodPanel.transform);
-        }
-        else if (imgNum >= 50)
-        { // 날씨
-            // Debug.Log("날씨");
-            icon = Instantiate(_eventIconPrefab, _otherPanel.transform);
-        }
-        else
-        { // 정령
-            if (!_onSpiritBuff)
+            if (GameObject.Find(imgNum.ToString() + "Icon") == null)
             {
-                // Debug.Log("정령");
-                icon = Instantiate(_eventIconPrefab, _otherPanel.transform);
-                icon.transform.SetAsFirstSibling(); // 맨 앞으로
-                _onSpiritBuff = true;
+                icon = Instantiate(_eventIconPrefab, _foodPanel.transform);
             }
             else
             {
                 return;
             }
+
+            // icon = Instantiate(_eventIconPrefab, _foodPanel.transform);
+        }
+        else if (imgNum >= 50)
+        { // 날씨
+            // Debug.Log("날씨");
+            if (GameObject.Find(imgNum.ToString() + "Icon") == null)
+            {
+                icon = Instantiate(_eventIconPrefab, _otherPanel.transform);
+            }
+            else
+            {
+                return;
+            }
+
+        }
+        else
+        { // 정령
+            if (_onSpiritBuff)
+            {
+                Destroy(_otherPanel.transform.GetChild(0).gameObject);
+            }
+            icon = Instantiate(_eventIconPrefab, _otherPanel.transform);
+            icon.transform.SetAsFirstSibling(); // 맨 앞으로
+            _onSpiritBuff = true;
         }
         // Debug.Log(icon);
         // 아이콘 이름 변경
@@ -235,6 +251,14 @@ public class EventPanel : MonoBehaviour
         // }
         // eventCnt--;
     }
+
+    // 정령 버프 교체
+    // public void changeSpiritBuff(int imgNum)
+    // {
+    //     _onSpiritBuff = false;
+    //     Destory(_otherPanel.transform.GetChild(0).gameObject);
+    //     setEventIcon(imgNum);
+    // }
 
     // public void setEventRain()
     // {
