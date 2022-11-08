@@ -28,6 +28,7 @@ public class SystemManager : MonoBehaviour
     public bool[] _purification = new bool[_sector_size];
     public GameObject[] _sector = new GameObject[_sector_size];
     public SectorObject _sectorTest;
+    private SectorObject[] _sectors;
     public GameObject[] _randomNPC = new GameObject[2];
 
     public int[,] _timezone = new int[,] { { 6, 7, 18, 19 }, { 6, 6, 19, 20 }, { 6, 7, 18, 19 }, { 7, 8, 18, 19 } };
@@ -42,6 +43,8 @@ public class SystemManager : MonoBehaviour
         _hour_display = 6;
         _minute = 0;
         _minute_display = 0;
+        _player = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
+        _sectors = MapObject.GetComponentsInChildren<SectorObject>();
     }
 
     // Update is called once per frame
@@ -133,6 +136,12 @@ public class SystemManager : MonoBehaviour
 
     private void DayEnd()
     {
+        // 모든 SectorObject의 DayEnd 동작
+        foreach(var sector in _sectors)
+        {
+            sector.DayEnd();
+        }
+
         // _sectorTest.DayEnd();
         int npc1_position = RandomPurification();
         int npc2_position = RandomPurification();
@@ -141,6 +150,38 @@ public class SystemManager : MonoBehaviour
         _randomNPC[0].transform.position = NPCRandomPosition(npc1_position);
         _randomNPC[1].transform.position = NPCRandomPosition(npc2_position);
 
+        // 필드의 동물, 떨어진 아이템, 매일 새로 생성되는 자원 제거
+        GameObject[] rabbits = GameObject.FindGameObjectsWithTag("Rabbit");
+        GameObject[] deers = GameObject.FindGameObjectsWithTag("Deer");
+        GameObject[] wolfs = GameObject.FindGameObjectsWithTag("Wolf");
+        GameObject[] bears = GameObject.FindGameObjectsWithTag("Bear");
+        GameObject[] items = GameObject.FindGameObjectsWithTag("droppedItem");
+        GameObject[] props = GameObject.FindGameObjectsWithTag("resource");
+
+        foreach(var r in rabbits)
+        {
+            Destroy(r);
+        }
+        foreach(var d in deers)
+        {
+            Destroy(d);
+        }
+        foreach(var w in wolfs)
+        {
+            Destroy(w);
+        }
+        foreach(var b in bears)
+        {
+            Destroy(b);
+        }
+        foreach(var i in items)
+        {
+            Destroy(i);
+        }
+        foreach(var p in props)
+        {
+            Destroy(p);
+        }
     }
 
     //정화된 구역 중에서 랜덤 한 구역 정하기
