@@ -28,6 +28,7 @@ public class EventPanel : MonoBehaviour
 
     // 테스트용 코드
     public bool _setTest;
+    public bool _delTest;
     void Start()
     {
         // setEventIcon(1);
@@ -76,8 +77,13 @@ public class EventPanel : MonoBehaviour
     {
         if (_setTest)
         {
-            setEventIcon(50);
+            setEventIcon(1);
             _setTest = false;
+        }
+        if (_delTest)
+        {
+            delEventIcon(1);
+            _delTest = false;
         }
     }
 
@@ -96,6 +102,8 @@ public class EventPanel : MonoBehaviour
         // int wCnt = _weatherPanel.transform.childCount;
         // int wCnt = _weatherPanel.transform.childCount;
         int oCnt = _otherPanel.transform.childCount;
+        // Debug.Log("oCnt: " + oCnt);
+        // Debug.Log("fCnt: " + fCnt);
         if (oCnt == 0)
         {
             _otherPanel.SetActive(false);
@@ -118,27 +126,27 @@ public class EventPanel : MonoBehaviour
     // 아이콘 생성 및 이미지 변경
     public void setEventIcon(int imgNum)
     {
-        Debug.Log("셋 이벤트 콜");
+        // Debug.Log("셋 이벤트 콜");
         // 아이콘 생성
         GameObject icon;
         if (imgNum >= 100)
         { // 음식
-            Debug.Log("음식");
+            // Debug.Log("음식");
             icon = Instantiate(_eventIconPrefab, _foodPanel.transform);
             // icon = Instantiate(_eventIconPrefab, _foodPanel.transform);
         }
         else if (imgNum >= 50)
         { // 날씨
-            Debug.Log("날씨");
+            // Debug.Log("날씨");
             icon = Instantiate(_eventIconPrefab, _otherPanel.transform);
         }
         else
         { // 정령
             if (!_onSpiritBuff)
             {
-                Debug.Log("정령");
+                // Debug.Log("정령");
                 icon = Instantiate(_eventIconPrefab, _otherPanel.transform);
-                icon.transform.SetAsFirstSibling();
+                icon.transform.SetAsFirstSibling(); // 맨 앞으로
                 _onSpiritBuff = true;
             }
             else
@@ -146,16 +154,16 @@ public class EventPanel : MonoBehaviour
                 return;
             }
         }
-        Debug.Log(icon);
+        // Debug.Log(icon);
         // 아이콘 이름 변경
-        icon.name = imgNum.ToString();
-        Debug.Log(icon.name);
+        icon.name = imgNum.ToString() + "Icon";
+        // Debug.Log(icon.name);
         // 아이콘 이미지 변경
         Sprite iconImg = getIconImg(imgNum);
         icon.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = iconImg;
         // 아이콘 번호 부여
         icon.GetComponent<EventIcon>()._iconNum = imgNum;
-        Debug.Log(icon.GetComponent<EventIcon>()._iconNum);
+        // Debug.Log(icon.GetComponent<EventIcon>()._iconNum);
         // panel 부분 활성화/비활성화
         activePanel();
 
@@ -163,7 +171,7 @@ public class EventPanel : MonoBehaviour
 
     public Sprite getIconImg(int imgNum)
     {
-        Debug.Log("겟 아이콘 이미지");
+        // Debug.Log("겟 아이콘 이미지");
         if (Dic.ContainsKey(imgNum))
         {
             return Dic[imgNum];
@@ -173,44 +181,60 @@ public class EventPanel : MonoBehaviour
         return img;
     }
 
-    // // 이벤트 오브젝트 삭제 함수
-    // public void deleteObject(int imgNum)
-    // {
-    //     if (imgNum >= 100)
-    //     { // 음식
-    //         icon = Instantiate(_eventIcon, _foodPanel.transform);
-    //     }
-    //     else if (imgNum >= 50)
-    //     { // 날씨
-    //         icon = Instantiate(_eventIcon, _weatherPanel.transform);
-    //     }
-    //     else if (imgNum >= 1)
-    //     { // 정령
-    //         icon = Instantiate(_eventIcon, _spiritPanel.transform);
-    //     }
+    // 이벤트 오브젝트 삭제 함수
+    public void delEventIcon(int imgNum)
+    {
+        GameObject delObj = GameObject.Find(imgNum.ToString() + "Icon"); // 삭제할 아이콘
+        // Debug.Log(delObj);
+        Destroy(delObj); // 삭제
+
+        if (delObj.transform.parent.gameObject.transform.childCount == 1)
+        { // 라인 삭제
+            delObj.transform.parent.gameObject.SetActive(false);
+        }
+        // Debug.Log(_otherPanel.transform.childCount);
+
+        if (imgNum >= 1 && imgNum <= 7)
+        { // 정령이면 버프 체크
+            _onSpiritBuff = false;
+        }
+        // Debug.Log(_onSpiritBuff);
+
+        // if (imgNum >= 100)
+        // { // 음식
+        //     icon = Instantiate(_eventIcon, _foodPanel.transform);
+        // }
+        // else if (imgNum >= 50)
+        // { // 날씨
+        //     icon = Instantiate(_eventIcon, _weatherPanel.transform);
+        // }
+        // else if (imgNum >= 1)
+        // { // 정령
+        //     icon = Instantiate(_eventIcon, _spiritPanel.transform);
+        // }
 
 
 
-    //     // int removeIdx = child.GetComponent<UIEventIdx>().idx - 1;
+        // // int removeIdx = child.GetComponent<UIEventIdx>().idx - 1;
 
-    //     Destroy(child);
+        // Destroy(child);
 
-    //     // 이벤트 리스트 shifting 작업
-    //     for (int i = removeIdx; i < eventCnt - 1; i++)
-    //     {
-    //         Vector3 posit = new Vector3(i * 30 + 10, -10, 0);
+        // // 이벤트 리스트 shifting 작업
+        // for (int i = removeIdx; i < eventCnt - 1; i++)
+        // {
+        //     Vector3 posit = new Vector3(i * 30 + 10, -10, 0);
 
-    //         GameObject questBtnInit = eventList[i + 1];
+        //     GameObject questBtnInit = eventList[i + 1];
 
-    //         RectTransform questBtnRect = questBtnInit.GetComponent<RectTransform>();
-    //         questBtnRect.SetLocalPositionAndRotation(posit, rotateZero);
+        //     RectTransform questBtnRect = questBtnInit.GetComponent<RectTransform>();
+        //     questBtnRect.SetLocalPositionAndRotation(posit, rotateZero);
 
-    //         questBtnInit.GetComponent<UIEventIdx>().idx = i + 1;
+        //     questBtnInit.GetComponent<UIEventIdx>().idx = i + 1;
 
-    //         eventList[i] = questBtnInit;
-    //     }
-    //     eventCnt--;
-    // }
+        //     eventList[i] = questBtnInit;
+        // }
+        // eventCnt--;
+    }
 
     // public void setEventRain()
     // {
