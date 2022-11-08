@@ -22,7 +22,7 @@ public class DroppedItem : MonoBehaviour
         var itemData = JsonHelper.FromJson<ItemObject>(jsonString);
         itemObject = itemData[ItemIndexArray.arr[itemCode]];
 
-        
+
     }
 
     // Update is called once per frame 
@@ -30,13 +30,6 @@ public class DroppedItem : MonoBehaviour
     {
         transform.Rotate(Vector3.up * 100 * Time.deltaTime);
 
-        // if (trans.position.y < 0.1f)
-        // {
-        //     trans.position = new Vector3(trans.position.x, 0.1f, trans.position.z);
-        // }
-        
     }
-
-
 
 }

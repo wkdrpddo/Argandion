@@ -73,6 +73,11 @@ public class SystemManager : MonoBehaviour
             _minute -= 60;
             _hour += 1;
 
+            if (_hour == 21)
+            {
+                animalDestroy();
+            }
+
             if (_hour >= 23)
             {
                 _hour = 6;
@@ -186,6 +191,21 @@ public class SystemManager : MonoBehaviour
         //     Destroy(p);
 
         // }
+    }
+
+    private void animalDestroy()
+    {
+        Transform animals = GameObject.Find("Animals").transform;
+
+        foreach (Transform animal in animals)
+        {
+            //플레이어랑 거리 계산해서 멀리있는 동물들만 삭제
+            float distance = Vector3.Distance(animal.position, _player.transform.position);
+            if (distance >= 50f)
+            {
+                Destroy(animal.gameObject);
+            }
+        }
     }
 
     //정화된 구역 중에서 랜덤 한 구역 정하기
