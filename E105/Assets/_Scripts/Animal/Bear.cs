@@ -88,7 +88,7 @@ public class Bear : MonoBehaviour
             {
                 //다음 랜덤 행동 개시
                 ReSet();
-                StopCoroutine(AttackCoroutine());   ///////이거 빼보기
+                StopCoroutine(AttackCoroutine());   ///////이거 빼보기 
             }
         }
     }

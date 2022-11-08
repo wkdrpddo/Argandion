@@ -45,15 +45,36 @@ public class Ranch : MonoBehaviour
     void NewDay()
     {
         for (int i = 0; i < cows; i ++) {
-            milk += milkPerDay[Random.Range(0,5)];
+            if ( _buff.yellowPray || _buff.yellowSpirit) {
+                int milkToday = milkPerDay[Random.Range(0,5)];
+                float milkFloat = (float)milkToday;
+                milkFloat *= 1.4f;
+                milk += Mathf.RoundToInt(milkFloat);
+            } else {
+                milk += milkPerDay[Random.Range(0,5)];
+            }
         }
 
         for (int i = 0; i < chicks; i++) {
-            eggs += eggsPerDay[Random.Range(0,5)];
+            if ( _buff.yellowPray || _buff.yellowSpirit) {
+                int eggsToday = eggsPerDay[Random.Range(0,5)];
+                float eggsFloat = (float)eggsToday;
+                eggsFloat *= 1.4f;
+                eggs += Mathf.RoundToInt(eggsFloat);
+            } else {
+                eggs += eggsPerDay[Random.Range(0,5)];
+            }
         }
 
         for (int i = 0; i < sheeps; i++) {
-            wool += woolPerDay[Random.Range(0,5)];
+            if ( _buff.yellowPray || _buff.yellowSpirit) {
+                int woolToday = woolPerDay[Random.Range(0,5)];
+                float woolFloat = (float)woolToday;
+                woolFloat *= 1.4f;
+                wool += Mathf.RoundToInt(woolFloat);
+            } else {
+                wool += woolPerDay[Random.Range(0,5)];
+            }
         }
     }
     

@@ -27,15 +27,15 @@ public class DroppedItem : MonoBehaviour
     void Update()
     {
         transform.Rotate(Vector3.up * 100 * Time.deltaTime);
-        if (trans.position.y < 0.5f) {
-            trans.position = new Vector3(trans.position.x, 0.5f, trans.position.z);
+        if (trans.position.y < 0.1f) {
+            trans.position = new Vector3(trans.position.x, 0.1f, trans.position.z);
         }
     }
 
-    void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("wateredDirt") || other.gameObject.CompareTag("dirt")) {
-            rigid.useGravity = false;
-            rigid.isKinematic = true;
-        }
-    }
+    // void OnTriggerEnter(Collider other) {
+    //     if (other.gameObject.layer == 0) {
+    //         rigid.useGravity = false;
+    //         rigid.isKinematic = true;
+    //     }
+    // }
 }

@@ -13,7 +13,8 @@ public class PlayerSystem : MonoBehaviour
     private GameObject _nearBiome;
     public Inventory _theInventory;
     public Chest _theChest;
-    public BuffManager _buffManager;
+    public GameObject _buffManagerObject;
+    private BuffManager _buff;
 
     private GameObject _nearObject;
 
@@ -64,16 +65,37 @@ public class PlayerSystem : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        _buffManagerObject = GameObject.Find("BuffManager");
+        _buff = _buffManagerObject.GetComponent<BuffManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        GetBuff();
         GetInput();
         Move();
         changeItem();
         checkHand();
         Interaction();
+        watering();
+        fff();
+    }
+
+    void GetBuff() {
+        if (_buff.pinkPray) {
+            _health_max = 200;
+            _stamina_max = 150;
+        } else {
+            _health_max = 100;
+            _stamina_max = 100;
+            if (_health > _health_max) {
+                _health = _health_max;
+            }
+            if (_stamina > _stamina_max) {
+                _stamina = _stamina_max; 
+            }
+        }
     }
 
     void GetInput()
@@ -103,7 +125,7 @@ public class PlayerSystem : MonoBehaviour
             if (Input.GetAxisRaw("run") != 0)
             {
                 // transform.position += moveDir * Time.deltaTime * _runspeed;
-                speed = moveDir * _runspeed;
+                speed = moveDir * _runspeed * ( _buff.skyPray ? 1.3f : 1.0f ) * ( _buff.skySpirit ? 1.3f : 1.0f );
                 // speed.y = -1f;
                 if (_onAir==0)
                 {
@@ -116,7 +138,7 @@ public class PlayerSystem : MonoBehaviour
             else
             {
                 // transform.position += moveDir * Time.deltaTime * _walkspeed;
-                speed = moveDir * _walkspeed;
+                speed = moveDir * _runspeed * ( _buff.skyPray ? 1.3f : 1.0f ) * ( _buff.skySpirit ? 1.3f : 1.0f );
                 // speed.y = -1f;
                 if (_onAir==0)
                 {
@@ -340,7 +362,7 @@ public class PlayerSystem : MonoBehaviour
     }
 
     void fff() {
-        if(_readyToHarvest && Input.GetButtonDown("fff")) {
+        if(_readyToHarvest && Input.GetKeyDown(KeyCode.F)) {
             Harvested harvested = _nearObject.GetComponent<Harvested>();
             harvested.Harvesting();
             _nearCrops = false;
@@ -349,11 +371,11 @@ public class PlayerSystem : MonoBehaviour
             return ;
         }
 
-        if (_onSoil && Input.GetButtonDown("fff") && !_nearCrops) {
+        if (_onSoil && Input.GetKeyDown(KeyCode.F) && !_nearCrops) {
             Instantiate(_wheat, nearSoil(_character.position), _character.rotation);
         }
 
-        if (_nearItem && Input.GetButtonDown("fff")) {
+        if (_nearItem && Input.GetKeyDown(KeyCode.F)) {
             Item item = _nearObject.GetComponent<Item>();
             ItemObject itemObject = item.itemObject;
             if(itemObject != null) {
@@ -373,7 +395,7 @@ public class PlayerSystem : MonoBehaviour
             _theChest.PutItem(item, invenCount);
         }
 
-        if (_nearChest && Input.GetButtonDown("water")) {
+        if (_nearChest && Input.GetKeyDown(KeyCode.G)) {
             ItemObject item = _theChest.TakeItem(chestIdx, -chestCount);
             Debug.Log("햇당");
             Debug.Log(item);
@@ -381,14 +403,14 @@ public class PlayerSystem : MonoBehaviour
         }
 
         if (_nearSpirit && Input.GetButtonDown("fff")) {
-            if ( _buffManager._isFlowerBuffActived ) {
+            if ( _buff._isFlowerBuffActived ) {
                 Debug.Log("이미 다른버프가 발동중이라구!");
             } else {
                 ItemObject item = _theInventory.StoreItem(0, -1);
                 if ( item.Category == "꽃") {
                     SpiritBuff spirit = _nearObject.GetComponent<SpiritBuff>();
                     spirit.Spirit(item);
-                    _buffManager._isFlowerBuffActived = true;
+                    _buff._isFlowerBuffActived = true;
                 } else if ( item.ItemCode == 0 ) {
                     Debug.Log("아무것도 없는데?");
                 } else {
@@ -410,7 +432,7 @@ public class PlayerSystem : MonoBehaviour
 
     }
     void watering() {
-        if (_onSoil && Input.GetButtonDown("water") ) {
+        if (_onSoil && Input.GetKeyDown(KeyCode.G) ) {
             Debug.Log("물줬당");
             Dirt dirt = _nearBiome.GetComponent<Dirt>();
             dirt.Water();
@@ -543,18 +565,22 @@ public class PlayerSystem : MonoBehaviour
         if (_health <= 0) {
             _health = 0;
             playerDeath();
+        } else if ( _health == _health_max ) {
+            _health = _health_max;
         }
-        _UIManager.setHealthBar(_health/_health_max);
+        // _UIManager.setHealthBar(_health/_health_max);
     }
 
     public void changeEnergy(float value)
     {
-        _stamina -= value;
+        _stamina -= value * (_buff.pinkPray ? 0.8f : 1.0f) * (_buff.pinkSpirit ? 0.8f : 1.0f);
         if (_stamina <= 0) {
             _stamina = 0;
             playerDeath();
+        } else if ( _stamina == _stamina_max ) {
+            _stamina = _stamina_max;
         }
-        _UIManager.setEnergyBar(_stamina/_stamina_max);
+        // _UIManager.setEnergyBar(_stamina/_stamina_max);
     }
 
     private void playerDeath()
