@@ -288,6 +288,37 @@ public class PlayerSystem : MonoBehaviour
                         _delayedTimer = _equipList[_equipItem, 2];
                         _movedDelay = _equipList[_equipItem, 3];
                     }
+                    // building쪽 ==============
+                    if (col.TryGetComponent(out SignInteraction signInteraction))
+                    {
+                        Debug.Log("표지판 인식");
+                        signInteraction.Interaction();
+                    }
+                    if (col.TryGetComponent(out CraftingTableInteraction craftingTableInteraction))
+                    {
+                        Debug.Log("제작대 인식");
+                        craftingTableInteraction.Interaction();
+                    }
+                    if (col.TryGetComponent(out CookingInteraction cookingInteraction))
+                    {
+                        Debug.Log("주방 인식");
+                        cookingInteraction.Interaction();
+                    }
+                    if (col.TryGetComponent(out SleepInteraction sleepInteraction))
+                    {
+                        sleepInteraction.Interaction();
+                    }
+                    if (col.TryGetComponent(out TeleportationHome teleportationHome))
+                    {
+                        Debug.Log("이동 인식");
+                        teleportationHome.Interaction();
+                    }
+                    if (col.TryGetComponent(out ChestInteraction chestInteraction))
+                    {
+                        Debug.Log("상자 인식");
+                        chestInteraction.Interaction();
+                    }
+                    // ===========================
                 }
             }
         }
