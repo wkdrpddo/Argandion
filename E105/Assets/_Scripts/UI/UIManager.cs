@@ -173,28 +173,18 @@ public class UIManager : MonoBehaviour
                 int random = Random.Range(1, 7);
                 OnBuildEventPanel(random);
             }
+        }
 
-            // // test conversation
-            // int conversationCnt = _conversationpanel.GetComponent<ConversationPanel>().getConversationCnt();
-            // if (_conversationpanel.GetComponent<ConversationPanel>().getIsConversation())
-            // {
-            //     _conversationpanel.GetComponent<ConversationPanel>().conversation();
-            // }
-            // else
-            // {
-            //     switch (conversationCnt)
-            //     {
-            //         case -1:
-            //             OnConversationPanel(1);
-            //             break;
-            //         case 0:
-            //             _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
-            //             break;
-            //         case 1:
-            //             _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
-            //             break;
-            //     }
-            // }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            if (!_craftingpanel.activeSelf)
+            {
+                _craftingpanel.GetComponent<CraftingPanel>().OnPanel(4);
+            }
+            else
+            {
+                _craftingpanel.GetComponent<CraftingPanel>().closeWindow();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -426,15 +416,15 @@ public class UIManager : MonoBehaviour
     }
 
     // 소지금 관련
-    public int getPlayerGlod()
+    public int getPlayerGold()
     {
-        return 0;
+        return 5000;
         // return _systemmanager.getPlayerGold();
     }
 
-    public void setGold(int gold)
+    public void addPlayerGold(int value)
     {
-        // _transactionanimalpanel.transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = gold.ToString();
+        // _systemmanager.addPlayerGold(value);
     }
 
     // 게임 시작 종료

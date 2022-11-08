@@ -12,7 +12,6 @@ public class Inventory : MonoBehaviour
 
     public Slot[] slots;  // 슬롯들 배열
 
-    public int gold;
     private UIManager ui;
 
     void Start()
@@ -23,10 +22,7 @@ public class Inventory : MonoBehaviour
         go_SlotsParent = transform.GetChild(0).GetChild(0).gameObject;
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
 
-        gold = 5000;
-
-        transform.parent.GetChild(2).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = gold.ToString();
-        ui.setGold(gold);
+        transform.parent.GetChild(2).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGold().ToString();
     }
 
     // 인벤토리에 빈 공간이 있는지 확인

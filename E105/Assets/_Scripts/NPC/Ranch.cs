@@ -11,6 +11,7 @@ public class Ranch : MonoBehaviour
     private BuffManager _buff;
     public Inventory theInventory;
     public GameObject item;
+    private UIManager ui;
 
     public int cows = 0;
     public int chicks = 0;
@@ -22,12 +23,14 @@ public class Ranch : MonoBehaviour
     public int eggs = 0;
     public int wool = 0;
 
-    private int[] milkPerDay = {0,0,0,1,1};
-    private int[] eggsPerDay = {0,0,1,1,2};
-    private int[] woolPerDay = {0,1,2,3,4};
+    private int[] milkPerDay = { 0, 0, 0, 1, 1 };
+    private int[] eggsPerDay = { 0, 0, 1, 1, 2 };
+    private int[] woolPerDay = { 0, 1, 2, 3, 4 };
 
     void Start()
     {
+        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+
         temp = system._day;
         _buffManagerObject = GameObject.Find("BuffManager");
         _buff = _buffManagerObject.GetComponent<BuffManager>();
@@ -36,7 +39,8 @@ public class Ranch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (temp != system._day) {
+        if (temp != system._day)
+        {
             NewDay();
             temp = system._day;
         }
@@ -44,96 +48,108 @@ public class Ranch : MonoBehaviour
 
     void NewDay()
     {
-        for (int i = 0; i < cows; i ++) {
-            milk += milkPerDay[Random.Range(0,5)];
+        for (int i = 0; i < cows; i++)
+        {
+            milk += milkPerDay[Random.Range(0, 5)];
         }
 
-        for (int i = 0; i < chicks; i++) {
-            eggs += eggsPerDay[Random.Range(0,5)];
+        for (int i = 0; i < chicks; i++)
+        {
+            eggs += eggsPerDay[Random.Range(0, 5)];
         }
 
-        for (int i = 0; i < sheeps; i++) {
-            wool += woolPerDay[Random.Range(0,5)];
+        for (int i = 0; i < sheeps; i++)
+        {
+            wool += woolPerDay[Random.Range(0, 5)];
         }
     }
-    
+
     void GetMilk(int howMany)
     {
-        if (milk >= howMany) {
+        if (milk >= howMany)
+        {
             milk -= howMany;
-            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(110),howMany);
+            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(110), howMany);
         }
     }
 
     void GetWool(int howMany)
     {
-        if (wool >= howMany) {
+        if (wool >= howMany)
+        {
             wool -= howMany;
-            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(505),howMany);
+            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(505), howMany);
         }
     }
 
     void GetEggs(int howMany)
     {
-        if (eggs >= howMany) {
+        if (eggs >= howMany)
+        {
             eggs -= howMany;
-            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(111),howMany);
+            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(111), howMany);
         }
     }
 
     void BuyCow(int howMany)
     {
-        int tempPoint = point + (4*howMany);
-        if (theInventory.gold >= (howMany * 1000) && tempPoint <= maxPoint) {
+        int tempPoint = point + (4 * howMany);
+        if (ui.getPlayerGold() >= (howMany * 1000) && tempPoint <= maxPoint)
+        {
             cows += howMany;
-            theInventory.gold -= (howMany *1000);
+            ui.addPlayerGold(-1 * (howMany * 1000));
             point = tempPoint;
         }
     }
 
     void BuyChick(int howMany)
     {
-        int tempPoint = point + (3*howMany);
-        if (theInventory.gold >= (howMany * 650) && tempPoint <= maxPoint) {
+        int tempPoint = point + (3 * howMany);
+        if (ui.getPlayerGold() >= (howMany * 650) && tempPoint <= maxPoint)
+        {
             cows += howMany;
-            theInventory.gold -= (howMany * 650);
+            ui.addPlayerGold(-1 * (howMany * 650));
             point = tempPoint;
         }
     }
 
     void BuySheep(int howMany)
     {
-        int tempPoint = point + (2*howMany);
-        if (theInventory.gold >= (howMany * 350) && tempPoint <= maxPoint) {
+        int tempPoint = point + (2 * howMany);
+        if (ui.getPlayerGold() >= (howMany * 350) && tempPoint <= maxPoint)
+        {
             cows += howMany;
-            theInventory.gold -= (howMany * 350);
+            ui.addPlayerGold(-1 * (howMany * 350));
             point = tempPoint;
         }
     }
 
     void SellCow(int howMany)
     {
-        if (cows >= howMany) {
+        if (cows >= howMany)
+        {
             cows -= howMany;
-            theInventory.gold += (howMany * 500);
+            ui.addPlayerGold((howMany * 500));
             point -= 4 * howMany;
         }
     }
 
     void SellChick(int howMany)
     {
-        if (chicks >= howMany) {
+        if (chicks >= howMany)
+        {
             chicks -= howMany;
-            theInventory.gold += (howMany * 325);
+            ui.addPlayerGold((howMany * 325));
             point -= 3 * howMany;
         }
     }
 
     void SellSheep(int howMany)
     {
-        if (sheeps >= howMany) {
+        if (sheeps >= howMany)
+        {
             sheeps -= howMany;
-            theInventory.gold += (howMany * 175);
+            ui.addPlayerGold((howMany * 175));
             point -= 2 * howMany;
         }
     }

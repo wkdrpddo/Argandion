@@ -1,7 +1,7 @@
-using System.Collections; 
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine; 
+using UnityEngine;
 
 [System.Serializable]
 public class Product
@@ -21,6 +21,7 @@ public class BuyingCarpentor : MonoBehaviour
     public Inventory theInventory;
     public Product[] myData;
     public GameObject item;
+    private UIManager ui;
 
     // Start is called before the first frame update
     void Start()
@@ -28,14 +29,19 @@ public class BuyingCarpentor : MonoBehaviour
         string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/BuyingCarpentor.json");
         var buyDatas = JsonHelper.FromJson<Product>(jsonString);
         myData = buyDatas;
+
+        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
     public void Buy(int idx, int howMany = 1)
     {
-        if (theInventory.gold > myData[idx].Cost * howMany) {
-            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(myData[idx].Result),howMany);
-            theInventory.gold -= myData[idx].Cost * howMany;
-        } else {
+        if (ui.getPlayerGold() > myData[idx].Cost * howMany)
+        {
+            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(myData[idx].Result), howMany);
+            ui.addPlayerGold(myData[idx].Cost * howMany * -1);
+        }
+        else
+        {
             Debug.Log("돈없엉");
         }
     }

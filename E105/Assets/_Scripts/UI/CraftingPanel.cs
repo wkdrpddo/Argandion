@@ -70,9 +70,8 @@ public class CraftingPanel : MonoBehaviour
             ItemObject itemObject = _itemmanager.FindItem(combObj.Result);
 
             GameObject craftBtn = Instantiate(craftItemButton, ScrollContent.transform);
-            RectTransform craftBtnRect = craftBtn.GetComponent<RectTransform>();
 
-            // craftBtnRect.
+            // craftBtn
         }
     }
     // Start is called before the first frame update

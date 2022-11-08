@@ -11,7 +11,7 @@ public class TransactionAnimalPanel : MonoBehaviour
 
     private bool checkInfo(int cost, int area)
     {
-        if (cost <= ui.getPlayerGlod())
+        if (cost <= ui.getPlayerGold())
         {
             return true;
         }
@@ -86,7 +86,7 @@ public class TransactionAnimalPanel : MonoBehaviour
         ui = gameObject.GetComponentInParent<UIManager>();
 
         Debug.Log("==============" + transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text);
-        transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGlod().ToString();
+        transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGold().ToString();
     }
 
     // Update is called once per frame
