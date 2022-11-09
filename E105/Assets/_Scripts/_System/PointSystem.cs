@@ -8,11 +8,14 @@ public class PointSystem : MonoBehaviour
     public int _isDen;
     public GameObject[] _animals = new GameObject[4];
     public Transform _base_transform;
+    public int num;
     // Start is called before the first frame update
     void Start()
     {
         _Sector = this.GetComponentInParent<SectorObject>();
         _base_transform = gameObject.transform;
+        
+        DayEnd();
     }
 
     // Update is called once per frame
@@ -30,16 +33,16 @@ public class PointSystem : MonoBehaviour
                 Check_Animal();
                 break;
             case 1:
-                Spawn_Animal(0, 1);
+                Spawn_Animal(0, num);
                 break;
             case 2:
-                Spawn_Animal(1, 1);
+                Spawn_Animal(1, num);
                 break;
             case 3:
-                Spawn_Animal(2, 1);
+                Spawn_Animal(2, num);
                 break;
             case 4:
-                Spawn_Animal(3, 1);
+                Spawn_Animal(3, num);
                 break;
         }
     }

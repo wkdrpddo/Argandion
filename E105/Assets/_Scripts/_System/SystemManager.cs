@@ -238,28 +238,28 @@ public class SystemManager : MonoBehaviour
         switch (region)
         {
             case 0:
-                position = new Vector3(Random.Range(0.0f, 60.0f), 0.0f, Random.Range(225.0f, 275.0f));
+                position = new Vector3(Random.Range(0.0f, 60.0f), 5.0f, Random.Range(225.0f, 275.0f));
                 break;
             case 1:
-                position = new Vector3(Random.Range(87.0f, 202.0f), 0.0f, Random.Range(193.0f, 264.0f));
+                position = new Vector3(Random.Range(87.0f, 202.0f), 5.0f, Random.Range(193.0f, 264.0f));
                 break;
             case 2:
-                position = new Vector3(Random.Range(193.0f, 233.0f), 0.0f, Random.Range(200.0f, 256.0f));
+                position = new Vector3(Random.Range(193.0f, 233.0f), 5.0f, Random.Range(200.0f, 256.0f));
                 break;
             case 3:
-                position = new Vector3(Random.Range(33.0f, 79.0f), 0.0f, Random.Range(110.0f, 162.0f));
+                position = new Vector3(Random.Range(33.0f, 79.0f), 5.0f, Random.Range(110.0f, 162.0f));
                 break;
             case 4:
-                position = new Vector3(Random.Range(80.0f, 192.0f), 0.0f, Random.Range(110.0f, 200.0f));
+                position = new Vector3(Random.Range(80.0f, 192.0f), 5.0f, Random.Range(110.0f, 200.0f));
                 break;
             case 5:
-                position = new Vector3(Random.Range(193.0f, 251.0f), 0.0f, Random.Range(120.0f, 200.0f));
+                position = new Vector3(Random.Range(193.0f, 251.0f), 5.0f, Random.Range(120.0f, 200.0f));
                 break;
             case 6:
-                position = new Vector3(Random.Range(0.0f, 166.0f), 0.0f, Random.Range(38.0f, 110.0f));
+                position = new Vector3(Random.Range(0.0f, 166.0f), 5.0f, Random.Range(38.0f, 110.0f));
                 break;
             case 7:
-                position = new Vector3(Random.Range(180.0f, 194.0f), 0.0f, Random.Range(81.0f, 110.0f));
+                position = new Vector3(Random.Range(180.0f, 194.0f), 5.0f, Random.Range(81.0f, 110.0f));
                 break;
         }
 

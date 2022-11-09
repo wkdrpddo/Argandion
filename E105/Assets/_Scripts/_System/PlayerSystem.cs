@@ -61,12 +61,14 @@ public class PlayerSystem : MonoBehaviour
     public int _onAir=0;
     public float _gravity;
 
+
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         _buffManagerObject = GameObject.Find("BuffManager");
         _buff = _buffManagerObject.GetComponent<BuffManager>();
+
     }
 
     // Update is called once per frame

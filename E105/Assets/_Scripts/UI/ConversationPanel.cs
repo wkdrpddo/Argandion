@@ -96,6 +96,7 @@ public class ConversationPanel : MonoBehaviour
         isConversation = false;
         selectConversationCount = 0;
         conversationCount = -1;
+        ui.conversationNPC = 0;
         ui.runControllPlayer();
 
         Transform[] selectObjectList = _selectpanel.GetComponentsInChildren<Transform>();

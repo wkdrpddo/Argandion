@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3752328896113464208}
-  - component: {fileID: 5007680133014133018}
+  - component: {fileID: 726289326709470889}
   - component: {fileID: 269416449402592309}
   - component: {fileID: 2619370522510174463}
   - component: {fileID: 5007680133014133019}
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5007680133014133018
+--- !u!114 &726289326709470889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,10 +44,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4564719196251261226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaf5a915a7633864d9e5c7d867a4673b, type: 3}
+  m_Script: {fileID: 11500000, guid: 981cb9105a22dd3499b808d5827098fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animal: {fileID: 9220930600122839901, guid: 1f5e1a5f78676674ebb13d2011af9482, type: 3}
+  _Sector: {fileID: 0}
+  _isDen: 2
+  _animals:
+  - {fileID: 46987768899458066, guid: 19e73a9208a4fb74eaa114df6c3fd8b7, type: 3}
+  - {fileID: 9220930600122839901, guid: 1f5e1a5f78676674ebb13d2011af9482, type: 3}
+  - {fileID: 580955392012718917, guid: 1a7af9c9749991341b904a53c12b783f, type: 3}
+  - {fileID: 4083345258465680454, guid: b493e4cf3b099184ea1b5b920f9d9a72, type: 3}
+  _base_transform: {fileID: 0}
   num: 3
 --- !u!33 &269416449402592309
 MeshFilter:
