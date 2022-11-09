@@ -72,7 +72,7 @@ public class EventManager : MonoBehaviour
     {
         // Debug.Log("크리에이트 콜");
         DescriptObj descObj = iconData[EventIndexArray.arr[imgNum]];
-        Debug.Log(descObj.Name);
+        // Debug.Log(descObj.Name);
         _eventPanel.setEventIcon(imgNum, descObj);
     }
 
