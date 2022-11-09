@@ -46,7 +46,7 @@ public class BuildingChange : MonoBehaviour
         if (_dayEndTest)
         {
             Debug.Log("dayEnd");
-            DayEnd();
+            DayStart();
             _dayEndTest = false;
         }
 
@@ -73,7 +73,7 @@ public class BuildingChange : MonoBehaviour
     // 하루 끝
     // 건축 중이면 건물 오브젝트 바꾸기
     // 건축 마지막 날이면 Destory()
-    public void DayEnd()
+    public void DayStart()
     {
         switch (_phase)
         {
