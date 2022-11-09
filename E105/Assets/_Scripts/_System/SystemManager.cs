@@ -202,6 +202,18 @@ public class SystemManager : MonoBehaviour
         }
     }
 
+    private void DayStart()
+    {
+
+        // 모든 SectorObject의 DayEnd 동작
+        foreach (var sector in _sectors)
+        {
+            sector.DayStart();
+        }
+
+        // _sectorTest.DayEnd();
+    }
+
     //정화된 구역 중에서 랜덤 한 구역 정하기
     private int RandomPurification()
     {

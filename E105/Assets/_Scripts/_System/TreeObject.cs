@@ -7,9 +7,15 @@ public class TreeObject : MonoBehaviour
     public int _days;
     public float _health;
     public bool _isFallen;
+    public BuffManager _buff;
+    public GameObject[] _droppedItem = new GameObject[3];
 
     public GameObject[] _trees = new GameObject[8];
     public Collider _box;
+    void Start()
+    {
+        _buff = GameObject.Find("BuffManager").GetComponent<BuffManager>();
+    }
     public void DayEnd()
     {
         _days += 1;
@@ -44,6 +50,23 @@ public class TreeObject : MonoBehaviour
 
     private void DestroyWood()
     {
+        Transform trans = gameObject.transform;
         Destroy(this.gameObject);
+        int many = Random.Range(1,5);
+        for (int i=0;i<many;i++) {
+            Instantiate(_droppedItem[0], trans.position + new Vector3(Random.Range(-2f,2f),1.5f,Random.Range(-2f,2f)), trans.rotation);
+        }
+        int many2 = Random.Range(2,4);
+        int many3 = Random.Range(2,4);
+        if ( _buff.orangePray ) {
+            many2 += 1;
+            many3 += 1;
+        }
+        for (int i=0;i<many2;i++) {
+            Instantiate(_droppedItem[1], trans.position + new Vector3(Random.Range(-2f,2f),1.5f,Random.Range(-2f,2f)), trans.rotation);
+        }
+        for (int i=0;i<many3;i++) {
+            Instantiate(_droppedItem[2], trans.position + new Vector3(Random.Range(-2f,2f),1.5f,Random.Range(-2f,2f)), trans.rotation);
+        }
     }
 }

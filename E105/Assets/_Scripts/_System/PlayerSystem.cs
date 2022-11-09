@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerSystem : MonoBehaviour
 {
+    [SerializeField]
+    private string _playerName;
+    private int _playertype;
     public GameObject _SystemManager;
     public UIManager _UIManager;
     public Transform _camera;
@@ -34,6 +37,7 @@ public class PlayerSystem : MonoBehaviour
     private bool _setHand = false;
     private bool _onSoil=false;
     public bool _canMove = true;
+    private bool _canAction = true;
 
     private bool _ikDown;
 
@@ -44,6 +48,10 @@ public class PlayerSystem : MonoBehaviour
     private bool _readyToHarvest = false;
     private bool _nearCarpentor = false;
     private bool _nearItem = false;
+
+    [SerializeField]
+    private float _act_speed = 1.0f;
+    private float _delay_speed = 1.0f;
     
     public float _gold;
 
@@ -74,7 +82,7 @@ public class PlayerSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetBuff();
+        // GetBuff();
         GetInput();
         Move();
         changeItem();
@@ -162,13 +170,13 @@ public class PlayerSystem : MonoBehaviour
             _movedDelay -= Time.deltaTime;
             _movedDelay = Mathf.Max(0, _movedDelay);
         }
-        if (Input.GetAxisRaw("useKey") == 1 && _delayedTimer <= 0)
+        if (_canAction &&Input.GetAxisRaw("useKey") == 1 && _delayedTimer <= 0)
         {
             if (_equipList[_equipItem, 1] >= 3)
             {
                 _playerAnimator.SetInteger("action", ((int)_equipList[_equipItem, 1]));
-                _delayedTimer = _equipList[_equipItem, 2];
-                _movedDelay = _equipList[_equipItem, 3];
+                _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
+                _movedDelay = _equipList[_equipItem, 3] / _act_speed;
                 _equipment[_equipItem].SetActive(true);
                 _setHand = true;
             }
@@ -292,7 +300,7 @@ public class PlayerSystem : MonoBehaviour
 
     private void Interaction()
     {
-        if (Input.GetButtonDown("interactionKey"))
+        if (Input.GetButtonDown("interactionKey") && _canInteract)
         {
             Vector3 pos = new Vector3(this.transform.position.x,this.transform.position.y,this.transform.position.z);
             _colset = Physics.OverlapSphere(pos,_interactRadius,layerMask:1633);
@@ -314,8 +322,8 @@ public class PlayerSystem : MonoBehaviour
                         Debug.Log("버..섯?");
                         Debug.Log(Gat);
                         Gat.Interaction(_equipList[_equipItem,1]);
-                        _delayedTimer = _equipList[_equipItem, 2];
-                        _movedDelay = _equipList[_equipItem, 3];
+                        _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
+                        _movedDelay = _equipList[_equipItem, 3] / _act_speed;
                     }
                     // building쪽 ==============
                     if (col.TryGetComponent(out SignInteraction signInteraction))
@@ -594,5 +602,54 @@ public class PlayerSystem : MonoBehaviour
     private void playerDeath()
     {
         Debug.Log("플레이어 체력 또는 기력 0");
+    }
+
+    public void setPlayerName(string name)
+    {
+        _playerName = name;
+    }
+
+    public string getPlayerName()
+    {
+        return _playerName;
+    }
+
+    public void setPlayerType(int index)
+    {
+        _playertype = index;
+    }
+
+    public int getPlayerType()
+    {
+        return _playertype;
+    }
+
+    public void toggleCanAction()
+    {
+        _canAction = !_canAction;
+    }
+
+    public void setCanAction(bool value)
+    {
+        _canAction = value;
+    }
+
+    public void toggleCanInteract()
+    {
+        _canInteract = !_canInteract;
+    }
+
+    public void setCanInteract(bool value)
+    {
+        _canInteract = value;
+    }
+
+    public void setActionSpeed()
+    {
+        _act_speed = 1;
+        if (_buff.skyPray)
+        {
+            _act_speed *= 1.3f;
+        }
     }
 }

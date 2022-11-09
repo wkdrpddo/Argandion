@@ -20,7 +20,7 @@ public class MushroomSpawn : MonoBehaviour
     // {
         
     // }
-    public void DayEnd()
+    public void DayStart()
     {
         Check_Mushroom();
     }
