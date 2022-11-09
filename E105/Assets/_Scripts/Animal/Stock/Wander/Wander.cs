@@ -97,6 +97,7 @@ public class Wander : MonoBehaviour
     private Color rangeColor = new Color(0.502f, 0f, 0f, 0.7f);
     private Vector3 currentTarget;
     private float currentTurnSpeed;
+    private bool _checker;
 
     public void OnDrawGizmos()
     {
@@ -134,7 +135,6 @@ public class Wander : MonoBehaviour
         currentTarget = target;
         currentTurnSpeed = turnSpeed;
         animator.SetBool("isWalking", true);
-
         var ElapseTime = 0f;
         while (Vector3.Distance(transform.position, target) > 0.25f)
         {
@@ -154,9 +154,9 @@ public class Wander : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * currentTurnSpeed);
 
             // prevent X axis rotation
-            Quaternion q = transform.rotation;
-            q.eulerAngles = new Vector3(0, q.eulerAngles.y, q.eulerAngles.z);
-            transform.rotation = q;
+            // Quaternion q = transform.rotation;
+            // q.eulerAngles = new Vector3(0, q.eulerAngles.y, q.eulerAngles.z);
+            // transform.rotation = q;
 
             currentTurnSpeed += Time.deltaTime;
             ElapseTime += Time.deltaTime;
@@ -166,13 +166,31 @@ public class Wander : MonoBehaviour
         currentTarget = Vector3.zero;
         StartCoroutine(Idle(GetIdleTime()));
     }
-
     public IEnumerator Idle(float idleTime)
     {
         animator.SetBool("isWalking", false);
+        animator.SetBool("isEating", false);
         yield return new WaitForSeconds(idleTime);
-        StartCoroutine(Walk(RandonPointInRange()));
+
+        int _random = Random.Range(0, 10); // eat, walk
+        if (_random >= 0 && _random <= 7)  // 8/10 확률
+            StartCoroutine(Walk(RandonPointInRange()));
+        else                               // 2/10 확률
+            StartCoroutine(Eat());
     }
+
+    public IEnumerator Eat()
+    {
+        animator.SetBool("isEating", true);
+        if (!_checker)
+        {
+            _checker = true;
+            yield return new WaitForSeconds(10);
+            _checker = false;
+        }
+        StartCoroutine(Idle(GetIdleTime()));
+    }
+
 
     public Vector3 RandonPointInRange()
     {
@@ -201,4 +219,6 @@ public class Wander : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(Idle(GetIdleTime()));
     }
+
+
 }

@@ -26,6 +26,11 @@ public class Ranch : MonoBehaviour
     private int[] eggsPerDay = {0,0,1,1,2};
     private int[] woolPerDay = {0,1,2,3,4};
 
+
+    // public GameObject[] cowPrefabs = new GameObject[10];
+    // private GameObject[] chickPrefabs = new GameObject[10];
+    // private GameObject[] sheepPrefabs = new GameObject[10];
+
     void Start()
     {
         temp = system._day;
@@ -110,6 +115,11 @@ public class Ranch : MonoBehaviour
             theInventory.gold -= (howMany *1000);
             point = tempPoint;
         }
+
+        // 목장 중앙에서 랜덤 offset 으로 소 생성
+        // Instantiate(cowPrefab, new Vector3(0, 2, 0), Quaternion.identity);
+        // 얘를 관리해야 함.. 어떻게?
+        // 배열을 두기
     }
 
     void BuyChick(int howMany)
@@ -134,11 +144,14 @@ public class Ranch : MonoBehaviour
 
     void SellCow(int howMany)
     {
-        if (cows >= howMany) {
+        if (cows >= howMany) { 
             cows -= howMany;
             theInventory.gold += (howMany * 500);
             point -= 4 * howMany;
         }
+
+        // destory cow prefabs
+
     }
 
     void SellChick(int howMany)
