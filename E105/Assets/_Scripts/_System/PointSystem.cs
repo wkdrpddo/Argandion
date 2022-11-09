@@ -21,7 +21,7 @@ public class PointSystem : MonoBehaviour
 
     }
 
-    public void DayEnd()
+    public void DayStart()
     {
         // Debug.Log("Point sys dayend");
         switch (_isDen)

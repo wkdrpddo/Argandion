@@ -106,6 +106,8 @@ public class SystemManager : MonoBehaviour
                         UpdateSeason(_month / 2);
                     }
                 }
+
+                // DayStart()
             }
         }
 
@@ -186,6 +188,18 @@ public class SystemManager : MonoBehaviour
             Destroy(p);
 
         }
+    }
+
+    private void DayStart()
+    {
+
+        // 모든 SectorObject의 DayEnd 동작
+        foreach (var sector in _sectors)
+        {
+            sector.DayStart();
+        }
+
+        // _sectorTest.DayEnd();
     }
 
     //정화된 구역 중에서 랜덤 한 구역 정하기

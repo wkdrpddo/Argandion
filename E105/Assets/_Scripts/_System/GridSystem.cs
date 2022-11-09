@@ -26,7 +26,7 @@ public class GridSystem : MonoBehaviour
         
     // }
 
-    public void DayEnd()
+    public void DayStart()
     {
         Check_Tree();
         // Check_Branch();

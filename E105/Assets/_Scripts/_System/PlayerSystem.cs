@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerSystem : MonoBehaviour
 {
+    [SerializeField]
+    private string _playerName;
+    private int _playertype;
     public GameObject _SystemManager;
     public UIManager _UIManager;
     public Transform _camera;
@@ -72,7 +75,7 @@ public class PlayerSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetBuff();
+        // GetBuff();
         GetInput();
         Move();
         changeItem();
@@ -586,5 +589,25 @@ public class PlayerSystem : MonoBehaviour
     private void playerDeath()
     {
         Debug.Log("플레이어 체력 또는 기력 0");
+    }
+
+    public void setPlayerName(string name)
+    {
+        _playerName = name;
+    }
+
+    public string getPlayerName()
+    {
+        return _playerName;
+    }
+
+    public void setPlayerType(int index)
+    {
+        _playertype = index;
+    }
+
+    public int getPlayerType()
+    {
+        return _playertype;
     }
 }

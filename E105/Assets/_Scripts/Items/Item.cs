@@ -10,8 +10,7 @@ public class ItemObject
     public int ItemCode;
     public string Name;
     public string Category;
-    public int BuyCost;
-    public int SellCost;
+    public string Desc;
     public Sprite ItemImage;
 }
 
