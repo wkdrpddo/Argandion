@@ -14,12 +14,31 @@ public class SpiritBuff : MonoBehaviour
     }
 
     public void Spirit(ItemObject item) {
-        if (item.ItemCode == 21) {
-            WhiteSpirit();
+        if (buffManager._isFlowerBuffActived == false) {
+            if (item.ItemCode == 50) {
+                PinkSpirit();
+            } else if (item.ItemCode == 51) {
+                OrangeSpirit();
+            } else if (item.ItemCode == 52) {
+                RedSpirit();
+            } else if (item.ItemCode == 53) {
+                SkySpirit();
+            } else if (item.ItemCode == 54) {
+                BlueSpirit();
+            } else if (item.ItemCode == 55) {
+                YellowSpirit();
+            } else if (item.ItemCode == 56) {
+                WhiteSpirit();
+            } else {
+                Debug.Log("꽃이 아니야!");
+            }
+        } else {
+            Debug.Log("다른 꽃 버프가 활성중 입니다!");
         }
     }
 
     public void WhiteSpirit(){
+        buffManager._isFlowerBuffActived = true;
         buffManager.whiteSpirit = true;
         buffManager._flowerBuffTargetDay = systemManager._day + 3;
         buffManager._flowerBuffTargetMonth = systemManager._month;
@@ -42,6 +61,7 @@ public class SpiritBuff : MonoBehaviour
     }
     
     public void RedSpirit(){
+        buffManager._isFlowerBuffActived = true;
         buffManager.redSpirit = true;
         buffManager._flowerBuffTargetDay = systemManager._day + 3;
         buffManager._flowerBuffTargetMonth = systemManager._month;
@@ -56,6 +76,7 @@ public class SpiritBuff : MonoBehaviour
     }
     
     public void PinkSpirit(){
+        buffManager._isFlowerBuffActived = true;
         buffManager.pinkSpirit = true;
         buffManager._flowerBuffTargetDay = systemManager._day + 3;
         buffManager._flowerBuffTargetMonth = systemManager._month;
@@ -70,6 +91,7 @@ public class SpiritBuff : MonoBehaviour
     }
     
     public void YellowSpirit(){
+        buffManager._isFlowerBuffActived = true;
         buffManager.yellowSpirit = true;
         buffManager._flowerBuffTargetDay = systemManager._day + 3;
         buffManager._flowerBuffTargetMonth = systemManager._month;
@@ -84,6 +106,7 @@ public class SpiritBuff : MonoBehaviour
     }
     
     public void SkySpirit(){
+        buffManager._isFlowerBuffActived = true;
         buffManager.skySpirit = true;
         buffManager._flowerBuffTargetDay = systemManager._day + 3;
         buffManager._flowerBuffTargetMonth = systemManager._month;
