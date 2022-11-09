@@ -13,6 +13,7 @@ public class BuffManager : MonoBehaviour
     public bool whiteSpirit = false;
     public bool whitePray = false;
     public bool orangePray = false;
+    public bool blueSpirit = false;
     public bool bluePray = false;
     public bool redSpirit = false;
     public bool redPray = false;

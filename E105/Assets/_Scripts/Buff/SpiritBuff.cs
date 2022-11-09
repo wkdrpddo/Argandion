@@ -7,6 +7,7 @@ public class SpiritBuff : MonoBehaviour
     public SystemManager systemManager;
     public GameObject _buffManagerObject;
     private BuffManager buffManager;
+    public GameObject[] buildings;
 
     private void Start() {
         _buffManagerObject = GameObject.Find("BuffManager");
@@ -53,10 +54,12 @@ public class SpiritBuff : MonoBehaviour
     }
 
     public void OrangeSpirit(){
+        // buildings = GameObject.FindGameObjectsWithLayer(10)
         Debug.Log("나는 주황색정령버프");
     }
     
     public void BlueSpirit(){
+        buffManager.blueSpirit = true;
         Debug.Log("나는 파랑색정령버프");
     }
     

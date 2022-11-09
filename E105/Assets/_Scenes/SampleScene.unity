@@ -2622,12 +2622,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52529d5ec5054624db93da79520c20ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _systemManager: {fileID: 0}
   _flowerBuffTargetMonth: 0
   _flowerBuffTargetDay: 0
   _isFlowerBuffActived: 0
   whiteSpirit: 0
   whitePray: 0
   orangePray: 0
+  blueSpirit: 0
   bluePray: 0
   redSpirit: 0
   redPray: 0
@@ -2642,6 +2644,14 @@ MonoBehaviour:
   eatSandwich: 0
   eatBread: 0
   eatMilk: 0
+  coldWaveMonth: 0
+  coldWaveDay: 0
+  inColdWave: 0
+  rainyMonth: 0
+  rainyDay: 0
+  inRainy: 0
+  _endMonth: 0
+  _endDay: 0
 --- !u!4 &195320417
 Transform:
   m_ObjectHideFlags: 0
@@ -10153,6 +10163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   systemManager: {fileID: 930144952}
+  _buffManager: {fileID: 0}
 --- !u!4 &887255324
 Transform:
   m_ObjectHideFlags: 0
@@ -10659,14 +10670,16 @@ MonoBehaviour:
   _month: 0
   _day: 0
   _season: 0
-  _weather: 0
   _hour_display: 0
   _minute_display: 0
   _hour: 0
+  _weather: 0
   _hour_time_changemeter: 20000
   _light: {fileID: 705507993}
   MapObject: {fileID: 1059826833}
   _player: {fileID: 0}
+  _weatherManager: {fileID: 0}
+  _buffManager: {fileID: 0}
   _development_level: 0
   _purification_sector: 0
   _purification_size: 0
@@ -17916,6 +17929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   systemManager: {fileID: 930144952}
   _buffManagerObject: {fileID: 0}
+  buildings: []
 --- !u!65 &1485820510
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26060,6 +26074,26 @@ PrefabInstance:
     - target: {fileID: 2282979091950156677, guid: 481f9fa698b133b48be55587276f7c82, type: 3}
       propertyPath: m_Name
       value: BuffManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2282979091950156730, guid: 481f9fa698b133b48be55587276f7c82, type: 3}
+      propertyPath: bluePray
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2282979091950156730, guid: 481f9fa698b133b48be55587276f7c82, type: 3}
+      propertyPath: redSpirit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2282979091950156730, guid: 481f9fa698b133b48be55587276f7c82, type: 3}
+      propertyPath: whitePray
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2282979091950156730, guid: 481f9fa698b133b48be55587276f7c82, type: 3}
+      propertyPath: orangePray
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2282979091950156730, guid: 481f9fa698b133b48be55587276f7c82, type: 3}
+      propertyPath: whiteSpirit
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2282979091950156731, guid: 481f9fa698b133b48be55587276f7c82, type: 3}
       propertyPath: m_RootOrder

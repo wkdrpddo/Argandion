@@ -37,6 +37,12 @@ public class WeatherManager : MonoBehaviour
 
     public void SetWeather(int season)
     {
+        if (_buffManager.blueSpirit) { // 파랑색 정령버프가 있으면 무조건 비가 온다.
+            systemManager._weather = 1;
+            _buffManager.blueSpirit = false;
+            return ;
+        }
+
         if (season == 0) { // 봄은 무난하다
             SetSpring();
         } else if (season == 1) { // 여름의 경우
