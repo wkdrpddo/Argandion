@@ -23,7 +23,7 @@ public class EventManager : MonoBehaviour
     {
         _eventPanel = GameObject.Find("EventPanel").GetComponent<EventPanel>();
         setDescriptObj();
-        callAllPanel();
+        // callAllPanel();
     }
 
     // 테스트용 코드
@@ -64,42 +64,16 @@ public class EventManager : MonoBehaviour
     private void setDescriptObj()
     {
         string jsonInputString = Application.dataPath + "/Data/Json/EventPanelDescription.json";
-        // Debug.Log(jsonInputString);
-
         string jsonString = File.ReadAllText(jsonInputString);
-
-        // Debug.Log(jsonString);
         iconData = JsonHelper.FromJson<DescriptObj>(jsonString);
-
-        Debug.Log(iconData.Length);
-        // Debug.Log(iconData);
-
-        // for (int i = 0; i < iconData.Length; i++)
-        // {
-        //     // Debug.Log(iconData[i]);
-        //     descriptObj descObj = iconData[i];
-        //     // Debug.Log(iconData[i].Name);
-        // }
     }
 
     public void createPanelTest(int imgNum)
     {
-        Debug.Log("크리에이트 콜");
+        // Debug.Log("크리에이트 콜");
         DescriptObj descObj = iconData[EventIndexArray.arr[imgNum]];
         Debug.Log(descObj.Name);
         _eventPanel.setEventIcon(imgNum, descObj);
-        // if (descObj != null)
-        // {
-        //     _eventPanel.setEventIcon(imgNum, descObj);
-        // }
-
     }
-
-    // Id를 배열 인덱스로 만들어야 하나? => 지금 배열 크기가 안 커서 반복해도 될 것 같긴 한데
-    public DescriptObj findByID(int imgNum)
-    {
-        return iconData[EventIndexArray.arr[imgNum]];
-    }
-
 
 }
