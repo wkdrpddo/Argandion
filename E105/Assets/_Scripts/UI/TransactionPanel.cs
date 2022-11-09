@@ -98,6 +98,7 @@ public class TransactionPanel : MonoBehaviour
         }
 
         gameObject.SetActive(false);
+        ui.runControllPlayer();
         ui.OnInventory(2);
     }
 }

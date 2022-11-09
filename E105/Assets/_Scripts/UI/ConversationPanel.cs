@@ -18,11 +18,11 @@ public class ConversationPanel : MonoBehaviour
         9. 세계수
         10. 세계수의 정령
     */
-    public TextMeshProUGUI _npcname;
-    public TextMeshProUGUI _nomaltalk;
+    private TextMeshProUGUI _npcname;
+    private TextMeshProUGUI _nomaltalk;
+    private GameObject _selectpanel;
     private int conversationCount = -1;         // -1 : 대화 전, 0 : 대화 시작, 1 : 마지막 대화
 
-    public GameObject _selectpanel;
     private bool isOnPanel = false;
     public GameObject conversationButton;
     private UIManager ui;
@@ -163,13 +163,6 @@ public class ConversationPanel : MonoBehaviour
                 warpBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "빠른 이동";
                 warpBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionPanel);
                 break;
-            case 10:
-                GameObject buffBtn = Instantiate(conversationButton, _selectpanel.transform);
-                RectTransform buffBtnRect = buffBtn.GetComponent<RectTransform>();
-                buffBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
-                buffBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "정령의 축복 [버프]";
-                buffBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionPanel);
-                break;
         }
     }
 
@@ -202,6 +195,10 @@ public class ConversationPanel : MonoBehaviour
     void Start()
     {
         ui = gameObject.GetComponentInParent<UIManager>();
+        _npcname = transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
+        _nomaltalk = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+
+        _selectpanel = transform.GetChild(0).GetChild(1).gameObject;
         isConversation = false;
     }
 

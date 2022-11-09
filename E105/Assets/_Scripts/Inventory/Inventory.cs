@@ -17,40 +17,18 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
+        go_InventoryBase = transform.GetChild(0).gameObject;
+        go_SlotsParent = go_InventoryBase.transform.GetChild(0).gameObject;
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
         uiGroup = gameObject.GetComponent<RectTransform>();
     }
 
     void Update()
     {
-        TryOpenInventory();
+
     }
 
-    private void TryOpenInventory()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            invectoryActivated = !invectoryActivated;
 
-            if (invectoryActivated)
-                OpenInventory();
-            else
-                CloseInventory();
-
-        }
-    }
-
-    private void OpenInventory()
-    {
-        // go_InventoryBase.SetActive(true);
-        uiGroup.anchoredPosition = Vector3.zero;
-    }
-
-    private void CloseInventory()
-    {
-        // go_InventoryBase.SetActive(false);
-        uiGroup.anchoredPosition = Vector3.down * 1000;
-    }
     public bool CheckInven(ItemObject _item, int _count = 1, bool _sec = false)
     {
         if (!_sec)

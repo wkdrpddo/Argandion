@@ -94,7 +94,7 @@ public class Ranch : MonoBehaviour
         }
     }
 
-    void GetMilk(int howMany)
+    public void GetMilk(int howMany)
     {
         if (milk >= howMany)
         {
@@ -103,7 +103,7 @@ public class Ranch : MonoBehaviour
         }
     }
 
-    void GetWool(int howMany)
+    public void GetWool(int howMany)
     {
         if (wool >= howMany)
         {
@@ -112,7 +112,7 @@ public class Ranch : MonoBehaviour
         }
     }
 
-    void GetEggs(int howMany)
+    public void GetEggs(int howMany)
     {
         if (eggs >= howMany)
         {
@@ -121,40 +121,64 @@ public class Ranch : MonoBehaviour
         }
     }
 
-    void BuyCow(int howMany)
+    public void BuyCow()
     {
-        int tempPoint = point + (4 * howMany);
-        if (ui.getPlayerGold() >= (howMany * 1000) && tempPoint <= maxPoint)
+        int tempPoint = point + 4;
+        if (ui.getPlayerGold() < 1000)
         {
-            cows += howMany;
-            ui.addPlayerGold(-1 * (howMany * 1000));
+            ui.OnResultNotificationPanel("소지금이 부족합니다.");
+        }
+        else if (tempPoint > maxPoint)
+        {
+            ui.OnResultNotificationPanel("농장의 수용량이 부족합니다.");
+        }
+        else
+        {
+            cows++;
+            ui.addPlayerGold(-1000);
             point = tempPoint;
         }
     }
 
-    void BuyChick(int howMany)
+    public void BuyChick()
     {
-        int tempPoint = point + (3 * howMany);
-        if (ui.getPlayerGold() >= (howMany * 650) && tempPoint <= maxPoint)
+        int tempPoint = point + 3;
+        if (ui.getPlayerGold() < 650)
         {
-            cows += howMany;
-            ui.addPlayerGold(-1 * (howMany * 650));
+            ui.OnResultNotificationPanel("소지금이 부족합니다.");
+        }
+        else if (tempPoint > maxPoint)
+        {
+            ui.OnResultNotificationPanel("농장의 수용량이 부족합니다.");
+        }
+        else
+        {
+            chicks++;
+            ui.addPlayerGold(-650);
             point = tempPoint;
         }
     }
 
-    void BuySheep(int howMany)
+    public void BuySheep()
     {
-        int tempPoint = point + (2 * howMany);
-        if (ui.getPlayerGold() >= (howMany * 350) && tempPoint <= maxPoint)
+        int tempPoint = point + 2;
+        if (ui.getPlayerGold() < 350)
         {
-            cows += howMany;
-            ui.addPlayerGold(-1 * (howMany * 350));
+            ui.OnResultNotificationPanel("소지금이 부족합니다.");
+        }
+        else if (tempPoint > maxPoint)
+        {
+            ui.OnResultNotificationPanel("농장의 수용량이 부족합니다.");
+        }
+        else
+        {
+            sheeps++;
+            ui.addPlayerGold(-350);
             point = tempPoint;
         }
     }
 
-    void SellCow(int howMany)
+    public void SellCow(int howMany)
     {
         if (cows >= howMany)
         {
@@ -164,7 +188,7 @@ public class Ranch : MonoBehaviour
         }
     }
 
-    void SellChick(int howMany)
+    public void SellChick(int howMany)
     {
         if (chicks >= howMany)
         {
@@ -174,7 +198,7 @@ public class Ranch : MonoBehaviour
         }
     }
 
-    void SellSheep(int howMany)
+    public void SellSheep(int howMany)
     {
         if (sheeps >= howMany)
         {
