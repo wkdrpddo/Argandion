@@ -5,7 +5,8 @@ using TMPro;
 
 public class TransactionDoubleCheck : MonoBehaviour
 {
-    private NPCManager _npcmanager;
+    [SerializeField] private NPCManager _npcmanager;
+    [SerializeField] private UIManager ui;
     private int storeIndex;
     private int itemIndex;
 
@@ -34,6 +35,24 @@ public class TransactionDoubleCheck : MonoBehaviour
             case 4:
                 break;
             case 5:
+                if (itemIndex == 1)
+                {
+                    _npcmanager.GetComponent<Ranch>().BuySheep();
+                }
+                else if (itemIndex == 2)
+                {
+                    _npcmanager.GetComponent<Ranch>().BuyChick();
+                }
+                else if (itemIndex == 3)
+                {
+                    _npcmanager.GetComponent<Ranch>().BuyCow();
+                }
+                else
+                {
+                    Debug.LogError("인수관계가 잘못 되었습니다.");
+                }
+
+                handleModal();
                 break;
             case 6:
                 break;
@@ -42,6 +61,7 @@ public class TransactionDoubleCheck : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         _npcmanager = GameObject.Find("NPCManager").GetComponent<NPCManager>();
         storeIndex = -1;
         itemIndex = -1;

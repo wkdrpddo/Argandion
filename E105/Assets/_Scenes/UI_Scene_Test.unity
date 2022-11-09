@@ -933,12 +933,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52529d5ec5054624db93da79520c20ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _systemManager: {fileID: 0}
   _flowerBuffTargetMonth: 0
   _flowerBuffTargetDay: 0
   _isFlowerBuffActived: 0
   whiteSpirit: 0
   whitePray: 0
   orangePray: 0
+  blueSpirit: 0
   bluePray: 0
   redSpirit: 0
   redPray: 0
@@ -948,10 +950,19 @@ MonoBehaviour:
   yellowPray: 0
   skySpirit: 0
   skyPray: 0
-  isDringkingMilk: 0
-  isEatingBread: 0
   isFull: 0
   notThirsty: 0
+  eatSandwich: 0
+  eatBread: 0
+  eatMilk: 0
+  coldWaveMonth: 0
+  coldWaveDay: 0
+  inColdWave: 0
+  rainyMonth: 0
+  rainyDay: 0
+  inRainy: 0
+  _endMonth: 0
+  _endDay: 0
 --- !u!4 &168746846
 Transform:
   m_ObjectHideFlags: 0
@@ -3091,6 +3102,12 @@ MonoBehaviour:
   milk: 0
   eggs: 0
   wool: 0
+  droppedMilk: {fileID: 6190726314707718250, guid: 9377de90e50c519418b62fe2d127932e, type: 3}
+  droppedEgg: {fileID: 8114458806767023247, guid: 2f28d138e6ccc3547a8aec6eea403527, type: 3}
+  droppedWool: {fileID: 3274354479592268485, guid: 20dc5065d640b2c4593d9f215e006407, type: 3}
+  cowPrefab: {fileID: 3165481376602392460, guid: 2afa4d02770097540b65823d10632914, type: 3}
+  chickenPrefab: {fileID: 7334901126005219082, guid: 22c7c91e4e6ff874bb977d45c5c04aed, type: 3}
+  sheepPrefab: {fileID: 1162367592428075780, guid: 796736b416d12444eb40b2d318b4916d, type: 3}
 --- !u!1001 &732656709
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8517,6 +8534,7 @@ MonoBehaviour:
   _eventAnnounce: {fileID: 2006054986}
   _announceTitle: {fileID: 0}
   _announceText: {fileID: 510901085}
+  _nowequip: {fileID: 0}
   _timer: {fileID: 362602686}
   rotateZero: {x: 0, y: 0, z: 0, w: 1}
   conversationNPC: 0
@@ -9946,13 +9964,15 @@ MonoBehaviour:
   _month: 0
   _day: 0
   _season: 0
-  _weather: 0
   _hour_display: 0
   _minute_display: 0
+  _hour: 0
+  _weather: 0
   _hour_time_changemeter: 120000
   _light: {fileID: 2138222493}
   MapObject: {fileID: 118334711}
   _player: {fileID: 0}
+  _weatherManager: {fileID: 0}
   _buffManager: {fileID: 0}
   _development_level: 0
   _purification_sector: 0

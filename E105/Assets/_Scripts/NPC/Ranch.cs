@@ -28,13 +28,25 @@ public class Ranch : MonoBehaviour
     private int[] woolPerDay = { 0, 1, 2, 3, 4 };
 
 
-    // public GameObject[] cowPrefabs = new GameObject[10];
-    // private GameObject[] chickPrefabs = new GameObject[10];
-    // private GameObject[] sheepPrefabs = new GameObject[10];
+    public GameObject droppedMilk;
+    public GameObject droppedEgg;
+    public GameObject droppedWool;
+
+    public GameObject cowPrefab;
+    public GameObject chickenPrefab;
+    public GameObject sheepPrefab;
+
+    private List<GameObject> cowPrefabs = new List<GameObject>();
+    private List<GameObject> chickenPrefabs = new List<GameObject>();
+    private List<GameObject> sheepPrefabs = new List<GameObject>();
+
 
     void Start()
     {
         ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+        system = GameObject.Find("SystemManager").GetComponent<SystemManager>();
+        _buffManagerObject = GameObject.Find("BuffManager");
+        _buff = _buffManagerObject.GetComponent<BuffManager>();
 
         temp = system._day;
         _buffManagerObject = GameObject.Find("BuffManager");
@@ -97,6 +109,19 @@ public class Ranch : MonoBehaviour
                 wool += woolPerDay[Random.Range(0, 5)];
             }
         }
+
+        for (int i = 0; i < milk; i++)
+        {
+            Instantiate(droppedMilk, getRandonPoint(), Quaternion.identity);
+        }
+        for (int i = 0; i < eggs; i++)
+        {
+            Instantiate(droppedEgg, getRandonPoint(), Quaternion.identity);
+        }
+        for (int i = 0; i < wool; i++)
+        {
+            Instantiate(droppedWool, getRandonPoint(), Quaternion.identity);
+        }
     }
 
     public void GetMilk(int howMany)
@@ -139,6 +164,10 @@ public class Ranch : MonoBehaviour
         }
         else
         {
+            // cowPrefab 랜덤으로 생성하고 리스트에 저장하기
+            GameObject addData = Instantiate(cowPrefab, getRandonPoint(), Quaternion.identity);
+            cowPrefabs.Add(addData);
+
             cows++;
             ui.addPlayerGold(-1000);
             point = tempPoint;
@@ -163,6 +192,9 @@ public class Ranch : MonoBehaviour
         }
         else
         {
+            GameObject addData = Instantiate(chickenPrefab, getRandonPoint(), Quaternion.identity);
+            chickenPrefabs.Add(addData);
+
             chicks++;
             ui.addPlayerGold(-650);
             point = tempPoint;
@@ -182,6 +214,9 @@ public class Ranch : MonoBehaviour
         }
         else
         {
+            GameObject addData = Instantiate(sheepPrefab, getRandonPoint(), Quaternion.identity);
+            sheepPrefabs.Add(addData);
+
             sheeps++;
             ui.addPlayerGold(-350);
             point = tempPoint;
@@ -192,6 +227,12 @@ public class Ranch : MonoBehaviour
     {
         if (cows >= howMany)
         {
+            // cowPrefab 삭제하고 리스트에서 삭제하기
+            for (int i = howMany - 1; i >= cows; i--)
+            {
+                Destroy(cowPrefabs[i], 10f);
+            }
+
             cows -= howMany;
             ui.addPlayerGold((howMany * 500));
             point -= 4 * howMany;
@@ -205,6 +246,12 @@ public class Ranch : MonoBehaviour
     {
         if (chicks >= howMany)
         {
+
+            for (int i = howMany - 1; i >= chicks; i--)
+            {
+                Destroy(chickenPrefabs[i], 10f);
+            }
+
             chicks -= howMany;
             ui.addPlayerGold((howMany * 325));
             point -= 3 * howMany;
@@ -215,9 +262,35 @@ public class Ranch : MonoBehaviour
     {
         if (sheeps >= howMany)
         {
+
+            for (int i = howMany - 1; i >= sheeps; i--)
+            {
+                Destroy(sheepPrefabs[i], 10f);
+            }
+
             sheeps -= howMany;
             ui.addPlayerGold((howMany * 175));
             point -= 2 * howMany;
         }
     }
+
+    Vector3 getRandonPoint()
+    {
+        Vector3 point = new Vector3();
+        while (true)
+        {
+            point = new Vector3(Random.Range(210, 275), 2, Random.Range(150, 190));
+            if (isValid(point))
+                return point;
+        }
+    }
+
+    bool isValid(Vector3 point)
+    {
+        // 재단사 집 범위에 해당하는 경우
+        if (point.x < 224 && point.z >= 150)
+            return false;
+        return true;
+    }
+
 }

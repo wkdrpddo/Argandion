@@ -10,43 +10,6 @@ public class TransactionAnimalPanel : MonoBehaviour
     private UIManager ui;
     private bool isOnPanel;
 
-    private bool checkInfo(int cost, int area)
-    {
-        if (cost <= ui.getPlayerGold())
-        {
-            return true;
-        }
-        return false;
-        // 현재 돈이랑..
-        // 수용 cost 랑
-        // 체크하고...
-
-    }
-
-    public void clickBuyChicken()
-    {
-        if (checkInfo(650, 3))
-        {
-
-        }
-    }
-
-    public void clickBuySheep()
-    {
-        if (checkInfo(350, 2))
-        {
-
-        }
-    }
-
-    public void clickBuyCow()
-    {
-        if (checkInfo(1000, 4))
-        {
-
-        }
-    }
-
     public void callCellModal(int value)
     {
         switch (value)
@@ -89,9 +52,14 @@ public class TransactionAnimalPanel : MonoBehaviour
 
         transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGold().ToString();
 
-        gameObject.transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("닭", 5, -1));
-        gameObject.transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("소", 5, -1));
-        gameObject.transform.GetChild(0).GetChild(2).GetChild(2).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("양", 5, -1));
+        gameObject.transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("닭", 5, 2));
+        gameObject.transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("소", 5, 3));
+        gameObject.transform.GetChild(0).GetChild(2).GetChild(2).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("양", 5, 1));
+    }
+
+    public void syncRanchData()
+    {
+
     }
 
     // Update is called once per frame
