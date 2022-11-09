@@ -117,6 +117,7 @@ public class SaveSystem : MonoBehaviour
             saveJson.treepos.Add(trees[i].transform.position.z);
             saveJson.treeday.Add(trees[i].GetComponent<TreeObject>()._days);
         }
+        saveJson.treecount = trees.Length;
         string json = JsonUtility.ToJson(saveJson, true);
         File.WriteAllText("jsonSave.json",json);
     }
