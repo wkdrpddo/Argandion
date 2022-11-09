@@ -5,6 +5,36 @@ using UnityEngine;
 public class OreObject : MonoBehaviour
 {
     public float _health;
+    public int type;
+    public GameObject[] _droppedItem = new GameObject[2];
+    public int[,] _droppedCount = new int[2,2];
+    public BuffManager _buff;
+
+    void Start()
+    {
+        _buff = GameObject.Find("BuffManager").GetComponent<BuffManager>();
+        switch(type)
+        {
+            case 0:
+                _droppedCount[0,0] = 0;
+                _droppedCount[0,0] = 4;
+                _droppedCount[1,0] = 1;
+                _droppedCount[1,1] = 3;
+                break;
+            case 1:
+                _droppedCount[0,0] = 0;
+                _droppedCount[0,0] = 4;
+                _droppedCount[1,0] = 1;
+                _droppedCount[1,1] = 3;
+                break;
+            case 2:
+                _droppedCount[0,0] = 0;
+                _droppedCount[0,0] = 5;
+                _droppedCount[1,0] = 1;
+                _droppedCount[1,1] = 2;
+                break;
+        }
+    }
     // Start is called before the first frame update
     public void DayEnd()
     {
@@ -16,7 +46,32 @@ public class OreObject : MonoBehaviour
         _health -= damage;
         if (_health <= 0)
         {
-            Destroy(gameObject);
+            DestroyOre();
+        }
+    }
+
+    private void DestroyOre()
+    {
+        Transform trans = gameObject.transform;
+        Destroy(this.gameObject);
+        int many = Random.Range(_droppedCount[0,0],_droppedCount[0,1]);
+        for (int i=0;i<many;i++) {
+            Instantiate(_droppedItem[0], trans.position + new Vector3(Random.Range(-2f,2f),1.5f,Random.Range(-2f,2f)), trans.rotation);
+        }
+        int many2 = Random.Range(_droppedCount[1,0],_droppedCount[1,1]);
+        float final = many2;
+        if ( _buff.redPray ) {
+            final *= Random.Range(1.2f,2.0f);
+        }
+        while (final >= 1)
+        {
+            final -= 1;
+            Instantiate(_droppedItem[1], trans.position + new Vector3(Random.Range(-2f,2f),1.5f,Random.Range(-2f,2f)), trans.rotation);
+        }
+        float lotto = Random.Range(0f,1f);
+        if (lotto < final)
+        {
+            Instantiate(_droppedItem[1], trans.position + new Vector3(Random.Range(-2f,2f),1.5f,Random.Range(-2f,2f)), trans.rotation);
         }
     }
 }

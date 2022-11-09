@@ -78,11 +78,6 @@ public class TransactionPanel : MonoBehaviour
             itemObject = _itemmanager.FindItem(buyingObject.Result);
 
             GameObject productBtn = Instantiate(storeItemCard, ScrollContent.transform);
-            RectTransform productBtnRect = productBtn.GetComponent<RectTransform>();
-
-            Debug.Log(productBtnRect.anchoredPosition);
-            productBtnRect.SetLocalPositionAndRotation(new Vector3(7.5f, -10 - i * 50, 0), ui.rotateZero);
-            Debug.Log(productBtn.GetComponent<RectTransform>().position);
 
             productBtn.transform.GetChild(0).GetComponent<Image>().sprite = ui.getItemIcon(itemObject.ItemCode);
             productBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemObject.Name;
@@ -103,6 +98,7 @@ public class TransactionPanel : MonoBehaviour
         }
 
         gameObject.SetActive(false);
+        ui.runControllPlayer();
         ui.OnInventory(2);
     }
 }

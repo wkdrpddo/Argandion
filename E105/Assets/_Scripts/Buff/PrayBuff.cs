@@ -5,16 +5,20 @@ using UnityEngine;
 public class PrayBuff : MonoBehaviour
 {
     public SystemManager systemManager;
-    public BuffManager buffManager;
+    public GameObject _buffManagerObject;
+    private BuffManager buffManager;
     public Inventory _theInventory;
     
     public int tempDay;
+    public int tempMonth;
     public bool todayPray = false;
     public int flowerIdx = 0;
     public int prayDay = 0;
 
     void Start() {
         tempDay = systemManager._day;
+        _buffManagerObject = GameObject.Find("BuffManager");
+        buffManager = _buffManagerObject.GetComponent<BuffManager>();
     }
 
     void Update() {
@@ -22,9 +26,23 @@ public class PrayBuff : MonoBehaviour
             NewDay();
             tempDay = systemManager._day;
         }
+
+        if (buffManager._flowerBuffTargetMonth == systemManager._month && buffManager._flowerBuffTargetDay == systemManager._day) {
+            buffManager.FlowerBuffEnd();
+        }
     }
 
     public void Pray(ItemObject item) {
+        if (buffManager._isFlowerBuffActived) {
+            Debug.Log("이미 다른버프가 활성화 중 입니다.");
+            return;
+        }
+
+        if (item.Category != "꽃") {
+            Debug.Log("꽃이 아닙니다!");
+            return;
+        }
+        
         if (!todayPray) {
             if ((flowerIdx == 0 || flowerIdx == item.ItemCode)) {
                 flowerIdx = item.ItemCode;
@@ -61,10 +79,25 @@ public class PrayBuff : MonoBehaviour
     }
 
     public void Reincarnation() {
-        Debug.Log("버프 시작");
+        if (flowerIdx == 50) {
+            PinkPray();
+        } else if (flowerIdx == 51) {
+            OrangePray();
+        } else if (flowerIdx == 52) {
+            RedPray();
+        } else if (flowerIdx == 53) {
+            SkyPray();
+        } else if (flowerIdx == 54) {
+            BluePray();
+        } else if (flowerIdx == 55) {
+            YellowPray();
+        } else if (flowerIdx == 56) {
+            WhitePray();
+        }
     }
 
     public void WhitePray(){
+        buffManager._isFlowerBuffActived = true;
         buffManager.whitePray = true;
         buffManager._flowerBuffTargetDay = systemManager._day;
         buffManager._flowerBuffTargetMonth = systemManager._month + 1;
@@ -75,6 +108,7 @@ public class PrayBuff : MonoBehaviour
     }
 
     public void OrangePray(){
+        buffManager._isFlowerBuffActived = true;
         buffManager.orangePray = true;
         buffManager._flowerBuffTargetDay = systemManager._day;
         buffManager._flowerBuffTargetMonth = systemManager._month + 1;
@@ -85,6 +119,7 @@ public class PrayBuff : MonoBehaviour
     }
     
     public void BluePray(){
+        buffManager._isFlowerBuffActived = true;
         buffManager.bluePray = true;
         buffManager._flowerBuffTargetDay = systemManager._day;
         buffManager._flowerBuffTargetMonth = systemManager._month + 1;
@@ -95,6 +130,7 @@ public class PrayBuff : MonoBehaviour
     }
     
     public void RedPray(){
+        buffManager._isFlowerBuffActived = true;
         buffManager.redPray = true;
         buffManager._flowerBuffTargetDay = systemManager._day;
         buffManager._flowerBuffTargetMonth = systemManager._month + 1;
@@ -105,6 +141,7 @@ public class PrayBuff : MonoBehaviour
     }
     
     public void PinkPray(){
+        buffManager._isFlowerBuffActived = true;
         buffManager.pinkPray = true;
         buffManager._flowerBuffTargetDay = systemManager._day;
         buffManager._flowerBuffTargetMonth = systemManager._month + 1;
@@ -115,6 +152,7 @@ public class PrayBuff : MonoBehaviour
     }
     
     public void YellowPray(){
+        buffManager._isFlowerBuffActived = true;
         buffManager.yellowPray = true;
         buffManager._flowerBuffTargetDay = systemManager._day;
         buffManager._flowerBuffTargetMonth = systemManager._month + 1;
@@ -125,6 +163,7 @@ public class PrayBuff : MonoBehaviour
     }
     
     public void SkyPray(){
+        buffManager._isFlowerBuffActived = true;
         buffManager.skyPray = true;
         buffManager._flowerBuffTargetDay = systemManager._day;
         buffManager._flowerBuffTargetMonth = systemManager._month + 1;

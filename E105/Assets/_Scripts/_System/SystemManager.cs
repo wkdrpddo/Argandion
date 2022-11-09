@@ -7,10 +7,10 @@ public class SystemManager : MonoBehaviour
     public int _month;
     public int _day;
     public int _season;
-    public int _weather;
     public int _hour_display;
     public int _minute_display;
-    private int _hour;
+    public int _hour;
+    public int _weather;
     private float _minute;
     private bool _game_state = false;
     public float _hour_time_changemeter = 1000;
@@ -18,8 +18,8 @@ public class SystemManager : MonoBehaviour
     public GameObject _light;
     public GameObject MapObject;
     public PlayerSystem _player;
+    public WeatherManager _weatherManager;
     public BuffManager _buffManager;
-
     public int _development_level;  // 1부터
     public int _purification_sector;
 
@@ -38,13 +38,14 @@ public class SystemManager : MonoBehaviour
         _month = 1;
         _day = 1;
         _season = 0;
-        _weather = 0;
         _hour = 6;
         _hour_display = 6;
         _minute = 0;
         _minute_display = 0;
         _player = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
-        // _sectors = MapObject.GetComponentsInChildren<SectorObject>();
+        _sectors = MapObject.GetComponentsInChildren<SectorObject>();
+        _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
+        _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
     }
 
     // Update is called once per frame
@@ -73,29 +74,20 @@ public class SystemManager : MonoBehaviour
             _minute -= 60;
             _hour += 1;
 
+            if (_hour == 21)
+            {
+                animalDestroy();
+            }
+
             if (_hour >= 23)
             {
                 _hour = 6;
                 _day += 1;
 
-                // DayEnd();
-
-                // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
-                // {
-                //     _buffManager.FlowerBuffEnd();
-                //     Debug.Log("꽃 버프 종료!");
-                // }
-
-
                 if (_day >= 29)
                 {
                     _day -= 28;
                     _month += 1;
-                    // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
-                    // {
-                    //     _buffManager.FlowerBuffEnd();
-                    //     Debug.Log("꽃 버프 종료!");
-                    // }
 
                     if (_month >= 9)
                     {
@@ -106,6 +98,14 @@ public class SystemManager : MonoBehaviour
                         UpdateSeason(_month / 2);
                     }
                 }
+
+                DayEnd();
+                _weatherManager.SetWeather(_season);
+                if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day) {
+                    _buffManager.FlowerBuffEnd();
+                }
+                _buffManager.DayEnd();
+                DayStart();
             }
         }
 
@@ -188,6 +188,33 @@ public class SystemManager : MonoBehaviour
         }
     }
 
+    private void animalDestroy()
+    {
+        Transform animals = GameObject.Find("Animals").transform;
+
+        foreach (Transform animal in animals)
+        {
+            //플레이어랑 거리 계산해서 멀리있는 동물들만 삭제
+            float distance = Vector3.Distance(animal.position, _player.transform.position);
+            if (distance >= 50f)
+            {
+                Destroy(animal.gameObject);
+            }
+        }
+    }
+
+    private void DayStart()
+    {
+
+        // 모든 SectorObject의 DayEnd 동작
+        foreach (var sector in _sectors)
+        {
+            sector.DayStart();
+        }
+
+        // _sectorTest.DayEnd();
+    }
+
     //정화된 구역 중에서 랜덤 한 구역 정하기
     private int RandomPurification()
     {
@@ -218,28 +245,28 @@ public class SystemManager : MonoBehaviour
         switch (region)
         {
             case 0:
-                position = new Vector3(Random.Range(0.0f, 60.0f), 0.0f, Random.Range(225.0f, 275.0f));
+                position = new Vector3(Random.Range(0.0f, 60.0f), 5.0f, Random.Range(225.0f, 275.0f));
                 break;
             case 1:
-                position = new Vector3(Random.Range(87.0f, 202.0f), 0.0f, Random.Range(193.0f, 264.0f));
+                position = new Vector3(Random.Range(87.0f, 202.0f), 5.0f, Random.Range(193.0f, 264.0f));
                 break;
             case 2:
-                position = new Vector3(Random.Range(193.0f, 233.0f), 0.0f, Random.Range(200.0f, 256.0f));
+                position = new Vector3(Random.Range(193.0f, 233.0f), 5.0f, Random.Range(200.0f, 256.0f));
                 break;
             case 3:
-                position = new Vector3(Random.Range(33.0f, 79.0f), 0.0f, Random.Range(110.0f, 162.0f));
+                position = new Vector3(Random.Range(33.0f, 79.0f), 5.0f, Random.Range(110.0f, 162.0f));
                 break;
             case 4:
-                position = new Vector3(Random.Range(80.0f, 192.0f), 0.0f, Random.Range(110.0f, 200.0f));
+                position = new Vector3(Random.Range(80.0f, 192.0f), 5.0f, Random.Range(110.0f, 200.0f));
                 break;
             case 5:
-                position = new Vector3(Random.Range(193.0f, 251.0f), 0.0f, Random.Range(120.0f, 200.0f));
+                position = new Vector3(Random.Range(193.0f, 251.0f), 5.0f, Random.Range(120.0f, 200.0f));
                 break;
             case 6:
-                position = new Vector3(Random.Range(0.0f, 166.0f), 0.0f, Random.Range(38.0f, 110.0f));
+                position = new Vector3(Random.Range(0.0f, 166.0f), 5.0f, Random.Range(38.0f, 110.0f));
                 break;
             case 7:
-                position = new Vector3(Random.Range(180.0f, 194.0f), 0.0f, Random.Range(81.0f, 110.0f));
+                position = new Vector3(Random.Range(180.0f, 194.0f), 5.0f, Random.Range(81.0f, 110.0f));
                 break;
         }
 

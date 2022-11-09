@@ -10,6 +10,8 @@ public class NPCObject : MonoBehaviour
     private GameObject _PlayerObject;
     private GameObject _UIManager;
 
+    
+
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -28,7 +30,7 @@ public class NPCObject : MonoBehaviour
         _animator.SetTrigger("move");
         this.transform.LookAt(_PlayerObject.transform);
         
-        //ConversationStart();
+        ConversationStart();
     }
 
     public void ConversationStart()

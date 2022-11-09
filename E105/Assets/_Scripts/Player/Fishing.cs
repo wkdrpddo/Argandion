@@ -62,6 +62,11 @@ public class Fishing : MonoBehaviour
 
     public void DoFishing (int rodIdx, int baitIdx)
     {
+        if (_buff.inColdWave && _buff.redPray) {
+            Debug.Log("호수가 얼어있어 낚시를 하지못합니다 T.T");
+            return ;
+        }
+
         if ( !isFishing ) {
             myRod = rodIdx;
             myBait = baitIdx;

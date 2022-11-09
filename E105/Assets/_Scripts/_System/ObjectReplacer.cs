@@ -6,18 +6,6 @@ public class ObjectReplacer : MonoBehaviour
 {
     public GameObject[] _Object= new GameObject[8];
     public bool _purification;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void updateObject(int index)
     {
         if (_purification) {

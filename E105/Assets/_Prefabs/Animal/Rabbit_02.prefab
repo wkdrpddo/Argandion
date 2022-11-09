@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 3633685016805357019}
   - component: {fileID: 3633685016805357018}
   - component: {fileID: 3633685016805357017}
-  - component: {fileID: 3633685016805357016}
   - component: {fileID: 3633685016805357023}
   - component: {fileID: 3633685016805357022}
   m_Layer: 6
@@ -164,29 +163,12 @@ MonoBehaviour:
   walkTime: 10
   runTime: 5
   anim: {fileID: 3633685016805357018}
-  rigid: {fileID: 3633685016805357016}
+  rigid: {fileID: 0}
   boxCol: {fileID: 3633685016805357023}
-  items: {fileID: 0}
   item20: {fileID: 6777932844636356568, guid: a1b18b75c39e18b449d3b43fd24805a4, type: 3}
   item21: {fileID: 4956551251443665880, guid: 7db8369d420354d41bf2f3bf640abfe5, type: 3}
   item103: {fileID: 7913045582467998978, guid: 6f5a8c07806c99d4491b5493fcc6a58d, type: 3}
   item104: {fileID: 2340880782906982372, guid: 9e161033d7e0147489c7cd4136759e48, type: 3}
---- !u!54 &3633685016805357016
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3633685016805357021}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!65 &3633685016805357023
 BoxCollider:
   m_ObjectHideFlags: 0

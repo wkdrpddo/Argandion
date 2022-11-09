@@ -58,13 +58,12 @@ public class SectorObject : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
 
     public void DayEnd()
+    {
+    }
+
+    public void DayStart()
     {
         Check_Flower();
         Check_Grid();
@@ -112,15 +111,15 @@ public class SectorObject : MonoBehaviour
         MushroomSpawn[] mushroom = this.GetComponentsInChildren<MushroomSpawn>();
         foreach (var grid in grids)
         {
-            grid.DayEnd();
+            grid.DayStart();
         }
         foreach (var point in points)
         {
-            point.DayEnd();
+            point.DayStart();
         }
         foreach (var mush in mushroom)
         {
-            mush.DayEnd();
+            mush.DayStart();
         }
     }
 }
