@@ -96,9 +96,10 @@ public class SystemManager : MonoBehaviour
 
                 // DayEnd();
                 _weatherManager.SetWeather(_season);
-                if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day) {
-                    _buffManager.FlowerBuffEnd();
-                }
+                // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day) {
+                //     _buffManager.FlowerBuffEnd();
+                // }
+                _buffManager.DayEnd();
             }
         }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeatherManager : MonoBehaviour
 {
     public SystemManager systemManager;
+    public BuffManager _buffManager;
 
     private float[] spring = {1.0f, 6.0f, 13.0f, 13.0f, 67.0f};
     private int[] springIdx = {7, 6, 2, 1, 0};
@@ -29,12 +30,8 @@ public class WeatherManager : MonoBehaviour
     private bool while5 = false; // 태풍 중 (태풍-태풍-비를 구현하기 위한 변수)
     private int how5 = 0; // 태풍 몇일째인지 (태풍-태풍-비를 구현하기 위한 변수)
 
-    public int rainyMonth = 0;
-    public int rainyDay = 0;
-    public int coldWindMonth = 0;
-    public int coldWindDay = 0;
-
     private void Start() {
+        _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         SetYearEvent();
     }
 
@@ -99,7 +96,12 @@ public class WeatherManager : MonoBehaviour
     }
 
     private void SetSummer()
-    {
+    {   
+        if (_buffManager.inRainy) { // 장마 시즌일경우 비로 고정
+            systemManager._weather = 1;
+            return ;
+        }
+
         float randomValue = Random.value * 100.0f;
 
         float cumulative = 0.0f;
@@ -182,11 +184,6 @@ public class WeatherManager : MonoBehaviour
         }
     }
 
-    private void inRainySeason()
-    {
-        
-    }
-
     private void SetYearEvent()
     {   
         // 변수 초기화
@@ -198,17 +195,17 @@ public class WeatherManager : MonoBehaviour
         how5 = 0;
         
         // 장마, 한파 날짜 정해주기
-        rainyMonth = Random.Range(2,4);
-        if (rainyMonth == 2) {
-            rainyDay = Random.Range(1,29);
+        _buffManager.rainyMonth = Random.Range(2,4);
+        if (_buffManager.rainyMonth == 2) {
+            _buffManager.rainyDay = Random.Range(1,29);
         } else {
-            rainyDay = Random.Range(1,23);
+            _buffManager.rainyDay = Random.Range(1,23);
         }
-        coldWindMonth = Random.Range(6,8);
-        if (coldWindMonth == 6) {
-            coldWindDay = Random.Range(1,29);
+        _buffManager.coldWaveMonth = Random.Range(6,8);
+        if (_buffManager.coldWaveMonth == 6) {
+            _buffManager.coldWaveDay = Random.Range(1,29);
         } else {
-            coldWindDay = Random.Range(1,16);
+            _buffManager.coldWaveDay = Random.Range(1,16);
         }
     }
 }
