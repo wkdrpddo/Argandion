@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class TransactionAnimalPanel : MonoBehaviour
@@ -11,7 +12,7 @@ public class TransactionAnimalPanel : MonoBehaviour
 
     private bool checkInfo(int cost, int area)
     {
-        if (cost <= ui.getPlayerGlod())
+        if (cost <= ui.getPlayerGold())
         {
             return true;
         }
@@ -76,6 +77,7 @@ public class TransactionAnimalPanel : MonoBehaviour
     public void closePanel()
     {
         gameObject.SetActive(false);
+        ui.runControllPlayer();
         ui.closeTradeModal();
     }
 
@@ -85,8 +87,11 @@ public class TransactionAnimalPanel : MonoBehaviour
         isOnPanel = false;
         ui = gameObject.GetComponentInParent<UIManager>();
 
-        Debug.Log("==============" + transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text);
-        transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGlod().ToString();
+        transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGold().ToString();
+
+        gameObject.transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("닭", 5, -1));
+        gameObject.transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("소", 5, -1));
+        gameObject.transform.GetChild(0).GetChild(2).GetChild(2).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("양", 5, -1));
     }
 
     // Update is called once per frame

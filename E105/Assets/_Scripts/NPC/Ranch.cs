@@ -11,6 +11,7 @@ public class Ranch : MonoBehaviour
     private BuffManager _buff;
     public Inventory theInventory;
     public GameObject item;
+    private UIManager ui;
 
     public int cows = 0;
     public int chicks = 0;
@@ -22,9 +23,9 @@ public class Ranch : MonoBehaviour
     public int eggs = 0;
     public int wool = 0;
 
-    private int[] milkPerDay = {0,0,0,1,1};
-    private int[] eggsPerDay = {0,0,1,1,2};
-    private int[] woolPerDay = {0,1,2,3,4};
+    private int[] milkPerDay = { 0, 0, 0, 1, 1 };
+    private int[] eggsPerDay = { 0, 0, 1, 1, 2 };
+    private int[] woolPerDay = { 0, 1, 2, 3, 4 };
 
 
     // public GameObject[] cowPrefabs = new GameObject[10];
@@ -33,6 +34,8 @@ public class Ranch : MonoBehaviour
 
     void Start()
     {
+        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+
         temp = system._day;
         _buffManagerObject = GameObject.Find("BuffManager");
         _buff = _buffManagerObject.GetComponent<BuffManager>();
@@ -41,7 +44,8 @@ public class Ranch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (temp != system._day) {
+        if (temp != system._day)
+        {
             NewDay();
             temp = system._day;
         }
@@ -49,70 +53,94 @@ public class Ranch : MonoBehaviour
 
     void NewDay()
     {
-        for (int i = 0; i < cows; i ++) {
-            if ( _buff.yellowPray || _buff.yellowSpirit) {
-                int milkToday = milkPerDay[Random.Range(0,5)];
+        for (int i = 0; i < cows; i++)
+        {
+            if (_buff.yellowPray || _buff.yellowSpirit)
+            {
+                int milkToday = milkPerDay[Random.Range(0, 5)];
                 float milkFloat = (float)milkToday;
                 milkFloat *= 1.4f;
                 milk += Mathf.RoundToInt(milkFloat);
-            } else {
-                milk += milkPerDay[Random.Range(0,5)];
+            }
+            else
+            {
+                milk += milkPerDay[Random.Range(0, 5)];
             }
         }
 
-        for (int i = 0; i < chicks; i++) {
-            if ( _buff.yellowPray || _buff.yellowSpirit) {
-                int eggsToday = eggsPerDay[Random.Range(0,5)];
+        for (int i = 0; i < chicks; i++)
+        {
+            if (_buff.yellowPray || _buff.yellowSpirit)
+            {
+                int eggsToday = eggsPerDay[Random.Range(0, 5)];
                 float eggsFloat = (float)eggsToday;
                 eggsFloat *= 1.4f;
                 eggs += Mathf.RoundToInt(eggsFloat);
-            } else {
-                eggs += eggsPerDay[Random.Range(0,5)];
+            }
+            else
+            {
+                eggs += eggsPerDay[Random.Range(0, 5)];
             }
         }
 
-        for (int i = 0; i < sheeps; i++) {
-            if ( _buff.yellowPray || _buff.yellowSpirit) {
-                int woolToday = woolPerDay[Random.Range(0,5)];
+        for (int i = 0; i < sheeps; i++)
+        {
+            if (_buff.yellowPray || _buff.yellowSpirit)
+            {
+                int woolToday = woolPerDay[Random.Range(0, 5)];
                 float woolFloat = (float)woolToday;
                 woolFloat *= 1.4f;
                 wool += Mathf.RoundToInt(woolFloat);
-            } else {
-                wool += woolPerDay[Random.Range(0,5)];
+            }
+            else
+            {
+                wool += woolPerDay[Random.Range(0, 5)];
             }
         }
     }
-    
-    void GetMilk(int howMany)
+
+    public void GetMilk(int howMany)
     {
-        if (milk >= howMany) {
+        if (milk >= howMany)
+        {
             milk -= howMany;
-            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(110),howMany);
+            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(110), howMany);
         }
     }
 
-    void GetWool(int howMany)
+    public void GetWool(int howMany)
     {
-        if (wool >= howMany) {
+        if (wool >= howMany)
+        {
             wool -= howMany;
-            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(505),howMany);
+            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(505), howMany);
         }
     }
 
-    void GetEggs(int howMany)
+    public void GetEggs(int howMany)
     {
-        if (eggs >= howMany) {
+        if (eggs >= howMany)
+        {
             eggs -= howMany;
-            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(111),howMany);
+            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(111), howMany);
         }
     }
 
-    void BuyCow(int howMany)
+    public void BuyCow()
     {
-        int tempPoint = point + (4*howMany);
-        if (theInventory.gold >= (howMany * 1000) && tempPoint <= maxPoint) {
-            cows += howMany;
-            theInventory.gold -= (howMany *1000);
+        int tempPoint = point + 4;
+        if (ui.getPlayerGold() < 1000)
+        {
+            ui.OnResultNotificationPanel("소지금이 부족합니다.");
+        }
+        else if (tempPoint > maxPoint)
+        {
+            ui.OnResultNotificationPanel("농장의 수용량이 부족합니다.");
+        }
+        else
+        {
+            cows++;
+            ui.addPlayerGold(-1000);
             point = tempPoint;
         }
 
@@ -122,31 +150,50 @@ public class Ranch : MonoBehaviour
         // 배열을 두기
     }
 
-    void BuyChick(int howMany)
+    public void BuyChick()
     {
-        int tempPoint = point + (3*howMany);
-        if (theInventory.gold >= (howMany * 650) && tempPoint <= maxPoint) {
-            cows += howMany;
-            theInventory.gold -= (howMany * 650);
+        int tempPoint = point + 3;
+        if (ui.getPlayerGold() < 650)
+        {
+            ui.OnResultNotificationPanel("소지금이 부족합니다.");
+        }
+        else if (tempPoint > maxPoint)
+        {
+            ui.OnResultNotificationPanel("농장의 수용량이 부족합니다.");
+        }
+        else
+        {
+            chicks++;
+            ui.addPlayerGold(-650);
             point = tempPoint;
         }
     }
 
-    void BuySheep(int howMany)
+    public void BuySheep()
     {
-        int tempPoint = point + (2*howMany);
-        if (theInventory.gold >= (howMany * 350) && tempPoint <= maxPoint) {
-            cows += howMany;
-            theInventory.gold -= (howMany * 350);
+        int tempPoint = point + 2;
+        if (ui.getPlayerGold() < 350)
+        {
+            ui.OnResultNotificationPanel("소지금이 부족합니다.");
+        }
+        else if (tempPoint > maxPoint)
+        {
+            ui.OnResultNotificationPanel("농장의 수용량이 부족합니다.");
+        }
+        else
+        {
+            sheeps++;
+            ui.addPlayerGold(-350);
             point = tempPoint;
         }
     }
 
-    void SellCow(int howMany)
+    public void SellCow(int howMany)
     {
-        if (cows >= howMany) { 
+        if (cows >= howMany)
+        {
             cows -= howMany;
-            theInventory.gold += (howMany * 500);
+            ui.addPlayerGold((howMany * 500));
             point -= 4 * howMany;
         }
 
@@ -154,20 +201,22 @@ public class Ranch : MonoBehaviour
 
     }
 
-    void SellChick(int howMany)
+    public void SellChick(int howMany)
     {
-        if (chicks >= howMany) {
+        if (chicks >= howMany)
+        {
             chicks -= howMany;
-            theInventory.gold += (howMany * 325);
+            ui.addPlayerGold((howMany * 325));
             point -= 3 * howMany;
         }
     }
 
-    void SellSheep(int howMany)
+    public void SellSheep(int howMany)
     {
-        if (sheeps >= howMany) {
+        if (sheeps >= howMany)
+        {
             sheeps -= howMany;
-            theInventory.gold += (howMany * 175);
+            ui.addPlayerGold((howMany * 175));
             point -= 2 * howMany;
         }
     }

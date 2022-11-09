@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class CreateCharacter : MonoBehaviour
 {
-    public GameObject _baseuipanel;
+    private UIManager ui;
+    private Image manImg;
+    private Image womanImg;
     public Sprite unselectedMan;
     public Sprite selectedMan;
     public Sprite unselectedWoman;
     public Sprite selectedWoman;
-    public Image manImg;
-    public Image womanImg;
 
     public void selectMan()
     {
@@ -35,13 +35,15 @@ public class CreateCharacter : MonoBehaviour
 
     public void gameStart()
     {
-        _baseuipanel.SetActive(true);
+        ui.OnBaseUIPanel();
         gameObject.SetActive(false);
     }
     // Start is called before the first frame update
     void Start()
     {
-
+        ui = gameObject.GetComponentInParent<UIManager>();
+        manImg = transform.GetChild(5).GetComponentInChildren<Image>();
+        womanImg = transform.GetChild(6).GetComponentInChildren<Image>();
     }
 
     // Update is called once per frame

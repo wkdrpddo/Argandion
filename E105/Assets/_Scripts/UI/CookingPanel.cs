@@ -1,20 +1,169 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+[System.Serializable]
+public class combFoodEffectObject
+{
+    public int ItemCode;
+    public int Health;
+    public int Stamina;
+    public string Effect;
+}
 
 public class CookingPanel : MonoBehaviour
 {
     private UIManager ui;
+
+    public GameObject RecipeCard;
+    public GameObject RecipeText;
+    public GameObject NomalText;
+
+    private GameObject DishContent;
+    private GameObject RecipeContent;
+
+    private combObject[] itemData;
+    private combFoodEffectObject[] effectData;
 
     public void closeWindow()
     {
         gameObject.SetActive(false);
         ui.runControllPlayer();
     }
+
+    public void openCooking()
+    {
+        gameObject.SetActive(true);
+        setDishList();
+    }
+
+    private void setDishList()
+    {
+        deleteDishList();
+
+        string jsonInputString = Application.dataPath + "/Data/Json/CombFood.json";
+        string jsonString = File.ReadAllText(jsonInputString);
+        itemData = JsonHelper.FromJson<combObject>(jsonString);
+
+        for (int i = 0; i < itemData.Length; i++)
+        {
+            combObject combObj = itemData[i];
+            ItemObject itemObj = ui.findItem(combObj.Result);
+
+            GameObject dishBtn = Instantiate(RecipeCard, DishContent.transform);
+
+            dishBtn.transform.GetChild(0).GetComponent<Image>().sprite = ui.getItemIcon(itemObj.ItemCode);
+            dishBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemObj.Name;
+            dishBtn.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = itemObj.Desc;
+
+            int index = i;
+            dishBtn.GetComponent<Button>().onClick.AddListener(() => setRecipeList(index));
+        }
+    }
+
+    private void setRecipeList(int value)
+    {
+        deleteRecipeList();
+
+        combObject combObj = itemData[value];
+
+        GameObject nomalText1 = Instantiate(NomalText, RecipeContent.transform);
+        nomalText1.GetComponent<TextMeshProUGUI>().text = "재  료";
+
+        if (combObj.Material1 != 0)
+        {
+            createRecipeCard(combObj.Material1, combObj.Cost1);
+        }
+        if (combObj.Material2 != 0)
+        {
+            createRecipeCard(combObj.Material2, combObj.Cost2);
+        }
+        if (combObj.Material3 != 0)
+        {
+            createRecipeCard(combObj.Material3, combObj.Cost3);
+        }
+        if (combObj.Material4 != 0)
+        {
+            createRecipeCard(combObj.Material4, combObj.Cost4);
+        }
+        if (combObj.Material5 != 0)
+        {
+            createRecipeCard(combObj.Material5, combObj.Cost5);
+        }
+        if (combObj.Material6 != 0)
+        {
+            createRecipeCard(combObj.Material6, combObj.Cost6);
+        }
+
+        GameObject dividLine = Instantiate(NomalText, RecipeContent.transform);
+        dividLine.GetComponent<TextMeshProUGUI>().text = "-------------------------";
+        dividLine.GetComponent<TextMeshProUGUI>().fontSize = 12;
+
+        GameObject nomalText2 = Instantiate(NomalText, RecipeContent.transform);
+        nomalText2.GetComponent<TextMeshProUGUI>().text = "효  과";
+
+        string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/CombFoodEffect.json");
+        effectData = JsonHelper.FromJson<combFoodEffectObject>(jsonString);
+
+        // 효과 text 추가
+        combFoodEffectObject effectObj = effectData[value];
+
+        GameObject effectText1 = Instantiate(NomalText, RecipeContent.transform);
+        effectText1.GetComponent<TextMeshProUGUI>().text = "   체력 +" + effectObj.Health;
+        effectText1.GetComponent<TextMeshProUGUI>().fontSize = 16;
+        GameObject effectText2 = Instantiate(NomalText, RecipeContent.transform);
+        effectText2.GetComponent<TextMeshProUGUI>().text = "   기력 +" + effectObj.Stamina;
+        effectText2.GetComponent<TextMeshProUGUI>().fontSize = 16;
+        if (effectObj.Effect != null)
+        {
+            GameObject effectText3 = Instantiate(NomalText, RecipeContent.transform);
+            effectText3.GetComponent<TextMeshProUGUI>().text = "   " + effectObj.Effect;
+            effectText3.GetComponent<TextMeshProUGUI>().fontSize = 16;
+        }
+    }
+
+    private void createRecipeCard(int material, int count)
+    {
+        GameObject metarialCard = Instantiate(RecipeText, RecipeContent.transform);
+        ItemObject itemObj = ui.findItem(material);
+
+        metarialCard.transform.GetChild(0).GetComponent<Image>().sprite = ui.getItemIcon(material);
+        metarialCard.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemObj.Name + "  " + count;
+    }
+
+    private void deleteDishList()
+    {
+        RectTransform[] craftObjs = DishContent.GetComponentsInChildren<RectTransform>();
+        for (int i = 1; i < craftObjs.Length; i++)
+        {
+            if (craftObjs[i] != DishContent.GetComponent<RectTransform>())
+            {
+                Destroy(craftObjs[i].gameObject);
+            }
+        }
+    }
+
+    private void deleteRecipeList()
+    {
+        RectTransform[] craftObjs = RecipeContent.GetComponentsInChildren<RectTransform>();
+        for (int i = 1; i < craftObjs.Length; i++)
+        {
+            if (craftObjs[i] != RecipeContent.GetComponent<RectTransform>())
+            {
+                Destroy(craftObjs[i].gameObject);
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         ui = gameObject.GetComponentInParent<UIManager>();
+        DishContent = transform.GetChild(1).GetChild(1).GetChild(0).GetChild(0).gameObject;
+        RecipeContent = transform.GetChild(2).GetChild(1).GetChild(0).GetChild(0).gameObject;
     }
 
     // Update is called once per frame

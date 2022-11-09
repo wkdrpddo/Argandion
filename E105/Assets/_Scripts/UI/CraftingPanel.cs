@@ -26,15 +26,11 @@ public class combObject
 public class CraftingPanel : MonoBehaviour
 {
     private UIManager ui;
-    public GameObject craftItemButton;
-    private Item _itemmanager;
-    private GameObject ScrollContent;
-
-    public void closeWindow()
-    {
-        gameObject.SetActive(false);
-        ui.runControllPlayer();
-    }
+    public GameObject _craftItemButton;
+    public GameObject _metarialsCard;
+    private GameObject _scrollcontent;
+    private GameObject _metarialsgrid;
+    private combObject[] itemData;
 
     public void OnPanel(int value)
     {
@@ -62,25 +58,138 @@ public class CraftingPanel : MonoBehaviour
         }
 
         string jsonString = File.ReadAllText(jsonInputString);
-        combObject[] itemData = JsonHelper.FromJson<combObject>(jsonString);
+        itemData = JsonHelper.FromJson<combObject>(jsonString);
 
         for (int i = 0; i < itemData.Length; i++)
         {
             combObject combObj = itemData[i];
-            ItemObject itemObject = _itemmanager.FindItem(combObj.Result);
+            ItemObject itemObject = ui.findItem(combObj.Result);
 
-            GameObject craftBtn = Instantiate(craftItemButton, ScrollContent.transform);
-            RectTransform craftBtnRect = craftBtn.GetComponent<RectTransform>();
+            GameObject craftBtn = Instantiate(_craftItemButton, _scrollcontent.transform);
 
-            // craftBtnRect.
+            craftBtn.transform.GetChild(0).GetComponent<Image>().sprite = ui.getItemIcon(itemObject.ItemCode);
+            craftBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemObject.Name;
+            craftBtn.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = itemObject.Desc;
+
+            int index = i;
+            craftBtn.GetComponent<Button>().onClick.AddListener(() => setMetarialsList(index));
         }
     }
+
+    private void setMetarialsList(int value)
+    {
+        deleteMetarialList();
+
+        combObject combObj = itemData[value];
+        if (combObj.Material1 == 0)
+        {
+            createNullCard();
+        }
+        else
+        {
+            createMetarialCard(combObj.Material1, combObj.Cost1);
+        }
+
+        if (combObj.Material2 == 0)
+        {
+            createNullCard();
+        }
+        else
+        {
+            createMetarialCard(combObj.Material2, combObj.Cost2);
+        }
+        if (combObj.Material3 == 0)
+        {
+            createNullCard();
+        }
+        else
+        {
+            createMetarialCard(combObj.Material3, combObj.Cost3);
+        }
+        if (combObj.Material4 == 0)
+        {
+            createNullCard();
+        }
+        else
+        {
+            createMetarialCard(combObj.Material4, combObj.Cost4);
+        }
+        if (combObj.Material5 == 0)
+        {
+            createNullCard();
+        }
+        else
+        {
+            createMetarialCard(combObj.Material5, combObj.Cost5);
+        }
+        if (combObj.Material6 == 0)
+        {
+            createNullCard();
+        }
+        else
+        {
+            createMetarialCard(combObj.Material6, combObj.Cost6);
+        }
+    }
+
+    private void createMetarialCard(int material, int count)
+    {
+        GameObject metarialCard = Instantiate(_metarialsCard, _metarialsgrid.transform);
+        ItemObject itemObj = ui.findItem(material);
+
+        metarialCard.transform.GetChild(0).GetComponent<Image>().sprite = ui.getItemIcon(itemObj.ItemCode);
+        metarialCard.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemObj.Name;
+        metarialCard.transform.GetChild(2).GetComponentInChildren<TextMeshProUGUI>().text = count.ToString();
+    }
+
+    private void createNullCard()
+    {
+        GameObject metarialCard = Instantiate(_metarialsCard, _metarialsgrid.transform);
+        metarialCard.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+        metarialCard.transform.GetChild(0).gameObject.SetActive(false);
+        metarialCard.transform.GetChild(1).gameObject.SetActive(false);
+        metarialCard.transform.GetChild(2).gameObject.SetActive(false);
+    }
+
+    private void deleteMetarialList()
+    {
+        RectTransform[] metarialObjs = _metarialsgrid.GetComponentsInChildren<RectTransform>();
+        for (int i = 1; i < metarialObjs.Length; i++)
+        {
+            if (metarialObjs[i] != _metarialsgrid.GetComponent<RectTransform>())
+            {
+                Destroy(metarialObjs[i].gameObject);
+            }
+        }
+    }
+
+    private void deleteCraftList()
+    {
+        RectTransform[] craftObjs = _scrollcontent.GetComponentsInChildren<RectTransform>();
+        for (int i = 1; i < craftObjs.Length; i++)
+        {
+            if (craftObjs[i] != _scrollcontent.GetComponent<RectTransform>())
+            {
+                Destroy(craftObjs[i].gameObject);
+            }
+        }
+    }
+
+    public void closePanel()
+    {
+        gameObject.SetActive(false);
+        deleteMetarialList();
+        deleteCraftList();
+        ui.runControllPlayer();
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
         ui = gameObject.GetComponentInParent<UIManager>();
-        _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();
-        ScrollContent = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).gameObject;
+        _scrollcontent = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).gameObject;
+        _metarialsgrid = transform.GetChild(1).GetChild(1).gameObject;
     }
 
     // Update is called once per frame

@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 2660478888905864122}
   - component: {fileID: 2660478888905864100}
   - component: {fileID: 2660478888905864123}
+  - component: {fileID: 1516491003932766632}
   m_Layer: 5
   m_Name: CreateCharacter
   m_TagString: Untagged
@@ -236,6 +237,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1516491003932766632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2660478888905864121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f4417470a13e74099e9e3ccae61c30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unselectedMan: {fileID: 21300000, guid: d88ffe7e1f2d67d4987e318cb7cc4080, type: 3}
+  selectedMan: {fileID: 21300000, guid: 8f3aa511be92dcc41adc1abf9c1345c4, type: 3}
+  unselectedWoman: {fileID: 21300000, guid: 841b8b826ea1a6b44b9385a5f3c8cf06, type: 3}
+  selectedWoman: {fileID: 21300000, guid: d3bdc6d9e1409514694529e1960cc09b, type: 3}
 --- !u!1 &2660478888954775433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2660478889480061490}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1516491003932766632}
+        m_TargetAssemblyTypeName: CreateCharacter, Assembly-CSharp
+        m_MethodName: gameStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2660478889513380297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,7 +1610,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2660478889914253455}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1516491003932766632}
+        m_TargetAssemblyTypeName: CreateCharacter, Assembly-CSharp
+        m_MethodName: backToMain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2660478890044450702
 GameObject:
   m_ObjectHideFlags: 0
