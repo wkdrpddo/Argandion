@@ -5,22 +5,33 @@ using TMPro;
 
 public class TransactionDoubleCheck : MonoBehaviour
 {
-    [SerializeField] private GameObject _npcmanager;
+    [SerializeField] private Ranch _ranch;
     [SerializeField] private UIManager ui;
     [SerializeField] private int storeIndex;
     [SerializeField] private int itemIndex;
-    public Ranch ranch;
+    [SerializeField] private int itemCode;
+
+    // public Inventory _inventory;
 
     public void handleModal()
     {
+        if (storeIndex != 5)
+        {
+            if (ui.checkInventory(ui.findItem(itemCode), 1, true))
+            {
+                ui.OnResultNotificationPanel("구매가 불가능 합니다. 인벤토리를 확인 해 주세요!!");
+                return;
+            }
+        }
         gameObject.SetActive(!gameObject.activeSelf);
     }
 
-    public void setData(string name, int storeIdx, int itemIdx)
+    public void setData(string name, int storeIdx, int itemIdx, int itemCode)
     {
         gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name + " 을(를) 구매하시겠습니까?";
         storeIndex = storeIdx;
         itemIndex = itemIdx;
+        this.itemCode = itemCode;
     }
 
     public void clickOK()
@@ -38,21 +49,22 @@ public class TransactionDoubleCheck : MonoBehaviour
             case 5:
                 if (itemIndex == 1)
                 {
-                    _npcmanager.GetComponent<Ranch>().BuySheep();
+                    _ranch.BuySheep();
                 }
                 else if (itemIndex == 2)
                 {
-                    _npcmanager.GetComponent<Ranch>().BuyChick();
+                    _ranch.BuyChick();
                 }
                 else if (itemIndex == 3)
                 {
-                    _npcmanager.GetComponent<Ranch>().BuyCow();
+                    _ranch.BuyCow();
                 }
                 else
                 {
                     Debug.LogError("인수관계가 잘못 되었습니다.");
                 }
 
+                ui.syncAnimalPanel(_ranch.getPoint(), _ranch.sheeps, _ranch.chicks, _ranch.cows);
                 handleModal();
                 break;
             case 6:
@@ -63,7 +75,7 @@ public class TransactionDoubleCheck : MonoBehaviour
     void Start()
     {
         ui = GameObject.Find("UIManager").GetComponent<UIManager>();
-        _npcmanager = GameObject.Find("NPCManager");
+        _ranch = GameObject.Find("NPCManager").GetComponent<Ranch>();
         storeIndex = -1;
         itemIndex = -1;
     }

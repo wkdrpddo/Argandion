@@ -15,6 +15,17 @@ public class ResultNotificationPanel : MonoBehaviour
     public void handelNoti(string inputText)
     {
         gameObject.SetActive(!gameObject.activeSelf);
-        _notitext.text = inputText;
+
+        if (inputText != "")
+        {
+            _notitext.text = inputText;
+        }
+
+        Invoke("closeNoti", 1.5f);
+    }
+
+    private void closeNoti()
+    {
+        gameObject.SetActive(false);
     }
 }

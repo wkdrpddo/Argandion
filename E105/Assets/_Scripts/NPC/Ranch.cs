@@ -63,6 +63,11 @@ public class Ranch : MonoBehaviour
         }
     }
 
+    public int getPoint()
+    {
+        return point;
+    }
+
     void NewDay()
     {
         for (int i = 0; i < cows; i++)
@@ -233,7 +238,7 @@ public class Ranch : MonoBehaviour
             // cowPrefab 삭제하고 리스트에서 삭제하기
             for (int i = howMany - 1; i >= cows; i--)
             {
-                Destroy(cowPrefabs[i], 10f);
+                Destroy(cowPrefabs[i], 0.5f);
             }
 
             cows -= howMany;
@@ -252,7 +257,7 @@ public class Ranch : MonoBehaviour
 
             for (int i = howMany - 1; i >= chicks; i--)
             {
-                Destroy(chickenPrefabs[i], 10f);
+                Destroy(chickenPrefabs[i], 0.5f);
             }
 
             chicks -= howMany;
@@ -268,7 +273,7 @@ public class Ranch : MonoBehaviour
 
             for (int i = howMany - 1; i >= sheeps; i--)
             {
-                Destroy(sheepPrefabs[i], 10f);
+                Destroy(sheepPrefabs[i], 0.5f);
             }
 
             sheeps -= howMany;

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public static bool invectoryActivated = false;  // 인벤토리 활성화 여부.
-    public int gold = 500000; // 현재 소유 골드
     private RectTransform uiGroup;
 
     [SerializeField]

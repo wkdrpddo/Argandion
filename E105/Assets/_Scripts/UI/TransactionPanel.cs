@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 [System.Serializable]
 public class buyingObject
@@ -83,6 +84,16 @@ public class TransactionPanel : MonoBehaviour
             productBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemObject.Name;
             productBtn.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = buyingObject.Cost.ToString();
             productBtn.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = itemObject.Desc;
+
+            int itemIdx = i;
+            int pos = Array.IndexOf(multiBuyItemCode, buyingObject.Result);
+            if (pos == -1)
+            {
+                productBtn.GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel(itemObject.Name, value, itemIdx, itemObject.ItemCode));
+            }
+            else
+            {
+            }
         }
     }
 
@@ -101,4 +112,6 @@ public class TransactionPanel : MonoBehaviour
         ui.runControllPlayer();
         ui.OnInventory(2);
     }
+
+    private int[] multiBuyItemCode = new int[] { 4, 323, 324, 500, 501, 502, 503, 504 };
 }

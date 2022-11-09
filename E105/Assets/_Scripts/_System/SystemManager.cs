@@ -46,6 +46,8 @@ public class SystemManager : MonoBehaviour
         _sectors = MapObject.GetComponentsInChildren<SectorObject>();
         _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
+
+        _player_gold = 50000;
     }
 
     // Update is called once per frame
@@ -101,7 +103,8 @@ public class SystemManager : MonoBehaviour
 
                 DayEnd();
                 _weatherManager.SetWeather(_season);
-                if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day) {
+                if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
+                {
                     _buffManager.FlowerBuffEnd();
                 }
                 _buffManager.DayEnd();

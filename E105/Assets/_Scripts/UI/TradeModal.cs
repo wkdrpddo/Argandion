@@ -6,17 +6,28 @@ using TMPro;
 
 public class TradeModal : MonoBehaviour
 {
-    /*
-        1. 동물 판매
-        2. 아이템 구매
-        3. 아이템 판매
+    /* checkMod
+        0. 판매 = 목장 과 그 외
+        1. 구매 - 각각 구분 필요 [5번 제외]
+
+        storeIdx
+        1. 재단사
+        2. 공방
+        3. 호수
+        4. 대장간
+        5. 목장
+        6. 사냥꾼
     */
 
-    private int tradeMod;
-    private int tradeCost;
-    private string iconName;
+    [SerializeField] private Ranch _ranch;
+    [SerializeField] private UIManager ui;
+    [SerializeField] private int tradeMod;
+    [SerializeField] private int tradeCost;
+    [SerializeField] private string iconName;
+    [SerializeField] private int storeIndex;
+    [SerializeField] private int itemIndex;
 
-    public void setModal(string name, string iconName, int maxCnt, int checkMod, int cost)
+    public void setModal(string name, string iconName, int maxCnt, int cost, int checkMod, int storeIdx, int itemIdx)
     {
         gameObject.SetActive(true);
         transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + iconName);
@@ -27,6 +38,8 @@ public class TradeModal : MonoBehaviour
         tradeMod = checkMod;
         tradeCost = cost;
         this.iconName = iconName;
+        storeIndex = storeIdx;
+        itemIndex = itemIdx;
     }
 
     public void closeModal()
@@ -37,17 +50,50 @@ public class TradeModal : MonoBehaviour
     public void clickOk()
     {
         int tradeCount = (int)gameObject.GetComponentInChildren<Slider>().value;
-        int calculCost = tradeCount * tradeCost;
-        switch (tradeMod)
+
+        Debug.Log("====== click On function ======");
+        if (tradeMod == 0)
         {
-            case 1:
-                // 해당 동물 수, 수용량, 
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
+            sellEvent(tradeCount);
         }
+        else
+        {
+            buyEvent(tradeCount);
+        }
+    }
+
+    private void sellEvent(int tradeCnt)
+    {
+        Debug.Log("------ ------ sellEvent function ------ ------");
+        if (storeIndex == 5)
+        {
+            switch (itemIndex)
+            {
+                case 1:
+                    _ranch.SellSheep(tradeCnt);
+                    break;
+                case 2:
+                    _ranch.SellChick(tradeCnt);
+                    break;
+                case 3:
+                    _ranch.SellCow(tradeCnt);
+                    break;
+                default:
+                    Debug.LogError("인수 관계가 잘못되었습니다");
+                    break;
+            }
+            ui.syncAnimalPanel(_ranch.getPoint(), _ranch.sheeps, _ranch.chicks, _ranch.cows);
+            closeModal();
+        }
+        else
+        {
+
+        }
+    }
+
+    private void buyEvent(int tradeCnt)
+    {
+
     }
 
     public void matchSliderValue()
@@ -57,7 +103,8 @@ public class TradeModal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _ranch = GameObject.Find("NPCManager").GetComponent<Ranch>();
+        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
     // Update is called once per frame

@@ -38,9 +38,9 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI _announceTitle;
     public TextMeshProUGUI _announceText;
 
-    [SerializeField] private GameObject _nowequip;
+    private GameObject _nowequip;
 
-    private SystemManager _systemmanager;
+    [SerializeField] private SystemManager _systemmanager;
     private PlayerSystem _playersystem;
     private Item _itemmanager;
 
@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
     public int conversationNPC = 0;
     private int selectCharacter = -1;
     private bool isPressESC = false;
-    private bool isGameStart = false;
+    // private bool isGameStart = false;
     private bool isMyHome = false;
 
 
@@ -73,11 +73,6 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isGameStart = false;
-
-        // GameObject.Find("SoundManager").GetComponent<SoundManager>()._optionpanel = GameObject.Find("OptionPanel");
-        // GameObject.Find("SoundManager").GetComponent<SoundManager>()._optionpanelfrommain = GameObject.Find("OptionPanelFromMainPage");
-
         _systemmanager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         _playersystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
         _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();
@@ -160,14 +155,14 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetButtonDown("InventoryKey"))
         {
-            if (isGameStart)
+            if (getGameState())
             {
                 OnInventoryPanel();
             }
         }
         if (Input.GetButtonDown("mapKey"))
         {
-            if (isGameStart && !isMyHome)
+            if (getGameState() && !isMyHome)
             {
                 OnMapUIPanel();
             }
@@ -224,8 +219,8 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                // int randomNum = Random.Range(1, 11);
-                int randomNum = 5;
+                int randomNum = Random.Range(1, 11);
+                // int randomNum = 5;
                 switch (conversationCnt)
                 {
                     case -1:
@@ -315,12 +310,13 @@ public class UIManager : MonoBehaviour
     public void OnMainPagePanel()
     {
         _mainpage.gameObject.SetActive(true);
-        isGameStart = false;
+        setGameState(false);
+        // isGameStart = false;
     }
 
     public void OnMapUIPanel()
     {
-        if (isGameStart)
+        if (getGameState())
         {
             if (_mapuipanel.activeSelf)
             {
@@ -343,15 +339,15 @@ public class UIManager : MonoBehaviour
         _resultnotificationpanel.GetComponent<ResultNotificationPanel>().handelNoti(text);
     }
 
-    public void OnTransactionDoubleCheckPanel(string name, int store, int itemIdx)
+    public void OnTransactionDoubleCheckPanel(string name, int store, int itemIdx, int itemCode)
     {
+        _transactiondoublecheck.setData(name, store, itemIdx, itemCode);
         _transactiondoublecheck.handleModal();
-        _transactiondoublecheck.setData(name, store, itemIdx);
     }
 
-    public void OnTradeModal(string name, string iconName, int maxCnt, int checkMod, int cost)
+    public void OnTradeModal(string name, string iconName, int maxCnt, int cost, int checkMod, int storeIdx, int itemIdx)
     {
-        _trademodal.GetComponent<TradeModal>().setModal(name, iconName, maxCnt, checkMod, cost);
+        _trademodal.GetComponent<TradeModal>().setModal(name, iconName, maxCnt, cost, checkMod, storeIdx, itemIdx);
     }
 
     public void closeTradeModal()
@@ -406,6 +402,12 @@ public class UIManager : MonoBehaviour
 
     // ======================= Base UI 관련 함수 끝
 
+    // 동물 수 동기화 함수
+    public void syncAnimalPanel(int capacity, int sheepCnt, int chickenCnt, int cowCnt)
+    {
+        _transactionanimalpanel.syncRanchData(capacity, sheepCnt, chickenCnt, cowCnt);
+    }
+
     // ESC 클릭 시 동작
     public void pressedESC()
     {
@@ -413,7 +415,7 @@ public class UIManager : MonoBehaviour
 
         if (isPressESC)
         {
-            if (isGameStart)
+            if (getGameState())
             {
                 _optionpanel.gameObject.SetActive(true);
             }
@@ -425,7 +427,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            if (isGameStart)
+            if (getGameState())
             {
                 _optionpanel.gameObject.SetActive(false);
             }
@@ -435,6 +437,13 @@ public class UIManager : MonoBehaviour
             }
             _playersystem._canMove = true;
         }
+    }
+
+    // inventory 접근 함수
+    public bool checkInventory(ItemObject _item, int _count, bool _sec)
+    {
+        Inventory inven = _inventory.transform.GetChild(1).GetComponent<Inventory>();
+        return inven.CheckInven(_item, _count, _sec);
     }
 
     // 플레이어 조작 정지
@@ -470,36 +479,35 @@ public class UIManager : MonoBehaviour
     // 소지금 관련
     public int getPlayerGold()
     {
-        // int gold = _systemmanager.getPlayerGold();
-        // _invenMoney.text = gold.ToString();
-        // return gold;
-        return 5000;
+        int gold = _systemmanager.getPlayerGold();
+        _invenMoney.text = gold.ToString();
+        return gold;
     }
 
     public void addPlayerGold(int value)
     {
-        // _systemmanager.addPlayerGold(value);
-        // _invenMoney.text = getPlayerGold().ToString();
+        _systemmanager.addPlayerGold(value);
+        _invenMoney.text = getPlayerGold().ToString();
     }
 
     // 게임 시작 종료
     public void setGameState(bool value)
     {
-        // _systemmanager.setGameState(value);
-        isGameStart = value;
+        _systemmanager.setGameState(value);
+        // isGameStart = value;
     }
 
     public bool getGameState()
     {
-        // return _systemmanager.getGameState();
-        return isGameStart;
+        return _systemmanager.getGameState();
+        // return isGameStart;
     }
 
     public void QuitGame()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-#endif      
+#endif
         Application.Quit();
     }
 }

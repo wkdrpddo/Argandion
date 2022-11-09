@@ -5,37 +5,37 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    private int Sound_Background = 20;
-    private int Sound_Effect = 20;
+    private float Sound_Background = 20;
+    private float Sound_Effect = 20;
 
     // option panal
-    public GameObject _optionpanel;
-    public GameObject _optionpanelfrommain;
+    // public GameObject _optionpanel;
+    // public GameObject _optionpanelfrommain;
 
     public void setBackgroundSound(Slider slider)
     {
-        Sound_Background = (int)slider.value;
-        _optionpanel.transform.Find("BackgroundSlider").gameObject.GetComponent<Slider>().value = Sound_Background;
-        _optionpanelfrommain.transform.Find("BackgroundSlider").gameObject.GetComponent<Slider>().value = Sound_Background;
+        Sound_Background = slider.value;
     }
 
     public void setEffectSound(Slider slider)
     {
-        Sound_Effect = (int)slider.value;
-        _optionpanel.transform.Find("EffectSlider").gameObject.GetComponent<Slider>().value = Sound_Effect;
-        _optionpanelfrommain.transform.Find("EffectSlider").gameObject.GetComponent<Slider>().value = Sound_Effect;
+        Sound_Effect = slider.value;
+    }
+
+    public float getBackgroundSound()
+    {
+        return Sound_Background;
+    }
+
+    public float getEffectSound()
+    {
+        return Sound_Effect;
     }
 
     // Start is called before the first frame update
-    // void Start()
-    // {
-    //     Debug.Log(_optionpanel);
-    //     _optionpanel.transform.Find("BackgroundSlider").gameObject.GetComponent<Slider>().value = Sound_Background;
-    //     _optionpanelfrommain.transform.Find("BackgroundSlider").gameObject.GetComponent<Slider>().value = Sound_Background;
-    //     _optionpanel.transform.Find("EffectSlider").gameObject.GetComponent<Slider>().value = Sound_Effect;
-    //     _optionpanelfrommain.transform.Find("EffectSlider").gameObject.GetComponent<Slider>().value = Sound_Effect;
-
-    // }
+    void Start()
+    {
+    }
 
     // Update is called once per frame
     void Update()
