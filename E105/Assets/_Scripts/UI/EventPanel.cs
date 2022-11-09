@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 // 이벤트 관련 코드
 public class EventPanel : MonoBehaviour
 {
@@ -21,11 +22,11 @@ public class EventPanel : MonoBehaviour
 
     void Start()
     {
-        setEventIcon(1);
-        setEventIcon(50);
-        setEventIcon(100);
-        setEventIcon(101);
-        setEventIcon(102);
+        // setEventIcon(1);
+        // setEventIcon(50);
+        // setEventIcon(100);
+        // setEventIcon(101);
+        // setEventIcon(102);
     }
 
     // 테스트용 업데이트
@@ -33,7 +34,7 @@ public class EventPanel : MonoBehaviour
     {
         if (_setTest)
         {
-            setEventIcon(_testNum);
+            // setEventIcon(_testNum);
             _setTest = false;
         }
         if (_delTest)
@@ -84,7 +85,7 @@ public class EventPanel : MonoBehaviour
     // 아이콘 생성 및 이미지 변경
     // 정령 버프 중이면 나중에 들어온 걸로 교체
     // 계절이랑 음식은 시간 안 띄우니까 나중에 들어온 거 무시 => delete 함수 콜할 때 시간 리셋만 해주면 될 듯
-    public void setEventIcon(int imgNum)
+    public void setEventIcon(int imgNum, DescriptObj descObj)
     {
         // 아이콘 생성
         GameObject icon;
@@ -127,6 +128,8 @@ public class EventPanel : MonoBehaviour
         icon.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = iconImg;
         // 아이콘 번호 부여
         icon.GetComponent<EventIcon>()._iconNum = imgNum;
+        // 아이콘 hover 정보 부여
+        icon.GetComponent<EventIcon>()._descriptObj = descObj;
         // panel 부분 활성화/비활성화
         activePanel();
     }

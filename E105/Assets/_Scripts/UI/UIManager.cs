@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
     private GameObject _notificationpanel;
 
     public GameObject _eventAnnounce;
+    public TextMeshProUGUI _announceTitle;
     public TextMeshProUGUI _announceText;
 
     private GameObject _nowequip;
@@ -126,7 +127,8 @@ public class UIManager : MonoBehaviour
         _notificationpanel.SetActive(false);
 
         _eventAnnounce = GameObject.Find("EventUIAnnounce");
-        _announceText = _eventAnnounce.GetComponentInChildren<TextMeshProUGUI>();
+        _announceTitle = _eventAnnounce.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
+        _announceText = _eventAnnounce.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
         _eventAnnounce.SetActive(false);
 
         _nowequip = GameObject.Find("NowEquip");

@@ -46,7 +46,7 @@ public class BuildingChange : MonoBehaviour
         if (_dayEndTest)
         {
             Debug.Log("dayEnd");
-            DayEnd();
+            DayStart();
             _dayEndTest = false;
         }
 
