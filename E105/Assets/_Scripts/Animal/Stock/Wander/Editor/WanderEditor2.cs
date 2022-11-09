@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Wander))]
+[CustomEditor(typeof(Wander2))]
 public class WanderEditor2 : Editor
 {
-    private Wander wander;
+    private Wander2 wander;
 
     private float minValue = 0f;
     private float maxValue = 10f;
 
     public void OnEnable()
     {
-        wander = (Wander)target;
+        wander = (Wander2)target;
     }
 
     public override void OnInspectorGUI()

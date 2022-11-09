@@ -18,7 +18,9 @@ public class Wander2 : MonoBehaviour
         }
         set
         {
+#if UNITY_EDITOR
             Undo.RecordObject(this, "Change Walk Speed");
+#endif
             walkSpeed = value;
         }
 
@@ -34,7 +36,9 @@ public class Wander2 : MonoBehaviour
         }
         set
         {
+#if UNITY_EDITOR
             Undo.RecordObject(this, "Change Turn Speed");
+#endif
             turnSpeed = value;
         }
     }
@@ -49,7 +53,9 @@ public class Wander2 : MonoBehaviour
         }
         set
         {
+#if UNITY_EDITOR
             Undo.RecordObject(this, "Change Min Idle Time");
+#endif      
             minIdleTime = Mathf.Clamp(value, 0, maxIdleTime);
         }
     }
@@ -64,8 +70,9 @@ public class Wander2 : MonoBehaviour
         }
         set
         {
-
+#if UNITY_EDITOR
             Undo.RecordObject(this, "Change Max Idle Time");
+#endif    
             maxIdleTime = Mathf.Clamp(value, minIdleTime, 20);
         }
     }
@@ -82,8 +89,8 @@ public class Wander2 : MonoBehaviour
         {
 #if UNITY_EDITOR
             SceneView.RepaintAll();
-#endif
             Undo.RecordObject(this, "Change Wander Range");
+#endif
             wanderRange = value;
         }
     }
