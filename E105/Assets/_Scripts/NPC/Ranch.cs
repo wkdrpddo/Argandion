@@ -206,14 +206,17 @@ public class Ranch : MonoBehaviour
         int tempPoint = point + 2;
         if (ui.getPlayerGold() < 350)
         {
+            Debug.Log("소지금 부족 오류");
             ui.OnResultNotificationPanel("소지금이 부족합니다.");
         }
         else if (tempPoint > maxPoint)
         {
+            Debug.Log("수용량 부족 오류");
             ui.OnResultNotificationPanel("농장의 수용량이 부족합니다.");
         }
         else
         {
+            Debug.Log("정상 동작");
             GameObject addData = Instantiate(sheepPrefab, getRandonPoint(), Quaternion.identity);
             sheepPrefabs.Add(addData);
 

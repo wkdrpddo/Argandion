@@ -224,8 +224,8 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                int randomNum = Random.Range(1, 11);
-                // int randomNum = 1;
+                // int randomNum = Random.Range(1, 11);
+                int randomNum = 5;
                 switch (conversationCnt)
                 {
                     case -1:

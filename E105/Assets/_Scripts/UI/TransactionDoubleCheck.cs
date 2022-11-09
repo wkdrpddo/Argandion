@@ -5,10 +5,11 @@ using TMPro;
 
 public class TransactionDoubleCheck : MonoBehaviour
 {
-    [SerializeField] private NPCManager _npcmanager;
+    [SerializeField] private GameObject _npcmanager;
     [SerializeField] private UIManager ui;
-    private int storeIndex;
-    private int itemIndex;
+    [SerializeField] private int storeIndex;
+    [SerializeField] private int itemIndex;
+    public Ranch ranch;
 
     public void handleModal()
     {
@@ -17,7 +18,7 @@ public class TransactionDoubleCheck : MonoBehaviour
 
     public void setData(string name, int storeIdx, int itemIdx)
     {
-        gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name + " 을(를) 판매하시겠습니까?";
+        gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name + " 을(를) 구매하시겠습니까?";
         storeIndex = storeIdx;
         itemIndex = itemIdx;
     }
@@ -62,7 +63,7 @@ public class TransactionDoubleCheck : MonoBehaviour
     void Start()
     {
         ui = GameObject.Find("UIManager").GetComponent<UIManager>();
-        _npcmanager = GameObject.Find("NPCManager").GetComponent<NPCManager>();
+        _npcmanager = GameObject.Find("NPCManager");
         storeIndex = -1;
         itemIndex = -1;
     }
