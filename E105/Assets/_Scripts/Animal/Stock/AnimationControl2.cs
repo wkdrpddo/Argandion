@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationControl : MonoBehaviour {
+public class AnimationControl2 : MonoBehaviour {
 
 
 	string currentAnimation="";

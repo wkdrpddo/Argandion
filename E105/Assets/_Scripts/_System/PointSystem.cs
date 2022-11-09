@@ -14,14 +14,7 @@ public class PointSystem : MonoBehaviour
     {
         _Sector = this.GetComponentInParent<SectorObject>();
         _base_transform = gameObject.transform;
-        
-        DayEnd();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+    
     }
 
     public void DayStart()

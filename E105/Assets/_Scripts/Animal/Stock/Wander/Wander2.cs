@@ -5,7 +5,7 @@ using UnityEditor;
 #endif
 
 [RequireComponent(typeof(Animator)), RequireComponent(typeof(Rigidbody))]
-public class Wander : MonoBehaviour
+public class Wander2 : MonoBehaviour
 {
 
     [SerializeField]

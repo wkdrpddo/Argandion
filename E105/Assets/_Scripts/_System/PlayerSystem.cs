@@ -65,8 +65,9 @@ public class PlayerSystem : MonoBehaviour
     private Vector3 speed;
 
     private Collider[] _colset;
-    private bool _canInteract;
     public int _onAir=0;
+    [SerializeField]
+    private bool _canInteract;
     public float _gravity;
 
 
@@ -76,7 +77,7 @@ public class PlayerSystem : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         _buffManagerObject = GameObject.Find("BuffManager");
         _buff = _buffManagerObject.GetComponent<BuffManager>();
-
+        _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
     // Update is called once per frame
@@ -304,10 +305,12 @@ public class PlayerSystem : MonoBehaviour
         {
             Vector3 pos = new Vector3(this.transform.position.x,this.transform.position.y,this.transform.position.z);
             _colset = Physics.OverlapSphere(pos,_interactRadius,layerMask:1633);
+            Debug.Log(_colset.Length);
             foreach(var col in _colset)
             {
                 if (col.TryGetComponent(out Interactable inter))
                 {
+                    Debug.Log(col);
                     // 이런 형태로 작성
                     // if (col.TryGetComponent(out NPCObject npc))
                     // {
@@ -317,7 +320,7 @@ public class PlayerSystem : MonoBehaviour
                     {
                         npc.Interaction();
                     }
-                    if (_equipList[_equipItem,0] == 1 && col.TryGetComponent(out GatheringObject Gat))
+                    if (_equipList[_equipItem,1] == 1 && col.TryGetComponent(out GatheringObject Gat))
                     {
                         Debug.Log("버..섯?");
                         Debug.Log(Gat);
@@ -513,7 +516,8 @@ public class PlayerSystem : MonoBehaviour
             _nearObject = other.gameObject;
             DroppedItem item = _nearObject.GetComponent<DroppedItem>();
             _theInventory.AcquireItem(item.itemObject, 1);
-            Destroy(_nearObject);
+            Debug.Log(_nearObject.transform.parent);
+            Destroy(_nearObject.transform.parent.gameObject);
         }
 
         // Debug.Log("OnTriggerEnter(): " + other.tag);

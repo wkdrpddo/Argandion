@@ -12,9 +12,11 @@ public class TreeObject : MonoBehaviour
 
     public GameObject[] _trees = new GameObject[8];
     public Collider _box;
+    public GameObject _itemParent;
     void Start()
     {
         _buff = GameObject.Find("BuffManager").GetComponent<BuffManager>();
+        _itemParent = GameObject.Find("Items");
     }
     public void DayEnd()
     {
@@ -54,7 +56,7 @@ public class TreeObject : MonoBehaviour
         Destroy(this.gameObject);
         int many = Random.Range(1,5);
         for (int i=0;i<many;i++) {
-            Instantiate(_droppedItem[0], trans.position + new Vector3(Random.Range(-2f,2f),1.5f,Random.Range(-2f,2f)), trans.rotation);
+            Instantiate(_droppedItem[0], trans.position + new Vector3(Random.Range(-2f,2f),3.5f,Random.Range(-2f,2f)), trans.rotation, _itemParent.transform);
         }
         int many2 = Random.Range(2,4);
         int many3 = Random.Range(2,4);
@@ -63,10 +65,10 @@ public class TreeObject : MonoBehaviour
             many3 += 1;
         }
         for (int i=0;i<many2;i++) {
-            Instantiate(_droppedItem[1], trans.position + new Vector3(Random.Range(-2f,2f),1.5f,Random.Range(-2f,2f)), trans.rotation);
+            Instantiate(_droppedItem[1], trans.position + new Vector3(Random.Range(-2f,2f),3.5f,Random.Range(-2f,2f)), trans.rotation, _itemParent.transform);
         }
         for (int i=0;i<many3;i++) {
-            Instantiate(_droppedItem[2], trans.position + new Vector3(Random.Range(-2f,2f),1.5f,Random.Range(-2f,2f)), trans.rotation);
+            Instantiate(_droppedItem[2], trans.position + new Vector3(Random.Range(-2f,2f),3.5f,Random.Range(-2f,2f)), trans.rotation, _itemParent.transform);
         }
     }
 }

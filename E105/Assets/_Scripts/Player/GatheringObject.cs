@@ -20,8 +20,8 @@ public class GatheringObject : MonoBehaviour
 
     public void Interaction(float time)
     {
-        // if(_inventory.CheckInven(_item.FindItem(_itemCode),1))
-        if (true)
+        if(_inventory.CheckInven(_item.FindItem(_itemCode),1))
+        // if (true)
         {
             Debug.Log("this is true");
             Debug.Log(_ps.gameObject.transform.position);
@@ -31,7 +31,7 @@ public class GatheringObject : MonoBehaviour
             Direction = Direction.normalized;
             _ps._character.forward = Direction;
             _ps._playerAnimator.SetInteger("action", 10);
-            // StartCoroutine(StopPlayer(time));
+            StartCoroutine(StopPlayer(time));
         }
     }
 

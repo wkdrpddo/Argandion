@@ -99,12 +99,13 @@ public class SystemManager : MonoBehaviour
                     }
                 }
 
-                // DayEnd();
+                DayEnd();
                 _weatherManager.SetWeather(_season);
-                // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day) {
-                //     _buffManager.FlowerBuffEnd();
-                // }
+                if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day) {
+                    _buffManager.FlowerBuffEnd();
+                }
                 _buffManager.DayEnd();
+                DayStart();
             }
         }
 
@@ -153,38 +154,38 @@ public class SystemManager : MonoBehaviour
 
 
         // 필드의 동물, 떨어진 아이템, 매일 새로 생성되는 자원 제거
-        // GameObject[] rabbits = GameObject.FindGameObjectsWithTag("Rabbit");
-        // GameObject[] deers = GameObject.FindGameObjectsWithTag("Deer");
-        // GameObject[] wolfs = GameObject.FindGameObjectsWithTag("Wolf");
-        // GameObject[] bears = GameObject.FindGameObjectsWithTag("Bear");
-        // GameObject[] items = GameObject.FindGameObjectsWithTag("droppedItem");
-        // GameObject[] props = GameObject.FindGameObjectsWithTag("resource");
+        GameObject[] rabbits = GameObject.FindGameObjectsWithTag("Rabbit");
+        GameObject[] deers = GameObject.FindGameObjectsWithTag("Deer");
+        GameObject[] wolfs = GameObject.FindGameObjectsWithTag("Wolf");
+        GameObject[] bears = GameObject.FindGameObjectsWithTag("Bear");
+        GameObject[] items = GameObject.FindGameObjectsWithTag("droppedItem");
+        GameObject[] props = GameObject.FindGameObjectsWithTag("resource");
 
-        // foreach (var r in rabbits)
-        // {
-        //     Destroy(r);
-        // }
-        // foreach (var d in deers)
-        // {
-        //     Destroy(d);
-        // }
-        // foreach (var w in wolfs)
-        // {
-        //     Destroy(w);
-        // }
-        // foreach (var b in bears)
-        // {
-        //     Destroy(b);
-        // }
-        // foreach (var i in items)
-        // {
-        //     Destroy(i);
-        // }
-        // foreach (var p in props)
-        // {
-        //     Destroy(p);
+        foreach (var r in rabbits)
+        {
+            Destroy(r);
+        }
+        foreach (var d in deers)
+        {
+            Destroy(d);
+        }
+        foreach (var w in wolfs)
+        {
+            Destroy(w);
+        }
+        foreach (var b in bears)
+        {
+            Destroy(b);
+        }
+        foreach (var i in items)
+        {
+            Destroy(i);
+        }
+        foreach (var p in props)
+        {
+            Destroy(p);
 
-        // }
+        }
     }
 
     private void animalDestroy()

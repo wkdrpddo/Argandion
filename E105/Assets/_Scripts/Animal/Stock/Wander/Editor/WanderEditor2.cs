@@ -2,7 +2,7 @@
 using UnityEditor;
 
 [CustomEditor(typeof(Wander))]
-public class WanderEditor : Editor
+public class WanderEditor2 : Editor
 {
     private Wander wander;
 

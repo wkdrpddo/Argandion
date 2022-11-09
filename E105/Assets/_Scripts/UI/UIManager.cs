@@ -85,7 +85,7 @@ public class UIManager : MonoBehaviour
         _baseuipanel = gameObject.transform.Find("BaseUIPanel").gameObject;
         _healthbar = _baseuipanel.transform.GetChild(0).GetComponent<Slider>();
         _energybar = _baseuipanel.transform.GetChild(1).GetComponent<Slider>();
-
+        _nowequip = GameObject.Find("NowEquip").gameObject;
         _baseuipanel.SetActive(false);
 
         _mapuipanel = GameObject.Find("MapUIPanel");
@@ -178,19 +178,19 @@ public class UIManager : MonoBehaviour
         //     _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
         // }
 
-        if (Input.GetButtonDown("interactionKey"))
-        {
-            // test buildEvent
-            if (_buildeventpanel.GetComponent<BuildEventPanel>().isOnPanel)
-            {
-                _buildeventpanel.GetComponent<BuildEventPanel>().closeWindow();
-            }
-            else
-            {
-                int random = Random.Range(1, 7);
-                OnBuildEventPanel(random);
-            }
-        }
+        // if (Input.GetButtonDown("interactionKey"))
+        // {
+        //     // test buildEvent
+        //     if (_buildeventpanel.GetComponent<BuildEventPanel>().isOnPanel)
+        //     {
+        //         _buildeventpanel.GetComponent<BuildEventPanel>().closeWindow();
+        //     }
+        //     else
+        //     {
+        //         int random = Random.Range(1, 7);
+        //         OnBuildEventPanel(random);
+        //     }
+        // }
 
         if (Input.GetKeyDown(KeyCode.V))
         {
