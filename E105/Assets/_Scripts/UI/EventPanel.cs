@@ -10,7 +10,7 @@ public class EventPanel : MonoBehaviour
     public GameObject _otherPanel; // 미리 끌어서 넣기
     public GameObject _foodPanel; // 미리 끌어서 넣기
 
-    public bool _onSpiritBuff;
+    // public bool _onSpiritBuff;
 
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>(); // 아이콘 이미지
 
@@ -112,13 +112,13 @@ public class EventPanel : MonoBehaviour
         }
         else
         { // 정령
-            if (_onSpiritBuff)
-            { // 버프 실행 중이면
-                Destroy(_otherPanel.transform.GetChild(0).gameObject);
-            }
+            // if (_onSpiritBuff)
+            // { // 버프 실행 중이면
+            //     Destroy(_otherPanel.transform.GetChild(0).gameObject);
+            // }
             icon = Instantiate(_eventIconPrefab, _otherPanel.transform);
             icon.transform.SetAsFirstSibling(); // 맨 앞으로
-            _onSpiritBuff = true;
+            // _onSpiritBuff = true;
         }
         // 아이콘 이름 변경
         icon.name = imgNum.ToString() + "Icon";
@@ -142,9 +142,9 @@ public class EventPanel : MonoBehaviour
             delObj.transform.parent.gameObject.SetActive(false);
         }
 
-        if (imgNum >= 1 && imgNum <= 7)
-        { // 정령이면 버프 체크
-            _onSpiritBuff = false;
-        }
+        // if (imgNum >= 1 && imgNum <= 7)
+        // { // 정령이면 버프 체크
+        //     _onSpiritBuff = false;
+        // }
     }
 }
