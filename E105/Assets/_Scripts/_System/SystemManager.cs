@@ -7,10 +7,10 @@ public class SystemManager : MonoBehaviour
     public int _month;
     public int _day;
     public int _season;
-    public int _weather;
     public int _hour_display;
     public int _minute_display;
-    private int _hour;
+    public int _hour;
+    public int _weather;
     private float _minute;
     private bool _game_state = false;
     public float _hour_time_changemeter = 1000;
@@ -18,8 +18,8 @@ public class SystemManager : MonoBehaviour
     public GameObject _light;
     public GameObject MapObject;
     public PlayerSystem _player;
+    public WeatherManager _weatherManager;
     public BuffManager _buffManager;
-
     public int _development_level;  // 1부터
     public int _purification_sector;
 
@@ -38,13 +38,14 @@ public class SystemManager : MonoBehaviour
         _month = 1;
         _day = 1;
         _season = 0;
-        _weather = 0;
         _hour = 6;
         _hour_display = 6;
         _minute = 0;
         _minute_display = 0;
         _player = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
         _sectors = MapObject.GetComponentsInChildren<SectorObject>();
+        _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
+        _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
     }
 
     // Update is called once per frame
@@ -83,24 +84,10 @@ public class SystemManager : MonoBehaviour
                 _hour = 6;
                 _day += 1;
 
-                DayEnd();
-
-                // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
-                // {
-                //     _buffManager.FlowerBuffEnd();
-                //     Debug.Log("꽃 버프 종료!");
-                // }
-
-
                 if (_day >= 29)
                 {
                     _day -= 28;
                     _month += 1;
-                    // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
-                    // {
-                    //     _buffManager.FlowerBuffEnd();
-                    //     Debug.Log("꽃 버프 종료!");
-                    // }
 
                     if (_month >= 9)
                     {
@@ -111,6 +98,13 @@ public class SystemManager : MonoBehaviour
                         UpdateSeason(_month / 2);
                     }
                 }
+
+                // DayEnd();
+                _weatherManager.SetWeather(_season);
+                // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day) {
+                //     _buffManager.FlowerBuffEnd();
+                // }
+                _buffManager.DayEnd();
             }
         }
 
