@@ -73,12 +73,17 @@ public class SystemManager : MonoBehaviour
             _minute -= 60;
             _hour += 1;
 
+            if (_hour == 21)
+            {
+                animalDestroy();
+            }
+
             if (_hour >= 23)
             {
                 _hour = 6;
                 _day += 1;
 
-                // DayEnd();
+                DayEnd();
 
                 // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
                 // {
@@ -154,37 +159,52 @@ public class SystemManager : MonoBehaviour
 
 
         // 필드의 동물, 떨어진 아이템, 매일 새로 생성되는 자원 제거
-        GameObject[] rabbits = GameObject.FindGameObjectsWithTag("Rabbit");
-        GameObject[] deers = GameObject.FindGameObjectsWithTag("Deer");
-        GameObject[] wolfs = GameObject.FindGameObjectsWithTag("Wolf");
-        GameObject[] bears = GameObject.FindGameObjectsWithTag("Bear");
-        GameObject[] items = GameObject.FindGameObjectsWithTag("droppedItem");
-        GameObject[] props = GameObject.FindGameObjectsWithTag("resource");
+        // GameObject[] rabbits = GameObject.FindGameObjectsWithTag("Rabbit");
+        // GameObject[] deers = GameObject.FindGameObjectsWithTag("Deer");
+        // GameObject[] wolfs = GameObject.FindGameObjectsWithTag("Wolf");
+        // GameObject[] bears = GameObject.FindGameObjectsWithTag("Bear");
+        // GameObject[] items = GameObject.FindGameObjectsWithTag("droppedItem");
+        // GameObject[] props = GameObject.FindGameObjectsWithTag("resource");
 
-        foreach (var r in rabbits)
-        {
-            Destroy(r);
-        }
-        foreach (var d in deers)
-        {
-            Destroy(d);
-        }
-        foreach (var w in wolfs)
-        {
-            Destroy(w);
-        }
-        foreach (var b in bears)
-        {
-            Destroy(b);
-        }
-        foreach (var i in items)
-        {
-            Destroy(i);
-        }
-        foreach (var p in props)
-        {
-            Destroy(p);
+        // foreach (var r in rabbits)
+        // {
+        //     Destroy(r);
+        // }
+        // foreach (var d in deers)
+        // {
+        //     Destroy(d);
+        // }
+        // foreach (var w in wolfs)
+        // {
+        //     Destroy(w);
+        // }
+        // foreach (var b in bears)
+        // {
+        //     Destroy(b);
+        // }
+        // foreach (var i in items)
+        // {
+        //     Destroy(i);
+        // }
+        // foreach (var p in props)
+        // {
+        //     Destroy(p);
 
+        // }
+    }
+
+    private void animalDestroy()
+    {
+        Transform animals = GameObject.Find("Animals").transform;
+
+        foreach (Transform animal in animals)
+        {
+            //플레이어랑 거리 계산해서 멀리있는 동물들만 삭제
+            float distance = Vector3.Distance(animal.position, _player.transform.position);
+            if (distance >= 50f)
+            {
+                Destroy(animal.gameObject);
+            }
         }
     }
 
@@ -218,28 +238,28 @@ public class SystemManager : MonoBehaviour
         switch (region)
         {
             case 0:
-                position = new Vector3(Random.Range(0.0f, 60.0f), 0.0f, Random.Range(225.0f, 275.0f));
+                position = new Vector3(Random.Range(0.0f, 60.0f), 5.0f, Random.Range(225.0f, 275.0f));
                 break;
             case 1:
-                position = new Vector3(Random.Range(87.0f, 202.0f), 0.0f, Random.Range(193.0f, 264.0f));
+                position = new Vector3(Random.Range(87.0f, 202.0f), 5.0f, Random.Range(193.0f, 264.0f));
                 break;
             case 2:
-                position = new Vector3(Random.Range(193.0f, 233.0f), 0.0f, Random.Range(200.0f, 256.0f));
+                position = new Vector3(Random.Range(193.0f, 233.0f), 5.0f, Random.Range(200.0f, 256.0f));
                 break;
             case 3:
-                position = new Vector3(Random.Range(33.0f, 79.0f), 0.0f, Random.Range(110.0f, 162.0f));
+                position = new Vector3(Random.Range(33.0f, 79.0f), 5.0f, Random.Range(110.0f, 162.0f));
                 break;
             case 4:
-                position = new Vector3(Random.Range(80.0f, 192.0f), 0.0f, Random.Range(110.0f, 200.0f));
+                position = new Vector3(Random.Range(80.0f, 192.0f), 5.0f, Random.Range(110.0f, 200.0f));
                 break;
             case 5:
-                position = new Vector3(Random.Range(193.0f, 251.0f), 0.0f, Random.Range(120.0f, 200.0f));
+                position = new Vector3(Random.Range(193.0f, 251.0f), 5.0f, Random.Range(120.0f, 200.0f));
                 break;
             case 6:
-                position = new Vector3(Random.Range(0.0f, 166.0f), 0.0f, Random.Range(38.0f, 110.0f));
+                position = new Vector3(Random.Range(0.0f, 166.0f), 5.0f, Random.Range(38.0f, 110.0f));
                 break;
             case 7:
-                position = new Vector3(Random.Range(180.0f, 194.0f), 0.0f, Random.Range(81.0f, 110.0f));
+                position = new Vector3(Random.Range(180.0f, 194.0f), 5.0f, Random.Range(81.0f, 110.0f));
                 break;
         }
 

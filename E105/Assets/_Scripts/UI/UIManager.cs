@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
     public GameObject _eventAnnounce;
     public TextMeshProUGUI _announceText;
 
-    private GameObject _nowequip;
+    [SerializeField] private GameObject _nowequip;
 
     private SystemManager _systemmanager;
     private PlayerSystem _playersystem;
@@ -67,8 +67,8 @@ public class UIManager : MonoBehaviour
     {
         isGameStart = false;
 
-        GameObject.Find("SoundManager").GetComponent<SoundManager>()._optionpanel = GameObject.Find("OptionPanel");
-        GameObject.Find("SoundManager").GetComponent<SoundManager>()._optionpanelfrommain = GameObject.Find("OptionPanelFromMainPage");
+        // GameObject.Find("SoundManager").GetComponent<SoundManager>()._optionpanel = GameObject.Find("OptionPanel");
+        // GameObject.Find("SoundManager").GetComponent<SoundManager>()._optionpanelfrommain = GameObject.Find("OptionPanelFromMainPage");
 
         _systemmanager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         _playersystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
@@ -78,6 +78,7 @@ public class UIManager : MonoBehaviour
         _baseuipanel = GameObject.Find("BaseUIPanel");
         _healthbar = GameObject.Find("HealthSlider").GetComponent<Slider>();
         _energybar = GameObject.Find("EnergySlider").GetComponent<Slider>();
+        _nowequip = GameObject.Find("NowEquip");
         _baseuipanel.SetActive(false);
 
         _optionpanel = GameObject.Find("OptionPanel");
@@ -129,7 +130,6 @@ public class UIManager : MonoBehaviour
         _announceText = _eventAnnounce.GetComponentInChildren<TextMeshProUGUI>();
         _eventAnnounce.SetActive(false);
 
-        _nowequip = GameObject.Find("NowEquip");
     }
 
     // Update is called once per frame
@@ -197,32 +197,32 @@ public class UIManager : MonoBehaviour
         //     // }
         // }
 
-        // if (Input.GetKeyDown(KeyCode.C))
-        // {
-        //     // test conversation
-        //     int conversationCnt = _conversationpanel.GetComponent<ConversationPanel>().getConversationCnt();
-        //     if (_conversationpanel.GetComponent<ConversationPanel>().getIsConversation())
-        //     {
-        //         _conversationpanel.GetComponent<ConversationPanel>().conversation();
-        //     }
-        //     else
-        //     {
-        //         int randomNum = Random.Range(1, 11);
-        //         // int randomNum = 1;
-        //         switch (conversationCnt)
-        //         {
-        //             case -1:
-        //                 OnConversationPanel(randomNum);
-        //                 break;
-        //             case 0:
-        //                 _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
-        //                 break;
-        //             case 1:
-        //                 _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
-        //                 break;
-        //         }
-        //     }
-        // }
+        if (Input.GetButtonDown("interactionKey") && conversationNPC != 0)
+        {
+            // test conversation
+            int conversationCnt = _conversationpanel.GetComponent<ConversationPanel>().getConversationCnt();
+            if (_conversationpanel.GetComponent<ConversationPanel>().getIsConversation())
+            {
+                _conversationpanel.GetComponent<ConversationPanel>().conversation();
+            }
+            else
+            {
+                // int randomNum = Random.Range(1, 11);
+                // int randomNum = 1;
+                switch (conversationCnt)
+                {
+                    // case -1:
+                    //     OnConversationPanel(randomNum);
+                    //     break;
+                    case 0:
+                        _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
+                        break;
+                    case 1:
+                        _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
+                        break;
+                }
+            }
+        }
     }
 
     // ======================== UI 호출 함수 Start

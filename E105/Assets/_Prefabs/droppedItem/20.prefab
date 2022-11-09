@@ -44,6 +44,10 @@ PrefabInstance:
       value: SM_Prop_Animal_Pelt_03
       objectReference: {fileID: 0}
     - target: {fileID: 1239581555314710, guid: 7ada432aa5d5d6742a270de336774eb9, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1239581555314710, guid: 7ada432aa5d5d6742a270de336774eb9, type: 3}
       propertyPath: m_TagString
       value: droppedItem
       objectReference: {fileID: 0}
@@ -151,7 +155,7 @@ Rigidbody:
   m_GameObject: {fileID: 5680580686211250023}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 5
   m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -166,11 +170,30 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5680580686211250023}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8684906, y: 0.009999995, z: 0.9418825}
-  m_Center: {x: 0.0015517324, y: 0.0049999976, z: -0.03239377}
+  m_Size: {x: 0.86849064, y: 0.5, z: 0.9418825}
+  m_Center: {x: 0.0015517572, y: 0, z: -0.032393783}
+--- !u!114 &4141353039139726344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5680580686211250023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8050a55e7b022a40915c7f6e82839b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemCode: 20
+  itemObject:
+    ItemCode: 20
+    Name: "\uB3D9\uBB3C\uC758 \uAC00\uC8FD"
+    Category: "\uAC00\uC8FD"
+    Desc: 
+    ItemImage: {fileID: 0}
 --- !u!4 &5683172815206846523 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4418925997143882, guid: 7ada432aa5d5d6742a270de336774eb9, type: 3}

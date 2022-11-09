@@ -34,7 +34,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
         itemCount = _count;
         LoadImage(item.ItemCode);
 
-        if(item.Category != "장비")
+        if (item.Category != "장비")
         {
             // go_CountImage.SetActive(true);
             // text_Count.text = itemCount.ToString();
@@ -49,13 +49,13 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     }
 
     private void LoadImage(int idx)
-    {   
+    {
         int sdfs = 37002;
         byte[] byteTexture = System.IO.File.ReadAllBytes(Application.dataPath + $"/Data/Image/{sdfs}.png");
-        Texture2D texture = new Texture2D(0,0);
+        Texture2D texture = new Texture2D(0, 0);
         texture.LoadImage(byteTexture);
 
-        Rect rect = new Rect(0,0, texture.width, texture.height);
+        Rect rect = new Rect(0, 0, texture.width, texture.height);
         itemImage.sprite = Sprite.Create(texture, rect, new Vector2(0.5f, 0.5f));
     }
 
@@ -81,12 +81,16 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button == PointerEventData.InputButton.Right)
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (item.ItemCode == 0) {
+            if (item.ItemCode == 0)
+            {
                 Debug.Log("아이템이 업ㅇ서용");
-            } else {
-                if (item.Category == "식량") {
+            }
+            else
+            {
+                if (item.Category == "식량")
+                {
                     foodManager.UseFood(item.ItemCode);
                     SetSlotCount(-1);
                 }

@@ -10,8 +10,7 @@ public class ItemObject
     public int ItemCode;
     public string Name;
     public string Category;
-    public int BuyCost;
-    public int SellCost;
+    public string Desc;
     public Sprite ItemImage;
 }
 
@@ -64,7 +63,7 @@ public class Item : MonoBehaviour
 
     private void LoadImage(int idx)
     {
-        byte[] byteTexture = System.IO.File.ReadAllBytes("C:/Users/SSAFY/Desktop/E1058/S07P31E105/E105/Assets/Data/Image/37002.png");
+        byte[] byteTexture = System.IO.File.ReadAllBytes(Application.dataPath + "/Data/Image/37002.png");
         Texture2D texture = new Texture2D(0,0);
         texture.LoadImage(byteTexture);
 

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4130950911495395268}
-  - component: {fileID: 5203975594065403214}
+  - component: {fileID: 6870941567687821595}
   - component: {fileID: 1079683459851311201}
   - component: {fileID: 2963149936886918315}
   - component: {fileID: 5203975594065403215}
@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4130950911495395268
 Transform:
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5203975594065403214
+--- !u!114 &6870941567687821595
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,12 +44,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3611822421796064638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ced570c6a8711a4bae9a7846ad23ccc, type: 3}
+  m_Script: {fileID: 11500000, guid: 981cb9105a22dd3499b808d5827098fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rabbit1: {fileID: 46987768899458066, guid: 19e73a9208a4fb74eaa114df6c3fd8b7, type: 3}
-  rabbit2: {fileID: 3633685016805357021, guid: 5664fa555c0091543b03425b6c9657c1, type: 3}
-  rabbit3: {fileID: 3532343274708905525, guid: 36ac845a2cb80194b89b61487d373aa3, type: 3}
+  _Sector: {fileID: 0}
+  _isDen: 1
+  _animals:
+  - {fileID: 46987768899458066, guid: 19e73a9208a4fb74eaa114df6c3fd8b7, type: 3}
+  - {fileID: 9220930600122839901, guid: 1f5e1a5f78676674ebb13d2011af9482, type: 3}
+  - {fileID: 580955392012718917, guid: 1a7af9c9749991341b904a53c12b783f, type: 3}
+  - {fileID: 4083345258465680454, guid: b493e4cf3b099184ea1b5b920f9d9a72, type: 3}
+  _base_transform: {fileID: 0}
+  num: 3
 --- !u!33 &1079683459851311201
 MeshFilter:
   m_ObjectHideFlags: 0

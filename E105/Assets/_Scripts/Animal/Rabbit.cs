@@ -28,19 +28,16 @@ public class Rabbit : MonoBehaviour
 
     //필요한 컴포넌트
     [SerializeField] private Animator anim;
-    [SerializeField] private Rigidbody rigid;
     [SerializeField] private BoxCollider boxCol;
     private NavMeshAgent nav;
 
-
-    [SerializeField] private GameObject items;  
     //Item
     [SerializeField] private GameObject item20;  //동물의 가죽
     [SerializeField] private GameObject item21;   //부드러운 가죽
     [SerializeField] private GameObject item103;   //작은 고기
     [SerializeField] private GameObject item104;   //고기
 
-     
+
 
 
     // Start is called before the first frame update
@@ -176,31 +173,33 @@ public class Rabbit : MonoBehaviour
 
     private void Item()
     {
-        int random_index = Random.Range(1,3);
-        for( int i=0; i<random_index; i++)  //동물의 가죽
+        int random_index = Random.Range(1, 3);
+        for (int i = 0; i < random_index; i++)  //동물의 가죽
         {
-            Instantiate(item20, this.transform.position + new Vector3(Random.Range(-2f,2f),1f,Random.Range(-2f,2f)), Quaternion.identity).transform.parent = items.transform;
+            Instantiate(item20, this.transform.position + new Vector3(Random.Range(-2f, 2f), 1f, Random.Range(-2f, 2f)), Quaternion.identity).transform.parent = GameObject.Find("Items").transform;
         }
 
-        random_index = Random.Range(0,3);
-        if(random_index > 0){
-            for( int i=0; i<random_index; i++)  //부드러운 가죽
+        random_index = Random.Range(0, 3);
+        if (random_index > 0)
+        {
+            for (int i = 0; i < random_index; i++)  //부드러운 가죽
             {
-                Instantiate(item21, this.transform.position + new Vector3(Random.Range(-2f,2f),1f,Random.Range(-2f,2f)), Quaternion.identity).transform.parent = items.transform;
+                Instantiate(item21, this.transform.position + new Vector3(Random.Range(-2f, 2f), 1f, Random.Range(-2f, 2f)), Quaternion.identity).transform.parent = GameObject.Find("Items").transform;
             }
         }
 
-        random_index = Random.Range(1,3);
-        for( int i=0; i<random_index; i++)  // 작은고기
+        random_index = Random.Range(1, 3);
+        for (int i = 0; i < random_index; i++)  // 작은고기
         {
-            Instantiate(item103, this.transform.position + new Vector3(Random.Range(-2f,2f),1f,Random.Range(-2f,2f)), Quaternion.identity).transform.parent = items.transform;
+            Instantiate(item103, this.transform.position + new Vector3(Random.Range(-2f, 2f), 1f, Random.Range(-2f, 2f)), Quaternion.identity).transform.parent = GameObject.Find("Items").transform;
         }
-        
-        random_index = Random.Range(0,2);
-        if(random_index > 0){
-            for( int i=0; i<random_index; i++)  // 고기
+
+        random_index = Random.Range(0, 2);
+        if (random_index > 0)
+        {
+            for (int i = 0; i < random_index; i++)  // 고기
             {
-                Instantiate(item104, this.transform.position + new Vector3(Random.Range(-2f,2f),1f,Random.Range(-2f,2f)), Quaternion.identity).transform.parent = items.transform;
+                Instantiate(item104, this.transform.position + new Vector3(Random.Range(-2f, 2f), 1f, Random.Range(-2f, 2f)), Quaternion.identity).transform.parent = GameObject.Find("Items").transform;
             }
         }
     }
