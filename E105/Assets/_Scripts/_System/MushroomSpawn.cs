@@ -29,7 +29,7 @@ public class MushroomSpawn : MonoBehaviour
     private void Check_Mushroom()
     {
         float srnd = Random.Range(0f,1f);
-        if (srnd <= _Sector._mushroom_spawn_base_percent * _Sector._mushroom_ruin_factor)
+        if (srnd <= (_Sector._purifier ? _Sector._mushroom_spawn_base_percent : _Sector._mushroom_spawn_base_percent * _Sector._mushroom_ruin_factor))
         {
             Debug.Log("버섯소환");
             int rnd = Random.Range(0,_Sector._mushroom_count_factor[1]);
@@ -60,15 +60,15 @@ public class MushroomSpawn : MonoBehaviour
                 int rnd = Random.Range(0,_Sector._mushroom_type_factor[2]);
                 if (rnd < _Sector._mushroom_type_factor[0])
                 {
-                    Instantiate(_mushroom[0],pos,new Quaternion());
+                    Instantiate(_mushroom[0],pos,new Quaternion(),_Sector.gameObject.transform);
                 }
                 else if (rnd < _Sector._mushroom_type_factor[1])
                 {
-                    Instantiate(_mushroom[1],pos,new Quaternion());
+                    Instantiate(_mushroom[1],pos,new Quaternion(),_Sector.gameObject.transform);
                 }
                 else if (rnd < _Sector._mushroom_type_factor[2])
                 {
-                    Instantiate(_mushroom[2],pos,new Quaternion());
+                    Instantiate(_mushroom[2],pos,new Quaternion(),_Sector.gameObject.transform);
                 }
             }
             count -= 1;
