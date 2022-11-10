@@ -171,6 +171,10 @@ public class Food : MonoBehaviour
                 { // 직전에 스튜 안 먹었을 때만 panel call
                     createFoodIcon(_eventCode);
                 }
+                else
+                {
+                    _eventPanel.activeIcon(_eventCode);
+                }
                 CancelInvoke("HpUp");
                 Stew();
             }
@@ -180,6 +184,10 @@ public class Food : MonoBehaviour
                 if (_foodBuff[_buffIdx] == false)
                 { // 직전에 버섯볶음 안 먹었을 때만 panel call
                     createFoodIcon(_eventCode);
+                }
+                else
+                {
+                    _eventPanel.activeIcon(_eventCode);
                 }
                 CancelInvoke("SpUp");
                 MushroomFood();
@@ -247,11 +255,16 @@ public class Food : MonoBehaviour
 
     private void Drinking()
     {
+        Debug.Log("time: " + time + ", 음료 마심");
         CancelInvoke("Thirsty");
         Invoke("Thirsty", 120.0f);
         if (_foodBuff[_buffIdx] == false)
         { // 직전에 음료 안 마셨을 때만 panel call
             createFoodIcon(_eventCode);
+        }
+        else
+        {
+            _eventPanel.activeIcon(_eventCode);
         }
     }
     private void Thirsty()
@@ -267,6 +280,10 @@ public class Food : MonoBehaviour
         if (_foodBuff[_buffIdx] == false)
         { // 직전에 스테이크 안 먹었을 때만 panel call
             createFoodIcon(_eventCode);
+        }
+        else
+        {
+            _eventPanel.activeIcon(_eventCode);
         }
     }
 

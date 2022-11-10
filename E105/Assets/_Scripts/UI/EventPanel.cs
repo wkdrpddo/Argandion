@@ -197,5 +197,6 @@ public class EventPanel : MonoBehaviour
         }
 
     }
+
 }
 
