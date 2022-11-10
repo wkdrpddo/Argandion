@@ -20,6 +20,7 @@ public class SystemManager : MonoBehaviour
     public PlayerSystem _player;
     public WeatherManager _weatherManager;
     public BuffManager _buffManager;
+    public NPCManager _NPCManager;
     public int _development_level;  // 1부터
     public int _purification_sector;
 
@@ -46,12 +47,14 @@ public class SystemManager : MonoBehaviour
         _sectors = MapObject.GetComponentsInChildren<SectorObject>();
         _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
+        _NPCManager = GameObject.Find("NPCManager").GetComponent<NPCManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         TimeSystem();
+
     }
 
     private void UpdateSeason(int index)
@@ -61,10 +64,29 @@ public class SystemManager : MonoBehaviour
         MapObject.GetComponent<MapObject>().UpdateFieldManager(index);
     }
 
-    private void UpdatePurification(int index)
+    public void UpdatePurification(int index)  //1번부터 
     {
-        _purification[index] = !_purification[index];
+        switch(index)
+        {
+            case 1: 
+            case 2: 
+            case 3: 
+            case 4: 
+                _purification[index-1] = true;
+                MapObject.GetComponent<MapObject>().ChangePurifier(index-1);
+                _NPCManager.NPCActive(index-1);
+                break;
+            case 6: 
+            case 7: 
+                _purification[index-1] = true;
+                MapObject.GetComponent<MapObject>().ChangePurifier(index-1);
+                MapObject.GetComponent<MapObject>().ChangePurifier(7);
+                _NPCManager.NPCActive(index-2);
+                break;
+
+        }
     }
+
 
     private void TimeSystem()
     {
@@ -225,10 +247,8 @@ public class SystemManager : MonoBehaviour
         {
             if (_purification[i])
             {
-
                 region[_purification_size] = i;
                 _purification_size++;
-
             }
         }
 
@@ -245,28 +265,28 @@ public class SystemManager : MonoBehaviour
         switch (region)
         {
             case 0:
-                position = new Vector3(Random.Range(0.0f, 60.0f), 5.0f, Random.Range(225.0f, 275.0f));
+                position = new Vector3(Random.Range(0.0f, 60.0f), 1.9f, Random.Range(225.0f, 275.0f));
                 break;
             case 1:
-                position = new Vector3(Random.Range(87.0f, 202.0f), 5.0f, Random.Range(193.0f, 264.0f));
+                position = new Vector3(Random.Range(87.0f, 202.0f), 1.9f, Random.Range(193.0f, 264.0f));
                 break;
             case 2:
-                position = new Vector3(Random.Range(193.0f, 233.0f), 5.0f, Random.Range(200.0f, 256.0f));
+                position = new Vector3(Random.Range(193.0f, 233.0f), 1.9f, Random.Range(200.0f, 256.0f));
                 break;
             case 3:
-                position = new Vector3(Random.Range(33.0f, 79.0f), 5.0f, Random.Range(110.0f, 162.0f));
+                position = new Vector3(Random.Range(33.0f, 79.0f), 1.9f, Random.Range(110.0f, 162.0f));
                 break;
             case 4:
-                position = new Vector3(Random.Range(80.0f, 192.0f), 5.0f, Random.Range(110.0f, 200.0f));
+                position = new Vector3(Random.Range(80.0f, 192.0f), 1.9f, Random.Range(110.0f, 200.0f));
                 break;
             case 5:
-                position = new Vector3(Random.Range(193.0f, 251.0f), 5.0f, Random.Range(120.0f, 200.0f));
+                position = new Vector3(Random.Range(193.0f, 251.0f), 1.9f, Random.Range(120.0f, 200.0f));
                 break;
             case 6:
-                position = new Vector3(Random.Range(0.0f, 166.0f), 5.0f, Random.Range(38.0f, 110.0f));
+                position = new Vector3(Random.Range(0.0f, 166.0f), 1.9f, Random.Range(38.0f, 110.0f));
                 break;
             case 7:
-                position = new Vector3(Random.Range(180.0f, 194.0f), 5.0f, Random.Range(81.0f, 110.0f));
+                position = new Vector3(Random.Range(180.0f, 194.0f), 1.9f, Random.Range(81.0f, 110.0f));
                 break;
         }
 
@@ -298,4 +318,8 @@ public class SystemManager : MonoBehaviour
     {
         _player_gold += value;
     }
+
+
+
+
 }

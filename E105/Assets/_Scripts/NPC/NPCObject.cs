@@ -68,7 +68,7 @@ public class NPCObject : MonoBehaviour
 
     public void ConversationEnd()
     {
-
+        
     }
 
 }
