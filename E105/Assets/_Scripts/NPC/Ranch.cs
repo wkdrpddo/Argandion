@@ -236,10 +236,13 @@ public class Ranch : MonoBehaviour
         if (cows >= howMany)
         {
             // cowPrefab 삭제하고 리스트에서 삭제하기
-            for (int i = howMany - 1; i >= cows; i--)
+            for (int count = 0; count < howMany; count++)
             {
+                int i = cows - count - 1;
                 Destroy(cowPrefabs[i], 0.5f);
+                cowPrefabs.RemoveAt(i);
             }
+
 
             cows -= howMany;
             ui.addPlayerGold((howMany * 500));
@@ -255,10 +258,13 @@ public class Ranch : MonoBehaviour
         if (chicks >= howMany)
         {
 
-            for (int i = howMany - 1; i >= chicks; i--)
+            for (int count = 0; count < howMany; count++)
             {
+                int i = chicks - count - 1;
                 Destroy(chickenPrefabs[i], 0.5f);
+                chickenPrefabs.RemoveAt(i);
             }
+
 
             chicks -= howMany;
             ui.addPlayerGold((howMany * 325));
@@ -271,10 +277,13 @@ public class Ranch : MonoBehaviour
         if (sheeps >= howMany)
         {
 
-            for (int i = howMany - 1; i >= sheeps; i--)
+            for (int count = 0; count < howMany; count++)
             {
+                int i = sheeps - count - 1;
                 Destroy(sheepPrefabs[i], 0.5f);
+                sheepPrefabs.RemoveAt(i);
             }
+
 
             sheeps -= howMany;
             ui.addPlayerGold((howMany * 175));

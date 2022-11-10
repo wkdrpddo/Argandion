@@ -10,6 +10,8 @@ public class CombSmith : MonoBehaviour
     public CombRecipe[] myData;
     public GameObject item;
 
+    private UIManager ui;
+
     private int[] myItems = new int[25];
     private int[] howItems = new int[25];
     private int[] canMake = new int[12];
@@ -18,7 +20,8 @@ public class CombSmith : MonoBehaviour
 
     void Start()
     {
-        slots = go_SlotsParent.GetComponentsInChildren<Slot>();
+        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+        // slots = go_SlotsParent.GetComponentsInChildren<Slot>();
         string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/CombSmith.json");
         var combDatas = JsonHelper.FromJson<CombRecipe>(jsonString);
         myData = combDatas;
@@ -26,14 +29,20 @@ public class CombSmith : MonoBehaviour
 
     public void Hello()
     {
+        slots = ui.getInventorySlots();
+
         myItems = new int[25];
         howItems = new int[25];
         canMake = new int[12];
-        
-        foreach(Slot slot in slots) {
-            if (slot.itemCount >0) {
-                for (int i=0; i < 12; i++) {
-                    if (myItems[i] == 0 || myItems[i] == slot.item.ItemCode){
+
+        foreach (Slot slot in slots)
+        {
+            if (slot.itemCount > 0)
+            {
+                for (int i = 0; i < 12; i++)
+                {
+                    if (myItems[i] == 0 || myItems[i] == slot.item.ItemCode)
+                    {
                         myItems[i] = slot.item.ItemCode;
                         howItems[i] += slot.itemCount;
                         break;
@@ -43,34 +52,40 @@ public class CombSmith : MonoBehaviour
         }
 
         int canMakeIdx = 0;
-        foreach(CombRecipe rec in myData) {
+        foreach (CombRecipe rec in myData)
+        {
             int canMakeNum = CanMake(rec, myItems, howItems);
             canMake[canMakeIdx] = canMakeNum;
             if (canMakeNum > 0)
-                Debug.Log(item.GetComponent<Item>().FindName(rec.Result) + "는(은) " +CanMake(rec, myItems, howItems) + "개 만들 수 있습니다.");
+                Debug.Log(ui.findItem(rec.Result).Name + "는(은) " + CanMake(rec, myItems, howItems) + "개 만들 수 있습니다.");
             else
-                Debug.Log(item.GetComponent<Item>().FindName(rec.Result) + "는(은) 만들 수 없습니다 T.T");
-            
-            canMakeIdx +=1;
+                Debug.Log(ui.findItem(rec.Result).Name + "는(은) 만들 수 없습니다 T.T");
+
+            canMakeIdx += 1;
         }
     }
 
+    public int[] getCanMakeList()
+    {
+        return canMake;
+    }
+
     public void Trade(int idx, int howMany)
-    {   
-        if (canMake[idx] > 0 && canMake[idx] >= howMany )
+    {
+        if (canMake[idx] > 0 && canMake[idx] >= howMany)
         {
-            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(myData[idx].Result),howMany);
-            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(myData[idx].Material1), -myData[idx].Cost1 * howMany);
+            ui.acquireItem(ui.findItem(myData[idx].Result), howMany);
+            ui.reductItem(ui.findItem(myData[idx].Material1), -myData[idx].Cost1 * howMany);
             if (myData[idx].Material2 > 0)
-                theInventory.AcquireItem(item.GetComponent<Item>().FindItem(myData[idx].Material2), -myData[idx].Cost2 * howMany);
+                ui.reductItem(ui.findItem(myData[idx].Material2), -myData[idx].Cost2 * howMany);
             if (myData[idx].Material3 > 0)
-                theInventory.AcquireItem(item.GetComponent<Item>().FindItem(myData[idx].Material3), -myData[idx].Cost3 * howMany);
+                ui.reductItem(ui.findItem(myData[idx].Material3), -myData[idx].Cost3 * howMany);
             if (myData[idx].Material4 > 0)
-                theInventory.AcquireItem(item.GetComponent<Item>().FindItem(myData[idx].Material4), -myData[idx].Cost4 * howMany);
+                ui.reductItem(ui.findItem(myData[idx].Material4), -myData[idx].Cost4 * howMany);
             if (myData[idx].Material5 > 0)
-                theInventory.AcquireItem(item.GetComponent<Item>().FindItem(myData[idx].Material5), -myData[idx].Cost5 * howMany);
+                ui.reductItem(ui.findItem(myData[idx].Material5), -myData[idx].Cost5 * howMany);
             if (myData[idx].Material6 > 0)
-                theInventory.AcquireItem(item.GetComponent<Item>().FindItem(myData[idx].Material6), -myData[idx].Cost6 * howMany);
+                ui.reductItem(ui.findItem(myData[idx].Material6), -myData[idx].Cost6 * howMany);
             // canMake[idx] -= howMany;
             Hello();
         }
@@ -85,96 +100,131 @@ public class CombSmith : MonoBehaviour
         int howM5 = 0;
         int howM6 = 0;
 
-        for (int i=0; i<25; i++) {
-            if (myItems[i] == rec.Material1) {
+        for (int i = 0; i < 25; i++)
+        {
+            if (myItems[i] == rec.Material1)
+            {
                 howM1 = howItems[i] / rec.Cost1;
-                if (howM1 == 0) {
+                if (howM1 == 0)
+                {
                     return 0;
                 }
                 break;
             }
         }
 
-        if ( rec.Material2 > 0 ){
-            for (int i=0; i<25; i++) {
-                if (myItems[i] == rec.Material2) {
+        if (rec.Material2 > 0)
+        {
+            for (int i = 0; i < 25; i++)
+            {
+                if (myItems[i] == rec.Material2)
+                {
                     howM2 = howItems[i] / rec.Cost2;
-                    if (howM2 == 0) {
+                    if (howM2 == 0)
+                    {
                         return 0;
                     }
                     break;
                 }
             }
-        } else {
+        }
+        else
+        {
             howM2 = 9999;
         }
 
-        if ( rec.Material3 > 0 ){
-            for (int i=0; i<25; i++) {
-                if (myItems[i] == rec.Material3) {
+        if (rec.Material3 > 0)
+        {
+            for (int i = 0; i < 25; i++)
+            {
+                if (myItems[i] == rec.Material3)
+                {
                     howM3 = howItems[i] / rec.Cost3;
-                    if (howM3 == 0) {
+                    if (howM3 == 0)
+                    {
                         return 0;
                     }
                     break;
                 }
             }
-        } else {
+        }
+        else
+        {
             howM3 = 9999;
         }
 
-        if ( rec.Material4 > 0 ){
-            for (int i=0; i<25; i++) {
-                if (myItems[i] == rec.Material4) {
+        if (rec.Material4 > 0)
+        {
+            for (int i = 0; i < 25; i++)
+            {
+                if (myItems[i] == rec.Material4)
+                {
                     howM4 = howItems[i] / rec.Cost4;
-                    if (howM4 == 0) {
+                    if (howM4 == 0)
+                    {
                         return 0;
                     }
                     break;
                 }
             }
-        } else {
+        }
+        else
+        {
             howM4 = 9999;
         }
 
-        if ( rec.Material5 > 0 ){
-            for (int i=0; i<25; i++) {
-                if (myItems[i] == rec.Material5) {
+        if (rec.Material5 > 0)
+        {
+            for (int i = 0; i < 25; i++)
+            {
+                if (myItems[i] == rec.Material5)
+                {
                     howM5 = howItems[i] / rec.Cost5;
-                    if (howM5 == 0) {
+                    if (howM5 == 0)
+                    {
                         return 0;
                     }
                     break;
                 }
             }
-        } else {
+        }
+        else
+        {
             howM5 = 9999;
         }
 
-        if ( rec.Material6 > 0 ){
-            for (int i=0; i<25; i++) {
-                if (myItems[i] == rec.Material6) {
+        if (rec.Material6 > 0)
+        {
+            for (int i = 0; i < 25; i++)
+            {
+                if (myItems[i] == rec.Material6)
+                {
                     howM6 = howItems[i] / rec.Cost6;
-                    if (howM6 == 0) {
+                    if (howM6 == 0)
+                    {
                         return 0;
                     }
                     break;
                 }
             }
-        } else {
+        }
+        else
+        {
             howM6 = 9999;
         }
 
-        int[] howM = {howM1, howM2, howM3, howM4, howM5, howM6};
-        
+        int[] howM = { howM1, howM2, howM3, howM4, howM5, howM6 };
+
         return FindMin(howM);
     }
 
     int FindMin(int[] howM)
-    {   
+    {
         int min = howM[0];
-        for (int idx = 0; idx < howM.Length; idx ++) {
-            if (min > howM[idx]) {
+        for (int idx = 0; idx < howM.Length; idx++)
+        {
+            if (min > howM[idx])
+            {
                 min = howM[idx];
             }
         }

@@ -50,12 +50,11 @@ public class UIManager : MonoBehaviour
 
     // 상태 저장 데이터
     public Quaternion rotateZero = Quaternion.Euler(new Vector3(0, 0, 0));     // 회전값 기본값 세팅
-    public int conversationNPC = 0;
-    private int selectCharacter = -1;
-    private bool isPressESC = false;
-    // private bool isGameStart = false;
-    private bool isMyHome = false;
-
+    public int conversationNPC;
+    private int selectCharacter;
+    private bool isPressESC;
+    private bool isMyHome;
+    private bool isTransactionOpen;
 
 
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>();
@@ -73,9 +72,17 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        conversationNPC = 0;
+        selectCharacter = -1;
+        isPressESC = false;
+        isMyHome = false;
+        isTransactionOpen = false;
+
         _systemmanager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         _playersystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
         _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();
+
+        _systemmanager.setPlayerGold(245000);
 
         _baseuipanel = gameObject.transform.Find("BaseUIPanel").gameObject;
         _healthbar = _baseuipanel.transform.GetChild(0).GetComponent<Slider>();
@@ -126,7 +133,7 @@ public class UIManager : MonoBehaviour
 
         _inventory = gameObject.transform.Find("Inventory").gameObject;
         _invenMoney = _inventory.transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
-        // _invenMoney.text = _playersystem.getPlayerGold();
+        _invenMoney.text = _systemmanager.getPlayerGold().ToString();
         _inventory.gameObject.SetActive(false);
 
         _notificationpanel = GameObject.Find("NotificationPanel");
@@ -141,6 +148,11 @@ public class UIManager : MonoBehaviour
         _announceText = _eventAnnounce.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
         _eventAnnounce.SetActive(false);
 
+
+        ItemObject item1 = findItem(2);
+        acquireItem(item1, 98);
+        ItemObject item2 = findItem(3);
+        acquireItem(item2, 99);
     }
 
     // Update is called once per frame
@@ -234,6 +246,12 @@ public class UIManager : MonoBehaviour
                         break;
                 }
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            _storagepanel.SetActive(!_storagepanel.activeSelf);
+            OnInventory(3);
         }
     }
 
@@ -341,6 +359,7 @@ public class UIManager : MonoBehaviour
 
     public void OnTransactionDoubleCheckPanel(string name, int store, int itemIdx, int itemCode)
     {
+        // Debug.Log("============ " + itemIdx);
         _transactiondoublecheck.setData(name, store, itemIdx, itemCode);
         _transactiondoublecheck.handleModal();
     }
@@ -376,6 +395,17 @@ public class UIManager : MonoBehaviour
     }
 
     // ======================= UI 호출 함수 End
+
+    // 거래 패널 오픈 여부 함수
+    public bool getIsOpenTransaction()
+    {
+        return isTransactionOpen;
+    }
+
+    public void setIsOpenTransaction(bool value)
+    {
+        isTransactionOpen = value;
+    }
 
     // 캐릭터 선택 관련 함수
     public void setCharacterValue(int value)
@@ -440,10 +470,48 @@ public class UIManager : MonoBehaviour
     }
 
     // inventory 접근 함수
-    public bool checkInventory(ItemObject _item, int _count, bool _sec)
+    public bool checkInventory(ItemObject _item, int _count)
     {
         Inventory inven = _inventory.transform.GetChild(1).GetComponent<Inventory>();
-        return inven.CheckInven(_item, _count, _sec);
+        return inven.CheckInven(_item, _count);
+    }
+
+    public void acquireItem(ItemObject _item, int _count)
+    {
+        _inventory.transform.GetChild(1).GetComponent<Inventory>().AcquireItem(_item, _count);
+    }
+
+    public void reductItem(ItemObject _item, int _count)
+    {
+        _inventory.transform.GetChild(1).GetComponent<Inventory>().ReductItem(_item, _count);
+    }
+
+    public void sellItem(int slotIdx, int _count)
+    {
+        _inventory.transform.GetChild(1).GetComponent<Inventory>().SellInventoryItem(slotIdx, _count);
+    }
+
+    public void onSlotOverModal(string _text, Vector3 _position)
+    {
+        _inventory.transform.GetChild(3).gameObject.SetActive(true);
+        _inventory.transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().text = _text;
+        _inventory.transform.GetChild(3).transform.position = _position;
+    }
+
+    public void offSlotOverModal()
+    {
+        _inventory.transform.GetChild(3).gameObject.SetActive(false);
+    }
+
+    public Slot[] getInventorySlots()
+    {
+        return _inventory.transform.GetChild(1).GetComponent<Inventory>().getInventorySlots();
+    }
+
+    // 제작관련 함수
+    public CraftingPanel getCraftPanel()
+    {
+        return _craftingpanel;
     }
 
     // 플레이어 조작 정지

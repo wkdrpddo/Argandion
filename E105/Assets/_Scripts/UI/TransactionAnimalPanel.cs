@@ -9,7 +9,6 @@ public class TransactionAnimalPanel : MonoBehaviour
     // private 
     [SerializeField] private UIManager ui;
     private Ranch _ranch;
-    private bool isOnPanel;
 
     public void callCellModal(int value)
     {
@@ -28,14 +27,10 @@ public class TransactionAnimalPanel : MonoBehaviour
 
     }
 
-    public bool getIsOn()
-    {
-        return isOnPanel;
-    }
-
     public void onPanel()
     {
         gameObject.SetActive(true);
+        ui.setIsOpenTransaction(true);
 
         transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGold().ToString();
     }
@@ -45,12 +40,12 @@ public class TransactionAnimalPanel : MonoBehaviour
         gameObject.SetActive(false);
         ui.runControllPlayer();
         ui.closeTradeModal();
+        ui.setIsOpenTransaction(false);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        isOnPanel = false;
         ui = gameObject.GetComponentInParent<UIManager>();
 
         gameObject.transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("닭", 5, 2, -1));

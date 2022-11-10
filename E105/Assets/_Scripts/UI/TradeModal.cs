@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class TradeModal : MonoBehaviour
 {
-    /* checkMod
+    /* tradeMod
         0. 판매 = 목장 과 그 외
         1. 구매 - 각각 구분 필요 [5번 제외]
+        2. 제작
 
         storeIdx
         1. 재단사
@@ -19,6 +21,7 @@ public class TradeModal : MonoBehaviour
         6. 사냥꾼
     */
 
+    [SerializeField] private GameObject _npcmanager;
     [SerializeField] private Ranch _ranch;
     [SerializeField] private UIManager ui;
     [SerializeField] private int tradeMod;
@@ -30,10 +33,32 @@ public class TradeModal : MonoBehaviour
     public void setModal(string name, string iconName, int maxCnt, int cost, int checkMod, int storeIdx, int itemIdx)
     {
         gameObject.SetActive(true);
-        transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + iconName);
+
+        int pos = Array.IndexOf(iconNameInString, iconName);
+        if (pos == -1)
+        {
+            transform.GetChild(1).GetComponent<Image>().sprite = ui.getItemIcon(int.Parse(iconName));
+        }
+        else
+        {
+            transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + iconName);
+        }
+
         transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = name;
         gameObject.GetComponentInChildren<Slider>().value = 0;
-        gameObject.GetComponentInChildren<Slider>().maxValue = maxCnt;
+        if (checkMod == 1)
+        {
+            int howmany = ui.getPlayerGold() / cost;
+            if (howmany > 99)
+            {
+                howmany = 99;
+            }
+            gameObject.GetComponentInChildren<Slider>().maxValue = howmany;
+        }
+        else
+        {
+            gameObject.GetComponentInChildren<Slider>().maxValue = maxCnt;
+        }
         transform.GetChild(4).GetComponentInChildren<TextMeshProUGUI>().text = "0";
         tradeMod = checkMod;
         tradeCost = cost;
@@ -56,10 +81,33 @@ public class TradeModal : MonoBehaviour
         {
             sellEvent(tradeCount);
         }
-        else
+        else if (tradeMod == 1)
         {
             buyEvent(tradeCount);
         }
+        else if (tradeMod == 2)
+        {
+            Debug.LogWarning("여기까지는 왔니?");
+            switch (storeIndex)
+            {
+                case 1:
+                    ui.getCraftPanel().GetComponent<CombDesigner>().Trade(itemIndex, tradeCount);
+                    break;
+                case 2:
+                    ui.getCraftPanel().GetComponent<CombCarpentor>().Trade(itemIndex, tradeCount);
+                    break;
+                case 4:
+                    ui.getCraftPanel().GetComponent<CombSmith>().Trade(itemIndex, tradeCount);
+                    break;
+                case 6:
+                    ui.getCraftPanel().GetComponent<CombHunter>().Trade(itemIndex, tradeCount);
+                    break;
+            }
+        }
+
+        ui.getCraftPanel().syncCanMakeList();
+        closeModal();
+        ui.OnResultNotificationPanel("제작이 완료되었습니다.");
     }
 
     private void sellEvent(int tradeCnt)
@@ -70,13 +118,13 @@ public class TradeModal : MonoBehaviour
             switch (itemIndex)
             {
                 case 1:
-                    _ranch.SellSheep(tradeCnt);
+                    _npcmanager.GetComponent<Ranch>().SellSheep(tradeCnt);
                     break;
                 case 2:
-                    _ranch.SellChick(tradeCnt);
+                    _npcmanager.GetComponent<Ranch>().SellChick(tradeCnt);
                     break;
                 case 3:
-                    _ranch.SellCow(tradeCnt);
+                    _npcmanager.GetComponent<Ranch>().SellCow(tradeCnt);
                     break;
                 default:
                     Debug.LogError("인수 관계가 잘못되었습니다");
@@ -87,13 +135,32 @@ public class TradeModal : MonoBehaviour
         }
         else
         {
-
+            if (tradeCnt != 0)
+            {
+                ui.sellItem(itemIndex, tradeCnt);
+                ui.addPlayerGold((tradeCost * tradeCnt));
+            }
         }
     }
 
     private void buyEvent(int tradeCnt)
     {
-
+        if (storeIndex == 2)
+        {
+            _npcmanager.GetComponent<BuyingCarpentor>().Buy(itemIndex, tradeCnt);
+        }
+        else if (storeIndex == 3)
+        {
+            _npcmanager.GetComponent<BuyingFisher>().Buy(itemIndex, tradeCnt);
+        }
+        else if (storeIndex == 6)
+        {
+            _npcmanager.GetComponent<BuyingHunter>().Buy(itemIndex, tradeCnt);
+        }
+        else
+        {
+            Debug.LogError("=== 상점구매 상점idx 정보가 맞지 않음 ===");
+        }
     }
 
     public void matchSliderValue()
@@ -105,6 +172,7 @@ public class TradeModal : MonoBehaviour
     {
         _ranch = GameObject.Find("NPCManager").GetComponent<Ranch>();
         ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+        _npcmanager = GameObject.Find("NPCManager").gameObject;
     }
 
     // Update is called once per frame
@@ -112,4 +180,7 @@ public class TradeModal : MonoBehaviour
     {
 
     }
+
+    private string[] iconNameInString = new string[] { "chicken", "cow", "sheep" };
+
 }

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    private float Sound_Background = 20;
-    private float Sound_Effect = 20;
+    private float Sound_Background = 0.2f;
+    private float Sound_Effect = 0.2f;
 
     // option panal
     // public GameObject _optionpanel;

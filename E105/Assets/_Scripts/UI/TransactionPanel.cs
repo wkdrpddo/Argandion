@@ -47,6 +47,7 @@ public class TransactionPanel : MonoBehaviour
     {
         gameObject.SetActive(true);
         setBuyPanelList(value);
+        ui.setIsOpenTransaction(true);
     }
 
     private void setBuyPanelList(int value)
@@ -86,13 +87,18 @@ public class TransactionPanel : MonoBehaviour
             productBtn.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = itemObject.Desc;
 
             int itemIdx = i;
+            string name = itemObject.Name;
+            int itemCode = itemObject.ItemCode;
+            int buyCost = buyingObject.Cost;
             int pos = Array.IndexOf(multiBuyItemCode, buyingObject.Result);
             if (pos == -1)
             {
-                productBtn.GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel(itemObject.Name, value, itemIdx, itemObject.ItemCode));
+                // Debug.Log("name : " + itemObject.Name + " | itemCode : " + itemObject.ItemCode);
+                productBtn.GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel(name, value, itemIdx, itemCode));
             }
             else
             {
+                productBtn.GetComponent<Button>().onClick.AddListener(() => ui.OnTradeModal(name, itemCode.ToString(), 99, buyCost, 1, value, itemIdx));
             }
         }
     }
@@ -111,7 +117,8 @@ public class TransactionPanel : MonoBehaviour
         gameObject.SetActive(false);
         ui.runControllPlayer();
         ui.OnInventory(2);
+        ui.setIsOpenTransaction(false);
     }
 
-    private int[] multiBuyItemCode = new int[] { 4, 323, 324, 500, 501, 502, 503, 504 };
+    private int[] multiBuyItemCode = new int[] { 4, 500, 501, 502, 503, 504 };
 }

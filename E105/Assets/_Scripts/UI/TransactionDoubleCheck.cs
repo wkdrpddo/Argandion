@@ -6,6 +6,11 @@ using TMPro;
 public class TransactionDoubleCheck : MonoBehaviour
 {
     [SerializeField] private Ranch _ranch;
+    private BuyingCarpentor _carpentor;
+    private BuyingDesigner _designer;
+    private BuyingFisher _fisher;
+    private BuyingHunter _hunter;
+    private BuyingSmith _smith;
     [SerializeField] private UIManager ui;
     [SerializeField] private int storeIndex;
     [SerializeField] private int itemIndex;
@@ -17,7 +22,7 @@ public class TransactionDoubleCheck : MonoBehaviour
     {
         if (storeIndex != 5)
         {
-            if (ui.checkInventory(ui.findItem(itemCode), 1, true))
+            if (!ui.checkInventory(ui.findItem(itemCode), 1))
             {
                 ui.OnResultNotificationPanel("구매가 불가능 합니다. 인벤토리를 확인 해 주세요!!");
                 return;
@@ -28,6 +33,7 @@ public class TransactionDoubleCheck : MonoBehaviour
 
     public void setData(string name, int storeIdx, int itemIdx, int itemCode)
     {
+        // Debug.Log("name : " + name + " | itemcode : " + itemCode);
         gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name + " 을(를) 구매하시겠습니까?";
         storeIndex = storeIdx;
         itemIndex = itemIdx;
@@ -39,12 +45,16 @@ public class TransactionDoubleCheck : MonoBehaviour
         switch (storeIndex)
         {
             case 1:
+                _designer.Buy(itemIndex, 1);
                 break;
             case 2:
+                _carpentor.Buy(itemIndex, 1);
                 break;
             case 3:
+                _fisher.Buy(itemIndex, 1);
                 break;
             case 4:
+                _smith.Buy(itemIndex, 1);
                 break;
             case 5:
                 if (itemIndex == 1)
@@ -65,17 +75,23 @@ public class TransactionDoubleCheck : MonoBehaviour
                 }
 
                 ui.syncAnimalPanel(_ranch.getPoint(), _ranch.sheeps, _ranch.chicks, _ranch.cows);
-                handleModal();
                 break;
             case 6:
+                _hunter.Buy(itemIndex, 1);
                 break;
         }
+        handleModal();
     }
     // Start is called before the first frame update
     void Start()
     {
         ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         _ranch = GameObject.Find("NPCManager").GetComponent<Ranch>();
+        _carpentor = GameObject.Find("NPCManager").GetComponent<BuyingCarpentor>();
+        _designer = GameObject.Find("NPCManager").GetComponent<BuyingDesigner>();
+        _fisher = GameObject.Find("NPCManager").GetComponent<BuyingFisher>();
+        _hunter = GameObject.Find("NPCManager").GetComponent<BuyingHunter>();
+        _smith = GameObject.Find("NPCManager").GetComponent<BuyingSmith>();
         storeIndex = -1;
         itemIndex = -1;
     }

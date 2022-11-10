@@ -11,7 +11,7 @@ public class ItemObject
     public string Name;
     public string Category;
     public string Desc;
-    public Sprite ItemImage;
+    public int SellCost;
 }
 
 [System.Serializable]
@@ -49,26 +49,15 @@ public class Item : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("test");
-        Debug.Log(itemCode);
-        Debug.Log(ItemIndexArray.arr[itemCode]);
+        // Debug.Log("test");
+        // Debug.Log(itemCode);
+        // Debug.Log(ItemIndexArray.arr[itemCode]);
         string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/ItemTable2.json");
         var itemData = JsonHelper.FromJson<ItemObject>(jsonString);
         itemObject = itemData[ItemIndexArray.arr[itemCode]];
-        LoadImage(itemCode);
-        Debug.Log("----");
-        Debug.Log(itemObject.Name);
-        Debug.Log("----");
-    }
-
-    private void LoadImage(int idx)
-    {
-        byte[] byteTexture = System.IO.File.ReadAllBytes(Application.dataPath + "/Data/Image/37002.png");
-        Texture2D texture = new Texture2D(0, 0);
-        texture.LoadImage(byteTexture);
-
-        Rect rect = new Rect(0, 0, texture.width, texture.height);
-        itemObject.ItemImage = Sprite.Create(texture, rect, new Vector2(0.5f, 0.5f));
+        // Debug.Log("----");
+        // Debug.Log(itemObject.Name);
+        // Debug.Log("----");
     }
 
     public string FindName(int idx)

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BuyingFisher : MonoBehaviour
 {
-    public Inventory theInventory;
     public Product[] myData;
     public GameObject item;
     private UIManager ui;
@@ -22,14 +21,14 @@ public class BuyingFisher : MonoBehaviour
 
     public void Buy(int idx, int howMany = 1)
     {
-        if (ui.getPlayerGold() > myData[idx].Cost * howMany)
+        if (ui.getPlayerGold() >= myData[idx].Cost * howMany)
         {
-            theInventory.AcquireItem(item.GetComponent<Item>().FindItem(myData[idx].Result), howMany);
+            ui.acquireItem(ui.findItem(myData[idx].Result), howMany);
             ui.addPlayerGold(myData[idx].Cost * howMany * -1);
         }
         else
         {
-            Debug.Log("돈없엉");
+            ui.OnResultNotificationPanel("잔액이 부족합니다.");
         }
     }
 }
