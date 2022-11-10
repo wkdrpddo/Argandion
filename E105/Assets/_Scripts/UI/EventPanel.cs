@@ -41,8 +41,8 @@ public class EventPanel : MonoBehaviour
     {
         setDescriptObj();
         createAllPanel();
-        arrayLog(); // 테스트 코드
-        Debug.Log("푸드 활성화 개수: " + _foodIconACnt);
+        // arrayLog(); // 테스트 코드
+        // Debug.Log("푸드 활성화 개수: " + _foodIconACnt);
         // setEventIcon(1);
         // setEventIcon(50);
         // setEventIcon(100);
@@ -55,14 +55,14 @@ public class EventPanel : MonoBehaviour
     {
         if (_setTest)
         {
-            activeIcon(3);
+            // activeIcon(3);
             _setTest = false;
         }
         if (_delTest)
         {
-            inactiveIcon(1);
-            inactiveIcon(56);
-            inactiveIcon(50);
+            // inactiveIcon(1);
+            // inactiveIcon(56);
+            // inactiveIcon(50);
             _delTest = false;
         }
     }
