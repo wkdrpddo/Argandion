@@ -7,6 +7,7 @@ public class MushroomSpawn : MonoBehaviour
     public SectorObject _Sector;
     public GameObject[] _mushroom = new GameObject[3];
     public Transform _base_transform;
+    public float _radius;
     private Collider[] _buffer;
     // Start is called before the first frame update
     void Start()
@@ -47,9 +48,9 @@ public class MushroomSpawn : MonoBehaviour
     {
         while (count>0)
         {
-            float X = Random.Range(-0.5f,0.5f);
+            float X = Random.Range(-(_radius+0.5f),(_radius+0.5f));
             int ZM = Random.Range(0,2);
-            float Z = (ZM==0 ? Mathf.Sqrt(0.5f-(X*X)) : -Mathf.Sqrt(0.5f-(X*X)));
+            float Z = (ZM==0 ? Mathf.Sqrt((_radius+0.5f)-(X*X)) : -Mathf.Sqrt((_radius+0.5f)-(X*X)));
             Vector3 pos = new Vector3(_base_transform.position.x+X,_base_transform.position.y+3f,_base_transform.position.z+Z);
 
             _buffer = Physics.OverlapBox(pos,new Vector3(0.5f,3f,0.5f),new Quaternion(),layerMask:320);
