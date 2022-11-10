@@ -10,6 +10,7 @@ public class GatheringObject : MonoBehaviour
     private PlayerSystem _ps;
     public Inventory _inventory;
     public Item _item;
+    public bool _isremain;
 
     // Update is called once per frame
 
@@ -45,5 +46,9 @@ public class GatheringObject : MonoBehaviour
     {
         _ps._playerAnimator.SetInteger("action", 0);
         _inventory.AcquireItem(_item.FindItem(_itemCode),1);
+        if (!_isremain)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
