@@ -72,17 +72,6 @@ public class EventManager : MonoBehaviour
 
         foodBuffChecking();
 
-
-
-
-
-
-
-
-
-
-
-
     }
 
     // 테스트 코드
