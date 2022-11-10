@@ -1,9 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using EventCodeToIndex;
 
-
+[System.Serializable]
+public class DescriptObj
+{
+    public int Id;
+    public string Name;
+    public string Description;
+}
 // 이벤트 관련 코드
 public class EventPanel : MonoBehaviour
 {
@@ -13,6 +22,13 @@ public class EventPanel : MonoBehaviour
 
     // public bool _onSpiritBuff;
 
+    private GameObject[] _iconObject;
+    private DescriptObj[] _descData;
+
+    // 아이콘 활성화 개수인데 이건 스크립트 위치 바뀔 수 있음
+    private byte _foodIconACnt;
+    private byte _otherIconACnt;
+
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>(); // 아이콘 이미지
 
     // 테스트용 코드 시작 =======================================================================
@@ -20,8 +36,13 @@ public class EventPanel : MonoBehaviour
     public bool _delTest;
     public int _testNum;
 
+
     void Start()
     {
+        setDescriptObj();
+        createAllPanel();
+        arrayLog(); // 테스트 코드
+        Debug.Log("푸드 활성화 개수: " + _foodIconACnt);
         // setEventIcon(1);
         // setEventIcon(50);
         // setEventIcon(100);
@@ -34,20 +55,39 @@ public class EventPanel : MonoBehaviour
     {
         if (_setTest)
         {
-            // setEventIcon(_testNum);
+            activeIcon(3);
             _setTest = false;
         }
         if (_delTest)
         {
-            delEventIcon(_testNum);
+            inactiveIcon(1);
+            inactiveIcon(56);
+            inactiveIcon(50);
             _delTest = false;
         }
+    }
+
+    // 테스트 코드
+    public void arrayLog()
+    {
+        for (int i = 0; i < _iconObject.Length; i++)
+        {
+            Debug.Log(_iconObject[i]);
+        }
+        activeIcon(1);
+        activeIcon(100);
+        activeIcon(56);
+        activeIcon(50);
+
+        // activeIcon(3);
+        // _panelObject[EventIndexArray.arr[0]].SetActive(true);
+        // _panelObject[EventIndexArray.arr[100]].SetActive(true);
     }
 
     // 테스트용 코드 끝 =======================================================================
 
     // 아이콘 가져오기
-    public Sprite getIconImg(int eventCode)
+    private Sprite getIconImg(int eventCode)
     {
         if (Dic.ContainsKey(eventCode))
         {
@@ -58,12 +98,88 @@ public class EventPanel : MonoBehaviour
         return img;
     }
 
+    // Json 부르는 코드 (배열로)
+    private void setDescriptObj()
+    {
+        string jsonInputString = Application.dataPath + "/Data/Json/EventPanelDescription.json";
+        string jsonString = File.ReadAllText(jsonInputString);
+        _descData = JsonHelper.FromJson<DescriptObj>(jsonString);
+    }
+
+    // 처음 패널 전부 생성
+    public void createAllPanel()
+    {
+        // 패널 배열 생성
+        _iconObject = new GameObject[_descData.Length];
+        // 패널 배열에 패널 만들어 넣기
+        for (int i = 0; i < _iconObject.Length; i++)
+        {
+            int eventCode = _descData[i].Id;
+            // 아이콘 생성
+            GameObject icon;
+            if (eventCode >= 100)
+            { // 음식
+                icon = Instantiate(_eventIconPrefab, _foodPanel.transform);
+            }
+            else
+            { // 날씨, 정령
+                icon = Instantiate(_eventIconPrefab, _otherPanel.transform);
+            }
+            icon.name = eventCode.ToString() + "Icon";
+            // 아이콘 이미지 변경
+            Sprite iconImg = getIconImg(eventCode);
+            icon.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = iconImg;
+            // 아이콘 번호 부여
+            icon.GetComponent<EventIcon>()._iconNum = eventCode;
+            // 아이콘 hover 정보 부여
+            icon.GetComponent<EventIcon>()._descriptObj = _descData[i];
+            // 비활성화
+            icon.SetActive(false);
+            // 배열에 panel 넣기
+            _iconObject[i] = icon;
+        }
+    }
+
+    public void activeIcon(int eventCode)
+    {
+        GameObject icon = _iconObject[EventIndexArray.arr[eventCode]];
+        icon.SetActive(true);
+        if (eventCode >= 100)
+        { // 음식
+            _foodIconACnt++;
+            icon.transform.SetAsLastSibling(); // 맨 뒤로
+        }
+        else if (eventCode >= 50)
+        { // 날씨
+            _otherIconACnt++;
+            icon.transform.SetAsLastSibling(); // 맨 뒤로
+        }
+        else
+        { // 정령
+            _otherIconACnt++;
+            icon.transform.SetAsFirstSibling(); // 맨 앞으로
+        }
+        activePanel();
+    }
+
+    public void inactiveIcon(int eventCode)
+    {
+        _iconObject[EventIndexArray.arr[eventCode]].SetActive(false);
+        if (eventCode >= 100)
+        { // 음식
+            _foodIconACnt--;
+        }
+        else
+        { // 날씨, 정령
+            _otherIconACnt--;
+        }
+        activePanel();
+    }
+
     // panel 활성화
     private void activePanel()
     {
-        int fCnt = _foodPanel.transform.childCount;
-        int oCnt = _otherPanel.transform.childCount;
-        if (oCnt == 0)
+        if (_otherIconACnt == 0)
         {
             _otherPanel.SetActive(false);
         }
@@ -71,7 +187,7 @@ public class EventPanel : MonoBehaviour
         {
             _otherPanel.SetActive(true);
         }
-        if (fCnt == 0)
+        if (_foodIconACnt == 0)
         {
             _foodPanel.SetActive(false);
         }
@@ -81,81 +197,5 @@ public class EventPanel : MonoBehaviour
         }
 
     }
-
-    // 아이콘 생성 및 이미지 변경
-    // 정령 버프 중이면 나중에 들어온 걸로 교체
-    // 계절이랑 음식은 시간 안 띄우니까 나중에 들어온 거 무시 => delete 함수 콜할 때 시간 리셋만 해주면 될 듯
-    public void setEventIcon(int eventCode, DescriptObj descObj)
-    {
-        // 아이콘 생성
-        GameObject icon;
-        if (eventCode >= 100)
-        { // 음식
-            if (GameObject.Find(eventCode.ToString() + "Icon") == null)
-            {
-                icon = Instantiate(_eventIconPrefab, _foodPanel.transform);
-            }
-            else
-            {
-                return;
-            }
-        }
-        else if (eventCode >= 50)
-        { // 날씨
-            if (GameObject.Find(eventCode.ToString() + "Icon") == null)
-            {
-                icon = Instantiate(_eventIconPrefab, _otherPanel.transform);
-            }
-            else
-            {
-                return;
-            }
-        }
-        else
-        { // 정령
-            // if (_onSpiritBuff)
-            // { // 버프 실행 중이면
-            //     Destroy(_otherPanel.transform.GetChild(0).gameObject);
-            // }
-            icon = Instantiate(_eventIconPrefab, _otherPanel.transform);
-            icon.transform.SetAsFirstSibling(); // 맨 앞으로
-            // _onSpiritBuff = true;
-        }
-        // 아이콘 이름 변경
-        icon.name = eventCode.ToString() + "Icon";
-        // 아이콘 이미지 변경
-        Sprite iconImg = getIconImg(eventCode);
-        icon.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = iconImg;
-        // 아이콘 번호 부여
-        icon.GetComponent<EventIcon>()._iconNum = eventCode;
-        // 아이콘 hover 정보 부여
-        icon.GetComponent<EventIcon>()._descriptObj = descObj;
-        // panel 부분 활성화/비활성화
-        activePanel();
-    }
-
-    // 이벤트 오브젝트 삭제 함수
-    public void delEventIcon(int eventCode)
-    {
-        GameObject delObj = GameObject.Find(eventCode.ToString() + "Icon"); // 삭제할 아이콘
-        if (delObj == null)
-        {
-            return;
-        }
-        else
-        {
-            Destroy(delObj); // 삭제
-
-            if (delObj.transform.parent.gameObject.transform.childCount == 1)
-            { // 라인 삭제
-                delObj.transform.parent.gameObject.SetActive(false);
-            }
-        }
-
-
-        // if (imgNum >= 1 && imgNum <= 7)
-        // { // 정령이면 버프 체크
-        //     _onSpiritBuff = false;
-        // }
-    }
 }
+

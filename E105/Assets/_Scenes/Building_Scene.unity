@@ -154,7 +154,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &94697541
 MonoBehaviour:
@@ -172,7 +172,10 @@ MonoBehaviour:
   _food: {fileID: 0}
   _buffManager: {fileID: 0}
   _uiManager: {fileID: 0}
+  _event: {fileID: 0}
   _test: 0
+  _test1: 0
+  _test2: 0
 --- !u!114 &94697542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e845a8e220911e4abd5870c79d4869e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
   _testing: 0
 --- !u!1 &166946920
 GameObject:
@@ -219,7 +221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e845a8e220911e4abd5870c79d4869e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
   _testing: 0
 --- !u!65 &166946922
 BoxCollider:
@@ -297,7 +298,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &171487759 stripped
 RectTransform:
@@ -686,7 +687,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 823953310836376044, guid: e998a39ba83f745468f6ca82433b6cc5, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 823953310836376044, guid: e998a39ba83f745468f6ca82433b6cc5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1138,7 +1139,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6394119387755124409, guid: 2018bcac01cdb484ebd447a439eae9b1, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6394119387755124409, guid: 2018bcac01cdb484ebd447a439eae9b1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11200,7 +11201,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1146951614941172542}
   m_HandleRect: {fileID: 1146951614941172543}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -46304,7 +46305,7 @@ RectTransform:
   - {fileID: 7459996602211480658}
   - {fileID: 6524032638237971436}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -46323,7 +46324,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2494ac9a7092e95438b7b73b4193fe48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eventpanel: {fileID: 0}
   _eventAnnounce: {fileID: 0}
   _announceTitle: {fileID: 0}
   _announceText: {fileID: 0}
@@ -46331,6 +46331,7 @@ MonoBehaviour:
   _timer: {fileID: 3893258388697182665}
   rotateZero: {x: 0, y: 0, z: 0, w: 1}
   conversationNPC: 0
+  _eventpanel: {fileID: 0}
 --- !u!1 &4858486893383619167
 GameObject:
   m_ObjectHideFlags: 0
