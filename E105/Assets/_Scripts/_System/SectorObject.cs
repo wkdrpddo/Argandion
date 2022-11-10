@@ -122,4 +122,11 @@ public class SectorObject : MonoBehaviour
             mush.DayStart();
         }
     }
+
+    public void Purifier()
+    {
+        _purifier = true;
+        
+        //나무 오브젝트 등등 정화된 걸로 바꾸기
+    }
 }
