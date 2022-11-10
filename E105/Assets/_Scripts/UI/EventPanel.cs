@@ -47,14 +47,14 @@ public class EventPanel : MonoBehaviour
     // 테스트용 코드 끝 =======================================================================
 
     // 아이콘 가져오기
-    public Sprite getIconImg(int imgNum)
+    public Sprite getIconImg(int eventCode)
     {
-        if (Dic.ContainsKey(imgNum))
+        if (Dic.ContainsKey(eventCode))
         {
-            return Dic[imgNum];
+            return Dic[eventCode];
         }
-        Sprite img = Resources.Load<Sprite>("EventIcon/" + imgNum);
-        Dic.Add(imgNum, img);
+        Sprite img = Resources.Load<Sprite>("EventIcon/" + eventCode);
+        Dic.Add(eventCode, img);
         return img;
     }
 
@@ -85,13 +85,13 @@ public class EventPanel : MonoBehaviour
     // 아이콘 생성 및 이미지 변경
     // 정령 버프 중이면 나중에 들어온 걸로 교체
     // 계절이랑 음식은 시간 안 띄우니까 나중에 들어온 거 무시 => delete 함수 콜할 때 시간 리셋만 해주면 될 듯
-    public void setEventIcon(int imgNum, DescriptObj descObj)
+    public void setEventIcon(int eventCode, DescriptObj descObj)
     {
         // 아이콘 생성
         GameObject icon;
-        if (imgNum >= 100)
+        if (eventCode >= 100)
         { // 음식
-            if (GameObject.Find(imgNum.ToString() + "Icon") == null)
+            if (GameObject.Find(eventCode.ToString() + "Icon") == null)
             {
                 icon = Instantiate(_eventIconPrefab, _foodPanel.transform);
             }
@@ -100,9 +100,9 @@ public class EventPanel : MonoBehaviour
                 return;
             }
         }
-        else if (imgNum >= 50)
+        else if (eventCode >= 50)
         { // 날씨
-            if (GameObject.Find(imgNum.ToString() + "Icon") == null)
+            if (GameObject.Find(eventCode.ToString() + "Icon") == null)
             {
                 icon = Instantiate(_eventIconPrefab, _otherPanel.transform);
             }
@@ -122,12 +122,12 @@ public class EventPanel : MonoBehaviour
             // _onSpiritBuff = true;
         }
         // 아이콘 이름 변경
-        icon.name = imgNum.ToString() + "Icon";
+        icon.name = eventCode.ToString() + "Icon";
         // 아이콘 이미지 변경
-        Sprite iconImg = getIconImg(imgNum);
+        Sprite iconImg = getIconImg(eventCode);
         icon.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = iconImg;
         // 아이콘 번호 부여
-        icon.GetComponent<EventIcon>()._iconNum = imgNum;
+        icon.GetComponent<EventIcon>()._iconNum = eventCode;
         // 아이콘 hover 정보 부여
         icon.GetComponent<EventIcon>()._descriptObj = descObj;
         // panel 부분 활성화/비활성화
@@ -135,15 +135,23 @@ public class EventPanel : MonoBehaviour
     }
 
     // 이벤트 오브젝트 삭제 함수
-    public void delEventIcon(int imgNum)
+    public void delEventIcon(int eventCode)
     {
-        GameObject delObj = GameObject.Find(imgNum.ToString() + "Icon"); // 삭제할 아이콘
-        Destroy(delObj); // 삭제
-
-        if (delObj.transform.parent.gameObject.transform.childCount == 1)
-        { // 라인 삭제
-            delObj.transform.parent.gameObject.SetActive(false);
+        GameObject delObj = GameObject.Find(eventCode.ToString() + "Icon"); // 삭제할 아이콘
+        if (delObj == null)
+        {
+            return;
         }
+        else
+        {
+            Destroy(delObj); // 삭제
+
+            if (delObj.transform.parent.gameObject.transform.childCount == 1)
+            { // 라인 삭제
+                delObj.transform.parent.gameObject.SetActive(false);
+            }
+        }
+
 
         // if (imgNum >= 1 && imgNum <= 7)
         // { // 정령이면 버프 체크
