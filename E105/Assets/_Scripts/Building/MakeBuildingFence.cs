@@ -33,15 +33,15 @@ public class MakeBuildingFence : MonoBehaviour
         _systemManager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         // 함수 호출
         setValue();
-        makeFence(); // 테스트 용
+        makeFence();
     }
 
     public void checkPurification()
     {
-        // 정화 판정
+        // 정화 판정(로드 용)
         if (_systemManager._purification[_sectorNum])
         {
-            Destroy(gameObject);
+            Destroy(_fences);
         }
     }
 

@@ -61,7 +61,7 @@ public class SystemManager : MonoBehaviour
         MapObject.GetComponent<MapObject>().UpdateFieldManager(index);
     }
 
-    private void UpdatePurification(int index)
+    public void UpdatePurification(int index)
     {
         _purification[index] = !_purification[index];
     }
