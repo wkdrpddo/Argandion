@@ -59,7 +59,7 @@ public class UIManager : MonoBehaviour
     // 주연 추가
     public GameObject _eventpanel;
     // private EventManager _eventmanager;
-    public Food _food;
+    public FoodManager _foodmanager;
 
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>();
 
@@ -84,7 +84,7 @@ public class UIManager : MonoBehaviour
         _systemmanager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         _playersystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
         _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();
-        _food = GameObject.Find("Test").GetComponent<Food>();
+        _foodmanager = GameObject.Find("FoodManager").GetComponent<FoodManager>();
         // _eventmanager = GameObject.Find("EventManager").GetComponent<EventManager>();
 
 
@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour
         _healthbar = _baseuipanel.transform.GetChild(0).GetComponent<Slider>();
         _energybar = _baseuipanel.transform.GetChild(1).GetComponent<Slider>();
         _eventpanel = _baseuipanel.transform.GetChild(4).gameObject;
-        _food._eventPanel = _eventpanel.GetComponent<EventPanel>();
+        _foodmanager._eventPanel = _eventpanel.GetComponent<EventPanel>();
         // _food.settingEventPanel();
         // _eventmanager.setting();
 

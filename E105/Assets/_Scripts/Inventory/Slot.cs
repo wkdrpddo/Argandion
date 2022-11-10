@@ -10,7 +10,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public ItemObject item;
     public int itemCount;
     public Image itemImage;
-    public Food foodManager;
+    public FoodManager foodManager;
 
     [SerializeField]
     private Text text_Count;
