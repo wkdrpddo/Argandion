@@ -7,9 +7,10 @@ public class BuffManager : MonoBehaviour
     public SystemManager _systemManager;
 
     // 꽃 버프 관련
-    public int _flowerBuffTargetMonth = 0;
-    public int _flowerBuffTargetDay = 0;
-    public bool _isFlowerBuffActived = false;
+    public int _flowerBuffTargetMonth = 0; // 버프가 끝나는 날의 달
+    public int _flowerBuffTargetDay = 0; // 버프가 끝나는 날의 날
+    public bool _isFlowerBuffActived = false; // 버프 진행 중
+    // 버프 종류
     public bool whiteSpirit = false;
     public bool whitePray = false;
     public bool orangePray = false;
