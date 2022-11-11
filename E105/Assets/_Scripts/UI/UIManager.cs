@@ -47,6 +47,7 @@ public class UIManager : MonoBehaviour
     private Slider _healthbar;
     private Slider _energybar;
     public RectTransform _timer;
+    public GameObject _daytime;
 
     // 상태 저장 데이터
     public Quaternion rotateZero = Quaternion.Euler(new Vector3(0, 0, 0));     // 회전값 기본값 세팅
@@ -96,6 +97,7 @@ public class UIManager : MonoBehaviour
         _healthbar = _baseuipanel.transform.GetChild(0).GetComponent<Slider>();
         _energybar = _baseuipanel.transform.GetChild(1).GetComponent<Slider>();
         _eventpanel = _baseuipanel.transform.GetChild(4).gameObject;
+        _daytime = _baseuipanel.transform.GetChild(2).GetChild(1).gameObject;
         _foodmanager._eventPanel = _eventpanel.GetComponent<EventPanel>();
         // _food.settingEventPanel();
         // _eventmanager.setting();
@@ -300,7 +302,9 @@ public class UIManager : MonoBehaviour
 
     public void OnCookingPanel()
     {
+        Debug.Log("온쿠킹");
         stopControllPlayer();
+        Debug.Log("스탑");
         _cookingpanel.GetComponent<CookingPanel>().openCooking();
     }
 
@@ -592,5 +596,21 @@ public class UIManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+    }
+
+    public void DayStart()
+    {
+        Transform trans = _daytime.GetComponent<RectTransform>().transform;
+        Image img = _daytime.GetComponent<Image>();
+        if (_systemmanager._buffManager.whitePray || _systemmanager._buffManager.whiteSpirit)
+        {
+            trans.SetLocalPositionAndRotation(trans.position, Quaternion.Euler(180, 180, 15));
+            img.fillAmount = 0.83333f;
+        }
+        else
+        {
+            trans.SetLocalPositionAndRotation(trans.position, Quaternion.Euler(180, 180, 0));
+            img.fillAmount = 0.70833f;
+        }
     }
 }

@@ -30,7 +30,7 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        playBGM1();
+        // playBGM1();
     }
     public void playBGM1()
     {
@@ -47,7 +47,6 @@ public class SoundManager : MonoBehaviour
     public void setBackgroundSound(Slider slider)
     {
         Sound_Background = slider.value;
-        bgmPlayer.volume = Sound_Background;
     }
 
     public void setEffectSound(Slider slider)

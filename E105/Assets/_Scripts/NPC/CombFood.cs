@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class CombFood : MonoBehaviour
 {
-    public GameObject go_SlotsParent;
     public UIManager ui;
     public CombRecipe[] myData;
     public GameObject item;
@@ -19,7 +18,6 @@ public class CombFood : MonoBehaviour
     void Start()
     {
         ui = GameObject.Find("UIManager").GetComponent<UIManager>();
-        // slots = go_SlotsParent.GetComponentsInChildren<Slot>();
         string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/CombFood.json");
         var combDatas = JsonHelper.FromJson<CombRecipe>(jsonString);
         myData = combDatas;

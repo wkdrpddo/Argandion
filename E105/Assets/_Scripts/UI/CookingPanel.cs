@@ -35,11 +35,14 @@ public class CookingPanel : MonoBehaviour
     {
         gameObject.SetActive(false);
         gameObject.transform.GetChild(0).GetComponent<Button>().interactable = true;
+        _cookingInteraction.CookingEnd();
+
         ui.runControllPlayer();
     }
 
     public void openCooking()
     {
+        _cookingInteraction.CookingStart();
         gameObject.SetActive(true);
         setDishList();
     }
