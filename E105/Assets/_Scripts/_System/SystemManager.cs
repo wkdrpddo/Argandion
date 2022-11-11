@@ -43,8 +43,8 @@ public class SystemManager : MonoBehaviour
         _minute = 0;
         _minute_display = 0;
         _player = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
-        _sectors = MapObject.GetComponentsInChildren<SectorObject>();
-        _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
+        // _sectors = MapObject.GetComponentsInChildren<SectorObject>();
+        // _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
     }
 
@@ -61,7 +61,7 @@ public class SystemManager : MonoBehaviour
         MapObject.GetComponent<MapObject>().UpdateFieldManager(index);
     }
 
-    private void UpdatePurification(int index)
+    public void UpdatePurification(int index)
     {
         _purification[index] = !_purification[index];
     }
@@ -101,7 +101,8 @@ public class SystemManager : MonoBehaviour
 
                 DayEnd();
                 _weatherManager.SetWeather(_season);
-                if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day) {
+                if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
+                {
                     _buffManager.FlowerBuffEnd();
                 }
                 _buffManager.DayEnd();
