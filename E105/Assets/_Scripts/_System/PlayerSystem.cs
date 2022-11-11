@@ -511,14 +511,14 @@ public class PlayerSystem : MonoBehaviour
             combCarpentor.Hello();
         }
 
-        if (other.gameObject.CompareTag("droppedItem")){
-            Debug.Log("아이템 가까이에 있음");
-            _nearObject = other.gameObject;
-            DroppedItem item = _nearObject.GetComponent<DroppedItem>();
-            _theInventory.AcquireItem(item.itemObject, 1);
-            Debug.Log(_nearObject.transform.parent);
-            Destroy(_nearObject.transform.parent.gameObject);
-        }
+        // if (other.gameObject.CompareTag("droppedItem")){
+        //     Debug.Log("아이템 가까이에 있음");
+        //     _nearObject = other.gameObject;
+        //     DroppedItem item = _nearObject.GetComponent<DroppedItem>();
+        //     _theInventory.AcquireItem(item.itemObject, 1);
+        //     Debug.Log(_nearObject.transform.parent);
+        //     Destroy(_nearObject.transform.parent.gameObject);
+        // }
 
         // Debug.Log("OnTriggerEnter(): " + other.tag);
         if (other.tag == "CraftingTable" || other.tag == "Sign")
@@ -530,6 +530,16 @@ public class PlayerSystem : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter(Collision other) {
+        if (other.gameObject.CompareTag("droppedItem")){
+            Debug.Log("아이템 가까이에 있음");
+            _nearObject = other.gameObject;
+            DroppedItem item = _nearObject.GetComponent<DroppedItem>();
+            _theInventory.AcquireItem(item.itemObject, 1);
+            Debug.Log(_nearObject.transform.parent);
+            Destroy(_nearObject.transform.parent.gameObject);
+        }
+    }
     void OnTriggerExit(Collider other) {
         if (other.gameObject.CompareTag("dirt")) {
             _onSoil = false;

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3721612243675543813
+--- !u!1 &2264312802187606961
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3724247831116902877}
-  - component: {fileID: 3735394456472304765}
-  - component: {fileID: 3743187752974805593}
-  - component: {fileID: 3694341228629642245}
-  - component: {fileID: 9055070741347680975}
-  - component: {fileID: 6076084083990184068}
-  - component: {fileID: 745328318482328662}
+  - component: {fileID: 2268462997756724669}
+  - component: {fileID: 2242038520039307291}
+  - component: {fileID: 2250519883424591181}
+  - component: {fileID: 2762257454201569810}
+  - component: {fileID: 6988894382714874960}
+  - component: {fileID: -1656480375446473397}
   m_Layer: 0
-  m_Name: Onion3
-  m_TagString: harvested
+  m_Name: Tomato1
+  m_TagString: crop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3724247831116902877
+--- !u!4 &2268462997756724669
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3721612243675543813}
+  m_GameObject: {fileID: 2264312802187606961}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.4, y: 0.26234415, z: 1.76}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -3.5, y: 0.13869286, z: 0.5}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3735394456472304765
+--- !u!33 &2242038520039307291
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3721612243675543813}
-  m_Mesh: {fileID: 4300000, guid: de9b4a235dc6deb47b37b73480eeb917, type: 3}
---- !u!23 &3743187752974805593
+  m_GameObject: {fileID: 2264312802187606961}
+  m_Mesh: {fileID: 4300000, guid: 5863613c13383ba4cbcd755da3576e9b, type: 3}
+--- !u!23 &2250519883424591181
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3721612243675543813}
+  m_GameObject: {fileID: 2264312802187606961}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -65,6 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 2100000, guid: da5a311d3775332478c396918dda3aaa, type: 2}
   - {fileID: 2100000, guid: fdf18c58b725a2f469593ece1786d307, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -87,43 +87,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3694341228629642245
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3721612243675543813}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43909544317185354, guid: bf121819c01998c4ca933f914feff969, type: 2}
---- !u!114 &9055070741347680975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3721612243675543813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f84df88236f0772478b8a7bb67fa7c29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cropOnField: {fileID: 6904147769432942758, guid: f16d5e158cc9f5b41853a93631f8f818, type: 3}
-  self: {fileID: 3724247831116902877}
-  howMany: 040000000500000006000000
-  _buffManagerObject: {fileID: 0}
---- !u!54 &6076084083990184068
+--- !u!54 &2762257454201569810
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3721612243675543813}
+  m_GameObject: {fileID: 2264312802187606961}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -133,16 +103,40 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &745328318482328662
+--- !u!65 &6988894382714874960
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3721612243675543813}
+  m_GameObject: {fileID: 2264312802187606961}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.20243713, y: 0.5321781, z: 0.17878051}
-  m_Center: {x: 0, y: 0.17465709, z: 0}
+  m_Size: {x: 0.27002716, y: 0.30628467, z: 0.279942}
+  m_Center: {x: 0.04832901, y: 0.14871949, z: 0.017033383}
+--- !u!114 &-1656480375446473397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2264312802187606961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e81c474bf161e9408ea556be57c54f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cropCode: 8
+  cropObject:
+    CropCode: 0
+    CropName: 
+    Water: 0
+    NextPhaseDay: 0
+    Season: 0
+  nextCrop: {fileID: 2937387957052118234, guid: 74d2298e826dd53419131747416a7428, type: 3}
+  self: {fileID: 2268462997756724669}
+  updateDay: 0
+  _systemManager: {fileID: 0}
+  isIn: 0

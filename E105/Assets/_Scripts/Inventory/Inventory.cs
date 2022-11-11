@@ -23,12 +23,6 @@ public class Inventory : MonoBehaviour
         uiGroup = gameObject.GetComponent<RectTransform>();
     }
 
-    void Update()
-    {
-
-    }
-
-
     public bool CheckInven(ItemObject _item, int _count = 1, bool _sec = false)
     {
         if (!_sec)
