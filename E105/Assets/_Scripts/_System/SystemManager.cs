@@ -23,6 +23,8 @@ public class SystemManager : MonoBehaviour
     public BuffManager _buffManager;
     public NPCManager _NPCManager;
     public UIManager _UIManager;
+    public EventPanel _EventPanel;
+    public PrayBuff _PrayBuff;
     public int _development_level;  // 1부터
     public int _purification_sector;
 
@@ -46,12 +48,12 @@ public class SystemManager : MonoBehaviour
         _minute = 0;
         _minute_display = 0;
         _player = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
-        // _sectors = MapObject.GetComponentsInChildren<SectorObject>();
+        _sectors = MapObject.GetComponentsInChildren<SectorObject>();
         _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         _NPCManager = GameObject.Find("NPCManager").GetComponent<NPCManager>();
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
-
+        _PrayBuff = GameObject.Find("BuffManager").GetComponent<PrayBuff>();
     }
 
     // Update is called once per frame
@@ -167,7 +169,16 @@ public class SystemManager : MonoBehaviour
 
     private void DayEnd()
     {
-        // _weather = _weatherManager.SetWeather(_season);
+        if (1 <= _weather && _weather <= 9)
+        {
+            _EventPanel.inactiveIcon(_weather+49);
+        }
+        _weatherManager.SetWeather(_season);
+        if (1 <= _weather && _weather <= 9)
+        {
+            _EventPanel.activeIcon(_weather+49);
+        }
+        Debug.Log(_weather);
         // 모든 SectorObject의 DayEnd 동작
         foreach (var sector in _sectors)
         {
@@ -244,7 +255,7 @@ public class SystemManager : MonoBehaviour
             sector.DayStart();
         }
         // _sectorTest.DayEnd();
-        // _UIManager.DayStart();
+        _UIManager.DayStart();
     }
 
     //정화된 구역 중에서 랜덤 한 구역 정하기
@@ -329,7 +340,13 @@ public class SystemManager : MonoBehaviour
         _player_gold += value;
     }
 
+    public void callActiveIcon(int value)
+    {
+        _EventPanel.activeIcon(value);
+    }
 
-
-
+    public void callInactiveIcon(int value)
+    {
+        _EventPanel.inactiveIcon(value);
+    }
 }

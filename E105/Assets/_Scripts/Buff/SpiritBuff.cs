@@ -9,6 +9,9 @@ public class SpiritBuff : MonoBehaviour
     private BuffManager buffManager;
     public GameObject[] buildings;
 
+    // public int testSpirit;
+    // public bool testCode;
+
     private void Start() {
         _buffManagerObject = GameObject.Find("BuffManager");
         buffManager = _buffManagerObject.GetComponent<BuffManager>();
@@ -18,18 +21,25 @@ public class SpiritBuff : MonoBehaviour
         if (buffManager._isFlowerBuffActived == false) {
             if (item.ItemCode == 50) {
                 PinkSpirit();
+                systemManager.callActiveIcon(15);
             } else if (item.ItemCode == 51) {
                 OrangeSpirit();
+                systemManager.callActiveIcon(12);
             } else if (item.ItemCode == 52) {
                 RedSpirit();
+                systemManager.callActiveIcon(14);
             } else if (item.ItemCode == 53) {
                 SkySpirit();
+                systemManager.callActiveIcon(17);
             } else if (item.ItemCode == 54) {
                 BlueSpirit();
+                systemManager.callActiveIcon(13);
             } else if (item.ItemCode == 55) {
                 YellowSpirit();
+                systemManager.callActiveIcon(16);
             } else if (item.ItemCode == 56) {
                 WhiteSpirit();
+                systemManager.callActiveIcon(11);
             } else {
                 Debug.Log("꽃이 아니야!");
             }
@@ -54,12 +64,33 @@ public class SpiritBuff : MonoBehaviour
     }
 
     public void OrangeSpirit(){
+        buffManager._isFlowerBuffActived = true;
+        buffManager.orangeSpirit = true;
+        buffManager._flowerBuffTargetDay = systemManager._day + 1;
+        buffManager._flowerBuffTargetMonth = systemManager._month;
+        if (buffManager._flowerBuffTargetDay > 28) {
+            buffManager._flowerBuffTargetDay -= 28;
+            buffManager._flowerBuffTargetMonth += + 1;
+            if (buffManager._flowerBuffTargetMonth > 8) {
+                buffManager._flowerBuffTargetMonth -= 8;
+            }
+        }
         // buildings = GameObject.FindGameObjectsWithLayer(10)
         Debug.Log("나는 주황색정령버프");
     }
     
     public void BlueSpirit(){
+        buffManager._isFlowerBuffActived = true;
         buffManager.blueSpirit = true;
+        buffManager._flowerBuffTargetDay = systemManager._day + 1;
+        buffManager._flowerBuffTargetMonth = systemManager._month;
+        if (buffManager._flowerBuffTargetDay > 28) {
+            buffManager._flowerBuffTargetDay -= 28;
+            buffManager._flowerBuffTargetMonth += + 1;
+            if (buffManager._flowerBuffTargetMonth > 8) {
+                buffManager._flowerBuffTargetMonth -= 8;
+            }
+        }
         Debug.Log("나는 파랑색정령버프");
     }
     
@@ -122,5 +153,4 @@ public class SpiritBuff : MonoBehaviour
         }
         Debug.Log("나는 하늘색정령버프");
     }
-    
 }

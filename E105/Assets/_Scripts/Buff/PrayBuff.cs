@@ -14,13 +14,38 @@ public class PrayBuff : MonoBehaviour
     public int flowerIdx = 0;
     public int prayDay = 0;
 
+    public bool testCode;
+
     void Start()
     {
         tempDay = systemManager._day;
         buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
     }
 
+    // void Update()
+    // {
+    //     if (tempDay != systemManager._day)
+    //     {
+    //         NewDay();
+    //         tempDay = systemManager._day;
+    //     }
+
+    //     if (buffManager._flowerBuffTargetMonth == systemManager._month && buffManager._flowerBuffTargetDay == systemManager._day)
+    //     {
+    //         buffManager.FlowerBuffEnd(); // 버프 끝
+    //     }
+    // }
+
     void Update()
+    {
+        if (testCode)
+        {
+            testCode = !testCode;
+            Reincarnation();
+        }
+    }
+
+    public void DayStart()
     {
         if (tempDay != systemManager._day)
         {
@@ -30,7 +55,7 @@ public class PrayBuff : MonoBehaviour
 
         if (buffManager._flowerBuffTargetMonth == systemManager._month && buffManager._flowerBuffTargetDay == systemManager._day)
         {
-            buffManager.FlowerBuffEnd(); // 버프 끝
+            buffManager.FlowerBuffEnd(20); // 버프 끝
         }
     }
 
@@ -105,36 +130,49 @@ public class PrayBuff : MonoBehaviour
         if (flowerIdx == 50)
         {
             PinkPray();
+            systemManager.callActiveIcon(5);
         }
         else if (flowerIdx == 51)
         {
             OrangePray();
+            systemManager.callActiveIcon(2);
         }
         else if (flowerIdx == 52)
         {
             RedPray();
+            systemManager.callActiveIcon(4);
+            if (buffManager.isColdWaveIcons)
+            {
+                systemManager.callInactiveIcon(58);
+            };
         }
         else if (flowerIdx == 53)
         {
             SkyPray();
+            systemManager.callActiveIcon(7);
         }
         else if (flowerIdx == 54)
         {
             BluePray();
+            systemManager.callActiveIcon(3);
         }
         else if (flowerIdx == 55)
         {
             YellowPray();
+            systemManager.callActiveIcon(6);
         }
         else if (flowerIdx == 56)
         {
             WhitePray();
+            systemManager.callActiveIcon(1);
         }
     }
 
     public void WhitePray()
     {
+        buffManager.FlowerBuffEnd(1);
         buffManager._isFlowerBuffActived = true;
+        buffManager._isPrayBuffActived = true;
         buffManager.whitePray = true;
         buffManager._flowerBuffTargetDay = systemManager._day;
         buffManager._flowerBuffTargetMonth = systemManager._month + 1;
@@ -147,7 +185,9 @@ public class PrayBuff : MonoBehaviour
 
     public void OrangePray()
     {
+        buffManager.FlowerBuffEnd(2);
         buffManager._isFlowerBuffActived = true;
+        buffManager._isPrayBuffActived = true;
         buffManager.orangePray = true;
         buffManager._flowerBuffTargetDay = systemManager._day;
         buffManager._flowerBuffTargetMonth = systemManager._month + 1;
@@ -160,7 +200,9 @@ public class PrayBuff : MonoBehaviour
 
     public void BluePray()
     {
+        buffManager.FlowerBuffEnd(3);
         buffManager._isFlowerBuffActived = true;
+        buffManager._isPrayBuffActived = true;
         buffManager.bluePray = true;
         buffManager._flowerBuffTargetDay = systemManager._day;
         buffManager._flowerBuffTargetMonth = systemManager._month + 1;
@@ -173,7 +215,9 @@ public class PrayBuff : MonoBehaviour
 
     public void RedPray()
     {
+        buffManager.FlowerBuffEnd(4);
         buffManager._isFlowerBuffActived = true;
+        buffManager._isPrayBuffActived = true;
         buffManager.redPray = true;
         buffManager._flowerBuffTargetDay = systemManager._day;
         buffManager._flowerBuffTargetMonth = systemManager._month + 1;
@@ -186,7 +230,9 @@ public class PrayBuff : MonoBehaviour
 
     public void PinkPray()
     {
+        buffManager.FlowerBuffEnd(5);
         buffManager._isFlowerBuffActived = true;
+        buffManager._isPrayBuffActived = true;
         buffManager.pinkPray = true;
         buffManager._flowerBuffTargetDay = systemManager._day;
         buffManager._flowerBuffTargetMonth = systemManager._month + 1;
@@ -199,7 +245,9 @@ public class PrayBuff : MonoBehaviour
 
     public void YellowPray()
     {
+        buffManager.FlowerBuffEnd(6);
         buffManager._isFlowerBuffActived = true;
+        buffManager._isPrayBuffActived = true;
         buffManager.yellowPray = true;
         buffManager._flowerBuffTargetDay = systemManager._day;
         buffManager._flowerBuffTargetMonth = systemManager._month + 1;
@@ -212,7 +260,9 @@ public class PrayBuff : MonoBehaviour
 
     public void SkyPray()
     {
+        buffManager.FlowerBuffEnd(7);
         buffManager._isFlowerBuffActived = true;
+        buffManager._isPrayBuffActived = true;
         buffManager.skyPray = true;
         buffManager._flowerBuffTargetDay = systemManager._day;
         buffManager._flowerBuffTargetMonth = systemManager._month + 1;

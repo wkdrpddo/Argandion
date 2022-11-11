@@ -35,7 +35,7 @@ namespace EventCodeToIndex
             arr[54] = 18;
             arr[55] = 19;
             arr[56] = 20;
-            arr[57] = 21;
+            arr[58] = 21;
             arr[100] = 22;
             arr[101] = 23;
             arr[102] = 24;

@@ -11,8 +11,8 @@ public class OptionPanel : MonoBehaviour
     {
         _soundmanager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
-        gameObject.transform.GetChild(0).GetComponent<Slider>().value = _soundmanager.getBackgroundSound();
-        gameObject.transform.GetChild(1).GetComponent<Slider>().value = _soundmanager.getEffectSound();
+        // gameObject.transform.GetChild(0).GetComponent<Slider>().value = _soundmanager.getBackgroundSound();
+        // gameObject.transform.GetChild(1).GetComponent<Slider>().value = _soundmanager.getEffectSound();
     }
 
     // Update is called once per frame
