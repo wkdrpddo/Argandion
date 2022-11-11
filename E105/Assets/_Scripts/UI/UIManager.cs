@@ -41,25 +41,27 @@ public class UIManager : MonoBehaviour
     private GameObject _nowequip;
 
     [SerializeField] private SystemManager _systemmanager;
-    private PlayerSystem _playersystem;
+    [SerializeField] private PlayerSystem _playersystem;
     private Item _itemmanager;
 
     private Slider _healthbar;
     private Slider _energybar;
     public RectTransform _timer;
+    public GameObject _daytime;
 
     // 상태 저장 데이터
     public Quaternion rotateZero = Quaternion.Euler(new Vector3(0, 0, 0));     // 회전값 기본값 세팅
-    // 주연 추가
-    public GameObject _eventpanel;
-    // private EventManager _eventmanager;
-    public FoodManager _foodmanager;
 
     public int conversationNPC;
     private int selectCharacter;
     private bool isPressESC;
     private bool isMyHome;
     private bool isTransactionOpen;
+
+    // 주연 추가
+    public GameObject _eventpanel;
+    // private EventManager _eventmanager;
+    public FoodManager _foodmanager;
 
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>();
 
@@ -95,6 +97,7 @@ public class UIManager : MonoBehaviour
         _healthbar = _baseuipanel.transform.GetChild(0).GetComponent<Slider>();
         _energybar = _baseuipanel.transform.GetChild(1).GetComponent<Slider>();
         _eventpanel = _baseuipanel.transform.GetChild(4).gameObject;
+        _daytime = _baseuipanel.transform.GetChild(2).GetChild(1).gameObject;
         _foodmanager._eventPanel = _eventpanel.GetComponent<EventPanel>();
         // _food.settingEventPanel();
         // _eventmanager.setting();
@@ -199,19 +202,19 @@ public class UIManager : MonoBehaviour
         //     _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
         // }
 
-        // if (Input.GetButtonDown("interactionKey"))
-        // {
-        //     // test buildEvent
-        //     if (_buildeventpanel.GetComponent<BuildEventPanel>().isOnPanel)
-        //     {
-        //         _buildeventpanel.GetComponent<BuildEventPanel>().closeWindow();
-        //     }
-        //     else
-        //     {
-        //         int random = Random.Range(1, 7);
-        //         OnBuildEventPanel(random);
-        //     }
-        // }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            // test buildEvent
+            if (_buildeventpanel.GetComponent<BuildEventPanel>().isOnPanel)
+            {
+                _buildeventpanel.GetComponent<BuildEventPanel>().closeWindow();
+            }
+            else
+            {
+                int random = Random.Range(1, 7);
+                OnBuildEventPanel(random);
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.V))
         {
@@ -247,6 +250,7 @@ public class UIManager : MonoBehaviour
             {
                 int randomNum = Random.Range(1, 11);
                 // int randomNum = 5;
+                randomNum = 6;
                 switch (conversationCnt)
                 {
                     case -1:
@@ -299,7 +303,9 @@ public class UIManager : MonoBehaviour
 
     public void OnCookingPanel()
     {
+        Debug.Log("온쿠킹");
         stopControllPlayer();
+        Debug.Log("스탑");
         _cookingpanel.GetComponent<CookingPanel>().openCooking();
     }
 
@@ -528,7 +534,7 @@ public class UIManager : MonoBehaviour
         return _craftingpanel;
     }
 
-    // 플레이어 조작 정지
+    // 플레이어 함수 관련
     private void stopControllPlayer()
     {
         _playersystem._canMove = false;
@@ -537,6 +543,15 @@ public class UIManager : MonoBehaviour
     public void runControllPlayer()
     {
         _playersystem._canMove = true;
+    }
+
+    public void runCookingAnimation()
+    {
+        Debug.LogWarning("======== ui cooking call ========");
+        // _playersystem._playerAnimator.SetInteger("action", 6);
+        _playersystem.setAnimator(6, 5.0f);
+        Debug.LogWarning(_playersystem._playerAnimator);
+        Debug.LogWarning(_playersystem._playerAnimator.GetInteger("action"));
     }
 
     // item 관련 함수
@@ -591,5 +606,21 @@ public class UIManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+    }
+
+    public void DayStart()
+    {
+        Transform trans = _daytime.GetComponent<RectTransform>().transform;
+        Image img = _daytime.GetComponent<Image>();
+        if (_systemmanager._buffManager.whitePray || _systemmanager._buffManager.whiteSpirit)
+        {
+            trans.SetLocalPositionAndRotation(trans.position, Quaternion.Euler(180, 180, 15));
+            img.fillAmount = 0.83333f;
+        }
+        else
+        {
+            trans.SetLocalPositionAndRotation(trans.position, Quaternion.Euler(180, 180, 0));
+            img.fillAmount = 0.70833f;
+        }
     }
 }

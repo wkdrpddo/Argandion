@@ -40,6 +40,7 @@ public class CraftingPanel : MonoBehaviour
     {
         gameObject.SetActive(true);
         setCraftData(value);
+        gameObject.transform.GetChild(1).GetChild(2).GetComponent<Button>().interactable = false;
     }
 
     public void onClickCraft()
@@ -63,6 +64,8 @@ public class CraftingPanel : MonoBehaviour
         {
             ui.OnResultNotificationPanel("인벤토리에 빈 공간이 없습니다.");
         }
+
+        gameObject.transform.GetChild(1).GetChild(2).GetComponent<Button>().interactable = false;
     }
 
     private void setCraftData(int value)

@@ -123,7 +123,7 @@ public class ConversationPanel : MonoBehaviour
             case 2:
             case 3:
             case 4:
-            case 6:
+                // case 6:
                 GameObject tradeBtn = Instantiate(conversationButton, _selectpanel.transform);
                 RectTransform tradeBtnRect = tradeBtn.GetComponent<RectTransform>();
                 tradeBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);

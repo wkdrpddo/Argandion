@@ -51,6 +51,7 @@ public class SystemManager : MonoBehaviour
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         _NPCManager = GameObject.Find("NPCManager").GetComponent<NPCManager>();
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+
     }
 
     // Update is called once per frame
