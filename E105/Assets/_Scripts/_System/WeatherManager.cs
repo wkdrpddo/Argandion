@@ -7,6 +7,8 @@ public class WeatherManager : MonoBehaviour
     public SystemManager systemManager;
     public BuffManager _buffManager;
 
+    private float[] perfect = {1.0f, 99.0f};
+    private int[] perfectIdx = {7, 0};
     private float[] spring = {1.0f, 6.0f, 13.0f, 13.0f, 67.0f};
     private int[] springIdx = {7, 6, 2, 1, 0};
     private float[] summer = {1.0f, 4.0f, 6.0f, 8.0f, 10.0f, 14.0f, 57.0f};
@@ -40,6 +42,29 @@ public class WeatherManager : MonoBehaviour
         if (_buffManager.blueSpirit) { // 파랑색 정령버프가 있으면 무조건 비가 온다.
             systemManager._weather = 1;
             _buffManager.blueSpirit = false;
+            return ;
+        }
+
+        float randomPerfect = Random.value * 100.0f;
+        if (randomPerfect <= 1.0f) {
+            systemManager._weather = 7;
+            if (while4){
+                if (how4 == 2) {
+                    while4 = false;
+                    after4 = true;
+                } else {
+                    how4 +=1;
+                }
+            }
+
+            if (while5){
+                if (how5 == 2) {
+                    while5 = false;
+                    after5 = true;
+                } else {
+                    how5 +=1;
+                }
+            }
             return ;
         }
 
@@ -103,6 +128,7 @@ public class WeatherManager : MonoBehaviour
 
     private void SetSummer()
     {   
+
         if (_buffManager.inRainy) { // 장마 시즌일경우 비로 고정
             systemManager._weather = 1;
             return ;
