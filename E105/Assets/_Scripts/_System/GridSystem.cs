@@ -12,7 +12,8 @@ public class GridSystem : MonoBehaviour
     public float _tree_spawn_percent;
     public Transform _base_transform;
     private Collider[] _buffer;
-    // Start is called before the first frame update
+    private bool _purified;
+    public bool _ore_spawn;
     void Start()
     {
         _Sector = this.GetComponentInParent<SectorObject>();
@@ -20,18 +21,19 @@ public class GridSystem : MonoBehaviour
         _base_transform = gameObject.transform;
     }
 
-    // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
-
     public void DayStart()
     {
-        Check_Tree();
-        // Check_Branch();
-        // Check_Stone();
-        // Check_Ore();
+        _purified = _Sector._purifier;
+        if (_ore_spawn)
+        {
+            Check_Ore();
+        }
+        else
+        {
+            Check_Tree();
+            Check_Branch();
+            Check_Stone();
+        }
         TreeObject[] trees = this.GetComponentsInChildren<TreeObject>();
         foreach (var tree in trees)
         {
@@ -41,7 +43,7 @@ public class GridSystem : MonoBehaviour
 
     private void Check_Tree()
     {
-        if (_Sector._tree_remain < _Sector._tree_max)
+        if (_Sector._tree_remain < (_purified ? _Sector._tree_max : _Sector._tree_max * _Sector._tree_ruin_max_factor))
         {
             float rnd = Random.Range(0f,1f);
             if (rnd <= _tree_spawn_percent)
@@ -50,7 +52,7 @@ public class GridSystem : MonoBehaviour
             }
             else
             {
-                _tree_spawn_percent = _tree_spawn_percent * _Sector._tree_spawn_factor * _Sector._tree_ruin_spawn_factor;
+                _tree_spawn_percent = _tree_spawn_percent * _Sector._tree_spawn_factor * (_purified ? 1 : _Sector._tree_ruin_spawn_factor);
                 _tree_spawn_percent = Mathf.Min(100,_tree_spawn_percent);
             }
         }
@@ -61,14 +63,14 @@ public class GridSystem : MonoBehaviour
         Debug.Log("나무가 생성됨!");
         Vector3 pos = new Vector3(_base_transform.position.x+Random.Range(-5f,5f),_base_transform.position.y+0.5f,_base_transform.position.z+Random.Range(-5f,5f));
         int cnt = 0;
-        while (cnt < 24 && _Sector._tree_remain < _Sector._tree_max)
+        while (cnt < 24 && _Sector._tree_remain < (_purified ? _Sector._tree_max : _Sector._tree_max * _Sector._tree_ruin_max_factor))
         {
             _buffer = Physics.OverlapBox(center:pos,halfExtents:new Vector3(0.5f,0.5f,0.5f),new Quaternion(),layerMask:1<<7);
                 Debug.Log(_buffer.Length);
                 if (_buffer.Length==0)
                 {
                     int treenum = Random.Range(0,8);
-                    Instantiate(_trees[treenum],pos,new Quaternion(),gameObject.transform);
+                    GameObject tr = Instantiate(_trees[treenum],pos,new Quaternion(),gameObject.transform);
                     _Sector._tree_remain += 1;
                     _tree_spawn_percent = _Sector._tree_spawn_base_percent;
                     break;
@@ -86,7 +88,7 @@ public class GridSystem : MonoBehaviour
     private void Check_Branch()
     {
         float srnd = Random.Range(0f,1f);
-        if (srnd <= _Sector._branch_spawn_base_percent)
+        if (srnd <= (_purified ? _Sector._branch_spawn_base_percent : _Sector._branch_spawn_base_percent * _Sector._branch_ruin_factor))
         {
             int rnd = Random.Range(0,_Sector._branch_type_factor[2]);
             if (rnd < _Sector._branch_type_factor[0])
@@ -137,7 +139,7 @@ public class GridSystem : MonoBehaviour
     private void Check_Stone()
     {
         float srnd = Random.Range(0f,1f);
-        if (srnd <= _Sector._stone_spawn_base_percent)
+        if (srnd <= (_purified ? _Sector._stone_spawn_base_percent : _Sector._stone_spawn_base_percent * _Sector._stone_ruin_factor))
         {
             int rnd = Random.Range(0,_Sector._stone_type_factor[2]);
             if (rnd < _Sector._stone_type_factor[0])
@@ -188,7 +190,7 @@ public class GridSystem : MonoBehaviour
     private void Check_Ore()
     {
         float srnd = Random.Range(0f,1f);
-        if (srnd <= _Sector._ore_spawn_base_percent)
+        if (srnd <= (_purified ? _Sector._ore_spawn_base_percent : _Sector._ore_spawn_base_percent * _Sector._ore_ruin_factor))
         {
             int rnd = Random.Range(0,_Sector._ore_count_factor[1]);
             if (rnd < _Sector._ore_count_factor[0])

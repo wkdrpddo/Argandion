@@ -9,6 +9,7 @@ public class BuildingChange : MonoBehaviour
     // 스크립트
     public MakeBuildingFence _makeFences;
     public MakeSign _makeSign;
+    public SystemManager _systemManager;
 
     // 게임 오브젝트
     public GameObject _constructionPrefab;
@@ -33,6 +34,11 @@ public class BuildingChange : MonoBehaviour
     // 테스트용 변수
     public bool _fulfillTest;
     public bool _dayEndTest;
+
+    void Start()
+    {
+        _systemManager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
+    }
 
     // 테스트용 update();
     void Update()
@@ -70,7 +76,7 @@ public class BuildingChange : MonoBehaviour
         Destroy(gameObject.GetComponent<BoxCollider>());
     }
 
-    // 하루 끝
+    // 하루 시작
     // 건축 중이면 건물 오브젝트 바꾸기
     // 건축 마지막 날이면 Destory()
     public void DayStart()
@@ -86,6 +92,8 @@ public class BuildingChange : MonoBehaviour
                 break;
             case 4:
                 FinishConstruction();
+                // 정화 콜
+                _systemManager.UpdatePurification(_makeFences._sectorNum);
                 Destroy(_constructionSet);
                 Destroy(gameObject);
                 break;

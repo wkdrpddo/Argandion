@@ -3,8 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class Sound
+{
+    public string soundName;
+    public AudioClip clip;
+}
+
 public class SoundManager : MonoBehaviour
 {
+    [Header("사운드 등록")]
+    [SerializeField] Sound[] bgmSounds;
+
+
+    [Header("사운드 플레이어")]
+    [SerializeField] AudioSource bgmPlayer;
+
+
     private float Sound_Background = 0.2f;
     private float Sound_Effect = 0.2f;
 
@@ -12,9 +27,27 @@ public class SoundManager : MonoBehaviour
     // public GameObject _optionpanel;
     // public GameObject _optionpanelfrommain;
 
+
+    void Start()
+    {
+        playBGM1();
+    }
+    public void playBGM1()
+    {
+        bgmPlayer.clip = bgmSounds[0].clip;
+        bgmPlayer.Play();
+    }
+
+    public void playBGM2()
+    {
+        bgmPlayer.clip = bgmSounds[1].clip;
+        bgmPlayer.Play();
+    }
+
     public void setBackgroundSound(Slider slider)
     {
         Sound_Background = slider.value;
+        bgmPlayer.volume = Sound_Background;
     }
 
     public void setEffectSound(Slider slider)
@@ -30,16 +63,5 @@ public class SoundManager : MonoBehaviour
     public float getEffectSound()
     {
         return Sound_Effect;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

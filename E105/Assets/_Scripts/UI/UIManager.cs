@@ -50,12 +50,17 @@ public class UIManager : MonoBehaviour
 
     // 상태 저장 데이터
     public Quaternion rotateZero = Quaternion.Euler(new Vector3(0, 0, 0));     // 회전값 기본값 세팅
+
     public int conversationNPC;
     private int selectCharacter;
     private bool isPressESC;
     private bool isMyHome;
     private bool isTransactionOpen;
 
+    // 주연 추가
+    public GameObject _eventpanel;
+    // private EventManager _eventmanager;
+    public FoodManager _foodmanager;
 
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>();
 
@@ -81,12 +86,20 @@ public class UIManager : MonoBehaviour
         _systemmanager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         _playersystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
         _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();
+        _foodmanager = GameObject.Find("FoodManager").GetComponent<FoodManager>();
+        // _eventmanager = GameObject.Find("EventManager").GetComponent<EventManager>();
+
 
         _systemmanager.setPlayerGold(245000);
 
         _baseuipanel = gameObject.transform.Find("BaseUIPanel").gameObject;
         _healthbar = _baseuipanel.transform.GetChild(0).GetComponent<Slider>();
         _energybar = _baseuipanel.transform.GetChild(1).GetComponent<Slider>();
+        _eventpanel = _baseuipanel.transform.GetChild(4).gameObject;
+        _foodmanager._eventPanel = _eventpanel.GetComponent<EventPanel>();
+        // _food.settingEventPanel();
+        // _eventmanager.setting();
+
         _nowequip = GameObject.Find("NowEquip").gameObject;
         _baseuipanel.SetActive(false);
 
