@@ -55,12 +55,17 @@ public class CombFood : MonoBehaviour
             int canMakeNum = CanMake(rec, myItems, howItems);
             canMake[canMakeIdx] = canMakeNum;
             if (canMakeNum > 0)
-                Debug.Log(item.GetComponent<Item>().FindName(rec.Result) + "는(은) " + CanMake(rec, myItems, howItems) + "개 만들 수 있습니다.");
+                Debug.Log(ui.findItem(rec.Result).Name + "는(은) " + CanMake(rec, myItems, howItems) + "개 만들 수 있습니다.");
             else
-                Debug.Log(item.GetComponent<Item>().FindName(rec.Result) + "는(은) 만들 수 없습니다 T.T");
+                Debug.Log(ui.findItem(rec.Result).Name + "는(은) 만들 수 없습니다 T.T");
 
             canMakeIdx += 1;
         }
+    }
+
+    public int[] getCanMakeList()
+    {
+        return canMake;
     }
 
     public void Trade(int idx, int howMany)

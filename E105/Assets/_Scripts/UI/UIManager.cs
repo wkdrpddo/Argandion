@@ -153,6 +153,8 @@ public class UIManager : MonoBehaviour
         acquireItem(item1, 98);
         ItemObject item2 = findItem(3);
         acquireItem(item2, 99);
+        ItemObject item3 = findItem(106);
+        acquireItem(item3, 30);
     }
 
     // Update is called once per frame
