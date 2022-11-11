@@ -25,10 +25,6 @@ public class BuffManager : MonoBehaviour
     public bool skySpirit = false;
     public bool skyPray = false;
 
-    // 음식 관련
-    // public bool isFull = false; // 스테이크에 들어감
-    // public bool notThirsty = false; // 음료에 들어감
-
     // 장마, 한파 관련
     public int coldWaveMonth;
     public int coldWaveDay;
