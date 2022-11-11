@@ -20,25 +20,25 @@ public class CameraSystem : MonoBehaviour
 
     public void CookingCamera()
     {
-        Vector3 pos = new Vector3(_po.transform.position.x+0.15f,_po.transform.position.y+2.51f,_po.transform.position.z+2.75f);
-        Quaternion rot = Quaternion.Euler(30f,180f,0.4f);
-        _cam.transform.SetPositionAndRotation(pos,rot);
+        Vector3 pos = new Vector3(_po.transform.position.x + 0f, _po.transform.position.y + 2.51f, _po.transform.position.z + 2.75f);
+        Quaternion rot = Quaternion.Euler(30f, 180f, 0.4f);
+        _cam.transform.SetPositionAndRotation(pos, rot);
     }
 
     public void ResetCamera()
     {
-        Vector3 pos = new Vector3(_po.transform.position.x+0f,_po.transform.position.y+5.5f,_po.transform.position.z+-8f);
-        Quaternion rot = Quaternion.Euler(30f,0f,0f);
-        _cam.transform.SetPositionAndRotation(pos,rot);
+        Vector3 pos = new Vector3(_po.transform.position.x + 0f, _po.transform.position.y + 5.5f, _po.transform.position.z + -8f);
+        Quaternion rot = Quaternion.Euler(30f, 0f, 0f);
+        _cam.transform.SetPositionAndRotation(pos, rot);
     }
 
     // test code
-    void Update()
-    {
-        if (_hold_cam)
-        {
-            CookingCamera();
-            _hold_cam = false;
-        }
-    }
+    // void Update()
+    // {
+    //     if (_hold_cam)
+    //     {
+    //         CookingCamera();
+    //         _hold_cam = false;
+    //     }
+    // }
 }

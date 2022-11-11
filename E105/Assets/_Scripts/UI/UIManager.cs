@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
     private GameObject _nowequip;
 
     [SerializeField] private SystemManager _systemmanager;
-    private PlayerSystem _playersystem;
+    [SerializeField] private PlayerSystem _playersystem;
     private Item _itemmanager;
 
     private Slider _healthbar;
@@ -202,19 +202,19 @@ public class UIManager : MonoBehaviour
         //     _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
         // }
 
-        // if (Input.GetButtonDown("interactionKey"))
-        // {
-        //     // test buildEvent
-        //     if (_buildeventpanel.GetComponent<BuildEventPanel>().isOnPanel)
-        //     {
-        //         _buildeventpanel.GetComponent<BuildEventPanel>().closeWindow();
-        //     }
-        //     else
-        //     {
-        //         int random = Random.Range(1, 7);
-        //         OnBuildEventPanel(random);
-        //     }
-        // }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            // test buildEvent
+            if (_buildeventpanel.GetComponent<BuildEventPanel>().isOnPanel)
+            {
+                _buildeventpanel.GetComponent<BuildEventPanel>().closeWindow();
+            }
+            else
+            {
+                int random = Random.Range(1, 7);
+                OnBuildEventPanel(random);
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.V))
         {
@@ -250,6 +250,7 @@ public class UIManager : MonoBehaviour
             {
                 int randomNum = Random.Range(1, 11);
                 // int randomNum = 5;
+                randomNum = 6;
                 switch (conversationCnt)
                 {
                     case -1:
@@ -533,7 +534,7 @@ public class UIManager : MonoBehaviour
         return _craftingpanel;
     }
 
-    // 플레이어 조작 정지
+    // 플레이어 함수 관련
     private void stopControllPlayer()
     {
         _playersystem._canMove = false;
@@ -542,6 +543,15 @@ public class UIManager : MonoBehaviour
     public void runControllPlayer()
     {
         _playersystem._canMove = true;
+    }
+
+    public void runCookingAnimation()
+    {
+        Debug.LogWarning("======== ui cooking call ========");
+        // _playersystem._playerAnimator.SetInteger("action", 6);
+        _playersystem.setAnimator(6, 5.0f);
+        Debug.LogWarning(_playersystem._playerAnimator);
+        Debug.LogWarning(_playersystem._playerAnimator.GetInteger("action"));
     }
 
     // item 관련 함수

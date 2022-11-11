@@ -103,11 +103,11 @@ public class TradeModal : MonoBehaviour
                     ui.getCraftPanel().GetComponent<CombHunter>().Trade(itemIndex, tradeCount);
                     break;
             }
+            ui.OnResultNotificationPanel("제작이 완료되었습니다.");
         }
 
         ui.getCraftPanel().syncCanMakeList();
         closeModal();
-        ui.OnResultNotificationPanel("제작이 완료되었습니다.");
     }
 
     private void sellEvent(int tradeCnt)

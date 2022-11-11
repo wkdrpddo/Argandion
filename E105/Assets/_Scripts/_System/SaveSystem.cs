@@ -5,7 +5,8 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 [System.Serializable]
-public class JsonSave {
+public class JsonSave
+{
     public List<float> treepos = new List<float>();
     public List<int> treeday = new List<int>();
     public int treecount;
@@ -72,10 +73,10 @@ public class SaveSystem : MonoBehaviour
         // }
 
         // 퀵슬롯의 아이템 등록
-        for (int i=0;i<7;i++)
+        for (int i = 0; i < 7; i++)
         {
-            _savedata._quickslot[i,0] = (int)_ps._equipList[i,0];
-            _savedata._quickslot[i,1] = (int)_ps._equipList[i,4];
+            _savedata._quickslot[i, 0] = (int)_ps._equipList[i, 0];
+            _savedata._quickslot[i, 1] = (int)_ps._equipList[i, 4];
         }
 
         // 장비창 아이템 저장
@@ -83,7 +84,7 @@ public class SaveSystem : MonoBehaviour
 
         _savedata._sectorPurifierCount = _sys._purification_sector;
         _savedata._PurifierLevel = _sys._development_level;
-        for (int i=0;i<8;i++)
+        for (int i = 0; i < 8; i++)
         {
             _savedata._sectorPurifierInfo[i] = _sys._purification[i];
         }
@@ -92,10 +93,10 @@ public class SaveSystem : MonoBehaviour
 
         // 농토 정보 저장
         Dirt[] dirts = GameObject.Find("DirtParent").GetComponentsInChildren<Dirt>();
-        for (int i=0;i<81;i++)
+        for (int i = 0; i < 81; i++)
         {
-            _savedata._dirt[i,0] = dirts[i].watered;
-            _savedata._dirt[i,1] = dirts[i].minusWater;
+            _savedata._dirt[i, 0] = dirts[i].watered;
+            _savedata._dirt[i, 1] = dirts[i].minusWater;
         }
 
         // 정령 버프 제사 진행도 / 꽃 번호
@@ -110,7 +111,7 @@ public class SaveSystem : MonoBehaviour
 
         JsonSave saveJson = new JsonSave();
         GameObject[] trees = GameObject.FindGameObjectsWithTag("tree");
-        for (int i=0;i<trees.Length;i++)
+        for (int i = 0; i < trees.Length; i++)
         {
             saveJson.treepos.Add(trees[i].transform.position.x);
             saveJson.treepos.Add(trees[i].transform.position.y);
@@ -119,7 +120,7 @@ public class SaveSystem : MonoBehaviour
         }
         saveJson.treecount = trees.Length;
         string json = JsonUtility.ToJson(saveJson, true);
-        File.WriteAllText("jsonSave.json",json);
+        File.WriteAllText("jsonSave.json", json);
     }
 
     public void Load()
@@ -128,7 +129,7 @@ public class SaveSystem : MonoBehaviour
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = File.Open(filePath, FileMode.Open);
 
-        if (stream!=null && stream.Length > 0)
+        if (stream != null && stream.Length > 0)
         {
             SaveData _LoadData = (SaveData)formatter.Deserialize(stream);
             Debug.Log("로드 동작");
@@ -143,7 +144,7 @@ public class SaveSystem : MonoBehaviour
             _sys._season = _LoadData._season;
             // _sm._optionpanel = _LoadData._sound1;
             // _sm._optionpanel = _LoadData._sound2;
-            
+
             // 인벤토리 아이템 호출
             // Slot[] inventorySlot = GameObject.Find("InventorySlotParent").GetComponentsInChildren<Slot>();
             // for (int i=0;i<25;i++)
@@ -158,14 +159,14 @@ public class SaveSystem : MonoBehaviour
             //     storageSlot[i].AddItem(_item.FindItem(_LoadData._storage[i,0]),_LoadData._storage[i,1]);
             // }
 
-            for (int i=0;i<7;i++)
+            for (int i = 0; i < 7; i++)
             {
                 // 아이템 장착 함수 (갯수도)
             }
 
             _sys._purification_sector = _LoadData._sectorPurifierCount;
             _sys._development_level = _LoadData._PurifierLevel;
-            for (int i=0;i<8;i++)
+            for (int i = 0; i < 8; i++)
             {
                 _sys._purification[i] = _LoadData._sectorPurifierInfo[i];
             }
@@ -174,10 +175,10 @@ public class SaveSystem : MonoBehaviour
 
             // 농토 정보 저장
             Dirt[] dirts = GameObject.Find("DirtParent").GetComponentsInChildren<Dirt>();
-            for (int i=0;i<81;i++)
+            for (int i = 0; i < 81; i++)
             {
-                dirts[i].watered = _LoadData._dirt[i,0];
-                dirts[i].minusWater = _LoadData._dirt[i,1];
+                dirts[i].watered = _LoadData._dirt[i, 0];
+                dirts[i].minusWater = _LoadData._dirt[i, 1];
             }
 
             // 정령 버프 제사 진행도 / 꽃 번호
@@ -186,18 +187,18 @@ public class SaveSystem : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (_isSave)
-        {
-            _isSave = !_isSave;
-            Save(_savedata);
-            
-        }
-        if (_isLoad)
-        {
-            _isLoad = !_isLoad;
-            Load();
-        }
-    }
+    // void Update()
+    // {
+    //     if (_isSave)
+    //     {
+    //         _isSave = !_isSave;
+    //         Save(_savedata);
+
+    //     }
+    //     if (_isLoad)
+    //     {
+    //         _isLoad = !_isLoad;
+    //         Load();
+    //     }
+    // }
 }

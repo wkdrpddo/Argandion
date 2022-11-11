@@ -35,6 +35,7 @@ public class CookingPanel : MonoBehaviour
     {
         gameObject.SetActive(false);
         gameObject.transform.GetChild(0).GetComponent<Button>().interactable = true;
+
         _cookingInteraction.CookingEnd();
 
         ui.runControllPlayer();
@@ -45,10 +46,16 @@ public class CookingPanel : MonoBehaviour
         _cookingInteraction.CookingStart();
         gameObject.SetActive(true);
         setDishList();
+        gameObject.transform.GetChild(0).GetComponent<Button>().interactable = false;
     }
 
     public void onClickCooking()
     {
+        Debug.LogWarning("========== 요리하기 클릭 ============");
+        ui.runCookingAnimation();
+        Invoke("completeCooking", 7f);
+
+        Debug.LogWarning("========== after animation call ============");
         bool isContainInventory;
         ItemObject craftItem = ui.findItem(itemData[index].Result);
         isContainInventory = ui.checkInventory(craftItem, 1);
@@ -62,8 +69,21 @@ public class CookingPanel : MonoBehaviour
             ui.OnResultNotificationPanel("인벤토리에 빈 공간이 없습니다.");
         }
 
+        gameObject.transform.GetChild(0).GetComponent<Button>().interactable = false;
         syncCanmakeList();
         deleteRecipeList();
+    }
+
+    public void completeCooking()
+    {
+        gameObject.transform.GetChild(3).GetComponent<Image>().sprite = ui.getItemIcon(itemData[index].Result);
+        gameObject.transform.GetChild(3).gameObject.SetActive(true);
+        Invoke("endShowFoodIcon", 1.5f);
+    }
+
+    public void endShowFoodIcon()
+    {
+        gameObject.transform.GetChild(3).gameObject.SetActive(false);
     }
 
     private void setDishList()
