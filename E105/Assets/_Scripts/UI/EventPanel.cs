@@ -134,7 +134,7 @@ public class EventPanel : MonoBehaviour
             // 아이콘 hover 정보 부여
             icon.GetComponent<EventIcon>()._descriptObj = _descData[i];
             // 비활성화
-            icon.SetActive(false);
+            // icon.SetActive(false);
             // 배열에 panel 넣기
             _iconObject[i] = icon;
         }

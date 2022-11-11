@@ -29,7 +29,7 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        playBGM1();
+        // playBGM1();
     }
     public void playBGM1()
     {
