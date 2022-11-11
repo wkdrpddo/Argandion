@@ -17,6 +17,7 @@ public class combFoodEffectObject
 public class CookingPanel : MonoBehaviour
 {
     private UIManager ui;
+    public CookingInteraction _cookingInteraction;
 
     public GameObject RecipeCard;
     public GameObject RecipeText;
@@ -27,10 +28,13 @@ public class CookingPanel : MonoBehaviour
 
     private combObject[] itemData;
     private combFoodEffectObject[] effectData;
+    private int[] canMakeList;
+    private int index;
 
     public void closeWindow()
     {
         gameObject.SetActive(false);
+        gameObject.transform.GetChild(0).GetComponent<Button>().interactable = true;
         ui.runControllPlayer();
     }
 
@@ -40,9 +44,31 @@ public class CookingPanel : MonoBehaviour
         setDishList();
     }
 
+    public void onClickCooking()
+    {
+        bool isContainInventory;
+        ItemObject craftItem = ui.findItem(itemData[index].Result);
+        isContainInventory = ui.checkInventory(craftItem, 1);
+
+        if (isContainInventory)
+        {
+            gameObject.GetComponent<CombFood>().Trade(index, 1);
+        }
+        else
+        {
+            ui.OnResultNotificationPanel("인벤토리에 빈 공간이 없습니다.");
+        }
+
+        syncCanmakeList();
+        deleteRecipeList();
+    }
+
     private void setDishList()
     {
         deleteDishList();
+
+        gameObject.GetComponent<CombFood>().Hello();
+        canMakeList = gameObject.GetComponent<CombFood>().getCanMakeList();
 
         string jsonInputString = Application.dataPath + "/Data/Json/CombFood.json";
         string jsonString = File.ReadAllText(jsonInputString);
@@ -66,6 +92,17 @@ public class CookingPanel : MonoBehaviour
 
     private void setRecipeList(int value)
     {
+        if (canMakeList[value] <= 0)
+        {
+            gameObject.transform.GetChild(0).GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            gameObject.transform.GetChild(0).GetComponent<Button>().interactable = true;
+        }
+
+        index = value;
+
         deleteRecipeList();
 
         combObject combObj = itemData[value];
@@ -156,6 +193,11 @@ public class CookingPanel : MonoBehaviour
                 Destroy(craftObjs[i].gameObject);
             }
         }
+    }
+
+    public void syncCanmakeList()
+    {
+        canMakeList = gameObject.GetComponent<CombFood>().getCanMakeList();
     }
 
     // Start is called before the first frame update

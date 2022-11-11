@@ -30,7 +30,11 @@ public class CraftingPanel : MonoBehaviour
     public GameObject _metarialsCard;
     private GameObject _scrollcontent;
     private GameObject _metarialsgrid;
-    private combObject[] itemData;
+
+    [SerializeField] private combObject[] itemData;
+    [SerializeField] private int[] canMakeList;
+    [SerializeField] private int index;
+    [SerializeField] private int storeIdx;
 
     public void OnPanel(int value)
     {
@@ -38,22 +42,56 @@ public class CraftingPanel : MonoBehaviour
         setCraftData(value);
     }
 
+    public void onClickCraft()
+    {
+        bool isContainInventory;
+        ItemObject craftItem = ui.findItem(itemData[index].Result);
+        if (craftItem.Category == "장비" || craftItem.Category == "옷")
+        {
+            isContainInventory = ui.checkInventory(craftItem, 1);
+        }
+        else
+        {
+            isContainInventory = ui.checkInventory(craftItem, canMakeList[index]);
+        }
+
+        if (isContainInventory)
+        {
+            ui.OnTradeModal(craftItem.Name, craftItem.ItemCode.ToString(), canMakeList[index], -1, 2, storeIdx, index);
+        }
+        else
+        {
+            ui.OnResultNotificationPanel("인벤토리에 빈 공간이 없습니다.");
+        }
+    }
+
     private void setCraftData(int value)
     {
+        storeIdx = value;
+        deleteCraftList();
+
         string jsonInputString = Application.dataPath + "/Data/Json";
         switch (value)
         {
             case 1:
                 jsonInputString += "/CombDesigner.json";
+                gameObject.GetComponent<CombDesigner>().Hello();
+                canMakeList = gameObject.GetComponent<CombDesigner>().getCanMakeList();
                 break;
             case 2:
                 jsonInputString += "/CombCarpentor.json";
+                gameObject.GetComponent<CombCarpentor>().Hello();
+                canMakeList = gameObject.GetComponent<CombCarpentor>().getCanMakeList();
                 break;
             case 4:
                 jsonInputString += "/CombSmith.json";
+                gameObject.GetComponent<CombSmith>().Hello();
+                canMakeList = gameObject.GetComponent<CombSmith>().getCanMakeList();
                 break;
             case 6:
                 jsonInputString += "/CombHunter.json";
+                gameObject.GetComponent<CombHunter>().Hello();
+                canMakeList = gameObject.GetComponent<CombHunter>().getCanMakeList();
                 break;
         }
 
@@ -78,6 +116,17 @@ public class CraftingPanel : MonoBehaviour
 
     private void setMetarialsList(int value)
     {
+        if (canMakeList[value] <= 0)
+        {
+            gameObject.transform.GetChild(1).GetChild(2).GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            gameObject.transform.GetChild(1).GetChild(2).GetComponent<Button>().interactable = true;
+        }
+
+        index = value;
+
         deleteMetarialList();
 
         combObject combObj = itemData[value];
@@ -175,11 +224,33 @@ public class CraftingPanel : MonoBehaviour
         }
     }
 
+    public void syncCanMakeList()
+    {
+        switch (storeIdx)
+        {
+            case 1:
+                canMakeList = gameObject.GetComponent<CombDesigner>().getCanMakeList();
+                break;
+            case 2:
+                canMakeList = gameObject.GetComponent<CombCarpentor>().getCanMakeList();
+                break;
+            case 4:
+                canMakeList = gameObject.GetComponent<CombSmith>().getCanMakeList();
+                break;
+            case 6:
+                canMakeList = gameObject.GetComponent<CombHunter>().getCanMakeList();
+                break;
+        }
+
+        deleteMetarialList();
+    }
+
     public void closePanel()
     {
         gameObject.SetActive(false);
         deleteMetarialList();
         deleteCraftList();
+        gameObject.transform.GetChild(1).GetChild(2).GetComponent<Button>().interactable = true;
         ui.runControllPlayer();
     }
 
