@@ -29,13 +29,18 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        playBGM();
+        playBGM1();
     }
-    public void playBGM()
+    public void playBGM1()
     {
         bgmPlayer.clip = bgmSounds[0].clip;
         bgmPlayer.Play();
+    }
 
+    public void playBGM2()
+    {
+        bgmPlayer.clip = bgmSounds[1].clip;
+        bgmPlayer.Play();
     }
 
     public void setBackgroundSound(Slider slider)
