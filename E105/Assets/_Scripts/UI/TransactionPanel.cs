@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 [System.Serializable]
 public class buyingObject
@@ -46,6 +47,7 @@ public class TransactionPanel : MonoBehaviour
     {
         gameObject.SetActive(true);
         setBuyPanelList(value);
+        ui.setIsOpenTransaction(true);
     }
 
     private void setBuyPanelList(int value)
@@ -83,6 +85,21 @@ public class TransactionPanel : MonoBehaviour
             productBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemObject.Name;
             productBtn.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = buyingObject.Cost.ToString();
             productBtn.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = itemObject.Desc;
+
+            int itemIdx = i;
+            string name = itemObject.Name;
+            int itemCode = itemObject.ItemCode;
+            int buyCost = buyingObject.Cost;
+            int pos = Array.IndexOf(multiBuyItemCode, buyingObject.Result);
+            if (pos == -1)
+            {
+                // Debug.Log("name : " + itemObject.Name + " | itemCode : " + itemObject.ItemCode);
+                productBtn.GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel(name, value, itemIdx, itemCode));
+            }
+            else
+            {
+                productBtn.GetComponent<Button>().onClick.AddListener(() => ui.OnTradeModal(name, itemCode.ToString(), 99, buyCost, 1, value, itemIdx));
+            }
         }
     }
 
@@ -100,5 +117,8 @@ public class TransactionPanel : MonoBehaviour
         gameObject.SetActive(false);
         ui.runControllPlayer();
         ui.OnInventory(2);
+        ui.setIsOpenTransaction(false);
     }
+
+    private int[] multiBuyItemCode = new int[] { 4, 500, 501, 502, 503, 504 };
 }

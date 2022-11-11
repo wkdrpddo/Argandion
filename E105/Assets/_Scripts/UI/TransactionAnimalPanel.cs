@@ -7,71 +7,32 @@ using TMPro;
 public class TransactionAnimalPanel : MonoBehaviour
 {
     // private 
-    private UIManager ui;
-    private bool isOnPanel;
-
-    private bool checkInfo(int cost, int area)
-    {
-        if (cost <= ui.getPlayerGold())
-        {
-            return true;
-        }
-        return false;
-        // 현재 돈이랑..
-        // 수용 cost 랑
-        // 체크하고...
-
-    }
-
-    public void clickBuyChicken()
-    {
-        if (checkInfo(650, 3))
-        {
-
-        }
-    }
-
-    public void clickBuySheep()
-    {
-        if (checkInfo(350, 2))
-        {
-
-        }
-    }
-
-    public void clickBuyCow()
-    {
-        if (checkInfo(1000, 4))
-        {
-
-        }
-    }
+    [SerializeField] private UIManager ui;
+    private Ranch _ranch;
 
     public void callCellModal(int value)
     {
         switch (value)
         {
             case 1:
-                ui.OnTradeModal("닭", "chicken", 10, 1, 325);
+                ui.OnTradeModal("닭", "chicken", _ranch.chicks, 325, 0, 5, 2);
                 break;
             case 2:
-                ui.OnTradeModal("소", "cow", 10, 1, 500);
+                ui.OnTradeModal("소", "cow", _ranch.cows, 500, 0, 5, 3);
                 break;
             case 3:
-                ui.OnTradeModal("양", "sheep", 10, 1, 175);
+                ui.OnTradeModal("양", "sheep", _ranch.sheeps, 175, 0, 5, 1);
                 break;
         }
 
     }
 
-    public bool getIsOn()
-    {
-        return isOnPanel;
-    }
-
     public void onPanel()
     {
         gameObject.SetActive(true);
+        ui.setIsOpenTransaction(true);
+
+        transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGold().ToString();
     }
 
     public void closePanel()
@@ -79,19 +40,33 @@ public class TransactionAnimalPanel : MonoBehaviour
         gameObject.SetActive(false);
         ui.runControllPlayer();
         ui.closeTradeModal();
+        ui.setIsOpenTransaction(false);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        isOnPanel = false;
         ui = gameObject.GetComponentInParent<UIManager>();
 
-        transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGold().ToString();
+        gameObject.transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("닭", 5, 2, -1));
+        gameObject.transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("소", 5, 3, -1));
+        gameObject.transform.GetChild(0).GetChild(2).GetChild(2).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("양", 5, 1, -1));
 
-        gameObject.transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("닭", 5, -1));
-        gameObject.transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("소", 5, -1));
-        gameObject.transform.GetChild(0).GetChild(2).GetChild(2).GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel("양", 5, -1));
+        _ranch = GameObject.Find("NPCManager").GetComponent<Ranch>();
+    }
+
+    public void syncRanchData(int point, int sheepCnt, int chickenCnt, int cowCnt)
+    {
+        // 수용량 동기화
+        gameObject.transform.GetChild(1).Find("Capacity").GetComponentInChildren<TextMeshProUGUI>().text = point.ToString() + "/80";
+
+        // 보유 동물 수 동기화
+        gameObject.transform.GetChild(1).GetChild(3).Find("Sheep").Find("HowManyHave").GetComponent<TextMeshProUGUI>().text = sheepCnt.ToString();
+        gameObject.transform.GetChild(1).GetChild(3).Find("Chicken").Find("HowManyHave").GetComponent<TextMeshProUGUI>().text = chickenCnt.ToString();
+        gameObject.transform.GetChild(1).GetChild(3).Find("Cow").Find("HowManyHave").GetComponent<TextMeshProUGUI>().text = cowCnt.ToString();
+
+        // 소지금 동기화
+        transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGold().ToString();
     }
 
     // Update is called once per frame

@@ -190,6 +190,10 @@ GameObject:
   - component: {fileID: 5514123913716706464}
   - component: {fileID: 5514123913716707167}
   - component: {fileID: 1450066485809157851}
+  - component: {fileID: 8457107992851592383}
+  - component: {fileID: 978151521689621678}
+  - component: {fileID: 8855085099682364372}
+  - component: {fileID: 5463088097754120286}
   m_Layer: 5
   m_Name: CraftingPanel
   m_TagString: Untagged
@@ -271,6 +275,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _craftItemButton: {fileID: 2483053999869357226, guid: 79fb0b0bee43c7749a935b0981f817c9, type: 3}
   _metarialsCard: {fileID: 1002280952395467696, guid: 7c0ad0681b95d9c41862b2dad3747c1e, type: 3}
+  itemData: []
+  canMakeList: 
+  index: 0
+  storeIdx: 0
+--- !u!114 &8457107992851592383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5514123913716707165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09d63c43f3965ba4d94a5c1a8c43aaf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go_SlotsParent: {fileID: 0}
+  theInventory: {fileID: 0}
+  myData: []
+  item: {fileID: 0}
+--- !u!114 &978151521689621678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5514123913716707165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f10764fc7db89374e8137c6041619fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go_SlotsParent: {fileID: 0}
+  theInventory: {fileID: 0}
+  myData: []
+  item: {fileID: 0}
+--- !u!114 &8855085099682364372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5514123913716707165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727a4f4429ec3e941918206eac554a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go_SlotsParent: {fileID: 0}
+  theInventory: {fileID: 0}
+  myData: []
+  item: {fileID: 0}
+--- !u!114 &5463088097754120286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5514123913716707165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff6bdec1b9ad0946bbc31216d801115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go_SlotsParent: {fileID: 0}
+  theInventory: {fileID: 0}
+  myData: []
+  item: {fileID: 0}
 --- !u!1 &5514123913742776827
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,7 +524,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
     m_PressedColor: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -470,7 +542,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5514123913796785764}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1450066485809157851}
+        m_TargetAssemblyTypeName: CraftingPanel, Assembly-CSharp
+        m_MethodName: onClickCraft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5514123914139975328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,7 +1547,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 15
   m_Viewport: {fileID: 5514123914224058575}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 5514123914935231574}

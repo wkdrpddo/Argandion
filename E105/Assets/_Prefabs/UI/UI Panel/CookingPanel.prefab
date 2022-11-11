@@ -601,6 +601,7 @@ GameObject:
   - component: {fileID: 652179931396210373}
   - component: {fileID: 652179931396210372}
   - component: {fileID: 1346796149327774121}
+  - component: {fileID: 4637070073493528636}
   m_Layer: 5
   m_Name: CookingPanel
   m_TagString: Untagged
@@ -681,9 +682,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb455478d76f204c87f862e5aafabf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cookingInteraction: {fileID: 0}
   RecipeCard: {fileID: 5533205736015160694, guid: cd9e3ac17191046408db488fad5d4060, type: 3}
   RecipeText: {fileID: 148548286767066475, guid: 23ee06b9589fd4944b5349de4d1bc2b1, type: 3}
   NomalText: {fileID: 9070152751341539777, guid: a558cb06f02d9f44999cd1f1a86e8653, type: 3}
+--- !u!114 &4637070073493528636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652179931396210490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 706d0c147e1b97846a30b5a67d358ec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go_SlotsParent: {fileID: 0}
+  ui: {fileID: 0}
+  myData: []
+  item: {fileID: 0}
 --- !u!1 &652179931422420670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1948,6 +1966,50 @@ PrefabInstance:
     - target: {fileID: 2064436893301889630, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064436893301889631, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064436893301889631, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064436893301889631, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 0.047058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064436893301889631, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064436893301889631, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064436893301889631, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064436893301889631, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1346796149327774121}
+    - target: {fileID: 2064436893301889631, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064436893301889631, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onClickCooking
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064436893301889631, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CookingPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064436893301889631, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2064436894236230244, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
       propertyPath: m_text

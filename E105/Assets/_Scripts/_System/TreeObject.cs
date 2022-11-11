@@ -13,10 +13,12 @@ public class TreeObject : MonoBehaviour
     public GameObject[] _trees = new GameObject[8];
     public Collider _box;
     public GameObject _itemParent;
+    private SectorObject _sector;
     void Start()
     {
         _buff = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         _itemParent = GameObject.Find("Items");
+        _sector = gameObject.transform.parent.gameObject.transform.parent.GetComponent<SectorObject>();
     }
     public void DayEnd()
     {
@@ -53,6 +55,7 @@ public class TreeObject : MonoBehaviour
     private void DestroyWood()
     {
         Transform trans = gameObject.transform;
+        _sector._tree_remain -= 1;
         Destroy(this.gameObject);
         int many = Random.Range(1,5);
         for (int i=0;i<many;i++) {

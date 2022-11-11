@@ -38,9 +38,9 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI _announceTitle;
     public TextMeshProUGUI _announceText;
 
-    [SerializeField] private GameObject _nowequip;
+    private GameObject _nowequip;
 
-    private SystemManager _systemmanager;
+    [SerializeField] private SystemManager _systemmanager;
     private PlayerSystem _playersystem;
     private Item _itemmanager;
 
@@ -50,16 +50,16 @@ public class UIManager : MonoBehaviour
 
     // 상태 저장 데이터
     public Quaternion rotateZero = Quaternion.Euler(new Vector3(0, 0, 0));     // 회전값 기본값 세팅
-    public int conversationNPC = 0;
-    private int selectCharacter = -1;
-    private bool isPressESC = false;
-    private bool isGameStart = false;
-    private bool isMyHome = false;
-
     // 주연 추가
     public GameObject _eventpanel;
     // private EventManager _eventmanager;
     public FoodManager _foodmanager;
+
+    public int conversationNPC;
+    private int selectCharacter;
+    private bool isPressESC;
+    private bool isMyHome;
+    private bool isTransactionOpen;
 
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>();
 
@@ -76,10 +76,11 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isGameStart = false;
-
-        // GameObject.Find("SoundManager").GetComponent<SoundManager>()._optionpanel = GameObject.Find("OptionPanel");
-        // GameObject.Find("SoundManager").GetComponent<SoundManager>()._optionpanelfrommain = GameObject.Find("OptionPanelFromMainPage");
+        conversationNPC = 0;
+        selectCharacter = -1;
+        isPressESC = false;
+        isMyHome = false;
+        isTransactionOpen = false;
 
         _systemmanager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         _playersystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
@@ -87,6 +88,8 @@ public class UIManager : MonoBehaviour
         _foodmanager = GameObject.Find("FoodManager").GetComponent<FoodManager>();
         // _eventmanager = GameObject.Find("EventManager").GetComponent<EventManager>();
 
+
+        _systemmanager.setPlayerGold(245000);
 
         _baseuipanel = gameObject.transform.Find("BaseUIPanel").gameObject;
         _healthbar = _baseuipanel.transform.GetChild(0).GetComponent<Slider>();
@@ -142,7 +145,7 @@ public class UIManager : MonoBehaviour
 
         _inventory = gameObject.transform.Find("Inventory").gameObject;
         _invenMoney = _inventory.transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
-        // _invenMoney.text = _playersystem.getPlayerGold();
+        _invenMoney.text = _systemmanager.getPlayerGold().ToString();
         _inventory.gameObject.SetActive(false);
 
         _notificationpanel = GameObject.Find("NotificationPanel");
@@ -157,6 +160,13 @@ public class UIManager : MonoBehaviour
         _announceText = _eventAnnounce.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
         _eventAnnounce.SetActive(false);
 
+
+        ItemObject item1 = findItem(2);
+        acquireItem(item1, 98);
+        ItemObject item2 = findItem(3);
+        acquireItem(item2, 99);
+        ItemObject item3 = findItem(106);
+        acquireItem(item3, 30);
     }
 
     // Update is called once per frame
@@ -171,14 +181,14 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetButtonDown("InventoryKey"))
         {
-            if (isGameStart)
+            if (getGameState())
             {
                 OnInventoryPanel();
             }
         }
         if (Input.GetButtonDown("mapKey"))
         {
-            if (isGameStart && !isMyHome)
+            if (getGameState() && !isMyHome)
             {
                 OnMapUIPanel();
             }
@@ -236,7 +246,7 @@ public class UIManager : MonoBehaviour
             else
             {
                 int randomNum = Random.Range(1, 11);
-                // int randomNum = 1;
+                // int randomNum = 5;
                 switch (conversationCnt)
                 {
                     case -1:
@@ -250,6 +260,12 @@ public class UIManager : MonoBehaviour
                         break;
                 }
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            _storagepanel.SetActive(!_storagepanel.activeSelf);
+            OnInventory(3);
         }
     }
 
@@ -326,12 +342,13 @@ public class UIManager : MonoBehaviour
     public void OnMainPagePanel()
     {
         _mainpage.gameObject.SetActive(true);
-        isGameStart = false;
+        setGameState(false);
+        // isGameStart = false;
     }
 
     public void OnMapUIPanel()
     {
-        if (isGameStart)
+        if (getGameState())
         {
             if (_mapuipanel.activeSelf)
             {
@@ -354,15 +371,16 @@ public class UIManager : MonoBehaviour
         _resultnotificationpanel.GetComponent<ResultNotificationPanel>().handelNoti(text);
     }
 
-    public void OnTransactionDoubleCheckPanel(string name, int store, int itemIdx)
+    public void OnTransactionDoubleCheckPanel(string name, int store, int itemIdx, int itemCode)
     {
+        // Debug.Log("============ " + itemIdx);
+        _transactiondoublecheck.setData(name, store, itemIdx, itemCode);
         _transactiondoublecheck.handleModal();
-        _transactiondoublecheck.setData(name, store, itemIdx);
     }
 
-    public void OnTradeModal(string name, string iconName, int maxCnt, int checkMod, int cost)
+    public void OnTradeModal(string name, string iconName, int maxCnt, int cost, int checkMod, int storeIdx, int itemIdx)
     {
-        _trademodal.GetComponent<TradeModal>().setModal(name, iconName, maxCnt, checkMod, cost);
+        _trademodal.GetComponent<TradeModal>().setModal(name, iconName, maxCnt, cost, checkMod, storeIdx, itemIdx);
     }
 
     public void closeTradeModal()
@@ -392,6 +410,17 @@ public class UIManager : MonoBehaviour
 
     // ======================= UI 호출 함수 End
 
+    // 거래 패널 오픈 여부 함수
+    public bool getIsOpenTransaction()
+    {
+        return isTransactionOpen;
+    }
+
+    public void setIsOpenTransaction(bool value)
+    {
+        isTransactionOpen = value;
+    }
+
     // 캐릭터 선택 관련 함수
     public void setCharacterValue(int value)
     {
@@ -417,6 +446,12 @@ public class UIManager : MonoBehaviour
 
     // ======================= Base UI 관련 함수 끝
 
+    // 동물 수 동기화 함수
+    public void syncAnimalPanel(int capacity, int sheepCnt, int chickenCnt, int cowCnt)
+    {
+        _transactionanimalpanel.syncRanchData(capacity, sheepCnt, chickenCnt, cowCnt);
+    }
+
     // ESC 클릭 시 동작
     public void pressedESC()
     {
@@ -424,7 +459,7 @@ public class UIManager : MonoBehaviour
 
         if (isPressESC)
         {
-            if (isGameStart)
+            if (getGameState())
             {
                 _optionpanel.gameObject.SetActive(true);
             }
@@ -436,7 +471,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            if (isGameStart)
+            if (getGameState())
             {
                 _optionpanel.gameObject.SetActive(false);
             }
@@ -446,6 +481,51 @@ public class UIManager : MonoBehaviour
             }
             _playersystem._canMove = true;
         }
+    }
+
+    // inventory 접근 함수
+    public bool checkInventory(ItemObject _item, int _count)
+    {
+        Inventory inven = _inventory.transform.GetChild(1).GetComponent<Inventory>();
+        return inven.CheckInven(_item, _count);
+    }
+
+    public void acquireItem(ItemObject _item, int _count)
+    {
+        _inventory.transform.GetChild(1).GetComponent<Inventory>().AcquireItem(_item, _count);
+    }
+
+    public void reductItem(ItemObject _item, int _count)
+    {
+        _inventory.transform.GetChild(1).GetComponent<Inventory>().ReductItem(_item, _count);
+    }
+
+    public void sellItem(int slotIdx, int _count)
+    {
+        _inventory.transform.GetChild(1).GetComponent<Inventory>().SellInventoryItem(slotIdx, _count);
+    }
+
+    public void onSlotOverModal(string _text, Vector3 _position)
+    {
+        _inventory.transform.GetChild(3).gameObject.SetActive(true);
+        _inventory.transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().text = _text;
+        _inventory.transform.GetChild(3).transform.position = _position;
+    }
+
+    public void offSlotOverModal()
+    {
+        _inventory.transform.GetChild(3).gameObject.SetActive(false);
+    }
+
+    public Slot[] getInventorySlots()
+    {
+        return _inventory.transform.GetChild(1).GetComponent<Inventory>().getInventorySlots();
+    }
+
+    // 제작관련 함수
+    public CraftingPanel getCraftPanel()
+    {
+        return _craftingpanel;
     }
 
     // 플레이어 조작 정지
@@ -481,36 +561,35 @@ public class UIManager : MonoBehaviour
     // 소지금 관련
     public int getPlayerGold()
     {
-        // int gold = _systemmanager.getPlayerGold();
-        // _invenMoney.text = gold.ToString();
-        // return gold;
-        return 5000;
+        int gold = _systemmanager.getPlayerGold();
+        _invenMoney.text = gold.ToString();
+        return gold;
     }
 
     public void addPlayerGold(int value)
     {
-        // _systemmanager.addPlayerGold(value);
-        // _invenMoney.text = getPlayerGold().ToString();
+        _systemmanager.addPlayerGold(value);
+        _invenMoney.text = getPlayerGold().ToString();
     }
 
     // 게임 시작 종료
     public void setGameState(bool value)
     {
-        // _systemmanager.setGameState(value);
-        isGameStart = value;
+        _systemmanager.setGameState(value);
+        // isGameStart = value;
     }
 
     public bool getGameState()
     {
-        // return _systemmanager.getGameState();
-        return isGameStart;
+        return _systemmanager.getGameState();
+        // return isGameStart;
     }
 
     public void QuitGame()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-#endif      
+#endif
         Application.Quit();
     }
 }
