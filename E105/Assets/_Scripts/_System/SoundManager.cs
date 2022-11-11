@@ -3,25 +3,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class Sound{
+    public string soundName;
+    public AudioClip clip;
+}
+
 public class SoundManager : MonoBehaviour
 {
-    private int Sound_Background = 20;
-    private int Sound_Effect = 20;
+    [Header("사운드 등록")]
+    [SerializeField] Sound[] bgmSounds;
+
+
+    [Header("사운드 플레이어")]
+    [SerializeField] AudioSource bgmPlayer;
+
+
+    private float Sound_Background = 20;
+    private float Sound_Effect = 20;
 
     // option panal
     public GameObject _optionpanel;
     public GameObject _optionpanelfrommain;
 
+
+    void Start()
+    {
+        playBGM1();
+    }
+    public void playBGM1()
+    {
+        bgmPlayer.clip = bgmSounds[0].clip;
+        bgmPlayer.Play();
+    }
+
+    public void playBGM2()
+    {
+        bgmPlayer.clip = bgmSounds[1].clip;
+        bgmPlayer.Play();
+    }
+
     public void setBackgroundSound(Slider slider)
     {
-        Sound_Background = (int)slider.value;
+        Sound_Background = slider.value;
         _optionpanel.transform.Find("BackgroundSlider").gameObject.GetComponent<Slider>().value = Sound_Background;
         _optionpanelfrommain.transform.Find("BackgroundSlider").gameObject.GetComponent<Slider>().value = Sound_Background;
+        bgmPlayer.volume = Sound_Background;
     }
 
     public void setEffectSound(Slider slider)
     {
-        Sound_Effect = (int)slider.value;
+        Sound_Effect = slider.value;
         _optionpanel.transform.Find("EffectSlider").gameObject.GetComponent<Slider>().value = Sound_Effect;
         _optionpanelfrommain.transform.Find("EffectSlider").gameObject.GetComponent<Slider>().value = Sound_Effect;
     }

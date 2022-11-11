@@ -24,5 +24,8 @@ public class MapObject : MonoBehaviour
 
     public void ChangePurifier(int index)
     {
+        SectorObject[index].transform.GetComponent<SectorObject>().Purifier();
+        SectorObject[index].transform.GetChild(0).gameObject.SetActive(false);
+        SectorObject[index].transform.GetChild(1).gameObject.SetActive(true);       
     }
 }
