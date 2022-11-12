@@ -171,12 +171,12 @@ public class SystemManager : MonoBehaviour
     {
         if (1 <= _weather && _weather <= 9)
         {
-            _EventPanel.inactiveIcon(_weather+49);
+            _EventPanel.inactiveIcon(_weather + 49);
         }
         _weatherManager.SetWeather(_season);
         if (1 <= _weather && _weather <= 9)
         {
-            _EventPanel.activeIcon(_weather+49);
+            _EventPanel.activeIcon(_weather + 49);
         }
         Debug.Log(_weather);
         // 모든 SectorObject의 DayEnd 동작
