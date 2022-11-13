@@ -5,9 +5,6 @@ using ItemCodeToIndex;
 
 public class Storage : MonoBehaviour
 {
-    public static bool invectoryActivated = false;  // 인벤토리 활성화 여부.
-    private RectTransform uiGroup;
-
     [SerializeField]
     private GameObject go_InventoryBase; // Inventory_Base 이미지
     [SerializeField]
@@ -20,9 +17,18 @@ public class Storage : MonoBehaviour
         go_InventoryBase = transform.GetChild(0).gameObject;
         go_SlotsParent = go_InventoryBase.transform.GetChild(0).gameObject;
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
-        uiGroup = gameObject.GetComponent<RectTransform>();
+
+        for (int i = 0; i < 100; i++)
+        {
+            slots[i].setIdx(i);
+        }
     }
 
+    public int checkStorage(ItemObject _item, int _count)
+    {
+        int slotIndex = ItemIndexArray.arr[_item.ItemCode] - 1;
+        return (slots[slotIndex].itemCount + _count) - 9999;
+    }
 
     public void AcquireItem(ItemObject _item, int _count = 1)
     {

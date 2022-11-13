@@ -56,7 +56,12 @@ public class UIManager : MonoBehaviour
     private int selectCharacter;
     private bool isPressESC;
     private bool isMyHome;
+
+    // 패널 오픈 여부 변수
     private bool isTransactionOpen;
+    private bool isInventoryOpen;
+    private bool isInvenRightModal;
+    private bool isStorageOpen;
 
     // 주연 추가
     public GameObject _eventpanel;
@@ -83,6 +88,8 @@ public class UIManager : MonoBehaviour
         isPressESC = false;
         isMyHome = false;
         isTransactionOpen = false;
+        isInventoryOpen = false;
+        isStorageOpen = false;
 
         _systemmanager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         _playersystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
@@ -170,6 +177,12 @@ public class UIManager : MonoBehaviour
         acquireItem(item2, 99);
         ItemObject item3 = findItem(106);
         acquireItem(item3, 30);
+        ItemObject item4 = findItem(127);
+        acquireItem(item4, 99);
+        acquireItem(item4, 99);
+        acquireItem(item4, 10);
+        ItemObject item5 = findItem(302);
+        acquireItem(item5, 1);
     }
 
     // Update is called once per frame
@@ -201,6 +214,11 @@ public class UIManager : MonoBehaviour
         // {
         //     _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
         // }
+
+        if (Input.GetButtonDown("interactionKey") && isInvenRightModal)
+        {
+            closeInvenRightClickModal();
+        }
 
         if (Input.GetKeyDown(KeyCode.B))
         {
@@ -249,8 +267,12 @@ public class UIManager : MonoBehaviour
             else
             {
                 int randomNum = Random.Range(1, 11);
-                // int randomNum = 5;
-                randomNum = 6;
+                // randomNum = 1;
+                // randomNum = 2;
+                // randomNum = 3;
+                // randomNum = 4;
+                // randomNum = 5;
+                // randomNum = 6;
                 switch (conversationCnt)
                 {
                     case -1:
@@ -266,14 +288,26 @@ public class UIManager : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            _conversationpanel.conversationWhenAlterBuff();
+        }
+
         if (Input.GetKeyDown(KeyCode.O))
         {
             _storagepanel.SetActive(!_storagepanel.activeSelf);
             OnInventory(3);
         }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            _playersystem.changeHealth(30);
+            _playersystem.changeEnergy(30);
+        }
     }
 
     // ======================== UI 호출 함수 Start
+
     public void OnBaseUIPanel()
     {
         _baseuipanel.SetActive(true);
@@ -416,7 +450,7 @@ public class UIManager : MonoBehaviour
 
     // ======================= UI 호출 함수 End
 
-    // 거래 패널 오픈 여부 함수
+    // 패널 오픈 여부 함수
     public bool getIsOpenTransaction()
     {
         return isTransactionOpen;
@@ -425,6 +459,26 @@ public class UIManager : MonoBehaviour
     public void setIsOpenTransaction(bool value)
     {
         isTransactionOpen = value;
+    }
+
+    public bool getIsOpenInventory()
+    {
+        return isInventoryOpen;
+    }
+
+    public void setIsOpenInventory(bool value)
+    {
+        isInventoryOpen = value;
+    }
+
+    public bool getIsOpenStorage()
+    {
+        return isStorageOpen;
+    }
+
+    public void setIsOpenStorage(bool value)
+    {
+        isStorageOpen = value;
     }
 
     // 캐릭터 선택 관련 함수
@@ -506,9 +560,34 @@ public class UIManager : MonoBehaviour
         _inventory.transform.GetChild(1).GetComponent<Inventory>().ReductItem(_item, _count);
     }
 
-    public void sellItem(int slotIdx, int _count)
+    public void sellItem(int slotIdx, int _count, int _key)
     {
-        _inventory.transform.GetChild(1).GetComponent<Inventory>().SellInventoryItem(slotIdx, _count);
+        if (_key == 1)
+        {
+            _inventory.transform.GetChild(1).GetComponent<Inventory>().SellInventoryItem(slotIdx, _count);
+        }
+        else if (_key == 2)
+        {
+            _inventory.transform.GetChild(0).GetComponent<Quickslot>().SellQuickslotItem(slotIdx, _count);
+        }
+        else if (_key == 3)
+        {
+            switch (slotIdx)
+            {
+                case 0:
+                    _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Slot>().SetSlotCount(-1);
+                    break;
+                case 1:
+                    _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(2).GetComponent<Slot>().SetSlotCount(-1);
+                    break;
+                case 2:
+                    _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(3).GetComponent<Slot>().SetSlotCount(-1);
+                    break;
+                case 3:
+                    _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(4).GetComponent<Slot>().SetSlotCount(-1);
+                    break;
+            }
+        }
     }
 
     public void onSlotOverModal(string _text, Vector3 _position)
@@ -521,6 +600,154 @@ public class UIManager : MonoBehaviour
     public void offSlotOverModal()
     {
         _inventory.transform.GetChild(3).gameObject.SetActive(false);
+    }
+
+    // 인벤 마우스 우클릭
+    public void clickRightSlotModal(int _key, Vector3 _position, ItemObject _item, int _count, int _index)
+    {
+        isInvenRightModal = true;
+        Debug.LogWarning("마우스 우클릭 모달 호출");
+        _inventory.transform.GetChild(4).gameObject.SetActive(true);
+        _inventory.transform.GetChild(4).transform.position = _position;
+        switch (_key)
+        {
+            case 1:
+                _inventory.transform.GetChild(4).GetChild(0).gameObject.SetActive(true);
+                _inventory.transform.GetChild(4).GetChild(0).GetComponent<Button>().onClick.RemoveAllListeners();
+                _inventory.transform.GetChild(4).GetChild(0).GetComponent<Button>().onClick.AddListener(() => rightEquip(_item, _count, _index));
+                break;
+            case 2:
+                _inventory.transform.GetChild(4).GetChild(2).gameObject.SetActive(true);
+                _inventory.transform.GetChild(4).GetChild(2).GetComponent<Button>().onClick.RemoveAllListeners();
+                _inventory.transform.GetChild(4).GetChild(2).GetComponent<Button>().onClick.AddListener(() => rightQuick(_item, _count, _index));
+                break;
+            case 3:
+                _inventory.transform.GetChild(4).GetChild(1).gameObject.SetActive(true);
+                _inventory.transform.GetChild(4).GetChild(1).GetComponent<Button>().onClick.RemoveAllListeners();
+                _inventory.transform.GetChild(4).GetChild(1).GetComponent<Button>().onClick.AddListener(() => rightUse(_item, _count, _index));
+                break;
+            case 4:
+                _inventory.transform.GetChild(4).GetChild(3).gameObject.SetActive(true);
+                _inventory.transform.GetChild(4).GetChild(3).GetComponent<Button>().onClick.RemoveAllListeners();
+                _inventory.transform.GetChild(4).GetChild(3).GetComponent<Button>().onClick.AddListener(() => rightDismiss(_item, _count, _index));
+                break;
+
+        }
+    }
+
+    // 인벤 우클릭 모달 close
+    public void closeInvenRightClickModal()
+    {
+        isInvenRightModal = false;
+        _inventory.transform.GetChild(4).gameObject.SetActive(false);
+        for (int i = 0; i < 4; i++)
+        {
+            _inventory.transform.GetChild(4).GetChild(i).gameObject.SetActive(false);
+        }
+    }
+
+    // 인벤토리 아이템 처리 - 우클릭
+    public void rightEquip(ItemObject _item, int _count, int invenIdx)
+    {
+        // Debug.Log("여기 몇 번 동작해?");
+        ItemObject itemObj = null;
+        int equiptCnt = -1;
+        switch (_item.ItemCode)
+        {
+            case 400:
+                equiptCnt = _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Slot>().getSlotItemCount();
+                if (equiptCnt > 0)
+                {
+                    itemObj = _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Slot>().getSlotItemData();
+                }
+
+                _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Slot>().AddItem(_item);
+                sellItem(invenIdx, _count, 1);
+                break;
+            case 401:
+                equiptCnt = _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(2).GetComponent<Slot>().getSlotItemCount();
+                if (equiptCnt > 0)
+                {
+                    itemObj = _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(2).GetComponent<Slot>().getSlotItemData();
+                }
+
+                _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(2).GetComponent<Slot>().AddItem(_item);
+                sellItem(invenIdx, _count, 1);
+                break;
+            case 402:
+                equiptCnt = _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(3).GetComponent<Slot>().getSlotItemCount();
+                if (equiptCnt > 0)
+                {
+                    itemObj = _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(3).GetComponent<Slot>().getSlotItemData();
+                }
+
+                _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(3).GetComponent<Slot>().AddItem(_item);
+                sellItem(invenIdx, _count, 1);
+                break;
+            case 403:
+            case 404:
+                equiptCnt = _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(4).GetComponent<Slot>().getSlotItemCount();
+                if (equiptCnt > 0)
+                {
+                    itemObj = _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(4).GetComponent<Slot>().getSlotItemData();
+                }
+
+                _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(4).GetComponent<Slot>().AddItem(_item);
+                sellItem(invenIdx, _count, 1);
+                break;
+            case 502:
+            case 503:
+            case 504:
+                _baseuipanel.transform.GetChild(3).GetChild(1).GetComponentInChildren<Slot>().AddItem(_item, _count);
+                break;
+            default:
+                break;
+        }
+
+        if (itemObj != null)
+        {
+            acquireItem(itemObj, 1);
+        }
+
+        closeInvenRightClickModal();
+    }
+
+    public void rightQuick(ItemObject _item, int _count, int _index)
+    {
+        if (_inventory.transform.GetChild(0).GetComponent<Quickslot>().CheckInven(_item, _count))
+        {
+            _inventory.transform.GetChild(0).GetComponent<Quickslot>().AcquireItem(_item, _count);
+            sellItem(_index, _count, 1);
+        }
+        else
+        {
+            OnResultNotificationPanel("퀵슬롯에 빈 공간이 없습니다.");
+        }
+        closeInvenRightClickModal();
+    }
+
+    public void rightDismiss(ItemObject _item, int _count, int _index)
+    {
+        if (checkInventory(_item, _count))
+        {
+            if (_item.Category == "옷")
+            {
+                sellItem(_index, _count, 3);
+            }
+            else
+            {
+                sellItem(_index, _count, 2);
+            }
+            acquireItem(_item, _count);
+        }
+        closeInvenRightClickModal();
+    }
+
+    public void rightUse(ItemObject _item, int _count, int _index)
+    {
+        _foodmanager.UseFood(_item.ItemCode);
+        sellItem(_index, 1, 1);
+        closeInvenRightClickModal();
     }
 
     public Slot[] getInventorySlots()
@@ -554,6 +781,12 @@ public class UIManager : MonoBehaviour
         Debug.LogWarning(_playersystem._playerAnimator.GetInteger("action"));
     }
 
+    // input 관련 함수
+    public void toggleCanInteract()
+    {
+        _playersystem.toggleCanInteract();
+    }
+
     // item 관련 함수
     public ItemObject findItem(int value)
     {
@@ -585,6 +818,24 @@ public class UIManager : MonoBehaviour
     {
         _systemmanager.addPlayerGold(value);
         _invenMoney.text = getPlayerGold().ToString();
+    }
+
+    // 플레이어 체력 / 기력
+    public void healPlayer()
+    {
+        _playersystem.changeHealth(-10000);
+        _playersystem.changeEnergy(-10000);
+        _conversationpanel.selectHeal();
+    }
+
+    // 사운드 관련
+    public void playRandomBGM()
+    {
+        // GameObject.Find("SoundManager").GetComponent<SoundManager>().playRandom();
+    }
+    public void BGMChanger(string _bgmName)
+    {
+        _conversationpanel.selectMusic(_bgmName);
     }
 
     // 게임 시작 종료

@@ -83,7 +83,10 @@ public class TradeModal : MonoBehaviour
         }
         else if (tradeMod == 1)
         {
-            buyEvent(tradeCount);
+            if (tradeCount > 0)
+            {
+                buyEvent(tradeCount);
+            }
         }
         else if (tradeMod == 2)
         {
@@ -137,7 +140,7 @@ public class TradeModal : MonoBehaviour
         {
             if (tradeCnt != 0)
             {
-                ui.sellItem(itemIndex, tradeCnt);
+                ui.sellItem(itemIndex, tradeCnt, 1);
                 ui.addPlayerGold((tradeCost * tradeCnt));
             }
         }
