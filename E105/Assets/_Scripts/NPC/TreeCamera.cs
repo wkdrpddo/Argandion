@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldTree : MonoBehaviour
+public class TreeCamera : MonoBehaviour
 {
     private SystemManager _system;
     private CameraSystem _camera;
