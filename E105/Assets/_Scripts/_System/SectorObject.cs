@@ -101,7 +101,8 @@ public class SectorObject : MonoBehaviour
         Debug.Log("번 지역에 생성");
         Collider tcol = _SectorCollider[count];
         Vector3 pos = new Vector3(tcol.bounds.center.x+Random.Range(-tcol.bounds.extents.x,tcol.bounds.extents.x),tcol.bounds.center.y+3f,tcol.bounds.center.z+Random.Range(-tcol.bounds.extents.z,tcol.bounds.extents.z));
-        Instantiate(_floweObject,pos,new Quaternion());
+        GameObject flower = Instantiate(_floweObject,pos,new Quaternion(),gameObject.transform);
+        flower.GetComponent<GatheringObject>().setFlower(true);
         Debug.Log(pos);
         _flower_remain += 1;
     }
