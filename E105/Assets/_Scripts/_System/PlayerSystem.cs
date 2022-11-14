@@ -90,7 +90,7 @@ public class PlayerSystem : MonoBehaviour
         _buff = _buffManagerObject.GetComponent<BuffManager>();
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _itemManager = GameObject.Find("ItemManager").GetComponent<Item>();
-
+        _character = GameObject.Find("PlayerBody").transform;
     }
 
     // Update is called once per frame
