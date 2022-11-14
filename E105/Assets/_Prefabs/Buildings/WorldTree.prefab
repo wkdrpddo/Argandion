@@ -245,7 +245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &138242941610226025
 Transform:
   m_ObjectHideFlags: 0
@@ -612,6 +612,8 @@ GameObject:
   - component: {fileID: 138242942359407710}
   - component: {fileID: 138242942359407711}
   - component: {fileID: -1390467927239077520}
+  - component: {fileID: 1989903159101993648}
+  - component: {fileID: 8078024832671523956}
   m_Layer: 0
   m_Name: WorldTree
   m_TagString: Untagged
@@ -662,6 +664,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e474ae330fa99ff48953c33d7a701857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &1989903159101993648
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138242942359407705}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 50
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8078024832671523956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138242942359407705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f358726747228b4e9f4733047ad5434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &138242942516255388
@@ -993,7 +1020,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6461612405272855647
 Transform:
   m_ObjectHideFlags: 0

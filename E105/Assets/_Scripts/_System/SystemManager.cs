@@ -17,7 +17,7 @@ public class SystemManager : MonoBehaviour
     public float _hour_time_changemeter = 1000;
     private int _player_gold;
     public GameObject _light;
-    public GameObject _MapObject;
+    public GameObject MapObject;
     public PlayerSystem _player;
     public WeatherManager _weatherManager;
     public BuffManager _buffManager;
@@ -27,11 +27,13 @@ public class SystemManager : MonoBehaviour
     public PrayBuff _PrayBuff;
     public int _development_level;  // 1부터
     public int _purification_sector;
+
     static int _sector_size = 8;
     public int _purification_size;
     public bool[] _purification = new bool[_sector_size];
+    public GameObject[] _sector = new GameObject[_sector_size + 2];
     public SectorObject _sectorTest;
-    [SerializeField] private SectorObject[] _sectors;
+    private SectorObject[] _sectors;
     public GameObject[] _randomNPC = new GameObject[2];
 
     public int[,] _timezone = new int[,] { { 6, 7, 18, 19 }, { 6, 6, 19, 20 }, { 6, 7, 18, 19 }, { 7, 8, 18, 19 } };
@@ -46,18 +48,12 @@ public class SystemManager : MonoBehaviour
         _minute = 0;
         _minute_display = 0;
         _player = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
-
-        _MapObject = GameObject.Find("Map");
-        _sectors = _MapObject.GetComponentsInChildren<SectorObject>();
+        _sectors = MapObject.GetComponentsInChildren<SectorObject>();
         _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         _NPCManager = GameObject.Find("NPCManager").GetComponent<NPCManager>();
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _PrayBuff = GameObject.Find("BuffManager").GetComponent<PrayBuff>();
-        _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
-
-
-
     }
 
     // Update is called once per frame
@@ -71,11 +67,9 @@ public class SystemManager : MonoBehaviour
     {
         Debug.Log("계절이 바뀌었습니다.");
         _season = index;
-        _MapObject.GetComponent<MapObject>().UpdateFieldManager(index);
+        MapObject.GetComponent<MapObject>().UpdateFieldManager(index);
     }
 
-
-    //건물이 모두 지어지면 호출
     public void UpdatePurification(int index)  //1번부터 
     {
         switch (index)
@@ -85,14 +79,14 @@ public class SystemManager : MonoBehaviour
             case 3:
             case 4:
                 _purification[index - 1] = true;
-                _MapObject.GetComponent<MapObject>().ChangePurifier(index - 1);
+                MapObject.GetComponent<MapObject>().ChangePurifier(index - 1);
                 _NPCManager.NPCActive(index - 1);
                 break;
             case 6:
             case 7:
                 _purification[index - 1] = true;
-                _MapObject.GetComponent<MapObject>().ChangePurifier(index - 1);
-                _MapObject.GetComponent<MapObject>().ChangePurifier(7);
+                MapObject.GetComponent<MapObject>().ChangePurifier(index - 1);
+                MapObject.GetComponent<MapObject>().ChangePurifier(7);
                 _NPCManager.NPCActive(index - 2);
                 break;
 
@@ -354,5 +348,47 @@ public class SystemManager : MonoBehaviour
     public void callInactiveIcon(int value)
     {
         _EventPanel.inactiveIcon(value);
+    }
+
+    public void CompleteConstruction(int index)
+    {
+        MapObject.GetComponent<MapObject>().ChangePurifier(index);
+        _purification[index] = true;
+        _purification_sector += 1;
+        if (_purification_sector > 2 && _development_level < 2)
+        {
+            _development_level = 2;
+            DevelopLevelUp();
+        }
+        if (_purification_sector > 4 && _development_level < 3)
+        {
+            _development_level = 3;
+            DevelopLevelUp();
+        }
+        // 이자리에 특정 건물들 call 함수 입력
+    }
+
+    public void DevelopLevelUp()
+    {
+        if (_development_level == 2)
+        {
+            //실행문
+        }
+        if (_development_level == 3)
+        {
+            //실행문
+        }
+    }
+
+    // 발전도 확인
+    public int getDevelopLevel()
+    {
+        return _development_level;
+    }
+
+    // 정화 여부 확인 (섹터 1번부터 8번까지)
+    public bool isPurifiered(int index)
+    {
+        return _purification[index - 1];
     }
 }
