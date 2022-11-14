@@ -941,6 +941,6 @@ public class PlayerSystem : MonoBehaviour
         {
             obj.SetActive(false);
         }
-        _player_character[index].SetActive = true;
+        _player_character[index].SetActive(true);
     }
 }
