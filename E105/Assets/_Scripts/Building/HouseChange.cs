@@ -42,7 +42,7 @@ public class HouseChange : MonoBehaviour
     // 발전도 변하면 call하기
     public void ChangeHouse()
     {
-        int devLevel = _systemManager._development_level;
+        int devLevel = _systemManager.getDevelopLevel();
         gameObject.transform.GetChild(devLevel - 1).gameObject.SetActive(false);
         gameObject.transform.GetChild(devLevel).gameObject.SetActive(true);
     }

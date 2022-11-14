@@ -64,6 +64,7 @@ public class PlayerSystem : MonoBehaviour
     public float _interactRadius;
     private Rigidbody rb;
     private Vector3 speed;
+    public GameObject[] _player_character;
 
     private Collider[] _colset;
     public int _onAir = 0;
@@ -932,5 +933,14 @@ public class PlayerSystem : MonoBehaviour
     private void removeDebuff()
     {
 
+    }
+
+    public void ChangePlayerCharacter(int index)
+    {
+        foreach (var obj in _player_character)
+        {
+            obj.SetActive(false);
+        }
+        _player_character[index].SetActive = true;
     }
 }
