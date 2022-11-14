@@ -19,7 +19,6 @@ public class SoundManager : MonoBehaviour
     [Header("사운드 플레이어")]
     [SerializeField] AudioSource bgmPlayer;
 
-
     private float Sound_Background = 0.2f;
     private float Sound_Effect = 0.2f;
 
@@ -63,4 +62,5 @@ public class SoundManager : MonoBehaviour
     {
         return Sound_Effect;
     }
+
 }

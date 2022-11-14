@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SystemManager : MonoBehaviour
 {
+    private bool _time_stop;
     public int _month;
     public int _day;
     public int _season;
@@ -21,6 +22,9 @@ public class SystemManager : MonoBehaviour
     public WeatherManager _weatherManager;
     public BuffManager _buffManager;
     public NPCManager _NPCManager;
+    public UIManager _UIManager;
+    public EventPanel _EventPanel;
+    public PrayBuff _PrayBuff;
     public int _development_level;  // 1부터
     public int _purification_sector;
 
@@ -44,10 +48,12 @@ public class SystemManager : MonoBehaviour
         _minute = 0;
         _minute_display = 0;
         _player = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
-        // _sectors = MapObject.GetComponentsInChildren<SectorObject>();
-        // _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
+        _sectors = MapObject.GetComponentsInChildren<SectorObject>();
+        _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         _NPCManager = GameObject.Find("NPCManager").GetComponent<NPCManager>();
+        _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        _PrayBuff = GameObject.Find("BuffManager").GetComponent<PrayBuff>();
     }
 
     // Update is called once per frame
@@ -90,76 +96,89 @@ public class SystemManager : MonoBehaviour
 
     private void TimeSystem()
     {
-        _minute += Time.deltaTime * (_hour_time_changemeter / 1000f);
-        if (_minute >= 60)
+        if (!_time_stop)
         {
-            _minute -= 60;
-            _hour += 1;
-
-            if (_hour == 21)
+            _minute += Time.deltaTime * (_hour_time_changemeter / 1000f);
+            if (_minute >= 60)
             {
-                animalDestroy();
-            }
+                _minute -= 60;
+                _hour += 1;
 
-            if (_hour >= 23)
-            {
-                _hour = 6;
-                _day += 1;
-
-                if (_day >= 29)
+                if (_hour == 21)
                 {
-                    _day -= 28;
-                    _month += 1;
-
-                    if (_month >= 9)
-                    {
-                        _month -= 8;
-                    }
-                    if (_month % 2 == 1)
-                    {
-                        UpdateSeason(_month / 2);
-                    }
+                    animalDestroy();
                 }
 
-                DayEnd();
-                _weatherManager.SetWeather(_season);
-                if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
+                if (_hour >= ((_buffManager.whitePray || _buffManager.whiteSpirit) ? 25 : 23))
                 {
-                    _buffManager.FlowerBuffEnd();
+                    _hour = ((_buffManager.whitePray || _buffManager.whiteSpirit) ? 5 : 6);
+                    _day += 1;
+
+                    if (_day >= 29)
+                    {
+                        _day -= 28;
+                        _month += 1;
+
+                        if (_month >= 9)
+                        {
+                            _month -= 8;
+                            // _weatherManager.SetYearEvent();
+                        }
+                        if (_month % 2 == 1)
+                        {
+                            UpdateSeason(_month / 2);
+                        }
+                    }
+
+                    DayEnd();
+                    // _weatherManager.SetWeather(_season);
+                    // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
+                    // {
+                    //     _buffManager.FlowerBuffEnd();
+                    // }
+                    // _buffManager.DayEnd();
+                    DayStart();
                 }
-                _buffManager.DayEnd();
-                DayStart();
             }
-        }
 
-        _minute_display = ((int)_minute);
-        _hour_display = _hour;
+            _minute_display = ((int)_minute);
+            _hour_display = _hour;
 
-        if (_hour < _timezone[_season, 0])
-        {
-            _light.transform.rotation = Quaternion.Euler(-10, -30, _light.transform.rotation.z);
-        }
-        else if (_timezone[_season, 0] <= _hour && _hour < _timezone[_season, 1])
-        {
-            _light.transform.rotation = Quaternion.Euler(-10 + _minute, -30, _light.transform.rotation.z);
-        }
-        else if (_timezone[_season, 1] <= _hour && _hour < _timezone[_season, 2])
-        {
-            _light.transform.rotation = Quaternion.Euler(50, -30, _light.transform.rotation.z);
-        }
-        else if (_timezone[_season, 2] <= _hour && _hour < _timezone[_season, 3])
-        {
-            _light.transform.rotation = Quaternion.Euler(50 + _minute * 2.5f, -30, _light.transform.rotation.z);
-        }
-        else if (_timezone[_season, 3] <= _hour)
-        {
-            _light.transform.rotation = Quaternion.Euler(200, -30, _light.transform.rotation.z);
+            if (_hour < _timezone[_season, 0])
+            {
+                _light.transform.rotation = Quaternion.Euler(-10, -30, _light.transform.rotation.z);
+            }
+            else if (_timezone[_season, 0] <= _hour && _hour < _timezone[_season, 1])
+            {
+                _light.transform.rotation = Quaternion.Euler(-10 + _minute, -30, _light.transform.rotation.z);
+            }
+            else if (_timezone[_season, 1] <= _hour && _hour < _timezone[_season, 2])
+            {
+                _light.transform.rotation = Quaternion.Euler(50, -30, _light.transform.rotation.z);
+            }
+            else if (_timezone[_season, 2] <= _hour && _hour < _timezone[_season, 3])
+            {
+                _light.transform.rotation = Quaternion.Euler(50 + _minute * 2.5f, -30, _light.transform.rotation.z);
+            }
+            else if (_timezone[_season, 3] <= _hour)
+            {
+                _light.transform.rotation = Quaternion.Euler(200, -30, _light.transform.rotation.z);
+            }
         }
     }
 
     private void DayEnd()
     {
-
+        if (1 <= _weather && _weather <= 9)
+        {
+            _EventPanel.inactiveIcon(_weather + 49);
+        }
+        _weatherManager.SetWeather(_season);
+        if (1 <= _weather && _weather <= 9)
+        {
+            _EventPanel.activeIcon(_weather + 49);
+        }
+        Debug.Log(_weather);
         // 모든 SectorObject의 DayEnd 동작
         foreach (var sector in _sectors)
         {
@@ -209,6 +228,7 @@ public class SystemManager : MonoBehaviour
             Destroy(p);
 
         }
+        _buffManager.DayEnd();
     }
 
     private void animalDestroy()
@@ -234,8 +254,8 @@ public class SystemManager : MonoBehaviour
         {
             sector.DayStart();
         }
-
         // _sectorTest.DayEnd();
+        _UIManager.DayStart();
     }
 
     //정화된 구역 중에서 랜덤 한 구역 정하기
@@ -320,7 +340,13 @@ public class SystemManager : MonoBehaviour
         _player_gold += value;
     }
 
+    public void callActiveIcon(int value)
+    {
+        _EventPanel.activeIcon(value);
+    }
 
-
-
+    public void callInactiveIcon(int value)
+    {
+        _EventPanel.inactiveIcon(value);
+    }
 }

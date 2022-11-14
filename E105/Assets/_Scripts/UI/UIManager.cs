@@ -944,12 +944,12 @@ public class UIManager : MonoBehaviour
         Image img = _daytime.GetComponent<Image>();
         if (_systemmanager._buffManager.whitePray || _systemmanager._buffManager.whiteSpirit)
         {
-            trans.SetLocalPositionAndRotation(trans.position, Quaternion.Euler(180, 180, 15));
+            trans.SetLocalPositionAndRotation(trans.localPosition, Quaternion.Euler(180, 180, 15));
             img.fillAmount = 0.83333f;
         }
         else
         {
-            trans.SetLocalPositionAndRotation(trans.position, Quaternion.Euler(180, 180, 0));
+            trans.SetLocalPositionAndRotation(trans.localPosition, Quaternion.Euler(180, 180, 0));
             img.fillAmount = 0.70833f;
         }
     }

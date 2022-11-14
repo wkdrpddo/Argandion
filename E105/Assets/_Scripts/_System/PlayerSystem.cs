@@ -157,7 +157,7 @@ public class PlayerSystem : MonoBehaviour
             else
             {
                 // transform.position += moveDir * Time.deltaTime * _walkspeed;
-                speed = moveDir * _runspeed * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
+                speed = moveDir * _walkspeed * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
                 // speed.y = -1f;
                 if (_onAir == 0)
                 {
@@ -450,13 +450,17 @@ public class PlayerSystem : MonoBehaviour
             {
                 Debug.Log("이미 다른버프가 발동중이라구!");
             }
+            else if (_buff._isPrayBuffActived)
+            {
+                Debug.Log("제단 버프 진행중");
+            }
             else
             {
                 ItemObject item = _theInventory.StoreItem(0, -1);
                 if (item.Category == "꽃")
                 {
                     SpiritBuff spirit = _nearObject.GetComponent<SpiritBuff>();
-                    spirit.Spirit(item);
+                    // spirit.Spirit(item);
                     _buff._isFlowerBuffActived = true;
                 }
                 else if (item.ItemCode == 0)

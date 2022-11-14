@@ -11,7 +11,7 @@ public class SectorObject : MonoBehaviour
     public float _flower_spawn_base_percent;
     public float _flower_spawn_percent;
     public float _flower_spawn_factor;
-    public float _flower_spawn_bonus_factor;
+    public float _flower_spawn_bonus_factor = 1.05f;
     public float _flower_spawn_distance;
     public int _tree_max;
     public int _tree_remain;
@@ -44,10 +44,12 @@ public class SectorObject : MonoBehaviour
     public Collider[] _SectorCollider;
     public List<float> _SectorArea;
     public GameObject _floweObject;
+    private BuffManager _BuffManager;
     private float _sumSector;
     // Start is called before the first frame update
     void Start()
     {
+        _BuffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         _SectorArea.Add(0f);
         foreach (Collider col in _SectorCollider)
         {
@@ -80,7 +82,7 @@ public class SectorObject : MonoBehaviour
             }
             else
             {
-                _flower_spawn_percent = _flower_spawn_percent*_flower_spawn_factor*_flower_spawn_bonus_factor;
+                _flower_spawn_percent = _flower_spawn_percent*_flower_spawn_factor*(_BuffManager.yellowPray ? _flower_spawn_bonus_factor : 1.0f);
                 _flower_spawn_percent = Mathf.Min(0.8f,_flower_spawn_percent);
             }
         }

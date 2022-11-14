@@ -32,7 +32,7 @@ public class WeatherManager : MonoBehaviour
 
     private void Start() {
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
-        SetYearEvent();
+        SetYearEvent(); // 나중에 변경/삭제 해야함
     }
 
     public void SetWeather(int season)
@@ -201,13 +201,13 @@ public class WeatherManager : MonoBehaviour
         how5 = 0;
         
         // 장마, 한파 날짜 정해주기
-        _buffManager.rainyMonth = Random.Range(2,4);
+        _buffManager.rainyMonth = Random.Range(3,5);
         if (_buffManager.rainyMonth == 2) {
             _buffManager.rainyDay = Random.Range(1,29);
         } else {
             _buffManager.rainyDay = Random.Range(1,23);
         }
-        _buffManager.coldWaveMonth = Random.Range(6,8);
+        _buffManager.coldWaveMonth = Random.Range(7,9);
         if (_buffManager.coldWaveMonth == 6) {
             _buffManager.coldWaveDay = Random.Range(1,29);
         } else {
