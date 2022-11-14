@@ -25,10 +25,11 @@ public class Storage : MonoBehaviour
 
         for (int i = 0; i < 100; i++)
         {
+            Debug.Log("=============" + slots[i]);
             int idx = i;
             slots[i].setIdx(idx);
             Debug.Log("여기 동작하나요?  : " + idx);
-            // slots[i].item = ui.findItemToSeq(idx);
+            slots[i].item = ui.findItemToSeq(idx);
         }
     }
 

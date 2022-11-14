@@ -850,10 +850,10 @@ public class UIManager : MonoBehaviour
         return _itemmanager.FindItem(value);
     }
 
-    // public ItemObject findItemToSeq(int value)
-    // {
-    //     return _itemmanager.FindItemToSeq(value);
-    // }
+    public ItemObject findItemToSeq(int value)
+    {
+        // return _itemmanager.FindItemToSeq(value);
+    }
 
     // 퀵슬롯 변경 함수
     public void setEquipPointer(int num)
