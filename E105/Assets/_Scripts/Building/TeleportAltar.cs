@@ -24,62 +24,84 @@ public class TeleportAltar : MonoBehaviour
     }
 
     // 테스트 코드
-    public bool _test;
+    public bool _goup;
+    public bool _godown;
 
     private void Update() {
-        if(_test){
+        if(_goup){
             goUp();
-            _test = false;
+            _goup = false;
+        }if(_godown){
+            goDown();
+            _godown = false;
         }
     }
 
-
-    // Enter 했을 때 fx 넣기?
-
     public void Interaction()
     {
+        Debug.Log("인터렉션");
         _uiManager.OnConversationPanel(11);
     }
 
     // 위로 올라갈 때 call
     public void goUp()
     {
+        // 플레이어
+        _playerSystem.transform.GetChild(0).gameObject.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
+        _playerSystem.transform.position = new Vector3(_teleportDown.transform.position.x, _playerSystem.transform.position.y, _teleportDown.transform.position.z);
         // 이동 fx
         fxD(true);
-        _fxPtD.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Play();
-        // StartCoroutine("FxDelayGoUpDepart");
+        StartCoroutine("FxDelayGoUp");
     }
 
     // 밑으로 내려갈 때 call
     private void goDown()
     {
-        _playerSystem.transform.position = new Vector3(_teleportDown.transform.position.x, _teleportDown.transform.position.y, _teleportDown.transform.position.z);
-        if(_sector8._purifier){
-            _soundManager.playBGM1();
-        }else{
-            _soundManager.playBGM2();
-        }
-    }
-
-    // fx 딜레이
-    IEnumerator FxDelayGoUpDepart(){
-        yield return new WaitForSeconds(2.0f);
-        // Down쪽 fx 되돌리기
-        fxD(false);
-        // Up쪽 fx 하기
+        // 플레이어
+        _playerSystem.transform.GetChild(0).gameObject.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
+        _playerSystem.transform.position = new Vector3(_teleportUp.transform.position.x, _playerSystem.transform.position.y, _teleportUp.transform.position.z);
+        // 이동 fx
         fxU(true);
-        // 이동
-        _playerSystem.transform.position = new Vector3(_teleportUp.transform.position.x, _teleportUp.transform.position.y+1f, _teleportUp.transform.position.z);
-        // _soundManager.playBGM4();
-        
-        StartCoroutine("FxDelayGoUpArrival");
+        StartCoroutine("FxDelayGoDown");
     }
 
-    IEnumerator FxDelayGoUpArrival(){
+    // Down -> Up fx 딜레이
+    IEnumerator FxDelayGoUp(){
+        yield return new WaitForSeconds(2.0f);
+        // Up쪽 fx 하기
+        _fxPtU.transform.GetChild(2).gameObject.SetActive(true);
         _playerSystem._canMove = false;
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(0.5f);
+        // 이동
+        _playerSystem.transform.position = new Vector3(_teleportUp.transform.position.x, _teleportUp.transform.position.y, _teleportUp.transform.position.z);
+        // 사운드
+        // _soundManager.playBGM4();
+        // fx 되돌리기
+        yield return new WaitForSeconds(1.3f);
         _playerSystem._canMove = true;
-        // Up쪽 fx 되돌리기
+        fxD(false);
+        fxU(false);
+    }
+
+    // Up -> Down fx 딜레이
+    IEnumerator FxDelayGoDown(){
+        yield return new WaitForSeconds(2.0f);
+        // Down쪽 fx 하기
+        _fxPtD.transform.GetChild(2).gameObject.SetActive(true);
+        _playerSystem._canMove = false;
+        yield return new WaitForSeconds(0.5f);
+        // 이동
+        _playerSystem.transform.position = new Vector3(_teleportDown.transform.position.x, _teleportDown.transform.position.y, _teleportDown.transform.position.z);
+        // 사운드
+        // if(_sector8._purifier){
+        //     _soundManager.playBGM1();
+        // }else{
+        //     _soundManager.playBGM2();
+        // }
+        // fx 되돌리기
+        yield return new WaitForSeconds(1.3f);
+        _playerSystem._canMove = true;
+        fxD(false);
         fxU(false);
     }
 
@@ -93,7 +115,5 @@ public class TeleportAltar : MonoBehaviour
         _fxPtU.transform.GetChild(1).gameObject.SetActive(b);
         _fxPtU.transform.GetChild(2).gameObject.SetActive(b);
     }
-
-
 
 }
