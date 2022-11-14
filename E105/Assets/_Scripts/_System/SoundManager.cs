@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 [System.Serializable]
 public class Sound
 {
@@ -19,8 +20,10 @@ public class SoundManager : MonoBehaviour
     [Header("사운드 플레이어")]
     [SerializeField] AudioSource bgmPlayer;
 
-    private float Sound_Background = 0.2f;
-    private float Sound_Effect = 0.2f;
+    private float Sound_Background = 0.5f;
+    private float Sound_Effect = 0.5f;
+
+    private UIManager _UIManager;
 
     // option panal
     // public GameObject _optionpanel;
@@ -29,28 +32,67 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        // playBGM1();
+        _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        playBGM1();
     }
-    public void playBGM1()
+    public void playBGM1()  //정화
     {
+        bgmPlayer.Stop();
         bgmPlayer.clip = bgmSounds[0].clip;
         bgmPlayer.Play();
     }
 
-    public void playBGM2()
+    public void playBGM2()  //황폐화
     {
+        bgmPlayer.Stop();
         bgmPlayer.clip = bgmSounds[1].clip;
         bgmPlayer.Play();
     }
 
-    public void setBackgroundSound(Slider slider)
+    public void playBGM3()  //숲
     {
-        Sound_Background = slider.value;
+        bgmPlayer.Stop();
+        bgmPlayer.clip = bgmSounds[2].clip;
+        bgmPlayer.Play();
     }
 
-    public void setEffectSound(Slider slider)
+    public void playBGM4()  //제단
     {
-        Sound_Effect = slider.value;
+        bgmPlayer.Stop();
+        bgmPlayer.clip = bgmSounds[3].clip;
+        bgmPlayer.Play();
+    }
+
+    public void playRandom()  //음악가가 랜덤음악 재생
+    {
+        bgmPlayer.Stop();
+        int random = Random.Range(0, 2);
+
+        switch (random)
+        {
+            case 0:
+                bgmPlayer.clip = bgmSounds[4].clip;
+                break;
+            case 1:
+                bgmPlayer.clip = bgmSounds[5].clip;
+                break;
+        }
+
+        bgmPlayer.Play();
+
+        //UIManager에서 BGMChanger(string bgmName) 호출하기
+        //_UIManager.BGMChanger(bgmName);
+    }
+
+    public void setBackgroundSound(float volume)
+    {
+        Sound_Background = volume;
+        bgmPlayer.volume = Sound_Background;
+    }
+
+    public void setEffectSound(float volume)
+    {
+        Sound_Effect = volume;
     }
 
     public float getBackgroundSound()

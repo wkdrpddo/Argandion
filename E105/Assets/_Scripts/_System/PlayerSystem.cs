@@ -21,6 +21,8 @@ public class PlayerSystem : MonoBehaviour
 
     private GameObject _nearObject;
 
+    private SoundManager _soundManager;
+
     // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대), 이동불가 시간, 작업시간}
     public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 10, 0, 0, 0, 20 }, { 20, 0, 0, 0, 10 } };
     public GameObject[] _equipment = new GameObject[7];
@@ -70,7 +72,11 @@ public class PlayerSystem : MonoBehaviour
     private bool _canInteract;
     public float _gravity;
 
+
     private bool otherAnimated;
+
+
+    private int _current_region;  //플레이어가 현재 어느 있는 지역의 상태 
 
 
     // Start is called before the first frame update
@@ -80,6 +86,8 @@ public class PlayerSystem : MonoBehaviour
         _buffManagerObject = GameObject.Find("BuffManager");
         _buff = _buffManagerObject.GetComponent<BuffManager>();
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        _current_region = 0;
+        _soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -158,6 +166,7 @@ public class PlayerSystem : MonoBehaviour
             {
                 // transform.position += moveDir * Time.deltaTime * _walkspeed;
                 speed = moveDir * _walkspeed * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
+
                 // speed.y = -1f;
                 if (_onAir == 0)
                 {
@@ -450,10 +459,12 @@ public class PlayerSystem : MonoBehaviour
             {
                 Debug.Log("이미 다른버프가 발동중이라구!");
             }
+
             else if (_buff._isPrayBuffActived)
             {
                 Debug.Log("제단 버프 진행중");
             }
+
             else
             {
                 ItemObject item = _theInventory.StoreItem(0, -1);
@@ -579,6 +590,35 @@ public class PlayerSystem : MonoBehaviour
             // Debug.Log("작업 영역");
         }
 
+        if (other.tag == "sector")
+        {
+            //현재 들어온 지역
+            if (other.transform.GetComponent<SectorObject>()._purifier)  //정화된 구역에 들어왔을때
+            {
+                if (_current_region != 0)  //이전 구역이 정화구역이 아니었을때만 사운드 체인지
+                {
+                    _soundManager.playBGM1();
+                    _current_region = 0;
+                }
+            }
+            else  //황폐화 구역에 들어왔을때
+            {
+                if (_current_region != 1) //이전 구역이 황폐화구역이 아니었을때만 사운드 체인지
+                {
+                    _soundManager.playBGM2();
+                    _current_region = 1;
+                }
+            }
+        }
+
+        if (other.tag == "forest")   //숲으로 이동
+        {
+            if (_current_region != 2)
+            {
+                _soundManager.playBGM3();
+                _current_region = 2;
+            }
+        }
 
     }
 
@@ -652,7 +692,7 @@ public class PlayerSystem : MonoBehaviour
         {
             _health = _health_max;
         }
-        // _UIManager.setHealthBar(_health/_health_max);
+        _UIManager.setHealthBar(_health / _health_max);
     }
 
     public void changeEnergy(float value)

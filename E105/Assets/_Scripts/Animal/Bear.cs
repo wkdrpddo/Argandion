@@ -37,6 +37,7 @@ public class Bear : MonoBehaviour
     [SerializeField] private BoxCollider boxCol;
     private NavMeshAgent nav;
     [SerializeField] private Transform playerPos;
+    [SerializeField] private PlayerSystem _playerSystem;
 
     //Item
     [SerializeField] private GameObject item20;  //동물의 가죽
@@ -50,6 +51,7 @@ public class Bear : MonoBehaviour
         nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
         currentTime = waitTime;
         isAction = true;
+        _playerSystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
         playerPos = GameObject.Find("PlayerObject").transform;
     }
 
@@ -190,6 +192,8 @@ public class Bear : MonoBehaviour
         if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out _hit, 3, targetMask))
         {
             Debug.Log("플레이어 적중!");
+            _playerSystem.changeHealth(10);
+
         }
         else
         {
