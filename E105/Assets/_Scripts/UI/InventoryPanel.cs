@@ -9,17 +9,20 @@ public class InventoryPanel : MonoBehaviour
     public void handlePanel()
     {
         gameObject.SetActive(!gameObject.activeSelf);
+        ui.setIsOpenInventory(gameObject.activeSelf);
+        ui.toggleCanInteract();
+
+        if (!gameObject.activeSelf)
+        {
+            ui.closeInvenRightClickModal();
+            ui.runControllPlayer();
+        }
+
         ui.OnInventory(1);
     }
     // Start is called before the first frame update
     void Start()
     {
         ui = gameObject.GetComponentInParent<UIManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

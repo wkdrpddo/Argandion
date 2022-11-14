@@ -141,30 +141,73 @@ public class ConversationPanel : MonoBehaviour
                 GameObject bgmSelectBtn = Instantiate(conversationButton, _selectpanel.transform);
                 RectTransform bgmSelectBtnRect = bgmSelectBtn.GetComponent<RectTransform>();
                 bgmSelectBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
-                bgmSelectBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "BGM 선택";
-                bgmSelectBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionPanel);
+                bgmSelectBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "BGM 변경";
+                bgmSelectBtn.GetComponent<Button>().onClick.AddListener(ui.playRandomBGM);
                 break;
             case 8:
                 GameObject healBtn = Instantiate(conversationButton, _selectpanel.transform);
                 RectTransform healBtnRect = healBtn.GetComponent<RectTransform>();
                 healBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
                 healBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "순례자의 기도 [회복]";
-                healBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionPanel);
+                healBtn.GetComponent<Button>().onClick.AddListener(ui.healPlayer);
                 break;
             case 9:
+                GameObject warpBtn = Instantiate(conversationButton, _selectpanel.transform);
+                RectTransform warpBtnRect = warpBtn.GetComponent<RectTransform>();
+                warpBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+                warpBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "빠른 이동";
+                warpBtn.GetComponent<Button>().onClick.AddListener(selectTeleport);
+                break;
+            case 10:
                 GameObject seedBtn = Instantiate(conversationButton, _selectpanel.transform);
                 RectTransform seedBtnRect = seedBtn.GetComponent<RectTransform>();
                 seedBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
                 seedBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "씨앗이 필요해";
                 seedBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionPanel);
-
-                GameObject warpBtn = Instantiate(conversationButton, _selectpanel.transform);
-                RectTransform warpBtnRect = warpBtn.GetComponent<RectTransform>();
-                warpBtnRect.SetLocalPositionAndRotation(new Vector3(0, -11, 0), ui.rotateZero);
-                warpBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "빠른 이동";
-                warpBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionPanel);
                 break;
         }
+    }
+
+    public void selectHeal()
+    {
+        _selectpanel.SetActive(false);
+        _nomaltalk.text = "[순례자의 기도로 체력과 기력이 모두 회복되었습니다.]\n\n언제나 정령이 함께하길..";
+        _nomaltalk.gameObject.SetActive(true);
+        isConversation = true;
+        selectConversationCount = 4;
+    }
+
+    public void selectMusic(string _bgmName)
+    {
+        _selectpanel.SetActive(false);
+        _nomaltalk.text = "새로운 멜로디를 들려드리죠-\n\n현재 BGM : " + _bgmName;
+        _nomaltalk.gameObject.SetActive(true);
+        isConversation = true;
+        selectConversationCount = 4;
+    }
+
+    public void selectTeleport()
+    {
+        Transform[] selectObjectList = _selectpanel.GetComponentsInChildren<Transform>();
+        for (int i = 1; i < selectObjectList.Length; i++)
+        {
+            if (selectObjectList[i] != _selectpanel.transform)
+            {
+                Destroy(selectObjectList[i].gameObject);
+            }
+        }
+
+        GameObject teleportBtn = Instantiate(conversationButton, _selectpanel.transform);
+        RectTransform teleportBtnRect = teleportBtn.GetComponent<RectTransform>();
+        teleportBtnRect.SetLocalPositionAndRotation(new Vector3(0, 55, 0), ui.rotateZero);
+        teleportBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "포목점 너머 사냥터";
+        teleportBtn.GetComponent<Button>().onClick.AddListener(selectConversation);
+
+        GameObject teleportBtn2 = Instantiate(conversationButton, _selectpanel.transform);
+        RectTransform teleportBtnRect2 = teleportBtn2.GetComponent<RectTransform>();
+        teleportBtnRect2.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+        teleportBtn2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "사냥꾼 오두막 너머 사냥터";
+        teleportBtn2.GetComponent<Button>().onClick.AddListener(selectConversation);
     }
 
     private void selectConversation()
@@ -203,12 +246,6 @@ public class ConversationPanel : MonoBehaviour
         isConversation = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public bool getIsOn()
     {
         return isOnPanel;
@@ -222,6 +259,17 @@ public class ConversationPanel : MonoBehaviour
     public bool getIsConversation()
     {
         return isConversation;
+    }
+
+    // 세계수 정령에게 '재단 버프' 중 꽃 들고 말 걸기
+    public void conversationWhenAlterBuff()
+    {
+        ui.conversationNPC = 10;
+        _npcname.text = "세계수의 정령";
+        gameObject.SetActive(true);
+        _nomaltalk.text = "제단에서 이미 축복을 받고 있군요, 저희의 축복은 다음에 찾아오세요";
+        isConversation = true;
+        selectConversationCount = 4;
     }
 
     // NPC 대사 저장 배열

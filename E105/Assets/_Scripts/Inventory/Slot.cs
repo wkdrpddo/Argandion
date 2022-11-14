@@ -32,6 +32,16 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     //     ItemUse();
     // }
 
+    public ItemObject getSlotItemData()
+    {
+        return item;
+    }
+
+    public int getSlotItemCount()
+    {
+        return itemCount;
+    }
+
     public void setIdx(int slotIdx)
     {
         idx = slotIdx;
@@ -97,37 +107,59 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         // 좌클릭 시, 상점이 열려있는 경우
         if (eventData.button == PointerEventData.InputButton.Left && ui.getIsOpenTransaction() && itemCount != 0)
         {
-            ui.OnTradeModal(item.Name, item.ItemCode.ToString(), itemCount, item.SellCost, 0, -1, idx);
+            if (!(item.ItemCode >= 50 && item.ItemCode <= 56) && !(item.ItemCode >= 300 && item.ItemCode <= 304) && item.ItemCode != 320)
+            {
+                ui.OnTradeModal(item.Name, item.ItemCode.ToString(), itemCount, item.SellCost, 0, -1, idx);
+            }
         }
 
-        if (eventData.button == PointerEventData.InputButton.Right)
+        // 좌클릭 시, 창고가 열려있는 경우
+        if (eventData.button == PointerEventData.InputButton.Left && ui.getIsOpenStorage() && itemCount != 0)
         {
-            if (item.ItemCode == 0)
+            if (gameObject.transform.parent.parent.parent.gameObject.name == "Bag")
             {
-                Debug.Log("아이템이 업ㅇ서용");
+                ui.OnTradeModal(item.Name, item.ItemCode.ToString(), itemCount, item.SellCost, 3, -1, idx);
             }
-            else
+            else if (gameObject.transform.parent.parent.parent.gameObject.name == "StorageScroll")
             {
-                if (item.Category == "식량")
+                ui.OnTradeModal(item.Name, item.ItemCode.ToString(), itemCount, item.SellCost, 4, -1, idx);
+            }
+        }
+
+        // 우클릭 시, 인벤토리가 열려있는 경우
+        if (eventData.button == PointerEventData.InputButton.Right && ui.getIsOpenInventory() && itemCount != 0)
+        {
+            Debug.LogWarning("인벤토리 우클릭");
+            if (gameObject.transform.parent.parent.parent.gameObject.name == "QuickSlot" || gameObject.transform.parent.name == "Equipment")
+            {
+                Debug.Log("여긴 퀵 슬롯 또는 장비 슬롯");
+                ui.clickRightSlotModal(4, Input.mousePosition - new Vector3(2, -2, 0), item, itemCount, idx);
+            }
+            else if (gameObject.transform.parent.parent.parent.gameObject.name == "Bag")
+            {
+                Debug.Log("여긴 인벤토리");
+                switch (item.Category)
                 {
-                    foodManager.UseFood(item.ItemCode);
-                    SetSlotCount(-1);
+                    case "옷":
+                    case "기타":
+                        if (item.Name != "양털")
+                        {
+                            ui.clickRightSlotModal(1, Input.mousePosition - new Vector3(2, -2, 0), item, itemCount, idx);
+                        }
+                        break;
+                    case "장비":
+                    case "꽃":
+                        ui.clickRightSlotModal(2, Input.mousePosition - new Vector3(2, -2, 0), item, itemCount, idx);
+                        break;
+                    case "식량":
+                        if (item.ItemCode < 103 || (item.ItemCode > 106 && item.ItemCode < 111) || item.ItemCode > 113)
+                        {
+                            ui.clickRightSlotModal(2, Input.mousePosition - new Vector3(2, -2, 0), item, itemCount, idx);
+                            ui.clickRightSlotModal(3, Input.mousePosition - new Vector3(2, -2, 0), item, itemCount, idx);
+                        }
+                        break;
                 }
             }
-            // if (item != null)
-            // {
-            //     if(item.itemType == Item.ItemType.Equipment)
-            //     {
-            //         // 장착
-            //         StartCoroutine(theWeaponManager.ChangeWeaponCoroutine(item.weaponType, item.itemName));
-            //     }
-            //     else
-            //     {
-            //         // 소비
-            //         Debug.Log(item.itemName + " 을 사용했습니다.");
-            //         SetSlotCount(-1);
-            //     }
-            // }
         }
     }
 

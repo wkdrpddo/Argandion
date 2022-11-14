@@ -11,6 +11,8 @@ public class TradeModal : MonoBehaviour
         0. 판매 = 목장 과 그 외
         1. 구매 - 각각 구분 필요 [5번 제외]
         2. 제작
+        3. 창고 넣기
+        4. 창고 빼기
 
         storeIdx
         1. 재단사
@@ -83,11 +85,14 @@ public class TradeModal : MonoBehaviour
         }
         else if (tradeMod == 1)
         {
-            buyEvent(tradeCount);
+            if (tradeCount > 0)
+            {
+                buyEvent(tradeCount);
+            }
         }
         else if (tradeMod == 2)
         {
-            Debug.LogWarning("여기까지는 왔니?");
+            // Debug.LogWarning("여기까지는 왔니?");
             switch (storeIndex)
             {
                 case 1:
@@ -104,6 +109,14 @@ public class TradeModal : MonoBehaviour
                     break;
             }
             ui.OnResultNotificationPanel("제작이 완료되었습니다.");
+        }
+        else if (tradeMod == 3)
+        {
+            ui.addToStorage(ui.findItem(Int32.Parse(iconName)), tradeCount, itemIndex);
+        }
+        else if (tradeMod == 4)
+        {
+            ui.removeToStorage(ui.findItem(Int32.Parse(iconName)), tradeCount, itemIndex);
         }
 
         ui.getCraftPanel().syncCanMakeList();
@@ -137,7 +150,7 @@ public class TradeModal : MonoBehaviour
         {
             if (tradeCnt != 0)
             {
-                ui.sellItem(itemIndex, tradeCnt);
+                ui.sellItem(itemIndex, tradeCnt, 1);
                 ui.addPlayerGold((tradeCost * tradeCnt));
             }
         }
