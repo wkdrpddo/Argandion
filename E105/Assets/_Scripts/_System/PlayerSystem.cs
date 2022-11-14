@@ -772,4 +772,152 @@ public class PlayerSystem : MonoBehaviour
         _movedDelay = time;
         _delayedTimer = time;
     }
+    public void setQuickItem(int index, int itemCode, int Count)
+    {
+        ItemObject input = _itemManager.FindItem(itemCode);
+        if (input.Category == "장비")
+        {
+            _equipList[index,0] = itemCode;
+            _equipList[index,4] = 1;
+            if (itemCode==300 || itemCode==305 || itemCode==310 || itemCode==315)
+            {
+                _equipList[index,1] = 1;
+                switch(itemCode)
+                {
+                    case 300:
+                        _equipList[index,2] = 2f;
+                        _equipList[index,3] = 2f;
+                        break;
+                    case 305:
+                        _equipList[index,2] = 1.5f;
+                        _equipList[index,3] = 1.5f;
+                        break;
+                    case 310:
+                        _equipList[index,2] = 1f;
+                        _equipList[index,3] = 1f;
+                        break;
+                    case 315:
+                        _equipList[index,2] = 0.5f;
+                        _equipList[index,3] = 0.5f;
+                        break;
+                }
+            }
+            if (itemCode==301 || itemCode==306 || itemCode==311 || itemCode==316)
+            {
+                _equipList[index,1] = 3;
+                _equipList[index,2] = 0.8f;
+                _equipList[index,3] = 0.8f;
+            }
+            if (itemCode==302 || itemCode==307 || itemCode==312 || itemCode==317)
+            {
+                _equipList[index,1] = 4;
+                _equipList[index,2] = 0.8f;
+                _equipList[index,3] = 0.8f;
+            }
+            if (itemCode==303 || itemCode==308 || itemCode==313 || itemCode==318)
+            {
+                _equipList[index,1] = 2;
+                switch(itemCode)
+                {
+                    case 303:
+                        _equipList[index,2] = 2f;
+                        _equipList[index,3] = 2f;
+                        break;
+                    case 308:
+                        _equipList[index,2] = 1.5f;
+                        _equipList[index,3] = 1.5f;
+                        break;
+                    case 313:
+                        _equipList[index,2] = 1f;
+                        _equipList[index,3] = 1f;
+                        break;
+                    case 318:
+                        _equipList[index,2] = 0.5f;
+                        _equipList[index,3] = 0.5f;
+                        break;
+                }
+            }
+            if (itemCode==304 || itemCode==309 || itemCode==314 || itemCode==319)
+            {
+                _equipList[index,1] = 5;
+                _equipList[index,2] = 0.6f;
+                _equipList[index,3] = 0.6f;
+            }
+            if (itemCode==320 || itemCode==321 || itemCode==322)
+            {
+                _equipList[index,1] = 6;
+            }
+        }
+        else
+        {
+            _equipList[index,0] = itemCode;
+            _equipList[index,1] = 0;
+            _equipList[index,2] = 0;
+            _equipList[index,3] = 0;
+            _equipList[index,4] = Count;
+        }
+    }
+
+    public void setEquipItem(int itemcode, int slot)
+    {
+        if (_slot_equipment[slot] == 0)
+        {
+            addEquipItem(itemcode);
+            _slot_equipment[slot] = itemcode;
+        }
+        else
+        {
+            subEquipItem(itemcode);
+            addEquipItem(itemcode);
+            _slot_equipment[slot] = itemcode;
+        }
+    }
+
+    private void addEquipItem(int itemcode)
+    {
+        switch (itemcode)
+        {
+            case 400:
+                _stamina_percent -= 10;
+                break;
+            case 401:
+                _damage_percent += 10;
+                break;
+            case 402:
+                _defense_percent += 10;
+                break;
+            case 403:
+                _movement_percent += 10;
+                break;
+            case 404:
+                removeDebuff();
+                break;
+        }
+    }
+
+    private void subEquipItem(int itemcode)
+    {
+        switch (itemcode)
+        {
+            case 400:
+                _stamina_percent += 10;
+                break;
+            case 401:
+                _damage_percent -= 10;
+                break;
+            case 402:
+                _defense_percent -= 10;
+                break;
+            case 403:
+                _movement_percent -= 10;
+                break;
+            case 404:
+                break;
+        }
+    }
+
+    private void removeDebuff()
+    {
+        
+    }
 }
