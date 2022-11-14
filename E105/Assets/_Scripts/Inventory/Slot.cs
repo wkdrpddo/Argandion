@@ -116,7 +116,14 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         // 좌클릭 시, 창고가 열려있는 경우
         if (eventData.button == PointerEventData.InputButton.Left && ui.getIsOpenStorage() && itemCount != 0)
         {
-
+            if (gameObject.transform.parent.parent.parent.gameObject.name == "Bag")
+            {
+                ui.OnTradeModal(item.Name, item.ItemCode.ToString(), itemCount, item.SellCost, 3, -1, idx);
+            }
+            else if (gameObject.transform.parent.parent.parent.gameObject.name == "StorageScroll")
+            {
+                ui.OnTradeModal(item.Name, item.ItemCode.ToString(), itemCount, item.SellCost, 4, -1, idx);
+            }
         }
 
         // 우클릭 시, 인벤토리가 열려있는 경우

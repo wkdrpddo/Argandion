@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private SystemManager _systemmanager;
     [SerializeField] private PlayerSystem _playersystem;
-    private Item _itemmanager;
+    [SerializeField] private Item _itemmanager;
 
     private Slider _healthbar;
     private Slider _energybar;
@@ -58,10 +58,10 @@ public class UIManager : MonoBehaviour
     private bool isMyHome;
 
     // 패널 오픈 여부 변수
-    private bool isTransactionOpen;
-    private bool isInventoryOpen;
-    private bool isInvenRightModal;
-    private bool isStorageOpen;
+    [SerializeField] private bool isTransactionOpen;
+    [SerializeField] private bool isInventoryOpen;
+    [SerializeField] private bool isInvenRightModal;
+    [SerializeField] private bool isStorageOpen;
 
     // 주연 추가
     public GameObject _eventpanel;
@@ -183,6 +183,21 @@ public class UIManager : MonoBehaviour
         acquireItem(item4, 10);
         ItemObject item5 = findItem(302);
         acquireItem(item5, 1);
+        ItemObject item10 = findItem(110);
+        acquireItem(item10, 1);
+        ItemObject item11 = findItem(120);
+        acquireItem(item11, 1);
+
+        ItemObject item6 = findItem(54);
+        acquireItem(item6, 6);
+        ItemObject item7 = findItem(4);
+        acquireItem(item7, 35);
+        ItemObject item8 = findItem(21);
+        acquireItem(item8, 15);
+        ItemObject item9 = findItem(12);
+        acquireItem(item9, 15);
+
+        _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().AcquireItem(findItem(2), 9990);
     }
 
     // Update is called once per frame
@@ -231,6 +246,7 @@ public class UIManager : MonoBehaviour
             {
                 int random = Random.Range(1, 7);
                 OnBuildEventPanel(random);
+                // OnBuildEventPanel(3);
             }
         }
 
@@ -295,7 +311,7 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.O))
         {
-            _storagepanel.SetActive(!_storagepanel.activeSelf);
+            OnStoragePanel();
             OnInventory(3);
         }
 
@@ -346,13 +362,14 @@ public class UIManager : MonoBehaviour
     public void OnBuildEventPanel(int value)
     {
         stopControllPlayer();
-        _buildeventpanel.GetComponent<BuildEventPanel>().OnPanel(value);
+        int step = Random.Range(0, 6);
+        _buildeventpanel.GetComponent<BuildEventPanel>().OnPanel(value, step);
     }
 
     public void OnStoragePanel()
     {
         stopControllPlayer();
-        _storagepanel.SetActive(true);
+        _storagepanel.GetComponent<StoragePanel>().handlePanel();
     }
 
     public void OnInventoryPanel()
@@ -745,6 +762,7 @@ public class UIManager : MonoBehaviour
 
     public void rightUse(ItemObject _item, int _count, int _index)
     {
+        Debug.Log(_item.ItemCode);
         _foodmanager.UseFood(_item.ItemCode);
         sellItem(_index, 1, 1);
         closeInvenRightClickModal();
@@ -753,6 +771,45 @@ public class UIManager : MonoBehaviour
     public Slot[] getInventorySlots()
     {
         return _inventory.transform.GetChild(1).GetComponent<Inventory>().getInventorySlots();
+    }
+
+    // 창고 관련
+    public void addToStorage(ItemObject _item, int _count, int slotIdx)
+    {
+        int value = _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().checkStorage(_item, _count);
+        if (value <= 0)
+        {
+            _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().AcquireItem(_item, _count);
+            _inventory.transform.GetChild(1).GetComponent<Inventory>().SellInventoryItem(slotIdx, _count);
+        }
+        else if (value == _count)
+        {
+            OnResultNotificationPanel("창고에 " + _item.Name + "이(가) 가득 찼습니다.");
+        }
+        else
+        {
+            _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().AcquireItem(_item, _count - value);
+            _inventory.transform.GetChild(1).GetComponent<Inventory>().SellInventoryItem(slotIdx, _count - value);
+        }
+    }
+
+    public void removeToStorage(ItemObject _item, int _count, int slotIdx)
+    {
+        int nowCnt = _count;
+        while (nowCnt > 99)
+        {
+            if (checkInventory(_item, 99))
+            {
+                acquireItem(_item, 99);
+                _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().AcquireItem(_item, -99);
+                nowCnt -= 99;
+            }
+        }
+        if (checkInventory(_item, nowCnt))
+        {
+            acquireItem(_item, nowCnt);
+            _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().AcquireItem(_item, nowCnt);
+        }
     }
 
     // 제작관련 함수
@@ -793,6 +850,11 @@ public class UIManager : MonoBehaviour
         return _itemmanager.FindItem(value);
     }
 
+    // public ItemObject findItemToSeq(int value)
+    // {
+    //     return _itemmanager.FindItemToSeq(value);
+    // }
+
     // 퀵슬롯 변경 함수
     public void setEquipPointer(int num)
     {
@@ -828,6 +890,17 @@ public class UIManager : MonoBehaviour
         _conversationpanel.selectHeal();
     }
 
+    // 플레이어 장비 관련
+    public void setPlayerQuickSlot(int index, int itemCode, int count)
+    {
+        // _playersystem.setQuickItem(index, itemCode, count);
+    }
+
+    public void setPlayerEquipSlot()
+    {
+        // _playersystem.setEquiptItem();
+    }
+
     // 사운드 관련
     public void playRandomBGM()
     {
@@ -836,6 +909,12 @@ public class UIManager : MonoBehaviour
     public void BGMChanger(string _bgmName)
     {
         _conversationpanel.selectMusic(_bgmName);
+    }
+
+    // 제사 관련 코드
+    public void prayToAltar(int _nowFlowerCode, int _newFlowerCode)
+    {
+
     }
 
     // 게임 시작 종료

@@ -75,4 +75,11 @@ public class Item : MonoBehaviour
         itemObject = itemData[ItemIndexArray.arr[idx]];
         return itemObject;
     }
+
+    public ItemObject FindItemToSeq(int idx)
+    {
+        string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/ItemTable2.json");
+        var itemData = JsonHelper.FromJson<ItemObject>(jsonString);
+        return itemData[idx];
+    }
 }

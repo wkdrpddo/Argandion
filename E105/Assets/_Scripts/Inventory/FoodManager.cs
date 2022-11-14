@@ -91,9 +91,9 @@ public class FoodManager : MonoBehaviour
         _buffIdx = _eventCode - 100;
 
         // ================================================================
-        // Debug.Log("아이템 코드 " + _itemCode);
-        // Debug.Log("이벤트 코드 " + _eventCode);
-        // Debug.Log("버프 인덱스: " + _buffIdx);
+        Debug.Log("아이템 코드 " + _itemCode);
+        Debug.Log("이벤트 코드 " + _eventCode);
+        Debug.Log("버프 인덱스: " + _buffIdx);
         // ================================================================
         string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/FoodTable.json");
         var foodData = JsonHelper.FromJson<FoodObject>(jsonString);

@@ -15,6 +15,7 @@ public class InventoryPanel : MonoBehaviour
         if (!gameObject.activeSelf)
         {
             ui.closeInvenRightClickModal();
+            ui.runControllPlayer();
         }
 
         ui.OnInventory(1);

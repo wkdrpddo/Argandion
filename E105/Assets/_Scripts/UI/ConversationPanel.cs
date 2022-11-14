@@ -152,17 +152,18 @@ public class ConversationPanel : MonoBehaviour
                 healBtn.GetComponent<Button>().onClick.AddListener(ui.healPlayer);
                 break;
             case 9:
+                GameObject warpBtn = Instantiate(conversationButton, _selectpanel.transform);
+                RectTransform warpBtnRect = warpBtn.GetComponent<RectTransform>();
+                warpBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+                warpBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "빠른 이동";
+                warpBtn.GetComponent<Button>().onClick.AddListener(selectTeleport);
+                break;
+            case 10:
                 GameObject seedBtn = Instantiate(conversationButton, _selectpanel.transform);
                 RectTransform seedBtnRect = seedBtn.GetComponent<RectTransform>();
                 seedBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
                 seedBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "씨앗이 필요해";
                 seedBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionPanel);
-
-                GameObject warpBtn = Instantiate(conversationButton, _selectpanel.transform);
-                RectTransform warpBtnRect = warpBtn.GetComponent<RectTransform>();
-                warpBtnRect.SetLocalPositionAndRotation(new Vector3(0, -11, 0), ui.rotateZero);
-                warpBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "빠른 이동";
-                warpBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionPanel);
                 break;
         }
     }
@@ -196,8 +197,17 @@ public class ConversationPanel : MonoBehaviour
             }
         }
 
-        GameObject warpBtn = Instantiate(conversationButton, _selectpanel.transform);
-        RectTransform warpBtnRect = warpBtn.GetComponent<RectTransform>();
+        GameObject teleportBtn = Instantiate(conversationButton, _selectpanel.transform);
+        RectTransform teleportBtnRect = teleportBtn.GetComponent<RectTransform>();
+        teleportBtnRect.SetLocalPositionAndRotation(new Vector3(0, 55, 0), ui.rotateZero);
+        teleportBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "포목점 너머 사냥터";
+        teleportBtn.GetComponent<Button>().onClick.AddListener(selectConversation);
+
+        GameObject teleportBtn2 = Instantiate(conversationButton, _selectpanel.transform);
+        RectTransform teleportBtnRect2 = teleportBtn2.GetComponent<RectTransform>();
+        teleportBtnRect2.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+        teleportBtn2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "사냥꾼 오두막 너머 사냥터";
+        teleportBtn2.GetComponent<Button>().onClick.AddListener(selectConversation);
     }
 
     private void selectConversation()
