@@ -23,7 +23,7 @@ public class TeleportAltar : MonoBehaviour
 
     }
 
-    // 테스트 코드
+    // 테스트 코드 ========================================================
     public bool _goup;
     public bool _godown;
 
@@ -36,6 +36,7 @@ public class TeleportAltar : MonoBehaviour
             _godown = false;
         }
     }
+    // ==================================================================
 
     public void Interaction()
     {
