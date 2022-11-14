@@ -30,11 +30,7 @@ public class OptionPanel : MonoBehaviour
 
     public void setSound()
     {
-        _bgmVolume = gameObject.transform.GetChild(0).GetComponent<Slider>().value;
-        _effectVolume = gameObject.transform.GetChild(1).GetComponent<Slider>().value;
 
-        _soundmanager.setBackgroundSound(_bgmVolume);
-        _soundmanager.setEffectSound(_effectVolume);
     }
 
     public void handelPanel()

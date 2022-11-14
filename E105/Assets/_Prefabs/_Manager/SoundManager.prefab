@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6762331234307030614}
-  - component: {fileID: 6762331234307030612}
   - component: {fileID: 6762331234307030613}
+  - component: {fileID: 7667013243401349127}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -33,24 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6762331234307030612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6762331234307030615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc4f52660a794d448bb75e1abe2d6686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgmSounds:
-  - soundName: BGM1
-    clip: {fileID: 8300000, guid: 3e385449fc517416cb437c23590e6663, type: 3}
-  - soundName: BGM2
-    clip: {fileID: 8300000, guid: 2921e1c26eac347cba44131378aa3574, type: 3}
-  bgmPlayer: {fileID: 6762331234307030613}
 --- !u!82 &6762331234307030613
 AudioSource:
   m_ObjectHideFlags: 0
@@ -147,3 +129,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7667013243401349127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762331234307030615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc4f52660a794d448bb75e1abe2d6686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmSounds: []
+  bgmPlayer: {fileID: 0}
