@@ -32,17 +32,19 @@ public class SaveSystem : MonoBehaviour
     public UIManager _ui;
     public BuffManager _bm;
     public SoundManager _sm;
+    public PrayBuff _pb;
     public Item _item;
 
     void Start()
     {
         _savedata = new SaveData();
-        // _ps = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
-        // _sys = GameObject.Find("SystemManager").GetComponent<SystemManager>();
-        // _ui = GameObject.Find("UIManager").GetComponent<UIManager>();
-        // _bm = GameObject.Find("BuffManager").GetComponent<BuffManager>();
-        // _sm = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-        // _item = GameObject.Find("Item").GetComponent<Item>();
+        _ps = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
+        _sys = GameObject.Find("SystemManager").GetComponent<SystemManager>();
+        _ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+        _bm = GameObject.Find("BuffManager").GetComponent<BuffManager>();
+        _sm = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        _item = GameObject.Find("ItemManager").GetComponent<Item>();
+
     }
     public void Save(SaveData _data)
     {
@@ -51,10 +53,10 @@ public class SaveSystem : MonoBehaviour
         _savedata._playertype = _ps.getPlayerType();
         _savedata._month = _sys._month;
         _savedata._day = _sys._day;
-        // _savedata._weather = ;
+        _savedata._weather = _sys._weather;
         _savedata._season = _sys._season;
-        // _savedata._sound1 = ;
-        // _savedata._sound2 = ;
+        _savedata._sound1 = _sm.getBackgroundSound();
+        _savedata._sound2 = _sm.getEffectSound();
 
         // 인벤토리 아이템 저장
         // Slot[] inventorySlot = GameObject.Find("InventorySlotParent").GetComponentsInChildren<Slot>();
@@ -80,16 +82,40 @@ public class SaveSystem : MonoBehaviour
         }
 
         // 장비창 아이템 저장
-        // ??
+        for (int i = 0; i < 4; i++)
+        {
+            _savedata._equipment[i] = _ps.getSlotEquip(i);
+        }
 
+        // 정화 정보
         _savedata._sectorPurifierCount = _sys._purification_sector;
         _savedata._PurifierLevel = _sys._development_level;
         for (int i = 0; i < 8; i++)
         {
             _savedata._sectorPurifierInfo[i] = _sys._purification[i];
         }
+
+        // 버프 지속시간
         _savedata._flowerBuffTargetMonth = _bm._flowerBuffTargetMonth;
         _savedata._flowerBuffTargetDay = _bm._flowerBuffTargetDay;
+        
+        // 버프 종류 확인
+        _savedata._flowerBuffBoolList[0] = _bm._isFlowerBuffActived; // 버프 진행 중
+        _savedata._flowerBuffBoolList[1] = _bm._isPrayBuffActived; // 제단 버프 진행 중
+        _savedata._flowerBuffBoolList[2] = _bm.whiteSpirit;
+        _savedata._flowerBuffBoolList[3] = _bm.whitePray;
+        _savedata._flowerBuffBoolList[4] = _bm.orangeSpirit;
+        _savedata._flowerBuffBoolList[5] = _bm.orangePray;
+        _savedata._flowerBuffBoolList[6] = _bm.blueSpirit;
+        _savedata._flowerBuffBoolList[7] = _bm.bluePray;
+        _savedata._flowerBuffBoolList[8] = _bm.redSpirit;
+        _savedata._flowerBuffBoolList[9] = _bm.redPray;
+        _savedata._flowerBuffBoolList[10] = _bm.pinkSpirit;
+        _savedata._flowerBuffBoolList[11] = _bm.pinkPray;
+        _savedata._flowerBuffBoolList[12] = _bm.yellowSpirit;
+        _savedata._flowerBuffBoolList[13] = _bm.yellowPray;
+        _savedata._flowerBuffBoolList[14] = _bm.skySpirit;
+        _savedata._flowerBuffBoolList[15] = _bm.skyPray;
 
         // 농토 정보 저장
         Dirt[] dirts = GameObject.Find("DirtParent").GetComponentsInChildren<Dirt>();
@@ -100,8 +126,8 @@ public class SaveSystem : MonoBehaviour
         }
 
         // 정령 버프 제사 진행도 / 꽃 번호
-        // _savedata.pray[0] = 1;
-        // _savedata.pray[1] = 2;
+        _savedata.pray[0] = _pb.prayDay;
+        _savedata.pray[1] = _pb.flowerIdx;
 
         string filePath = "saveFile.dat";
         BinaryFormatter formatter = new BinaryFormatter();
@@ -140,10 +166,10 @@ public class SaveSystem : MonoBehaviour
             _ps.setPlayerType(_LoadData._playertype);
             _sys._month = _LoadData._month;
             _sys._day = _LoadData._day;
-            // = _LoadData._weather;
+            _sys._weather = _LoadData._weather;
             _sys._season = _LoadData._season;
-            // _sm._optionpanel = _LoadData._sound1;
-            // _sm._optionpanel = _LoadData._sound2;
+            // _sm.setBackgroundSound(_LoadData._sound1);
+            // _sm.setEffectSound(_LoadData._sound2);
 
             // 인벤토리 아이템 호출
             // Slot[] inventorySlot = GameObject.Find("InventorySlotParent").GetComponentsInChildren<Slot>();
@@ -161,7 +187,12 @@ public class SaveSystem : MonoBehaviour
 
             for (int i = 0; i < 7; i++)
             {
-                // 아이템 장착 함수 (갯수도)
+                _ps.setQuickItem(i,_LoadData._quickslot[i,0],_LoadData._quickslot[i,1]);
+            }
+
+            for (int i = 0; i< 4; i++)
+            {
+                _ps.setEquipItem(_LoadData._equipment[i],i);
             }
 
             _sys._purification_sector = _LoadData._sectorPurifierCount;
@@ -182,8 +213,8 @@ public class SaveSystem : MonoBehaviour
             }
 
             // 정령 버프 제사 진행도 / 꽃 번호
-            // 1 = _LoadData.pray[0];
-            // 2 = _LoadData.pray[1];
+            _pb.prayDay = _LoadData.pray[0];
+            _pb.flowerIdx = _LoadData.pray[1];
         }
     }
 
