@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GatheringObject : MonoBehaviour
 {
+    private bool _isFlower;
     public int _itemCode;
     public float _delayedTimer;
     public float _movedDelay;
@@ -11,11 +12,14 @@ public class GatheringObject : MonoBehaviour
     public Inventory _inventory;
     public Item _item;
     public bool _isremain;
+    private int _sectorNumber;
 
     // Update is called once per frame
 
     void Start()
     {
+        _inventory = GameObject.Find("UIManager").transform.GetChild(8).transform.GetChild(1).GetComponent<Inventory>();
+        _item = GameObject.Find("ItemManager").GetComponent<Item>();
         _ps = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
     }
 
@@ -24,7 +28,6 @@ public class GatheringObject : MonoBehaviour
         if(_inventory.CheckInven(_item.FindItem(_itemCode),1))
         // if (true)
         {
-            Debug.Log("this is true");
             Debug.Log(_ps.gameObject.transform.position);
             Debug.Log(gameObject.transform.position);
             Vector3 Direction = (gameObject.transform.position - _ps.gameObject.transform.position);
@@ -46,9 +49,18 @@ public class GatheringObject : MonoBehaviour
     {
         _ps._playerAnimator.SetInteger("action", 0);
         _inventory.AcquireItem(_item.FindItem(_itemCode),1);
+        if (_isFlower)
+        {
+            gameObject.transform.parent.GetComponent<SectorObject>()._flower_remain -= 1;
+        }
         if (!_isremain)
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void setFlower(bool value)
+    {
+        _isFlower = value;
     }
 }

@@ -20,6 +20,7 @@ public class PlayerSystem : MonoBehaviour
     private BuffManager _buff;
 
     private GameObject _nearObject;
+    private Item _itemManager;
 
     // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대), 이동불가 시간, 작업시간}
     public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 10, 0, 0, 0, 20 }, { 20, 0, 0, 0, 10 } };
@@ -71,7 +72,14 @@ public class PlayerSystem : MonoBehaviour
     public float _gravity;
 
     private bool otherAnimated;
-
+    private float _gatherspeed = 2.5f;
+    private float _shovelspeed = 2f;
+    private int _stamina_percent = 100;
+    private int _health_percent = 100;
+    private int _damage_percent = 100;
+    private int _defense_percent = 100;
+    private int _movement_percent = 100;
+    private int[] _slot_equipment = new int[] {0,0,0,0};
 
     // Start is called before the first frame update
     void Start()
@@ -80,6 +88,7 @@ public class PlayerSystem : MonoBehaviour
         _buffManagerObject = GameObject.Find("BuffManager");
         _buff = _buffManagerObject.GetComponent<BuffManager>();
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        _itemManager = GameObject.Find("ItemManager").GetComponent<Item>();
     }
 
     // Update is called once per frame
@@ -144,7 +153,7 @@ public class PlayerSystem : MonoBehaviour
             if (Input.GetAxisRaw("run") != 0)
             {
                 // transform.position += moveDir * Time.deltaTime * _runspeed;
-                speed = moveDir * _runspeed * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
+                speed = moveDir * _runspeed * _movement_percent / 100 * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
                 // speed.y = -1f;
                 if (_onAir == 0)
                 {
@@ -157,7 +166,7 @@ public class PlayerSystem : MonoBehaviour
             else
             {
                 // transform.position += moveDir * Time.deltaTime * _walkspeed;
-                speed = moveDir * _walkspeed * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
+                speed = moveDir * _walkspeed * _movement_percent / 100 * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
                 // speed.y = -1f;
                 if (_onAir == 0)
                 {
@@ -567,7 +576,10 @@ public class PlayerSystem : MonoBehaviour
             Debug.Log("아이템 가까이에 있음");
             _nearObject = other.gameObject;
             DroppedItem item = _nearObject.GetComponent<DroppedItem>();
-            _theInventory.AcquireItem(item.itemObject, 1);
+            if (_theInventory.CheckInven(item.itemObject))
+            {
+                _theInventory.AcquireItem(item.itemObject, 1);
+            }
             Debug.Log(_nearObject.transform.parent);
             Destroy(_nearObject.transform.parent.gameObject);
         }
@@ -655,6 +667,26 @@ public class PlayerSystem : MonoBehaviour
         // _UIManager.setHealthBar(_health/_health_max);
     }
 
+    public void damageHealth(float value)
+    {
+        float dmg = value * _defense_percent / 100;
+        _health -= (int)dmg;
+        dmg -= (int)dmg;
+        if (dmg > 0)
+        {
+            float rnd = Random.Range(0f,1f);
+            if (rnd < dmg)
+            {
+                _health -= 1;
+            }
+        }
+        if (_health <= 0)
+        {
+            _health = 0;
+            playerDeath();
+        }
+    }
+
     public void changeEnergy(float value)
     {
         _stamina -= value * (_buff.pinkPray ? 0.8f : 1.0f) * (_buff.pinkSpirit ? 0.8f : 1.0f);
@@ -668,6 +700,26 @@ public class PlayerSystem : MonoBehaviour
             _stamina = _stamina_max;
         }
         // _UIManager.setEnergyBar(_stamina/_stamina_max);
+    }
+
+    public void damageStamina(float value)
+    {
+        float dmg = value * _stamina_percent / 100;
+        _stamina -= (int)dmg;
+        dmg -= (int)dmg;
+        if (dmg > 0)
+        {
+            float rnd = Random.Range(0f,1f);
+            if (rnd < dmg)
+            {
+                _stamina -= 1;
+            }
+        }
+        if (_stamina <= 0)
+        {
+            _stamina = 0;
+            playerDeath();
+        }
     }
 
     private void playerDeath()
@@ -731,5 +783,154 @@ public class PlayerSystem : MonoBehaviour
         _playerAnimator.SetInteger("action", index);
         _movedDelay = time;
         _delayedTimer = time;
+    }
+
+    public void setQuickItem(int index, int itemCode, int Count)
+    {
+        ItemObject input = _itemManager.FindItem(itemCode);
+        if (input.Category == "장비")
+        {
+            _equipList[index,0] = itemCode;
+            _equipList[index,4] = 1;
+            if (itemCode==300 || itemCode==305 || itemCode==310 || itemCode==315)
+            {
+                _equipList[index,1] = 1;
+                switch(itemCode)
+                {
+                    case 300:
+                        _equipList[index,2] = 2f;
+                        _equipList[index,3] = 2f;
+                        break;
+                    case 305:
+                        _equipList[index,2] = 1.5f;
+                        _equipList[index,3] = 1.5f;
+                        break;
+                    case 310:
+                        _equipList[index,2] = 1f;
+                        _equipList[index,3] = 1f;
+                        break;
+                    case 315:
+                        _equipList[index,2] = 0.5f;
+                        _equipList[index,3] = 0.5f;
+                        break;
+                }
+            }
+            if (itemCode==301 || itemCode==306 || itemCode==311 || itemCode==316)
+            {
+                _equipList[index,1] = 3;
+                _equipList[index,2] = 0.8f;
+                _equipList[index,3] = 0.8f;
+            }
+            if (itemCode==302 || itemCode==307 || itemCode==312 || itemCode==317)
+            {
+                _equipList[index,1] = 4;
+                _equipList[index,2] = 0.8f;
+                _equipList[index,3] = 0.8f;
+            }
+            if (itemCode==303 || itemCode==308 || itemCode==313 || itemCode==318)
+            {
+                _equipList[index,1] = 2;
+                switch(itemCode)
+                {
+                    case 303:
+                        _equipList[index,2] = 2f;
+                        _equipList[index,3] = 2f;
+                        break;
+                    case 308:
+                        _equipList[index,2] = 1.5f;
+                        _equipList[index,3] = 1.5f;
+                        break;
+                    case 313:
+                        _equipList[index,2] = 1f;
+                        _equipList[index,3] = 1f;
+                        break;
+                    case 318:
+                        _equipList[index,2] = 0.5f;
+                        _equipList[index,3] = 0.5f;
+                        break;
+                }
+            }
+            if (itemCode==304 || itemCode==309 || itemCode==314 || itemCode==319)
+            {
+                _equipList[index,1] = 5;
+                _equipList[index,2] = 0.6f;
+                _equipList[index,3] = 0.6f;
+            }
+            if (itemCode==320 || itemCode==321 || itemCode==322)
+            {
+                _equipList[index,1] = 6;
+            }
+        }
+        else
+        {
+            _equipList[index,0] = itemCode;
+            _equipList[index,1] = 0;
+            _equipList[index,2] = 0;
+            _equipList[index,3] = 0;
+            _equipList[index,4] = Count;
+        }
+    }
+
+    public void setEquipItem(int itemcode, int slot)
+    {
+        if (_slot_equipment[slot] == 0)
+        {
+            addEquipItem(itemcode);
+            _slot_equipment[slot] = itemcode;
+        }
+        else
+        {
+            subEquipItem(itemcode);
+            addEquipItem(itemcode);
+            _slot_equipment[slot] = itemcode;
+        }
+    }
+
+    private void addEquipItem(int itemcode)
+    {
+        switch (itemcode)
+        {
+            case 400:
+                _stamina_percent -= 10;
+                break;
+            case 401:
+                _damage_percent += 10;
+                break;
+            case 402:
+                _defense_percent += 10;
+                break;
+            case 403:
+                _movement_percent += 10;
+                break;
+            case 404:
+                removeDebuff();
+                break;
+        }
+    }
+
+    private void subEquipItem(int itemcode)
+    {
+        switch (itemcode)
+        {
+            case 400:
+                _stamina_percent += 10;
+                break;
+            case 401:
+                _damage_percent -= 10;
+                break;
+            case 402:
+                _defense_percent -= 10;
+                break;
+            case 403:
+                _movement_percent -= 10;
+                break;
+            case 404:
+                break;
+        }
+    }
+
+    private void removeDebuff()
+    {
+
     }
 }

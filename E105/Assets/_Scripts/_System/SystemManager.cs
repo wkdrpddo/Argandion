@@ -349,4 +349,46 @@ public class SystemManager : MonoBehaviour
     {
         _EventPanel.inactiveIcon(value);
     }
+
+    public void CompleteConstruction(int index)
+    {
+        MapObject.GetComponent<MapObject>().ChangePurifier(index);
+        _purification[index] = true;
+        _purification_sector += 1;
+        if (_purification_sector > 2 && _development_level < 2)
+        {
+            _development_level = 2;
+            DevelopLevelUp();
+        }
+        if (_purification_sector > 4 && _development_level < 3)
+        {
+            _development_level = 3;
+            DevelopLevelUp();
+        }
+        // 이자리에 특정 건물들 call 함수 입력
+    }
+
+    public void DevelopLevelUp()
+    {
+        if (_development_level==2)
+        {
+            //실행문
+        }
+        if (_development_level==3)
+        {
+            //실행문
+        }
+    }
+
+    // 발전도 확인
+    public int getDevelopLevel()
+    {
+        return _development_level;
+    }
+    
+    // 정화 여부 확인 (섹터 1번부터 8번까지)
+    public bool isPurifiered(int index)
+    {
+        return _purification[index-1];
+    }
 }
