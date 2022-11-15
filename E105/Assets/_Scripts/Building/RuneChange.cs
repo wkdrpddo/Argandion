@@ -16,15 +16,15 @@ public class RuneChange : MonoBehaviour
     int tmp = 0;
 
     // 테스트용 update();
-    void Update()
-    {
-        if (_up)
-        {
-            turnOnRune(++tmp);
-            _up = false; // 테스트용 변수
+    // void Update()
+    // {
+    //     if (_up)
+    //     {
+    //         turnOnRune(++tmp);
+    //         _up = false; // 테스트용 변수
 
-        }
-    }
+    //     }
+    // }
 
     // ==================================================== 지울 위치 (끝) ==================================
 

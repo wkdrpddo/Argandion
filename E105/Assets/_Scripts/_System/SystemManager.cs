@@ -33,6 +33,7 @@ public class SystemManager : MonoBehaviour
 
     public SectorObject _sectorTest;
     [SerializeField] private SectorObject[] _sectors;
+    [SerializeField] private BuildingChange[] _buildings;
     public GameObject[] _randomNPC = new GameObject[2];
 
     public int[,] _timezone = new int[,] { { 6, 7, 18, 19 }, { 6, 6, 19, 20 }, { 6, 7, 18, 19 }, { 7, 8, 18, 19 } };
@@ -55,6 +56,7 @@ public class SystemManager : MonoBehaviour
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _PrayBuff = GameObject.Find("BuffManager").GetComponent<PrayBuff>();
         _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
+        // _buildings = GameObject.Find("Buildings").GetComponentsInChildren<BuildingChange>();
 
 
 
@@ -262,6 +264,12 @@ public class SystemManager : MonoBehaviour
         }
         // _sectorTest.DayEnd();
         _UIManager.DayStart();
+
+        // foreach (var building in _buildings)
+        // {
+        //     building.DayStart();
+        // }
+        
     }
 
     //정화된 구역 중에서 랜덤 한 구역 정하기

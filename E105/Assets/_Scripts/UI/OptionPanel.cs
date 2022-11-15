@@ -21,12 +21,6 @@ public class OptionPanel : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // setSound();
-
-    }
 
     public void setSound()
     {

@@ -17,14 +17,14 @@ public class WorldTree : MonoBehaviour
         _playerSystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
     }
     // 테스트 코드 ========================================================
-    public bool _go0;
+    // public bool _go0;
 
-    private void Update() {
-        if(_go0){
-            doTeleport(0);
-            _go0 = false;
-        }
-    }
+    // private void Update() {
+    //     if(_go0){
+    //         doTeleport(0);
+    //         _go0 = false;
+    //     }
+    // }
     // ==================================================================
 
     public void Interaction()

@@ -36,14 +36,14 @@ public class PrayBuff : MonoBehaviour
     //     }
     // }
 
-    void Update()
-    {
-        if (testCode)
-        {
-            testCode = !testCode;
-            Reincarnation();
-        }
-    }
+    // void Update()
+    // {
+    //     if (testCode)
+    //     {
+    //         testCode = !testCode;
+    //         Reincarnation();
+    //     }
+    // }
 
     public void DayStart()
     {

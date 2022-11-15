@@ -29,9 +29,4 @@ public class UIEventMousePointer : MonoBehaviour, IPointerEnterHandler, IPointer
         Debug.Log(_announce);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

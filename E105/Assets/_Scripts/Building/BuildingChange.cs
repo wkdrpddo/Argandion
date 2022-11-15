@@ -41,22 +41,22 @@ public class BuildingChange : MonoBehaviour
     }
 
     // 테스트용 update();
-    void Update()
-    {
-        if (_fulfillTest)
-        {
-            Debug.Log("condition fulfill");
-            _fulfillTest = false; // 테스트용 변수
-            _phase = 1;
-        }
-        if (_dayEndTest)
-        {
-            Debug.Log("dayEnd");
-            DayStart();
-            _dayEndTest = false;
-        }
+    // void Update()
+    // {
+    //     if (_fulfillTest)
+    //     {
+    //         Debug.Log("condition fulfill");
+    //         _fulfillTest = false; // 테스트용 변수
+    //         _phase = 1;
+    //     }
+    //     if (_dayEndTest)
+    //     {
+    //         Debug.Log("dayEnd");
+    //         DayStart();
+    //         _dayEndTest = false;
+    //     }
 
-    }
+    // }
 
     // ==================================================== 지울 위치 (끝) ==================================
 

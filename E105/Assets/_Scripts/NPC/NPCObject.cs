@@ -19,11 +19,6 @@ public class NPCObject : MonoBehaviour
         _UIManager = GameObject.Find("UIManager");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void Interaction()
     {
@@ -32,6 +27,7 @@ public class NPCObject : MonoBehaviour
         
         ConversationStart();
     }
+
 
     public void ConversationStart()
     {
@@ -61,14 +57,12 @@ public class NPCObject : MonoBehaviour
             case "NPC8" :
                 _UIManager.GetComponent<UIManager>().OnConversationPanel(8);
                 break;
+            case "Spirit" :
+                _UIManager.GetComponent<UIManager>().OnConversationPanel(10);
+                break;
         }
 
-
     }
 
-    public void ConversationEnd()
-    {
-        
-    }
 
 }
