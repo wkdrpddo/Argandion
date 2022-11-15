@@ -29,6 +29,7 @@ public class CameraSystem : MonoBehaviour
 
     public void ResetCamera()
     {
+        _cam.transform.parent = _po.transform;
         Vector3 pos = new Vector3(_po.transform.position.x + 0f, _po.transform.position.y + 5.5f, _po.transform.position.z + -8f);
         Quaternion rot = Quaternion.Euler(30f, 0f, 0f);
         _cam.transform.SetPositionAndRotation(pos, rot);
