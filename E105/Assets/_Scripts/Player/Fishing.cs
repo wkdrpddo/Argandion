@@ -28,11 +28,28 @@ public class Fishing : MonoBehaviour
     public Item item;
     public GameObject _buffManagerObject;
     private BuffManager _buff;
+    public GameObject _po;
+    public PlayerSystem _ps;
+
+    private Vector3 _Dpos;
+    private GameObject _cha;
+    
 
     void Start()
     {
         _buffManagerObject = GameObject.Find("BuffManager");
+        item = GameObject.Find("ItemManager").GetComponent<Item>();
         _buff = _buffManagerObject.GetComponent<BuffManager>();
+        _po = GameObject.Find("PlayerObject");
+        _cha = _po.transform.Find("PlayerBody").gameObject;
+        _ps = _po.GetComponent<PlayerSystem>();
+        _Dpos = gameObject.transform.forward;
+    }
+
+    public void Interaction(float rodNumber, float baitNum)
+    {
+        Debug.Log("낚시 상호작용");
+        DoFishing((int)rodNumber, (int)baitNum);
     }
 
     void Update() {
@@ -43,6 +60,7 @@ public class Fishing : MonoBehaviour
                 isBaiting = true;
                 phase = 3;
                 Debug.Log("미끼를 물었다!");
+                _ps.setAnimator(12,0);
             }
         }
 
@@ -55,7 +73,11 @@ public class Fishing : MonoBehaviour
                 myReactionTime = 0.0f;
                 phase = 5;
                 Debug.Log("물고기가 튀었어");
-                Invoke("FishingDelay", 1.0f);
+                _ps._canMove = true;
+                _ps.setCanAction(true);
+                _ps._playerAnimator.SetBool("fishingFail",true);
+                _ps.setAnimator(0,0);
+                Invoke("FishingDelay", 2.0f);
             }
         }
     }
@@ -67,12 +89,18 @@ public class Fishing : MonoBehaviour
             return ;
         }
 
-        if ( !isFishing ) {
+        if ( !isFishing && phase == 0) {
             myRod = rodIdx;
             myBait = baitIdx;
             phase = 1;
+            _cha.transform.forward = _Dpos;
+            _ps._canMove = false;
+            _ps.setCanAction(false);
             Debug.Log("낚시대 투척!");
-            Invoke("FishingStart", 1.0f);
+            _ps.setAnimator(9,0);
+            // isFishing = true;
+            _ps._playerAnimator.SetBool("fishingFail",false);
+            Invoke("FishingStart", 2.0f);
         } else if ( isBaiting ) {
             FishingSuccess();
         }
@@ -112,6 +140,7 @@ public class Fishing : MonoBehaviour
             Debug.Log(waitingTime);
             fishingDelay = true;
             isFishing = true;
+            _ps.setAnimator(11,0);
             phase = 2;
         }
     }
@@ -126,6 +155,7 @@ public class Fishing : MonoBehaviour
             isFishing = false;
             myWaitingTime = 0.0f;
             myReactionTime = 0.0f;
+            _ps.setAnimator(13,0);
             Invoke("FishingDelay", 3.0f);
         } else {
             Debug.Log("아직 미끼를 물지 않았습니다!");
@@ -135,5 +165,8 @@ public class Fishing : MonoBehaviour
     void FishingDelay()
     {
         fishingDelay = false;
+        phase = 0;
+        _ps._canMove = true;
+        _ps.setCanAction(true);
     }
 }

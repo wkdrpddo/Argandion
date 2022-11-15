@@ -75,5 +75,8 @@ public class GatheringObject : MonoBehaviour
         _fruit.SetActive(value);
     }
 
-
+    public void setSector(int value)
+    {
+        _sectorNumber = value;
+    }
 }

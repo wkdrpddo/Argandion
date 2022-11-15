@@ -23,7 +23,7 @@ public class PlayerSystem : MonoBehaviour
     private Item _itemManager;
 
     // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대), 이동불가 시간, 작업시간}
-    public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 10, 0, 0, 0, 20 }, { 20, 0, 0, 0, 10 }, { 20, 0, 0, 0, 1} };
+    public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 320, 6, 0, 0, 1 }, { 20, 0, 0, 0, 10 }, { 502, 0, 0, 0, 60} };
     public GameObject[] _equipment = new GameObject[7];
     public int _equipItem = 0;
 
@@ -49,13 +49,11 @@ public class PlayerSystem : MonoBehaviour
     private bool _readyToHarvest = false;
     private bool _nearCarpentor = false;
     private bool _nearItem = false;
+    private float _runtime;
 
     [SerializeField]
     private float _act_speed = 1.0f;
     private float _delay_speed = 1.0f;
-
-    public float _gold;
-
 
     public int chestIdx = 0;
     public int chestCount = 1;
@@ -164,7 +162,7 @@ public class PlayerSystem : MonoBehaviour
                 }
                 rb.velocity = (speed);
                 _playerAnimator.SetInteger("action", 2);
-
+                _runtime += Time.deltaTime;
             }
             else
             {
@@ -200,12 +198,12 @@ public class PlayerSystem : MonoBehaviour
         }
         if (_canAction && Input.GetAxisRaw("useKey") == 1 && _delayedTimer <= 0)
         {
-            if (_equipList[_equipItem, 1] >= 3)
+            if (_equipList[_equipItem, 1] >= 3 && _equipList[_equipItem, 1] <= 5)
             {
                 _playerAnimator.SetInteger("action", ((int)_equipList[_equipItem, 1]));
                 _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
                 _movedDelay = _equipList[_equipItem, 3] / _act_speed;
-                _equipment[_equipItem].SetActive(true);
+                _equipment[(int)_equipList[_equipItem,1]].SetActive(true);
                 _setHand = true;
             }
 
@@ -247,6 +245,11 @@ public class PlayerSystem : MonoBehaviour
             _delayedTimer = Mathf.Max(0, _delayedTimer);
         }
         _character.position = transform.position;
+        if (_runtime > 1)
+        {
+            _runtime -= 1;
+            damageStamina(1);
+        }
     }
 
     private void changeItem()
@@ -343,6 +346,10 @@ public class PlayerSystem : MonoBehaviour
                     // {
                     //     npc.Interaction();
                     // }
+                    // if (_equipList[_equipItem, 0] >= 50 && _equipList[_equipItem, 0] <= 56 && col.TryGetComponent(out WorldTreeSpirit fairy))
+                    // {
+                    //     fairy.Interaction(_equipList[_equipItem, 0]);
+                    // }
                     if (col.TryGetComponent(out NPCObject npc))
                     {
                         npc.Interaction();
@@ -360,7 +367,10 @@ public class PlayerSystem : MonoBehaviour
                             _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
                             _movedDelay = _equipList[_equipItem, 3] / _act_speed;
                         }
-                        
+                    }
+                    if (_equipList[_equipItem, 1] == 6 && col.TryGetComponent(out Fishing fish))
+                    {
+                        fish.Interaction(_equipList[_equipItem, 0],_equipList[7,0]);
                     }
                     // building쪽 ==============
                     if (col.TryGetComponent(out SignInteraction signInteraction))
@@ -539,12 +549,6 @@ public class PlayerSystem : MonoBehaviour
             _nearObject = other.gameObject;
         }
 
-        if (other.gameObject.CompareTag("item"))
-        {
-            _nearObject = other.gameObject;
-            _nearItem = true;
-        }
-
         // if (other.gameObject.CompareTag("droppedItem")){
         //     _nearObject = other.gameObject;
         //     _nearDroppedItem = true;
@@ -594,14 +598,11 @@ public class PlayerSystem : MonoBehaviour
             Destroy(_nearObject.transform.parent.gameObject);
         }
 
-        // Debug.Log("OnTriggerEnter(): " + other.tag);
-        if (other.tag == "CraftingTable" || other.tag == "Sign")
+        if (other.gameObject.CompareTag("item"))
         {
             _nearObject = other.gameObject;
-            // Debug.Log("작업 영역");
+            _nearItem = true;
         }
-
-
     }
 
     void OnTriggerExit(Collider other)
@@ -674,7 +675,7 @@ public class PlayerSystem : MonoBehaviour
         {
             _health = _health_max;
         }
-        // _UIManager.setHealthBar(_health/_health_max);
+        _UIManager.setHealthBar(_health/_health_max);
     }
 
     public void damageHealth(float value)
@@ -695,6 +696,7 @@ public class PlayerSystem : MonoBehaviour
             _health = 0;
             playerDeath();
         }
+        _UIManager.setHealthBar(_health/_health_max);
     }
 
     public void changeEnergy(float value)
@@ -709,7 +711,7 @@ public class PlayerSystem : MonoBehaviour
         {
             _stamina = _stamina_max;
         }
-        // _UIManager.setEnergyBar(_stamina/_stamina_max);
+        _UIManager.setEnergyBar(_stamina/_stamina_max);
     }
 
     public void damageStamina(float value)
@@ -730,6 +732,7 @@ public class PlayerSystem : MonoBehaviour
             _stamina = 0;
             playerDeath();
         }
+        _UIManager.setEnergyBar(_stamina/_stamina_max);
     }
 
     private void playerDeath()
@@ -788,7 +791,6 @@ public class PlayerSystem : MonoBehaviour
 
     public void setAnimator(int index, float time)
     {
-        Debug.Log(index);
         otherAnimated = true;
         _playerAnimator.SetInteger("action", index);
         _movedDelay = time;
