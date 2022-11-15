@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CreateCharacter : MonoBehaviour
 {
@@ -13,18 +14,21 @@ public class CreateCharacter : MonoBehaviour
     public Sprite unselectedWoman;
     public Sprite selectedWoman;
 
+    private string _name;
+
+
     public void selectMan()
     {
         manImg.sprite = selectedMan;
         womanImg.sprite = unselectedWoman;
-        gameObject.GetComponentInParent<UIManager>().setCharacterValue(0);
+        gameObject.GetComponentInParent<UIManager>().setCharacterValue(1);
     }
 
     public void selectWoman()
     {
         manImg.sprite = unselectedMan;
         womanImg.sprite = selectedWoman;
-        gameObject.GetComponentInParent<UIManager>().setCharacterValue(1);
+        gameObject.GetComponentInParent<UIManager>().setCharacterValue(0);
     }
 
     public void backToMain()
@@ -36,19 +40,20 @@ public class CreateCharacter : MonoBehaviour
     public void gameStart()
     {
         ui.OnBaseUIPanel();
+        ui.selectPlayer();
+        ui.setPlayerName(_name);
         gameObject.SetActive(false);
     }
     // Start is called before the first frame update
     void Start()
     {
         ui = gameObject.GetComponentInParent<UIManager>();
-        manImg = transform.GetChild(5).GetComponentInChildren<Image>();
-        womanImg = transform.GetChild(6).GetComponentInChildren<Image>();
+        manImg = transform.GetChild(5).GetChild(0).GetComponent<Image>();
+        womanImg = transform.GetChild(6).GetChild(0).GetComponent<Image>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void getName()
     {
-
+        _name = gameObject.transform.GetChild(2).GetComponent<TMP_InputField>().text;
     }
 }

@@ -29,6 +29,7 @@ public class CameraSystem : MonoBehaviour
 
     public void ResetCamera()
     {
+        _cam.transform.parent = _po.transform;
         Vector3 pos = new Vector3(_po.transform.position.x + 0f, _po.transform.position.y + 5.5f, _po.transform.position.z + -8f);
         Quaternion rot = Quaternion.Euler(30f, 0f, 0f);
         _cam.transform.SetPositionAndRotation(pos, rot);
@@ -37,8 +38,8 @@ public class CameraSystem : MonoBehaviour
     public void treeCamera()
     {
         _cam.transform.parent = _worldtree.transform;
-        Vector3 pos = new Vector3(_worldtree.transform.position.x, _worldtree.transform.position.y + 8.0f, _worldtree.transform.position.z + -20f);
-        Quaternion rot = Quaternion.Euler(15f, 0f, 0f);
+        Vector3 pos = new Vector3(_worldtree.transform.position.x, _worldtree.transform.position.y + 15.0f, _worldtree.transform.position.z + -43.41f);
+        Quaternion rot = Quaternion.Euler(-7.5f, 0f, 0f);
         _cam.transform.SetPositionAndRotation(pos, rot);
     }
 

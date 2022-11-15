@@ -38,6 +38,7 @@ public class ChestInteraction : MonoBehaviour
 
     public void Interaction()
     {
+        Debug.Log("UI Storage 오픈");
         _uiManager.OnStoragePanel();
     }
 }
