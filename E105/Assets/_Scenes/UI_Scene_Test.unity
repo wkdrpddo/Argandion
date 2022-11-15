@@ -5376,6 +5376,10 @@ PrefabInstance:
       propertyPath: m_Size
       value: 0.49999997
       objectReference: {fileID: 0}
+    - target: {fileID: 192638408708282348, guid: 172e419b95a3f6a4bbe17d467397b9dc, type: 3}
+      propertyPath: m_Value
+      value: 1.0000001
+      objectReference: {fileID: 0}
     - target: {fileID: 192638408817933558, guid: 172e419b95a3f6a4bbe17d467397b9dc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -8457,6 +8461,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2494ac9a7092e95438b7b73b4193fe48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _baseuipanel: {fileID: 0}
+  _mapuipanel: {fileID: 0}
+  _mainpage: {fileID: 0}
+  _optionpanel: {fileID: 0}
+  _optionfrommain: {fileID: 0}
+  _createcharacter: {fileID: 0}
+  _conversationpanel: {fileID: 0}
+  _craftingpanel: {fileID: 0}
+  _cookingpanel: {fileID: 0}
+  _buildeventpanel: {fileID: 0}
+  _transactionanimalpanel: {fileID: 0}
+  _transactionpanel: {fileID: 0}
+  _inventorypanel: {fileID: 0}
+  _storagepanel: {fileID: 0}
+  _trademodal: {fileID: 0}
+  _inventory: {fileID: 0}
+  _invenMoney: {fileID: 0}
+  _notificationpanel: {fileID: 0}
+  _resultnotificationpanel: {fileID: 0}
+  _transactiondoublecheck: {fileID: 0}
   _eventAnnounce: {fileID: 0}
   _announceTitle: {fileID: 0}
   _announceText: {fileID: 0}
@@ -8464,6 +8488,8 @@ MonoBehaviour:
   _playersystem: {fileID: 0}
   _itemmanager: {fileID: 0}
   _worldtree: {fileID: 0}
+  _alterdown: {fileID: 0}
+  _alterup: {fileID: 0}
   _timer: {fileID: 362602686}
   _daytime: {fileID: 0}
   rotateZero: {x: 0, y: 0, z: 0, w: 1}
@@ -9670,7 +9696,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4594870534359501279, guid: 7c94548a5ce41c549826a41af7b41152, type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4594870534429522166, guid: 7c94548a5ce41c549826a41af7b41152, type: 3}
       propertyPath: m_SizeDelta.y
@@ -10031,7 +10057,7 @@ MonoBehaviour:
   _weather: 0
   _hour_time_changemeter: 12000
   _light: {fileID: 2138222493}
-  MapObject: {fileID: 118334711}
+  _MapObject: {fileID: 0}
   _player: {fileID: 0}
   _weatherManager: {fileID: 0}
   _buffManager: {fileID: 0}
@@ -10043,16 +10069,8 @@ MonoBehaviour:
   _purification_sector: 0
   _purification_size: 0
   _purification: 0000000000000000
-  _sector:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   _sectorTest: {fileID: 1240022319}
+  _sectors: []
   _randomNPC:
   - {fileID: 1848679731}
   - {fileID: 2001067163}
@@ -11629,6 +11647,7 @@ MonoBehaviour:
   _teleportOutside:
   - {fileID: 298259515}
   - {fileID: 1572014942}
+  _go0: 0
 --- !u!114 &1861460600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12603,6 +12622,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 652179931701440510, guid: 73765655d0dee3f4183d018083fffc39, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1269092552084547165, guid: 73765655d0dee3f4183d018083fffc39, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -13228,7 +13251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2660478888905864122, guid: 0d7908bf335bafe4e8ada5c8c7d9b086, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10.999908
+      value: -10.999878
       objectReference: {fileID: 0}
     - target: {fileID: 2660478888905864122, guid: 0d7908bf335bafe4e8ada5c8c7d9b086, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
