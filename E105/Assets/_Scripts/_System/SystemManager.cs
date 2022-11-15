@@ -30,6 +30,7 @@ public class SystemManager : MonoBehaviour
     static int _sector_size = 8;
     public int _purification_size;
     public bool[] _purification = new bool[_sector_size];
+
     public SectorObject _sectorTest;
     [SerializeField] private SectorObject[] _sectors;
     public GameObject[] _randomNPC = new GameObject[2];
@@ -46,7 +47,6 @@ public class SystemManager : MonoBehaviour
         _minute = 0;
         _minute_display = 0;
         _player = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
-
         _MapObject = GameObject.Find("Map");
         _sectors = _MapObject.GetComponentsInChildren<SectorObject>();
         _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
