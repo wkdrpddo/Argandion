@@ -28,6 +28,20 @@ public class BuildEventPanel : MonoBehaviour
     [SerializeField] private bool[] canMake;
     [SerializeField] private Slot[] slots;
     [SerializeField] private bool canBuild;
+    [SerializeField] private ItemObject[] usedItem;
+
+    [SerializeField] private int _key;
+    [SerializeField] private int _step;
+
+    // 각 건물 시작을 위한 데이터
+    private BuildingChange anglerHouse;
+    private BuildingChange barn;
+    private BuildingChange blacksmithHouse;
+    private BuildingChange forge;
+    private BuildingChange clothShop;
+    private BuildingChange hunterHouse;
+    private BuildingChange workShop;
+
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +64,17 @@ public class BuildEventPanel : MonoBehaviour
         myItems = new int[25];
         howItems = new int[25];
         canMake = new bool[7];
+
+        usedItem = new ItemObject[7];
+
+        // 건물 시작 데이터 가져오기
+        anglerHouse = GameObject.Find("AnglerHousePlace").GetComponent<BuildingChange>();
+        barn = GameObject.Find("BarnPlace").GetComponent<BuildingChange>();
+        blacksmithHouse = GameObject.Find("BlacksmithHousePlace").GetComponent<BuildingChange>();
+        forge = GameObject.Find("ForgePlace").GetComponent<BuildingChange>();
+        clothShop = GameObject.Find("ClothshopPlace").GetComponent<BuildingChange>();
+        hunterHouse = GameObject.Find("HunterHousePlace").GetComponent<BuildingChange>();
+        workShop = GameObject.Find("WorkshopPlace").GetComponent<BuildingChange>();
     }
 
     private void setting(int _buildKey, int _step)
@@ -82,6 +107,7 @@ public class BuildEventPanel : MonoBehaviour
         {
             if (flowerName.text == ui.findItem(myItems[i]).Name && howItems[i] >= buildCost[_step, 1])
             {
+                usedItem[0] = ui.findItem(myItems[i]);
                 canMake[0] = true;
                 break;
             }
@@ -106,6 +132,7 @@ public class BuildEventPanel : MonoBehaviour
             {
                 if (materials[i].text == ui.findItem(myItems[j]).Name && howItems[j] >= buildConditionCount[_buildKey - 1, i + 1])
                 {
+                    usedItem[i + 1] = ui.findItem(myItems[j]);
                     canMake[i + 1] = true;
                     materials[i].color = new Color(0, 0, 0);
                     break;
@@ -156,14 +183,57 @@ public class BuildEventPanel : MonoBehaviour
         isOnPanel = false;
         gameObject.SetActive(false);
         ui.runControllPlayer();
-        _failmodal.SetActive(false);
+        // _failmodal.SetActive(false);
     }
 
     public void OnPanel(int value, int step)
     {
-        isOnPanel = true;
-        gameObject.SetActive(true);
-        setBuildCondition(value, step);
+        _key = value;
+        _step = step;
+
+        if (!checkIsBuild())
+        {
+            ui.OnResultNotificationPanel("이미 건설이 진행중인 건물입니다.");
+        }
+        else
+        {
+            isOnPanel = true;
+            gameObject.SetActive(true);
+            setBuildCondition(value, step);
+        }
+    }
+
+    private bool checkIsBuild()
+    {
+        int buildPhase = -1;
+        switch (_key)
+        {
+            case 1:
+                buildPhase = clothShop._phase;
+                break;
+            case 2:
+                buildPhase = workShop._phase;
+                break;
+            case 3:
+                buildPhase = anglerHouse._phase;
+                break;
+            case 4:
+                buildPhase = forge._phase;
+                buildPhase = blacksmithHouse._phase;
+                break;
+            case 6:
+                buildPhase = barn._phase;
+                break;
+            case 7:
+                buildPhase = hunterHouse._phase;
+                break;
+        }
+
+        if (buildPhase == -1)
+        {
+            return true;
+        }
+        return false;
     }
 
     public void clickOkBtn()
@@ -171,6 +241,30 @@ public class BuildEventPanel : MonoBehaviour
         if (canBuild)
         {
             Debug.Log("============= 건설 시작 =============");
+            switch (_key)
+            {
+                case 1:
+                    clothShop._phase = 1;
+                    break;
+                case 2:
+                    workShop._phase = 1;
+                    break;
+                case 3:
+                    anglerHouse._phase = 1;
+                    break;
+                case 4:
+                    forge._phase = 1;
+                    blacksmithHouse._phase = 1;
+                    break;
+                case 6:
+                    barn._phase = 1;
+                    break;
+                case 7:
+                    hunterHouse._phase = 1;
+                    break;
+            }
+            Build();
+            closeWindow();
         }
         else
         {
@@ -182,6 +276,23 @@ public class BuildEventPanel : MonoBehaviour
     private void closeFailModal()
     {
         _failmodal.SetActive(false);
+    }
+
+    private void Build()
+    {
+        // Debug.Log("꽃 소모");
+        ui.acquireItem(usedItem[0], -1 * buildCost[_step, 1]);
+        for (int i = 1; i < 7; i++)
+        {
+            if (usedItem[i] == null)
+            {
+                break;
+            }
+            // Debug.Log("재료 소모 : " + buildConditionCount[_key - 1, i]);
+            ui.acquireItem(usedItem[i], -1 * buildConditionCount[_key - 1, i]);
+        }
+        // Debug.Log("골드 소모");
+        ui.addPlayerGold(-1 * buildCost[_step, 0]);
     }
 
     private void setBuildCondition(int value, int step)

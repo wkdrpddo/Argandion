@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ItemCodeToIndex;
+using System.IO;
 
 public class Storage : MonoBehaviour
 {
@@ -23,13 +24,14 @@ public class Storage : MonoBehaviour
         go_SlotsParent = go_InventoryBase.transform.GetChild(0).gameObject;
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
 
-        for (int i = 0; i < 100; i++)
+        string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/ItemTable2.json");
+        ItemObject[] ogjs = JsonHelper.FromJson<ItemObject>(jsonString);
+
+        for (int i = 0; i < 98; i++)
         {
-            Debug.Log("=============" + slots[i]);
             int idx = i;
             slots[i].setIdx(idx);
-            Debug.Log("여기 동작하나요?  : " + idx);
-            // slots[i].item = ui.findItemToSeq(idx);
+            slots[i].item = ogjs[i + 1];
         }
     }
 
@@ -52,6 +54,8 @@ public class Storage : MonoBehaviour
         else
         {
             slots[slotIndex].transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0);
+            slots[slotIndex].transform.GetChild(1).gameObject.SetActive(false);
+            slots[slotIndex].transform.GetChild(0).GetComponent<Image>().sprite = ui.getItemIcon(_item.ItemCode);
         }
     }
 }

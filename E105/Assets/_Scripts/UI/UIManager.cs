@@ -43,6 +43,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private SystemManager _systemmanager;
     [SerializeField] private PlayerSystem _playersystem;
     [SerializeField] private Item _itemmanager;
+    [SerializeField] private WorldTree _worldtree;
+    [SerializeField] private TeleportAltar _alterdown;
+    [SerializeField] private TeleportAltar _alterup;
 
     private Slider _healthbar;
     private Slider _energybar;
@@ -95,6 +98,9 @@ public class UIManager : MonoBehaviour
         _playersystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
         _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();
         _foodmanager = GameObject.Find("FoodManager").GetComponent<FoodManager>();
+        _worldtree = GameObject.Find("WorldTree").GetComponent<WorldTree>();
+        // _alterdown = GameObject.Find("teleportDown").GetComponent<TeleportAltar>();
+        // _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
         // _eventmanager = GameObject.Find("EventManager").GetComponent<EventManager>();
 
 
@@ -169,7 +175,6 @@ public class UIManager : MonoBehaviour
         _announceTitle = _eventAnnounce.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
         _announceText = _eventAnnounce.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
         _eventAnnounce.SetActive(false);
-
 
         ItemObject item1 = findItem(2);
         acquireItem(item1, 98);
@@ -282,19 +287,26 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                int randomNum = Random.Range(1, 11);
+                int randomNum = Random.Range(1, 12);
                 // randomNum = 1;
                 // randomNum = 2;
                 // randomNum = 3;
                 // randomNum = 4;
                 // randomNum = 5;
                 // randomNum = 6;
+                // randomNum = 9;
+                // randomNum = 10;
+                randomNum = Random.Range(11, 13);
                 switch (conversationCnt)
                 {
                     case -1:
                         OnConversationPanel(randomNum);
                         break;
                     case 0:
+                        if (conversationNPC == 9)
+                        {
+                            break;
+                        }
                         _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
                         break;
                     case 1:
@@ -332,7 +344,7 @@ public class UIManager : MonoBehaviour
     {
         _transactionpanel.GetComponent<TransactionPanel>().OnPanel(conversationNPC);
         _conversationpanel.GetComponent<ConversationPanel>().resetConversationPanel();
-        conversationNPC = 0;
+        // conversationNPC = 0;
         stopControllPlayer();
         OnInventory(2);
     }
@@ -362,8 +374,8 @@ public class UIManager : MonoBehaviour
     public void OnBuildEventPanel(int value)
     {
         stopControllPlayer();
-        int step = Random.Range(0, 6);
-        _buildeventpanel.GetComponent<BuildEventPanel>().OnPanel(value, step);
+        // int step = _systemmanager.getPuriCount();
+        _buildeventpanel.GetComponent<BuildEventPanel>().OnPanel(value, 1);
     }
 
     public void OnStoragePanel()
@@ -437,7 +449,13 @@ public class UIManager : MonoBehaviour
 
     public void OnTradeModal(string name, string iconName, int maxCnt, int cost, int checkMod, int storeIdx, int itemIdx)
     {
-        _trademodal.GetComponent<TradeModal>().setModal(name, iconName, maxCnt, cost, checkMod, storeIdx, itemIdx);
+        int _storeKey = storeIdx;
+        if (_storeKey == -1)
+        {
+            _storeKey = conversationNPC;
+        }
+        // Debug.Log(_storeKey);
+        _trademodal.GetComponent<TradeModal>().setModal(name, iconName, maxCnt, cost, checkMod, _storeKey, itemIdx);
     }
 
     public void closeTradeModal()
@@ -680,6 +698,7 @@ public class UIManager : MonoBehaviour
 
                 _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Slot>().AddItem(_item);
                 sellItem(invenIdx, _count, 1);
+                setPlayerEquipSlot(_item.ItemCode, 0);
                 break;
             case 401:
                 equiptCnt = _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(2).GetComponent<Slot>().getSlotItemCount();
@@ -690,6 +709,7 @@ public class UIManager : MonoBehaviour
 
                 _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(2).GetComponent<Slot>().AddItem(_item);
                 sellItem(invenIdx, _count, 1);
+                setPlayerEquipSlot(_item.ItemCode, 1);
                 break;
             case 402:
                 equiptCnt = _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(3).GetComponent<Slot>().getSlotItemCount();
@@ -700,6 +720,7 @@ public class UIManager : MonoBehaviour
 
                 _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(3).GetComponent<Slot>().AddItem(_item);
                 sellItem(invenIdx, _count, 1);
+                setPlayerEquipSlot(_item.ItemCode, 2);
                 break;
             case 403:
             case 404:
@@ -711,11 +732,13 @@ public class UIManager : MonoBehaviour
 
                 _inventorypanel.transform.GetChild(0).GetChild(2).GetChild(4).GetComponent<Slot>().AddItem(_item);
                 sellItem(invenIdx, _count, 1);
+                setPlayerEquipSlot(_item.ItemCode, 3);
                 break;
             case 502:
             case 503:
             case 504:
                 _baseuipanel.transform.GetChild(3).GetChild(1).GetComponentInChildren<Slot>().AddItem(_item, _count);
+                setPlayerQuickSlot(8, _item.ItemCode, _count);
                 break;
             default:
                 break;
@@ -768,6 +791,23 @@ public class UIManager : MonoBehaviour
         closeInvenRightClickModal();
     }
 
+    public void quickUse(int _itemCode, int _count, int _slotIdx)
+    {
+        if (findItem(_itemCode).Category == "식량")
+        {
+            _foodmanager.UseFood(_itemCode);
+        }
+
+        if (_slotIdx == 8)
+        {
+            reductItem(findItem(_itemCode), -1 * _count);
+        }
+        else
+        {
+            sellItem(_slotIdx, _count, 2);
+        }
+    }
+
     public Slot[] getInventorySlots()
     {
         return _inventory.transform.GetChild(1).GetComponent<Inventory>().getInventorySlots();
@@ -808,7 +848,7 @@ public class UIManager : MonoBehaviour
         if (checkInventory(_item, nowCnt))
         {
             acquireItem(_item, nowCnt);
-            _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().AcquireItem(_item, nowCnt);
+            _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().AcquireItem(_item, -1 * nowCnt);
         }
     }
 
@@ -850,15 +890,29 @@ public class UIManager : MonoBehaviour
         return _itemmanager.FindItem(value);
     }
 
-    // public ItemObject findItemToSeq(int value)
-    // {
-    //     return _itemmanager.FindItemToSeq(value);
-    // }
-
     // 퀵슬롯 변경 함수
     public void setEquipPointer(int num)
     {
         _nowequip.transform.SetLocalPositionAndRotation(new Vector3((num - 1) * 31 + 2, 0, 0), rotateZero);
+    }
+
+    // 퀵슬롯 동기 함수
+    public void syncQuickSlot()
+    {
+        Slot[] baseuiQuick = _baseuipanel.transform.GetChild(3).GetChild(0).GetChild(0).GetComponentsInChildren<Slot>();
+        Slot[] quickSlotData = _inventory.transform.GetChild(0).GetComponent<Quickslot>().getInventorySlots();
+
+        for (int i = 0; i < 7; i++)
+        {
+            if (quickSlotData[i].itemCount <= 0)
+            {
+                baseuiQuick[i].SetSlotCount(-1 * baseuiQuick[i].itemCount);
+            }
+            else
+            {
+                baseuiQuick[i].AddItem(quickSlotData[i].item, quickSlotData[i].itemCount);
+            }
+        }
     }
 
     // 집인지 확인하는 코드
@@ -882,6 +936,18 @@ public class UIManager : MonoBehaviour
         _invenMoney.text = getPlayerGold().ToString();
     }
 
+    // 플레이어 선택
+    public void selectPlayer()
+    {
+        _playersystem.ChangePlayerCharacter(selectCharacter);
+    }
+
+    public void setPlayerName(string _name)
+    {
+        _playersystem.setPlayerName(_name);
+    }
+
+
     // 플레이어 체력 / 기력
     public void healPlayer()
     {
@@ -893,12 +959,12 @@ public class UIManager : MonoBehaviour
     // 플레이어 장비 관련
     public void setPlayerQuickSlot(int index, int itemCode, int count)
     {
-        // _playersystem.setQuickItem(index, itemCode, count);
+        _playersystem.setQuickItem(index, itemCode, count);
     }
 
-    public void setPlayerEquipSlot()
+    public void setPlayerEquipSlot(int itemCode, int idx)
     {
-        // _playersystem.setEquiptItem();
+        _playersystem.setEquipItem(itemCode, idx);
     }
 
     // 사운드 관련
@@ -906,15 +972,33 @@ public class UIManager : MonoBehaviour
     {
         // GameObject.Find("SoundManager").GetComponent<SoundManager>().playRandom();
     }
-    public void BGMChanger(string _bgmName)
-    {
-        _conversationpanel.selectMusic(_bgmName);
-    }
+    // public void BGMChanger(string _bgmName)
+    // {
+    //     _conversationpanel.selectMusic(_bgmName);
+    // }
 
     // 제사 관련 코드
     public void prayToAltar(int _nowFlowerCode, int _newFlowerCode)
     {
 
+    }
+
+    // 세계수 텔포
+    public void doTeleport(int value)
+    {
+        _worldtree.doTeleport(value);
+        _conversationpanel.resetConversationPanel();
+    }
+
+    // 제단 텔포
+    public void upTeleport()
+    {
+        _alterdown.goUp();
+    }
+
+    public void downTeleport()
+    {
+        // _alterup.goDown();
     }
 
     // 게임 시작 종료

@@ -69,6 +69,9 @@ public class TransactionPanel : MonoBehaviour
             case 6:
                 jsonInputString = jsonStringBase + "/BuyingHunter.json";
                 break;
+            case 10:
+                jsonInputString = jsonStringBase + "/BuyingSeed.json";
+                break;
         }
 
         jsonString = File.ReadAllText(jsonInputString);
@@ -78,6 +81,8 @@ public class TransactionPanel : MonoBehaviour
         {
             buyingObject = itemData[i];
             itemObject = _itemmanager.FindItem(buyingObject.Result);
+
+            // Debug.Log("현재 아이템 데이터 : " + buyingObject.Result);
 
             GameObject productBtn = Instantiate(storeItemCard, ScrollContent.transform);
 
@@ -91,6 +96,7 @@ public class TransactionPanel : MonoBehaviour
             int itemCode = itemObject.ItemCode;
             int buyCost = buyingObject.Cost;
             int pos = Array.IndexOf(multiBuyItemCode, buyingObject.Result);
+            // Debug.Log(pos);
             if (pos == -1)
             {
                 // Debug.Log("name : " + itemObject.Name + " | itemCode : " + itemObject.ItemCode);
@@ -116,9 +122,10 @@ public class TransactionPanel : MonoBehaviour
 
         gameObject.SetActive(false);
         ui.runControllPlayer();
+        ui.conversationNPC = 0;
         ui.OnInventory(2);
         ui.setIsOpenTransaction(false);
     }
 
-    private int[] multiBuyItemCode = new int[] { 4, 500, 501, 502, 503, 504 };
+    private int[] multiBuyItemCode = new int[] { 4, 500, 501, 502, 503, 504, 212, 213, 214, 215, 216, 217, 218, 219 };
 }

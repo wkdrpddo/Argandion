@@ -125,6 +125,7 @@ MonoBehaviour:
   go_InventoryBase: {fileID: 0}
   go_SlotsParent: {fileID: 0}
   slots: []
+  ui: {fileID: 0}
 --- !u!1 &192638407965675038
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +649,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 192638408817933557}
   m_HandleRect: {fileID: 192638408817933558}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0.9999998
   m_Size: 0.4999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1964,6 +1965,26 @@ PrefabInstance:
     - target: {fileID: 1337456414719672627, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
       propertyPath: m_Name
       value: InvenSlot (97)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 07c10b12f0bbc0944bec374c704eeffd, type: 3}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
@@ -5595,6 +5616,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: InvenSlot (98)
       objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 62cdc6ac97c5a754cb55bca4327b2eed, type: 3}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
 --- !u!224 &2611467803842652242 stripped
@@ -6050,6 +6091,26 @@ PrefabInstance:
     - target: {fileID: 1337456414719672627, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
       propertyPath: m_Name
       value: InvenSlot (91)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 94353286bf930d9429897217c3a24387, type: 3}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
@@ -6786,7 +6847,7 @@ PrefabInstance:
     - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8c5a29aa7ba843e4abe4235d06985a0a, type: 3}
+      objectReference: {fileID: 21300000, guid: 74915433188be7b43b748d765dcb5ddc, type: 3}
     - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -8681,6 +8742,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: InvenSlot (94)
       objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2335820b77ea7de479547dd8e73a4189, type: 3}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
 --- !u!224 &5376195516625394498 stripped
@@ -9664,6 +9745,26 @@ PrefabInstance:
     - target: {fileID: 1337456414719672627, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
       propertyPath: m_Name
       value: InvenSlot (96)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f7ec98609fb00964d986f57c639d8674, type: 3}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
@@ -11405,6 +11506,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: InvenSlot (95)
       objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 959b6ed2b203d634c9e7ff73e9bbc483, type: 3}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
 --- !u!224 &7423120111758817021 stripped
@@ -12136,6 +12257,26 @@ PrefabInstance:
     - target: {fileID: 1337456414719672627, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
       propertyPath: m_Name
       value: InvenSlot (92)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 55d205cb78782674da99cf4586fb82b5, type: 3}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
@@ -13624,6 +13765,26 @@ PrefabInstance:
     - target: {fileID: 1337456414719672627, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
       propertyPath: m_Name
       value: InvenSlot (93)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b255e856cef1bd94abb76b0685d16329, type: 3}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777940839169119211, guid: 73637303877ac334e9d8f0d917a55914, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73637303877ac334e9d8f0d917a55914, type: 3}

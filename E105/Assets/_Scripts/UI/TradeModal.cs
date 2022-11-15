@@ -21,6 +21,7 @@ public class TradeModal : MonoBehaviour
         4. 대장간
         5. 목장
         6. 사냥꾼
+        10. 세계수의 정령
     */
 
     [SerializeField] private GameObject _npcmanager;
@@ -56,6 +57,14 @@ public class TradeModal : MonoBehaviour
                 howmany = 99;
             }
             gameObject.GetComponentInChildren<Slider>().maxValue = howmany;
+        }
+        else if (checkMod == 4)
+        {
+            if (maxCnt > 396)
+            {
+                maxCnt = 396;
+            }
+            gameObject.GetComponentInChildren<Slider>().maxValue = maxCnt;
         }
         else
         {
@@ -112,6 +121,7 @@ public class TradeModal : MonoBehaviour
         }
         else if (tradeMod == 3)
         {
+            Debug.Log("Item Code : " + iconName);
             ui.addToStorage(ui.findItem(Int32.Parse(iconName)), tradeCount, itemIndex);
         }
         else if (tradeMod == 4)
@@ -146,6 +156,14 @@ public class TradeModal : MonoBehaviour
             ui.syncAnimalPanel(_ranch.getPoint(), _ranch.sheeps, _ranch.chicks, _ranch.cows);
             closeModal();
         }
+        else if (storeIndex == 10)
+        {
+            if (tradeCnt != 0)
+            {
+                ui.sellItem(itemIndex, tradeCnt, 2);
+                ui.addPlayerGold((tradeCost * tradeCnt));
+            }
+        }
         else
         {
             if (tradeCnt != 0)
@@ -170,6 +188,10 @@ public class TradeModal : MonoBehaviour
         {
             _npcmanager.GetComponent<BuyingHunter>().Buy(itemIndex, tradeCnt);
         }
+        else if (storeIndex == 10)
+        {
+            _npcmanager.GetComponent<BuyingSeed>().Buy(itemIndex, tradeCnt);
+        }
         else
         {
             Debug.LogError("=== 상점구매 상점idx 정보가 맞지 않음 ===");
@@ -186,12 +208,6 @@ public class TradeModal : MonoBehaviour
         _ranch = GameObject.Find("NPCManager").GetComponent<Ranch>();
         ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         _npcmanager = GameObject.Find("NPCManager").gameObject;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private string[] iconNameInString = new string[] { "chicken", "cow", "sheep" };
