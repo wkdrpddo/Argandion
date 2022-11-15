@@ -15,9 +15,9 @@ public class OptionPanel : MonoBehaviour
 
 
         gameObject.transform.GetChild(0).GetComponent<Slider>().value = _soundmanager.getBackgroundSound();
-        Debug.Log(_soundmanager.getBackgroundSound());
+        // Debug.Log(_soundmanager.getBackgroundSound());
         gameObject.transform.GetChild(1).GetComponent<Slider>().value = _soundmanager.getEffectSound();
-        Debug.Log(_soundmanager.getEffectSound());
+        // Debug.Log(_soundmanager.getEffectSound());
 
     }
 
