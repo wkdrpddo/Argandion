@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HouseChange : MonoBehaviour
 {
-    public SystemManager _systemManager;
+    private SystemManager _systemManager;
 
     void Start()
     {

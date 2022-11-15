@@ -53,8 +53,8 @@ public class SectorObject : MonoBehaviour
         _SectorArea.Add(0f);
         foreach (Collider col in _SectorCollider)
         {
-            float sumArea = (col.bounds.extents.x * 2) * (col.bounds.extents.z * 2);
-            // Debug.Log(sumArea);
+            float sumArea = (col.bounds.extents.x*2) * (col.bounds.extents.z*2);
+            Debug.Log(sumArea);
             _sumSector += sumArea;
             _SectorArea.Add(_sumSector);
         }
@@ -75,15 +75,15 @@ public class SectorObject : MonoBehaviour
     {
         if (_flower_remain < _flower_max)
         {
-            float rnd = Random.Range(0f, 1f);
+            float rnd = Random.Range(0f,1f);
             if (rnd < _flower_spawn_percent)
             {
                 Spawn_Flower();
             }
             else
             {
-                _flower_spawn_percent = _flower_spawn_percent * _flower_spawn_factor * (_BuffManager.yellowPray ? _flower_spawn_bonus_factor : 1.0f);
-                _flower_spawn_percent = Mathf.Min(0.8f, _flower_spawn_percent);
+                _flower_spawn_percent = _flower_spawn_percent*_flower_spawn_factor*(_BuffManager.yellowPray ? _flower_spawn_bonus_factor : 1.0f);
+                _flower_spawn_percent = Mathf.Min(0.8f,_flower_spawn_percent);
             }
         }
     }
@@ -91,17 +91,18 @@ public class SectorObject : MonoBehaviour
     private void Spawn_Flower()
     {
         Debug.Log("꽃 생성");
-        float rnd = Random.Range(0f, _sumSector);
+        float rnd = Random.Range(0f,_sumSector);
         int count = 0;
-        while (!(_SectorArea[count] <= rnd && rnd <= _SectorArea[count + 1]))
+        while (!(_SectorArea[count]<=rnd && rnd<=_SectorArea[count+1]))
         {
-            count += 1;
+            count+=1;
         }
         Debug.Log(count);
         Debug.Log("번 지역에 생성");
         Collider tcol = _SectorCollider[count];
-        Vector3 pos = new Vector3(tcol.bounds.center.x + Random.Range(-tcol.bounds.extents.x, tcol.bounds.extents.x), tcol.bounds.center.y + 3f, tcol.bounds.center.z + Random.Range(-tcol.bounds.extents.z, tcol.bounds.extents.z));
-        Instantiate(_floweObject, pos, new Quaternion());
+        Vector3 pos = new Vector3(tcol.bounds.center.x+Random.Range(-tcol.bounds.extents.x,tcol.bounds.extents.x),tcol.bounds.center.y+3f,tcol.bounds.center.z+Random.Range(-tcol.bounds.extents.z,tcol.bounds.extents.z));
+        GameObject flower = Instantiate(_floweObject,pos,new Quaternion(),gameObject.transform);
+        flower.GetComponent<GatheringObject>().setFlower(true);
         Debug.Log(pos);
         _flower_remain += 1;
     }
@@ -128,7 +129,7 @@ public class SectorObject : MonoBehaviour
     public void Purifier()
     {
         _purifier = true;
-
+        
         //나무 오브젝트 등등 정화된 걸로 바꾸기
     }
 }

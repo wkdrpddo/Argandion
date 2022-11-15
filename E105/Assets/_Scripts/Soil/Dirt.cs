@@ -24,13 +24,13 @@ public class Dirt : MonoBehaviour
         _buff = _buffManagerObject.GetComponent<BuffManager>();
     }
 
-    void Update()
-    {
-        if (temp != _system._day) {
-            NewDay();
-            temp = _system._day;
-        }
-    }
+    // void Update()
+    // {
+    //     if (temp != _system._day) {
+    //         NewDay();
+    //         temp = _system._day;
+    //     }
+    // }
 
     void NewDay()
     {  
