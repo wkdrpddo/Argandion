@@ -13,7 +13,9 @@ public class StoragePanel : MonoBehaviour
 
     public void handlePanel()
     {
+        // Debug.Log("before switch storage active : " + gameObject.activeSelf);
         gameObject.SetActive(!gameObject.activeSelf);
+        // Debug.Log("after switch storage active : " + gameObject.activeSelf);
         ui.setIsOpenStorage(gameObject.activeSelf);
     }
 }

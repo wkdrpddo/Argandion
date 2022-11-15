@@ -7,32 +7,32 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     // Panel var
-    private GameObject _baseuipanel;
-    private GameObject _mapuipanel;
-    private MainPagePanel _mainpage;
-    private OptionPanel _optionpanel;
-    private OptionPanel _optionfrommain;
+    [SerializeField] private GameObject _baseuipanel;
+    [SerializeField] private GameObject _mapuipanel;
+    [SerializeField] private MainPagePanel _mainpage;
+    [SerializeField] private OptionPanel _optionpanel;
+    [SerializeField] private OptionPanel _optionfrommain;
 
-    private CreateCharacter _createcharacter;
+    [SerializeField] private CreateCharacter _createcharacter;
 
-    private ConversationPanel _conversationpanel;
+    [SerializeField] private ConversationPanel _conversationpanel;
 
-    private CraftingPanel _craftingpanel;
-    private CookingPanel _cookingpanel;
+    [SerializeField] private CraftingPanel _craftingpanel;
+    [SerializeField] private CookingPanel _cookingpanel;
 
-    private BuildEventPanel _buildeventpanel;
+    [SerializeField] private BuildEventPanel _buildeventpanel;
 
-    private TransactionAnimalPanel _transactionanimalpanel;
-    private TransactionPanel _transactionpanel;
-    private InventoryPanel _inventorypanel;
-    private GameObject _storagepanel;
-    private TradeModal _trademodal;
-    private GameObject _inventory;
-    private TextMeshProUGUI _invenMoney;
+    [SerializeField] private TransactionAnimalPanel _transactionanimalpanel;
+    [SerializeField] private TransactionPanel _transactionpanel;
+    [SerializeField] private InventoryPanel _inventorypanel;
+    [SerializeField] private GameObject _storagepanel;
+    [SerializeField] private TradeModal _trademodal;
+    [SerializeField] private GameObject _inventory;
+    [SerializeField] private TextMeshProUGUI _invenMoney;
 
-    private GameObject _notificationpanel;
-    private ResultNotificationPanel _resultnotificationpanel;
-    private TransactionDoubleCheck _transactiondoublecheck;
+    [SerializeField] private GameObject _notificationpanel;
+    [SerializeField] private ResultNotificationPanel _resultnotificationpanel;
+    [SerializeField] private TransactionDoubleCheck _transactiondoublecheck;
 
     public GameObject _eventAnnounce;
     public TextMeshProUGUI _announceTitle;
@@ -324,7 +324,6 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O))
         {
             OnStoragePanel();
-            OnInventory(3);
         }
 
         if (Input.GetKeyDown(KeyCode.N))
@@ -380,7 +379,14 @@ public class UIManager : MonoBehaviour
 
     public void OnStoragePanel()
     {
-        stopControllPlayer();
+        if(isStorageOpen)
+        {
+            runControllPlayer();
+        }else
+        {
+            stopControllPlayer();
+        }
+        OnInventory(3);
         _storagepanel.GetComponent<StoragePanel>().handlePanel();
     }
 

@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 9a47e193b0f4bac42bb7f18e7106d965, type: 2}
---- !u!114 &38130586 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2279172478988056613, guid: a4693dcb4f985e84d85e7628a6867fe6, type: 3}
-  m_PrefabInstance: {fileID: 1447808961}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f761d209a45ec3d4c9e4eec4eafa270b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &250927891 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7080265349388839388, guid: cf5a8ecb025e313438f779eee16e6c52, type: 3}
@@ -152,6 +141,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SectorObject: []
+--- !u!1 &344969694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 344969695}
+  - component: {fileID: 344969696}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &344969695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344969694}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -1.8860016, y: 0.076999985, z: -1.8269958}
+  m_LocalScale: {x: 1.5, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1934329203}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &344969696
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344969694}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.76, y: 0.35, z: 0.46}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &353475900
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -162,6 +196,10 @@ PrefabInstance:
     - target: {fileID: 852924986690934260, guid: a7f8c1e22f4c25847b210686c2b7d3e2, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498132248451818175, guid: a7f8c1e22f4c25847b210686c2b7d3e2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1807044139302955572, guid: a7f8c1e22f4c25847b210686c2b7d3e2, type: 3}
       propertyPath: m_Name
@@ -213,6 +251,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7f8c1e22f4c25847b210686c2b7d3e2, type: 3}
+--- !u!114 &418229392 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7920103851875848225, guid: a4693dcb4f985e84d85e7628a6867fe6, type: 3}
+  m_PrefabInstance: {fileID: 1447808961}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f761d209a45ec3d4c9e4eec4eafa270b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &462876709 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7667013243401349127, guid: 68a0da38e33a9d64d8976620d524acae, type: 3}
@@ -7405,7 +7454,7 @@ MonoBehaviour:
   system: {fileID: 0}
   temp: 0
   _buffManagerObject: {fileID: 0}
-  theInventory: {fileID: 38130586}
+  theInventory: {fileID: 0}
   item: {fileID: 1551311053}
   cows: 0
   chicks: 0
@@ -11924,6 +11973,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c445222bec193945923985def703de2, type: 3}
+--- !u!4 &1934329203 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3106564297498168623, guid: a7f8c1e22f4c25847b210686c2b7d3e2, type: 3}
+  m_PrefabInstance: {fileID: 353475900}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &2046461345
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23131,7 +23185,7 @@ PrefabInstance:
     - target: {fileID: 9104110807844069376, guid: 2018bcac01cdb484ebd447a439eae9b1, type: 3}
       propertyPath: _theInventory
       value: 
-      objectReference: {fileID: 38130586}
+      objectReference: {fileID: 418229392}
     - target: {fileID: 9104110807844069376, guid: 2018bcac01cdb484ebd447a439eae9b1, type: 3}
       propertyPath: _interactRadius
       value: 1.5
