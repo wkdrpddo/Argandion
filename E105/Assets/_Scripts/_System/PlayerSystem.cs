@@ -21,6 +21,7 @@ public class PlayerSystem : MonoBehaviour
 
     private GameObject _nearObject;
     private Item _itemManager;
+    private SoundManager _soundManager;
 
     // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대), 이동불가 시간, 작업시간}
     public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 10, 0, 0, 0, 20 }, { 20, 0, 0, 0, 10 }, { 20, 0, 0, 0, 1} };
@@ -82,6 +83,8 @@ public class PlayerSystem : MonoBehaviour
     private int _movement_percent = 100;
     private int[] _slot_equipment = new int[] { 0, 0, 0, 0 };
 
+    private int _current_region;  //플레이어가 현재 어느 있는 지역의 상태 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -92,6 +95,7 @@ public class PlayerSystem : MonoBehaviour
         _itemManager = GameObject.Find("ItemManager").GetComponent<Item>();
         _character = GameObject.Find("PlayerBody").transform;
         _SystemManager = GameObject.Find("SystemManager");
+        _soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -600,6 +604,37 @@ public class PlayerSystem : MonoBehaviour
             _nearObject = other.gameObject;
             // Debug.Log("작업 영역");
         }
+
+        if (other.tag == "sector")
+        {
+            //현재 들어온 지역
+            if (other.transform.GetComponent<SectorObject>()._purifier)  //정화된 구역에 들어왔을때
+            {
+                if (_current_region != 0)  //이전 구역이 정화구역이 아니었을때만 사운드 체인지
+                {
+                    _soundManager.playBGM1();
+                    _current_region = 0;
+                }
+            }
+            else  //황폐화 구역에 들어왔을때
+            {
+                if (_current_region != 1) //이전 구역이 황폐화구역이 아니었을때만 사운드 체인지
+                {
+                    _soundManager.playBGM2();
+                    _current_region = 1;
+                }
+            }
+        }
+
+        if (other.tag == "forest")   //숲으로 이동
+        {
+            if (_current_region != 2)
+            {
+                _soundManager.playBGM3();
+                _current_region = 2;
+            }
+        }
+
 
 
     }
