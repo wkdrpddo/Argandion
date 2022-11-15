@@ -26,8 +26,7 @@ public class SystemManager : MonoBehaviour
     public EventPanel _EventPanel;
     public PrayBuff _PrayBuff;
     public int _development_level;  // 1부터
-    public int _purification_sector;
-
+    public int _purification_sector = 0;
     static int _sector_size = 8;
     public int _purification_size;
     public bool[] _purification = new bool[_sector_size];
@@ -55,6 +54,10 @@ public class SystemManager : MonoBehaviour
         _NPCManager = GameObject.Find("NPCManager").GetComponent<NPCManager>();
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _PrayBuff = GameObject.Find("BuffManager").GetComponent<PrayBuff>();
+        _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
+
+
+
     }
 
     // Update is called once per frame
@@ -71,6 +74,8 @@ public class SystemManager : MonoBehaviour
         _MapObject.GetComponent<MapObject>().UpdateFieldManager(index);
     }
 
+
+    //건물이 모두 지어지면 호출
     public void UpdatePurification(int index)  //1번부터 
     {
         switch (index)
@@ -351,7 +356,7 @@ public class SystemManager : MonoBehaviour
         _EventPanel.inactiveIcon(value);
     }
 
-    public void CompleteConstruction(int index)
+        public void CompleteConstruction(int index)
     {
         _MapObject.GetComponent<MapObject>().ChangePurifier(index);
         _purification[index] = true;
@@ -371,11 +376,11 @@ public class SystemManager : MonoBehaviour
 
     public void DevelopLevelUp()
     {
-        if (_development_level == 2)
+        if (_development_level==2)
         {
             //실행문
         }
-        if (_development_level == 3)
+        if (_development_level==3)
         {
             //실행문
         }
@@ -386,10 +391,15 @@ public class SystemManager : MonoBehaviour
     {
         return _development_level;
     }
-
+    
     // 정화 여부 확인 (섹터 1번부터 8번까지)
     public bool isPurifiered(int index)
     {
-        return _purification[index - 1];
+        return _purification[index-1];
+    }
+
+    public int getPuriCount()
+    {
+        return _purification_sector;
     }
 }

@@ -23,7 +23,7 @@ public class PlayerSystem : MonoBehaviour
     private Item _itemManager;
 
     // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대), 이동불가 시간, 작업시간}
-    public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 10, 0, 0, 0, 20 }, { 20, 0, 0, 0, 10 } };
+    public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 10, 0, 0, 0, 20 }, { 20, 0, 0, 0, 10 }, { 20, 0, 0, 0, 1} };
     public GameObject[] _equipment = new GameObject[7];
     public int _equipItem = 0;
 
@@ -91,6 +91,7 @@ public class PlayerSystem : MonoBehaviour
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _itemManager = GameObject.Find("ItemManager").GetComponent<Item>();
         _character = GameObject.Find("PlayerBody").transform;
+        _SystemManager = GameObject.Find("SystemManager");
     }
 
     // Update is called once per frame
@@ -348,11 +349,18 @@ public class PlayerSystem : MonoBehaviour
                     }
                     if (_equipList[_equipItem, 1] == 1 && col.TryGetComponent(out GatheringObject Gat))
                     {
-                        Debug.Log("버..섯?");
-                        Debug.Log(Gat);
-                        Gat.Interaction(_equipList[_equipItem, 1]);
-                        _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
-                        _movedDelay = _equipList[_equipItem, 3] / _act_speed;
+                        if (Gat._isremain == false)
+                        {
+                            Gat.Interaction(_equipList[_equipItem, 1]);
+                            _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
+                            _movedDelay = _equipList[_equipItem, 3] / _act_speed;
+                        }
+                        else if (Gat._isHave) {
+                            Gat.Interaction(_equipList[_equipItem, 1]);
+                            _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
+                            _movedDelay = _equipList[_equipItem, 3] / _act_speed;
+                        }
+                        
                     }
                     // building쪽 ==============
                     if (col.TryGetComponent(out SignInteraction signInteraction))
@@ -662,7 +670,7 @@ public class PlayerSystem : MonoBehaviour
             _health = 0;
             playerDeath();
         }
-        else if (_health == _health_max)
+        else if (_health >= _health_max)
         {
             _health = _health_max;
         }
@@ -697,7 +705,7 @@ public class PlayerSystem : MonoBehaviour
             _stamina = 0;
             playerDeath();
         }
-        else if (_stamina == _stamina_max)
+        else if (_stamina >= _stamina_max)
         {
             _stamina = _stamina_max;
         }
@@ -943,5 +951,10 @@ public class PlayerSystem : MonoBehaviour
             obj.SetActive(false);
         }
         _player_character[index].SetActive(true);
+    }
+
+    public int getSlotEquip(int index)
+    {
+        return _slot_equipment[index];
     }
 }

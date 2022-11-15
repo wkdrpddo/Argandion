@@ -16,6 +16,16 @@ public class WorldTree : MonoBehaviour
         _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _playerSystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
     }
+    // 테스트 코드 ========================================================
+    public bool _go0;
+
+    private void Update() {
+        if(_go0){
+            doTeleport(0);
+            _go0 = false;
+        }
+    }
+    // ==================================================================
 
     public void Interaction()
     {
@@ -57,7 +67,18 @@ public class WorldTree : MonoBehaviour
     public void doTeleport(int num)
     {
         GameObject tp = _teleportOutside[num];
+        tp.transform.GetChild(0).gameObject.SetActive(true);
+        _playerSystem.transform.GetChild(0).gameObject.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
         _playerSystem.transform.position = new Vector3(tp.transform.position.x, tp.transform.position.y, tp.transform.position.z);
+        StartCoroutine("FxDelay");
+    }
+
+    // fx 딜레이
+    IEnumerator FxDelay(){
+        _playerSystem._canMove = false;
+        // 사운드 변경
+        yield return new WaitForSeconds(2.0f);
+        _playerSystem._canMove = true;
     }
 
 }

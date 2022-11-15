@@ -21,8 +21,8 @@ public class SaveData
     public int _season;
 
     // soundManager - 배경음 , 효과음
-    public int _sound1;
-    public int _sound2;
+    public float _sound1;
+    public float _sound2;
 
     // Inventory - 인벤토리 25칸 , 창고 100칸, 장비 4칸, 퀵슬롯 7칸, 미끼 1칸
     public int[,] _inventory = new int [25,2];
@@ -50,7 +50,7 @@ public class SaveData
     public int _flowerBuffTargetDay;
 
     // 정령 버프 확인용
-    public bool[] _flowerBuffBoolList = new bool[12];
+    public bool[] _flowerBuffBoolList = new bool[16];
 
     // 각 농작물의 작물 번호(위치), 생장 수
     public int[,] _farm = new int [729,2];
