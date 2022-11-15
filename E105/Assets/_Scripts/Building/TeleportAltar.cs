@@ -7,7 +7,7 @@ public class TeleportAltar : MonoBehaviour
     private SoundManager _soundManager;
     private PlayerSystem _playerSystem;
     private UIManager _uiManager;
-    private SectorObject _sector8; 
+    private SectorObject _sector8;
     [SerializeField] private GameObject _teleportUp; // 시작 전 넣어주기
     [SerializeField] private GameObject _teleportDown; // 시작 전 넣어주기
     [SerializeField] private GameObject _fxPtD;
@@ -27,11 +27,15 @@ public class TeleportAltar : MonoBehaviour
     public bool _goup;
     public bool _godown;
 
-    private void Update() {
-        if(_goup){
+    private void Update()
+    {
+        if (_goup)
+        {
             goUp();
             _goup = false;
-        }if(_godown){
+        }
+        if (_godown)
+        {
             goDown();
             _godown = false;
         }
@@ -56,7 +60,7 @@ public class TeleportAltar : MonoBehaviour
     }
 
     // 밑으로 내려갈 때 call
-    private void goDown()
+    public void goDown()
     {
         // 플레이어
         _playerSystem.transform.GetChild(0).gameObject.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
@@ -67,7 +71,8 @@ public class TeleportAltar : MonoBehaviour
     }
 
     // Down -> Up fx 딜레이
-    IEnumerator FxDelayGoUp(){
+    IEnumerator FxDelayGoUp()
+    {
         yield return new WaitForSeconds(2.0f);
         // Up쪽 fx 하기
         _fxPtU.transform.GetChild(2).gameObject.SetActive(true);
@@ -85,7 +90,8 @@ public class TeleportAltar : MonoBehaviour
     }
 
     // Up -> Down fx 딜레이
-    IEnumerator FxDelayGoDown(){
+    IEnumerator FxDelayGoDown()
+    {
         yield return new WaitForSeconds(2.0f);
         // Down쪽 fx 하기
         _fxPtD.transform.GetChild(2).gameObject.SetActive(true);
@@ -106,12 +112,14 @@ public class TeleportAltar : MonoBehaviour
         fxU(false);
     }
 
-    private void fxD(bool b){
+    private void fxD(bool b)
+    {
         _fxPtD.transform.GetChild(0).gameObject.SetActive(b);
         _fxPtD.transform.GetChild(1).gameObject.SetActive(b);
         _fxPtD.transform.GetChild(2).gameObject.SetActive(b);
     }
-    private void fxU(bool b){
+    private void fxU(bool b)
+    {
         _fxPtU.transform.GetChild(0).gameObject.SetActive(b);
         _fxPtU.transform.GetChild(1).gameObject.SetActive(b);
         _fxPtU.transform.GetChild(2).gameObject.SetActive(b);

@@ -39,10 +39,17 @@ public class CreateCharacter : MonoBehaviour
 
     public void gameStart()
     {
-        ui.OnBaseUIPanel();
-        ui.selectPlayer();
-        ui.setPlayerName(_name);
-        gameObject.SetActive(false);
+        if (_name == "")
+        {
+            ui.OnResultNotificationPanel("이름은 공백일 수 없습니다-");
+        }
+        else
+        {
+            ui.OnBaseUIPanel();
+            ui.selectPlayer();
+            ui.setPlayerName(_name);
+            gameObject.SetActive(false);
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -50,10 +57,17 @@ public class CreateCharacter : MonoBehaviour
         ui = gameObject.GetComponentInParent<UIManager>();
         manImg = transform.GetChild(5).GetChild(0).GetComponent<Image>();
         womanImg = transform.GetChild(6).GetChild(0).GetComponent<Image>();
+
+        selectWoman();
     }
 
     public void getName()
     {
         _name = gameObject.transform.GetChild(2).GetComponent<TMP_InputField>().text;
+    }
+
+    public void clickInputField()
+    {
+        gameObject.transform.GetChild(2).GetComponent<TMP_InputField>().text = "";
     }
 }

@@ -87,7 +87,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         conversationNPC = 0;
-        selectCharacter = -1;
+        selectCharacter = 0;
         isPressESC = false;
         isMyHome = false;
         isTransactionOpen = false;
@@ -221,12 +221,15 @@ public class UIManager : MonoBehaviour
         ItemObject item19 = findItem(22);
         acquireItem(item19, 35);
 
-        ItemObject item20 = findItem(104);
+        // ItemObject item20 = findItem(104);
+        // acquireItem(item20, 20);
+        // ItemObject item21 = findItem(112);
+        // acquireItem(item21, 25);
+        // ItemObject item22 = findItem(505);
+        // acquireItem(item22, 60);
+        ItemObject item20 = findItem(502);
         acquireItem(item20, 20);
-        ItemObject item21 = findItem(112);
-        acquireItem(item21, 25);
-        ItemObject item22 = findItem(505);
-        acquireItem(item22, 60);
+        acquireItem(item20, 99);
 
         _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().AcquireItem(findItem(2), 9990);
     }
@@ -344,7 +347,7 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            _conversationpanel.conversationWhenAlterBuff();
+            prayToSpirit(51);
         }
 
         if (Input.GetKeyDown(KeyCode.O))
@@ -405,14 +408,14 @@ public class UIManager : MonoBehaviour
 
     public void OnStoragePanel()
     {
-        if(isStorageOpen)
+        if (isStorageOpen)
         {
             runControllPlayer();
-        }else
+        }
+        else
         {
             stopControllPlayer();
         }
-        OnInventory(3);
         _storagepanel.GetComponent<StoragePanel>().handlePanel();
     }
 
@@ -769,8 +772,9 @@ public class UIManager : MonoBehaviour
             case 502:
             case 503:
             case 504:
-                _baseuipanel.transform.GetChild(3).GetChild(1).GetComponentInChildren<Slot>().AddItem(_item, _count);
-                setPlayerQuickSlot(8, _item.ItemCode, _count);
+                int _cnt = _inventory.transform.GetChild(1).GetComponent<Inventory>().getLessBaitCount(_item.ItemCode);
+                _baseuipanel.transform.GetChild(3).GetChild(1).GetComponentInChildren<Slot>().AddItem(_item, _cnt);
+                setPlayerQuickSlot(7, _item.ItemCode, _cnt);
                 break;
             default:
                 break;
@@ -1009,10 +1013,32 @@ public class UIManager : MonoBehaviour
     //     _conversationpanel.selectMusic(_bgmName);
     // }
 
-    // 제사 관련 코드
+    // 정령 버프 및 제사 관련 코드
+    public void prayToSpirit(int _flowerCode)
+    {
+        if (_systemmanager._buffManager._isFlowerBuffActived || _systemmanager._buffManager._isPrayBuffActived)
+        {
+            _conversationpanel.conversationWhenAlterBuff(0);
+        }
+        else
+        {
+            _conversationpanel.conversationWhenAlterBuff(_flowerCode);
+        }
+    }
+
     public void prayToAltar(int _nowFlowerCode, int _newFlowerCode)
     {
+        _conversationpanel.selectWhenAlterPray(_nowFlowerCode, _newFlowerCode);
+    }
 
+    public void callSpiritBuff(int _flower)
+    {
+        // _systemmanager._SpiritBuff.Spirit(findItem(_flower));
+    }
+
+    public void callPrayBuff(int _flower)
+    {
+        // 제단 함수 calll
     }
 
     // 세계수 텔포
@@ -1030,7 +1056,7 @@ public class UIManager : MonoBehaviour
 
     public void downTeleport()
     {
-        // _alterup.goDown();
+        _alterup.goDown();
     }
 
     // 게임 시작 종료
@@ -1052,6 +1078,49 @@ public class UIManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+    }
+
+    // 아이템 정보 Load
+    // 0 : 인벤 || 1 : 퀵슬롯 || 2. 장비 || 3. 창고
+    public void loadItemData(int[,] data, int _key)
+    {
+        Slot[] slots = null;
+        switch (_key)
+        {
+            case 0:
+                slots = _inventory.transform.GetChild(1).GetComponent<Inventory>().getInventorySlots();
+                break;
+            case 1:
+                slots = _inventory.transform.GetChild(0).GetComponent<Quickslot>().getInventorySlots();
+                break;
+            case 2:
+                slots = _inventorypanel.transform.GetChild(0).GetChild(2).GetComponentsInChildren<Slot>();
+                break;
+            case 3:
+                slots = _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().getInventorySlots();
+                break;
+        }
+
+        for (int i = 0; i < data.Length; i++)
+        {
+            if (data[i, 0] == 0)
+            {
+                continue;
+            }
+
+            if (_key == 1 && i == 7)
+            {
+                _baseuipanel.transform.GetChild(3).GetChild(1).GetComponentInChildren<Slot>().AddItem(findItem(data[i, 0]), data[i, 1]);
+                continue;
+            }
+
+            slots[i].AddItem(findItem(data[i, 0]), data[i, 1]);
+        }
+
+        if (_key == 1)
+        {
+            syncQuickSlot();
+        }
     }
 
     public void DayStart()

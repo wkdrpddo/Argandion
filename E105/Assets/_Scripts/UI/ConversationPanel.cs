@@ -271,11 +271,6 @@ public class ConversationPanel : MonoBehaviour
         teleportBtn2.GetComponent<Button>().onClick.AddListener(resetConversationPanel);
     }
 
-    private void runTeleport(int _key)
-    {
-
-    }
-
     private void selectConversation()
     {
         isConversation = true;
@@ -327,15 +322,68 @@ public class ConversationPanel : MonoBehaviour
         return isConversation;
     }
 
-    // 세계수 정령에게 '재단 버프' 중 꽃 들고 말 걸기
-    public void conversationWhenAlterBuff()
+    // 세계수 정령에게 꽃 들고 말 걸기
+    public void conversationWhenAlterBuff(int _key)
     {
         ui.conversationNPC = 10;
         _npcname.text = "세계수의 정령";
         gameObject.SetActive(true);
-        _nomaltalk.text = "제단에서 이미 축복을 받고 있군요, 저희의 축복은 다음에 찾아오세요";
-        isConversation = true;
-        selectConversationCount = 4;
+        if (_key == 0)
+        {
+            isConversation = true;
+            selectConversationCount = 4;
+            _nomaltalk.text = "이미 축복을 받고 있군요, 저희의 축복은 다음에 찾아오세요";
+        }
+        else
+        {
+            string flowerName = ui.findItem(_key).Name;
+            _nomaltalk.text = flowerName + "(이)군요, 정령들과 함께 축복을 해드릴게요-";
+            _selectpanel.SetActive(true);
+
+            GameObject prayBtn1 = Instantiate(conversationButton, _selectpanel.transform);
+            RectTransform prayBtnRect1 = prayBtn1.GetComponent<RectTransform>();
+            prayBtnRect1.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+            prayBtn1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃을 정령에게 건넨다.";
+            prayBtn1.GetComponent<Button>().onClick.AddListener(() => ui.callSpiritBuff(_key));
+
+            GameObject prayBtn2 = Instantiate(conversationButton, _selectpanel.transform);
+            RectTransform prayBtnRect2 = prayBtn2.GetComponent<RectTransform>();
+            prayBtnRect2.SetLocalPositionAndRotation(new Vector3(0, -11, 0), ui.rotateZero);
+            prayBtn2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃을 건네지 않는다.";
+            prayBtn2.GetComponent<Button>().onClick.AddListener(resetConversationPanel);
+        }
+    }
+
+    // 제단 제사 패널
+    public void selectWhenAlterPray(int nowCode, int newCode)
+    {
+        gameObject.SetActive(true);
+
+        string flowerName = "";
+        if (nowCode == 0)
+        {
+            flowerName = ui.findItem(newCode).Name;
+            _nomaltalk.text = flowerName + "을 제단에 바치고 제사를 지내겠습니까?";
+        }
+        else
+        {
+            _nomaltalk.text = ui.findItem(nowCode).Name + "의 기운이 아르간디움에 흐르고 있습니다.\n"
+                    + ui.findItem(newCode).Name + "을(를) 새롭게 제단에 바치고 제사를 지내겠습니까?";
+        }
+
+        GameObject prayBtn1 = Instantiate(conversationButton, _selectpanel.transform);
+        RectTransform prayBtnRect1 = prayBtn1.GetComponent<RectTransform>();
+        prayBtnRect1.SetLocalPositionAndRotation(new Vector3(0, 11, 0), ui.rotateZero);
+        prayBtn1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃을 제단에 바친다.";
+        prayBtn1.GetComponent<Button>().onClick.AddListener(() => ui.callPrayBuff(newCode));
+
+        GameObject prayBtn2 = Instantiate(conversationButton, _selectpanel.transform);
+        RectTransform prayBtnRect2 = prayBtn2.GetComponent<RectTransform>();
+        prayBtnRect2.SetLocalPositionAndRotation(new Vector3(0, -22, 0), ui.rotateZero);
+        prayBtn2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃을 바치지 않고 떠난다.";
+        prayBtn2.GetComponent<Button>().onClick.AddListener(resetConversationPanel);
+
+        _selectpanel.SetActive(true);
     }
 
     // NPC 대사 저장 배열
