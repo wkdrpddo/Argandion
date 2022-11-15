@@ -84,15 +84,21 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void SetSlotCount(int _count)
     {
+        // Debug.Log("itemCount : " + itemCount);
         itemCount += _count;
         text_Count.text = itemCount.ToString();
 
         if (itemCount <= 0)
+        {
+            Debug.Log("ClearSlot");
             ClearSlot();
+
+        }
     }
 
     private void ClearSlot()
     {
+        // Debug.Log("======== clear slot " + idx);
         item = null;
         itemCount = 0;
         itemImage.sprite = null;
@@ -107,7 +113,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         // 좌클릭 시, 상점이 열려있는 경우
         if (eventData.button == PointerEventData.InputButton.Left && ui.getIsOpenTransaction() && itemCount != 0)
         {
-            if (!(item.ItemCode >= 50 && item.ItemCode <= 56) && !(item.ItemCode >= 300 && item.ItemCode <= 304) && item.ItemCode != 320)
+            if (!(item.ItemCode >= 50 && item.ItemCode <= 56) && !(item.ItemCode >= 300 && item.ItemCode <= 304) && item.ItemCode != 320 && !(item.ItemCode >= 212 && item.ItemCode <= 219))
             {
                 ui.OnTradeModal(item.Name, item.ItemCode.ToString(), itemCount, item.SellCost, 0, -1, idx);
             }
@@ -149,6 +155,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
                         break;
                     case "장비":
                     case "꽃":
+                    case "씨앗":
                         ui.clickRightSlotModal(2, Input.mousePosition - new Vector3(2, -2, 0), item, itemCount, idx);
                         break;
                     case "식량":
@@ -168,7 +175,15 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (ui.getIsOpenTransaction() && itemCount != 0)
         {
             Vector3 vec3 = Input.mousePosition - new Vector3(2, -2, 0);
-            string _text = item.Name + "\n가격 : " + item.SellCost;
+            string _text = item.Name;
+            if (item.SellCost == -1)
+            {
+                _text += "\n판매불가 아이템";
+            }
+            else
+            {
+                _text += "\n가격 : " + item.SellCost;
+            }
             ui.onSlotOverModal(_text, vec3);
         }
     }

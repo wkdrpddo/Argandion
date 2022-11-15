@@ -81,15 +81,20 @@ public class Quickslot : MonoBehaviour
                     {
                         if (slots[i].itemCount + _count <= 99)
                         {
-                            ui.setPlayerQuickSlot(i, _item.ItemCode, _count);
+                            ui.setPlayerQuickSlot(i, _item.ItemCode, slots[i].itemCount + _count);
                             slots[i].SetSlotCount(_count);
+
+                            ui.syncQuickSlot();
                             return;
                         }
                         else
                         {
                             int temp = slots[i].itemCount;
+                            ui.setPlayerQuickSlot(i, _item.ItemCode, 99);
                             slots[i].SetSlotCount(99 - slots[i].itemCount);
                             AcquireItem(_item, _count + temp - 99);
+
+                            ui.syncQuickSlot();
                             return;
                         }
                     }
@@ -103,6 +108,8 @@ public class Quickslot : MonoBehaviour
             {
                 ui.setPlayerQuickSlot(i, _item.ItemCode, _count);
                 slots[i].AddItem(_item, _count);
+
+                ui.syncQuickSlot();
                 return;
             }
 
@@ -126,6 +133,8 @@ public class Quickslot : MonoBehaviour
                         if (slots[i].itemCount + _count <= 99)
                         {
                             slots[i].SetSlotCount(_count);
+
+                            ui.syncQuickSlot();
                             return;
                         }
                         else
@@ -133,6 +142,8 @@ public class Quickslot : MonoBehaviour
                             int temp = slots[i].itemCount;
                             slots[i].SetSlotCount(99 - slots[i].itemCount);
                             AcquireItem(_item, _count + temp - 99);
+
+                            ui.syncQuickSlot();
                             return;
                         }
                     }
@@ -145,6 +156,8 @@ public class Quickslot : MonoBehaviour
             if (slots[i].itemCount == 0)
             {
                 slots[i].AddItem(_item, _count);
+
+                ui.syncQuickSlot();
                 return;
             }
 
@@ -167,7 +180,17 @@ public class Quickslot : MonoBehaviour
 
     public void SellQuickslotItem(int slotIdx, int count)
     {
+        if (slots[slotIdx].itemCount - count == 0)
+        {
+            ui.setPlayerQuickSlot(slotIdx, 0, 0);
+        }
+        else
+        {
+            ui.setPlayerQuickSlot(slotIdx, slots[slotIdx].item.ItemCode, slots[slotIdx].itemCount - count);
+        }
         slots[slotIdx].SetSlotCount(count * -1);
+
+        ui.syncQuickSlot();
     }
 
     public Slot[] getInventorySlots()
