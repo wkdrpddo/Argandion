@@ -41,7 +41,12 @@ public class TeleportAltar : MonoBehaviour
     public void Interaction()
     {
         Debug.Log("인터렉션");
-        _uiManager.OnConversationPanel(11);
+        // 게임오브젝트 == 으로 비교 가능?
+        if(gameObject == _teleportDown){ // 올라가기
+            _uiManager.OnConversationPanel(11);
+        }else if(gameObject == _teleportUp){ // 내려가기
+            _uiManager.OnConversationPanel(12);
+        }
     }
 
     // 위로 올라갈 때 call
