@@ -22,12 +22,16 @@ public class TreeObject : MonoBehaviour
     }
     public void DayEnd()
     {
-        _days += 1;
-        if (!_isFallen && _days >= 4)
+        if (!_isFallen)
         {
-            int rnd = Random.Range(0,1);
-            Instantiate(_trees[rnd],new Vector3(gameObject.transform.position.x,gameObject.transform.position.y+6f,gameObject.transform.position.z),Quaternion.Euler(90,Random.Range(0f,360f),0),gameObject.transform.parent.gameObject.transform);
-            Destroy(gameObject);
+            _days += 1;
+            if (_days >= 4)
+            {
+                int rnd = Random.Range(0,1);
+                Instantiate(_trees[rnd],new Vector3(gameObject.transform.position.x,gameObject.transform.position.y+6f,gameObject.transform.position.z),Quaternion.Euler(90,Random.Range(0f,360f),0),gameObject.transform.parent.gameObject.transform);
+                Destroy(gameObject);
+            }
+            
         }
     }
 

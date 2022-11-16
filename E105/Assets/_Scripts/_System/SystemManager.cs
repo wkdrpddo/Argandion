@@ -34,7 +34,6 @@ public class SystemManager : MonoBehaviour
     public int _purification_size;
     public bool[] _purification = new bool[_sector_size];
     public WorldTree _worldTree;
-    private bool idx4;
 
     public SectorObject _sectorTest;
     [SerializeField] private SectorObject[] _sectors;
@@ -409,7 +408,7 @@ public class SystemManager : MonoBehaviour
             // 밭 활성화
             // 집 자라기
             _houseChange.ChangeHouse();
-            // 세계수 자라기
+            _worldTree.ChangeTreeLevel();
 
         }
         if (_development_level == 3)
@@ -420,7 +419,7 @@ public class SystemManager : MonoBehaviour
             // 밭 활성화
             // 집 자라기
             _houseChange.ChangeHouse();
-            // 세계수 자라기
+            _worldTree.ChangeTreeLevel();
         }
     }
 

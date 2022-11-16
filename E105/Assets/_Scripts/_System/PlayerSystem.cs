@@ -213,7 +213,7 @@ public class PlayerSystem : MonoBehaviour
 
             if (_equipList[_equipItem, 1] == 4)
             {
-                Collider[] ores = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f), new Vector3(0.5f, 0.5f, 0.5f));
+                Collider[] ores = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f), new Vector3(0.5f, 1.5f, 0.5f));
                 foreach (var ore in ores)
                 {
                     if (ore.tag == "Ore")
@@ -230,7 +230,7 @@ public class PlayerSystem : MonoBehaviour
             {
                 // Debug.Log(_character.forward);
                 Vector3 pos = new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f);
-                Collider[] trees = Physics.OverlapBox(pos, new Vector3(0.5f, 0.5f, 0.5f));
+                Collider[] trees = Physics.OverlapBox(pos, new Vector3(0.5f, 1.5f, 0.5f));
                 foreach (var tree in trees)
                 {
                     if (tree.gameObject.layer == 7)

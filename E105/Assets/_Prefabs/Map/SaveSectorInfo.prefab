@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &325373977655731564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 325373977655731561}
+  - component: {fileID: 325373977655731566}
+  - component: {fileID: 325373977655731567}
+  m_Layer: 0
+  m_Name: SaveSectorInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &325373977655731561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325373977655731564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 137.7997, y: 8, z: -2.4804}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &325373977655731566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325373977655731564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37157c81888ea6748817a584eefd8375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sectorNumber: 1
+  _purifier: 0
+  _flower_max: 1
+  _flower_remain: 0
+  _flower_spawn_base_percent: 0.2
+  _flower_spawn_percent: 0.2
+  _flower_spawn_factor: 1.1
+  _flower_spawn_bonus_factor: 1.05
+  _flower_spawn_distance: 0
+  _tree_max: 0
+  _tree_remain: 0
+  _tree_spawn_base_percent: 0
+  _tree_spawn_factor: 0
+  _tree_ruin_spawn_factor: 0
+  _tree_ruin_max_factor: 0
+  _mushroom_spawn_base_percent: 0.12
+  _mushroom_type_factor: 090000001200000014000000
+  _mushroom_count_factor: 0200000003000000
+  _mushroom_ruin_factor: 0.5
+  _branch_spawn_base_percent: 0.18
+  _branch_ruin_factor: 1.5
+  _branch_type_factor: 05000000080000000a000000
+  _ore_spawn_base_percent: 0
+  _ore_ruin_factor: 0
+  _ore_type_factor: 000000000000000000000000
+  _ore_count_factor: 000000000000000000000000
+  _stone_spawn_base_percent: 0
+  _stone_ruin_factor: 0
+  _stone_type_factor: 000000000000000000000000
+  _animal_spawn_base_percent: 0.03
+  _animal_spawn_ruin_percent: 0.06
+  _animal_type_base_factor: 00000000000000000100000001000000
+  _animal_type_ruin_factor: 00000000000000000100000001000000
+  _animal_bunny_count_factor: 
+  _animal_deer_count_factor: 
+  _animal_wolf_count_factor: 00000000000000000400000005000000
+  _animal_bear_count_factor: 
+  _SectorCollider:
+  - {fileID: 0}
+  - {fileID: 0}
+  _SectorArea: []
+  _floweObject: {fileID: 6065032735055853700, guid: 46fcb90df9fcde840a8d461a5e629088, type: 3}
+  _items: {fileID: 0}
+--- !u!114 &325373977655731567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325373977655731564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37157c81888ea6748817a584eefd8375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sectorNumber: 2
+  _purifier: 0
+  _flower_max: 2
+  _flower_remain: 0
+  _flower_spawn_base_percent: 0.2
+  _flower_spawn_percent: 0.2
+  _flower_spawn_factor: 1.12
+  _flower_spawn_bonus_factor: 1.05
+  _flower_spawn_distance: 0
+  _tree_max: 25
+  _tree_remain: 0
+  _tree_spawn_base_percent: 0.18
+  _tree_spawn_factor: 2
+  _tree_ruin_spawn_factor: 1.2
+  _tree_ruin_max_factor: 1.4
+  _mushroom_spawn_base_percent: 0.4
+  _mushroom_type_factor: 0b0000001100000014000000
+  _mushroom_count_factor: 0200000003000000
+  _mushroom_ruin_factor: 0.5
+  _branch_spawn_base_percent: 0.35
+  _branch_ruin_factor: 1.5
+  _branch_type_factor: 03000000080000000a000000
+  _ore_spawn_base_percent: 0
+  _ore_ruin_factor: 0
+  _ore_type_factor: 000000000000000000000000
+  _ore_count_factor: 000000000000000000000000
+  _stone_spawn_base_percent: 0.1
+  _stone_ruin_factor: 1.5
+  _stone_type_factor: 07000000090000000a000000
+  _animal_spawn_base_percent: 0.1
+  _animal_spawn_ruin_percent: 0.06
+  _animal_type_base_factor: 0d000000120000001400000014000000
+  _animal_type_ruin_factor: 01000000020000000700000000000000
+  _animal_bunny_count_factor: 00000000bc020000e7030000e7030000e7030000e7030000e7030000e7030000e7030000e7030000e8030000
+  _animal_deer_count_factor: 00000000080000000a000000
+  _animal_wolf_count_factor: 00000000000000000400000005000000
+  _animal_bear_count_factor: 
+  _SectorCollider:
+  - {fileID: 0}
+  - {fileID: 0}
+  _SectorArea: []
+  _floweObject: {fileID: 4783104584564589389, guid: cd1112311a88e014c9dcaea2523556c1, type: 3}
+  _items: {fileID: 0}
