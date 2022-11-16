@@ -27,7 +27,7 @@ public class SaveData
     // Inventory - 인벤토리 25칸 , 창고 100칸, 장비 4칸, 퀵슬롯 7칸, 미끼 1칸
     public int[,] _inventory = new int [25,2];
     public int[,] _storage = new int [100,2];
-    public int[] _equipment = new int[4];
+    public int[,] _equipment = new int[4,2];
     public int[,] _quickslot = new int[8,2];
 
     // 동물 개체수 및 잔여 수용량

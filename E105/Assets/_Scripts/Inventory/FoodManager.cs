@@ -27,6 +27,7 @@ public class FoodManager : MonoBehaviour
     // private EventManager _eventManager;
     // private UIManager _uiManager;s
     public EventPanel _eventPanel;
+    private ParticleSystem _particle;
 
     private int[] drinks = { 128, 129, 130 };
     private int[] foods = { 120, 121, 122, 123, 124, 125, 126, 127, 131, 132 };
@@ -50,6 +51,7 @@ public class FoodManager : MonoBehaviour
     {
         _player = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
+        _particle = _player.transform.Find("PlayerBody").transform.Find("Particle").GetComponent<ParticleSystem>();
         // time = 0; // 테스트 용
     }
 
@@ -85,6 +87,7 @@ public class FoodManager : MonoBehaviour
     // 음식 먹음
     public void UseFood(int foodCode)
     {
+        _particle.Play();
         // 변수 세팅
         _itemCode = foodCode;
         _eventCode = FoodToEventCodeArray.arr[foodCode];

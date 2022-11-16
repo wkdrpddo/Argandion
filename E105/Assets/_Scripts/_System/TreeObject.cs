@@ -74,4 +74,9 @@ public class TreeObject : MonoBehaviour
             Instantiate(_droppedItem[2], trans.position + new Vector3(Random.Range(-2f,2f),3.5f,Random.Range(-2f,2f)), trans.rotation, _itemParent.transform);
         }
     }
+
+    public SectorObject getSector()
+    {
+        return _sector;
+    }
 }

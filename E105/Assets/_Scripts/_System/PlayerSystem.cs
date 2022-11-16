@@ -24,7 +24,7 @@ public class PlayerSystem : MonoBehaviour
     private SoundManager _soundManager;
 
     // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대), 이동불가 시간, 작업시간}
-    public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 10, 0, 0, 0, 20 }, { 20, 0, 0, 0, 10 }, { 20, 0, 0, 0, 1} };
+    public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 320, 6, 0, 0, 1 }, { 20, 0, 0, 0, 10 }, { 502, 0, 0, 0, 60} };
     public GameObject[] _equipment = new GameObject[7];
     public int _equipItem = 0;
 
@@ -50,14 +50,12 @@ public class PlayerSystem : MonoBehaviour
     private bool _readyToHarvest = false;
     private bool _nearCarpentor = false;
     private bool _nearItem = false;
+    private float _runtime;
+    private bool _removeHandItem;
 
     [SerializeField]
     private float _act_speed = 1.0f;
     private float _delay_speed = 1.0f;
-
-    public float _gold;
-
-
     public int chestIdx = 0;
     public int chestCount = 1;
     public int invenIdx = 0;
@@ -109,6 +107,10 @@ public class PlayerSystem : MonoBehaviour
         Interaction();
         watering();
         fff();
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            _pss.Play();
+        }
     }
 
     void GetBuff()
@@ -168,7 +170,7 @@ public class PlayerSystem : MonoBehaviour
                 }
                 rb.velocity = (speed);
                 _playerAnimator.SetInteger("action", 2);
-
+                _runtime += Time.deltaTime;
             }
             else
             {
@@ -204,12 +206,12 @@ public class PlayerSystem : MonoBehaviour
         }
         if (_canAction && Input.GetAxisRaw("useKey") == 1 && _delayedTimer <= 0)
         {
-            if (_equipList[_equipItem, 1] >= 3)
+            if (_equipList[_equipItem, 1] >= 3 && _equipList[_equipItem, 1] <= 5)
             {
                 _playerAnimator.SetInteger("action", ((int)_equipList[_equipItem, 1]));
                 _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
                 _movedDelay = _equipList[_equipItem, 3] / _act_speed;
-                _equipment[_equipItem].SetActive(true);
+                _equipment[(int)_equipList[_equipItem,1]].SetActive(true);
                 _setHand = true;
             }
 
@@ -251,50 +253,58 @@ public class PlayerSystem : MonoBehaviour
             _delayedTimer = Mathf.Max(0, _delayedTimer);
         }
         _character.position = transform.position;
+        if (_runtime>1)
+        {
+            _runtime -= 1;
+            damageStamina(1);
+        }
     }
 
     private void changeItem()
     {
-        if (Input.GetAxisRaw("equip1") == 1)
+        if (_canInteract)
         {
-            _equipItem = 0;
-            _UIManager.setEquipPointer(1);
-        }
-        else if (Input.GetAxisRaw("equip2") == 1)
-        {
-            _equipItem = 1;
-            _UIManager.setEquipPointer(2);
-        }
-        else if (Input.GetAxisRaw("equip3") == 1)
-        {
-            _equipItem = 2;
-            _UIManager.setEquipPointer(3);
-        }
-        else if (Input.GetAxisRaw("equip4") == 1)
-        {
-            _equipItem = 3;
-            _UIManager.setEquipPointer(4);
-        }
-        else if (Input.GetAxisRaw("equip5") == 1)
-        {
-            _equipItem = 4;
-            _UIManager.setEquipPointer(5);
-        }
-        else if (Input.GetAxisRaw("equip6") == 1)
-        {
-            _equipItem = 5;
-            _UIManager.setEquipPointer(6);
-        }
-        else if (Input.GetAxisRaw("equip7") == 1)
-        {
-            _equipItem = 6;
-            _UIManager.setEquipPointer(7);
+            if (Input.GetAxisRaw("equip1") == 1)
+            {
+                _equipItem = 0;
+                _UIManager.setEquipPointer(1);
+            }
+            else if (Input.GetAxisRaw("equip2") == 1)
+            {
+                _equipItem = 1;
+                _UIManager.setEquipPointer(2);
+            }
+            else if (Input.GetAxisRaw("equip3") == 1)
+            {
+                _equipItem = 2;
+                _UIManager.setEquipPointer(3);
+            }
+            else if (Input.GetAxisRaw("equip4") == 1)
+            {
+                _equipItem = 3;
+                _UIManager.setEquipPointer(4);
+            }
+            else if (Input.GetAxisRaw("equip5") == 1)
+            {
+                _equipItem = 4;
+                _UIManager.setEquipPointer(5);
+            }
+            else if (Input.GetAxisRaw("equip6") == 1)
+            {
+                _equipItem = 5;
+                _UIManager.setEquipPointer(6);
+            }
+            else if (Input.GetAxisRaw("equip7") == 1)
+            {
+                _equipItem = 6;
+                _UIManager.setEquipPointer(7);
+            }
         }
     }
 
     private void checkHand()
     {
-        if (_movedDelay <= 0 && _setHand)
+        if (_movedDelay <= 0 && _setHand || _removeHandItem)
         {
             _setHand = false;
             foreach (var obj in _equipment)
@@ -304,6 +314,19 @@ public class PlayerSystem : MonoBehaviour
                     obj.SetActive(false);
                 }
             }
+            _removeHandItem = false;
+        }
+    }
+
+    public void setHandItem(bool value=false, int hand=0)
+    {
+        if (!value)
+        {
+            _equipment[hand].SetActive(true);
+        }
+        else
+        {
+            _removeHandItem = value;
         }
     }
 
@@ -364,7 +387,17 @@ public class PlayerSystem : MonoBehaviour
                             _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
                             _movedDelay = _equipList[_equipItem, 3] / _act_speed;
                         }
-                        
+                    }
+                    if (_equipList[_equipItem, 1] == 6 && _equipList[7,4] > 0 && col.TryGetComponent(out Fishing fis))
+                    {
+                        Debug.Log("낚싯터 인식");
+                        fis.Interaction(_equipList[_equipItem, 0],_equipList[7,0]);
+                        // _UIManager.quickUse(_equipList[7,0],1,7);
+                    }
+                    //제사창
+                    if (_equipList[_equipItem,0] >= 50 && _equipList[_equipItem, 0] <= 56 && col.TryGetComponent(out AltarTableInteraction alt))
+                    {
+                        // alt.Interaction(_equipList[_equipItem, 0],_equipItem);
                     }
                     // building쪽 ==============
                     if (col.TryGetComponent(out SignInteraction signInteraction))
@@ -497,22 +530,6 @@ public class PlayerSystem : MonoBehaviour
                 }
             }
         }
-
-        if (_nearAlter && Input.GetButtonDown("fff"))
-        {
-            ItemObject item = _theInventory.StoreItem(0, 0);
-            if (item.Category == "꽃")
-            {
-                PrayBuff pray = _nearObject.GetComponent<PrayBuff>();
-                // pray.Pray(item);
-                pray.Pray(item.ItemCode); // 이 부분도 수정(pray 함수 파라미터 변경)
-            }
-            else
-            {
-                Debug.Log("꽃가져와");
-            }
-        }
-
     }
     void watering()
     {
@@ -690,10 +707,10 @@ public class PlayerSystem : MonoBehaviour
             _nearAlter = false;
         }
 
-        if (other.gameObject.CompareTag("droppedItem"))
-        {
-            _nearObject = null;
-        }
+        // if (other.gameObject.CompareTag("droppedItem"))
+        // {
+        //     _nearObject = null;
+        // }
 
     }
 
@@ -710,7 +727,7 @@ public class PlayerSystem : MonoBehaviour
         {
             _health = _health_max;
         }
-        // _UIManager.setHealthBar(_health/_health_max);
+        _UIManager.setHealthBar(_health/_health_max);
     }
 
     public void damageHealth(float value)
@@ -731,6 +748,7 @@ public class PlayerSystem : MonoBehaviour
             _health = 0;
             playerDeath();
         }
+        _UIManager.setHealthBar(_health/_health_max);
     }
 
     public void changeEnergy(float value)
@@ -745,7 +763,7 @@ public class PlayerSystem : MonoBehaviour
         {
             _stamina = _stamina_max;
         }
-        // _UIManager.setEnergyBar(_stamina/_stamina_max);
+        _UIManager.setEnergyBar(_stamina/_stamina_max);
     }
 
     public void damageStamina(float value)
@@ -766,6 +784,7 @@ public class PlayerSystem : MonoBehaviour
             _stamina = 0;
             playerDeath();
         }
+        _UIManager.setEnergyBar(_stamina/_stamina_max);
     }
 
     private void playerDeath()
@@ -824,7 +843,6 @@ public class PlayerSystem : MonoBehaviour
 
     public void setAnimator(int index, float time)
     {
-        Debug.Log(index);
         otherAnimated = true;
         _playerAnimator.SetInteger("action", index);
         _movedDelay = time;

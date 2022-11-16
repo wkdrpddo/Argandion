@@ -25,6 +25,7 @@ public class SystemManager : MonoBehaviour
     public UIManager _UIManager;
     public EventPanel _EventPanel;
     public PrayBuff _PrayBuff;
+    public SpiritBuff _SpiritBuff;
     public int _development_level;  // 1부터
     public int _purification_sector = 0;
     static int _sector_size = 8;
@@ -55,9 +56,7 @@ public class SystemManager : MonoBehaviour
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _PrayBuff = GameObject.Find("BuffManager").GetComponent<PrayBuff>();
         _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
-
-
-
+        _SpiritBuff = GameObject.Find("BuffManager").GetComponent<SpiritBuff>();
     }
 
     // Update is called once per frame
@@ -173,7 +172,7 @@ public class SystemManager : MonoBehaviour
         }
     }
 
-    private void DayEnd()
+    public void DayEnd()
     {
         if (1 <= _weather && _weather <= 9)
         {
