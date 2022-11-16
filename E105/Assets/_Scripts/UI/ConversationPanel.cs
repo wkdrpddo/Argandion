@@ -341,6 +341,7 @@ public class ConversationPanel : MonoBehaviour
             teleportBtn.GetComponent<Button>().onClick.AddListener(() => ui.downTeleport());
         }
 
+        Debug.Log("체킹");
         GameObject teleportBtn2 = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform teleportBtnRect2 = teleportBtn2.GetComponent<RectTransform>();
         teleportBtnRect2.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);

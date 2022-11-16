@@ -6,16 +6,17 @@ public class TeleportAltar : MonoBehaviour
 {
     private SoundManager _soundManager;
     private PlayerSystem _playerSystem;
-    private UIManager _uiManager;
+    [SerializeField] private UIManager _uiManager;
     private SectorObject _sector8; 
     [SerializeField] private GameObject _teleportUp; // 시작 전 넣어주기
     [SerializeField] private GameObject _teleportDown; // 시작 전 넣어주기
-    [SerializeField] private GameObject _fxPtD;
-    [SerializeField] private GameObject _fxPtU;
+    private GameObject _fxPtD;
+    private GameObject _fxPtU;
 
     void Start()
     {
         _playerSystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
+        _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         _sector8 = GameObject.Find("Sector8").GetComponent<SectorObject>();
         _fxPtD = _teleportDown.transform.GetChild(0).gameObject;
@@ -24,8 +25,8 @@ public class TeleportAltar : MonoBehaviour
     }
 
     // 테스트 코드 ========================================================
-    public bool _goup;
-    public bool _godown;
+    // public bool _goup;
+    // public bool _godown;
 
     // private void Update() {
     //     if(_goup){
@@ -43,8 +44,10 @@ public class TeleportAltar : MonoBehaviour
         Debug.Log("인터렉션");
         // 게임오브젝트 == 으로 비교 가능?
         if(gameObject == _teleportDown){ // 올라가기
+            Debug.Log("올라가기");
             _uiManager.OnConversationPanel(11);
         }else if(gameObject == _teleportUp){ // 내려가기
+            Debug.Log("내려가기");
             _uiManager.OnConversationPanel(12);
         }
     }
@@ -79,6 +82,7 @@ public class TeleportAltar : MonoBehaviour
         _playerSystem._canMove = false;
         yield return new WaitForSeconds(0.5f);
         // 이동
+        Debug.Log(_teleportUp.transform.position.y);
         _playerSystem.transform.position = new Vector3(_teleportUp.transform.position.x, _teleportUp.transform.position.y, _teleportUp.transform.position.z);
         // 사운드
         // _soundManager.playBGM4();
@@ -97,6 +101,7 @@ public class TeleportAltar : MonoBehaviour
         _playerSystem._canMove = false;
         yield return new WaitForSeconds(0.5f);
         // 이동
+        Debug.Log(_teleportDown.transform.position.y);
         _playerSystem.transform.position = new Vector3(_teleportDown.transform.position.x, _teleportDown.transform.position.y, _teleportDown.transform.position.z);
         // 사운드
         // if(_sector8._purifier){
