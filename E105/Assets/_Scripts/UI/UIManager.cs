@@ -104,7 +104,7 @@ public class UIManager : MonoBehaviour
         // _eventmanager = GameObject.Find("EventManager").GetComponent<EventManager>();
 
 
-        _systemmanager.setPlayerGold(245000);
+        _systemmanager.setPlayerGold(9999999);
 
         _baseuipanel = gameObject.transform.Find("BaseUIPanel").gameObject;
         _healthbar = _baseuipanel.transform.GetChild(0).GetComponent<Slider>();
@@ -176,31 +176,57 @@ public class UIManager : MonoBehaviour
         _announceText = _eventAnnounce.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
         _eventAnnounce.SetActive(false);
 
-        ItemObject item1 = findItem(2);
-        acquireItem(item1, 98);
-        ItemObject item2 = findItem(3);
-        acquireItem(item2, 99);
-        ItemObject item3 = findItem(106);
-        acquireItem(item3, 30);
-        ItemObject item4 = findItem(127);
-        acquireItem(item4, 99);
-        acquireItem(item4, 99);
+        // 꽃
+        ItemObject item1 = findItem(50);
+        acquireItem(item1, 10);
+        ItemObject item2 = findItem(51);
+        acquireItem(item2, 10);
+        ItemObject item3 = findItem(52);
+        acquireItem(item3, 10);
+        ItemObject item4 = findItem(53);
         acquireItem(item4, 10);
-        ItemObject item5 = findItem(302);
-        acquireItem(item5, 1);
-        ItemObject item10 = findItem(110);
-        acquireItem(item10, 1);
-        ItemObject item11 = findItem(120);
-        acquireItem(item11, 1);
+        ItemObject item5 = findItem(54);
+        acquireItem(item5, 10);
+        ItemObject item10 = findItem(55);
+        acquireItem(item10, 10);
+        ItemObject item11 = findItem(56);
+        acquireItem(item11, 10);
+        // 그 외 재료
+        ItemObject item6 = findItem(1);
+        acquireItem(item6, 40);
+        ItemObject item7 = findItem(2);
+        acquireItem(item7, 27);
+        ItemObject item8 = findItem(3);
+        acquireItem(item8, 27);
+        ItemObject item9 = findItem(4);
+        acquireItem(item9, 99);
+        acquireItem(item9, 71);
 
-        ItemObject item6 = findItem(54);
-        acquireItem(item6, 6);
-        ItemObject item7 = findItem(4);
-        acquireItem(item7, 35);
-        ItemObject item8 = findItem(21);
-        acquireItem(item8, 15);
-        ItemObject item9 = findItem(12);
-        acquireItem(item9, 15);
+        ItemObject item12 = findItem(10);
+        acquireItem(item12, 99);
+        acquireItem(item12, 41);
+        ItemObject item13 = findItem(11);
+        acquireItem(item13, 10);
+        ItemObject item14 = findItem(12);
+        acquireItem(item14, 40);
+        ItemObject item15 = findItem(13);
+        acquireItem(item15, 2);
+        ItemObject item16 = findItem(14);
+        acquireItem(item16, 5);
+
+        ItemObject item17 = findItem(20);
+        acquireItem(item17, 40);
+        ItemObject item18 = findItem(21);
+        acquireItem(item18, 15);
+        ItemObject item19 = findItem(22);
+        acquireItem(item19, 35);
+
+        ItemObject item20 = findItem(104);
+        acquireItem(item20, 20);
+        ItemObject item21 = findItem(112);
+        acquireItem(item21, 25);
+        ItemObject item22 = findItem(505);
+        acquireItem(item22, 60);
 
         _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().AcquireItem(findItem(2), 9990);
     }
@@ -373,8 +399,8 @@ public class UIManager : MonoBehaviour
     public void OnBuildEventPanel(int value)
     {
         stopControllPlayer();
-        // int step = _systemmanager.getPuriCount();
-        _buildeventpanel.GetComponent<BuildEventPanel>().OnPanel(value, 1);
+        int step = _systemmanager.getPuriCount();
+        _buildeventpanel.GetComponent<BuildEventPanel>().OnPanel(value, step);
     }
 
     public void OnStoragePanel()
