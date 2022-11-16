@@ -837,7 +837,7 @@ GameObject:
   - component: {fileID: 4196084403019089689}
   - component: {fileID: 4196084403019089695}
   - component: {fileID: 4196084403019089694}
-  - component: {fileID: 4196084403019089692}
+  - component: {fileID: 7956994238423664589}
   m_Layer: 5
   m_Name: OptionPanel
   m_TagString: Untagged
@@ -912,7 +912,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4196084403019089692
+--- !u!114 &7956994238423664589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -924,6 +924,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee3752f28bd65a48b09475c08e31f2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundmanager: {fileID: 0}
+  ui: {fileID: 0}
 --- !u!1 &4196084403053303406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1873,7 +1875,7 @@ PrefabInstance:
     - target: {fileID: 1795787526645945135, guid: a4bab3047a3dfa843837c25cf6d82e53, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4196084403019089692}
+      objectReference: {fileID: 0}
     - target: {fileID: 1795787526645945135, guid: a4bab3047a3dfa843837c25cf6d82e53, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: handelPanel

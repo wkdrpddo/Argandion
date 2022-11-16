@@ -20,8 +20,8 @@ public class SoundManager : MonoBehaviour
     [Header("사운드 플레이어")]
     [SerializeField] AudioSource bgmPlayer;
 
-    private float Sound_Background = 0.5f;
-    private float Sound_Effect = 0.5f;
+    [SerializeField] private float Sound_Background = 0.5f;
+    [SerializeField] private float Sound_Effect = 0.5f;
 
     private UIManager _UIManager;
 
@@ -87,7 +87,7 @@ public class SoundManager : MonoBehaviour
     public void setBackgroundSound(Slider volume)
     {
         Sound_Background = volume.value;
-        bgmPlayer.volume = Sound_Background;
+        // bgmPlayer.volume = Sound_Background;
     }
 
     public void setEffectSound(Slider volume)
