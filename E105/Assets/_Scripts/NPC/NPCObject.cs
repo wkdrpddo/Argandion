@@ -23,7 +23,12 @@ public class NPCObject : MonoBehaviour
     public void Interaction()
     {
         _animator.SetTrigger("move");
-        this.transform.LookAt(_PlayerObject.transform);
+
+        if(this.name == "Spirit"){
+            this.transform.LookAt(_PlayerObject.transform.position + new Vector3(0,2f,0));
+        }else{
+            this.transform.LookAt(_PlayerObject.transform);
+        }
         
         ConversationStart();
     }
