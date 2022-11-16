@@ -287,6 +287,10 @@ public class UIManager : MonoBehaviour
                 {
                     _conversationpanel.GetComponent<ConversationPanel>().conversation();
                 }
+                else if (_conversationpanel.GetComponent<ConversationPanel>().getIsInformation())
+                {
+                    _conversationpanel.GetComponent<ConversationPanel>().information();
+                }
                 else
                 {
                     switch (conversationCnt)
@@ -924,6 +928,11 @@ public class UIManager : MonoBehaviour
         stopControllPlayer();
         setCanAction(false);
         setCanInteract(false);
+    }
+
+    public void delayRunControllKeys()
+    {
+        Invoke("runControllKeys", 0.2f);
     }
 
     public void runControllKeys()

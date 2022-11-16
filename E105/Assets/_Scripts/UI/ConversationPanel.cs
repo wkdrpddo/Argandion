@@ -23,13 +23,19 @@ public class ConversationPanel : MonoBehaviour
     private TextMeshProUGUI _npcname;
     private TextMeshProUGUI _nomaltalk;
     private GameObject _selectpanel;
-    private int conversationCount = -1;         // -1 : 대화 전, 0 : 대화 시작, 1 : 마지막 대화
+    private int conversationCount;        // -1 : 대화 전, 0 : 대화 시작, 1 : 마지막 대화
 
     public GameObject conversationButton;
     private UIManager ui;
+    // 선택창 '대화' 선택 시 관련 변수
     private bool isConversation;
-    private int selectConversationCount = 0;        // 선택창에서 '대화' 선택 시의 카운트
+    private int selectConversationCount;
+    // 선택창 '도움말' 선택 시 관련 변수
+    private bool isInformation;
+    private int informationCount;
+    private int isSpirit;
 
+    // 변수 get 함수
     public int getConversationCnt()
     {
         return conversationCount;
@@ -38,6 +44,28 @@ public class ConversationPanel : MonoBehaviour
     public bool getIsConversation()
     {
         return isConversation;
+    }
+
+    public bool getIsInformation()
+    {
+        return isInformation;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        ui = gameObject.GetComponentInParent<UIManager>();
+        _npcname = transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
+        _nomaltalk = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+        conversationCount = -1;
+
+        _selectpanel = transform.GetChild(0).GetChild(1).gameObject;
+
+        isConversation = false;
+        selectConversationCount = 0;
+        isInformation = false;
+        informationCount = 0;
+        isSpirit = -1;
     }
 
     // NPC 및 상호작용 대화 최초 시작
@@ -112,7 +140,7 @@ public class ConversationPanel : MonoBehaviour
         RectTransform helpBtnRect = helpBtn.GetComponent<RectTransform>();
         helpBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
         helpBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "도움말";
-        helpBtn.GetComponent<Button>().onClick.AddListener(selectConversation);
+        helpBtn.GetComponent<Button>().onClick.AddListener(() => selectInfo(-1));
 
         int npcNumber = ui.conversationNPC;
         if (npcNumber == 1 || npcNumber == 7 || npcNumber == 8)
@@ -162,6 +190,9 @@ public class ConversationPanel : MonoBehaviour
                 healBtn.GetComponent<Button>().onClick.AddListener(ui.healPlayer);
                 break;
             case 10:
+                helpBtn.GetComponent<Button>().onClick.RemoveAllListeners();
+                helpBtn.GetComponent<Button>().onClick.AddListener(spiritInfoSelect);
+
                 GameObject seedBtn = Instantiate(conversationButton, _selectpanel.transform);
                 RectTransform seedBtnRect = seedBtn.GetComponent<RectTransform>();
                 seedBtnRect.SetLocalPositionAndRotation(new Vector3(0, -11, 0), ui.rotateZero);
@@ -214,8 +245,10 @@ public class ConversationPanel : MonoBehaviour
         gameObject.SetActive(false);
         isConversation = false;
         selectConversationCount = 0;
+        isInformation = false;
+        informationCount = 0;
         conversationCount = -1;
-        ui.runControllKeys();
+        isSpirit = -1;
         ui.setIsOpenConversation(false);
 
         Transform[] selectObjectList = _selectpanel.GetComponentsInChildren<Transform>();
@@ -226,6 +259,9 @@ public class ConversationPanel : MonoBehaviour
                 Destroy(selectObjectList[i].gameObject);
             }
         }
+
+        ui.delayRunControllKeys();
+        // ui.runControllKeys();
     }
 
     // 순례자 - 기도 선택 시, 마무리 대사
@@ -342,15 +378,84 @@ public class ConversationPanel : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    // NPC 선택지 중 - '정령'의 '도움말' 선택 시 setting
+    private void spiritInfoSelect()
     {
-        ui = gameObject.GetComponentInParent<UIManager>();
-        _npcname = transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
-        _nomaltalk = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+        Transform[] selectBtns = _selectpanel.GetComponentsInChildren<Transform>();
+        // Debug.LogError(selectBtns[1].name);
+        // Debug.LogError(selectBtns[3].name);
+        // Debug.LogError(selectBtns[5].name);
 
-        _selectpanel = transform.GetChild(0).GetChild(1).gameObject;
-        isConversation = false;
+        selectBtns[1].GetChild(0).GetComponent<TextMeshProUGUI>().text = "농사";
+        selectBtns[1].GetComponent<Button>().onClick.RemoveAllListeners();
+        selectBtns[1].GetComponent<Button>().onClick.AddListener(() => selectInfo(0));
+
+        selectBtns[3].GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃";
+        selectBtns[3].GetComponent<Button>().onClick.RemoveAllListeners();
+        selectBtns[3].GetComponent<Button>().onClick.AddListener(() => selectInfo(1));
+
+        selectBtns[5].GetChild(0).GetComponent<TextMeshProUGUI>().text = "제단";
+        selectBtns[5].GetComponent<Button>().onClick.RemoveAllListeners();
+        selectBtns[5].GetComponent<Button>().onClick.AddListener(() => selectInfo(2));
+
+    }
+
+    // NPC 선택지 중 - 도움말 선택 시 setting
+    private void selectInfo(int _key)
+    {
+        Debug.Log("도움말 대화 시작");
+        isInformation = true;
+        _selectpanel.SetActive(false);
+        _nomaltalk.gameObject.SetActive(true);
+
+        if (_key == -1)
+        {
+            _key = ui.conversationNPC;
+            _nomaltalk.text = informations[_key - 1, informationCount];
+        }
+        else
+        {
+            isSpirit = _key;
+            _nomaltalk.text = spiritInformations[_key, informationCount];
+        }
+        informationCount++;
+    }
+
+    // NPC 선택지 중 - 도움말 선택 시 동작
+    public void information()
+    {
+        int _key = -1;
+        int maxLen = 0;
+        if (isSpirit >= 0)
+        {
+            _key = isSpirit;
+            maxLen = spiritInfoLength[_key];
+        }
+        else
+        {
+            _key = ui.conversationNPC;
+            maxLen = infoLength[_key - 1];
+        }
+
+
+        if (informationCount < maxLen)
+        {
+            Debug.Log("도움말 대화");
+            if (isSpirit >= 0)
+            {
+                _nomaltalk.text = spiritInformations[_key, informationCount];
+            }
+            else
+            {
+                _nomaltalk.text = informations[_key - 1, informationCount];
+            }
+            informationCount++;
+        }
+        else
+        {
+            Debug.Log("도움말 대화 종료");
+            resetConversationPanel();
+        }
     }
 
     // 세계수 정령에게 축복 상호작용 대사창
@@ -447,6 +552,28 @@ public class ConversationPanel : MonoBehaviour
         {"길이 없으면 길을 잃지 않습니다.", "정령의 기운을 따라 가세요, 빛이 당신을 인도합니다.", "제가 가는 곳이 제 집이고 제가 있는 곳이 저의 터전입니다.", "정령의 수호자여 무슨 일입니까?"},
         {"어서오세요, 오늘도 평화가 함께하길..", "그대의 노력으로 숲이 평화를 되찾고 있습니다..", "오늘도 정령의 빛이 그대와 함께 할 것입니다..", "힘을 나누어드리죠"},
         {"수 많은 정령들이 빛을 잃어갑니다. 당신만이 정령을 구할 수 있어요.", "정령의 꽃을 발견하셨나요? 정령의 축복을 받을 수 있겠네요.", "옛날에는 세계수의 근처에 정령의 제단이 있었다고 합니다.. 후후, 지금은 모르겠네요.", "수호자여, 도움이 필요한가요?"}
+    };
+
+    // 도움말 배열
+    // npc 별 도움말 count
+    private int[] infoLength = new int[] { 0, 4, 3, 2, 3, 4 };
+    // 정령 도움말 count - 선택지 선택 후 출력예정
+    private int[] spiritInfoLength = new int[] { 5, 3, 3 };
+
+    // npc별 도움말 배열
+    private string[,] informations = new string[,] {
+        {"","","",""},
+        {"숲을 돌아다니다보면 죽은 나무들을 볼 수 있을 거에요.","윤곽선이 표시된 나무를 도끼로 공격하면 나무를 얻을 수 있어요.","또한 숲에서는 블루베리 덤불, 버섯도 자라고 있어요.","채집용 칼을 들고 상호작용할 경우 채집을 시도할 수 있어요."},
+        {"호수에서는 낚시를 할 수 있네.. 낚싯대와 미끼만 있다면 가능하지","만약 물고기가 미끼를 물면 반응이 올걸세, 그때 다시 상호작용을 시도하면 낚시를 성공할 수 있네","낚싯대와 미끼의 품질에 따라 물고기를 더 빨리, 더 쉽게 잡을수 있을걸세",""},
+        {"곡괭이를 사용하여 광물 캐서 얻을 수 있네!","광물은 몇 안되는 광맥지대에서만 생성되니 유의하게, 하루가 지난 광맥을 사라지니 말일세","",""},
+        {"목장에서는 동물을 키울수 있어요-!","필요한 동물은 저를 통해 구입하시면 되고, 매일 부산물을 생성할 거에요.","목장에서 매일 자라는 풀은 제한되어 있어서, 제한적인 숫자의 동물만 키울 수 있어요-!",""},
+        {"야생 동물은 검으로 공격해서 잡을 수 있어!","정화되지 않은 지역은 사나운 동물이 많으니 조심하라구","사냥터에서는 더 많은 동물을 찾을 수 있을거야","밤이 늦으면 동물들도 자러가서 보이지 않게 될 테니 유의하고"}
+    };
+
+    private string[,] spiritInformations = new string[,] {
+        {"수호자는 농장에서 원하는 작물을 기를수 있어요.","호미를 사용해 땅을 갈면 작물을 심을 수 있고, 몇일이 지나면 수확할 수 있을거에요.","모든 작물은 매일 물을 소비하고 물이 부족하다면 알림을 띄워줄 거에요. 잊지 말고 살펴보도록 해요.","수확을 한 땅은 땅을 다시 갈기 전까지 작물을 심을 수 없어요.","모든 작물은 심을 수 있는 계절이 정해져 있고, 필요한 물의 양이 달라요."},
+        {"꽃은 아주 귀한 자원이에요. 채집용 칼을 통해 조심히 얻을 수 있답니다.","구역의 정화에는 해당 구역에서만 자라는 꽃이 필요해요.","이외에도 꽃을 저에게 주시면 작은 축복을 내려줄 수 있어요.","",""},
+        {"제단은 오래전부터 존재했던 저희의 성소에요.","3일간 매일 제단에 꽃을 바치면 정령이 당신을 축복해줄 거에요.","하지만 중간에 꽃을 바치지 않으면 처음부터 다시 꽃을 바쳐야해요.","",""}
     };
 
 }
