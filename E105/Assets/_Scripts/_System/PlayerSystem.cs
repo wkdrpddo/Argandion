@@ -21,6 +21,7 @@ public class PlayerSystem : MonoBehaviour
 
     private GameObject _nearObject;
     private Item _itemManager;
+    private SoundManager _soundManager;
 
     // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대), 이동불가 시간, 작업시간}
     public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 320, 6, 0, 0, 1 }, { 20, 0, 0, 0, 10 }, { 502, 0, 0, 0, 60} };
@@ -50,11 +51,11 @@ public class PlayerSystem : MonoBehaviour
     private bool _nearCarpentor = false;
     private bool _nearItem = false;
     private float _runtime;
+    private bool _removeHandItem;
 
     [SerializeField]
     private float _act_speed = 1.0f;
     private float _delay_speed = 1.0f;
-
     public int chestIdx = 0;
     public int chestCount = 1;
     public int invenIdx = 0;
@@ -80,6 +81,9 @@ public class PlayerSystem : MonoBehaviour
     private int _movement_percent = 100;
     private int[] _slot_equipment = new int[] { 0, 0, 0, 0 };
 
+    private int _current_region;  //플레이어가 현재 어느 있는 지역의 상태 
+
+    private ParticleSystem _pss;
     // Start is called before the first frame update
     void Start()
     {
@@ -90,6 +94,8 @@ public class PlayerSystem : MonoBehaviour
         _itemManager = GameObject.Find("ItemManager").GetComponent<Item>();
         _character = GameObject.Find("PlayerBody").transform;
         _SystemManager = GameObject.Find("SystemManager");
+        _soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        _pss = _character.Find("Particle").GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -103,6 +109,10 @@ public class PlayerSystem : MonoBehaviour
         Interaction();
         watering();
         fff();
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            _pss.Play();
+        }
     }
 
     void GetBuff()
@@ -245,7 +255,7 @@ public class PlayerSystem : MonoBehaviour
             _delayedTimer = Mathf.Max(0, _delayedTimer);
         }
         _character.position = transform.position;
-        if (_runtime > 1)
+        if (_runtime>1)
         {
             _runtime -= 1;
             damageStamina(1);
@@ -254,46 +264,49 @@ public class PlayerSystem : MonoBehaviour
 
     private void changeItem()
     {
-        if (Input.GetAxisRaw("equip1") == 1)
+        if (_canInteract)
         {
-            _equipItem = 0;
-            _UIManager.setEquipPointer(1);
-        }
-        else if (Input.GetAxisRaw("equip2") == 1)
-        {
-            _equipItem = 1;
-            _UIManager.setEquipPointer(2);
-        }
-        else if (Input.GetAxisRaw("equip3") == 1)
-        {
-            _equipItem = 2;
-            _UIManager.setEquipPointer(3);
-        }
-        else if (Input.GetAxisRaw("equip4") == 1)
-        {
-            _equipItem = 3;
-            _UIManager.setEquipPointer(4);
-        }
-        else if (Input.GetAxisRaw("equip5") == 1)
-        {
-            _equipItem = 4;
-            _UIManager.setEquipPointer(5);
-        }
-        else if (Input.GetAxisRaw("equip6") == 1)
-        {
-            _equipItem = 5;
-            _UIManager.setEquipPointer(6);
-        }
-        else if (Input.GetAxisRaw("equip7") == 1)
-        {
-            _equipItem = 6;
-            _UIManager.setEquipPointer(7);
+            if (Input.GetAxisRaw("equip1") == 1)
+            {
+                _equipItem = 0;
+                _UIManager.setEquipPointer(1);
+            }
+            else if (Input.GetAxisRaw("equip2") == 1)
+            {
+                _equipItem = 1;
+                _UIManager.setEquipPointer(2);
+            }
+            else if (Input.GetAxisRaw("equip3") == 1)
+            {
+                _equipItem = 2;
+                _UIManager.setEquipPointer(3);
+            }
+            else if (Input.GetAxisRaw("equip4") == 1)
+            {
+                _equipItem = 3;
+                _UIManager.setEquipPointer(4);
+            }
+            else if (Input.GetAxisRaw("equip5") == 1)
+            {
+                _equipItem = 4;
+                _UIManager.setEquipPointer(5);
+            }
+            else if (Input.GetAxisRaw("equip6") == 1)
+            {
+                _equipItem = 5;
+                _UIManager.setEquipPointer(6);
+            }
+            else if (Input.GetAxisRaw("equip7") == 1)
+            {
+                _equipItem = 6;
+                _UIManager.setEquipPointer(7);
+            }
         }
     }
 
     private void checkHand()
     {
-        if (_movedDelay <= 0 && _setHand)
+        if (_movedDelay <= 0 && _setHand || _removeHandItem)
         {
             _setHand = false;
             foreach (var obj in _equipment)
@@ -303,6 +316,19 @@ public class PlayerSystem : MonoBehaviour
                     obj.SetActive(false);
                 }
             }
+            _removeHandItem = false;
+        }
+    }
+
+    public void setHandItem(bool value=false, int hand=0)
+    {
+        if (!value)
+        {
+            _equipment[hand].SetActive(true);
+        }
+        else
+        {
+            _removeHandItem = value;
         }
     }
 
@@ -346,10 +372,6 @@ public class PlayerSystem : MonoBehaviour
                     // {
                     //     npc.Interaction();
                     // }
-                    // if (_equipList[_equipItem, 0] >= 50 && _equipList[_equipItem, 0] <= 56 && col.TryGetComponent(out WorldTreeSpirit fairy))
-                    // {
-                    //     fairy.Interaction(_equipList[_equipItem, 0]);
-                    // }
                     if (col.TryGetComponent(out NPCObject npc))
                     {
                         npc.Interaction();
@@ -368,9 +390,16 @@ public class PlayerSystem : MonoBehaviour
                             _movedDelay = _equipList[_equipItem, 3] / _act_speed;
                         }
                     }
-                    if (_equipList[_equipItem, 1] == 6 && col.TryGetComponent(out Fishing fish))
+                    if (_equipList[_equipItem, 1] == 6 && _equipList[7,4] > 0 && col.TryGetComponent(out Fishing fis))
                     {
-                        fish.Interaction(_equipList[_equipItem, 0],_equipList[7,0]);
+                        Debug.Log("낚싯터 인식");
+                        fis.Interaction(_equipList[_equipItem, 0],_equipList[7,0]);
+                        // _UIManager.quickUse(_equipList[7,0],1,7);
+                    }
+                    //제사창
+                    if (_equipList[_equipItem,0] >= 50 && _equipList[_equipItem, 0] <= 56 && col.TryGetComponent(out AltarTableInteraction alt))
+                    {
+                        // alt.Interaction(_equipList[_equipItem, 0],_equipItem);
                     }
                     // building쪽 ==============
                     if (col.TryGetComponent(out SignInteraction signInteraction))
@@ -503,21 +532,6 @@ public class PlayerSystem : MonoBehaviour
                 }
             }
         }
-
-        if (_nearAlter && Input.GetButtonDown("fff"))
-        {
-            ItemObject item = _theInventory.StoreItem(0, 0);
-            if (item.Category == "꽃")
-            {
-                PrayBuff pray = _nearObject.GetComponent<PrayBuff>();
-                pray.Pray(item);
-            }
-            else
-            {
-                Debug.Log("꽃가져와");
-            }
-        }
-
     }
     void watering()
     {
@@ -547,6 +561,12 @@ public class PlayerSystem : MonoBehaviour
             _nearCrops = true;
             _readyToHarvest = true;
             _nearObject = other.gameObject;
+        }
+
+        if (other.gameObject.CompareTag("item"))
+        {
+            _nearObject = other.gameObject;
+            _nearItem = true;
         }
 
         // if (other.gameObject.CompareTag("droppedItem")){
@@ -598,11 +618,45 @@ public class PlayerSystem : MonoBehaviour
             Destroy(_nearObject.transform.parent.gameObject);
         }
 
-        if (other.gameObject.CompareTag("item"))
+        // Debug.Log("OnTriggerEnter(): " + other.tag);
+        if (other.tag == "CraftingTable" || other.tag == "Sign")
         {
             _nearObject = other.gameObject;
-            _nearItem = true;
+            // Debug.Log("작업 영역");
         }
+
+        if (other.tag == "sector")
+        {
+            //현재 들어온 지역
+            if (other.transform.GetComponent<SectorObject>()._purifier)  //정화된 구역에 들어왔을때
+            {
+                if (_current_region != 0)  //이전 구역이 정화구역이 아니었을때만 사운드 체인지
+                {
+                    _soundManager.playBGM1();
+                    _current_region = 0;
+                }
+            }
+            else  //황폐화 구역에 들어왔을때
+            {
+                if (_current_region != 1) //이전 구역이 황폐화구역이 아니었을때만 사운드 체인지
+                {
+                    _soundManager.playBGM2();
+                    _current_region = 1;
+                }
+            }
+        }
+
+        if (other.tag == "forest")   //숲으로 이동
+        {
+            if (_current_region != 2)
+            {
+                _soundManager.playBGM3();
+                _current_region = 2;
+            }
+        }
+
+
+
     }
 
     void OnTriggerExit(Collider other)
@@ -655,10 +709,10 @@ public class PlayerSystem : MonoBehaviour
             _nearAlter = false;
         }
 
-        if (other.gameObject.CompareTag("droppedItem"))
-        {
-            _nearObject = null;
-        }
+        // if (other.gameObject.CompareTag("droppedItem"))
+        // {
+        //     _nearObject = null;
+        // }
 
     }
 

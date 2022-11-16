@@ -77,7 +77,10 @@ public class Fishing : MonoBehaviour
                 _ps.setCanAction(true);
                 _ps._playerAnimator.SetBool("fishingFail",true);
                 _ps.setAnimator(0,0);
-                Invoke("FishingDelay", 2.0f);
+                _ps.setHandItem(true);
+                fishingDelay = false;
+                phase = 0;
+
             }
         }
     }
@@ -90,6 +93,7 @@ public class Fishing : MonoBehaviour
         }
 
         if ( !isFishing && phase == 0) {
+            _ps.setHandItem(false,6);
             myRod = rodIdx;
             myBait = baitIdx;
             phase = 1;
@@ -168,5 +172,6 @@ public class Fishing : MonoBehaviour
         phase = 0;
         _ps._canMove = true;
         _ps.setCanAction(true);
+        _ps.setHandItem(true);
     }
 }
