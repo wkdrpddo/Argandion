@@ -187,6 +187,8 @@ public class UIManager : MonoBehaviour
         _announceText = _eventAnnounce.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
         _eventAnnounce.SetActive(false);
 
+
+        // 테스트 꽃
         ItemObject item1 = findItem(50);
         acquireItem(item1, 10);
         ItemObject item2 = findItem(51);
@@ -237,6 +239,8 @@ public class UIManager : MonoBehaviour
         acquireItem(item21, 25);
         ItemObject item22 = findItem(505);
         acquireItem(item22, 60);
+        _systemmanager.setPlayerGold(9999999); // 테스트 
+
     }
 
     // Update is called once per frame
