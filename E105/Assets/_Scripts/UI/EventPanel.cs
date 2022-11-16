@@ -32,23 +32,12 @@ public class EventPanel : MonoBehaviour
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>(); // 아이콘 이미지
 
     // 테스트용 코드 시작 =======================================================================
-    public bool _setTest;
-    public bool _delTest;
-    public int _testNum;
+    // public bool _setTest;
+    // public bool _delTest;
+    // public int _testNum;
 
 
-    void Start()
-    {
-        setDescriptObj();
-        createAllPanel();
-        // arrayLog(); // 테스트 코드
-        // Debug.Log("푸드 활성화 개수: " + _foodIconACnt);
-        // setEventIcon(1);
-        // setEventIcon(50);
-        // setEventIcon(100);
-        // setEventIcon(101);
-        // setEventIcon(102);
-    }
+
 
     // 테스트용 업데이트
     // void Update()
@@ -68,23 +57,31 @@ public class EventPanel : MonoBehaviour
     // }
 
     // 테스트 코드
-    public void arrayLog()
-    {
-        for (int i = 0; i < _iconObject.Length; i++)
-        {
-            Debug.Log(_iconObject[i]);
-        }
-        activeIcon(1);
-        activeIcon(100);
-        activeIcon(56);
-        activeIcon(50);
+    // public void arrayLog()
+    // {
+    //     for (int i = 0; i < _iconObject.Length; i++)
+    //     {
+    //         Debug.Log(_iconObject[i]);
+    //     }
+    //     activeIcon(1);
+    //     activeIcon(100);
+    //     activeIcon(56);
+    //     activeIcon(50);
 
-        // activeIcon(3);
-        // _panelObject[EventIndexArray.arr[0]].SetActive(true);
-        // _panelObject[EventIndexArray.arr[100]].SetActive(true);
-    }
+    //     // activeIcon(3);
+    //     // _panelObject[EventIndexArray.arr[0]].SetActive(true);
+    //     // _panelObject[EventIndexArray.arr[100]].SetActive(true);
+    // }
 
     // 테스트용 코드 끝 =======================================================================
+
+    // 패널 생성하기
+    public void setting()
+    {
+        Debug.Log("이벤트 패널 세팅 콜");
+        setDescriptObj();
+        createAllPanel();
+    }
 
     // 아이콘 가져오기
     private Sprite getIconImg(int eventCode)
@@ -199,4 +196,3 @@ public class EventPanel : MonoBehaviour
     }
 
 }
-

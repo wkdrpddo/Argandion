@@ -123,6 +123,7 @@ public class UIManager : MonoBehaviour
         _healthbar = _baseuipanel.transform.GetChild(0).GetComponent<Slider>();
         _energybar = _baseuipanel.transform.GetChild(1).GetComponent<Slider>();
         _eventpanel = _baseuipanel.transform.GetChild(4).gameObject;
+        _eventpanel.GetComponent<EventPanel>().setting();
         _daytime = _baseuipanel.transform.GetChild(2).GetChild(1).gameObject;
         _foodmanager._eventPanel = _eventpanel.GetComponent<EventPanel>();
 

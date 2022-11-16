@@ -44,17 +44,19 @@ public class SectorObject : MonoBehaviour
     public Collider[] _SectorCollider;
     public List<float> _SectorArea;
     public GameObject _floweObject;
+    public GameObject _items;
     private BuffManager _BuffManager;
     private float _sumSector;
     // Start is called before the first frame update
     void Start()
     {
+        _items = GameObject.Find("Items");
         _BuffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         _SectorArea.Add(0f);
         foreach (Collider col in _SectorCollider)
         {
             float sumArea = (col.bounds.extents.x*2) * (col.bounds.extents.z*2);
-            Debug.Log(sumArea);
+            // Debug.Log(sumArea);
             _sumSector += sumArea;
             _SectorArea.Add(_sumSector);
         }
