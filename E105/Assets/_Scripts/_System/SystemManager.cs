@@ -20,6 +20,7 @@ public class SystemManager : MonoBehaviour
     public GameObject _light;
     public GameObject _MapObject;
     public PlayerSystem _player;
+    public HouseChange _houseChange;
     public WeatherManager _weatherManager;
     public BuffManager _buffManager;
     public NPCManager _NPCManager;
@@ -60,8 +61,9 @@ public class SystemManager : MonoBehaviour
         _PrayBuff = GameObject.Find("BuffManager").GetComponent<PrayBuff>();
         _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
         _SpiritBuff = GameObject.Find("BuffManager").GetComponent<SpiritBuff>();
-
         _buildings = GameObject.Find("Buildings").GetComponentsInChildren<BuildingChange>();
+        _houseChange = GameObject.Find("Player House").GetComponent<HouseChange>();
+
         // _buiding1 = GameObject.Find("ClothshopPlace").GetComponent<BuildingChange>();
 
 
@@ -279,7 +281,6 @@ public class SystemManager : MonoBehaviour
 
     private void DayStart()
     {
-
         // 모든 SectorObject의 DayEnd 동작
         foreach (var sector in _sectors)
         {
@@ -411,10 +412,23 @@ public class SystemManager : MonoBehaviour
         if (_development_level == 2)
         {
             //실행문
+            // npc 부르기
+            _NPCManager.NPCActive(6);
+            // 밭 활성화
+            // 집 자라기
+            _houseChange.ChangeHouse();
+            // 세계수 자라기
+
         }
         if (_development_level == 3)
         {
             //실행문
+            // npc 부르기
+            _NPCManager.NPCActive(7);
+            // 밭 활성화
+            // 집 자라기
+            _houseChange.ChangeHouse();
+            // 세계수 자라기
         }
     }
 
