@@ -59,7 +59,8 @@ public class PrayBuff : MonoBehaviour
         }
     }
 
-    public void Pray(ItemObject item)
+    // 꽃을 코드로 받는 걸로 바꿈
+    public void Pray(int itemCode)
     {
         if (buffManager._isFlowerBuffActived)
         {
@@ -67,7 +68,7 @@ public class PrayBuff : MonoBehaviour
             return;
         }
 
-        if (item.Category != "꽃")
+        if (50 <= itemCode && itemCode <= 56)
         {
             Debug.Log("꽃이 아닙니다!");
             return;
@@ -75,9 +76,9 @@ public class PrayBuff : MonoBehaviour
 
         if (!todayPray)
         {
-            if ((flowerIdx == 0 || flowerIdx == item.ItemCode))
+            if ((flowerIdx == 0 || flowerIdx == itemCode))
             {
-                flowerIdx = item.ItemCode;
+                flowerIdx = itemCode;
                 todayPray = true;
                 if (prayDay < 2)
                 {
@@ -111,6 +112,59 @@ public class PrayBuff : MonoBehaviour
             Debug.Log("오늘은 이미 기도를 드렸습니다.");
         }
     }
+
+    // public void Pray(ItemObject item)
+    // {
+    //     if (buffManager._isFlowerBuffActived)
+    //     {
+    //         Debug.Log("이미 다른버프가 활성화 중 입니다.");
+    //         return;
+    //     }
+
+    //     if (item.Category != "꽃")
+    //     {
+    //         Debug.Log("꽃이 아닙니다!");
+    //         return;
+    //     }
+
+    //     if (!todayPray)
+    //     {
+    //         if ((flowerIdx == 0 || flowerIdx == item.ItemCode))
+    //         {
+    //             flowerIdx = item.ItemCode;
+    //             todayPray = true;
+    //             if (prayDay < 2)
+    //             {
+    //                 _theInventory.StoreItem(0, -1);
+    //                 prayDay += 1;
+    //             }
+    //             else
+    //             {
+    //                 if (_theInventory.slots[0].itemCount >= 2)
+    //                 {
+    //                     _theInventory.StoreItem(0, -2);
+    //                     prayDay += 1;
+    //                 }
+    //                 else
+    //                 {
+    //                     Debug.Log("꽃이 부족합니다.");
+    //                 }
+    //             }
+    //             if (prayDay == 3)
+    //             {
+    //                 Reincarnation();
+    //             }
+    //         }
+    //         else
+    //         {
+    //             Debug.Log("다른 제사버프가 활성화중입니다.");
+    //         }
+    //     }
+    //     else
+    //     {
+    //         Debug.Log("오늘은 이미 기도를 드렸습니다.");
+    //     }
+    // }
 
     public void NewDay()
     {

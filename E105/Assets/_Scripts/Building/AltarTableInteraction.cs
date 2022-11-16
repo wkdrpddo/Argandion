@@ -4,39 +4,49 @@ using UnityEngine;
 
 public class AltarTableInteraction : MonoBehaviour
 {
-    // public UIManager _uiManager;
+    private UIManager _uiManager;
     // public int _sectorNum;
+    private PrayBuff _prayBuff;
+    // private BuffManager _buffManager;
 
     void Start()
     {
-        // _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        _prayBuff = GameObject.Find("BuffManager").GetComponent<PrayBuff>();
+        // _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
+        _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
-    public void Interaction(int itemCode)
+    public void Interaction(int itemCode, int quickslotNum)
     {
+        int prePray = _prayBuff.flowerIdx; // 직전 버프 번호
+        // int prayDay = _prayBuff.prayDay; // 직전 버프 횟수
+        // bool isActived = _buffManager._isPrayBuffActived; // 제사 버프 진행 중
+
         // 손에 뭐 들고 있는지 확인해서
-        switch (itemCode)
-        {
-            case 50: // 분홍
-                break;
-            case 51: // 분홍
-                break;
-            case 52: // 분홍
-                break;
-            case 53: // 분홍
-                break;
-            case 54: // 분홍
-                break;
-            case 55: // 분홍
-                break;
-            case 56: // 분홍
-                break;
-
-
-
+        // 조건에 맞게 UI 호출
+        if(_prayBuff.todayPray){
+            _uiManager.OnResultNotificationPanel("오늘은 이미 꽃을 바쳤습니다.");
+            return;
         }
-        // 조건에 맞게 UI 호출(인벤 감소)
+        // _uiManager.prayToAltar(prePray, itemCode, quickslotNum);
+        
+        // switch (itemCode)
+        // {
+        //     case 50: // 분홍
+        //         _uiManager.prayToAltar(prePray, itemCode);
+        //         break;
+        //     case 51: // 주황
+        //         break;
+        //     case 52: // 빨강
+        //         break;
+        //     case 53: // 하늘
+        //         break;
+        //     case 54: // 파랑
+        //         break;
+        //     case 55: // 노랑
+        //         break;
+        //     case 56: // 흰색
+        //         break;
+        // }
     }
-
-
 }

@@ -504,7 +504,8 @@ public class PlayerSystem : MonoBehaviour
             if (item.Category == "꽃")
             {
                 PrayBuff pray = _nearObject.GetComponent<PrayBuff>();
-                pray.Pray(item);
+                // pray.Pray(item);
+                pray.Pray(item.ItemCode); // 이 부분도 수정(pray 함수 파라미터 변경)
             }
             else
             {

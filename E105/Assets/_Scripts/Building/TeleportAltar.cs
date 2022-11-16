@@ -61,7 +61,7 @@ public class TeleportAltar : MonoBehaviour
     }
 
     // 밑으로 내려갈 때 call
-    private void goDown()
+    public void goDown()
     {
         // 플레이어
         _playerSystem.transform.GetChild(0).gameObject.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
