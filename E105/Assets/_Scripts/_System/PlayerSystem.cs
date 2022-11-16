@@ -425,6 +425,11 @@ public class PlayerSystem : MonoBehaviour
                         Debug.Log("상자 인식");
                         chestInteraction.Interaction();
                     }
+                    if (col.TryGetComponent(out TeleportAltar teleportAltar))
+                    {
+                        Debug.Log("제단 텔포 인식");
+                        teleportAltar.Interaction();
+                    }
                     // ===========================
                 }
             }
