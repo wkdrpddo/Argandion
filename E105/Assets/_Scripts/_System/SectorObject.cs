@@ -54,7 +54,7 @@ public class SectorObject : MonoBehaviour
         foreach (Collider col in _SectorCollider)
         {
             float sumArea = (col.bounds.extents.x*2) * (col.bounds.extents.z*2);
-            Debug.Log(sumArea);
+            // Debug.Log(sumArea);
             _sumSector += sumArea;
             _SectorArea.Add(_sumSector);
         }

@@ -16,13 +16,13 @@ public class Dirt : MonoBehaviour
     private BuffManager _buff;
 
 
-    void Start()
-    {
-        particleObject = GetComponent<ParticleSystem>();
-        temp = _system._day;
-        _buffManagerObject = GameObject.Find("BuffManager");
-        _buff = _buffManagerObject.GetComponent<BuffManager>();
-    }
+    // void Start()
+    // {
+    //     particleObject = GetComponent<ParticleSystem>();
+    //     temp = _system._day;
+    //     _buffManagerObject = GameObject.Find("BuffManager");
+    //     _buff = _buffManagerObject.GetComponent<BuffManager>();
+    // }
 
     // void Update()
     // {
