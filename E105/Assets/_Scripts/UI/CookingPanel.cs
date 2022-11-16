@@ -31,22 +31,33 @@ public class CookingPanel : MonoBehaviour
     private int[] canMakeList;
     private int index;
 
-    public void closeWindow()
+    // Start is called before the first frame update
+    void Start()
     {
-        gameObject.SetActive(false);
-        gameObject.transform.GetChild(0).GetComponent<Button>().interactable = true;
-
-        _cookingInteraction.CookingEnd();
-
-        ui.runControllPlayer();
+        ui = gameObject.GetComponentInParent<UIManager>();
+        DishContent = transform.GetChild(1).GetChild(1).GetChild(0).GetChild(0).gameObject;
+        RecipeContent = transform.GetChild(2).GetChild(1).GetChild(0).GetChild(0).gameObject;
     }
 
-    public void openCooking()
+    public void handelPanel()
     {
-        _cookingInteraction.CookingStart();
-        gameObject.SetActive(true);
-        setDishList();
-        gameObject.transform.GetChild(0).GetComponent<Button>().interactable = false;
+        gameObject.SetActive(!gameObject.activeSelf);
+
+        if (gameObject.activeSelf)
+        {
+            ui.stopControllKeys();
+            ui.setIsOpenCook(true);
+            _cookingInteraction.CookingStart();
+            setDishList();
+            gameObject.transform.GetChild(0).GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            ui.runControllKeys();
+            ui.setIsOpenCook(false);
+            gameObject.transform.GetChild(0).GetComponent<Button>().interactable = true;
+            _cookingInteraction.CookingEnd();
+        }
     }
 
     public void onClickCooking()
@@ -221,19 +232,5 @@ public class CookingPanel : MonoBehaviour
     public void syncCanmakeList()
     {
         canMakeList = gameObject.GetComponent<CombFood>().getCanMakeList();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        ui = gameObject.GetComponentInParent<UIManager>();
-        DishContent = transform.GetChild(1).GetChild(1).GetChild(0).GetChild(0).gameObject;
-        RecipeContent = transform.GetChild(2).GetChild(1).GetChild(0).GetChild(0).gameObject;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

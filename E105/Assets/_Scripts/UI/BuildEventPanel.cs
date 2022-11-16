@@ -75,6 +75,38 @@ public class BuildEventPanel : MonoBehaviour
         clothShop = GameObject.Find("ClothshopPlace").GetComponent<BuildingChange>();
         hunterHouse = GameObject.Find("HunterHousePlace").GetComponent<BuildingChange>();
         workShop = GameObject.Find("WorkshopPlace").GetComponent<BuildingChange>();
+
+        gameObject.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => handelPanel(-1, -1));
+        gameObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => handelPanel(-1, -1));
+    }
+
+    public void handelPanel(int value, int step)
+    {
+        _key = value;
+        _step = step;
+
+        if (!checkIsBuild())
+        {
+            ui.OnResultNotificationPanel("이미 건설이 진행중인 건물입니다.");
+            ui.runControllPlayer();
+        }
+        else
+        {
+            gameObject.SetActive(!gameObject.activeSelf);
+            isOnPanel = gameObject.activeSelf;
+        }
+
+        if (gameObject.activeSelf)
+        {
+            setBuildCondition(value, step);
+            ui.stopControllKeys();
+            ui.setIsOpenBuildEvent(true);
+        }
+        else
+        {
+            ui.runControllKeys();
+            ui.setIsOpenBuildEvent(false);
+        }
     }
 
     private void setting(int _buildKey, int _step)
@@ -178,31 +210,6 @@ public class BuildEventPanel : MonoBehaviour
         return true;
     }
 
-    public void closeWindow()
-    {
-        isOnPanel = false;
-        gameObject.SetActive(false);
-        ui.runControllPlayer();
-        // _failmodal.SetActive(false);
-    }
-
-    public void OnPanel(int value, int step)
-    {
-        _key = value;
-        _step = step;
-
-        if (!checkIsBuild())
-        {
-            ui.OnResultNotificationPanel("이미 건설이 진행중인 건물입니다.");
-        }
-        else
-        {
-            isOnPanel = true;
-            gameObject.SetActive(true);
-            setBuildCondition(value, step);
-        }
-    }
-
     private bool checkIsBuild()
     {
         int buildPhase = -1;
@@ -264,7 +271,7 @@ public class BuildEventPanel : MonoBehaviour
                     break;
             }
             Build();
-            closeWindow();
+            handelPanel(-1, -1);
         }
         else
         {

@@ -36,11 +36,33 @@ public class CraftingPanel : MonoBehaviour
     [SerializeField] private int index;
     [SerializeField] private int storeIdx;
 
-    public void OnPanel(int value)
+    // Start is called before the first frame update
+    void Start()
     {
-        gameObject.SetActive(true);
-        setCraftData(value);
-        gameObject.transform.GetChild(1).GetChild(2).GetComponent<Button>().interactable = false;
+        ui = gameObject.GetComponentInParent<UIManager>();
+        _scrollcontent = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).gameObject;
+        _metarialsgrid = transform.GetChild(1).GetChild(1).gameObject;
+    }
+
+    public void handelPanel(int value)
+    {
+        gameObject.SetActive(!gameObject.activeSelf);
+
+        if (gameObject.activeSelf)
+        {
+            ui.stopControllKeys();
+            ui.setIsOpenCraft(true);
+            setCraftData(value);
+            gameObject.transform.GetChild(1).GetChild(2).GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            ui.runControllKeys();
+            ui.setIsOpenCraft(false);
+            deleteMetarialList();
+            deleteCraftList();
+            gameObject.transform.GetChild(1).GetChild(2).GetComponent<Button>().interactable = true;
+        }
     }
 
     public void onClickCraft()
@@ -246,29 +268,5 @@ public class CraftingPanel : MonoBehaviour
         }
 
         deleteMetarialList();
-    }
-
-    public void closePanel()
-    {
-        gameObject.SetActive(false);
-        deleteMetarialList();
-        deleteCraftList();
-        gameObject.transform.GetChild(1).GetChild(2).GetComponent<Button>().interactable = true;
-        ui.runControllPlayer();
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        ui = gameObject.GetComponentInParent<UIManager>();
-        _scrollcontent = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).gameObject;
-        _metarialsgrid = transform.GetChild(1).GetChild(1).gameObject;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

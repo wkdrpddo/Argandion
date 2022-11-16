@@ -48,7 +48,11 @@ public class CreateCharacter : MonoBehaviour
             ui.OnBaseUIPanel();
             ui.selectPlayer();
             ui.setPlayerName(_name);
+            ui.setGameState(true);
+
             gameObject.SetActive(false);
+
+            ui.runControllKeys();
         }
     }
     // Start is called before the first frame update

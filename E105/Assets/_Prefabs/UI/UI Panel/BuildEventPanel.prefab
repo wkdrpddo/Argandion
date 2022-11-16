@@ -1127,7 +1127,7 @@ GameObject:
   - component: {fileID: 7268768234592163272}
   - component: {fileID: 7268768234592163270}
   - component: {fileID: 7268768234592163271}
-  - component: {fileID: 5883149062337581079}
+  - component: {fileID: 6605689348832928509}
   m_Layer: 5
   m_Name: BuildEventPanel
   m_TagString: Untagged
@@ -1198,7 +1198,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5883149062337581079
+--- !u!114 &6605689348832928509
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1217,6 +1217,14 @@ MonoBehaviour:
   Forge: {fileID: 21300000, guid: 5166736041415d442b62716bce271e4c, type: 3}
   Hunter: {fileID: 21300000, guid: e386ff77cad759f4aa2393ce5d68b1ae, type: 3}
   Workshop: {fileID: 21300000, guid: 8d04ae908ddef8649badd423908e90f1, type: 3}
+  myItems: 
+  howItems: 
+  canMake: 
+  slots: []
+  canBuild: 0
+  usedItem: []
+  _key: 0
+  _step: 0
 --- !u!1 &7268768234713565389
 GameObject:
   m_ObjectHideFlags: 0
@@ -2163,7 +2171,7 @@ PrefabInstance:
     - target: {fileID: 2064436893301889631, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 5883149062337581079}
+      objectReference: {fileID: 6605689348832928509}
     - target: {fileID: 2064436893301889631, guid: 4194064580205fd4ab8de7b37edac9eb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -2293,10 +2301,10 @@ PrefabInstance:
     - target: {fileID: 1795787526645945135, guid: a4bab3047a3dfa843837c25cf6d82e53, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 5883149062337581079}
+      objectReference: {fileID: 7268768234592163273}
     - target: {fileID: 1795787526645945135, guid: a4bab3047a3dfa843837c25cf6d82e53, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: closeWindow
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1795787526645945135, guid: a4bab3047a3dfa843837c25cf6d82e53, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -2327,7 +2335,7 @@ PrefabInstance:
     - target: {fileID: 7962846765867657270, guid: fb889e817dd2f4a4cbdbd5386241dc4d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 5883149062337581079}
+      objectReference: {fileID: 0}
     - target: {fileID: 7962846765867657270, guid: fb889e817dd2f4a4cbdbd5386241dc4d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2

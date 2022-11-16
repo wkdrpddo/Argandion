@@ -13,14 +13,8 @@ public class MainPagePanel : MonoBehaviour
         ui = this.GetComponentInParent<UIManager>();
     }
 
-    public void setIsGameStart(bool value)
-    {
-        ui.setGameState(value);
-    }
-
     public void gameStart()
     {
-        setIsGameStart(true);
         gameObject.SetActive(false);
         ui.OnCreateCharacter();
     }

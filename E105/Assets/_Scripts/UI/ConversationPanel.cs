@@ -25,13 +25,22 @@ public class ConversationPanel : MonoBehaviour
     private GameObject _selectpanel;
     private int conversationCount = -1;         // -1 : 대화 전, 0 : 대화 시작, 1 : 마지막 대화
 
-    private bool isOnPanel = false;
     public GameObject conversationButton;
     private UIManager ui;
     private bool isConversation;
     private int selectConversationCount = 0;        // 선택창에서 '대화' 선택 시의 카운트
 
-    // 대화 시작
+    public int getConversationCnt()
+    {
+        return conversationCount;
+    }
+
+    public bool getIsConversation()
+    {
+        return isConversation;
+    }
+
+    // NPC 및 상호작용 대화 최초 시작
     public void setConversationNPC(int value)
     {
         ui.conversationNPC = value;
@@ -69,58 +78,27 @@ public class ConversationPanel : MonoBehaviour
             case 8:
                 _npcname.text = "순례자";
                 break;
-            case 9:
-                _npcname.gameObject.transform.parent.gameObject.SetActive(false);
-                conversationCount++;
-                break;
             case 10:
                 _npcname.text = "세계수의 정령";
                 break;
+            case 9:
+                _npcname.text = "세계수";
+                conversationCount++;
+                break;
             case 11:
             case 12:
+                // NPC가 아닌 상호작용이므로 이름이 필요 없음
                 _npcname.gameObject.transform.parent.gameObject.SetActive(false);
                 conversationCount++;
                 break;
         }
 
-        isOnPanel = true;
+        ui.setIsOpenConversation(true);
         setSelectList();
         gameObject.SetActive(true);
     }
 
-    public void secondConversation()
-    {
-        _nomaltalk.text = conversations[ui.conversationNPC - 1, 3];
-        conversationCount++;
-    }
-
-    public void thirdConversation()
-    {
-        _nomaltalk.gameObject.SetActive(false);
-        _selectpanel.SetActive(true);
-    }
-
-    public void resetConversationPanel()
-    {
-        _nomaltalk.gameObject.SetActive(true);
-        _selectpanel.SetActive(false);
-        gameObject.SetActive(false);
-        isConversation = false;
-        selectConversationCount = 0;
-        conversationCount = -1;
-        // ui.conversationNPC = 0;
-        ui.runControllPlayer();
-
-        Transform[] selectObjectList = _selectpanel.GetComponentsInChildren<Transform>();
-        for (int i = 1; i < selectObjectList.Length; i++)
-        {
-            if (selectObjectList[i] != _selectpanel.transform)
-            {
-                Destroy(selectObjectList[i].gameObject);
-            }
-        }
-    }
-
+    // NPC별 선택지 표시
     private void setSelectList()
     {
         GameObject talkBtn = Instantiate(conversationButton, _selectpanel.transform);
@@ -129,25 +107,44 @@ public class ConversationPanel : MonoBehaviour
         talkBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "대화";
         talkBtn.GetComponent<Button>().onClick.AddListener(selectConversation);
 
-        switch (ui.conversationNPC)
+        GameObject helpBtn = Instantiate(conversationButton, _selectpanel.transform);
+        RectTransform helpBtnRect = helpBtn.GetComponent<RectTransform>();
+        helpBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+        helpBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "도움말";
+        helpBtn.GetComponent<Button>().onClick.AddListener(selectConversation);
+
+        int npcNumber = ui.conversationNPC;
+        if (npcNumber == 1 || npcNumber == 7 || npcNumber == 8)
+        {
+            Destroy(helpBtn.gameObject);
+        }
+
+        switch (npcNumber)
         {
             case 1:
             case 2:
             case 3:
             case 4:
+            case 5:
                 // case 6:
                 GameObject tradeBtn = Instantiate(conversationButton, _selectpanel.transform);
                 RectTransform tradeBtnRect = tradeBtn.GetComponent<RectTransform>();
-                tradeBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+                tradeBtnRect.SetLocalPositionAndRotation(new Vector3(0, -11, 0), ui.rotateZero);
                 tradeBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "거래";
-                tradeBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionPanel);
-                break;
-            case 5:
-                GameObject animalTradeBtn = Instantiate(conversationButton, _selectpanel.transform);
-                RectTransform animalTradeBtnRect = animalTradeBtn.GetComponent<RectTransform>();
-                animalTradeBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
-                animalTradeBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "거래";
-                animalTradeBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionAnimalPanel);
+
+                if (npcNumber == 1)
+                {
+                    tradeBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+                }
+
+                if (npcNumber == 5)
+                {
+                    tradeBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionAnimalPanel);
+                }
+                else
+                {
+                    tradeBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionPanel);
+                }
                 break;
             case 7:
                 GameObject bgmSelectBtn = Instantiate(conversationButton, _selectpanel.transform);
@@ -163,18 +160,18 @@ public class ConversationPanel : MonoBehaviour
                 healBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "순례자의 기도 [회복]";
                 healBtn.GetComponent<Button>().onClick.AddListener(ui.healPlayer);
                 break;
+            case 10:
+                GameObject seedBtn = Instantiate(conversationButton, _selectpanel.transform);
+                RectTransform seedBtnRect = seedBtn.GetComponent<RectTransform>();
+                seedBtnRect.SetLocalPositionAndRotation(new Vector3(0, -11, 0), ui.rotateZero);
+                seedBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "씨앗이 필요해";
+                seedBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionPanel);
+                break;
             case 9:
                 _nomaltalk.gameObject.SetActive(true);
                 _nomaltalk.GetComponent<TextMeshProUGUI>().text = "힘을 나누어드리겠습니다.\n어느 위치로 이동하시겠습니까?";
 
                 selectTeleport();
-                break;
-            case 10:
-                GameObject seedBtn = Instantiate(conversationButton, _selectpanel.transform);
-                RectTransform seedBtnRect = seedBtn.GetComponent<RectTransform>();
-                seedBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
-                seedBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "씨앗이 필요해";
-                seedBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionPanel);
                 break;
             case 11:
                 Destroy(talkBtn.gameObject);
@@ -191,6 +188,43 @@ public class ConversationPanel : MonoBehaviour
         }
     }
 
+    // 선택창 전 대사 출력
+    public void secondConversation()
+    {
+        _nomaltalk.text = conversations[ui.conversationNPC - 1, 3];
+        conversationCount++;
+    }
+
+    // 선택창 출력
+    public void thirdConversation()
+    {
+        _nomaltalk.gameObject.SetActive(false);
+        _selectpanel.SetActive(true);
+    }
+
+    // Conversation Panel 초기화
+    public void resetConversationPanel()
+    {
+        _nomaltalk.gameObject.SetActive(true);
+        _selectpanel.SetActive(false);
+        gameObject.SetActive(false);
+        isConversation = false;
+        selectConversationCount = 0;
+        conversationCount = -1;
+        ui.runControllKeys();
+        ui.setIsOpenConversation(false);
+
+        Transform[] selectObjectList = _selectpanel.GetComponentsInChildren<Transform>();
+        for (int i = 1; i < selectObjectList.Length; i++)
+        {
+            if (selectObjectList[i] != _selectpanel.transform)
+            {
+                Destroy(selectObjectList[i].gameObject);
+            }
+        }
+    }
+
+    // 순례자 - 기도 선택 시, 마무리 대사
     public void selectHeal()
     {
         _selectpanel.SetActive(false);
@@ -200,6 +234,7 @@ public class ConversationPanel : MonoBehaviour
         selectConversationCount = 4;
     }
 
+    // 음악가 - BGM 변경 선택 시, 마무리 대사
     public void selectMusic(string _bgmName)
     {
         _selectpanel.SetActive(false);
@@ -209,6 +244,7 @@ public class ConversationPanel : MonoBehaviour
         selectConversationCount = 4;
     }
 
+    // 세계수 상호작용 시, 출력 선택지
     public void selectTeleport()
     {
         Transform[] selectObjectList = _selectpanel.GetComponentsInChildren<Transform>();
@@ -239,6 +275,7 @@ public class ConversationPanel : MonoBehaviour
         teleportBtn3.GetComponent<Button>().onClick.AddListener(resetConversationPanel);
     }
 
+    // 제단 상호작용 시 출력 선택지 : conversation 과 별개로 호출됨
     public void selectAlterTeleport(int _key)
     {
         Transform[] selectObjectList = _selectpanel.GetComponentsInChildren<Transform>();
@@ -271,6 +308,7 @@ public class ConversationPanel : MonoBehaviour
         teleportBtn2.GetComponent<Button>().onClick.AddListener(resetConversationPanel);
     }
 
+    // NPC 선택지 중 - 대화 선택 시 setting
     private void selectConversation()
     {
         isConversation = true;
@@ -282,6 +320,7 @@ public class ConversationPanel : MonoBehaviour
         selectConversationCount++;
     }
 
+    // NPC 선택지 중 - 대화 선택 시 동작
     public void conversation()
     {
         if (selectConversationCount < 4)
@@ -307,22 +346,7 @@ public class ConversationPanel : MonoBehaviour
         isConversation = false;
     }
 
-    public bool getIsOn()
-    {
-        return isOnPanel;
-    }
-
-    public int getConversationCnt()
-    {
-        return conversationCount;
-    }
-
-    public bool getIsConversation()
-    {
-        return isConversation;
-    }
-
-    // 세계수 정령에게 꽃 들고 말 걸기
+    // 세계수 정령에게 축복 상호작용 대사창
     public void conversationWhenAlterBuff(int _key)
     {
         ui.conversationNPC = 10;
@@ -354,13 +378,18 @@ public class ConversationPanel : MonoBehaviour
         }
     }
 
-    // 제단 제사 패널
-    public void selectWhenAlterPray(int nowCode, int newCode)
+    // 제단 제사 선택
+    public void selectWhenAlterPray(int nowCode, int newCode, int quickIdx)
     {
         gameObject.SetActive(true);
 
         string flowerName = "";
-        if (nowCode == 0)
+        if (nowCode == -1)
+        {
+            _nomaltalk.text = "이미 정령 제단의 축복이 흐르고 있습니다.\n"
+                    + ui.findItem(newCode).Name + "을(를) 새롭게 제단에 바치고 제사를 지내겠습니까?";
+        }
+        else if (nowCode == 0)
         {
             flowerName = ui.findItem(newCode).Name;
             _nomaltalk.text = flowerName + "을 제단에 바치고 제사를 지내겠습니까?";
@@ -371,11 +400,24 @@ public class ConversationPanel : MonoBehaviour
                     + ui.findItem(newCode).Name + "을(를) 새롭게 제단에 바치고 제사를 지내겠습니까?";
         }
 
+        int flowerCnt = 0;
+        switch (ui.getNowPrayDate())
+        {
+            case 0:
+            case 1:
+                flowerCnt = 1;
+                break;
+            case 2:
+                flowerCnt = 2;
+                break;
+        }
+
         GameObject prayBtn1 = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform prayBtnRect1 = prayBtn1.GetComponent<RectTransform>();
         prayBtnRect1.SetLocalPositionAndRotation(new Vector3(0, 11, 0), ui.rotateZero);
         prayBtn1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃을 제단에 바친다.";
         prayBtn1.GetComponent<Button>().onClick.AddListener(() => ui.callPrayBuff(newCode));
+        prayBtn1.GetComponent<Button>().onClick.AddListener(() => ui.quickUse(newCode, flowerCnt, quickIdx));
 
         GameObject prayBtn2 = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform prayBtnRect2 = prayBtn2.GetComponent<RectTransform>();
@@ -386,7 +428,7 @@ public class ConversationPanel : MonoBehaviour
         _selectpanel.SetActive(true);
     }
 
-    // NPC 대사 저장 배열
+    // NPC 시작 대사 저장 배열
     private string[,] conversations = new string[,]{
         {"호호, 안녕하세요! 괜찮은 옷이 있어요-", "우리 남편 못 보셨나요? 목장에도 없던데,,", "요즘 괜찮은 가죽이 없어서 옷을 만들 수 없어요..", "호호, 필요한 거 있으세요??"},
         {"좋~~은 목재가 들어왔어요! 목재 필요 없어요?", "나무만 패기엔 너무 좋은 날씨군요-", "더 좋은 도구가 필요하면 언제든 찾아주세요-!!", "오늘은 무슨 일로 오셨나요??"},
