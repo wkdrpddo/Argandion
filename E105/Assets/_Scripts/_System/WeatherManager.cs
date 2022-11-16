@@ -6,6 +6,8 @@ public class WeatherManager : MonoBehaviour
 {
     public SystemManager systemManager;
     public BuffManager _buffManager;
+    public ParticleSystem _snow;
+    public ParticleSystem _rain;
 
     private float[] perfect = {1.0f, 99.0f};
     private int[] perfectIdx = {7, 0};
@@ -35,13 +37,18 @@ public class WeatherManager : MonoBehaviour
     private void Start() {
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         SetYearEvent(); // 나중에 변경/삭제 해야함
+        _snow = GameObject.Find("Main Camera").transform.GetChild(0).GetComponent<ParticleSystem>();
+        _rain = GameObject.Find("Main Camera").transform.GetChild(1).GetComponent<ParticleSystem>();
     }
+    private int _season;
 
     public void SetWeather(int season)
     {
+        _season = season;
         if (_buffManager.blueSpirit) { // 파랑색 정령버프가 있으면 무조건 비가 온다.
             systemManager._weather = 1;
             _buffManager.blueSpirit = false;
+            playFX(1);
             return ;
         }
 
@@ -76,11 +83,13 @@ public class WeatherManager : MonoBehaviour
             } else if ( how5 < 2) { // 태풍 둘쨋날 (how5 == 1) 이면 여전히 날씨는 태풍
                 systemManager._weather = 5;
                 how5 += 1;
+                playFX(1);
                 return ;
             } else { // 태풍 마지막날엔 비가 내리고, 태풍이 끝나고 , 태풍후 변수를 true로 바꿔준다.
                 systemManager._weather = 1;
                 while5 = false;
                 after5 = true;
+                playFX(1);
                 return ;
             }
         } else if (season == 2) { // 가을의 경우
@@ -89,11 +98,13 @@ public class WeatherManager : MonoBehaviour
             } else if ( how5 < 2) { // 태풍 둘쨋날 (how5 == 1) 이면 여전히 날씨는 태풍
                 systemManager._weather = 5;
                 how5 += 1;
+                playFX(1);
                 return ;
             } else { // 태풍 마지막날엔 비가 내리고, 태풍이 끝나고 , 태풍 후 변수를 true로 바꿔준다.
                 systemManager._weather = 1;
                 while5 = false;
                 after5 = true;
+                playFX(1);
                 return ;
             }
         } else if (season == 3) { // 겨울의 경우
@@ -102,11 +113,13 @@ public class WeatherManager : MonoBehaviour
             } else if ( how4 < 2) { // 폭설 둘쨋날 (how4 == 1) 이면 여전히 날씨는 폭설
                 systemManager._weather = 4;
                 how4 += 1;
+                playFX(1);
                 return ;
             } else { // 폭설 마지막날엔 비가 내리고, 폭설이 끝나고, 폭설 후 변수를 true로 바꿔준다.
                 systemManager._weather = 1;
                 while4 = false;
                 after4 = true;
+                playFX(1);
                 return ;
             }
         }
@@ -121,6 +134,7 @@ public class WeatherManager : MonoBehaviour
             cumulative += spring[i];
             if(randomValue <= cumulative) {
                 systemManager._weather = springIdx[i];
+                playFX(springIdx[i]);
                 return ;
             }
         }
@@ -142,6 +156,7 @@ public class WeatherManager : MonoBehaviour
                 cumulative += summerAfter5[i];
                 if(randomValue <= cumulative) {
                     systemManager._weather = summerAfter5Idx[i];
+                    playFX(summerAfter5Idx[i]);
                     return ;
                 }
             }
@@ -154,6 +169,7 @@ public class WeatherManager : MonoBehaviour
                         while5 = true;
                         how5 += 1;
                     }
+                    playFX(summerIdx[i]);
                     return ;
                 }
             }
@@ -170,6 +186,7 @@ public class WeatherManager : MonoBehaviour
                 cumulative += fallAfter5[i];
                 if(randomValue <= cumulative) {
                     systemManager._weather = fallAfter5Idx[i];
+                    playFX(fallAfter5Idx[i]);
                     return ;
                 }
             }
@@ -182,6 +199,7 @@ public class WeatherManager : MonoBehaviour
                         while5 = true;
                         how5 += 1;
                     }
+                    playFX(fallIdx[i]);
                     return ;
                 }
             }
@@ -198,6 +216,7 @@ public class WeatherManager : MonoBehaviour
                 cumulative += winterAfter4[i];
                 if(randomValue <= cumulative) {
                     systemManager._weather = winterAfter4Idx[i];
+                    playFX(winterAfter4Idx[i]);
                     return ;
                 }
             }
@@ -210,6 +229,7 @@ public class WeatherManager : MonoBehaviour
                         while4 = true;
                         how4 += 1;
                     }
+                    playFX(winterIdx[i]);
                     return ;
                 }
             }
@@ -238,6 +258,53 @@ public class WeatherManager : MonoBehaviour
             _buffManager.coldWaveDay = Random.Range(1,29);
         } else {
             _buffManager.coldWaveDay = Random.Range(1,16);
+        }
+    }
+
+    private void playFX(int index)
+    {
+        switch(index)
+        {
+            case 0:
+                _snow.Stop();
+                _rain.Stop();
+                break;
+            case 1:
+                if (_season == 3)
+                {
+                    _snow.Play();
+                    _rain.Stop();
+                }
+                else
+                {
+                    _rain.Play();
+                    _snow.Stop();
+                }
+                break;
+            case 2:
+                _rain.Stop();
+                _snow.Stop();
+                break;
+            case 3:
+                _rain.Stop();
+                _snow.Stop();
+                break;
+            case 4:
+                _rain.Stop();
+                _snow.Play();
+                break;
+            case 5:
+                _rain.Play();
+                _snow.Stop();
+                break;
+            case 6:
+                _rain.Stop();
+                _snow.Stop();
+                break;
+            case 7:
+                _rain.Stop();
+                _snow.Stop();
+                break;
         }
     }
 }
