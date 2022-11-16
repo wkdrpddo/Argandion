@@ -85,10 +85,15 @@ public class BuildingChange : MonoBehaviour
         {
             case 1:
                 BuildStart();
+                _phase++;
                 break;
             case 2:
+                UpdateObject();
+                _phase++;
+                break;
             case 3:
                 UpdateObject();
+                _phase++;
                 break;
             case 4:
                 FinishConstruction();
@@ -97,8 +102,7 @@ public class BuildingChange : MonoBehaviour
                 Destroy(_constructionSet);
                 Destroy(gameObject);
                 break;
-        }
-        _phase++;
+        } 
     }
 
     // 중간 건축물 바꾸기

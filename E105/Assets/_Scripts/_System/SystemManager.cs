@@ -33,7 +33,7 @@ public class SystemManager : MonoBehaviour
 
     public SectorObject _sectorTest;
     [SerializeField] private SectorObject[] _sectors;
-    // [SerializeField] private BuildingChange[] _buildings;
+    [SerializeField] private BuildingChange[] _buildings;
     [SerializeField] private BuildingChange _buiding1;
     public GameObject[] _randomNPC = new GameObject[2];
 
@@ -57,7 +57,9 @@ public class SystemManager : MonoBehaviour
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _PrayBuff = GameObject.Find("BuffManager").GetComponent<PrayBuff>();
         _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
-        _buiding1 = GameObject.Find("ClothshopPlace").GetComponent<BuildingChange>();
+
+        _buildings = GameObject.Find("Buildings").GetComponentsInChildren<BuildingChange>();
+        // _buiding1 = GameObject.Find("ClothshopPlace").GetComponent<BuildingChange>();
 
 
 
@@ -266,11 +268,11 @@ public class SystemManager : MonoBehaviour
         // _sectorTest.DayEnd();
         _UIManager.DayStart();
 
-        _buiding1.DayStart();
-        // foreach (var building in _buildings)
-        // {
-        //     building.DayStart();
-        // }
+        // _buiding1.DayStart();
+        foreach (var building in _buildings)
+        {
+            building.DayStart();
+        }
 
     }
 
