@@ -18,7 +18,7 @@ public class TeleportationHome : MonoBehaviour
     {
         _playerSystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
         _directionalLight = GameObject.Find("Directional Light");
-        _homeLight = GameObject.Find("Home Light");
+        // _homeLight = GameObject.Find("Home Light");
         _teleportHomeInside = GameObject.Find("teleportHomeInside");
         _teleportHomeOutside = GameObject.Find("teleportHomeOutside");
         _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();

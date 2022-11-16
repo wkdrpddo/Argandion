@@ -93,6 +93,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         conversationNPC = 0;
         selectCharacter = 0;
         isPressESC = false;
@@ -116,7 +117,7 @@ public class UIManager : MonoBehaviour
         // _alter = GameObject.Find("Altar").GetComponent<Altar>();
 
 
-        _systemmanager.setPlayerGold(9999999);
+        // _systemmanager.setPlayerGold(9999999);
 
         _baseuipanel = gameObject.transform.Find("BaseUIPanel").gameObject;
         _healthbar = _baseuipanel.transform.GetChild(0).GetComponent<Slider>();
@@ -185,8 +186,7 @@ public class UIManager : MonoBehaviour
         _announceTitle = _eventAnnounce.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
         _announceText = _eventAnnounce.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
         _eventAnnounce.SetActive(false);
-
-        // 꽃
+        // 테스트 꽃
         ItemObject item1 = findItem(50);
         acquireItem(item1, 10);
         ItemObject item2 = findItem(51);
@@ -237,6 +237,8 @@ public class UIManager : MonoBehaviour
         acquireItem(item21, 25);
         ItemObject item22 = findItem(505);
         acquireItem(item22, 60);
+
+        _systemmanager.setPlayerGold(9999999);
 
     }
 
