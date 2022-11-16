@@ -52,6 +52,7 @@ public class FoodManager : MonoBehaviour
         _player = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         _particle = _player.transform.Find("PlayerBody").transform.Find("Particle").GetComponent<ParticleSystem>();
+        _particle.Stop();
         // time = 0; // 테스트 용
     }
 
