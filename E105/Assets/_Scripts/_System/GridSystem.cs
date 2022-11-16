@@ -71,7 +71,7 @@ public class GridSystem : MonoBehaviour
                 {
                     // 여기 큰일났어요 싯발
                     int treenum = Random.Range(0,1);
-                    GameObject tr = Instantiate(_trees[treenum],pos,new Quaternion(),gameObject.transform);
+                    GameObject tr = Instantiate(_trees[treenum],pos,new Quaternion(),gameObject.transform.parent.transform.parent.transform);
                     _Sector._tree_remain += 1;
                     _tree_spawn_percent = _Sector._tree_spawn_base_percent;
                     break;
@@ -116,7 +116,7 @@ public class GridSystem : MonoBehaviour
             int cnt = 0;
             while (cnt < 24)
             {
-                _buffer = Physics.OverlapBox(pos,new Vector3(0.5f,0.5f,0.5f));
+                _buffer = Physics.OverlapBox(center:pos,halfExtents:new Vector3(0.5f,0.5f,0.5f),new Quaternion(),layerMask:641);
                 // Debug.Log(_buffer.Length);
                 if (_buffer.Length==0)
                 {
@@ -140,7 +140,6 @@ public class GridSystem : MonoBehaviour
 
     private void Check_Stone()
     {
-        Debug.Log("돌맹이 생성됨!");
         float srnd = Random.Range(0f,1f);
         if (srnd <= (_purified ? _Sector._stone_spawn_base_percent : _Sector._stone_spawn_base_percent * _Sector._stone_ruin_factor))
         {
@@ -162,13 +161,14 @@ public class GridSystem : MonoBehaviour
 
     private void Spawn_Stone(int count)
     {
+        Debug.Log("돌맹이 생성됨!");
         while (count>0)
         {
             Vector3 pos = new Vector3(_base_transform.position.x+Random.Range(-5f,5f),_base_transform.position.y+0.5f,_base_transform.position.z+Random.Range(-5f,5f));
             int cnt = 0;
             while (cnt < 24)
             {
-                _buffer = Physics.OverlapBox(pos,new Vector3(0.5f,0.5f,0.5f));
+                _buffer = Physics.OverlapBox(center:pos,halfExtents:new Vector3(0.5f,0.5f,0.5f),new Quaternion(),layerMask:641);
                 // Debug.Log(_buffer.Length);
                 if (_buffer.Length==0)
                 {

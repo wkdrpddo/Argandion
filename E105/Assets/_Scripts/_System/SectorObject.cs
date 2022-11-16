@@ -65,6 +65,11 @@ public class SectorObject : MonoBehaviour
 
     public void DayEnd()
     {
+        TreeObject[] trees = gameObject.GetComponentsInChildren<TreeObject>();
+        foreach (TreeObject tree in trees)
+        {
+            tree.DayEnd();
+        }
     }
 
     public void DayStart()
@@ -107,6 +112,7 @@ public class SectorObject : MonoBehaviour
         flower.GetComponent<GatheringObject>().setFlower(true);
         Debug.Log(pos);
         _flower_remain += 1;
+        _flower_spawn_percent = _flower_spawn_base_percent;
     }
 
     private void Check_Grid()
