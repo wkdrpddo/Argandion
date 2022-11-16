@@ -18,16 +18,15 @@ public class HouseChange : MonoBehaviour
     int tmp = 0;
 
     // 테스트용 update();
-    void Update()
-    {
-        if (_devLevelUpTest)
-        {
-            Debug.Log("devLevelUp");
-            _devLevelUpTest = false; // 테스트용 변수
-            ChangeHouseTest(++tmp);
-        }
-
-    }
+    // void Update()
+    // {
+    //     if (_devLevelUpTest)
+    //     {
+    //         Debug.Log("devLevelUp");
+    //         _devLevelUpTest = false; // 테스트용 변수
+    //         ChangeHouseTest(++tmp);
+    //     }
+    // }
 
     // 발전도 변하면 call하기
     public void ChangeHouseTest(int devLevel)

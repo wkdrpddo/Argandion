@@ -27,15 +27,15 @@ public class TeleportAltar : MonoBehaviour
     public bool _goup;
     public bool _godown;
 
-    private void Update() {
-        if(_goup){
-            goUp();
-            _goup = false;
-        }if(_godown){
-            goDown();
-            _godown = false;
-        }
-    }
+    // private void Update() {
+    //     if(_goup){
+    //         goUp();
+    //         _goup = false;
+    //     }if(_godown){
+    //         goDown();
+    //         _godown = false;
+    //     }
+    // }
     // ==================================================================
 
     public void Interaction()

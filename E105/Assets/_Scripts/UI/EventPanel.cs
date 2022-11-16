@@ -51,21 +51,21 @@ public class EventPanel : MonoBehaviour
     }
 
     // 테스트용 업데이트
-    void Update()
-    {
-        if (_setTest)
-        {
-            // activeIcon(3);
-            _setTest = false;
-        }
-        if (_delTest)
-        {
-            // inactiveIcon(1);
-            // inactiveIcon(56);
-            // inactiveIcon(50);
-            _delTest = false;
-        }
-    }
+    // void Update()
+    // {
+    //     if (_setTest)
+    //     {
+    //         // activeIcon(3);
+    //         _setTest = false;
+    //     }
+    //     if (_delTest)
+    //     {
+    //         // inactiveIcon(1);
+    //         // inactiveIcon(56);
+    //         // inactiveIcon(50);
+    //         _delTest = false;
+    //     }
+    // }
 
     // 테스트 코드
     public void arrayLog()

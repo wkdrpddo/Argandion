@@ -20,15 +20,15 @@ public class FarmChange : MonoBehaviour
     int tmp = 1;
 
     // 테스트용 update();
-    void Update()
-    {
-        if (_devLevelUpTest)
-        {
-            _devLevelUpTest = false; // 테스트용 변수
-            ChangeFarmTest(++tmp);
-        }
+    // void Update()
+    // {
+    //     if (_devLevelUpTest)
+    //     {
+    //         _devLevelUpTest = false; // 테스트용 변수
+    //         ChangeFarmTest(++tmp);
+    //     }
 
-    }
+    // }
 
     public void ChangeFarmTest(int devLevel)
     {

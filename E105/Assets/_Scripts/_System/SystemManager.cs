@@ -34,6 +34,8 @@ public class SystemManager : MonoBehaviour
 
     public SectorObject _sectorTest;
     [SerializeField] private SectorObject[] _sectors;
+    [SerializeField] private BuildingChange[] _buildings;
+    [SerializeField] private BuildingChange _buiding1;
     public GameObject[] _randomNPC = new GameObject[2];
 
     public int[,] _timezone = new int[,] { { 6, 7, 18, 19 }, { 6, 6, 19, 20 }, { 6, 7, 18, 19 }, { 7, 8, 18, 19 } };
@@ -57,6 +59,12 @@ public class SystemManager : MonoBehaviour
         _PrayBuff = GameObject.Find("BuffManager").GetComponent<PrayBuff>();
         _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
         _SpiritBuff = GameObject.Find("BuffManager").GetComponent<SpiritBuff>();
+
+        _buildings = GameObject.Find("Buildings").GetComponentsInChildren<BuildingChange>();
+        // _buiding1 = GameObject.Find("ClothshopPlace").GetComponent<BuildingChange>();
+
+
+
     }
 
     // Update is called once per frame
@@ -261,6 +269,13 @@ public class SystemManager : MonoBehaviour
         }
         // _sectorTest.DayEnd();
         _UIManager.DayStart();
+
+        // _buiding1.DayStart();
+        foreach (var building in _buildings)
+        {
+            building.DayStart();
+        }
+
     }
 
     //정화된 구역 중에서 랜덤 한 구역 정하기
@@ -355,7 +370,7 @@ public class SystemManager : MonoBehaviour
         _EventPanel.inactiveIcon(value);
     }
 
-        public void CompleteConstruction(int index)
+    public void CompleteConstruction(int index)
     {
         _MapObject.GetComponent<MapObject>().ChangePurifier(index);
         _purification[index] = true;
@@ -375,11 +390,11 @@ public class SystemManager : MonoBehaviour
 
     public void DevelopLevelUp()
     {
-        if (_development_level==2)
+        if (_development_level == 2)
         {
             //실행문
         }
-        if (_development_level==3)
+        if (_development_level == 3)
         {
             //실행문
         }
@@ -390,11 +405,11 @@ public class SystemManager : MonoBehaviour
     {
         return _development_level;
     }
-    
+
     // 정화 여부 확인 (섹터 1번부터 8번까지)
     public bool isPurifiered(int index)
     {
-        return _purification[index-1];
+        return _purification[index - 1];
     }
 
     public int getPuriCount()

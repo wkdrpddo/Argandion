@@ -41,22 +41,22 @@ public class BuildingChange : MonoBehaviour
     }
 
     // 테스트용 update();
-    void Update()
-    {
-        if (_fulfillTest)
-        {
-            Debug.Log("condition fulfill");
-            _fulfillTest = false; // 테스트용 변수
-            _phase = 1;
-        }
-        if (_dayEndTest)
-        {
-            Debug.Log("dayEnd");
-            DayStart();
-            _dayEndTest = false;
-        }
+    // void Update()
+    // {
+    //     if (_fulfillTest)
+    //     {
+    //         Debug.Log("condition fulfill");
+    //         _fulfillTest = false; // 테스트용 변수
+    //         _phase = 1;
+    //     }
+    //     if (_dayEndTest)
+    //     {
+    //         Debug.Log("dayEnd");
+    //         DayStart();
+    //         _dayEndTest = false;
+    //     }
 
-    }
+    // }
 
     // ==================================================== 지울 위치 (끝) ==================================
 
@@ -85,10 +85,15 @@ public class BuildingChange : MonoBehaviour
         {
             case 1:
                 BuildStart();
+                _phase++;
                 break;
             case 2:
+                UpdateObject();
+                _phase++;
+                break;
             case 3:
                 UpdateObject();
+                _phase++;
                 break;
             case 4:
                 FinishConstruction();
@@ -97,8 +102,7 @@ public class BuildingChange : MonoBehaviour
                 Destroy(_constructionSet);
                 Destroy(gameObject);
                 break;
-        }
-        _phase++;
+        } 
     }
 
     // 중간 건축물 바꾸기

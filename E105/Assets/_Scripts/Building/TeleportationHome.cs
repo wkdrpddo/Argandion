@@ -64,7 +64,7 @@ public class TeleportationHome : MonoBehaviour
         _playerSystem.transform.position = new Vector3(_teleportHomeOutside.transform.position.x, _teleportHomeOutside.transform.position.y, _teleportHomeOutside.transform.position.z - 0.5f);
         _playerSystem.transform.GetChild(0).gameObject.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
         // '밖으로' 메시지 보내기
-        _uiManager.setIsHome(!_isInside);
+        _uiManager.setIsHome(_isInside);
     }
     private void setLight()
     {

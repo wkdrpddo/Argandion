@@ -16,9 +16,4 @@ public class QuestButton : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
