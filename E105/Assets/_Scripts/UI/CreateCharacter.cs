@@ -35,10 +35,13 @@ public class CreateCharacter : MonoBehaviour
     {
         gameObject.SetActive(false);
         gameObject.GetComponentInParent<UIManager>().OnMainPagePanel();
+        gameObject.transform.GetChild(2).GetComponent<TMP_InputField>().text = "";
     }
 
     public void gameStart()
     {
+        getName();
+
         if (_name == "")
         {
             ui.OnResultNotificationPanel("이름은 공백일 수 없습니다-");

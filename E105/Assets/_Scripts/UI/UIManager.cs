@@ -58,7 +58,7 @@ public class UIManager : MonoBehaviour
 
     public int conversationNPC;
     private int selectCharacter;
-    private bool isPressESC;
+    [SerializeField] public bool isPressESC;
     private bool isMyHome;
 
     // 패널 오픈 여부 변수
@@ -93,6 +93,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         conversationNPC = 0;
         selectCharacter = 0;
         isPressESC = false;
@@ -186,6 +187,59 @@ public class UIManager : MonoBehaviour
         _announceTitle = _eventAnnounce.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
         _announceText = _eventAnnounce.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
         _eventAnnounce.SetActive(false);
+        // 테스트 꽃
+        ItemObject item1 = findItem(50);
+        acquireItem(item1, 10);
+        ItemObject item2 = findItem(51);
+        acquireItem(item2, 10);
+        ItemObject item3 = findItem(52);
+        acquireItem(item3, 10);
+        ItemObject item4 = findItem(53);
+        acquireItem(item4, 10);
+        ItemObject item5 = findItem(54);
+        acquireItem(item5, 10);
+        ItemObject item10 = findItem(55);
+        acquireItem(item10, 10);
+        ItemObject item11 = findItem(56);
+        acquireItem(item11, 10);
+        // 그 외 재료
+        ItemObject item6 = findItem(1);
+        acquireItem(item6, 40);
+        ItemObject item7 = findItem(2);
+        acquireItem(item7, 27);
+        ItemObject item8 = findItem(3);
+        acquireItem(item8, 27);
+        ItemObject item9 = findItem(4);
+        acquireItem(item9, 99);
+        acquireItem(item9, 71);
+
+        ItemObject item12 = findItem(10);
+        acquireItem(item12, 99);
+        acquireItem(item12, 41);
+        ItemObject item13 = findItem(11);
+        acquireItem(item13, 10);
+        ItemObject item14 = findItem(12);
+        acquireItem(item14, 40);
+        ItemObject item15 = findItem(13);
+        acquireItem(item15, 2);
+        ItemObject item16 = findItem(14);
+        acquireItem(item16, 5);
+
+        ItemObject item17 = findItem(20);
+        acquireItem(item17, 40);
+        ItemObject item18 = findItem(21);
+        acquireItem(item18, 15);
+        ItemObject item19 = findItem(22);
+        acquireItem(item19, 35);
+
+        ItemObject item20 = findItem(104);
+        acquireItem(item20, 20);
+        ItemObject item21 = findItem(112);
+        acquireItem(item21, 25);
+        ItemObject item22 = findItem(505);
+        acquireItem(item22, 60);
+
+        _systemmanager.setPlayerGold(9999999);
 
     }
 
@@ -194,6 +248,7 @@ public class UIManager : MonoBehaviour
     {
         setTimer();
 
+        // if (Input.GetKeyDown("optionKey"))
         if (Input.GetButtonDown("optionKey"))
         {
             pressedESC();
@@ -284,8 +339,7 @@ public class UIManager : MonoBehaviour
 
     public void OnBuildEventPanel(int value)
     {
-        int step = _systemmanager.getPuriCount();
-        _buildeventpanel.GetComponent<BuildEventPanel>().handelPanel(value, step);
+        _buildeventpanel.GetComponent<BuildEventPanel>().handelPanel(value);
     }
 
     public void OnStoragePanel()
@@ -500,17 +554,18 @@ public class UIManager : MonoBehaviour
     // ESC 클릭 시 동작
     public void pressedESC()
     {
+        // Debug.Log("여기 들어옴?");
         isPressESC = !isPressESC;
 
         if (isPressESC)
         {
             if (getGameState())
             {
-                _optionpanel.gameObject.SetActive(true);
+                _optionpanel.handelPanel();
             }
             else
             {
-                _optionfrommain.gameObject.SetActive(true);
+                _optionfrommain.handelPanel();
             }
             stopControllKeys();
         }
@@ -518,11 +573,11 @@ public class UIManager : MonoBehaviour
         {
             if (getGameState())
             {
-                _optionpanel.gameObject.SetActive(false);
+                _optionpanel.handelPanel();
             }
             else
             {
-                _optionfrommain.gameObject.SetActive(false);
+                _optionfrommain.handelPanel();
             }
             runControllKeys();
         }

@@ -7,23 +7,32 @@ public class OptionPanel : MonoBehaviour
 {
     [SerializeField] private SoundManager _soundmanager;
     [SerializeField] private UIManager ui;
-    private float _bgmVolume;
-    private float _effectVolume;
-    // Start is called before the first frame update
+    [SerializeField] private Slider background;
+    [SerializeField] private Slider effect;
+
+
     void Start()
     {
         _soundmanager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+
+        background = gameObject.transform.GetChild(0).GetComponent<Slider>();
+        effect = gameObject.transform.GetChild(1).GetComponent<Slider>();
     }
 
     public void handelPanel()
     {
-        ui.pressedESC();
+        gameObject.SetActive(!gameObject.activeSelf);
 
         if (gameObject.activeSelf)
         {
-            gameObject.transform.GetChild(0).GetComponent<Slider>().value = _soundmanager.getBackgroundSound();
-            gameObject.transform.GetChild(1).GetComponent<Slider>().value = _soundmanager.getEffectSound();
+            background.value = _soundmanager.getBackgroundSound();
+            effect.value = _soundmanager.getEffectSound();
+            ui.isPressESC = true;
+        }
+        else
+        {
+            ui.isPressESC = false;
         }
     }
 }

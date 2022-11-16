@@ -33,25 +33,32 @@ public class Dirt : MonoBehaviour
     // }
 
     void NewDay()
-    {  
+    {
         if (gameObject.tag == "wateredDirt")
         {
             Debug.Log("물빠짐!");
             watered -= minusWater;
-            if (_buff.bluePray) {
+            if (_buff.bluePray)
+            {
                 watered += 25 * howMany;
             }
-            if (watered < 0) {
+            if (watered < 0)
+            {
                 watered = 0;
                 gameObject.tag = "dirt";
                 particleObject.Stop();
-            } else {
-                for (int i = 0; i < _nearObjects.Length; i++){
-                    if ( _nearObjects[i] != null ) {
+            }
+            else
+            {
+                for (int i = 0; i < _nearObjects.Length; i++)
+                {
+                    if (_nearObjects[i] != null)
+                    {
                         Crop crop = _nearObjects[i].GetComponent<Crop>();
                         crop.growUp();
                     }
-                    else {
+                    else
+                    {
                     }
                 }
             }
@@ -65,16 +72,20 @@ public class Dirt : MonoBehaviour
         particleObject.Play();
     }
 
-    void OnTriggerEnter(Collider other) {
+    void OnTriggerEnter(Collider other)
+    {
         if (other.gameObject.CompareTag("crop"))
         {
-            if (!other.gameObject.GetComponent<Crop>().isIn) {
-                for (int idx = 0; idx < 25; idx ++) {
-                    if (_nearObjects[idx] == null) {
+            if (!other.gameObject.GetComponent<Crop>().isIn)
+            {
+                for (int idx = 0; idx < 25; idx++)
+                {
+                    if (_nearObjects[idx] == null)
+                    {
                         Debug.Log(idx + "에 넣었어!");
                         _nearObjects[idx] = other.gameObject;
                         other.gameObject.GetComponent<Crop>().isIn = true;
-                        howMany +=1;
+                        howMany += 1;
                         break;
                     }
                 }
@@ -82,11 +93,14 @@ public class Dirt : MonoBehaviour
         }
     }
 
-    public void CropGrowUp(GameObject crop) {
-        for (int idx = 0; idx < 25; idx ++) {
-            if(_nearObjects[idx] == crop) {
+    public void CropGrowUp(GameObject crop)
+    {
+        for (int idx = 0; idx < 25; idx++)
+        {
+            if (_nearObjects[idx] == crop)
+            {
                 _nearObjects[idx] = null;
-                howMany -=1;
+                howMany -= 1;
                 break;
             }
         }

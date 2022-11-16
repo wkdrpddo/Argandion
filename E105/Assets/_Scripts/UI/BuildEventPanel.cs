@@ -31,7 +31,7 @@ public class BuildEventPanel : MonoBehaviour
     [SerializeField] private ItemObject[] usedItem;
 
     [SerializeField] private int _key;
-    [SerializeField] private int _step;
+    [SerializeField] private int step;
 
     // 각 건물 시작을 위한 데이터
     private BuildingChange anglerHouse;
@@ -76,14 +76,15 @@ public class BuildEventPanel : MonoBehaviour
         hunterHouse = GameObject.Find("HunterHousePlace").GetComponent<BuildingChange>();
         workShop = GameObject.Find("WorkshopPlace").GetComponent<BuildingChange>();
 
-        gameObject.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => handelPanel(-1, -1));
-        gameObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => handelPanel(-1, -1));
+        step = 0;
+
+        gameObject.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => handelPanel(-1));
+        gameObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => handelPanel(-1));
     }
 
-    public void handelPanel(int value, int step)
+    public void handelPanel(int value)
     {
         _key = value;
-        _step = step;
 
         if (!checkIsBuild())
         {
@@ -271,7 +272,7 @@ public class BuildEventPanel : MonoBehaviour
                     break;
             }
             Build();
-            handelPanel(-1, -1);
+            handelPanel(-1);
         }
         else
         {
@@ -288,7 +289,7 @@ public class BuildEventPanel : MonoBehaviour
     private void Build()
     {
         // Debug.Log("꽃 소모");
-        ui.acquireItem(usedItem[0], -1 * buildCost[_step, 1]);
+        ui.acquireItem(usedItem[0], -1 * buildCost[step, 1]);
         for (int i = 1; i < 7; i++)
         {
             if (usedItem[i] == null)
@@ -299,7 +300,8 @@ public class BuildEventPanel : MonoBehaviour
             ui.acquireItem(usedItem[i], -1 * buildConditionCount[_key - 1, i]);
         }
         // Debug.Log("골드 소모");
-        ui.addPlayerGold(-1 * buildCost[_step, 0]);
+        ui.addPlayerGold(-1 * buildCost[step, 0]);
+        step++;
     }
 
     private void setBuildCondition(int value, int step)
@@ -366,7 +368,7 @@ public class BuildEventPanel : MonoBehaviour
         {"대장간", "그레빌레아", "연목재", "경목재", "나뭇가지", "돌", "철광석", "금광석"},
         {"", "", "", "", "", "", "", ""},
         {"목장", "온시디움", "판자", "동물의 가죽", "철괴", "고기", "밀", ""},
-        {"사냥꾼의 오두막", "프리뮬라", "판자", "거친 가죽", "철괴", "돌", "", ""}
+        {"사냥꾼의\n오두막", "프리뮬라", "판자", "거친 가죽", "철괴", "돌", "", ""}
     };
 
     private int[,] buildConditionCount = new int[7, 7] {
