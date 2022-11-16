@@ -111,8 +111,8 @@ public class UIManager : MonoBehaviour
         _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();
         _foodmanager = GameObject.Find("FoodManager").GetComponent<FoodManager>();
         _worldtree = GameObject.Find("WorldTree").GetComponent<WorldTree>();
-        // _alterdown = GameObject.Find("teleportDown").GetComponent<TeleportAltar>();
-        // _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
+        _alterdown = GameObject.Find("teleportDown").GetComponent<TeleportAltar>();
+        _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
         // _alter = GameObject.Find("Altar").GetComponent<Altar>();
 
 
@@ -122,6 +122,7 @@ public class UIManager : MonoBehaviour
         _healthbar = _baseuipanel.transform.GetChild(0).GetComponent<Slider>();
         _energybar = _baseuipanel.transform.GetChild(1).GetComponent<Slider>();
         _eventpanel = _baseuipanel.transform.GetChild(4).gameObject;
+        _eventpanel.GetComponent<EventPanel>().setting();
         _daytime = _baseuipanel.transform.GetChild(2).GetChild(1).gameObject;
         _foodmanager._eventPanel = _eventpanel.GetComponent<EventPanel>();
 
