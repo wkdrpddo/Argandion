@@ -161,18 +161,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &250927891 stripped
+--- !u!1 &150759034 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 7080265349388839388, guid: cf5a8ecb025e313438f779eee16e6c52, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3600535632781760030, guid: cf5a8ecb025e313438f779eee16e6c52, type: 3}
   m_PrefabInstance: {fileID: 818153621}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &250927892
+--- !u!114 &150759036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 250927891}
+  m_GameObject: {fileID: 150759034}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ebb98478e2327245b15c54ed7007c64, type: 3}
@@ -253,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1807044139302955574, guid: a7f8c1e22f4c25847b210686c2b7d3e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.8099995
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1807044139302955574, guid: a7f8c1e22f4c25847b210686c2b7d3e2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4274,6 +4274,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d6cdf64f8df6c4c84880e4ae3d5ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &802765585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6347636930392310925, guid: cc0731491f4942b408ef2c7e54a986fe, type: 3}
+  m_PrefabInstance: {fileID: 954799915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &806266880
 GameObject:
   m_ObjectHideFlags: 0
@@ -4356,7 +4361,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -328.073, y: 0, z: 0}
 --- !u!1001 &818153621
 PrefabInstance:
@@ -4388,6 +4393,10 @@ PrefabInstance:
     - target: {fileID: 688583887872627100, guid: cf5a8ecb025e313438f779eee16e6c52, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 727680453685553233, guid: cf5a8ecb025e313438f779eee16e6c52, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 803798342982713221, guid: cf5a8ecb025e313438f779eee16e6c52, type: 3}
       propertyPath: _stone
@@ -11750,7 +11759,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1409734855
 GameObject:
@@ -12074,6 +12083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   systemManager: {fileID: 1259081800}
   _theInventory: {fileID: 0}
+  _item: {fileID: 0}
   tempDay: 0
   tempMonth: 0
   todayPray: 0
@@ -12260,6 +12270,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8022364947371792651, guid: 5c445222bec193945923985def703de2, type: 3}
+      propertyPath: _homeLight
+      value: 
+      objectReference: {fileID: 802765585}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c445222bec193945923985def703de2, type: 3}
 --- !u!4 &1934329203 stripped
@@ -23618,7 +23632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9104110807844069379, guid: 2018bcac01cdb484ebd447a439eae9b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9104110807844069379, guid: 2018bcac01cdb484ebd447a439eae9b1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23688,11 +23702,11 @@ PrefabInstance:
     - target: {fileID: 7886377701547957252, guid: 7dd69e4d7d7e67944a288d608e8a54b2, type: 3}
       propertyPath: MapObject
       value: 
-      objectReference: {fileID: 250927891}
+      objectReference: {fileID: 0}
     - target: {fileID: 7886377701547957252, guid: 7dd69e4d7d7e67944a288d608e8a54b2, type: 3}
       propertyPath: _MapObject
       value: 
-      objectReference: {fileID: 250927891}
+      objectReference: {fileID: 0}
     - target: {fileID: 7886377701547957252, guid: 7dd69e4d7d7e67944a288d608e8a54b2, type: 3}
       propertyPath: _UIManager
       value: 

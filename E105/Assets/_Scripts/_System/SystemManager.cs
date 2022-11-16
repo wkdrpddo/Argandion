@@ -14,6 +14,7 @@ public class SystemManager : MonoBehaviour
     public int _weather;
     private float _minute;
     private bool _game_state = false;
+    private bool idx4 = false;
     public float _hour_time_changemeter = 1000;
     private int _player_gold;
     public GameObject _light;
@@ -103,6 +104,23 @@ public class SystemManager : MonoBehaviour
                 _NPCManager.NPCActive(index - 2);
                 break;
 
+        }
+        
+        if (index ==4 && !idx4 ) {
+            _purification_sector -= 1;
+            idx4 = true;
+        }
+
+        _purification_sector += 1;
+        if (_purification_sector > 2 && _development_level < 2)
+        {
+            _development_level = 2;
+            DevelopLevelUp();
+        }
+        if (_purification_sector > 4 && _development_level < 3)
+        {
+            _development_level = 3;
+            DevelopLevelUp();
         }
     }
 
