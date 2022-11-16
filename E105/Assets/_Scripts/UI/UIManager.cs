@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -301,7 +302,6 @@ public class UIManager : MonoBehaviour
                             break;
                     }
                 }
-
             }
         }
     }
@@ -406,12 +406,26 @@ public class UIManager : MonoBehaviour
     public void OnTransactionDoubleCheckPanel(string name, int store, int itemIdx, int itemCode)
     {
         // Debug.Log("============ " + itemIdx);
+        if (conversationNPC != 5 && !checkInventory(findItem(itemCode), 1))
+        {
+            OnResultNotificationPanel("구매가 불가능 합니다. \n인벤토리를 확인 해 주세요!!");
+            return;
+        }
         _transactiondoublecheck.setData(name, store, itemIdx, itemCode);
         _transactiondoublecheck.handleModal();
     }
 
     public void OnTradeModal(string name, string iconName, int maxCnt, int cost, int checkMod, int storeIdx, int itemIdx)
     {
+        if ((checkMod == 1 || checkMod == 4) && !checkInventory(findItem(Int32.Parse(iconName)), 1))
+        {
+            OnResultNotificationPanel("구매가 불가능 합니다. \n인벤토리를 확인 해 주세요!!");
+            return;
+        }
+
+        // sell 요청 시, storeIdx는 인벤토리/퀵슬롯 구분자
+        // 1 : 인벤 // 2 : 퀵슬롯
+
         int _storeKey = storeIdx;
         if (_storeKey == -1)
         {
@@ -1067,11 +1081,13 @@ public class UIManager : MonoBehaviour
     public void upTeleport()
     {
         _alterdown.goUp();
+        _conversationpanel.resetConversationPanel();
     }
 
     public void downTeleport()
     {
         _alterup.goDown();
+        _conversationpanel.resetConversationPanel();
     }
 
     // 게임 시작 종료

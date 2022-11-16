@@ -156,7 +156,7 @@ public class TradeModal : MonoBehaviour
             ui.syncAnimalPanel(_ranch.getPoint(), _ranch.sheeps, _ranch.chicks, _ranch.cows);
             closeModal();
         }
-        else if (storeIndex == 10)
+        else if (storeIndex == 2)
         {
             if (tradeCnt != 0)
             {

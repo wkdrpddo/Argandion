@@ -92,6 +92,7 @@ public class ConversationPanel : MonoBehaviour
                 conversationCount++;
                 break;
         }
+        Debug.Log("초기대화 시작");
 
         ui.setIsOpenConversation(true);
         setSelectList();
@@ -191,6 +192,7 @@ public class ConversationPanel : MonoBehaviour
     // 선택창 전 대사 출력
     public void secondConversation()
     {
+        Debug.Log("초기 대화 두번째");
         _nomaltalk.text = conversations[ui.conversationNPC - 1, 3];
         conversationCount++;
     }
@@ -198,6 +200,7 @@ public class ConversationPanel : MonoBehaviour
     // 선택창 출력
     public void thirdConversation()
     {
+        Debug.Log("초기 대화 세번째");
         _nomaltalk.gameObject.SetActive(false);
         _selectpanel.SetActive(true);
     }
@@ -205,6 +208,7 @@ public class ConversationPanel : MonoBehaviour
     // Conversation Panel 초기화
     public void resetConversationPanel()
     {
+        Debug.Log("모든 대화 상호작용 종료");
         _nomaltalk.gameObject.SetActive(true);
         _selectpanel.SetActive(false);
         gameObject.SetActive(false);
@@ -311,6 +315,7 @@ public class ConversationPanel : MonoBehaviour
     // NPC 선택지 중 - 대화 선택 시 setting
     private void selectConversation()
     {
+        Debug.Log("선택지 대화 시작");
         isConversation = true;
         _selectpanel.SetActive(false);
         _nomaltalk.gameObject.SetActive(true);
@@ -325,12 +330,14 @@ public class ConversationPanel : MonoBehaviour
     {
         if (selectConversationCount < 4)
         {
+            Debug.Log("선택지 대화");
             int randCnt = Random.Range(0, 3);
             _nomaltalk.text = conversations[ui.GetComponent<UIManager>().conversationNPC - 1, randCnt];
             selectConversationCount++;
         }
         else
         {
+            Debug.Log("선택지 대화 종료");
             resetConversationPanel();
         }
     }

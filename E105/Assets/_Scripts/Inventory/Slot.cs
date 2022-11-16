@@ -115,7 +115,14 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         {
             if (!(item.ItemCode >= 50 && item.ItemCode <= 56) && !(item.ItemCode >= 300 && item.ItemCode <= 304) && item.ItemCode != 320 && !(item.ItemCode >= 212 && item.ItemCode <= 219))
             {
-                ui.OnTradeModal(item.Name, item.ItemCode.ToString(), itemCount, item.SellCost, 0, -1, idx);
+                if (gameObject.transform.parent.parent.parent.name == "Bag")
+                {
+                    ui.OnTradeModal(item.Name, item.ItemCode.ToString(), itemCount, item.SellCost, 0, 1, idx);
+                }
+                else if (gameObject.transform.parent.parent.parent.name == "QuickSlot")
+                {
+                    ui.OnTradeModal(item.Name, item.ItemCode.ToString(), itemCount, item.SellCost, 0, 2, idx);
+                }
             }
         }
 

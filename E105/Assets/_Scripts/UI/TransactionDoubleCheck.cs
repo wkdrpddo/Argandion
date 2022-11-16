@@ -20,14 +20,6 @@ public class TransactionDoubleCheck : MonoBehaviour
 
     public void handleModal()
     {
-        if (storeIndex != 5)
-        {
-            if (!ui.checkInventory(ui.findItem(itemCode), 1))
-            {
-                ui.OnResultNotificationPanel("구매가 불가능 합니다. 인벤토리를 확인 해 주세요!!");
-                return;
-            }
-        }
         gameObject.SetActive(!gameObject.activeSelf);
     }
 

@@ -99,7 +99,7 @@ public class BuildEventPanel : MonoBehaviour
 
         if (gameObject.activeSelf)
         {
-            setBuildCondition(value, step);
+            setBuildCondition(value);
             ui.stopControllKeys();
             ui.setIsOpenBuildEvent(true);
         }
@@ -110,7 +110,7 @@ public class BuildEventPanel : MonoBehaviour
         }
     }
 
-    private void setting(int _buildKey, int _step)
+    private void setting(int _buildKey)
     {
         slots = ui.getInventorySlots();
 
@@ -130,15 +130,15 @@ public class BuildEventPanel : MonoBehaviour
             }
         }
 
-        canBuild = CanMake(_buildKey, _step, myItems, howItems);
+        canBuild = CanMake(_buildKey, myItems, howItems);
     }
 
-    private bool CanMake(int _buildKey, int _step, int[] myItems, int[] howItems)
+    private bool CanMake(int _buildKey, int[] myItems, int[] howItems)
     {
         // 꽃 체크
         for (int i = 0; i < 25; i++)
         {
-            if (flowerName.text == ui.findItem(myItems[i]).Name && howItems[i] >= buildCost[_step, 1])
+            if (flowerName.text == ui.findItem(myItems[i]).Name && howItems[i] >= buildCost[step, 1])
             {
                 usedItem[0] = ui.findItem(myItems[i]);
                 canMake[0] = true;
@@ -180,7 +180,7 @@ public class BuildEventPanel : MonoBehaviour
             }
         }
 
-        if (ui.getPlayerGold() < buildCost[_step, 0])
+        if (ui.getPlayerGold() < buildCost[step, 0])
         {
             gameObject.transform.GetChild(0).GetChild(2).GetChild(8).GetComponent<TextMeshProUGUI>().color = new Color(255, 0, 0);
             return false;
@@ -304,7 +304,7 @@ public class BuildEventPanel : MonoBehaviour
         step++;
     }
 
-    private void setBuildCondition(int value, int step)
+    private void setBuildCondition(int value)
     {
         buildName.text = buildConditions[value - 1, 0];
         flowerName.text = buildConditions[value - 1, 1];
@@ -345,7 +345,7 @@ public class BuildEventPanel : MonoBehaviour
             }
         }
 
-        setting(value, step);
+        setting(value);
 
         flowerName.text = flowerName.text + " (" + buildCost[step, 1] + ")";
         for (int i = 0; i < 6; i++)
