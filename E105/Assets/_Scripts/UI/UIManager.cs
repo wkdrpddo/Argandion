@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private WorldTree _worldtree;
     [SerializeField] private TeleportAltar _alterdown;
     [SerializeField] private TeleportAltar _alterup;
+    [SerializeField] private Altar _alter;
 
     private Slider _healthbar;
     private Slider _energybar;
@@ -65,14 +66,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] private bool isInventoryOpen;
     [SerializeField] private bool isInvenRightModal;
     [SerializeField] private bool isStorageOpen;
+    private bool isCraftOpen;
+    private bool isCookOpen;
+    private bool isBuildEventOpen;
+    private bool isMapOpen;
+    private bool isConversationOpen;
 
     // 주연 추가
     public GameObject _eventpanel;
     // private EventManager _eventmanager;
     public FoodManager _foodmanager;
 
+    // Sprite 이미지 저장 Map
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>();
-
+    // Sprite 탐색 해서 저장하는 함수
     public Sprite getItemIcon(int key)
     {
         if (Dic.ContainsKey(key))
@@ -87,12 +94,17 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         conversationNPC = 0;
-        selectCharacter = -1;
+        selectCharacter = 0;
         isPressESC = false;
         isMyHome = false;
         isTransactionOpen = false;
         isInventoryOpen = false;
         isStorageOpen = false;
+        isCraftOpen = false;
+        isCookOpen = false;
+        isBuildEventOpen = false;
+        isMapOpen = false;
+        isConversationOpen = false;
 
         _systemmanager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         _playersystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
@@ -101,10 +113,10 @@ public class UIManager : MonoBehaviour
         _worldtree = GameObject.Find("WorldTree").GetComponent<WorldTree>();
         // _alterdown = GameObject.Find("teleportDown").GetComponent<TeleportAltar>();
         // _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
-        // _eventmanager = GameObject.Find("EventManager").GetComponent<EventManager>();
+        // _alter = GameObject.Find("Altar").GetComponent<Altar>();
 
 
-        _systemmanager.setPlayerGold(9999999);
+        // _systemmanager.setPlayerGold(9999999);
 
         _baseuipanel = gameObject.transform.Find("BaseUIPanel").gameObject;
         _healthbar = _baseuipanel.transform.GetChild(0).GetComponent<Slider>();
@@ -112,8 +124,6 @@ public class UIManager : MonoBehaviour
         _eventpanel = _baseuipanel.transform.GetChild(4).gameObject;
         _daytime = _baseuipanel.transform.GetChild(2).GetChild(1).gameObject;
         _foodmanager._eventPanel = _eventpanel.GetComponent<EventPanel>();
-        // _food.settingEventPanel();
-        // _eventmanager.setting();
 
         _nowequip = GameObject.Find("NowEquip").gameObject;
         _baseuipanel.SetActive(false);
@@ -176,59 +186,6 @@ public class UIManager : MonoBehaviour
         _announceText = _eventAnnounce.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
         _eventAnnounce.SetActive(false);
 
-        // 꽃
-        ItemObject item1 = findItem(50);
-        acquireItem(item1, 10);
-        ItemObject item2 = findItem(51);
-        acquireItem(item2, 10);
-        ItemObject item3 = findItem(52);
-        acquireItem(item3, 10);
-        ItemObject item4 = findItem(53);
-        acquireItem(item4, 10);
-        ItemObject item5 = findItem(54);
-        acquireItem(item5, 10);
-        ItemObject item10 = findItem(55);
-        acquireItem(item10, 10);
-        ItemObject item11 = findItem(56);
-        acquireItem(item11, 10);
-        // 그 외 재료
-        ItemObject item6 = findItem(1);
-        acquireItem(item6, 40);
-        ItemObject item7 = findItem(2);
-        acquireItem(item7, 27);
-        ItemObject item8 = findItem(3);
-        acquireItem(item8, 27);
-        ItemObject item9 = findItem(4);
-        acquireItem(item9, 99);
-        acquireItem(item9, 71);
-
-        ItemObject item12 = findItem(10);
-        acquireItem(item12, 99);
-        acquireItem(item12, 41);
-        ItemObject item13 = findItem(11);
-        acquireItem(item13, 10);
-        ItemObject item14 = findItem(12);
-        acquireItem(item14, 40);
-        ItemObject item15 = findItem(13);
-        acquireItem(item15, 2);
-        ItemObject item16 = findItem(14);
-        acquireItem(item16, 5);
-
-        ItemObject item17 = findItem(20);
-        acquireItem(item17, 40);
-        ItemObject item18 = findItem(21);
-        acquireItem(item18, 15);
-        ItemObject item19 = findItem(22);
-        acquireItem(item19, 35);
-
-        ItemObject item20 = findItem(104);
-        acquireItem(item20, 20);
-        ItemObject item21 = findItem(112);
-        acquireItem(item21, 25);
-        ItemObject item22 = findItem(505);
-        acquireItem(item22, 60);
-
-        _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().AcquireItem(findItem(2), 9990);
     }
 
     // Update is called once per frame
@@ -241,14 +198,17 @@ public class UIManager : MonoBehaviour
             pressedESC();
         }
 
-        if (Input.GetButtonDown("InventoryKey"))
+        // 다른 키 다 X, inventory key만 동작
+        if ((!isPanelOpen() && Input.GetButtonDown("InventoryKey")) || (isInventoryOpen && Input.GetButtonDown("InventoryKey")))
         {
             if (getGameState())
             {
                 OnInventoryPanel();
             }
         }
-        if (Input.GetButtonDown("mapKey"))
+
+        // 다른 키 다 X, map key만 동작
+        if ((!isPanelOpen() && Input.GetButtonDown("mapKey")) || (isMapOpen && Input.GetButtonDown("mapKey")))
         {
             if (getGameState() && !isMyHome)
             {
@@ -256,106 +216,38 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        // if (Input.GetButtonDown("interactionKey") && _conversationpanel.GetComponent<ConversationPanel>().getIsOn())
-        // {
-        //     _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
-        // }
-
         if (Input.GetButtonDown("interactionKey") && isInvenRightModal)
         {
             closeInvenRightClickModal();
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetButtonDown("interactionKey"))
         {
-            // test buildEvent
-            if (_buildeventpanel.GetComponent<BuildEventPanel>().isOnPanel)
+            if (isConversationOpen)
             {
-                _buildeventpanel.GetComponent<BuildEventPanel>().closeWindow();
-            }
-            else
-            {
-                int random = Random.Range(1, 7);
-                OnBuildEventPanel(random);
-                // OnBuildEventPanel(3);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            int randNum = Random.Range(1, 7);
-            if (randNum == 3 || randNum == 5)
-            {
-                randNum++;
-            }
-            if (!_craftingpanel.gameObject.activeSelf)
-            {
-                OnCraftingPanel(randNum);
-            }
-            else
-            {
-                _craftingpanel.GetComponent<CraftingPanel>().closePanel();
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            OnCookingPanel();
-        }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            // test conversation
-            int conversationCnt = _conversationpanel.GetComponent<ConversationPanel>().getConversationCnt();
-            if (_conversationpanel.GetComponent<ConversationPanel>().getIsConversation())
-            {
-                _conversationpanel.GetComponent<ConversationPanel>().conversation();
-            }
-            else
-            {
-                int randomNum = Random.Range(1, 12);
-                // randomNum = 1;
-                // randomNum = 2;
-                // randomNum = 3;
-                // randomNum = 4;
-                // randomNum = 5;
-                // randomNum = 6;
-                // randomNum = 9;
-                // randomNum = 10;
-                randomNum = Random.Range(11, 13);
-                switch (conversationCnt)
+                int conversationCnt = _conversationpanel.GetComponent<ConversationPanel>().getConversationCnt();
+                if (_conversationpanel.GetComponent<ConversationPanel>().getIsConversation())
                 {
-                    case -1:
-                        OnConversationPanel(randomNum);
-                        break;
-                    case 0:
-                        if (conversationNPC == 9)
-                        {
-                            break;
-                        }
-                        _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
-                        break;
-                    case 1:
-                        _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
-                        break;
+                    _conversationpanel.GetComponent<ConversationPanel>().conversation();
                 }
+                else
+                {
+                    switch (conversationCnt)
+                    {
+                        case 0:
+                            if (conversationNPC == 9)
+                            {
+                                break;
+                            }
+                            _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
+                            break;
+                        case 1:
+                            _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
+                            break;
+                    }
+                }
+
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            _conversationpanel.conversationWhenAlterBuff();
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            OnStoragePanel();
-        }
-
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            _playersystem.changeHealth(30);
-            _playersystem.changeEnergy(30);
         }
     }
 
@@ -365,74 +257,59 @@ public class UIManager : MonoBehaviour
     {
         _baseuipanel.SetActive(true);
     }
+
     public void OnTransactionPanel()
     {
-        _transactionpanel.GetComponent<TransactionPanel>().OnPanel(conversationNPC);
         _conversationpanel.GetComponent<ConversationPanel>().resetConversationPanel();
-        // conversationNPC = 0;
-        stopControllPlayer();
-        OnInventory(2);
+        _transactionpanel.GetComponent<TransactionPanel>().handelPanel(conversationNPC);
     }
 
     public void OnTransactionAnimalPanel()
     {
-        _transactionanimalpanel.GetComponent<TransactionAnimalPanel>().onPanel();
         _conversationpanel.GetComponent<ConversationPanel>().resetConversationPanel();
-        conversationNPC = 0;
-        stopControllPlayer();
+        _transactionanimalpanel.GetComponent<TransactionAnimalPanel>().handelPanel();
     }
 
     public void OnCraftingPanel(int value)
     {
-        stopControllPlayer();
-        _craftingpanel.GetComponent<CraftingPanel>().OnPanel(value);
+        _craftingpanel.GetComponent<CraftingPanel>().handelPanel(value);
     }
 
     public void OnCookingPanel()
     {
-        Debug.Log("온쿠킹");
-        stopControllPlayer();
-        Debug.Log("스탑");
-        _cookingpanel.GetComponent<CookingPanel>().openCooking();
+        // Debug.Log("온쿠킹");
+        _cookingpanel.GetComponent<CookingPanel>().handelPanel();
     }
 
     public void OnBuildEventPanel(int value)
     {
-        stopControllPlayer();
         int step = _systemmanager.getPuriCount();
-        _buildeventpanel.GetComponent<BuildEventPanel>().OnPanel(value, step);
+        _buildeventpanel.GetComponent<BuildEventPanel>().handelPanel(value, step);
     }
 
     public void OnStoragePanel()
     {
-        if(isStorageOpen)
-        {
-            runControllPlayer();
-        }else
-        {
-            stopControllPlayer();
-        }
-        OnInventory(3);
         _storagepanel.GetComponent<StoragePanel>().handlePanel();
     }
 
     public void OnInventoryPanel()
     {
+        _inventorypanel.GetComponent<InventoryPanel>().handlePanel();
+
         if (_inventorypanel.gameObject.activeSelf)
         {
-            runControllPlayer();
+            stopControllKeys();
         }
         else
         {
-            stopControllPlayer();
+            runControllKeys();
         }
-        _inventorypanel.GetComponent<InventoryPanel>().handlePanel();
     }
 
     public void OnConversationPanel(int value)
     {
         _conversationpanel.GetComponent<ConversationPanel>().setConversationNPC(value);
-        stopControllPlayer();
+        stopControllKeys();
     }
 
     public void OnCreateCharacter()
@@ -444,27 +321,27 @@ public class UIManager : MonoBehaviour
     {
         _mainpage.gameObject.SetActive(true);
         setGameState(false);
-        // isGameStart = false;
     }
 
     public void OnMapUIPanel()
     {
         if (getGameState())
         {
-            if (_mapuipanel.activeSelf)
-            {
-                _mapuipanel.SetActive(false);
-            }
-            else
-            {
-                _mapuipanel.SetActive(true);
-            }
+            _mapuipanel.SetActive(!_mapuipanel.activeSelf);
         }
     }
 
     public void OnNotificationPanel()
     {
-        _notificationpanel.SetActive(true);
+        _notificationpanel.SetActive(!_notificationpanel.activeSelf);
+        if (_notificationpanel.activeSelf)
+        {
+            stopControllKeys();
+        }
+        else
+        {
+            runControllKeys();
+        }
     }
 
     public void OnResultNotificationPanel(string text)
@@ -548,6 +425,46 @@ public class UIManager : MonoBehaviour
         isStorageOpen = value;
     }
 
+    public bool getIsOpenConversation()
+    {
+        return isConversationOpen;
+    }
+
+    public void setIsOpenConversation(bool value)
+    {
+        isConversationOpen = value;
+    }
+
+    public bool getIsOpenCraft()
+    {
+        return isCraftOpen;
+    }
+
+    public void setIsOpenCraft(bool value)
+    {
+        isCraftOpen = value;
+    }
+
+    public bool getIsOpenCook()
+    {
+        return isCookOpen;
+    }
+
+    public void setIsOpenCook(bool value)
+    {
+        isCookOpen = value;
+    }
+
+    public bool getIsOpenBuildEvent()
+    {
+        return isBuildEventOpen;
+    }
+
+    public void setIsOpenBuildEvent(bool value)
+    {
+        isBuildEventOpen = value;
+    }
+
     // 캐릭터 선택 관련 함수
     public void setCharacterValue(int value)
     {
@@ -594,7 +511,7 @@ public class UIManager : MonoBehaviour
             {
                 _optionfrommain.gameObject.SetActive(true);
             }
-            _playersystem._canMove = false;
+            stopControllKeys();
         }
         else
         {
@@ -606,7 +523,7 @@ public class UIManager : MonoBehaviour
             {
                 _optionfrommain.gameObject.SetActive(false);
             }
-            _playersystem._canMove = true;
+            runControllKeys();
         }
     }
 
@@ -769,8 +686,9 @@ public class UIManager : MonoBehaviour
             case 502:
             case 503:
             case 504:
-                _baseuipanel.transform.GetChild(3).GetChild(1).GetComponentInChildren<Slot>().AddItem(_item, _count);
-                setPlayerQuickSlot(8, _item.ItemCode, _count);
+                int _cnt = _inventory.transform.GetChild(1).GetComponent<Inventory>().getLessBaitCount(_item.ItemCode);
+                _baseuipanel.transform.GetChild(3).GetChild(1).GetComponentInChildren<Slot>().AddItem(_item, _cnt);
+                setPlayerQuickSlot(7, _item.ItemCode, _cnt);
                 break;
             default:
                 break;
@@ -891,7 +809,7 @@ public class UIManager : MonoBehaviour
     }
 
     // 플레이어 함수 관련
-    private void stopControllPlayer()
+    public void stopControllPlayer()
     {
         _playersystem._canMove = false;
     }
@@ -914,6 +832,41 @@ public class UIManager : MonoBehaviour
     public void toggleCanInteract()
     {
         _playersystem.toggleCanInteract();
+    }
+
+    public void toggleCanAction()
+    {
+        _playersystem.toggleCanAction();
+    }
+
+    public void setCanInteract(bool value)
+    {
+        _playersystem.setCanInteract(value);
+    }
+
+    public void setCanAction(bool value)
+    {
+        _playersystem.setCanAction(value);
+    }
+
+    public void stopControllKeys()
+    {
+        stopControllPlayer();
+        setCanAction(false);
+        setCanInteract(false);
+    }
+
+    public void runControllKeys()
+    {
+        runControllPlayer();
+        setCanAction(true);
+        setCanInteract(true);
+    }
+
+    public bool isPanelOpen()
+    {
+        return isInventoryOpen || isMapOpen || isStorageOpen || isTransactionOpen ||
+                    isCraftOpen || isCookOpen || isBuildEventOpen || isConversationOpen;
     }
 
     // item 관련 함수
@@ -1009,10 +962,43 @@ public class UIManager : MonoBehaviour
     //     _conversationpanel.selectMusic(_bgmName);
     // }
 
-    // 제사 관련 코드
-    public void prayToAltar(int _nowFlowerCode, int _newFlowerCode)
+    // 정령 버프 및 제단 관련 코드
+    public void prayToSpirit(int _flowerCode)
     {
+        if (_systemmanager._buffManager._isFlowerBuffActived || _systemmanager._buffManager._isPrayBuffActived)
+        {
+            _conversationpanel.conversationWhenAlterBuff(0);
+        }
+        else
+        {
+            _conversationpanel.conversationWhenAlterBuff(_flowerCode);
+        }
+    }
 
+    public void prayToAltar(int _nowFlowerCode, int _newFlowerCode, int quickIdx)
+    {
+        int nowCode = _nowFlowerCode;
+        if (_systemmanager._buffManager._isPrayBuffActived)
+        {
+            nowCode = -1;
+        }
+        _conversationpanel.selectWhenAlterPray(nowCode, _newFlowerCode, quickIdx);
+    }
+
+    public void callSpiritBuff(int _flower)
+    {
+        // _systemmanager._SpiritBuff.Spirit(findItem(_flower));
+    }
+
+    public void callPrayBuff(int _flower)
+    {
+        // _alter.goPray(_flower);
+    }
+
+    // 제사 몇 일 째인지 얻어오는 함수
+    public int getNowPrayDate()
+    {
+        return _systemmanager._PrayBuff.prayDay;
     }
 
     // 세계수 텔포
@@ -1030,20 +1016,18 @@ public class UIManager : MonoBehaviour
 
     public void downTeleport()
     {
-        // _alterup.goDown();
+        _alterup.goDown();
     }
 
     // 게임 시작 종료
     public void setGameState(bool value)
     {
         _systemmanager.setGameState(value);
-        // isGameStart = value;
     }
 
     public bool getGameState()
     {
         return _systemmanager.getGameState();
-        // return isGameStart;
     }
 
     public void QuitGame()
@@ -1052,6 +1036,49 @@ public class UIManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+    }
+
+    // 아이템 정보 Load
+    // 0 : 인벤 || 1 : 퀵슬롯 || 2. 장비 || 3. 창고
+    public void loadItemData(int[,] data, int _key)
+    {
+        Slot[] slots = null;
+        switch (_key)
+        {
+            case 0:
+                slots = _inventory.transform.GetChild(1).GetComponent<Inventory>().getInventorySlots();
+                break;
+            case 1:
+                slots = _inventory.transform.GetChild(0).GetComponent<Quickslot>().getInventorySlots();
+                break;
+            case 2:
+                slots = _inventorypanel.transform.GetChild(0).GetChild(2).GetComponentsInChildren<Slot>();
+                break;
+            case 3:
+                slots = _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().getInventorySlots();
+                break;
+        }
+
+        for (int i = 0; i < data.Length; i++)
+        {
+            if (data[i, 0] == 0)
+            {
+                continue;
+            }
+
+            if (_key == 1 && i == 7)
+            {
+                _baseuipanel.transform.GetChild(3).GetChild(1).GetComponentInChildren<Slot>().AddItem(findItem(data[i, 0]), data[i, 1]);
+                continue;
+            }
+
+            slots[i].AddItem(findItem(data[i, 0]), data[i, 1]);
+        }
+
+        if (_key == 1)
+        {
+            syncQuickSlot();
+        }
     }
 
     public void DayStart()

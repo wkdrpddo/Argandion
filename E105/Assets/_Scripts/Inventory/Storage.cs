@@ -58,4 +58,9 @@ public class Storage : MonoBehaviour
             slots[slotIndex].transform.GetChild(0).GetComponent<Image>().sprite = ui.getItemIcon(_item.ItemCode);
         }
     }
+
+    public Slot[] getInventorySlots()
+    {
+        return slots;
+    }
 }

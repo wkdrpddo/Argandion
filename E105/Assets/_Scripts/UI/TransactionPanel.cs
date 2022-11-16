@@ -43,12 +43,37 @@ public class TransactionPanel : MonoBehaviour
         ui = gameObject.GetComponentInParent<UIManager>();
     }
 
-    public void OnPanel(int value)
+    public void handelPanel(int value)
     {
-        gameObject.SetActive(true);
-        setBuyPanelList(value);
-        ui.setIsOpenTransaction(true);
+        gameObject.SetActive(!gameObject.activeSelf);
+        ui.setIsOpenTransaction(gameObject.activeSelf);
+        ui.OnInventory(2);
+        if (gameObject.activeSelf)
+        {
+            ui.stopControllKeys();
+            setBuyPanelList(value);
+        }
+        else
+        {
+            ui.runControllKeys();
+            ui.conversationNPC = 0;
+        }
     }
+
+    public void closeTransaction()
+    {
+        RectTransform[] selectObjectList = ScrollContent.GetComponentsInChildren<RectTransform>();
+        for (int i = 1; i < selectObjectList.Length; i++)
+        {
+            if (selectObjectList[i] != ScrollContent.GetComponent<RectTransform>())
+            {
+                Destroy(selectObjectList[i].gameObject);
+            }
+        }
+
+        handelPanel(-1);
+    }
+
 
     private void setBuyPanelList(int value)
     {
@@ -107,24 +132,6 @@ public class TransactionPanel : MonoBehaviour
                 productBtn.GetComponent<Button>().onClick.AddListener(() => ui.OnTradeModal(name, itemCode.ToString(), 99, buyCost, 1, value, itemIdx));
             }
         }
-    }
-
-    public void closeTransaction()
-    {
-        RectTransform[] selectObjectList = ScrollContent.GetComponentsInChildren<RectTransform>();
-        for (int i = 1; i < selectObjectList.Length; i++)
-        {
-            if (selectObjectList[i] != ScrollContent.GetComponent<RectTransform>())
-            {
-                Destroy(selectObjectList[i].gameObject);
-            }
-        }
-
-        gameObject.SetActive(false);
-        ui.runControllPlayer();
-        ui.conversationNPC = 0;
-        ui.OnInventory(2);
-        ui.setIsOpenTransaction(false);
     }
 
     private int[] multiBuyItemCode = new int[] { 4, 500, 501, 502, 503, 504, 212, 213, 214, 215, 216, 217, 218, 219 };

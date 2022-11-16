@@ -112,7 +112,7 @@ public class Inventory : MonoBehaviour
     {
         if (_item.Category != "장비" && _item.Category != "옷")
         {
-            for (int i = 0; i < slots.Length; i++)
+            for (int i = slots.Length - 1; i >= 0; i--)
             {
                 if (slots[i].item != null)  // null 이라면 slots[i].item.itemName 할 때 런타임 에러 나서
                 {
@@ -135,7 +135,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < slots.Length; i++)
+        for (int i = slots.Length - 1; i >= 0; i--)
         {
             if (slots[i].itemCount == 0)
             {
@@ -148,6 +148,23 @@ public class Inventory : MonoBehaviour
                 Debug.Log("꽉찼엉");
             }
         }
+    }
+
+    public int getLessBaitCount(int itemCode)
+    {
+
+        for (int i = slots.Length - 1; i >= 0; i--)
+        {
+            if (slots[i].item != null)  // null 이라면 slots[i].item.itemName 할 때 런타임 에러 나서
+            {
+                if (slots[i].item.ItemCode == itemCode)
+                {
+                    return slots[i].itemCount;
+                }
+            }
+        }
+
+        return -1;
     }
 
     public ItemObject StoreItem(int idx, int _count = 1)

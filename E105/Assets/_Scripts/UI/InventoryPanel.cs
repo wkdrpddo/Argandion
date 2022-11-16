@@ -10,15 +10,17 @@ public class InventoryPanel : MonoBehaviour
     {
         gameObject.SetActive(!gameObject.activeSelf);
         ui.setIsOpenInventory(gameObject.activeSelf);
-        ui.toggleCanInteract();
+        ui.OnInventory(1);
 
-        if (!gameObject.activeSelf)
+        if (gameObject.activeSelf)
+        {
+            ui.stopControllKeys();
+        }
+        else
         {
             ui.closeInvenRightClickModal();
-            ui.runControllPlayer();
+            ui.runControllKeys();
         }
-
-        ui.OnInventory(1);
     }
     // Start is called before the first frame update
     void Start()

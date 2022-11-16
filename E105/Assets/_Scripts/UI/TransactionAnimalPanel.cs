@@ -24,23 +24,25 @@ public class TransactionAnimalPanel : MonoBehaviour
                 ui.OnTradeModal("양", "sheep", _ranch.sheeps, 175, 0, 5, 1);
                 break;
         }
-
     }
 
-    public void onPanel()
+    public void handelPanel()
     {
-        gameObject.SetActive(true);
-        ui.setIsOpenTransaction(true);
+        gameObject.SetActive(!gameObject.activeSelf);
+        ui.setIsOpenTransaction(gameObject.activeSelf);
 
-        transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGold().ToString();
-    }
+        if (gameObject.activeSelf)
+        {
+            transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGold().ToString();
+            ui.stopControllKeys();
+        }
+        else
+        {
+            ui.closeTradeModal();
+            ui.runControllKeys();
+            ui.conversationNPC = 0;
+        }
 
-    public void closePanel()
-    {
-        gameObject.SetActive(false);
-        ui.runControllPlayer();
-        ui.closeTradeModal();
-        ui.setIsOpenTransaction(false);
     }
 
     // Start is called before the first frame update
@@ -67,11 +69,5 @@ public class TransactionAnimalPanel : MonoBehaviour
 
         // 소지금 동기화
         transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = ui.getPlayerGold().ToString();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
