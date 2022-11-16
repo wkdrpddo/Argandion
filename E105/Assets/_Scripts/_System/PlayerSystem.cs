@@ -107,10 +107,6 @@ public class PlayerSystem : MonoBehaviour
         Interaction();
         watering();
         fff();
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            _pss.Play();
-        }
     }
 
     void GetBuff()
