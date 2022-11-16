@@ -33,6 +33,7 @@ public class SystemManager : MonoBehaviour
     static int _sector_size = 8;
     public int _purification_size;
     public bool[] _purification = new bool[_sector_size];
+    public WorldTree _worldTree;
 
     public SectorObject _sectorTest;
     [SerializeField] private SectorObject[] _sectors;
@@ -59,8 +60,8 @@ public class SystemManager : MonoBehaviour
         _NPCManager = GameObject.Find("NPCManager").GetComponent<NPCManager>();
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _PrayBuff = GameObject.Find("BuffManager").GetComponent<PrayBuff>();
-        _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
         _SpiritBuff = GameObject.Find("BuffManager").GetComponent<SpiritBuff>();
+        _worldTree = GameObject.Find("WorldTree").GetComponent<WorldTree>();
         _buildings = GameObject.Find("Buildings").GetComponentsInChildren<BuildingChange>();
         _houseChange = GameObject.Find("Player House").GetComponent<HouseChange>();
 
@@ -82,6 +83,8 @@ public class SystemManager : MonoBehaviour
         Debug.Log("계절이 바뀌었습니다.");
         _season = index;
         _MapObject.GetComponent<MapObject>().UpdateFieldManager(index);
+        _worldTree.ChangeSeason();
+
     }
 
 
@@ -107,12 +110,13 @@ public class SystemManager : MonoBehaviour
                 break;
 
         }
-        
-        if (index ==4 && !idx4 ) {
-            _purification_sector -= 1;
-            idx4 = true;
-        }
 
+        if (index == 4 && !idx4)
+        {
+            idx4 = true;
+            _purification_sector -= 1;
+        }
+        _purification[index] = true;
         _purification_sector += 1;
         if (_purification_sector > 2 && _development_level < 2)
         {
@@ -391,19 +395,6 @@ public class SystemManager : MonoBehaviour
 
     public void CompleteConstruction(int index)
     {
-        _MapObject.GetComponent<MapObject>().ChangePurifier(index);
-        _purification[index] = true;
-        _purification_sector += 1;
-        if (_purification_sector > 2 && _development_level < 2)
-        {
-            _development_level = 2;
-            DevelopLevelUp();
-        }
-        if (_purification_sector > 4 && _development_level < 3)
-        {
-            _development_level = 3;
-            DevelopLevelUp();
-        }
         // 이자리에 특정 건물들 call 함수 입력
     }
 
@@ -417,7 +408,7 @@ public class SystemManager : MonoBehaviour
             // 밭 활성화
             // 집 자라기
             _houseChange.ChangeHouse();
-            // 세계수 자라기
+            _worldTree.ChangeTreeLevel();
 
         }
         if (_development_level == 3)
@@ -428,7 +419,7 @@ public class SystemManager : MonoBehaviour
             // 밭 활성화
             // 집 자라기
             _houseChange.ChangeHouse();
-            // 세계수 자라기
+            _worldTree.ChangeTreeLevel();
         }
     }
 

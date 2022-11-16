@@ -44,17 +44,19 @@ public class SectorObject : MonoBehaviour
     public Collider[] _SectorCollider;
     public List<float> _SectorArea;
     public GameObject _floweObject;
+    public GameObject _items;
     private BuffManager _BuffManager;
     private float _sumSector;
     // Start is called before the first frame update
     void Start()
     {
+        _items = GameObject.Find("Items");
         _BuffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         _SectorArea.Add(0f);
         foreach (Collider col in _SectorCollider)
         {
             float sumArea = (col.bounds.extents.x*2) * (col.bounds.extents.z*2);
-            Debug.Log(sumArea);
+            // Debug.Log(sumArea);
             _sumSector += sumArea;
             _SectorArea.Add(_sumSector);
         }
@@ -63,6 +65,11 @@ public class SectorObject : MonoBehaviour
 
     public void DayEnd()
     {
+        TreeObject[] trees = gameObject.GetComponentsInChildren<TreeObject>();
+        foreach (TreeObject tree in trees)
+        {
+            tree.DayEnd();
+        }
     }
 
     public void DayStart()
@@ -105,6 +112,7 @@ public class SectorObject : MonoBehaviour
         flower.GetComponent<GatheringObject>().setFlower(true);
         Debug.Log(pos);
         _flower_remain += 1;
+        _flower_spawn_percent = _flower_spawn_base_percent;
     }
 
     private void Check_Grid()
