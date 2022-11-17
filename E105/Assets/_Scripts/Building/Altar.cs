@@ -25,13 +25,16 @@ public class Altar : MonoBehaviour
     }
     // 하루 끝나면
     public void DayEnd(){
+        Debug.Log("데이엔드");
         if(_buffStart){ // 버프 시작하면(조건 만족)
+            Debug.Log("버프 시작");
             _dayEndBuffCnt = 0;
             _effect.SetActive(false); // 이펙트 빼고
             // 라이트 켜고
             _tableLight.SetActive(true);
 
         }else{ // 버프 시작 안 하면
+            Debug.Log("버프 시작 안 함");
             _onFlower.SetActive(false); // 테이블 위 꽃 없애기
             turnOnEffect(_dayEndBuffCnt); // 테이블 이펙트 바꿔주기
         }
@@ -77,7 +80,7 @@ public class Altar : MonoBehaviour
         _tableLight.SetActive(false);
         
     }
-    
+
     // 제사를 시도할 때
     public void goPray(int itemCode){
         _prayBuff.Pray(itemCode); // 제사

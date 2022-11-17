@@ -27,6 +27,7 @@ public class AltarTableInteraction : MonoBehaviour
         // 손에 뭐 들고 있는지 확인해서
         // 조건에 맞게 UI 호출
         if(_prayBuff.todayPray){
+            Debug.Log("들어옴");
             _uiManager.OnResultNotificationPanel("오늘은 이미 꽃을 바쳤습니다.");
             return;
         }

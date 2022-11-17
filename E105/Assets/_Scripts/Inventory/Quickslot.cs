@@ -10,7 +10,7 @@ public class Quickslot : MonoBehaviour
     private GameObject go_SlotsParent;  // Slot들의 부모인 Grid Setting 
 
     public Slot[] slots;  // 슬롯들 배열
-    private UIManager ui;
+    [SerializeField] private UIManager ui;
 
     void Start()
     {

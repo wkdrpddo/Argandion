@@ -394,6 +394,7 @@ public class UIManager : MonoBehaviour
 
     public void OnResultNotificationPanel(string text)
     {
+        Debug.Log("On");
         _resultnotificationpanel.GetComponent<ResultNotificationPanel>().handelNoti(text);
     }
 
@@ -1045,8 +1046,9 @@ public class UIManager : MonoBehaviour
 
     public void prayToAltar(int _nowFlowerCode, int _newFlowerCode, int quickIdx)
     {
+        Debug.Log("prayToAltar 콜");
         int nowCode = _nowFlowerCode;
-        if (_systemmanager._buffManager._isPrayBuffActived)
+        if (_systemmanager._buffManager._isPrayBuffActived && _nowFlowerCode != _newFlowerCode)
         {
             nowCode = -1;
         }
@@ -1055,12 +1057,16 @@ public class UIManager : MonoBehaviour
 
     public void callSpiritBuff(int _flower)
     {
-        // _systemmanager._SpiritBuff.Spirit(findItem(_flower));
+        _systemmanager._SpiritBuff.Spirit(findItem(_flower));
     }
 
     public void callPrayBuff(int _flower)
     {
-        // _alter.goPray(_flower);
+        _alter.goPray(_flower);
+    }
+
+    public void resetPrayBuffFx(){
+        _alter.buffEnd();
     }
 
     // 제사 몇 일 째인지 얻어오는 함수

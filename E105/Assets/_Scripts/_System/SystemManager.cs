@@ -35,6 +35,7 @@ public class SystemManager : MonoBehaviour
     public int _purification_size;
     public bool[] _purification = new bool[_sector_size];
     public WorldTree _worldTree;
+    public Altar _altar;
 
     public SectorObject _sectorTest;
     [SerializeField] private SectorObject[] _sectors;
@@ -67,7 +68,7 @@ public class SystemManager : MonoBehaviour
         _houseChange = GameObject.Find("Player House").GetComponent<HouseChange>();
         _farmChange = GameObject.Find("Map").transform.GetChild(4).transform.GetChild(0).transform.GetChild(2).GetComponent<FarmChange>();
         // _buiding1 = GameObject.Find("ClothshopPlace").GetComponent<BuildingChange>();
-
+        _altar = GameObject.Find("Altar").GetComponent<Altar>();
 
 
     }
@@ -222,6 +223,7 @@ public class SystemManager : MonoBehaviour
         {
             sector.DayEnd();
         }
+        _altar.DayEnd();
 
         // _sectorTest.DayEnd();
 
@@ -293,6 +295,8 @@ public class SystemManager : MonoBehaviour
         }
         // _sectorTest.DayEnd();
         _UIManager.DayStart();
+        Debug.Log("시스템 데이스탕트1");
+        _PrayBuff.DayStart();
 
         // _buiding1.DayStart();
         foreach (var building in _buildings)
