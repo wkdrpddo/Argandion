@@ -117,7 +117,7 @@ public class PointSystem : MonoBehaviour
                 if (rnd < _Sector._animal_type_ruin_factor[0])
                 {
                     len = _Sector._animal_bunny_count_factor.Length;
-                    sumV = Random.Range(0, _Sector._animal_type_base_factor[len - 1]);
+                    sumV = Random.Range(0, _Sector._animal_bunny_count_factor[len - 1]);
                     Debug.Log(sumV);
                     Debug.Log("토끼 카운트");
                     while (!(_Sector._animal_bunny_count_factor[index] <= sumV && sumV <= _Sector._animal_bunny_count_factor[index + 1]))

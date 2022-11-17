@@ -1029,7 +1029,8 @@ public class UIManager : MonoBehaviour
     // 사운드 관련
     public void playRandomBGM()
     {
-        // GameObject.Find("SoundManager").GetComponent<SoundManager>().playRandom();
+        Debug.Log("음악변경");
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().playRandom();
     }
     // public void BGMChanger(string _bgmName)
     // {
