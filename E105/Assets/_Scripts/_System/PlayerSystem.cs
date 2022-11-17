@@ -381,9 +381,10 @@ public class PlayerSystem : MonoBehaviour
             Debug.Log(_colset.Length);
             foreach (var col in _colset)
             {
+                Debug.Log(col);
                 if (col.TryGetComponent(out Interactable inter))
                 {
-                    Debug.Log(col);
+                    Debug.Log("if 안 "+col);
                     // 이런 형태로 작성
                     // if (col.TryGetComponent(out NPCObject npc))
                     // {
@@ -392,6 +393,11 @@ public class PlayerSystem : MonoBehaviour
                     if (col.TryGetComponent(out NPCObject npc))
                     {
                         npc.Interaction();
+                    }
+                    if (col.TryGetComponent(out WorldTreeInteraction worldTreeInteraction))
+                    {
+                        Debug.Log("세계수 인터렉션");
+                        worldTreeInteraction.Interaction();
                     }
                     if (_equipList[_equipItem, 1] == 1 && col.TryGetComponent(out GatheringObject Gat))
                     {
