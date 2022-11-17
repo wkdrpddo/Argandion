@@ -25,11 +25,11 @@ public class combObject
 
 public class CraftingPanel : MonoBehaviour
 {
-    private UIManager ui;
+    [SerializeField] private UIManager ui;
     public GameObject _craftItemButton;
     public GameObject _metarialsCard;
-    private GameObject _scrollcontent;
-    private GameObject _metarialsgrid;
+    [SerializeField] private GameObject _scrollcontent;
+    [SerializeField] private GameObject _metarialsgrid;
 
     [SerializeField] private combObject[] itemData;
     [SerializeField] private int[] canMakeList;

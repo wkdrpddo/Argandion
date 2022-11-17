@@ -20,13 +20,13 @@ public class ConversationPanel : MonoBehaviour
         11. 제단 텔포 (아래서 제단으로)
         12. 제단 텔포 (제단에서 아래로)
     */
-    private TextMeshProUGUI _npcname;
-    private TextMeshProUGUI _nomaltalk;
-    private GameObject _selectpanel;
-    private int conversationCount;        // -1 : 대화 전, 0 : 대화 시작, 1 : 마지막 대화
+    [SerializeField] private TextMeshProUGUI _npcname;
+    [SerializeField] private TextMeshProUGUI _nomaltalk;
+    [SerializeField] private GameObject _selectpanel;
+    [SerializeField] private int conversationCount;        // -1 : 대화 전, 0 : 대화 시작, 1 : 마지막 대화
 
-    public GameObject conversationButton;
-    private UIManager ui;
+    [SerializeField] public GameObject conversationButton;
+    [SerializeField] private UIManager ui;
     // 선택창 '대화' 선택 시 관련 변수
     private bool isConversation;
     private int selectConversationCount;

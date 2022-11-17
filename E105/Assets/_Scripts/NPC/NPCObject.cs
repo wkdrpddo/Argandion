@@ -10,7 +10,6 @@ public class NPCObject : MonoBehaviour
     private GameObject _PlayerObject;
     private GameObject _UIManager;
 
-    
 
     void Start()
     {
@@ -25,7 +24,7 @@ public class NPCObject : MonoBehaviour
         _animator.SetTrigger("move");
 
         if(this.name == "Spirit"){
-            this.transform.LookAt(_PlayerObject.transform.position + new Vector3(0,2f,0));
+            this.transform.LookAt(_PlayerObject.transform.position + new Vector3(0,this.transform.position.y,0));
         }else{
             this.transform.LookAt(_PlayerObject.transform);
         }

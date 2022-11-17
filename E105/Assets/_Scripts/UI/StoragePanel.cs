@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StoragePanel : MonoBehaviour
 {
-    private UIManager ui;
+    [SerializeField] private UIManager ui;
     // Start is called before the first frame update
     void Start()
     {

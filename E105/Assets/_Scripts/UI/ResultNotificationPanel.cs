@@ -5,7 +5,7 @@ using TMPro;
 
 public class ResultNotificationPanel : MonoBehaviour
 {
-    private TextMeshProUGUI _notitext;
+    [SerializeField] private TextMeshProUGUI _notitext;
     // Start is called before the first frame update
     void Start()
     {

@@ -7,12 +7,12 @@ using System;
 
 public class BuildEventPanel : MonoBehaviour
 {
-    private UIManager ui;
-    private Image buildIcon;
-    private TextMeshProUGUI buildName;
-    private TextMeshProUGUI flowerName;
-    private TextMeshProUGUI[] materials = new TextMeshProUGUI[6];
-    private GameObject _failmodal;
+   [SerializeField] private UIManager ui;
+   [SerializeField] private Image buildIcon;
+   [SerializeField] private TextMeshProUGUI buildName;
+   [SerializeField] private TextMeshProUGUI flowerName;
+   [SerializeField] private TextMeshProUGUI[] materials = new TextMeshProUGUI[6];
+   [SerializeField] private GameObject _failmodal;
 
     public bool isOnPanel = false;
 
@@ -34,13 +34,13 @@ public class BuildEventPanel : MonoBehaviour
     [SerializeField] private int step;
 
     // 각 건물 시작을 위한 데이터
-    private BuildingChange anglerHouse;
-    private BuildingChange barn;
-    private BuildingChange blacksmithHouse;
-    private BuildingChange forge;
-    private BuildingChange clothShop;
-    private BuildingChange hunterHouse;
-    private BuildingChange workShop;
+    [SerializeField] private BuildingChange anglerHouse;
+    [SerializeField] private BuildingChange barn;
+    [SerializeField] private BuildingChange blacksmithHouse;
+    [SerializeField] private BuildingChange forge;
+    [SerializeField] private BuildingChange clothShop;
+    [SerializeField] private BuildingChange hunterHouse;
+    [SerializeField] private BuildingChange workShop;
 
 
     // Start is called before the first frame update

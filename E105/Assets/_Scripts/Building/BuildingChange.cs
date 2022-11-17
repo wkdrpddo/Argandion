@@ -34,6 +34,7 @@ public class BuildingChange : MonoBehaviour
     // 테스트용 변수
     public bool _fulfillTest;
     public bool _dayEndTest;
+    public GameObject _tableObject;
 
     void Start()
     {
@@ -118,6 +119,10 @@ public class BuildingChange : MonoBehaviour
     void FinishConstruction()
     {
         Instantiate(_buildingFinish, new Vector3(gameObject.transform.position.x + _fBuildingX, gameObject.transform.parent.position.y + _fBuildingY, gameObject.transform.position.z + _fBuildingZ), Quaternion.Euler(0, _fBuildingRotY, 0), gameObject.transform.parent.gameObject.transform);
+        if (_tableObject)
+        {
+            _tableObject.SetActive(true);
+        }
     }
 
 
