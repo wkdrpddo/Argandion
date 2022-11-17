@@ -29,7 +29,7 @@ public class SectorObject : MonoBehaviour
     public float _ore_spawn_base_percent;
     public float _ore_ruin_factor;
     public int[] _ore_type_factor = new int[3];
-    public int[] _ore_count_factor = new int[3];
+    public int[] _ore_count_factor = new int[2];
     public float _stone_spawn_base_percent;
     public float _stone_ruin_factor;
     public int[] _stone_type_factor = new int[3];
