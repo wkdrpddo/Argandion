@@ -49,7 +49,7 @@ public class WorldTree : MonoBehaviour
     // '계절' 변하면 call하기
     public void ChangeSeason()
     {
-        int devLevel = _systemManager.getDevelopLevel() - 1; // 변한 발전도
+        int devLevel = _systemManager.getDevelopLevel() - 1; // 변한 발전도 
         int season = _systemManager._season; ; // 변한 계절
         Transform worldtree = gameObject.transform.GetChild(devLevel);
         if (season == 0)
