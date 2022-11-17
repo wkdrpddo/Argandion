@@ -35,7 +35,7 @@ public class WorldTree : MonoBehaviour
     // '발전도' 변하면 call하기
     public void ChangeTreeLevel()
     {
-        int devLevel = _systemManager.getDevelopLevel(); // 변한 발전도
+        int devLevel = _systemManager.getDevelopLevel() - 1; // 변한 발전도
         int season = _systemManager._season; // 변한 계절
         gameObject.transform.GetChild(devLevel - 1).gameObject.SetActive(false);
         gameObject.transform.GetChild(devLevel).gameObject.SetActive(true);
@@ -49,16 +49,18 @@ public class WorldTree : MonoBehaviour
     // '계절' 변하면 call하기
     public void ChangeSeason()
     {
+        int devLevel = _systemManager.getDevelopLevel() - 1; // 변한 발전도 
         int season = _systemManager._season; ; // 변한 계절
+        Transform worldtree = gameObject.transform.GetChild(devLevel);
         if (season == 0)
         {
-            gameObject.transform.GetChild(3).gameObject.SetActive(false);
-            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            worldtree.transform.GetChild(3).gameObject.SetActive(false);
+            worldtree.transform.GetChild(0).gameObject.SetActive(true);
         }
         else
         {
-            gameObject.transform.GetChild(season - 1).gameObject.SetActive(false);
-            gameObject.transform.GetChild(season).gameObject.SetActive(true);
+            worldtree.transform.GetChild(season - 1).gameObject.SetActive(false);
+            worldtree.transform.GetChild(season).gameObject.SetActive(true);
         }
 
     }
