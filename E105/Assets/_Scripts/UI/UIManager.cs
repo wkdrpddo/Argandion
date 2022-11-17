@@ -299,11 +299,13 @@ public class UIManager : MonoBehaviour
                         case 0:
                             if (conversationNPC == 9)
                             {
+                                Debug.Log("두번재 대화 스킵");
                                 break;
                             }
                             _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
                             break;
                         case 1:
+                                Debug.Log("세번째 대화");
                             _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
                             break;
                     }
