@@ -5,7 +5,7 @@ using TMPro;
 
 public class InventoryPanel : MonoBehaviour
 {
-    private UIManager ui;
+    [SerializeField] private UIManager ui;
     public void handlePanel()
     {
         gameObject.SetActive(!gameObject.activeSelf);
@@ -23,7 +23,7 @@ public class InventoryPanel : MonoBehaviour
         }
     }
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         ui = gameObject.GetComponentInParent<UIManager>();
     }

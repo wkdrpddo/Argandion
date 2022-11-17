@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour
         return icon;
     }
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
 
         conversationNPC = 0;
@@ -129,116 +129,102 @@ public class UIManager : MonoBehaviour
         _foodmanager._eventPanel = _eventpanel.GetComponent<EventPanel>();
 
         _nowequip = GameObject.Find("NowEquip").gameObject;
-        _baseuipanel.SetActive(false);
+        
 
         _mapuipanel = GameObject.Find("MapUIPanel");
-        _mapuipanel.SetActive(false);
-
         _mainpage = gameObject.transform.Find("MainPagePanel").GetComponent<MainPagePanel>();
-
         _optionpanel = gameObject.transform.Find("OptionPanel").GetComponent<OptionPanel>();
-        _optionpanel.gameObject.SetActive(false);
-
         _optionfrommain = gameObject.transform.Find("OptionPanelFromMainPage").GetComponent<OptionPanel>();
-        _optionfrommain.gameObject.SetActive(false);
-
         _createcharacter = gameObject.transform.Find("CreateCharacter").GetComponent<CreateCharacter>();
-        _createcharacter.gameObject.SetActive(false);
-
         _conversationpanel = gameObject.transform.Find("ConversationPanel").GetComponent<ConversationPanel>();
-        _conversationpanel.gameObject.SetActive(false);
-
         _cookingpanel = gameObject.transform.Find("CookingPanel").GetComponent<CookingPanel>();
-        _cookingpanel.gameObject.SetActive(false);
-
         _craftingpanel = gameObject.transform.Find("CraftingPanel").GetComponent<CraftingPanel>();
-        _craftingpanel.gameObject.SetActive(false);
-
         _buildeventpanel = gameObject.transform.Find("BuildEventPanel").GetComponent<BuildEventPanel>();
-        _buildeventpanel.gameObject.SetActive(false);
-
         _transactionanimalpanel = gameObject.transform.Find("TransactionAnimalPanel").GetComponent<TransactionAnimalPanel>();
-        _transactionanimalpanel.gameObject.SetActive(false);
-
         _transactionpanel = gameObject.transform.Find("TransactionPanel").GetComponent<TransactionPanel>();
-        _transactionpanel.gameObject.SetActive(false);
-
         _inventorypanel = gameObject.transform.Find("InventoryPanel").GetComponent<InventoryPanel>();
-        _inventorypanel.gameObject.SetActive(false);
-
         _storagepanel = gameObject.transform.Find("StoragePanel").gameObject;
-        _storagepanel.SetActive(false);
-
         _trademodal = gameObject.transform.Find("TradeModal").GetComponent<TradeModal>();
-        _trademodal.gameObject.SetActive(false);
-
         _inventory = gameObject.transform.Find("Inventory").gameObject;
         _invenMoney = _inventory.transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
         _invenMoney.text = _systemmanager.getPlayerGold().ToString();
-        _inventory.gameObject.SetActive(false);
-
         _notificationpanel = GameObject.Find("NotificationPanel");
-        _notificationpanel.SetActive(false);
         _resultnotificationpanel = gameObject.transform.Find("ResultNotificationPanel").GetComponent<ResultNotificationPanel>();
-        _resultnotificationpanel.gameObject.SetActive(false);
         _transactiondoublecheck = gameObject.transform.Find("TransactionDoubleCheckModal").GetComponent<TransactionDoubleCheck>();
-        _transactiondoublecheck.gameObject.SetActive(false);
-
         _eventAnnounce = GameObject.Find("EventUIAnnounce");
         _announceTitle = _eventAnnounce.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
         _announceText = _eventAnnounce.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
+
+        _transactiondoublecheck.gameObject.SetActive(false);
+        _resultnotificationpanel.gameObject.SetActive(false);
+        _notificationpanel.SetActive(false);
+        _baseuipanel.SetActive(false);
+        _mapuipanel.SetActive(false);
+        _optionpanel.gameObject.SetActive(false);
+        _optionfrommain.gameObject.SetActive(false);
+        _createcharacter.gameObject.SetActive(false);
+        _conversationpanel.gameObject.SetActive(false);
+        _cookingpanel.gameObject.SetActive(false);
+        _craftingpanel.gameObject.SetActive(false);
+        _buildeventpanel.gameObject.SetActive(false);
+        _transactionanimalpanel.gameObject.SetActive(false);
+        _transactionpanel.gameObject.SetActive(false);
+        _inventorypanel.gameObject.SetActive(false);
+        _storagepanel.SetActive(false);
+        _trademodal.gameObject.SetActive(false);
+        _inventory.gameObject.SetActive(false);
         _eventAnnounce.SetActive(false);
         // 테스트 꽃
-        ItemObject item1 = findItem(50);
-        acquireItem(item1, 10);
-        ItemObject item2 = findItem(51);
-        acquireItem(item2, 10);
-        ItemObject item3 = findItem(52);
-        acquireItem(item3, 10);
-        ItemObject item4 = findItem(53);
-        acquireItem(item4, 10);
-        ItemObject item5 = findItem(54);
-        acquireItem(item5, 10);
-        ItemObject item10 = findItem(55);
-        acquireItem(item10, 10);
-        ItemObject item11 = findItem(56);
-        acquireItem(item11, 10);
-        // 그 외 재료
-        ItemObject item6 = findItem(1);
-        acquireItem(item6, 40);
-        ItemObject item7 = findItem(2);
-        acquireItem(item7, 27);
-        ItemObject item8 = findItem(3);
-        acquireItem(item8, 27);
-        ItemObject item9 = findItem(4);
-        acquireItem(item9, 99);
-        acquireItem(item9, 71);
+        // ItemObject item1 = findItem(50);
+        // acquireItem(item1, 10);
+        // ItemObject item2 = findItem(51);
+        // acquireItem(item2, 10);
+        // ItemObject item3 = findItem(52);
+        // acquireItem(item3, 10);
+        // ItemObject item4 = findItem(53);
+        // acquireItem(item4, 10);
+        // ItemObject item5 = findItem(54);
+        // acquireItem(item5, 10);
+        // ItemObject item10 = findItem(55);
+        // acquireItem(item10, 10);
+        // ItemObject item11 = findItem(56);
+        // acquireItem(item11, 10);
+        // // 그 외 재료
+        // ItemObject item6 = findItem(1);
+        // acquireItem(item6, 40);
+        // ItemObject item7 = findItem(2);
+        // acquireItem(item7, 27);
+        // ItemObject item8 = findItem(3);
+        // acquireItem(item8, 27);
+        // ItemObject item9 = findItem(4);
+        // acquireItem(item9, 99);
+        // acquireItem(item9, 71);
 
-        ItemObject item12 = findItem(10);
-        acquireItem(item12, 99);
-        acquireItem(item12, 41);
-        ItemObject item13 = findItem(11);
-        acquireItem(item13, 10);
-        ItemObject item14 = findItem(12);
-        acquireItem(item14, 40);
-        ItemObject item15 = findItem(13);
-        acquireItem(item15, 2);
-        ItemObject item16 = findItem(14);
-        acquireItem(item16, 5);
+        // ItemObject item12 = findItem(10);
+        // acquireItem(item12, 99);
+        // acquireItem(item12, 41);
+        // ItemObject item13 = findItem(11);
+        // acquireItem(item13, 10);
+        // ItemObject item14 = findItem(12);
+        // acquireItem(item14, 40);
+        // ItemObject item15 = findItem(13);
+        // acquireItem(item15, 2);
+        // ItemObject item16 = findItem(14);
+        // acquireItem(item16, 5);
 
-        ItemObject item17 = findItem(20);
-        acquireItem(item17, 40);
-        ItemObject item18 = findItem(21);
-        acquireItem(item18, 15);
-        ItemObject item19 = findItem(22);
-        acquireItem(item19, 35);
+        // ItemObject item17 = findItem(20);
+        // acquireItem(item17, 40);
+        // ItemObject item18 = findItem(21);
+        // acquireItem(item18, 15);
+        // ItemObject item19 = findItem(22);
+        // acquireItem(item19, 35);
 
-        ItemObject item20 = findItem(104);
-        acquireItem(item20, 20);
-        ItemObject item21 = findItem(112);
-        acquireItem(item21, 25);
-        ItemObject item22 = findItem(505);
-        acquireItem(item22, 60);
+        // ItemObject item20 = findItem(104);
+        // acquireItem(item20, 20);
+        // ItemObject item21 = findItem(112);
+        // acquireItem(item21, 25);
+        // ItemObject item22 = findItem(505);
+        // acquireItem(item22, 60);
 
         _systemmanager.setPlayerGold(9999999);
 

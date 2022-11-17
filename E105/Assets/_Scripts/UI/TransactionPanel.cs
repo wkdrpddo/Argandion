@@ -24,9 +24,9 @@ public class TransactionPanel : MonoBehaviour
     */
     public GameObject storeItemCard;
 
-    private GameObject ScrollContent;
-    private UIManager ui;
-    private Item _itemmanager;
+    [SerializeField] private GameObject ScrollContent;
+    [SerializeField] private UIManager ui;
+    [SerializeField] private Item _itemmanager;
 
     private string jsonStringBase;
     private string jsonInputString;

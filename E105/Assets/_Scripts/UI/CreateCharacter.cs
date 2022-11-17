@@ -6,9 +6,9 @@ using TMPro;
 
 public class CreateCharacter : MonoBehaviour
 {
-    private UIManager ui;
-    private Image manImg;
-    private Image womanImg;
+    [SerializeField] private UIManager ui;
+    [SerializeField] private Image manImg;
+    [SerializeField] private Image womanImg;
     public Sprite unselectedMan;
     public Sprite selectedMan;
     public Sprite unselectedWoman;
@@ -55,7 +55,7 @@ public class CreateCharacter : MonoBehaviour
 
             gameObject.SetActive(false);
 
-            ui.delayRunControllKeys();
+            ui.runControllKeys();
         }
     }
     // Start is called before the first frame update
