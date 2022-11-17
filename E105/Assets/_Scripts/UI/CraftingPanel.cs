@@ -48,6 +48,7 @@ public class CraftingPanel : MonoBehaviour
     {
         gameObject.SetActive(!gameObject.activeSelf);
 
+        Debug.Log("craft 토글");
         if (gameObject.activeSelf)
         {
             ui.stopControllKeys();
@@ -57,7 +58,7 @@ public class CraftingPanel : MonoBehaviour
         }
         else
         {
-            ui.runControllKeys();
+            ui.delayRunControllKeys();
             ui.setIsOpenCraft(false);
             deleteMetarialList();
             deleteCraftList();
@@ -92,6 +93,7 @@ public class CraftingPanel : MonoBehaviour
 
     private void setCraftData(int value)
     {
+        Debug.Log(value);
         storeIdx = value;
         deleteCraftList();
 
@@ -109,6 +111,7 @@ public class CraftingPanel : MonoBehaviour
                 canMakeList = gameObject.GetComponent<CombCarpentor>().getCanMakeList();
                 break;
             case 4:
+                Debug.Log("체크");
                 jsonInputString += "/CombSmith.json";
                 gameObject.GetComponent<CombSmith>().Hello();
                 canMakeList = gameObject.GetComponent<CombSmith>().getCanMakeList();

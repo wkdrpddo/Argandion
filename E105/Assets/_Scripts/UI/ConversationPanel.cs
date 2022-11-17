@@ -118,6 +118,8 @@ public class ConversationPanel : MonoBehaviour
                 // NPC가 아닌 상호작용이므로 이름이 필요 없음
                 _npcname.gameObject.transform.parent.gameObject.SetActive(false);
                 conversationCount++;
+                conversationCount++;
+                _selectpanel.SetActive(true);
                 break;
         }
         Debug.Log("초기대화 시작");
@@ -232,10 +234,7 @@ public class ConversationPanel : MonoBehaviour
     public void thirdConversation()
     {
         Debug.Log("초기 대화 세번째");
-        if (!(ui.conversationNPC == 11) && !(ui.conversationNPC == 12))
-        {
-            _nomaltalk.gameObject.SetActive(false);
-        }
+        _nomaltalk.gameObject.SetActive(false);
         _selectpanel.SetActive(true);
     }
 
