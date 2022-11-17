@@ -973,7 +973,7 @@ GameObject:
   - component: {fileID: 7334901126005219103}
   m_Layer: 0
   m_Name: Chicken
-  m_TagString: Untagged
+  m_TagString: Collide
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1074,11 +1074,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1826a3238a73dbc4cbb7593e113ece2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 1
+  walkSpeed: 1.5
   turnSpeed: 5
   minIdleTime: 0.5
-  maxIdleTime: 20
-  wanderRange: 50
+  maxIdleTime: 5
+  wanderRange: 20
   showGizmos: 0
 --- !u!114 &7334901126005219103
 MonoBehaviour:

@@ -180,9 +180,9 @@ public class Wander2 : MonoBehaviour
         yield return new WaitForSeconds(idleTime);
 
         int _random = Random.Range(0, 10); // eat, walk
-        if (_random >= 0 && _random <= 7)  // 8/10 확률
+        if (_random >= 0 && _random <= 5)  // 6/10 확률
             StartCoroutine(Walk(RandonPointInRange()));
-        else                               // 2/10 확률
+        else                               // 4/10 확률
             StartCoroutine(Eat());
     }
 
@@ -208,7 +208,7 @@ public class Wander2 : MonoBehaviour
             randomPoint = originalPos + Random.insideUnitSphere * wanderRange;
         }
         // 목장 내 구역 y 값 2로 고정 후 사용
-        ret = new Vector3(randomPoint.x, 2, randomPoint.z);
+        ret = new Vector3(randomPoint.x, 0, randomPoint.z);
         return ret;
     }
 
