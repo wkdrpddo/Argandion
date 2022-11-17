@@ -5,7 +5,6 @@ using UnityEngine;
 public class WorldTree : MonoBehaviour
 {
     private SystemManager _systemManager;
-    private UIManager _uiManager;
     private PlayerSystem _playerSystem;
 
     [SerializeField] private GameObject[] _teleportOutside = new GameObject[2]; // 시작 전 넣어주기 // 텔포할 곳
@@ -13,7 +12,6 @@ public class WorldTree : MonoBehaviour
     void Start()
     {
         _systemManager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
-        _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _playerSystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
     }
     // 테스트 코드 ========================================================
@@ -27,10 +25,7 @@ public class WorldTree : MonoBehaviour
     // }
     // ==================================================================
 
-    public void Interaction()
-    {
-        _uiManager.OnConversationPanel(9);
-    }
+    
 
     // '발전도' 변하면 call하기
     public void ChangeTreeLevel()

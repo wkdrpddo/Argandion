@@ -18,12 +18,12 @@ public class PlayerSystem : MonoBehaviour
     public Chest _theChest;
     public GameObject _buffManagerObject;
     private BuffManager _buff;
-
+    public GameObject[] _crops;
     private GameObject _nearObject;
     private Item _itemManager;
     private SoundManager _soundManager;
 
-    // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대), 이동불가 시간, 작업시간}
+    // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대 7씨앗), 이동불가 시간, 작업시간}
     public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 320, 6, 0, 0, 1 }, { 20, 0, 0, 0, 10 }, { 502, 0, 0, 0, 60} };
     public GameObject[] _equipment = new GameObject[7];
     public int _equipItem = 0;
@@ -94,6 +94,7 @@ public class PlayerSystem : MonoBehaviour
         _character = GameObject.Find("PlayerBody").transform;
         _SystemManager = GameObject.Find("SystemManager");
         _soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        _theInventory = GameObject.Find("UIManager").transform.GetChild(8).transform.GetChild(1).GetComponent<Inventory>();
     }
 
     // Update is called once per frame
@@ -200,7 +201,7 @@ public class PlayerSystem : MonoBehaviour
             _movedDelay -= Time.deltaTime;
             _movedDelay = Mathf.Max(0, _movedDelay);
         }
-        if (_canAction && Input.GetAxisRaw("useKey") == 1 && _delayedTimer <= 0)
+        if (_canAction && Input.GetKeyDown(KeyCode.Space) && _delayedTimer <= 0)
         {
             if (_equipList[_equipItem, 1] >= 3 && _equipList[_equipItem, 1] <= 5)
             {
@@ -221,6 +222,50 @@ public class PlayerSystem : MonoBehaviour
                         ore.gameObject.TryGetComponent(out OreObject O);
                         {
                             O.Damaged(15);
+                        }
+                    }
+                }
+            }
+
+            if (_equipList[_equipItem, 1] == 2)
+            {
+                Debug.Log("몇번 누르지");
+                Collider[] soils = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f), new Vector3(0.5f, 1.5f, 0.5f));
+                foreach (var soil in soils)
+                {
+                    if (soil.tag == "dirt")
+                    {
+                        soil.gameObject.TryGetComponent(out Dirt D);
+                        {
+                            if (!D.isReady) {
+                                D.Ready();
+                            } else if (!D.fullWater){
+                                D.Water();
+                            } else {
+                                Debug.Log("농사준비완료!");
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (_equipList[_equipItem, 1] == 7)
+            {
+                Debug.Log("몇번 누르지");
+                Collider[] soils = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z), new Vector3(0, 1.5f, 0));
+                foreach (var soil in soils)
+                {
+                    if (soil.tag == "dirt")
+                    {
+                        soil.gameObject.TryGetComponent(out Dirt D);
+                        {
+                            if (D.fullWater && !_nearCrops) {
+                                Debug.Log("씨앗심기");
+                                Instantiate(_crops[(int)_equipList[_equipItem, 0]-212], nearSoil(_character.position), _character.rotation);
+                                _UIManager.quickUse((int)_equipList[_equipItem,0],1,_equipItem);
+                            } else {
+                                Debug.Log("씨앗못심기");
+                            }
                         }
                     }
                 }
@@ -263,11 +308,13 @@ public class PlayerSystem : MonoBehaviour
             if (Input.GetAxisRaw("equip1") == 1)
             {
                 _equipItem = 0;
+                Debug.Log(_equipList[_equipItem,1]);
                 _UIManager.setEquipPointer(1);
             }
             else if (Input.GetAxisRaw("equip2") == 1)
             {
                 _equipItem = 1;
+                Debug.Log(_equipList[_equipItem,1]);
                 _UIManager.setEquipPointer(2);
             }
             else if (Input.GetAxisRaw("equip3") == 1)
@@ -358,9 +405,10 @@ public class PlayerSystem : MonoBehaviour
             Debug.Log(_colset.Length);
             foreach (var col in _colset)
             {
+                Debug.Log(col);
                 if (col.TryGetComponent(out Interactable inter))
                 {
-                    Debug.Log(col);
+                    Debug.Log("if 안 "+col);
                     // 이런 형태로 작성
                     // if (col.TryGetComponent(out NPCObject npc))
                     // {
@@ -369,6 +417,11 @@ public class PlayerSystem : MonoBehaviour
                     if (col.TryGetComponent(out NPCObject npc))
                     {
                         npc.Interaction();
+                    }
+                    if (col.TryGetComponent(out WorldTreeInteraction worldTreeInteraction))
+                    {
+                        Debug.Log("세계수 인터렉션");
+                        worldTreeInteraction.Interaction();
                     }
                     if (_equipList[_equipItem, 1] == 1 && col.TryGetComponent(out GatheringObject Gat))
                     {
@@ -448,7 +501,7 @@ public class PlayerSystem : MonoBehaviour
     private Vector3 nearSoil(Vector3 pos)
     {
         float tempz = (int)pos.z + (pos.z > 0 ? 0.5f : -0.5f);
-        float tempx = (int)pos.x + (pos.x > 0 ? 0.5f : -0.5f);
+        float tempx = Mathf.Round(pos.x);
         return new Vector3(tempx, pos.y, tempz);
     }
 
@@ -462,11 +515,6 @@ public class PlayerSystem : MonoBehaviour
             _nearObject = null;
             _readyToHarvest = false;
             return;
-        }
-
-        if (_onSoil && Input.GetKeyDown(KeyCode.F) && !_nearCrops)
-        {
-            Instantiate(_wheat, nearSoil(_character.position), _character.rotation);
         }
 
         if (_nearItem && Input.GetKeyDown(KeyCode.F))
@@ -929,7 +977,11 @@ public class PlayerSystem : MonoBehaviour
         else
         {
             _equipList[index, 0] = itemCode;
-            _equipList[index, 1] = 0;
+            if (itemCode < 300 && 200 < itemCode) {
+                _equipList[index, 1] = 7;
+            } else{
+                _equipList[index, 1] = 0;
+            }
             _equipList[index, 2] = 0;
             _equipList[index, 3] = 0;
             _equipList[index, 4] = Count;

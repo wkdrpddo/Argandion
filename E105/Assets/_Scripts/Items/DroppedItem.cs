@@ -26,10 +26,10 @@ public class DroppedItem : MonoBehaviour
     }
 
     // Update is called once per frame 
-    void Update()
-    {
-        transform.Rotate(Vector3.up * 100 * Time.deltaTime);
+    // void Update()
+    // {
+    //     transform.Rotate(Vector3.up * 100 * Time.deltaTime);
 
-    }
+    // }
 
 }

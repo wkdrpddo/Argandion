@@ -8,6 +8,8 @@ public class Dirt : MonoBehaviour
     public int watered;
     public int minusWater;
     public int temp;
+    public bool isReady = false;
+    public bool fullWater = false;
     public GameObject[] _nearObjects = new GameObject[25];
     ParticleSystem particleObject;
 
@@ -15,37 +17,47 @@ public class Dirt : MonoBehaviour
     public GameObject _buffManagerObject;
     private BuffManager _buff;
 
-
     void Start()
     {
-        // particleObject = GetComponent<ParticleSystem>();
-        // temp = _system._day;
-        // _buffManagerObject = GameObject.Find("BuffManager");
-        // _buff = _buffManagerObject.GetComponent<BuffManager>();
+        _system = GameObject.Find("SystemManager").GetComponent<SystemManager>();
+        particleObject = GetComponent<ParticleSystem>();
+        temp = _system._day;
+        _buffManagerObject = GameObject.Find("BuffManager");
+        _buff = _buffManagerObject.GetComponent<BuffManager>();
     }
 
-    // void Update()
-    // {
-    //     if (temp != _system._day) {
-    //         NewDay();
-    //         temp = _system._day;
-    //     }
-    // }
+    void Update()
+    {
+        if (temp != _system._day) {
+            NewDay();
+            temp = _system._day;
+        }
+    }
+
+    public void Ready()
+    {
+        isReady = true;
+    }
 
     void NewDay()
     {
-        if (gameObject.tag == "wateredDirt")
+        if (watered > 0)
         {
             Debug.Log("물빠짐!");
             watered -= minusWater;
+            fullWater = false;
             if (_buff.bluePray)
             {
                 watered += 25 * howMany;
+                if (watered >= 1500) {
+                    watered = 1500;
+                    fullWater = true;
+                }
             }
             if (watered < 0)
             {
                 watered = 0;
-                gameObject.tag = "dirt";
+                fullWater = false;
                 particleObject.Stop();
             }
             else
@@ -67,7 +79,7 @@ public class Dirt : MonoBehaviour
 
     public void Water()
     {
-        gameObject.tag = "wateredDirt";
+        fullWater = true;
         watered = 15000;
         particleObject.Play();
     }

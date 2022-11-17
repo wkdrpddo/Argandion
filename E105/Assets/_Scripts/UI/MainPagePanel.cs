@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MainPagePanel : MonoBehaviour
 {
-    private UIManager ui;
+    [SerializeField] private UIManager ui;
 
     void Start()
     {

@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour
         return icon;
     }
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
 
         conversationNPC = 0;
@@ -129,69 +129,55 @@ public class UIManager : MonoBehaviour
         _foodmanager._eventPanel = _eventpanel.GetComponent<EventPanel>();
 
         _nowequip = GameObject.Find("NowEquip").gameObject;
-        _baseuipanel.SetActive(false);
+        
 
         _mapuipanel = GameObject.Find("MapUIPanel");
-        _mapuipanel.SetActive(false);
-
         _mainpage = gameObject.transform.Find("MainPagePanel").GetComponent<MainPagePanel>();
-
         _optionpanel = gameObject.transform.Find("OptionPanel").GetComponent<OptionPanel>();
-        _optionpanel.gameObject.SetActive(false);
-
         _optionfrommain = gameObject.transform.Find("OptionPanelFromMainPage").GetComponent<OptionPanel>();
-        _optionfrommain.gameObject.SetActive(false);
-
         _createcharacter = gameObject.transform.Find("CreateCharacter").GetComponent<CreateCharacter>();
-        _createcharacter.gameObject.SetActive(false);
-
         _conversationpanel = gameObject.transform.Find("ConversationPanel").GetComponent<ConversationPanel>();
-        _conversationpanel.gameObject.SetActive(false);
-
         _cookingpanel = gameObject.transform.Find("CookingPanel").GetComponent<CookingPanel>();
-        _cookingpanel.gameObject.SetActive(false);
-
         _craftingpanel = gameObject.transform.Find("CraftingPanel").GetComponent<CraftingPanel>();
-        _craftingpanel.gameObject.SetActive(false);
-
         _buildeventpanel = gameObject.transform.Find("BuildEventPanel").GetComponent<BuildEventPanel>();
-        _buildeventpanel.gameObject.SetActive(false);
-
         _transactionanimalpanel = gameObject.transform.Find("TransactionAnimalPanel").GetComponent<TransactionAnimalPanel>();
-        _transactionanimalpanel.gameObject.SetActive(false);
-
         _transactionpanel = gameObject.transform.Find("TransactionPanel").GetComponent<TransactionPanel>();
-        _transactionpanel.gameObject.SetActive(false);
-
         _inventorypanel = gameObject.transform.Find("InventoryPanel").GetComponent<InventoryPanel>();
-        _inventorypanel.gameObject.SetActive(false);
-
         _storagepanel = gameObject.transform.Find("StoragePanel").gameObject;
-        _storagepanel.SetActive(false);
-
         _trademodal = gameObject.transform.Find("TradeModal").GetComponent<TradeModal>();
-        _trademodal.gameObject.SetActive(false);
-
         _inventory = gameObject.transform.Find("Inventory").gameObject;
         _invenMoney = _inventory.transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
         _invenMoney.text = _systemmanager.getPlayerGold().ToString();
-        _inventory.gameObject.SetActive(false);
-
         _notificationpanel = GameObject.Find("NotificationPanel");
-        _notificationpanel.SetActive(false);
         _resultnotificationpanel = gameObject.transform.Find("ResultNotificationPanel").GetComponent<ResultNotificationPanel>();
-        _resultnotificationpanel.gameObject.SetActive(false);
         _transactiondoublecheck = gameObject.transform.Find("TransactionDoubleCheckModal").GetComponent<TransactionDoubleCheck>();
-        _transactiondoublecheck.gameObject.SetActive(false);
-
         _eventAnnounce = GameObject.Find("EventUIAnnounce");
         _announceTitle = _eventAnnounce.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
         _announceText = _eventAnnounce.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
+
+        _transactiondoublecheck.gameObject.SetActive(false);
+        _resultnotificationpanel.gameObject.SetActive(false);
+        _notificationpanel.SetActive(false);
+        _baseuipanel.SetActive(false);
+        _mapuipanel.SetActive(false);
+        _optionpanel.gameObject.SetActive(false);
+        _optionfrommain.gameObject.SetActive(false);
+        _createcharacter.gameObject.SetActive(false);
+        _conversationpanel.gameObject.SetActive(false);
+        _cookingpanel.gameObject.SetActive(false);
+        _craftingpanel.gameObject.SetActive(false);
+        _buildeventpanel.gameObject.SetActive(false);
+        _transactionanimalpanel.gameObject.SetActive(false);
+        _transactionpanel.gameObject.SetActive(false);
+        _inventorypanel.gameObject.SetActive(false);
+        _storagepanel.SetActive(false);
+        _trademodal.gameObject.SetActive(false);
+        _inventory.gameObject.SetActive(false);
         _eventAnnounce.SetActive(false);
         // 테스트 꽃
-        ItemObject item1 = findItem(50);
-        acquireItem(item1, 10);
-        ItemObject item2 = findItem(51);
+        ItemObject item1 = findItem(318);
+        acquireItem(item1, 1);
+        ItemObject item2 = findItem(212);
         acquireItem(item2, 10);
         ItemObject item3 = findItem(52);
         acquireItem(item3, 10);
@@ -302,11 +288,13 @@ public class UIManager : MonoBehaviour
                         case 0:
                             if (conversationNPC == 9)
                             {
+                                Debug.Log("두번재 대화 스킵");
                                 break;
                             }
                             _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
                             break;
                         case 1:
+                                Debug.Log("세번째 대화");
                             _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
                             break;
                     }

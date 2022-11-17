@@ -8,7 +8,7 @@ public class TransactionAnimalPanel : MonoBehaviour
 {
     // private 
     [SerializeField] private UIManager ui;
-    private Ranch _ranch;
+    [SerializeField] private Ranch _ranch;
 
     public void callCellModal(int value)
     {

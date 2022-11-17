@@ -6,11 +6,11 @@ using TMPro;
 public class TransactionDoubleCheck : MonoBehaviour
 {
     [SerializeField] private Ranch _ranch;
-    private BuyingCarpentor _carpentor;
-    private BuyingDesigner _designer;
-    private BuyingFisher _fisher;
-    private BuyingHunter _hunter;
-    private BuyingSmith _smith;
+    [SerializeField] private BuyingCarpentor _carpentor;
+    [SerializeField] private BuyingDesigner _designer;
+    [SerializeField] private BuyingFisher _fisher;
+    [SerializeField] private BuyingHunter _hunter;
+    [SerializeField] private BuyingSmith _smith;
     [SerializeField] private UIManager ui;
     [SerializeField] private int storeIndex;
     [SerializeField] private int itemIndex;

@@ -30,6 +30,8 @@ public class TeleportationHome : MonoBehaviour
         Debug.Log("트리거");
         if (gameObject == _teleportHomeInside && other.gameObject.layer == 3)
         {
+            var camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+            camera.clearFlags = CameraClearFlags.Skybox;
             goOutside();
         }
     }
@@ -37,6 +39,10 @@ public class TeleportationHome : MonoBehaviour
     public void Interaction()
     {
         Debug.Log("인터렉션");
+        var camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        camera.backgroundColor = Color.black;
+        camera.clearFlags = CameraClearFlags.SolidColor;
+
         goInside();
     }
 

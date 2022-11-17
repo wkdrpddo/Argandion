@@ -16,15 +16,15 @@ public class combFoodEffectObject
 
 public class CookingPanel : MonoBehaviour
 {
-    private UIManager ui;
+    [SerializeField] private UIManager ui;
     public CookingInteraction _cookingInteraction;
 
     public GameObject RecipeCard;
     public GameObject RecipeText;
     public GameObject NomalText;
 
-    private GameObject DishContent;
-    private GameObject RecipeContent;
+    [SerializeField] private GameObject DishContent;
+    [SerializeField] private GameObject RecipeContent;
 
     private combObject[] itemData;
     private combFoodEffectObject[] effectData;

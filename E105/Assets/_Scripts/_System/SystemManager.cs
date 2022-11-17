@@ -21,6 +21,7 @@ public class SystemManager : MonoBehaviour
     public GameObject _MapObject;
     public PlayerSystem _player;
     public HouseChange _houseChange;
+    public FarmChange _farmChange;
     public WeatherManager _weatherManager;
     public BuffManager _buffManager;
     public NPCManager _NPCManager;
@@ -64,7 +65,7 @@ public class SystemManager : MonoBehaviour
         _worldTree = GameObject.Find("WorldTree").GetComponent<WorldTree>();
         _buildings = GameObject.Find("Buildings").GetComponentsInChildren<BuildingChange>();
         _houseChange = GameObject.Find("Player House").GetComponent<HouseChange>();
-
+        _farmChange = GameObject.Find("Map").transform.GetChild(4).transform.GetChild(0).transform.GetChild(2).GetComponent<FarmChange>();
         // _buiding1 = GameObject.Find("ClothshopPlace").GetComponent<BuildingChange>();
 
 
@@ -406,6 +407,7 @@ public class SystemManager : MonoBehaviour
             // npc 부르기
             _NPCManager.NPCActive(6);
             // 밭 활성화
+            _farmChange.ChangeFarm();
             // 집 자라기
             _houseChange.ChangeHouse();
             _worldTree.ChangeTreeLevel();
@@ -417,6 +419,7 @@ public class SystemManager : MonoBehaviour
             // npc 부르기
             _NPCManager.NPCActive(7);
             // 밭 활성화
+            _farmChange.ChangeFarm();
             // 집 자라기
             _houseChange.ChangeHouse();
             _worldTree.ChangeTreeLevel();
