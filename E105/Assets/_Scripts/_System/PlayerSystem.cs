@@ -201,7 +201,7 @@ public class PlayerSystem : MonoBehaviour
             _movedDelay -= Time.deltaTime;
             _movedDelay = Mathf.Max(0, _movedDelay);
         }
-        if (_canAction && Input.GetAxisRaw("useKey") == 1 && _delayedTimer <= 0)
+        if (_canAction && Input.GetKeyDown(KeyCode.Space) && _delayedTimer <= 0)
         {
             if (_equipList[_equipItem, 1] >= 3 && _equipList[_equipItem, 1] <= 5)
             {
@@ -222,6 +222,28 @@ public class PlayerSystem : MonoBehaviour
                         ore.gameObject.TryGetComponent(out OreObject O);
                         {
                             O.Damaged(15);
+                        }
+                    }
+                }
+            }
+
+            if (_equipList[_equipItem, 1] == 2)
+            {
+                Debug.Log("몇번 누르지");
+                Collider[] soils = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f), new Vector3(0.5f, 1.5f, 0.5f));
+                foreach (var soil in soils)
+                {
+                    if (soil.tag == "dirt")
+                    {
+                        soil.gameObject.TryGetComponent(out Dirt D);
+                        {
+                            if (!D.isReady) {
+                                D.Ready();
+                            } else if (!D.fullWater){
+                                D.Water();
+                            } else {
+                                Debug.Log("농사준비완료!");
+                            }
                         }
                     }
                 }
