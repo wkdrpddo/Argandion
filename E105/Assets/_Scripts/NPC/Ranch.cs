@@ -296,7 +296,8 @@ public class Ranch : MonoBehaviour
         Vector3 point = new Vector3();
         while (true)
         {
-            point = new Vector3(Random.Range(210, 275), 2, Random.Range(150, 190));
+            // 목장 내 구역 y 값 2로 고정 후 사용
+            point = new Vector3(Random.Range(210, 275), 0, Random.Range(150, 190));
             if (isValid(point))
                 return point;
         }
