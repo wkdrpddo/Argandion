@@ -189,9 +189,9 @@ public class UIManager : MonoBehaviour
         _announceText = _eventAnnounce.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
         _eventAnnounce.SetActive(false);
         // 테스트 꽃
-        ItemObject item1 = findItem(50);
-        acquireItem(item1, 10);
-        ItemObject item2 = findItem(51);
+        ItemObject item1 = findItem(318);
+        acquireItem(item1, 1);
+        ItemObject item2 = findItem(212);
         acquireItem(item2, 10);
         ItemObject item3 = findItem(52);
         acquireItem(item3, 10);

@@ -65,13 +65,13 @@ public class Crop : MonoBehaviour
         {
             nearSoil = other.gameObject;
             Dirt dirt = nearSoil.GetComponent<Dirt>();
-            dirt.minusWater += cropObject.Water/2;
+            dirt.minusWater += cropObject.Water;
         }
         else if (other.gameObject.CompareTag("dirt"))
         {
             nearSoil = other.gameObject;
             Dirt dirt = nearSoil.GetComponent<Dirt>();
-            dirt.minusWater += cropObject.Water/2;
+            dirt.minusWater += cropObject.Water;
         }
     }
 }
