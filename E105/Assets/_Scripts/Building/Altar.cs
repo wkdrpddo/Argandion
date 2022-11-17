@@ -35,8 +35,10 @@ public class Altar : MonoBehaviour
 
         }else{ // 버프 시작 안 하면
             Debug.Log("버프 시작 안 함");
-            _onFlower.SetActive(false); // 테이블 위 꽃 없애기
-            turnOnEffect(_dayEndBuffCnt); // 테이블 이펙트 바꿔주기
+            if(_onFlower!=null){
+                _onFlower.SetActive(false); // 테이블 위 꽃 없애기
+                turnOnEffect(_dayEndBuffCnt); // 테이블 이펙트 바꿔주기
+            }
         }
     }
     
