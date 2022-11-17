@@ -94,6 +94,7 @@ public class PlayerSystem : MonoBehaviour
         _character = GameObject.Find("PlayerBody").transform;
         _SystemManager = GameObject.Find("SystemManager");
         _soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        _theInventory = GameObject.Find("UIManager").transform.GetChild(8).transform.GetChild(1).GetComponent<Inventory>();
     }
 
     // Update is called once per frame
