@@ -56,10 +56,10 @@ public class ConversationPanel : MonoBehaviour
     {
         ui = gameObject.GetComponentInParent<UIManager>();
         _npcname = transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
-        _nomaltalk = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+        _nomaltalk = transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
         conversationCount = -1;
 
-        _selectpanel = transform.GetChild(0).GetChild(1).gameObject;
+        _selectpanel = transform.GetChild(0).GetChild(0).gameObject;
 
         isConversation = false;
         selectConversationCount = 0;
@@ -232,7 +232,10 @@ public class ConversationPanel : MonoBehaviour
     public void thirdConversation()
     {
         Debug.Log("초기 대화 세번째");
-        _nomaltalk.gameObject.SetActive(false);
+        if (!(ui.conversationNPC == 11) && !(ui.conversationNPC == 12))
+        {
+            _nomaltalk.gameObject.SetActive(false);
+        }
         _selectpanel.SetActive(true);
     }
 
@@ -250,6 +253,9 @@ public class ConversationPanel : MonoBehaviour
         conversationCount = -1;
         isSpirit = -1;
         ui.setIsOpenConversation(false);
+
+        _nomaltalk.GetComponent<RectTransform>().localPosition = new Vector3(0, 115, 0);
+        _selectpanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 60, 0);
 
         Transform[] selectObjectList = _selectpanel.GetComponentsInChildren<Transform>();
         for (int i = 1; i < selectObjectList.Length; i++)
@@ -326,10 +332,15 @@ public class ConversationPanel : MonoBehaviour
                 Destroy(selectObjectList[i].gameObject);
             }
         }
+        // Debug.Log(_nomaltalk.GetComponent<RectTransform>().localPosition);
+        // Debug.Log(_selectpanel.GetComponent<RectTransform>().localPosition);
+
+        _nomaltalk.GetComponent<RectTransform>().localPosition = new Vector3(12, 120, 0);
+        _selectpanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 55, 0);
 
         GameObject teleportBtn = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform teleportBtnRect = teleportBtn.GetComponent<RectTransform>();
-        teleportBtnRect.SetLocalPositionAndRotation(new Vector3(0, 55, 0), ui.rotateZero);
+        teleportBtnRect.SetLocalPositionAndRotation(new Vector3(0, 33, 0), ui.rotateZero);
         if (_key == 0)
         {
             teleportBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "제단으로 이동합니다.";
@@ -344,7 +355,7 @@ public class ConversationPanel : MonoBehaviour
         Debug.Log("체킹");
         GameObject teleportBtn2 = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform teleportBtnRect2 = teleportBtn2.GetComponent<RectTransform>();
-        teleportBtnRect2.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+        teleportBtnRect2.SetLocalPositionAndRotation(new Vector3(0, 0, 0), ui.rotateZero);
         teleportBtn2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "취소";
         teleportBtn2.GetComponent<Button>().onClick.AddListener(resetConversationPanel);
     }

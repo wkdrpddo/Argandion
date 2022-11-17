@@ -55,7 +55,7 @@ public class CreateCharacter : MonoBehaviour
 
             gameObject.SetActive(false);
 
-            ui.runControllKeys();
+            ui.delayRunControllKeys();
         }
     }
     // Start is called before the first frame update
