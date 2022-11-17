@@ -446,7 +446,8 @@ public class PlayerSystem : MonoBehaviour
                     //제사창
                     if (_equipList[_equipItem,0] >= 50 && _equipList[_equipItem, 0] <= 56 && col.TryGetComponent(out AltarTableInteraction alt))
                     {
-                        // alt.Interaction(_equipList[_equipItem, 0],_equipItem);
+                        Debug.Log("제사 인터렉션");
+                        alt.Interaction((int)_equipList[_equipItem, 0],_equipItem);
                     }
                     // building쪽 ==============
                     if (col.TryGetComponent(out SignInteraction signInteraction))

@@ -14,10 +14,13 @@ public class ResultNotificationPanel : MonoBehaviour
 
     public void handelNoti(string inputText)
     {
+        Debug.Log("핸들노티");
+        Debug.Log("bool "+ gameObject.activeSelf);
         gameObject.SetActive(!gameObject.activeSelf);
 
         if (inputText != "")
         {
+            Debug.Log("inputText "+inputText);
             _notitext.text = inputText;
         }
 

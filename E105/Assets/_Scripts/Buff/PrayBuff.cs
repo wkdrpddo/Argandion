@@ -7,6 +7,7 @@ public class PrayBuff : MonoBehaviour
     public SystemManager systemManager;
     private BuffManager buffManager;
     public Inventory _theInventory;
+    private Altar _altar;
 
     public Item _item;
 
@@ -22,12 +23,15 @@ public class PrayBuff : MonoBehaviour
     {
         tempDay = systemManager._day;
         buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
+        _altar = GameObject.Find("Altar").GetComponent<Altar>();
     }
 
     public void DayStart()
     {
+        Debug.Log("데이스타트");
         if (tempDay != systemManager._day)
         {
+            Debug.Log("뉴데이 호출");
             NewDay();
             tempDay = systemManager._day;
         }
@@ -35,6 +39,7 @@ public class PrayBuff : MonoBehaviour
         if (buffManager._flowerBuffTargetMonth == systemManager._month && buffManager._flowerBuffTargetDay == systemManager._day)
         {
             buffManager.FlowerBuffEnd(20); // 버프 끝
+            _altar.buffEnd();
         }
     }
 
@@ -45,12 +50,13 @@ public class PrayBuff : MonoBehaviour
             todayPray = true;
             if (flowerIdx != itemCode)
             {
+                Debug.Log("다름");
                 flowerIdx = itemCode;
                 prayDay = 1;
             }
             else
             {
-                if (prayDay < 2)
+                if (prayDay <= 2)
                 {
                     prayDay += 1;
                 }
@@ -72,6 +78,9 @@ public class PrayBuff : MonoBehaviour
         else
         { // ??
             todayPray = false;
+        }
+        if(prayDay==3){
+            prayDay=0;
         }
     }
 
