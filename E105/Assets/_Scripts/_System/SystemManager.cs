@@ -415,7 +415,9 @@ public class SystemManager : MonoBehaviour
             // 집 자라기
             _houseChange.ChangeHouse();
             _worldTree.ChangeTreeLevel();
-
+            // 제단 텔레포트 active
+            GameObject.Find("Teleport").transform.GetChild(0).gameObject.SetActive(true);
+            GameObject.Find("Teleport").transform.GetChild(1).gameObject.SetActive(true);
         }
         if (_development_level == 3)
         {

@@ -114,7 +114,9 @@ public class UIManager : MonoBehaviour
         _foodmanager = GameObject.Find("FoodManager").GetComponent<FoodManager>();
         _worldtree = GameObject.Find("WorldTree").GetComponent<WorldTree>();
         _alterdown = GameObject.Find("teleportDown").GetComponent<TeleportAltar>();
+        GameObject.Find("Down").SetActive(false);
         _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
+        GameObject.Find("Up").SetActive(false);
         _alter = GameObject.Find("Altar").GetComponent<Altar>();
 
 
