@@ -113,8 +113,8 @@ public class UIManager : MonoBehaviour
         _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();
         _foodmanager = GameObject.Find("FoodManager").GetComponent<FoodManager>();
         _worldtree = GameObject.Find("WorldTree").GetComponent<WorldTree>();
-        // _alterdown = GameObject.Find("teleportDown").GetComponent<TeleportAltar>();
-        // _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
+        _alterdown = GameObject.Find("teleportDown").GetComponent<TeleportAltar>();
+        _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
         // _alter = GameObject.Find("Altar").GetComponent<Altar>();
 
 
@@ -259,6 +259,9 @@ public class UIManager : MonoBehaviour
                 OnMapUIPanel();
             }
         }
+
+        // 다른 키 다 X, craft / cooking 상호작용만 동작
+
 
         if (Input.GetButtonDown("interactionKey") && isInvenRightModal)
         {
@@ -586,7 +589,10 @@ public class UIManager : MonoBehaviour
             {
                 _optionfrommain.handelPanel();
             }
-            runControllKeys();
+            if (!isPanelOpen())
+            {
+                runControllKeys();
+            }
         }
     }
 
