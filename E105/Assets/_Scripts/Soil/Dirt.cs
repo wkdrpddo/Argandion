@@ -26,7 +26,7 @@ public class Dirt : MonoBehaviour
         _buff = _buffManagerObject.GetComponent<BuffManager>();
     }
 
-    void Update()
+    void DayStart()
     {
         if (temp != _system._day) {
             NewDay();

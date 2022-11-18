@@ -6,9 +6,11 @@ public class MapObject : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject[] SectorObject;
+    public SystemManager _systemManager;
     void Start()
     {
-        SectorObject = GameObject.FindGameObjectsWithTag("sector");
+        // SectorObject = GameObject.FindGameObjectsWithTag("sector");
+        _systemManager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
     }
 
     public void UpdateFieldManager(int index)
@@ -26,6 +28,7 @@ public class MapObject : MonoBehaviour
     {
         SectorObject[index].transform.GetComponent<SectorObject>().Purifier();
         SectorObject[index].transform.GetChild(0).gameObject.SetActive(false);
-        SectorObject[index].transform.GetChild(1).gameObject.SetActive(true);       
+        SectorObject[index].transform.GetChild(1).gameObject.SetActive(true);
+        UpdateFieldManager(_systemManager._season);
     }
 }
