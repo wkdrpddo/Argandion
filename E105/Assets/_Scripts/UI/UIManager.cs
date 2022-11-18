@@ -243,15 +243,12 @@ public class UIManager : MonoBehaviour
         ItemObject item22 = findItem(505);
         acquireItem(item22, 60);
 
-        //검 테스트
-        // ItemObject item304 = findItem(304);
-        // acquireItem(item304, 1);
-        // ItemObject item309 = findItem(309);
-        // acquireItem(item309, 1);
-        // ItemObject item314 = findItem(314);
-        // acquireItem(item314, 1);
-        // ItemObject item319 = findItem(319);
-        // acquireItem(item319, 1);
+
+        ItemObject item106 = findItem(106);
+        acquireItem(item106, 1);
+
+
+
 
 
         _systemmanager.setPlayerGold(9999999);

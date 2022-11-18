@@ -20,8 +20,8 @@ public class SoundManager : MonoBehaviour
     [Header("사운드 플레이어")]
     [SerializeField] AudioSource bgmPlayer;
 
-    [SerializeField] private float Sound_Background = 0.5f;
-    [SerializeField] private float Sound_Effect = 0.5f;
+    [SerializeField] private float Sound_Background = 0.2f;
+    [SerializeField] private float Sound_Effect = 0.2f;
 
     private UIManager _UIManager;
 
@@ -33,6 +33,7 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+
         playBGM1();
     }
     public void playBGM1()  //정화
