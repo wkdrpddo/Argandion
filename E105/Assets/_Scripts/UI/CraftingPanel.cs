@@ -25,7 +25,7 @@ public class combObject
 
 public class CraftingPanel : MonoBehaviour
 {
-    [SerializeField] private UIManager ui;
+    // [SerializeField] private UIManager ui;
     public GameObject _craftItemButton;
     public GameObject _metarialsCard;
     [SerializeField] private GameObject _scrollcontent;
@@ -39,7 +39,7 @@ public class CraftingPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ui = gameObject.GetComponentInParent<UIManager>();
+        // ui = gameObject.GetComponentInParent<UIManager>();
         _scrollcontent = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).gameObject;
         _metarialsgrid = transform.GetChild(1).GetChild(1).gameObject;
     }
@@ -51,15 +51,15 @@ public class CraftingPanel : MonoBehaviour
         Debug.Log("craft 토글");
         if (gameObject.activeSelf)
         {
-            ui.stopControllKeys();
-            ui.setIsOpenCraft(true);
+            UIManager._uimanagerInstance.stopControllKeys();
+            UIManager._uimanagerInstance.setIsOpenCraft(true);
             setCraftData(value);
             gameObject.transform.GetChild(1).GetChild(2).GetComponent<Button>().interactable = false;
         }
         else
         {
-            ui.delayRunControllKeys();
-            ui.setIsOpenCraft(false);
+            UIManager._uimanagerInstance.delayRunControllKeys();
+            UIManager._uimanagerInstance.setIsOpenCraft(false);
             deleteMetarialList();
             deleteCraftList();
             gameObject.transform.GetChild(1).GetChild(2).GetComponent<Button>().interactable = true;
@@ -69,23 +69,23 @@ public class CraftingPanel : MonoBehaviour
     public void onClickCraft()
     {
         bool isContainInventory;
-        ItemObject craftItem = ui.findItem(itemData[index].Result);
+        ItemObject craftItem = UIManager._uimanagerInstance.findItem(itemData[index].Result);
         if (craftItem.Category == "장비" || craftItem.Category == "옷")
         {
-            isContainInventory = ui.checkInventory(craftItem, 1);
+            isContainInventory = UIManager._uimanagerInstance.checkInventory(craftItem, 1);
         }
         else
         {
-            isContainInventory = ui.checkInventory(craftItem, canMakeList[index]);
+            isContainInventory = UIManager._uimanagerInstance.checkInventory(craftItem, canMakeList[index]);
         }
 
         if (isContainInventory)
         {
-            ui.OnTradeModal(craftItem.Name, craftItem.ItemCode.ToString(), canMakeList[index], -1, 2, storeIdx, index);
+            UIManager._uimanagerInstance.OnTradeModal(craftItem.Name, craftItem.ItemCode.ToString(), canMakeList[index], -1, 2, storeIdx, index);
         }
         else
         {
-            ui.OnResultNotificationPanel("인벤토리에 빈 공간이 없습니다.");
+            UIManager._uimanagerInstance.OnResultNotificationPanel("인벤토리에 빈 공간이 없습니다.");
         }
 
         gameObject.transform.GetChild(1).GetChild(2).GetComponent<Button>().interactable = false;
@@ -129,11 +129,11 @@ public class CraftingPanel : MonoBehaviour
         for (int i = 0; i < itemData.Length; i++)
         {
             combObject combObj = itemData[i];
-            ItemObject itemObject = ui.findItem(combObj.Result);
+            ItemObject itemObject = UIManager._uimanagerInstance.findItem(combObj.Result);
 
             GameObject craftBtn = Instantiate(_craftItemButton, _scrollcontent.transform);
 
-            craftBtn.transform.GetChild(0).GetComponent<Image>().sprite = ui.getItemIcon(itemObject.ItemCode);
+            craftBtn.transform.GetChild(0).GetComponent<Image>().sprite = UIManager._uimanagerInstance.getItemIcon(itemObject.ItemCode);
             craftBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemObject.Name;
             craftBtn.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = itemObject.Desc;
 
@@ -212,9 +212,9 @@ public class CraftingPanel : MonoBehaviour
     private void createMetarialCard(int material, int count)
     {
         GameObject metarialCard = Instantiate(_metarialsCard, _metarialsgrid.transform);
-        ItemObject itemObj = ui.findItem(material);
+        ItemObject itemObj = UIManager._uimanagerInstance.findItem(material);
 
-        metarialCard.transform.GetChild(0).GetComponent<Image>().sprite = ui.getItemIcon(itemObj.ItemCode);
+        metarialCard.transform.GetChild(0).GetComponent<Image>().sprite = UIManager._uimanagerInstance.getItemIcon(itemObj.ItemCode);
         metarialCard.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemObj.Name;
         metarialCard.transform.GetChild(2).GetComponentInChildren<TextMeshProUGUI>().text = count.ToString();
     }

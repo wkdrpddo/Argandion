@@ -26,7 +26,7 @@ public class ConversationPanel : MonoBehaviour
     [SerializeField] private int conversationCount;        // -1 : 대화 전, 0 : 대화 시작, 1 : 마지막 대화
 
     [SerializeField] public GameObject conversationButton;
-    [SerializeField] private UIManager ui;
+    // [SerializeField] private UIManager ui;
     // 선택창 '대화' 선택 시 관련 변수
     private bool isConversation;
     private int selectConversationCount;
@@ -52,9 +52,9 @@ public class ConversationPanel : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        ui = gameObject.GetComponentInParent<UIManager>();
+        // ui = gameObject.GetComponentInParent<UIManager>();
         _npcname = transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
         _nomaltalk = transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
         conversationCount = -1;
@@ -71,7 +71,8 @@ public class ConversationPanel : MonoBehaviour
     // NPC 및 상호작용 대화 최초 시작
     public void setConversationNPC(int value)
     {
-        ui.conversationNPC = value;
+        UIManager._uimanagerInstance.conversationNPC = value;
+        // ui.conversationNPC = value;
 
         int randCnt = Random.Range(0, 3);
         conversationCount++;
@@ -124,7 +125,8 @@ public class ConversationPanel : MonoBehaviour
         }
         Debug.Log("초기대화 시작");
 
-        ui.setIsOpenConversation(true);
+        UIManager._uimanagerInstance.setIsOpenConversation(true);
+        // ui.setIsOpenConversation(true);
         setSelectList();
         gameObject.SetActive(true);
     }
@@ -134,17 +136,18 @@ public class ConversationPanel : MonoBehaviour
     {
         GameObject talkBtn = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform talkBtnRect = talkBtn.GetComponent<RectTransform>();
-        talkBtnRect.SetLocalPositionAndRotation(new Vector3(0, 55, 0), ui.rotateZero);
+        talkBtnRect.SetLocalPositionAndRotation(new Vector3(0, 55, 0), UIManager._uimanagerInstance.rotateZero);
         talkBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "대화";
         talkBtn.GetComponent<Button>().onClick.AddListener(selectConversation);
 
         GameObject helpBtn = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform helpBtnRect = helpBtn.GetComponent<RectTransform>();
-        helpBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+        helpBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), UIManager._uimanagerInstance.rotateZero);
         helpBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "도움말";
         helpBtn.GetComponent<Button>().onClick.AddListener(() => selectInfo(-1));
 
-        int npcNumber = ui.conversationNPC;
+        int npcNumber = UIManager._uimanagerInstance.conversationNPC;
+        // int npcNumber = ui.conversationNPC;
         if (npcNumber == 1 || npcNumber == 7 || npcNumber == 8)
         {
             Destroy(helpBtn.gameObject);
@@ -160,36 +163,36 @@ public class ConversationPanel : MonoBehaviour
                 // case 6:
                 GameObject tradeBtn = Instantiate(conversationButton, _selectpanel.transform);
                 RectTransform tradeBtnRect = tradeBtn.GetComponent<RectTransform>();
-                tradeBtnRect.SetLocalPositionAndRotation(new Vector3(0, -11, 0), ui.rotateZero);
+                tradeBtnRect.SetLocalPositionAndRotation(new Vector3(0, -11, 0), UIManager._uimanagerInstance.rotateZero);
                 tradeBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "거래";
 
                 if (npcNumber == 1)
                 {
-                    tradeBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+                    tradeBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), UIManager._uimanagerInstance.rotateZero);
                 }
 
                 if (npcNumber == 5)
                 {
-                    tradeBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionAnimalPanel);
+                    tradeBtn.GetComponent<Button>().onClick.AddListener(UIManager._uimanagerInstance.OnTransactionAnimalPanel);
                 }
                 else
                 {
-                    tradeBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionPanel);
+                    tradeBtn.GetComponent<Button>().onClick.AddListener(UIManager._uimanagerInstance.OnTransactionPanel);
                 }
                 break;
             case 7:
                 GameObject bgmSelectBtn = Instantiate(conversationButton, _selectpanel.transform);
                 RectTransform bgmSelectBtnRect = bgmSelectBtn.GetComponent<RectTransform>();
-                bgmSelectBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+                bgmSelectBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), UIManager._uimanagerInstance.rotateZero);
                 bgmSelectBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "BGM 변경";
-                bgmSelectBtn.GetComponent<Button>().onClick.AddListener(ui.playRandomBGM);
+                bgmSelectBtn.GetComponent<Button>().onClick.AddListener(UIManager._uimanagerInstance.playRandomBGM);
                 break;
             case 8:
                 GameObject healBtn = Instantiate(conversationButton, _selectpanel.transform);
                 RectTransform healBtnRect = healBtn.GetComponent<RectTransform>();
-                healBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+                healBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), UIManager._uimanagerInstance.rotateZero);
                 healBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "순례자의 기도 [회복]";
-                healBtn.GetComponent<Button>().onClick.AddListener(ui.healPlayer);
+                healBtn.GetComponent<Button>().onClick.AddListener(UIManager._uimanagerInstance.healPlayer);
                 break;
             case 10:
                 helpBtn.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -197,9 +200,9 @@ public class ConversationPanel : MonoBehaviour
 
                 GameObject seedBtn = Instantiate(conversationButton, _selectpanel.transform);
                 RectTransform seedBtnRect = seedBtn.GetComponent<RectTransform>();
-                seedBtnRect.SetLocalPositionAndRotation(new Vector3(0, -11, 0), ui.rotateZero);
+                seedBtnRect.SetLocalPositionAndRotation(new Vector3(0, -11, 0), UIManager._uimanagerInstance.rotateZero);
                 seedBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "씨앗이 필요해";
-                seedBtn.GetComponent<Button>().onClick.AddListener(ui.OnTransactionPanel);
+                seedBtn.GetComponent<Button>().onClick.AddListener(UIManager._uimanagerInstance.OnTransactionPanel);
                 break;
             case 9:
                 _nomaltalk.gameObject.SetActive(true);
@@ -226,7 +229,7 @@ public class ConversationPanel : MonoBehaviour
     public void secondConversation()
     {
         Debug.Log("초기 대화 두번째");
-        _nomaltalk.text = conversations[ui.conversationNPC - 1, 3];
+        _nomaltalk.text = conversations[UIManager._uimanagerInstance.conversationNPC - 1, 3];
         conversationCount++;
     }
 
@@ -251,7 +254,7 @@ public class ConversationPanel : MonoBehaviour
         informationCount = 0;
         conversationCount = -1;
         isSpirit = -1;
-        ui.setIsOpenConversation(false);
+        UIManager._uimanagerInstance.setIsOpenConversation(false);
 
         _nomaltalk.GetComponent<RectTransform>().localPosition = new Vector3(0, 115, 0);
         _selectpanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 60, 0);
@@ -265,7 +268,7 @@ public class ConversationPanel : MonoBehaviour
             }
         }
 
-        ui.delayRunControllKeys();
+        UIManager._uimanagerInstance.delayRunControllKeys();
         // ui.runControllKeys();
     }
 
@@ -303,19 +306,19 @@ public class ConversationPanel : MonoBehaviour
 
         GameObject teleportBtn = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform teleportBtnRect = teleportBtn.GetComponent<RectTransform>();
-        teleportBtnRect.SetLocalPositionAndRotation(new Vector3(0, 55, 0), ui.rotateZero);
+        teleportBtnRect.SetLocalPositionAndRotation(new Vector3(0, 55, 0), UIManager._uimanagerInstance.rotateZero);
         teleportBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "포목점 너머 사냥터";
-        teleportBtn.GetComponent<Button>().onClick.AddListener(() => ui.doTeleport(0));
+        teleportBtn.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.doTeleport(0));
 
         GameObject teleportBtn2 = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform teleportBtnRect2 = teleportBtn2.GetComponent<RectTransform>();
-        teleportBtnRect2.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+        teleportBtnRect2.SetLocalPositionAndRotation(new Vector3(0, 22, 0), UIManager._uimanagerInstance.rotateZero);
         teleportBtn2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "사냥꾼 오두막 너머 사냥터";
-        teleportBtn2.GetComponent<Button>().onClick.AddListener(() => ui.doTeleport(1));
+        teleportBtn2.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.doTeleport(1));
 
         GameObject teleportBtn3 = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform teleportBtnRect3 = teleportBtn3.GetComponent<RectTransform>();
-        teleportBtnRect3.SetLocalPositionAndRotation(new Vector3(0, -11, 0), ui.rotateZero);
+        teleportBtnRect3.SetLocalPositionAndRotation(new Vector3(0, -11, 0), UIManager._uimanagerInstance.rotateZero);
         teleportBtn3.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "취소";
         teleportBtn3.GetComponent<Button>().onClick.AddListener(resetConversationPanel);
     }
@@ -339,22 +342,22 @@ public class ConversationPanel : MonoBehaviour
 
         GameObject teleportBtn = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform teleportBtnRect = teleportBtn.GetComponent<RectTransform>();
-        teleportBtnRect.SetLocalPositionAndRotation(new Vector3(0, 33, 0), ui.rotateZero);
+        teleportBtnRect.SetLocalPositionAndRotation(new Vector3(0, 33, 0), UIManager._uimanagerInstance.rotateZero);
         if (_key == 0)
         {
             teleportBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "제단으로 이동합니다.";
-            teleportBtn.GetComponent<Button>().onClick.AddListener(() => ui.upTeleport());
+            teleportBtn.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.upTeleport());
         }
         else if (_key == 1)
         {
             teleportBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "제단을 떠납니다.";
-            teleportBtn.GetComponent<Button>().onClick.AddListener(() => ui.downTeleport());
+            teleportBtn.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.downTeleport());
         }
 
         Debug.Log("체킹");
         GameObject teleportBtn2 = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform teleportBtnRect2 = teleportBtn2.GetComponent<RectTransform>();
-        teleportBtnRect2.SetLocalPositionAndRotation(new Vector3(0, 0, 0), ui.rotateZero);
+        teleportBtnRect2.SetLocalPositionAndRotation(new Vector3(0, 0, 0), UIManager._uimanagerInstance.rotateZero);
         teleportBtn2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "취소";
         teleportBtn2.GetComponent<Button>().onClick.AddListener(resetConversationPanel);
     }
@@ -368,7 +371,7 @@ public class ConversationPanel : MonoBehaviour
         _nomaltalk.gameObject.SetActive(true);
 
         int randCnt = Random.Range(0, 3);
-        _nomaltalk.text = conversations[ui.GetComponent<UIManager>().conversationNPC - 1, randCnt];
+        _nomaltalk.text = conversations[UIManager._uimanagerInstance.GetComponent<UIManager>().conversationNPC - 1, randCnt];
         selectConversationCount++;
     }
 
@@ -379,7 +382,7 @@ public class ConversationPanel : MonoBehaviour
         {
             Debug.Log("선택지 대화");
             int randCnt = Random.Range(0, 3);
-            _nomaltalk.text = conversations[ui.GetComponent<UIManager>().conversationNPC - 1, randCnt];
+            _nomaltalk.text = conversations[UIManager._uimanagerInstance.GetComponent<UIManager>().conversationNPC - 1, randCnt];
             selectConversationCount++;
         }
         else
@@ -421,7 +424,7 @@ public class ConversationPanel : MonoBehaviour
 
         if (_key == -1)
         {
-            _key = ui.conversationNPC;
+            _key = UIManager._uimanagerInstance.conversationNPC;
             _nomaltalk.text = informations[_key - 1, informationCount];
         }
         else
@@ -444,7 +447,7 @@ public class ConversationPanel : MonoBehaviour
         }
         else
         {
-            _key = ui.conversationNPC;
+            _key = UIManager._uimanagerInstance.conversationNPC;
             maxLen = infoLength[_key - 1];
         }
 
@@ -472,7 +475,7 @@ public class ConversationPanel : MonoBehaviour
     // 세계수 정령에게 축복 상호작용 대사창
     public void conversationWhenAlterBuff(int _key)
     {
-        ui.conversationNPC = 10;
+        UIManager._uimanagerInstance.conversationNPC = 10;
         _npcname.text = "세계수의 정령";
         gameObject.SetActive(true);
         if (_key == 0)
@@ -483,19 +486,19 @@ public class ConversationPanel : MonoBehaviour
         }
         else
         {
-            string flowerName = ui.findItem(_key).Name;
+            string flowerName = UIManager._uimanagerInstance.findItem(_key).Name;
             _nomaltalk.text = flowerName + "(이)군요, 정령들과 함께 축복을 해드릴게요-";
             _selectpanel.SetActive(true);
 
             GameObject prayBtn1 = Instantiate(conversationButton, _selectpanel.transform);
             RectTransform prayBtnRect1 = prayBtn1.GetComponent<RectTransform>();
-            prayBtnRect1.SetLocalPositionAndRotation(new Vector3(0, 22, 0), ui.rotateZero);
+            prayBtnRect1.SetLocalPositionAndRotation(new Vector3(0, 22, 0), UIManager._uimanagerInstance.rotateZero);
             prayBtn1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃을 정령에게 건넨다.";
-            prayBtn1.GetComponent<Button>().onClick.AddListener(() => ui.callSpiritBuff(_key));
+            prayBtn1.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.callSpiritBuff(_key));
 
             GameObject prayBtn2 = Instantiate(conversationButton, _selectpanel.transform);
             RectTransform prayBtnRect2 = prayBtn2.GetComponent<RectTransform>();
-            prayBtnRect2.SetLocalPositionAndRotation(new Vector3(0, -11, 0), ui.rotateZero);
+            prayBtnRect2.SetLocalPositionAndRotation(new Vector3(0, -11, 0), UIManager._uimanagerInstance.rotateZero);
             prayBtn2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃을 건네지 않는다.";
             prayBtn2.GetComponent<Button>().onClick.AddListener(resetConversationPanel);
         }
@@ -510,21 +513,21 @@ public class ConversationPanel : MonoBehaviour
         if (nowCode == -1)
         {
             _nomaltalk.text = "이미 정령 제단의 축복이 흐르고 있습니다.\n"
-                    + ui.findItem(newCode).Name + "을(를) 새롭게 제단에 바치고 제사를 지내겠습니까?";
+                    + UIManager._uimanagerInstance.findItem(newCode).Name + "을(를) 새롭게 제단에 바치고 제사를 지내겠습니까?";
         }
         else if (nowCode == 0)
         {
-            flowerName = ui.findItem(newCode).Name;
+            flowerName = UIManager._uimanagerInstance.findItem(newCode).Name;
             _nomaltalk.text = flowerName + "을 제단에 바치고 제사를 지내겠습니까?";
         }
         else
         {
-            _nomaltalk.text = ui.findItem(nowCode).Name + "의 기운이 아르간디움에 흐르고 있습니다.\n"
-                    + ui.findItem(newCode).Name + "을(를) 새롭게 제단에 바치고 제사를 지내겠습니까?";
+            _nomaltalk.text = UIManager._uimanagerInstance.findItem(nowCode).Name + "의 기운이 아르간디움에 흐르고 있습니다.\n"
+                    + UIManager._uimanagerInstance.findItem(newCode).Name + "을(를) 새롭게 제단에 바치고 제사를 지내겠습니까?";
         }
 
         int flowerCnt = 0;
-        switch (ui.getNowPrayDate())
+        switch (UIManager._uimanagerInstance.getNowPrayDate())
         {
             case 0:
             case 1:
@@ -537,14 +540,14 @@ public class ConversationPanel : MonoBehaviour
 
         GameObject prayBtn1 = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform prayBtnRect1 = prayBtn1.GetComponent<RectTransform>();
-        prayBtnRect1.SetLocalPositionAndRotation(new Vector3(0, 11, 0), ui.rotateZero);
+        prayBtnRect1.SetLocalPositionAndRotation(new Vector3(0, 11, 0), UIManager._uimanagerInstance.rotateZero);
         prayBtn1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃을 제단에 바친다.";
-        prayBtn1.GetComponent<Button>().onClick.AddListener(() => ui.callPrayBuff(newCode));
-        prayBtn1.GetComponent<Button>().onClick.AddListener(() => ui.quickUse(newCode, flowerCnt, quickIdx));
+        prayBtn1.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.callPrayBuff(newCode));
+        prayBtn1.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.quickUse(newCode, flowerCnt, quickIdx));
 
         GameObject prayBtn2 = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform prayBtnRect2 = prayBtn2.GetComponent<RectTransform>();
-        prayBtnRect2.SetLocalPositionAndRotation(new Vector3(0, -22, 0), ui.rotateZero);
+        prayBtnRect2.SetLocalPositionAndRotation(new Vector3(0, -22, 0), UIManager._uimanagerInstance.rotateZero);
         prayBtn2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃을 바치지 않고 떠난다.";
         prayBtn2.GetComponent<Button>().onClick.AddListener(resetConversationPanel);
 

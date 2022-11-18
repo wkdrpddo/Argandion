@@ -7,6 +7,14 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
+    // Singleton Patturn
+    public static UIManager _uimanagerInstance;
+    private void Awake()
+    {
+        _uimanagerInstance = this;
+    }
+
+
     // Panel var
     [SerializeField] private GameObject _baseuipanel;
     [SerializeField] private GameObject _mapuipanel;
@@ -78,6 +86,8 @@ public class UIManager : MonoBehaviour
     // private EventManager _eventmanager;
     public FoodManager _foodmanager;
 
+    [SerializeField] private GameObject _teleport;
+
     // Sprite 이미지 저장 Map
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>();
     // Sprite 탐색 해서 저장하는 함수
@@ -113,8 +123,11 @@ public class UIManager : MonoBehaviour
         _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();
         _foodmanager = GameObject.Find("FoodManager").GetComponent<FoodManager>();
         _worldtree = GameObject.Find("WorldTree").GetComponent<WorldTree>();
-        _alterdown = GameObject.Find("teleportDown").GetComponent<TeleportAltar>();
-        _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
+        _teleport = GameObject.Find("Teleport");
+        // _alterdown = GameObject.Find("Teleport").transform.GetChild(0).GetChild(0).GetComponent<TeleportAltar>();
+        // _alterup = GameObject.Find("Teleport").transform.GetChild(1).GetChild(0).GetComponent<TeleportAltar>();
+        // _alterdown = GameObject.Find("teleportDown").GetComponent<TeleportAltar>();
+        // _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
         // _alter = GameObject.Find("Altar").GetComponent<Altar>();
 
 
@@ -129,7 +142,7 @@ public class UIManager : MonoBehaviour
         _foodmanager._eventPanel = _eventpanel.GetComponent<EventPanel>();
 
         _nowequip = GameObject.Find("NowEquip").gameObject;
-        
+
 
         _mapuipanel = GameObject.Find("MapUIPanel");
         _mainpage = gameObject.transform.Find("MainPagePanel").GetComponent<MainPagePanel>();
@@ -294,7 +307,7 @@ public class UIManager : MonoBehaviour
                             _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
                             break;
                         case 1:
-                                Debug.Log("세번째 대화");
+                            Debug.Log("세번째 대화");
                             _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
                             break;
                     }
