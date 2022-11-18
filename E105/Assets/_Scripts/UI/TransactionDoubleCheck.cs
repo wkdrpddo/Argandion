@@ -11,7 +11,7 @@ public class TransactionDoubleCheck : MonoBehaviour
     [SerializeField] private BuyingFisher _fisher;
     [SerializeField] private BuyingHunter _hunter;
     [SerializeField] private BuyingSmith _smith;
-    [SerializeField] private UIManager ui;
+    // [SerializeField] private UIManager ui;
     [SerializeField] private int storeIndex;
     [SerializeField] private int itemIndex;
     [SerializeField] private int itemCode;
@@ -66,7 +66,7 @@ public class TransactionDoubleCheck : MonoBehaviour
                     Debug.LogError("인수관계가 잘못 되었습니다.");
                 }
 
-                ui.syncAnimalPanel(_ranch.getPoint(), _ranch.sheeps, _ranch.chicks, _ranch.cows);
+                UIManager._uimanagerInstance.syncAnimalPanel(_ranch.getPoint(), _ranch.sheeps, _ranch.chicks, _ranch.cows);
                 break;
             case 6:
                 _hunter.Buy(itemIndex, 1);
@@ -77,7 +77,7 @@ public class TransactionDoubleCheck : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         _ranch = GameObject.Find("NPCManager").GetComponent<Ranch>();
         _carpentor = GameObject.Find("NPCManager").GetComponent<BuyingCarpentor>();
         _designer = GameObject.Find("NPCManager").GetComponent<BuyingDesigner>();

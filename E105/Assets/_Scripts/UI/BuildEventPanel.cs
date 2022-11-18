@@ -7,12 +7,12 @@ using System;
 
 public class BuildEventPanel : MonoBehaviour
 {
-   [SerializeField] private UIManager ui;
-   [SerializeField] private Image buildIcon;
-   [SerializeField] private TextMeshProUGUI buildName;
-   [SerializeField] private TextMeshProUGUI flowerName;
-   [SerializeField] private TextMeshProUGUI[] materials = new TextMeshProUGUI[6];
-   [SerializeField] private GameObject _failmodal;
+    //    [SerializeField] private UIManager ui;
+    [SerializeField] private Image buildIcon;
+    [SerializeField] private TextMeshProUGUI buildName;
+    [SerializeField] private TextMeshProUGUI flowerName;
+    [SerializeField] private TextMeshProUGUI[] materials = new TextMeshProUGUI[6];
+    [SerializeField] private GameObject _failmodal;
 
     public bool isOnPanel = false;
 
@@ -49,7 +49,7 @@ public class BuildEventPanel : MonoBehaviour
         isOnPanel = false;
         canBuild = false;
 
-        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         buildIcon = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>();
         buildName = transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
         flowerName = transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>();
@@ -88,8 +88,10 @@ public class BuildEventPanel : MonoBehaviour
 
         if (!checkIsBuild())
         {
-            ui.OnResultNotificationPanel("이미 건설이 진행중인 건물입니다.");
-            ui.runControllPlayer();
+            UIManager._uimanagerInstance.OnResultNotificationPanel("이미 건설이 진행중인 건물입니다.");
+            UIManager._uimanagerInstance.runControllPlayer();
+            // ui.OnResultNotificationPanel("이미 건설이 진행중인 건물입니다.");
+            // ui.runControllPlayer();
         }
         else
         {
@@ -100,19 +102,24 @@ public class BuildEventPanel : MonoBehaviour
         if (gameObject.activeSelf)
         {
             setBuildCondition(value);
-            ui.stopControllKeys();
-            ui.setIsOpenBuildEvent(true);
+            UIManager._uimanagerInstance.stopControllKeys();
+            UIManager._uimanagerInstance.setIsOpenBuildEvent(true);
+            // ui.stopControllKeys();
+            // ui.setIsOpenBuildEvent(true);
         }
         else
         {
-            ui.runControllKeys();
-            ui.setIsOpenBuildEvent(false);
+            UIManager._uimanagerInstance.runControllKeys();
+            UIManager._uimanagerInstance.setIsOpenBuildEvent(false);
+            // ui.runControllKeys();
+            // ui.setIsOpenBuildEvent(false);
         }
     }
 
     private void setting(int _buildKey)
     {
-        slots = ui.getInventorySlots();
+        slots = UIManager._uimanagerInstance.getInventorySlots();
+        // slots = ui.getInventorySlots();
 
         foreach (Slot slot in slots)
         {
@@ -138,9 +145,9 @@ public class BuildEventPanel : MonoBehaviour
         // 꽃 체크
         for (int i = 0; i < 25; i++)
         {
-            if (flowerName.text == ui.findItem(myItems[i]).Name && howItems[i] >= buildCost[step, 1])
+            if (flowerName.text == UIManager._uimanagerInstance.findItem(myItems[i]).Name && howItems[i] >= buildCost[step, 1])
             {
-                usedItem[0] = ui.findItem(myItems[i]);
+                usedItem[0] = UIManager._uimanagerInstance.findItem(myItems[i]);
                 canMake[0] = true;
                 break;
             }
@@ -163,9 +170,9 @@ public class BuildEventPanel : MonoBehaviour
 
             for (int j = 0; j < 25; j++)
             {
-                if (materials[i].text == ui.findItem(myItems[j]).Name && howItems[j] >= buildConditionCount[_buildKey - 1, i + 1])
+                if (materials[i].text == UIManager._uimanagerInstance.findItem(myItems[j]).Name && howItems[j] >= buildConditionCount[_buildKey - 1, i + 1])
                 {
-                    usedItem[i + 1] = ui.findItem(myItems[j]);
+                    usedItem[i + 1] = UIManager._uimanagerInstance.findItem(myItems[j]);
                     canMake[i + 1] = true;
                     materials[i].color = new Color(0, 0, 0);
                     break;
@@ -180,7 +187,7 @@ public class BuildEventPanel : MonoBehaviour
             }
         }
 
-        if (ui.getPlayerGold() < buildCost[step, 0])
+        if (UIManager._uimanagerInstance.getPlayerGold() < buildCost[step, 0])
         {
             gameObject.transform.GetChild(0).GetChild(2).GetChild(8).GetComponent<TextMeshProUGUI>().color = new Color(255, 0, 0);
             return false;
@@ -289,7 +296,8 @@ public class BuildEventPanel : MonoBehaviour
     private void Build()
     {
         // Debug.Log("꽃 소모");
-        ui.acquireItem(usedItem[0], -1 * buildCost[step, 1]);
+        UIManager._uimanagerInstance.acquireItem(usedItem[0], -1 * buildCost[step, 1]);
+        // ui.acquireItem(usedItem[0], -1 * buildCost[step, 1]);
         for (int i = 1; i < 7; i++)
         {
             if (usedItem[i] == null)
@@ -297,10 +305,12 @@ public class BuildEventPanel : MonoBehaviour
                 break;
             }
             // Debug.Log("재료 소모 : " + buildConditionCount[_key - 1, i]);
-            ui.acquireItem(usedItem[i], -1 * buildConditionCount[_key - 1, i]);
+            UIManager._uimanagerInstance.acquireItem(usedItem[i], -1 * buildConditionCount[_key - 1, i]);
+            // ui.acquireItem(usedItem[i], -1 * buildConditionCount[_key - 1, i]);
         }
         // Debug.Log("골드 소모");
-        ui.addPlayerGold(-1 * buildCost[step, 0]);
+        UIManager._uimanagerInstance.addPlayerGold(-1 * buildCost[step, 0]);
+        // ui.addPlayerGold(-1 * buildCost[step, 0]);
         step++;
     }
 

@@ -25,7 +25,7 @@ public class TransactionPanel : MonoBehaviour
     public GameObject storeItemCard;
 
     [SerializeField] private GameObject ScrollContent;
-    [SerializeField] private UIManager ui;
+    // [SerializeField] private UIManager ui;
     [SerializeField] private Item _itemmanager;
 
     private string jsonStringBase;
@@ -40,23 +40,23 @@ public class TransactionPanel : MonoBehaviour
         jsonStringBase = Application.dataPath + "/Data/Json";
         _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();
         ScrollContent = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).gameObject;
-        ui = gameObject.GetComponentInParent<UIManager>();
+        // ui = gameObject.GetComponentInParent<UIManager>();
     }
 
     public void handelPanel(int value)
     {
         gameObject.SetActive(!gameObject.activeSelf);
-        ui.setIsOpenTransaction(gameObject.activeSelf);
-        ui.OnInventory(2);
+        UIManager._uimanagerInstance.setIsOpenTransaction(gameObject.activeSelf);
+        UIManager._uimanagerInstance.OnInventory(2);
         if (gameObject.activeSelf)
         {
-            ui.stopControllKeys();
+            UIManager._uimanagerInstance.stopControllKeys();
             setBuyPanelList(value);
         }
         else
         {
-            ui.runControllKeys();
-            ui.conversationNPC = 0;
+            UIManager._uimanagerInstance.runControllKeys();
+            UIManager._uimanagerInstance.conversationNPC = 0;
         }
     }
 
@@ -111,7 +111,7 @@ public class TransactionPanel : MonoBehaviour
 
             GameObject productBtn = Instantiate(storeItemCard, ScrollContent.transform);
 
-            productBtn.transform.GetChild(0).GetComponent<Image>().sprite = ui.getItemIcon(itemObject.ItemCode);
+            productBtn.transform.GetChild(0).GetComponent<Image>().sprite = UIManager._uimanagerInstance.getItemIcon(itemObject.ItemCode);
             productBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemObject.Name;
             productBtn.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = buyingObject.Cost.ToString();
             productBtn.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = itemObject.Desc;
@@ -125,11 +125,11 @@ public class TransactionPanel : MonoBehaviour
             if (pos == -1)
             {
                 // Debug.Log("name : " + itemObject.Name + " | itemCode : " + itemObject.ItemCode);
-                productBtn.GetComponent<Button>().onClick.AddListener(() => ui.OnTransactionDoubleCheckPanel(name, value, itemIdx, itemCode));
+                productBtn.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.OnTransactionDoubleCheckPanel(name, value, itemIdx, itemCode));
             }
             else
             {
-                productBtn.GetComponent<Button>().onClick.AddListener(() => ui.OnTradeModal(name, itemCode.ToString(), 99, buyCost, 1, value, itemIdx));
+                productBtn.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.OnTradeModal(name, itemCode.ToString(), 99, buyCost, 1, value, itemIdx));
             }
         }
     }

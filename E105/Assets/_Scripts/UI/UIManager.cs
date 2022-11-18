@@ -7,6 +7,14 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
+    // Singleton Patturn
+    public static UIManager _uimanagerInstance;
+    private void Awake()
+    {
+        _uimanagerInstance = this;
+    }
+
+
     // Panel var
     [SerializeField] private GameObject _baseuipanel;
     [SerializeField] private GameObject _mapuipanel;
@@ -78,6 +86,8 @@ public class UIManager : MonoBehaviour
     // private EventManager _eventmanager;
     public FoodManager _foodmanager;
 
+    [SerializeField] private GameObject _teleport;
+
     // Sprite 이미지 저장 Map
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>();
     // Sprite 탐색 해서 저장하는 함수
@@ -113,12 +123,12 @@ public class UIManager : MonoBehaviour
         _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();
         _foodmanager = GameObject.Find("FoodManager").GetComponent<FoodManager>();
         _worldtree = GameObject.Find("WorldTree").GetComponent<WorldTree>();
+        _teleport = GameObject.Find("Teleport");
         _alterdown = GameObject.Find("teleportDown").GetComponent<TeleportAltar>();
         GameObject.Find("Down").SetActive(false);
         _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
         GameObject.Find("Up").SetActive(false);
         _alter = GameObject.Find("Altar").GetComponent<Altar>();
-
 
         _systemmanager.setPlayerGold(9999999);
 
@@ -1078,7 +1088,8 @@ public class UIManager : MonoBehaviour
         _alter.goPray(_flower);
     }
 
-    public void resetPrayBuffFx(){
+    public void resetPrayBuffFx()
+    {
         _alter.buffEnd();
     }
 

@@ -16,7 +16,7 @@ public class combFoodEffectObject
 
 public class CookingPanel : MonoBehaviour
 {
-    [SerializeField] private UIManager ui;
+    // [SerializeField] private UIManager ui;
     public CookingInteraction _cookingInteraction;
 
     public GameObject RecipeCard;
@@ -34,7 +34,7 @@ public class CookingPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ui = gameObject.GetComponentInParent<UIManager>();
+        // ui = gameObject.GetComponentInParent<UIManager>();
         DishContent = transform.GetChild(1).GetChild(1).GetChild(0).GetChild(0).gameObject;
         RecipeContent = transform.GetChild(2).GetChild(1).GetChild(0).GetChild(0).gameObject;
     }
@@ -45,16 +45,16 @@ public class CookingPanel : MonoBehaviour
 
         if (gameObject.activeSelf)
         {
-            ui.stopControllKeys();
-            ui.setIsOpenCook(true);
+            UIManager._uimanagerInstance.stopControllKeys();
+            UIManager._uimanagerInstance.setIsOpenCook(true);
             _cookingInteraction.CookingStart();
             setDishList();
             gameObject.transform.GetChild(0).GetComponent<Button>().interactable = false;
         }
         else
         {
-            ui.runControllKeys();
-            ui.setIsOpenCook(false);
+            UIManager._uimanagerInstance.runControllKeys();
+            UIManager._uimanagerInstance.setIsOpenCook(false);
             gameObject.transform.GetChild(0).GetComponent<Button>().interactable = true;
             _cookingInteraction.CookingEnd();
         }
@@ -63,13 +63,13 @@ public class CookingPanel : MonoBehaviour
     public void onClickCooking()
     {
         Debug.LogWarning("========== 요리하기 클릭 ============");
-        ui.runCookingAnimation();
+        UIManager._uimanagerInstance.runCookingAnimation();
         Invoke("completeCooking", 7f);
 
         Debug.LogWarning("========== after animation call ============");
         bool isContainInventory;
-        ItemObject craftItem = ui.findItem(itemData[index].Result);
-        isContainInventory = ui.checkInventory(craftItem, 1);
+        ItemObject craftItem = UIManager._uimanagerInstance.findItem(itemData[index].Result);
+        isContainInventory = UIManager._uimanagerInstance.checkInventory(craftItem, 1);
 
         if (isContainInventory)
         {
@@ -77,7 +77,7 @@ public class CookingPanel : MonoBehaviour
         }
         else
         {
-            ui.OnResultNotificationPanel("인벤토리에 빈 공간이 없습니다.");
+            UIManager._uimanagerInstance.OnResultNotificationPanel("인벤토리에 빈 공간이 없습니다.");
         }
 
         gameObject.transform.GetChild(0).GetComponent<Button>().interactable = false;
@@ -87,7 +87,7 @@ public class CookingPanel : MonoBehaviour
 
     public void completeCooking()
     {
-        gameObject.transform.GetChild(3).GetComponent<Image>().sprite = ui.getItemIcon(itemData[index].Result);
+        gameObject.transform.GetChild(3).GetComponent<Image>().sprite = UIManager._uimanagerInstance.getItemIcon(itemData[index].Result);
         gameObject.transform.GetChild(3).gameObject.SetActive(true);
         Invoke("endShowFoodIcon", 1.5f);
     }
@@ -111,11 +111,11 @@ public class CookingPanel : MonoBehaviour
         for (int i = 0; i < itemData.Length; i++)
         {
             combObject combObj = itemData[i];
-            ItemObject itemObj = ui.findItem(combObj.Result);
+            ItemObject itemObj = UIManager._uimanagerInstance.findItem(combObj.Result);
 
             GameObject dishBtn = Instantiate(RecipeCard, DishContent.transform);
 
-            dishBtn.transform.GetChild(0).GetComponent<Image>().sprite = ui.getItemIcon(itemObj.ItemCode);
+            dishBtn.transform.GetChild(0).GetComponent<Image>().sprite = UIManager._uimanagerInstance.getItemIcon(itemObj.ItemCode);
             dishBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemObj.Name;
             dishBtn.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = itemObj.Desc;
 
@@ -199,9 +199,9 @@ public class CookingPanel : MonoBehaviour
     private void createRecipeCard(int material, int count)
     {
         GameObject metarialCard = Instantiate(RecipeText, RecipeContent.transform);
-        ItemObject itemObj = ui.findItem(material);
+        ItemObject itemObj = UIManager._uimanagerInstance.findItem(material);
 
-        metarialCard.transform.GetChild(0).GetComponent<Image>().sprite = ui.getItemIcon(material);
+        metarialCard.transform.GetChild(0).GetComponent<Image>().sprite = UIManager._uimanagerInstance.getItemIcon(material);
         metarialCard.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemObj.Name + "  " + count;
     }
 

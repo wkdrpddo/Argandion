@@ -6,16 +6,16 @@ using UnityEngine.UI;
 
 public class MainPagePanel : MonoBehaviour
 {
-    [SerializeField] private UIManager ui;
+    // [SerializeField] private UIManager ui;
 
     void Start()
     {
-        ui = this.GetComponentInParent<UIManager>();
+        // ui = this.GetComponentInParent<UIManager>();
     }
 
     public void gameStart()
     {
         gameObject.SetActive(false);
-        ui.OnCreateCharacter();
+        UIManager._uimanagerInstance.OnCreateCharacter();
     }
 }

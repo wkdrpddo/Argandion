@@ -26,7 +26,7 @@ public class TradeModal : MonoBehaviour
 
     [SerializeField] private GameObject _npcmanager;
     [SerializeField] private Ranch _ranch;
-    [SerializeField] private UIManager ui;
+    // [SerializeField] private UIManager ui;
     [SerializeField] private int tradeMod;
     [SerializeField] private int tradeCost;
     [SerializeField] private string iconName;
@@ -40,7 +40,7 @@ public class TradeModal : MonoBehaviour
         int pos = Array.IndexOf(iconNameInString, iconName);
         if (pos == -1)
         {
-            transform.GetChild(1).GetComponent<Image>().sprite = ui.getItemIcon(int.Parse(iconName));
+            transform.GetChild(1).GetComponent<Image>().sprite = UIManager._uimanagerInstance.getItemIcon(int.Parse(iconName));
         }
         else
         {
@@ -51,7 +51,7 @@ public class TradeModal : MonoBehaviour
         gameObject.GetComponentInChildren<Slider>().value = 0;
         if (checkMod == 1)
         {
-            int howmany = ui.getPlayerGold() / cost;
+            int howmany = UIManager._uimanagerInstance.getPlayerGold() / cost;
             if (howmany > 99)
             {
                 howmany = 99;
@@ -105,31 +105,31 @@ public class TradeModal : MonoBehaviour
             switch (storeIndex)
             {
                 case 1:
-                    ui.getCraftPanel().GetComponent<CombDesigner>().Trade(itemIndex, tradeCount);
+                    UIManager._uimanagerInstance.getCraftPanel().GetComponent<CombDesigner>().Trade(itemIndex, tradeCount);
                     break;
                 case 2:
-                    ui.getCraftPanel().GetComponent<CombCarpentor>().Trade(itemIndex, tradeCount);
+                    UIManager._uimanagerInstance.getCraftPanel().GetComponent<CombCarpentor>().Trade(itemIndex, tradeCount);
                     break;
                 case 4:
-                    ui.getCraftPanel().GetComponent<CombSmith>().Trade(itemIndex, tradeCount);
+                    UIManager._uimanagerInstance.getCraftPanel().GetComponent<CombSmith>().Trade(itemIndex, tradeCount);
                     break;
                 case 6:
-                    ui.getCraftPanel().GetComponent<CombHunter>().Trade(itemIndex, tradeCount);
+                    UIManager._uimanagerInstance.getCraftPanel().GetComponent<CombHunter>().Trade(itemIndex, tradeCount);
                     break;
             }
-            ui.OnResultNotificationPanel("제작이 완료되었습니다.");
+            UIManager._uimanagerInstance.OnResultNotificationPanel("제작이 완료되었습니다.");
         }
         else if (tradeMod == 3)
         {
             Debug.Log("Item Code : " + iconName);
-            ui.addToStorage(ui.findItem(Int32.Parse(iconName)), tradeCount, itemIndex);
+            UIManager._uimanagerInstance.addToStorage(UIManager._uimanagerInstance.findItem(Int32.Parse(iconName)), tradeCount, itemIndex);
         }
         else if (tradeMod == 4)
         {
-            ui.removeToStorage(ui.findItem(Int32.Parse(iconName)), tradeCount, itemIndex);
+            UIManager._uimanagerInstance.removeToStorage(UIManager._uimanagerInstance.findItem(Int32.Parse(iconName)), tradeCount, itemIndex);
         }
 
-        ui.getCraftPanel().syncCanMakeList();
+        UIManager._uimanagerInstance.getCraftPanel().syncCanMakeList();
         closeModal();
     }
 
@@ -153,23 +153,23 @@ public class TradeModal : MonoBehaviour
                     Debug.LogError("인수 관계가 잘못되었습니다");
                     break;
             }
-            ui.syncAnimalPanel(_ranch.getPoint(), _ranch.sheeps, _ranch.chicks, _ranch.cows);
+            UIManager._uimanagerInstance.syncAnimalPanel(_ranch.getPoint(), _ranch.sheeps, _ranch.chicks, _ranch.cows);
             closeModal();
         }
         else if (storeIndex == 2)
         {
             if (tradeCnt != 0)
             {
-                ui.sellItem(itemIndex, tradeCnt, 2);
-                ui.addPlayerGold((tradeCost * tradeCnt));
+                UIManager._uimanagerInstance.sellItem(itemIndex, tradeCnt, 2);
+                UIManager._uimanagerInstance.addPlayerGold((tradeCost * tradeCnt));
             }
         }
         else
         {
             if (tradeCnt != 0)
             {
-                ui.sellItem(itemIndex, tradeCnt, 1);
-                ui.addPlayerGold((tradeCost * tradeCnt));
+                UIManager._uimanagerInstance.sellItem(itemIndex, tradeCnt, 1);
+                UIManager._uimanagerInstance.addPlayerGold((tradeCost * tradeCnt));
             }
         }
     }
@@ -206,7 +206,7 @@ public class TradeModal : MonoBehaviour
     void Start()
     {
         _ranch = GameObject.Find("NPCManager").GetComponent<Ranch>();
-        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         _npcmanager = GameObject.Find("NPCManager").gameObject;
     }
 

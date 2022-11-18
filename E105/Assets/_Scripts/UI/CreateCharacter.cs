@@ -6,7 +6,7 @@ using TMPro;
 
 public class CreateCharacter : MonoBehaviour
 {
-    [SerializeField] private UIManager ui;
+    // [SerializeField] private UIManager ui;
     [SerializeField] private Image manImg;
     [SerializeField] private Image womanImg;
     public Sprite unselectedMan;
@@ -44,24 +44,24 @@ public class CreateCharacter : MonoBehaviour
 
         if (_name == "")
         {
-            ui.OnResultNotificationPanel("이름은 공백일 수 없습니다-");
+            UIManager._uimanagerInstance.OnResultNotificationPanel("이름은 공백일 수 없습니다-");
         }
         else
         {
-            ui.OnBaseUIPanel();
-            ui.selectPlayer();
-            ui.setPlayerName(_name);
-            ui.setGameState(true);
+            UIManager._uimanagerInstance.OnBaseUIPanel();
+            UIManager._uimanagerInstance.selectPlayer();
+            UIManager._uimanagerInstance.setPlayerName(_name);
+            UIManager._uimanagerInstance.setGameState(true);
 
             gameObject.SetActive(false);
 
-            ui.delayRunControllKeys();
+            UIManager._uimanagerInstance.delayRunControllKeys();
         }
     }
     // Start is called before the first frame update
     void Start()
     {
-        ui = gameObject.GetComponentInParent<UIManager>();
+        // ui = gameObject.GetComponentInParent<UIManager>();
         manImg = transform.GetChild(5).GetChild(0).GetComponent<Image>();
         womanImg = transform.GetChild(6).GetChild(0).GetComponent<Image>();
 

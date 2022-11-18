@@ -6,15 +6,18 @@ using UnityEngine.UI;
 public class OptionPanel : MonoBehaviour
 {
     [SerializeField] private SoundManager _soundmanager;
-    [SerializeField] private UIManager ui;
+    // [SerializeField] private UIManager ui;
     [SerializeField] private Slider background;
     [SerializeField] private Slider effect;
-
 
     void Start()
     {
         _soundmanager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+    }
+
+    void Awake()
+    {
+        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
 
         background = gameObject.transform.GetChild(0).GetComponent<Slider>();
         effect = gameObject.transform.GetChild(1).GetComponent<Slider>();
@@ -28,11 +31,11 @@ public class OptionPanel : MonoBehaviour
         {
             background.value = _soundmanager.getBackgroundSound();
             effect.value = _soundmanager.getEffectSound();
-            ui.isPressESC = true;
+            UIManager._uimanagerInstance.isPressESC = true;
         }
         else
         {
-            ui.isPressESC = false;
+            UIManager._uimanagerInstance.isPressESC = false;
         }
     }
 }
