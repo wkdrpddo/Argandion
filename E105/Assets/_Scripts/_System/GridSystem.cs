@@ -55,16 +55,13 @@ public class GridSystem : MonoBehaviour
 
     private void Spawn_Tree()
     {
-        Debug.Log("나무가 생성됨!");
         Vector3 pos = new Vector3(_base_transform.position.x+Random.Range(-5f,5f),_base_transform.position.y+0.5f,_base_transform.position.z+Random.Range(-5f,5f));
         int cnt = 0;
         while (cnt < 24 && _Sector._tree_remain < (_purified ? _Sector._tree_max : _Sector._tree_max * _Sector._tree_ruin_max_factor))
         {
             _buffer = Physics.OverlapBox(center:pos,halfExtents:new Vector3(0.5f,0.5f,0.5f),new Quaternion(),layerMask:1<<7);
-                // Debug.Log(_buffer.Length);
                 if (_buffer.Length==0)
                 {
-                    // 여기 큰일났어요 싯발
                     int treenum = Random.Range(0,1);
                     GameObject tr = Instantiate(_trees[treenum],pos,new Quaternion(),gameObject.transform.parent.transform.parent.transform);
                     _Sector._tree_remain += 1;
@@ -105,7 +102,6 @@ public class GridSystem : MonoBehaviour
     private void Spawn_Branch(int count)
     {
         Quaternion qua = Quaternion.Euler(Random.Range(0f,360f),Random.Range(0f,360f),Random.Range(0f,360f));
-        Debug.Log("나뭇가지 생성됨!");
         while (count>0)
         {
             Vector3 pos = new Vector3(_base_transform.position.x+Random.Range(-5f,5f),_base_transform.position.y+0.5f,_base_transform.position.z+Random.Range(-5f,5f));
@@ -113,7 +109,6 @@ public class GridSystem : MonoBehaviour
             while (cnt < 24)
             {
                 _buffer = Physics.OverlapBox(center:pos,halfExtents:new Vector3(0.5f,0.5f,0.5f),new Quaternion(),layerMask:641);
-                // Debug.Log(_buffer.Length);
                 if (_buffer.Length==0)
                 {
                     Instantiate(_branch,pos,qua,_Sector._items.transform);
@@ -157,7 +152,6 @@ public class GridSystem : MonoBehaviour
 
     private void Spawn_Stone(int count)
     {
-        Debug.Log("돌맹이 생성됨!");
         while (count>0)
         {
             Vector3 pos = new Vector3(_base_transform.position.x+Random.Range(-5f,5f),_base_transform.position.y+0.5f,_base_transform.position.z+Random.Range(-5f,5f));
@@ -165,7 +159,6 @@ public class GridSystem : MonoBehaviour
             while (cnt < 24)
             {
                 _buffer = Physics.OverlapBox(center:pos,halfExtents:new Vector3(0.5f,0.5f,0.5f),new Quaternion(),layerMask:641);
-                // Debug.Log(_buffer.Length);
                 if (_buffer.Length==0)
                 {
                     Instantiate(_stone,pos,new Quaternion(),_Sector._items.transform);
@@ -212,7 +205,6 @@ public class GridSystem : MonoBehaviour
             while (cnt < 24)
             {
                 _buffer = Physics.OverlapBox(pos,new Vector3(0.5f,0.5f,0.5f));
-                // Debug.Log(_buffer.Length);
                 if (_buffer.Length==0)
                 {
                     int rnd = Random.Range(0,_Sector._ore_type_factor[2]);
