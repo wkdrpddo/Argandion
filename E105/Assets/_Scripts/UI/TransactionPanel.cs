@@ -35,7 +35,7 @@ public class TransactionPanel : MonoBehaviour
     public buyingObject buyingObject;
     public ItemObject itemObject;
 
-    void Start()
+    void Awake()
     {
         jsonStringBase = Application.dataPath + "/Data/Json";
         _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();

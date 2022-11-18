@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
 
     public Slot[] slots;  // 슬롯들 배열
 
-    void Start()
+    void Awake()
     {
         go_InventoryBase = transform.GetChild(0).gameObject;
         go_SlotsParent = go_InventoryBase.transform.GetChild(0).gameObject;

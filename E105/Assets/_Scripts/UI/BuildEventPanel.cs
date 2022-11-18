@@ -44,7 +44,7 @@ public class BuildEventPanel : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         isOnPanel = false;
         canBuild = false;
@@ -67,6 +67,11 @@ public class BuildEventPanel : MonoBehaviour
 
         usedItem = new ItemObject[7];
 
+        step = 0;
+
+        gameObject.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => handelPanel(-1));
+        gameObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => handelPanel(-1));
+
         // 건물 시작 데이터 가져오기
         anglerHouse = GameObject.Find("AnglerHousePlace").GetComponent<BuildingChange>();
         barn = GameObject.Find("BarnPlace").GetComponent<BuildingChange>();
@@ -75,11 +80,11 @@ public class BuildEventPanel : MonoBehaviour
         clothShop = GameObject.Find("ClothshopPlace").GetComponent<BuildingChange>();
         hunterHouse = GameObject.Find("HunterHousePlace").GetComponent<BuildingChange>();
         workShop = GameObject.Find("WorkshopPlace").GetComponent<BuildingChange>();
+    }
 
-        step = 0;
+    void Start()
+    {
 
-        gameObject.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => handelPanel(-1));
-        gameObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => handelPanel(-1));
     }
 
     public void handelPanel(int value)

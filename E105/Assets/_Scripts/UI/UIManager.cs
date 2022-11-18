@@ -123,12 +123,13 @@ public class UIManager : MonoBehaviour
         _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();
         _foodmanager = GameObject.Find("FoodManager").GetComponent<FoodManager>();
         _worldtree = GameObject.Find("WorldTree").GetComponent<WorldTree>();
+
         _teleport = GameObject.Find("Teleport");
         _alterdown = GameObject.Find("teleportDown").GetComponent<TeleportAltar>();
         GameObject.Find("Down").SetActive(false);
         _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
         GameObject.Find("Up").SetActive(false);
-        _alter = GameObject.Find("Altar").GetComponent<Altar>();
+        // _alter = GameObject.Find("Altar").GetComponent<Altar>();
 
         _systemmanager.setPlayerGold(9999999);
 
@@ -141,7 +142,6 @@ public class UIManager : MonoBehaviour
         _foodmanager._eventPanel = _eventpanel.GetComponent<EventPanel>();
 
         _nowequip = GameObject.Find("NowEquip").gameObject;
-
 
         _mapuipanel = GameObject.Find("MapUIPanel");
         _mainpage = gameObject.transform.Find("MainPagePanel").GetComponent<MainPagePanel>();
@@ -186,10 +186,15 @@ public class UIManager : MonoBehaviour
         _trademodal.gameObject.SetActive(false);
         _inventory.gameObject.SetActive(false);
         _eventAnnounce.SetActive(false);
+
         // 테스트 꽃
-        ItemObject item1 = findItem(318);
-        acquireItem(item1, 1);
-        ItemObject item2 = findItem(212);
+        // ItemObject item1 = findItem(318);
+        // acquireItem(item1, 1);
+        // ItemObject item2 = findItem(212);
+        // acquireItem(item2, 10);
+        ItemObject item1 = findItem(50);
+        acquireItem(item1, 10);
+        ItemObject item2 = findItem(51);
         acquireItem(item2, 10);
         ItemObject item3 = findItem(52);
         acquireItem(item3, 10);
@@ -224,29 +229,29 @@ public class UIManager : MonoBehaviour
         ItemObject item16 = findItem(14);
         acquireItem(item16, 5);
 
-        // ItemObject item17 = findItem(20);
-        // acquireItem(item17, 40);
-        // ItemObject item18 = findItem(21);
-        // acquireItem(item18, 15);
-        // ItemObject item19 = findItem(22);
-        // acquireItem(item19, 35);
+        ItemObject item17 = findItem(20);
+        acquireItem(item17, 40);
+        ItemObject item18 = findItem(21);
+        acquireItem(item18, 15);
+        ItemObject item19 = findItem(22);
+        acquireItem(item19, 35);
 
-        // ItemObject item20 = findItem(104);
-        // acquireItem(item20, 20);
-        // ItemObject item21 = findItem(112);
-        // acquireItem(item21, 25);
-        // ItemObject item22 = findItem(505);
-        // acquireItem(item22, 60);
+        ItemObject item20 = findItem(104);
+        acquireItem(item20, 20);
+        ItemObject item21 = findItem(112);
+        acquireItem(item21, 25);
+        ItemObject item22 = findItem(505);
+        acquireItem(item22, 60);
 
         //검 테스트
-        ItemObject item304 = findItem(304);
-        acquireItem(item304, 1);
-        ItemObject item309 = findItem(309);
-        acquireItem(item309, 1);
-        ItemObject item314 = findItem(314);
-        acquireItem(item314, 1);
-        ItemObject item319 = findItem(319);
-        acquireItem(item319, 1);
+        // ItemObject item304 = findItem(304);
+        // acquireItem(item304, 1);
+        // ItemObject item309 = findItem(309);
+        // acquireItem(item309, 1);
+        // ItemObject item314 = findItem(314);
+        // acquireItem(item314, 1);
+        // ItemObject item319 = findItem(319);
+        // acquireItem(item319, 1);
 
 
         _systemmanager.setPlayerGold(9999999);
@@ -404,15 +409,7 @@ public class UIManager : MonoBehaviour
 
     public void OnNotificationPanel()
     {
-        _notificationpanel.SetActive(!_notificationpanel.activeSelf);
-        if (_notificationpanel.activeSelf)
-        {
-            stopControllKeys();
-        }
-        else
-        {
-            runControllKeys();
-        }
+        _notificationpanel.GetComponent<NotificationPanel>().handleNoti();
     }
 
     public void OnResultNotificationPanel(string text)

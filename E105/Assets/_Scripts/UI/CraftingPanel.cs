@@ -37,7 +37,7 @@ public class CraftingPanel : MonoBehaviour
     [SerializeField] private int storeIdx;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // ui = gameObject.GetComponentInParent<UIManager>();
         _scrollcontent = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).gameObject;

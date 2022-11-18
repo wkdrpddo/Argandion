@@ -16118,6 +16118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1053557173409114135, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1053557173409114219, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -17414,6 +17418,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3793579148429802521, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1624711147}
+    - target: {fileID: 3793579148429802521, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: setEffectSound
+      objectReference: {fileID: 0}
     - target: {fileID: 3793579148558472249, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -17421,6 +17433,14 @@ PrefabInstance:
     - target: {fileID: 3793579148558472249, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3793579148918527607, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1624711147}
+    - target: {fileID: 3793579148918527607, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: setBackgroundSound
       objectReference: {fileID: 0}
     - target: {fileID: 3879939215763261982, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
       propertyPath: m_AnchorMax.y
@@ -18294,6 +18314,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6170088112297784618, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1624711147}
+    - target: {fileID: 6170088112297784618, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: setEffectSound
+      objectReference: {fileID: 0}
     - target: {fileID: 6170088112449857570, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -18326,6 +18354,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6170088114044045568, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1624711147}
+    - target: {fileID: 6170088114044045568, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: setBackgroundSound
+      objectReference: {fileID: 0}
     - target: {fileID: 6224356946232524341, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -18685,6 +18721,14 @@ PrefabInstance:
     - target: {fileID: 6901002490270870363, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985664323965777409, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+      propertyPath: effect
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985664323965777409, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+      propertyPath: background
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6988397739265873834, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
       propertyPath: m_AnchorMax.y
@@ -19568,6 +19612,67 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+--- !u!1001 &1315597421
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400491041518785893, guid: 93290c34d80ed3643ae593fa6262458f, type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 400491041518785893, guid: 93290c34d80ed3643ae593fa6262458f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 290.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 400491041518785893, guid: 93290c34d80ed3643ae593fa6262458f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400491041518785893, guid: 93290c34d80ed3643ae593fa6262458f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 13.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 400491041518785893, guid: 93290c34d80ed3643ae593fa6262458f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400491041518785893, guid: 93290c34d80ed3643ae593fa6262458f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400491041518785893, guid: 93290c34d80ed3643ae593fa6262458f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400491041518785893, guid: 93290c34d80ed3643ae593fa6262458f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400491041518785893, guid: 93290c34d80ed3643ae593fa6262458f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400491041518785893, guid: 93290c34d80ed3643ae593fa6262458f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400491041518785893, guid: 93290c34d80ed3643ae593fa6262458f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782094733393798850, guid: 93290c34d80ed3643ae593fa6262458f, type: 3}
+      propertyPath: m_Name
+      value: AltarSet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363495850000024472, guid: 93290c34d80ed3643ae593fa6262458f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.19
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 93290c34d80ed3643ae593fa6262458f, type: 3}
 --- !u!114 &1331221852 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6596494007708812032, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
@@ -20103,6 +20208,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c735040d4f0cbae448b90ffa6635a2b6, type: 3}
+--- !u!114 &1624711147 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7667013243401349127, guid: 68a0da38e33a9d64d8976620d524acae, type: 3}
+  m_PrefabInstance: {fileID: 1508999032}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc4f52660a794d448bb75e1abe2d6686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1642420942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20662,7 +20778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7886377701547957252, guid: 7dd69e4d7d7e67944a288d608e8a54b2, type: 3}
       propertyPath: _hour_time_changemeter
-      value: 1000
+      value: 20000
       objectReference: {fileID: 0}
     - target: {fileID: 7886377701547957252, guid: 7dd69e4d7d7e67944a288d608e8a54b2, type: 3}
       propertyPath: _randomNPC.Array.data[0]
