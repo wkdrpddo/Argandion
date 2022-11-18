@@ -2699,6 +2699,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4877257342472200172, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1275682485}
+    - target: {fileID: 4877257342472200172, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: handleNoti
+      objectReference: {fileID: 0}
+    - target: {fileID: 4877257342472200172, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NotificationPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4900736614093145460, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -11530,6 +11542,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce3d18a9b9987f54d9b23fde5800e105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1275682485 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1592429721926999088, guid: cd904f60b76e81a47a54daf47f8f3e50, type: 3}
+  m_PrefabInstance: {fileID: 813703762}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36e7a5045a2bde4f80d33f0ac709b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1277718406
