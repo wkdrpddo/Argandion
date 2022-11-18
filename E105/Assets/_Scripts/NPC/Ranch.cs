@@ -178,10 +178,6 @@ public class Ranch : MonoBehaviour
             point = tempPoint;
         }
 
-        // 목장 중앙에서 랜덤 offset 으로 소 생성
-        // Instantiate(cowPrefab, new Vector3(0, 2, 0), Quaternion.identity);
-        // 얘를 관리해야 함.. 어떻게?
-        // 배열을 두기
     }
 
     public void BuyChick()
@@ -296,7 +292,7 @@ public class Ranch : MonoBehaviour
         Vector3 point = new Vector3();
         while (true)
         {
-            // 목장 내 구역 y 값 2로 고정 후 사용
+            // 목장 내 구역 y 값 0로 고정 후 사용
             point = new Vector3(Random.Range(210, 275), 0, Random.Range(150, 190));
             if (isValid(point))
                 return point;
@@ -306,7 +302,7 @@ public class Ranch : MonoBehaviour
     bool isValid(Vector3 point)
     {
         // 재단사 집 범위에 해당하는 경우
-        if (point.x < 224 && point.z >= 150)
+        if (point.x < 226 && point.z >= 152)
             return false;
         return true;
     }
