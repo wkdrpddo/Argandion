@@ -33,7 +33,7 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
-
+        Sound_Background = 0.2f;
         playBGM1();
     }
     public void playBGM1()  //정화
