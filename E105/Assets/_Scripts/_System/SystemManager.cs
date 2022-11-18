@@ -69,8 +69,7 @@ public class SystemManager : MonoBehaviour
         _farmChange = GameObject.Find("Map").transform.GetChild(4).transform.GetChild(0).transform.GetChild(2).GetComponent<FarmChange>();
         // _buiding1 = GameObject.Find("ClothshopPlace").GetComponent<BuildingChange>();
         _altar = GameObject.Find("Altar").GetComponent<Altar>();
-
-
+        _MapObject.GetComponent<MapObject>().UpdateFieldManager(_season);
     }
 
     // Update is called once per frame
