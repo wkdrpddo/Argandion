@@ -85,7 +85,7 @@ public class TeleportAltar : MonoBehaviour
         Debug.Log(_teleportUp.transform.position.y);
         _playerSystem.transform.position = new Vector3(_teleportUp.transform.position.x, _teleportUp.transform.position.y, _teleportUp.transform.position.z);
         // 사운드
-        // _soundManager.playBGM4();
+        _soundManager.playBGM4();
         // fx 되돌리기
         yield return new WaitForSeconds(1.3f);
         _playerSystem._canMove = true;
@@ -104,11 +104,11 @@ public class TeleportAltar : MonoBehaviour
         Debug.Log(_teleportDown.transform.position.y);
         _playerSystem.transform.position = new Vector3(_teleportDown.transform.position.x, _teleportDown.transform.position.y, _teleportDown.transform.position.z);
         // 사운드
-        // if(_sector8._purifier){
-        //     _soundManager.playBGM1();
-        // }else{
-        //     _soundManager.playBGM2();
-        // }
+        if(_sector8._purifier){
+            _soundManager.playBGM1();
+        }else{
+            _soundManager.playBGM2();
+        }
         // fx 되돌리기
         yield return new WaitForSeconds(1.3f);
         _playerSystem._canMove = true;

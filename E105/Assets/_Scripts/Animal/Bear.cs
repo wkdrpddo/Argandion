@@ -192,7 +192,7 @@ public class Bear : MonoBehaviour
         if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out _hit, 3, targetMask))
         {
             Debug.Log("플레이어 적중!");
-            _playerSystem.changeHealth(10);
+            _playerSystem.changeHealth(30);
 
         }
         else

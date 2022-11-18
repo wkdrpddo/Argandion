@@ -90,7 +90,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
         if (itemCount <= 0)
         {
-            Debug.Log("ClearSlot");
+            // Debug.Log("ClearSlot");
             ClearSlot();
 
         }

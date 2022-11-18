@@ -39,7 +39,7 @@ public class Wolf : MonoBehaviour
     [SerializeField] private BoxCollider boxCol;
     private NavMeshAgent nav;
     [SerializeField] private Transform playerPos;
-
+    [SerializeField] private PlayerSystem _playerSystem;
 
     //Item
     [SerializeField] private GameObject item20;  //동물의 가죽
@@ -52,6 +52,7 @@ public class Wolf : MonoBehaviour
     {
         nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
         playerPos = GameObject.Find("PlayerObject").transform;
+        _playerSystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
         currentTime = waitTime;
         isAction = true;
     }
@@ -206,6 +207,8 @@ public class Wolf : MonoBehaviour
         if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out _hit, 3, targetMask))
         {
             Debug.Log("플레이어 적중!");
+            _playerSystem.changeHealth(5);
+
         }
         else
         {

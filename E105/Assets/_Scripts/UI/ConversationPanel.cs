@@ -507,6 +507,7 @@ public class ConversationPanel : MonoBehaviour
     // 제단 제사 선택
     public void selectWhenAlterPray(int nowCode, int newCode, int quickIdx)
     {
+        Debug.Log("selectWhenAlterPray 콜");
         gameObject.SetActive(true);
 
         string flowerName = "";
@@ -542,8 +543,14 @@ public class ConversationPanel : MonoBehaviour
         RectTransform prayBtnRect1 = prayBtn1.GetComponent<RectTransform>();
         prayBtnRect1.SetLocalPositionAndRotation(new Vector3(0, 11, 0), UIManager._uimanagerInstance.rotateZero);
         prayBtn1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃을 제단에 바친다.";
-        prayBtn1.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.callPrayBuff(newCode));
-        prayBtn1.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.quickUse(newCode, flowerCnt, quickIdx));
+        Debug.Log("==============="+ui.getNowPrayDate());
+        if(nowCode == -1 && ui.getNowPrayDate()==0){
+            Debug.Log("fx 리셋 콜");
+            prayBtn1.GetComponent<Button>().onClick.AddListener(() => ui.resetPrayBuffFx());
+        }
+        prayBtn1.GetComponent<Button>().onClick.AddListener(() => ui.callPrayBuff(newCode));
+        prayBtn1.GetComponent<Button>().onClick.AddListener(() => ui.quickUse(newCode, flowerCnt, quickIdx));
+        prayBtn1.GetComponent<Button>().onClick.AddListener(resetConversationPanel);
 
         GameObject prayBtn2 = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform prayBtnRect2 = prayBtn2.GetComponent<RectTransform>();

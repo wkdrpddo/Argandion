@@ -18,17 +18,20 @@ public class AltarTableInteraction : MonoBehaviour
 
     public void Interaction(int itemCode, int quickslotNum)
     {
+        Debug.Log("인터렉션 호출");
         int prePray = _prayBuff.flowerIdx; // 직전 버프 번호
+        Debug.Log("prePray "+prePray);
         // int prayDay = _prayBuff.prayDay; // 직전 버프 횟수
         // bool isActived = _buffManager._isPrayBuffActived; // 제사 버프 진행 중
-
+        Debug.Log("todayPray " + _prayBuff.todayPray);
         // 손에 뭐 들고 있는지 확인해서
         // 조건에 맞게 UI 호출
         if(_prayBuff.todayPray){
+            Debug.Log("들어옴");
             _uiManager.OnResultNotificationPanel("오늘은 이미 꽃을 바쳤습니다.");
             return;
         }
-        // _uiManager.prayToAltar(prePray, itemCode, quickslotNum);
+        _uiManager.prayToAltar(prePray, itemCode, quickslotNum);
         
         // switch (itemCode)
         // {

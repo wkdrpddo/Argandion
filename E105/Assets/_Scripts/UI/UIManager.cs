@@ -124,12 +124,11 @@ public class UIManager : MonoBehaviour
         _foodmanager = GameObject.Find("FoodManager").GetComponent<FoodManager>();
         _worldtree = GameObject.Find("WorldTree").GetComponent<WorldTree>();
         _teleport = GameObject.Find("Teleport");
-        // _alterdown = GameObject.Find("Teleport").transform.GetChild(0).GetChild(0).GetComponent<TeleportAltar>();
-        // _alterup = GameObject.Find("Teleport").transform.GetChild(1).GetChild(0).GetComponent<TeleportAltar>();
-        // _alterdown = GameObject.Find("teleportDown").GetComponent<TeleportAltar>();
-        // _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
-        // _alter = GameObject.Find("Altar").GetComponent<Altar>();
-
+        _alterdown = GameObject.Find("teleportDown").GetComponent<TeleportAltar>();
+        GameObject.Find("Down").SetActive(false);
+        _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
+        GameObject.Find("Up").SetActive(false);
+        _alter = GameObject.Find("Altar").GetComponent<Altar>();
 
         _systemmanager.setPlayerGold(9999999);
 
@@ -225,19 +224,30 @@ public class UIManager : MonoBehaviour
         ItemObject item16 = findItem(14);
         acquireItem(item16, 5);
 
-        ItemObject item17 = findItem(20);
-        acquireItem(item17, 40);
-        ItemObject item18 = findItem(21);
-        acquireItem(item18, 15);
-        ItemObject item19 = findItem(22);
-        acquireItem(item19, 35);
+        // ItemObject item17 = findItem(20);
+        // acquireItem(item17, 40);
+        // ItemObject item18 = findItem(21);
+        // acquireItem(item18, 15);
+        // ItemObject item19 = findItem(22);
+        // acquireItem(item19, 35);
 
-        ItemObject item20 = findItem(104);
-        acquireItem(item20, 20);
-        ItemObject item21 = findItem(112);
-        acquireItem(item21, 25);
-        ItemObject item22 = findItem(505);
-        acquireItem(item22, 60);
+        // ItemObject item20 = findItem(104);
+        // acquireItem(item20, 20);
+        // ItemObject item21 = findItem(112);
+        // acquireItem(item21, 25);
+        // ItemObject item22 = findItem(505);
+        // acquireItem(item22, 60);
+
+        //검 테스트
+        ItemObject item304 = findItem(304);
+        acquireItem(item304, 1);
+        ItemObject item309 = findItem(309);
+        acquireItem(item309, 1);
+        ItemObject item314 = findItem(314);
+        acquireItem(item314, 1);
+        ItemObject item319 = findItem(319);
+        acquireItem(item319, 1);
+
 
         _systemmanager.setPlayerGold(9999999);
 
@@ -272,9 +282,6 @@ public class UIManager : MonoBehaviour
                 OnMapUIPanel();
             }
         }
-
-        // 다른 키 다 X, craft / cooking 상호작용만 동작
-
 
         if (Input.GetButtonDown("interactionKey") && isInvenRightModal)
         {
@@ -410,6 +417,7 @@ public class UIManager : MonoBehaviour
 
     public void OnResultNotificationPanel(string text)
     {
+        Debug.Log("On");
         _resultnotificationpanel.GetComponent<ResultNotificationPanel>().handelNoti(text);
     }
 
@@ -602,10 +610,7 @@ public class UIManager : MonoBehaviour
             {
                 _optionfrommain.handelPanel();
             }
-            if (!isPanelOpen())
-            {
-                runControllKeys();
-            }
+            runControllKeys();
         }
     }
 
@@ -1042,8 +1047,7 @@ public class UIManager : MonoBehaviour
     // 사운드 관련
     public void playRandomBGM()
     {
-        Debug.Log("음악변경");
-        GameObject.Find("SoundManager").GetComponent<SoundManager>().playRandom();
+        // GameObject.Find("SoundManager").GetComponent<SoundManager>().playRandom();
     }
     // public void BGMChanger(string _bgmName)
     // {
@@ -1065,8 +1069,9 @@ public class UIManager : MonoBehaviour
 
     public void prayToAltar(int _nowFlowerCode, int _newFlowerCode, int quickIdx)
     {
+        Debug.Log("prayToAltar 콜");
         int nowCode = _nowFlowerCode;
-        if (_systemmanager._buffManager._isPrayBuffActived)
+        if (_systemmanager._buffManager._isPrayBuffActived && _nowFlowerCode != _newFlowerCode)
         {
             nowCode = -1;
         }
@@ -1075,12 +1080,16 @@ public class UIManager : MonoBehaviour
 
     public void callSpiritBuff(int _flower)
     {
-        // _systemmanager._SpiritBuff.Spirit(findItem(_flower));
+        _systemmanager._SpiritBuff.Spirit(findItem(_flower));
     }
 
     public void callPrayBuff(int _flower)
     {
-        // _alter.goPray(_flower);
+        _alter.goPray(_flower);
+    }
+
+    public void resetPrayBuffFx(){
+        _alter.buffEnd();
     }
 
     // 제사 몇 일 째인지 얻어오는 함수
