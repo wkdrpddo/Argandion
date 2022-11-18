@@ -110,7 +110,6 @@ public class BuffManager : MonoBehaviour
 
     public void FlowerBuffEnd(int index)
     {
-        Debug.Log("버프끗");
         _flowerBuffTargetMonth = 0;
         _flowerBuffTargetDay = 0;
         _isFlowerBuffActived = false;

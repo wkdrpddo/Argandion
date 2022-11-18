@@ -246,6 +246,7 @@ public class SystemManager : MonoBehaviour
         GameObject[] items = GameObject.FindGameObjectsWithTag("droppedItem");
         GameObject[] props = GameObject.FindGameObjectsWithTag("resource");
         GameObject[] ores = GameObject.FindGameObjectsWithTag("Ore");
+        GameObject[] berrys = GameObject.FindGameObjectsWithTag("berry");
 
         foreach (var r in rabbits)
         {
@@ -274,6 +275,10 @@ public class SystemManager : MonoBehaviour
         foreach (var o in ores)
         {
             Destroy(o);
+        }
+        foreach (var b in berrys)
+        {
+            b.GetComponent<GatheringObject>().setHave(true);
         }
         _buffManager.DayEnd();
     }
@@ -308,7 +313,10 @@ public class SystemManager : MonoBehaviour
         // _buiding1.DayStart();
         foreach (var building in _buildings)
         {
+            if(building)
+            {
             building.DayStart();
+            }
         }
 
     }
