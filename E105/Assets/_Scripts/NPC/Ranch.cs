@@ -11,7 +11,7 @@ public class Ranch : MonoBehaviour
     private BuffManager _buff;
     public Inventory theInventory;
     public GameObject item;
-    private UIManager ui;
+    // private UIManager ui;
 
     public int cows = 0;
     public int chicks = 0;
@@ -41,9 +41,9 @@ public class Ranch : MonoBehaviour
     private List<GameObject> sheepPrefabs = new List<GameObject>();
 
 
-    void Start()
+    void Awake()
     {
-        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         system = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         _buffManagerObject = GameObject.Find("BuffManager");
         _buff = _buffManagerObject.GetComponent<BuffManager>();
@@ -159,13 +159,13 @@ public class Ranch : MonoBehaviour
     public void BuyCow()
     {
         int tempPoint = point + 4;
-        if (ui.getPlayerGold() < 1000)
+        if (UIManager._uimanagerInstance.getPlayerGold() < 1000)
         {
-            ui.OnResultNotificationPanel("소지금이 부족합니다.");
+            UIManager._uimanagerInstance.OnResultNotificationPanel("소지금이 부족합니다.");
         }
         else if (tempPoint > maxPoint)
         {
-            ui.OnResultNotificationPanel("농장의 수용량이 부족합니다.");
+            UIManager._uimanagerInstance.OnResultNotificationPanel("농장의 수용량이 부족합니다.");
         }
         else
         {
@@ -174,7 +174,7 @@ public class Ranch : MonoBehaviour
             cowPrefabs.Add(addData);
 
             cows++;
-            ui.addPlayerGold(-1000);
+            UIManager._uimanagerInstance.addPlayerGold(-1000);
             point = tempPoint;
         }
 
@@ -187,13 +187,13 @@ public class Ranch : MonoBehaviour
     public void BuyChick()
     {
         int tempPoint = point + 3;
-        if (ui.getPlayerGold() < 650)
+        if (UIManager._uimanagerInstance.getPlayerGold() < 650)
         {
-            ui.OnResultNotificationPanel("소지금이 부족합니다.");
+            UIManager._uimanagerInstance.OnResultNotificationPanel("소지금이 부족합니다.");
         }
         else if (tempPoint > maxPoint)
         {
-            ui.OnResultNotificationPanel("농장의 수용량이 부족합니다.");
+            UIManager._uimanagerInstance.OnResultNotificationPanel("농장의 수용량이 부족합니다.");
         }
         else
         {
@@ -201,7 +201,7 @@ public class Ranch : MonoBehaviour
             chickenPrefabs.Add(addData);
 
             chicks++;
-            ui.addPlayerGold(-650);
+            UIManager._uimanagerInstance.addPlayerGold(-650);
             point = tempPoint;
         }
     }
@@ -209,15 +209,15 @@ public class Ranch : MonoBehaviour
     public void BuySheep()
     {
         int tempPoint = point + 2;
-        if (ui.getPlayerGold() < 350)
+        if (UIManager._uimanagerInstance.getPlayerGold() < 350)
         {
             Debug.Log("소지금 부족 오류");
-            ui.OnResultNotificationPanel("소지금이 부족합니다.");
+            UIManager._uimanagerInstance.OnResultNotificationPanel("소지금이 부족합니다.");
         }
         else if (tempPoint > maxPoint)
         {
             Debug.Log("수용량 부족 오류");
-            ui.OnResultNotificationPanel("농장의 수용량이 부족합니다.");
+            UIManager._uimanagerInstance.OnResultNotificationPanel("농장의 수용량이 부족합니다.");
         }
         else
         {
@@ -226,7 +226,7 @@ public class Ranch : MonoBehaviour
             sheepPrefabs.Add(addData);
 
             sheeps++;
-            ui.addPlayerGold(-350);
+            UIManager._uimanagerInstance.addPlayerGold(-350);
             point = tempPoint;
         }
     }
@@ -245,7 +245,7 @@ public class Ranch : MonoBehaviour
 
 
             cows -= howMany;
-            ui.addPlayerGold((howMany * 500));
+            UIManager._uimanagerInstance.addPlayerGold((howMany * 500));
             point -= 4 * howMany;
         }
 
@@ -267,7 +267,7 @@ public class Ranch : MonoBehaviour
 
 
             chicks -= howMany;
-            ui.addPlayerGold((howMany * 325));
+            UIManager._uimanagerInstance.addPlayerGold((howMany * 325));
             point -= 3 * howMany;
         }
     }
@@ -286,7 +286,7 @@ public class Ranch : MonoBehaviour
 
 
             sheeps -= howMany;
-            ui.addPlayerGold((howMany * 175));
+            UIManager._uimanagerInstance.addPlayerGold((howMany * 175));
             point -= 2 * howMany;
         }
     }

@@ -75,7 +75,7 @@ public class TransactionDoubleCheck : MonoBehaviour
         handleModal();
     }
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         _ranch = GameObject.Find("NPCManager").GetComponent<Ranch>();
@@ -86,11 +86,5 @@ public class TransactionDoubleCheck : MonoBehaviour
         _smith = GameObject.Find("NPCManager").GetComponent<BuyingSmith>();
         storeIndex = -1;
         itemIndex = -1;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
