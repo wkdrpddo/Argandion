@@ -24,7 +24,7 @@ public class PlayerSystem : MonoBehaviour
     private SoundManager _soundManager;
 
     // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대 7씨앗), 이동불가 시간, 작업시간}
-    public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 320, 6, 0, 0, 1 }, { 20, 0, 0, 0, 10 }, { 502, 0, 0, 0, 60} };
+    public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 320, 6, 0, 0, 1 }, { 20, 0, 0, 0, 10 }, { 502, 0, 0, 0, 60 } };
     public GameObject[] _equipment = new GameObject[7];
     public int _equipItem = 0;
 
@@ -204,9 +204,9 @@ public class PlayerSystem : MonoBehaviour
         if (_canAction && Input.GetButtonDown("useKey") && _delayedTimer <= 0)
         {
             // 아이템 사용(식량)
-            if (_equipList[_equipItem, 0] >= 100 && _equipList[_equipItem,0] < 200)
+            if (_equipList[_equipItem, 0] >= 100 && _equipList[_equipItem, 0] < 200)
             {
-                _UIManager.quickUse((int)_equipList[_equipItem,0],1,_equipItem);
+                _UIManager.quickUse((int)_equipList[_equipItem, 0], 1, _equipItem);
             }
 
             // 장비 휘두르기 (도끼 곡괭이 검)
@@ -215,7 +215,7 @@ public class PlayerSystem : MonoBehaviour
                 _playerAnimator.SetInteger("action", ((int)_equipList[_equipItem, 1]));
                 _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
                 _movedDelay = _equipList[_equipItem, 3] / _act_speed;
-                _equipment[(int)_equipList[_equipItem,1]].SetActive(true);
+                _equipment[(int)_equipList[_equipItem, 1]].SetActive(true);
                 _setHand = true;
             }
 
@@ -245,11 +245,16 @@ public class PlayerSystem : MonoBehaviour
                     {
                         soil.gameObject.TryGetComponent(out Dirt D);
                         {
-                            if (!D.isReady) {
+                            if (!D.isReady)
+                            {
                                 D.Ready();
-                            } else if (!D.fullWater){
+                            }
+                            else if (!D.fullWater)
+                            {
                                 D.Water();
-                            } else {
+                            }
+                            else
+                            {
                                 Debug.Log("농사준비완료!");
                             }
                         }
@@ -267,10 +272,13 @@ public class PlayerSystem : MonoBehaviour
                     {
                         soil.gameObject.TryGetComponent(out Dirt D);
                         {
-                            if (D.fullWater && !_nearCrops) {
-                                Instantiate(_crops[(int)_equipList[_equipItem, 0]-212], nearSoil(_character.position), _character.rotation);
-                                _UIManager.quickUse((int)_equipList[_equipItem,0],1,_equipItem);
-                            } else {
+                            if (D.fullWater && !_nearCrops)
+                            {
+                                Instantiate(_crops[(int)_equipList[_equipItem, 0] - 212], nearSoil(_character.position), _character.rotation);
+                                _UIManager.quickUse((int)_equipList[_equipItem, 0], 1, _equipItem);
+                            }
+                            else
+                            {
                                 Debug.Log("씨앗못심기");
                             }
                         }
@@ -302,7 +310,7 @@ public class PlayerSystem : MonoBehaviour
             _delayedTimer = Mathf.Max(0, _delayedTimer);
         }
         _character.position = transform.position;
-        if (_runtime>1)
+        if (_runtime > 1)
         {
             _runtime -= 1;
             damageStamina(1);
@@ -367,7 +375,7 @@ public class PlayerSystem : MonoBehaviour
         }
     }
 
-    public void setHandItem(bool value=false, int hand=0)
+    public void setHandItem(bool value = false, int hand = 0)
     {
         if (!value)
         {
@@ -391,13 +399,14 @@ public class PlayerSystem : MonoBehaviour
                 Debug.Log(col);
                 if (col.TryGetComponent(out Interactable inter))
                 {
-                    Debug.Log("if 안 "+col);
+                    Debug.Log("if 안 " + col);
                     if (50 <= _equipList[_equipItem, 0] && _equipList[_equipItem, 0] <= 56 && col.TryGetComponent(out WorldTreeSpirit fairy))
                     {
-                        fairy.FlowerInteraction(_equipList[_equipItem,0]);
+                        fairy.FlowerInteraction((int)_equipList[_equipItem, 0]);
                         break;
                     }
-                    else {
+                    else
+                    {
                         if (col.TryGetComponent(out NPCObject npc))
                         {
                             npc.Interaction();
@@ -418,23 +427,24 @@ public class PlayerSystem : MonoBehaviour
                             _movedDelay = _equipList[_equipItem, 3] / _act_speed;
                             break;
                         }
-                        else if (Gat._isHave) {
+                        else if (Gat._isHave)
+                        {
                             Gat.Interaction(_equipList[_equipItem, 1]);
                             _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
                             _movedDelay = _equipList[_equipItem, 3] / _act_speed;
                             break;
                         }
                     }
-                    if (_equipList[_equipItem, 1] == 6 && _equipList[7,4] > 0 && col.TryGetComponent(out Fishing fis))
+                    if (_equipList[_equipItem, 1] == 6 && _equipList[7, 4] > 0 && col.TryGetComponent(out Fishing fis))
                     {
-                        fis.Interaction(_equipList[_equipItem, 0],_equipList[7,0]);
-                        _UIManager.quickUse((int)_equipList[7,0],1,7);
+                        fis.Interaction(_equipList[_equipItem, 0], _equipList[7, 0]);
+                        _UIManager.quickUse((int)_equipList[7, 0], 1, 7);
                         break;
                     }
                     //제사창
-                    if (_equipList[_equipItem,0] >= 50 && _equipList[_equipItem, 0] <= 56 && col.TryGetComponent(out AltarTableInteraction alt))
+                    if (_equipList[_equipItem, 0] >= 50 && _equipList[_equipItem, 0] <= 56 && col.TryGetComponent(out AltarTableInteraction alt))
                     {
-                        alt.Interaction((int)_equipList[_equipItem, 0],_equipItem);
+                        alt.Interaction((int)_equipList[_equipItem, 0], _equipItem);
                         break;
                     }
                     // building쪽 ==============
@@ -766,7 +776,7 @@ public class PlayerSystem : MonoBehaviour
         {
             _health = _health_max;
         }
-        _UIManager.setHealthBar(_health/_health_max);
+        _UIManager.setHealthBar(_health / _health_max);
     }
 
     public void damageHealth(float value)
@@ -787,7 +797,7 @@ public class PlayerSystem : MonoBehaviour
             _health = 0;
             playerDeath();
         }
-        _UIManager.setHealthBar(_health/_health_max);
+        _UIManager.setHealthBar(_health / _health_max);
     }
 
     public void changeEnergy(float value)
@@ -802,7 +812,7 @@ public class PlayerSystem : MonoBehaviour
         {
             _stamina = _stamina_max;
         }
-        _UIManager.setEnergyBar(_stamina/_stamina_max);
+        _UIManager.setEnergyBar(_stamina / _stamina_max);
     }
 
     public void damageStamina(float value)
@@ -823,7 +833,7 @@ public class PlayerSystem : MonoBehaviour
             _stamina = 0;
             playerDeath();
         }
-        _UIManager.setEnergyBar(_stamina/_stamina_max);
+        _UIManager.setEnergyBar(_stamina / _stamina_max);
     }
 
     private void playerDeath()
@@ -967,9 +977,12 @@ public class PlayerSystem : MonoBehaviour
         else
         {
             _equipList[index, 0] = itemCode;
-            if (itemCode < 300 && 200 < itemCode) {
+            if (itemCode < 300 && 200 < itemCode)
+            {
                 _equipList[index, 1] = 7;
-            } else{
+            }
+            else
+            {
                 _equipList[index, 1] = 0;
             }
             _equipList[index, 2] = 0;

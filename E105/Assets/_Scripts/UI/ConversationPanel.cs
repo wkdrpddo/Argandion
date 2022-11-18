@@ -490,6 +490,7 @@ public class ConversationPanel : MonoBehaviour
             isConversation = true;
             selectConversationCount = 4;
             _nomaltalk.text = "이미 축복을 받고 있군요, 저희의 축복은 다음에 찾아오세요";
+            Invoke("resetConversationPanel", 2.5f);
         }
         else
         {
@@ -502,6 +503,7 @@ public class ConversationPanel : MonoBehaviour
             prayBtnRect1.SetLocalPositionAndRotation(new Vector3(0, 22, 0), UIManager._uimanagerInstance.rotateZero);
             prayBtn1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃을 정령에게 건넨다.";
             prayBtn1.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.callSpiritBuff(_key));
+            prayBtn1.GetComponent<Button>().onClick.AddListener(resetConversationPanel);
 
             GameObject prayBtn2 = Instantiate(conversationButton, _selectpanel.transform);
             RectTransform prayBtnRect2 = prayBtn2.GetComponent<RectTransform>();
