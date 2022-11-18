@@ -8,7 +8,7 @@ public class MapObject : MonoBehaviour
     public GameObject[] SectorObject;
     void Start()
     {
-        SectorObject = GameObject.FindGameObjectsWithTag("sector");
+        // SectorObject = GameObject.FindGameObjectsWithTag("sector");
     }
 
     public void UpdateFieldManager(int index)
