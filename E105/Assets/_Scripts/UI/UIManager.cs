@@ -1088,7 +1088,8 @@ public class UIManager : MonoBehaviour
         _alter.goPray(_flower);
     }
 
-    public void resetPrayBuffFx(){
+    public void resetPrayBuffFx()
+    {
         _alter.buffEnd();
     }
 
