@@ -87,7 +87,7 @@ public class SoundManager : MonoBehaviour
     public void setBackgroundSound(Slider volume)
     {
         Sound_Background = volume.value;
-        // bgmPlayer.volume = Sound_Background;
+        bgmPlayer.volume = Sound_Background;
     }
 
     public void setEffectSound(Slider volume)
