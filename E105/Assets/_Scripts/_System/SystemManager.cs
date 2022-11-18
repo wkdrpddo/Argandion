@@ -308,7 +308,10 @@ public class SystemManager : MonoBehaviour
         // _buiding1.DayStart();
         foreach (var building in _buildings)
         {
+            if(building)
+            {
             building.DayStart();
+            }
         }
 
     }

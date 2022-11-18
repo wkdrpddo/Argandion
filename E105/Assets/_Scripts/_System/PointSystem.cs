@@ -47,9 +47,7 @@ public class PointSystem : MonoBehaviour
         {
             if (_Sector._purifier)
             {
-                Debug.Log("동물 소환되며 rnd는");
                 int rnd = Random.Range(0, _Sector._animal_type_base_factor[3]);
-                Debug.Log(rnd);
                 int len = 0;
                 int sumV = 0;
                 int index = 0;
@@ -57,8 +55,6 @@ public class PointSystem : MonoBehaviour
                 {
                     len = _Sector._animal_bunny_count_factor.Length;
                     sumV = Random.Range(0, _Sector._animal_bunny_count_factor[len - 1]);
-                    Debug.Log(sumV);
-                    Debug.Log("토끼 카운트");
                     while (!(_Sector._animal_bunny_count_factor[index] <= sumV && sumV <= _Sector._animal_bunny_count_factor[index + 1]))
                     {
                         index += 1;
@@ -70,8 +66,6 @@ public class PointSystem : MonoBehaviour
                 {
                     len = _Sector._animal_deer_count_factor.Length;
                     sumV = Random.Range(0, _Sector._animal_deer_count_factor[len - 1]);
-                    Debug.Log(sumV);
-                    Debug.Log("순록 카운트");
                     while (!(_Sector._animal_deer_count_factor[index] <= sumV && sumV <= _Sector._animal_deer_count_factor[index + 1]))
                     {
                         index += 1;
@@ -83,8 +77,6 @@ public class PointSystem : MonoBehaviour
                 {
                     len = _Sector._animal_wolf_count_factor.Length;
                     sumV = Random.Range(0, _Sector._animal_wolf_count_factor[len - 1]);
-                    Debug.Log(sumV);
-                    Debug.Log("늑대 카운트");
                     while (!(_Sector._animal_wolf_count_factor[index] <= sumV && sumV <= _Sector._animal_wolf_count_factor[index + 1]))
                     {
                         index += 1;
@@ -96,8 +88,6 @@ public class PointSystem : MonoBehaviour
                 {
                     len = _Sector._animal_bear_count_factor.Length;
                     sumV = Random.Range(0, _Sector._animal_bear_count_factor[len - 1]);
-                    Debug.Log(sumV);
-                    Debug.Log("곰 카운트");
                     while (!(_Sector._animal_bear_count_factor[index] <= sumV && sumV <= _Sector._animal_bear_count_factor[index + 1]))
                     {
                         index += 1;
@@ -108,9 +98,7 @@ public class PointSystem : MonoBehaviour
             }
             else
             {
-                Debug.Log("동물 소환되며 rnd는");
                 int rnd = Random.Range(0, _Sector._animal_type_ruin_factor[3]);
-                Debug.Log(rnd);
                 int len = 0;
                 int sumV = 0;
                 int index = 0;
@@ -118,8 +106,6 @@ public class PointSystem : MonoBehaviour
                 {
                     len = _Sector._animal_bunny_count_factor.Length;
                     sumV = Random.Range(0, _Sector._animal_bunny_count_factor[len - 1]);
-                    Debug.Log(sumV);
-                    Debug.Log("토끼 카운트");
                     while (!(_Sector._animal_bunny_count_factor[index] <= sumV && sumV <= _Sector._animal_bunny_count_factor[index + 1]))
                     {
                         index += 1;
@@ -131,8 +117,6 @@ public class PointSystem : MonoBehaviour
                 {
                     len = _Sector._animal_deer_count_factor.Length;
                     sumV = Random.Range(0, _Sector._animal_deer_count_factor[len - 1]);
-                    Debug.Log(sumV);
-                    Debug.Log("순록 카운트");
                     while (!(_Sector._animal_deer_count_factor[index] <= sumV && sumV <= _Sector._animal_deer_count_factor[index + 1]))
                     {
                         index += 1;
@@ -144,8 +128,6 @@ public class PointSystem : MonoBehaviour
                 {
                     len = _Sector._animal_wolf_count_factor.Length;
                     sumV = Random.Range(0, _Sector._animal_wolf_count_factor[len - 1]);
-                    Debug.Log(sumV);
-                    Debug.Log("늑대 카운트");
                     while (!(_Sector._animal_wolf_count_factor[index] <= sumV && sumV <= _Sector._animal_wolf_count_factor[index + 1]))
                     {
                         index += 1;
@@ -157,8 +139,6 @@ public class PointSystem : MonoBehaviour
                 {
                     len = _Sector._animal_bear_count_factor.Length;
                     sumV = Random.Range(0, _Sector._animal_bear_count_factor[len - 1]);
-                    Debug.Log(sumV);
-                    Debug.Log("곰 카운트");
                     while (!(_Sector._animal_bear_count_factor[index] <= sumV && sumV <= _Sector._animal_bear_count_factor[index + 1]))
                     {
                         index += 1;
