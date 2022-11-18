@@ -10,9 +10,10 @@ public class TeleportationHome : MonoBehaviour
     public GameObject _teleportHomeOutside;
     public GameObject _directionalLight;
     public GameObject _homeLight;
-
+    public WeatherManager _weatherManager;
+    public SystemManager _systemManager;
     private bool _isInside;
-
+    public GameObject _particleFX;
 
     void Start()
     {
@@ -22,7 +23,9 @@ public class TeleportationHome : MonoBehaviour
         _teleportHomeInside = GameObject.Find("teleportHomeInside");
         _teleportHomeOutside = GameObject.Find("teleportHomeOutside");
         _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
-
+        _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
+        _systemManager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
+        _particleFX = GameObject.Find("PlayerObject").transform.GetChild(1).transform.GetChild(0).gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,11 +59,13 @@ public class TeleportationHome : MonoBehaviour
         _playerSystem.transform.position = new Vector3(_teleportHomeInside.transform.position.x, _teleportHomeInside.transform.position.y, _teleportHomeInside.transform.position.z + 1f);
         // '안으로' 메시지 보내기
         _uiManager.setIsHome(_isInside);
-
+        _weatherManager.playWeatherFX(_systemManager._weather, _isInside);
+        _particleFX.SetActive(false);
     }
 
     private void goOutside()
     {
+        _particleFX.SetActive(true);
         // Debug.Log("밖으로");
         _isInside = false;
         // 집 빛 꺼주기, 밖 빛 켜주기
@@ -71,11 +76,17 @@ public class TeleportationHome : MonoBehaviour
         _playerSystem.transform.GetChild(0).gameObject.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
         // '밖으로' 메시지 보내기
         _uiManager.setIsHome(_isInside);
+        _weatherManager.playWeatherFX(_systemManager._weather, _isInside);
     }
     private void setLight()
     {
         _homeLight.SetActive(_isInside);
         _directionalLight.SetActive(!_isInside);
+    }
+
+    public bool getIsInside()
+    {
+        return _isInside;
     }
 }
 

@@ -34,11 +34,6 @@ public class GridSystem : MonoBehaviour
             Check_Branch();
             Check_Stone();
         }
-        TreeObject[] trees = this.GetComponentsInChildren<TreeObject>();
-        foreach (var tree in trees)
-        {
-            tree.DayEnd();
-        }
     }
 
     private void Check_Tree()
@@ -109,6 +104,7 @@ public class GridSystem : MonoBehaviour
 
     private void Spawn_Branch(int count)
     {
+        Quaternion qua = Quaternion.Euler(Random.Range(0f,360f),Random.Range(0f,360f),Random.Range(0f,360f));
         Debug.Log("나뭇가지 생성됨!");
         while (count>0)
         {
@@ -120,7 +116,7 @@ public class GridSystem : MonoBehaviour
                 // Debug.Log(_buffer.Length);
                 if (_buffer.Length==0)
                 {
-                    Instantiate(_branch,pos,new Quaternion(),_Sector._items.transform);
+                    Instantiate(_branch,pos,qua,_Sector._items.transform);
                     count -= 1;
                     break;
                 }
