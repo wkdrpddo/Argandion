@@ -12,12 +12,12 @@ public class OptionPanel : MonoBehaviour
 
     void Start()
     {
-        _soundmanager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     void Awake()
     {
         // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+        _soundmanager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
         background = gameObject.transform.GetChild(0).GetComponent<Slider>();
         effect = gameObject.transform.GetChild(1).GetComponent<Slider>();
