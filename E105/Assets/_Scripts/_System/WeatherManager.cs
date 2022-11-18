@@ -37,8 +37,8 @@ public class WeatherManager : MonoBehaviour
     private void Start() {
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         SetYearEvent(); // 나중에 변경/삭제 해야함
-        _snow = GameObject.Find("Main Camera").transform.GetChild(0).GetComponent<ParticleSystem>();
-        _rain = GameObject.Find("Main Camera").transform.GetChild(1).GetComponent<ParticleSystem>();
+        _snow = GameObject.Find("Main Camera").transform.GetChild(0).transform.GetChild(0).GetComponent<ParticleSystem>();
+        _rain = GameObject.Find("Main Camera").transform.GetChild(0).transform.GetChild(1).GetComponent<ParticleSystem>();
     }
     private int _season;
 
@@ -258,6 +258,18 @@ public class WeatherManager : MonoBehaviour
             _buffManager.coldWaveDay = Random.Range(1,29);
         } else {
             _buffManager.coldWaveDay = Random.Range(1,16);
+        }
+    }
+
+    public void playWeatherFX(int index, bool isIn)
+    {
+        if (isIn)
+        {
+            playFX(0);
+        }
+        else
+        {
+            playFX(index);
         }
     }
 

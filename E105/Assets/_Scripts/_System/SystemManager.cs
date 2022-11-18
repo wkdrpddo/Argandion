@@ -132,6 +132,10 @@ public class SystemManager : MonoBehaviour
         }
     }
 
+    public void setTimeSystem(bool value)
+    {
+        _time_stop = value;
+    }
 
     private void TimeSystem()
     {
