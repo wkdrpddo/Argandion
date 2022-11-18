@@ -40,7 +40,7 @@ public class CombHunter : MonoBehaviour
         {
             if (slot.itemCount > 0)
             {
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < 25; i++)
                 {
                     if (myItems[i] == 0 || myItems[i] == slot.item.ItemCode)
                     {
