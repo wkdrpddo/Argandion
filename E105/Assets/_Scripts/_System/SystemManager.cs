@@ -245,6 +245,7 @@ public class SystemManager : MonoBehaviour
         GameObject[] bears = GameObject.FindGameObjectsWithTag("Bear");
         GameObject[] items = GameObject.FindGameObjectsWithTag("droppedItem");
         GameObject[] props = GameObject.FindGameObjectsWithTag("resource");
+        GameObject[] ores = GameObject.FindGameObjectsWithTag("Ore");
 
         foreach (var r in rabbits)
         {
@@ -269,7 +270,10 @@ public class SystemManager : MonoBehaviour
         foreach (var p in props)
         {
             Destroy(p);
-
+        }
+        foreach (var o in ores)
+        {
+            Destroy(o);
         }
         _buffManager.DayEnd();
     }
