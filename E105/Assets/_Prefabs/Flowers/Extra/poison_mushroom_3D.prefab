@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5160041556449389457}
   - component: {fileID: 8988060458094237249}
   - component: {fileID: 6829553624296686825}
+  - component: {fileID: 6592041614355054459}
   m_Layer: 9
   m_Name: poison_mushroom_3D
   m_TagString: resource
@@ -161,3 +162,23 @@ MonoBehaviour:
   _inventory: {fileID: 0}
   _item: {fileID: 0}
   _isremain: 0
+  _isHave: 0
+  _fruit: {fileID: 0}
+--- !u!114 &6592041614355054459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966728846417549429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 0.9811321, g: 0.5852065, b: 0.06849409, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

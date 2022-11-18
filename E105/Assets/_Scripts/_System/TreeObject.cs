@@ -9,8 +9,6 @@ public class TreeObject : MonoBehaviour
     public bool _isFallen;
     public BuffManager _buff;
     public GameObject[] _droppedItem = new GameObject[3];
-
-    public GameObject[] _trees = new GameObject[8];
     public Collider _box;
     public GameObject _itemParent;
     private SectorObject _sector;
