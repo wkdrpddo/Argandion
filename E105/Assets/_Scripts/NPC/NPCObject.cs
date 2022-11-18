@@ -35,11 +35,6 @@ public class NPCObject : MonoBehaviour
         ConversationStart();
     }
 
-    public void FlowerInteraction(int flowerCode)
-    {
-        _UIManager.GetComponent<UIManager>().prayToSpirit(flowerCode);
-    }
-
 
 
     public void ConversationStart()
