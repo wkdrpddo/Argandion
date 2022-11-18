@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CombFood : MonoBehaviour
 {
-    public UIManager ui;
+    // public UIManager ui;
     public CombRecipe[] myData;
     public GameObject item;
 
@@ -15,9 +15,9 @@ public class CombFood : MonoBehaviour
 
     private Slot[] slots;
 
-    void Start()
+    void Awake()
     {
-        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/CombFood.json");
         var combDatas = JsonHelper.FromJson<CombRecipe>(jsonString);
         myData = combDatas;
@@ -25,7 +25,7 @@ public class CombFood : MonoBehaviour
 
     public void Hello()
     {
-        slots = ui.getInventorySlots();
+        slots = UIManager._uimanagerInstance.getInventorySlots();
 
         myItems = new int[25];
         howItems = new int[25];
@@ -53,9 +53,9 @@ public class CombFood : MonoBehaviour
             int canMakeNum = CanMake(rec, myItems, howItems);
             canMake[canMakeIdx] = canMakeNum;
             if (canMakeNum > 0)
-                Debug.Log(ui.findItem(rec.Result).Name + "는(은) " + CanMake(rec, myItems, howItems) + "개 만들 수 있습니다.");
+                Debug.Log(UIManager._uimanagerInstance.findItem(rec.Result).Name + "는(은) " + CanMake(rec, myItems, howItems) + "개 만들 수 있습니다.");
             else
-                Debug.Log(ui.findItem(rec.Result).Name + "는(은) 만들 수 없습니다 T.T");
+                Debug.Log(UIManager._uimanagerInstance.findItem(rec.Result).Name + "는(은) 만들 수 없습니다 T.T");
 
             canMakeIdx += 1;
         }
@@ -70,18 +70,18 @@ public class CombFood : MonoBehaviour
     {
         if (canMake[idx] > 0 && canMake[idx] >= howMany)
         {
-            ui.acquireItem(ui.findItem(myData[idx].Result), howMany);
-            ui.reductItem(ui.findItem(myData[idx].Material1), -myData[idx].Cost1 * howMany);
+            UIManager._uimanagerInstance.acquireItem(UIManager._uimanagerInstance.findItem(myData[idx].Result), howMany);
+            UIManager._uimanagerInstance.reductItem(UIManager._uimanagerInstance.findItem(myData[idx].Material1), -myData[idx].Cost1 * howMany);
             if (myData[idx].Material2 > 0)
-                ui.reductItem(ui.findItem(myData[idx].Material2), -myData[idx].Cost2 * howMany);
+                UIManager._uimanagerInstance.reductItem(UIManager._uimanagerInstance.findItem(myData[idx].Material2), -myData[idx].Cost2 * howMany);
             if (myData[idx].Material3 > 0)
-                ui.reductItem(ui.findItem(myData[idx].Material3), -myData[idx].Cost3 * howMany);
+                UIManager._uimanagerInstance.reductItem(UIManager._uimanagerInstance.findItem(myData[idx].Material3), -myData[idx].Cost3 * howMany);
             if (myData[idx].Material4 > 0)
-                ui.reductItem(ui.findItem(myData[idx].Material4), -myData[idx].Cost4 * howMany);
+                UIManager._uimanagerInstance.reductItem(UIManager._uimanagerInstance.findItem(myData[idx].Material4), -myData[idx].Cost4 * howMany);
             if (myData[idx].Material5 > 0)
-                ui.reductItem(ui.findItem(myData[idx].Material5), -myData[idx].Cost5 * howMany);
+                UIManager._uimanagerInstance.reductItem(UIManager._uimanagerInstance.findItem(myData[idx].Material5), -myData[idx].Cost5 * howMany);
             if (myData[idx].Material6 > 0)
-                ui.reductItem(ui.findItem(myData[idx].Material6), -myData[idx].Cost6 * howMany);
+                UIManager._uimanagerInstance.reductItem(UIManager._uimanagerInstance.findItem(myData[idx].Material6), -myData[idx].Cost6 * howMany);
             // canMake[idx] -= howMany;
             Hello();
         }

@@ -546,7 +546,6 @@ public class ConversationPanel : MonoBehaviour
 
         GameObject prayBtn1 = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform prayBtnRect1 = prayBtn1.GetComponent<RectTransform>();
-        prayBtnRect1.SetLocalPositionAndRotation(new Vector3(0, 22, 0), UIManager._uimanagerInstance.rotateZero);
         prayBtn1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃을 제단에 바친다.";
         Debug.Log("===============" + UIManager._uimanagerInstance.getNowPrayDate());
         if (nowCode == -1 && UIManager._uimanagerInstance.getNowPrayDate() == 0)
@@ -560,9 +559,19 @@ public class ConversationPanel : MonoBehaviour
 
         GameObject prayBtn2 = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform prayBtnRect2 = prayBtn2.GetComponent<RectTransform>();
-        prayBtnRect2.SetLocalPositionAndRotation(new Vector3(0, -11, 0), UIManager._uimanagerInstance.rotateZero);
         prayBtn2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃을 바치지 않고 떠난다.";
         prayBtn2.GetComponent<Button>().onClick.AddListener(resetConversationPanel);
+
+        if (nowCode == 0)
+        {
+            prayBtnRect1.SetLocalPositionAndRotation(new Vector3(0, 22, 0), UIManager._uimanagerInstance.rotateZero);
+            prayBtnRect2.SetLocalPositionAndRotation(new Vector3(0, -11, 0), UIManager._uimanagerInstance.rotateZero);
+        }
+        else
+        {
+            prayBtnRect1.SetLocalPositionAndRotation(new Vector3(0, 11, 0), UIManager._uimanagerInstance.rotateZero);
+            prayBtnRect2.SetLocalPositionAndRotation(new Vector3(0, -22, 0), UIManager._uimanagerInstance.rotateZero);
+        }
 
         _selectpanel.SetActive(true);
     }

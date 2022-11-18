@@ -129,7 +129,7 @@ public class UIManager : MonoBehaviour
         GameObject.Find("Down").SetActive(false);
         _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
         GameObject.Find("Up").SetActive(false);
-        // _alter = GameObject.Find("Altar").GetComponent<Altar>();
+        _alter = GameObject.Find("Altar").GetComponent<Altar>();
 
         _systemmanager.setPlayerGold(9999999);
 
@@ -160,8 +160,8 @@ public class UIManager : MonoBehaviour
         _inventory = gameObject.transform.Find("Inventory").gameObject;
         _invenMoney = _inventory.transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
         _invenMoney.text = _systemmanager.getPlayerGold().ToString();
-        _notificationpanel = GameObject.Find("NotificationPanel");
         _resultnotificationpanel = gameObject.transform.Find("ResultNotificationPanel").GetComponent<ResultNotificationPanel>();
+        _notificationpanel = GameObject.Find("NotificationPanel");
         _transactiondoublecheck = gameObject.transform.Find("TransactionDoubleCheckModal").GetComponent<TransactionDoubleCheck>();
         _eventAnnounce = GameObject.Find("EventUIAnnounce");
         _announceTitle = _eventAnnounce.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
@@ -409,6 +409,7 @@ public class UIManager : MonoBehaviour
 
     public void OnNotificationPanel()
     {
+        Debug.Log("On");
         _notificationpanel.GetComponent<NotificationPanel>().handleNoti();
     }
 

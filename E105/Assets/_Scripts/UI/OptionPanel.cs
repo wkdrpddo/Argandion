@@ -36,6 +36,7 @@ public class OptionPanel : MonoBehaviour
         else
         {
             UIManager._uimanagerInstance.isPressESC = false;
+            UIManager._uimanagerInstance.delayRunControllKeys();
         }
     }
 }

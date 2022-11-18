@@ -32,7 +32,7 @@ public class CookingPanel : MonoBehaviour
     private int index;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // ui = gameObject.GetComponentInParent<UIManager>();
         DishContent = transform.GetChild(1).GetChild(1).GetChild(0).GetChild(0).gameObject;

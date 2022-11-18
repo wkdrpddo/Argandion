@@ -10,25 +10,25 @@ public class BuyingDesigner : MonoBehaviour
     private UIManager ui;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/BuyingDesigner.json");
         var buyDatas = JsonHelper.FromJson<Product>(jsonString);
         myData = buyDatas;
 
-        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
     public void Buy(int idx, int howMany = 1)
     {
-        if (ui.getPlayerGold() >= myData[idx].Cost * howMany)
+        if (UIManager._uimanagerInstance.getPlayerGold() >= myData[idx].Cost * howMany)
         {
-            ui.acquireItem(ui.findItem(myData[idx].Result), howMany);
-            ui.addPlayerGold(myData[idx].Cost * howMany * -1);
+            UIManager._uimanagerInstance.acquireItem(UIManager._uimanagerInstance.findItem(myData[idx].Result), howMany);
+            UIManager._uimanagerInstance.addPlayerGold(myData[idx].Cost * howMany * -1);
         }
         else
         {
-            ui.OnResultNotificationPanel("잔액이 부족합니다.");
+            UIManager._uimanagerInstance.OnResultNotificationPanel("잔액이 부족합니다.");
         }
     }
 }
