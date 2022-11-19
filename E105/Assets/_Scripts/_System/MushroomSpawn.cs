@@ -49,7 +49,7 @@ public class MushroomSpawn : MonoBehaviour
         {
             float X = Random.Range(-(_radius+0.6f),(_radius+0.6f));
             int ZM = Random.Range(0,2);
-            float Z = (ZM==0 ? Mathf.Sqrt((_radius+0.6f)-(X*X)) : -Mathf.Sqrt((_radius+0.6f)-(X*X)));
+            float Z = (ZM==0 ? Mathf.Sqrt((_radius+0.6f)*(_radius+0.6f)-(X*X)) : -Mathf.Sqrt((_radius+0.6f)*(_radius+0.6f)-(X*X)));
             Vector3 pos = new Vector3(_base_transform.position.x+X,_base_transform.position.y+3f,_base_transform.position.z+Z);
 
             _buffer = Physics.OverlapBox(pos,new Vector3(0.5f,3f,0.5f),new Quaternion(),layerMask:320);
