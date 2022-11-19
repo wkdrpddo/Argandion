@@ -32,10 +32,10 @@ public class CookingInteraction : MonoBehaviour
     public void CookingStart()
     {
         // _cameraSystem = GameObject.Find("PlayerObject").GetComponent<CameraSystem>();
-        float yRot = GameObject.Find("CookingPlace").transform.rotation.eulerAngles.y + 180f;
+        // float yRot = GameObject.Find("CookingPlace").transform.rotation.eulerAngles.y + 180f;
         // Debug.Log("rot "+yRot);
         // Debug.Log(_cameraSystem);
-        _cameraSystem.CookingCamera(30f, yRot, 0.4f);
+        _cameraSystem.CookingCamera();
         _cookingLight.SetActive(true);
         _shelf.SetActive(false);
     }

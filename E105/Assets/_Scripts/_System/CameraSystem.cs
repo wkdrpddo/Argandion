@@ -20,11 +20,12 @@ public class CameraSystem : MonoBehaviour
         _worldtree = GameObject.Find("WorldTree");
     }
 
-    public void CookingCamera(float xRot, float yRot, float zRot)
+    public void CookingCamera()
     {
         Debug.Log("쿠킹 카메라");
-        Vector3 pos = new Vector3(_po.transform.position.x + 2.17f, _po.transform.position.y + 2.51f, _po.transform.position.z + 1.7f);
-        Quaternion rot = Quaternion.Euler(xRot, yRot, zRot);
+        Debug.Log(_po.transform.position);
+        Vector3 pos = new Vector3(_po.transform.position.x + 1.01f, _po.transform.position.y + 2.51f, _po.transform.position.z + 2.61f);
+        Quaternion rot = Quaternion.Euler(30f, -160.027f, 0.4f);
         _cam.transform.SetPositionAndRotation(pos, rot);
     }
 
