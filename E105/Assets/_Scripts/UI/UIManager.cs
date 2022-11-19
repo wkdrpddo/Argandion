@@ -61,6 +61,7 @@ public class UIManager : MonoBehaviour
     private Slider _energybar;
     public RectTransform _timer;
     public GameObject _daytime;
+    public GameObject _noontime;
 
     // 상태 저장 데이터
     public Quaternion rotateZero = Quaternion.Euler(new Vector3(0, 0, 0));     // 회전값 기본값 세팅
@@ -138,7 +139,8 @@ public class UIManager : MonoBehaviour
         _energybar = _baseuipanel.transform.GetChild(1).GetComponent<Slider>();
         _eventpanel = _baseuipanel.transform.GetChild(4).gameObject;
         _eventpanel.GetComponent<EventPanel>().setting();
-        _daytime = _baseuipanel.transform.GetChild(2).GetChild(1).gameObject;
+        _daytime = _baseuipanel.transform.GetChild(2).GetChild(2).gameObject;
+        _noontime = _baseuipanel.transform.GetChild(2).GetChild(3).gameObject;
         _foodmanager._eventPanel = _eventpanel.GetComponent<EventPanel>();
 
         _nowequip = GameObject.Find("NowEquip").gameObject;
@@ -1179,16 +1181,16 @@ public class UIManager : MonoBehaviour
     public void DayStart()
     {
         Transform trans = _daytime.GetComponent<RectTransform>().transform;
-        Image img = _daytime.GetComponent<Image>();
+        Image img = _noontime.GetComponent<Image>();
         if (_systemmanager._buffManager.whitePray || _systemmanager._buffManager.whiteSpirit)
         {
             trans.SetLocalPositionAndRotation(trans.localPosition, Quaternion.Euler(180, 180, 15));
-            img.fillAmount = 0.83333f;
+            img.fillAmount = 0.505f;
         }
         else
         {
             trans.SetLocalPositionAndRotation(trans.localPosition, Quaternion.Euler(180, 180, 0));
-            img.fillAmount = 0.70833f;
+            img.fillAmount = 0.38f;
         }
     }
 }
