@@ -204,7 +204,7 @@ public class GridSystem : MonoBehaviour
             int cnt = 0;
             while (cnt < 24)
             {
-                _buffer = Physics.OverlapBox(pos,new Vector3(0.5f,0.5f,0.5f));
+                _buffer = Physics.OverlapBox(pos,new Vector3(0.5f,0.5f,0.5f),new Quaternion(),layerMask:641);
                 if (_buffer.Length==0)
                 {
                     int rnd = Random.Range(0,_Sector._ore_type_factor[2]);
