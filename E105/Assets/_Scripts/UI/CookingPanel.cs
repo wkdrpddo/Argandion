@@ -71,6 +71,9 @@ public class CookingPanel : MonoBehaviour
 
         if (isContainInventory)
         {
+
+            gameObject.transform.GetChild(2).GetChild(2).GetComponent<Button>().interactable = false;
+            Invoke("onCancelBtn", 7f);
             Invoke("completeCooking", 7f);
             UIManager._uimanagerInstance.runCookingAnimation();
             Debug.LogWarning("========== after animation call ============");
@@ -84,6 +87,11 @@ public class CookingPanel : MonoBehaviour
         }
 
         deleteRecipeList();
+    }
+
+    private void onCancelBtn()
+    {
+        gameObject.transform.GetChild(2).GetChild(2).GetComponent<Button>().interactable = true;
     }
 
     public void completeCooking()
