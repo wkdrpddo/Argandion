@@ -21,6 +21,7 @@ public class SystemManager : MonoBehaviour
     public GameObject _MapObject;
     public PlayerSystem _player;
     public HouseChange _houseChange;
+    public HouseChange _interiorChange;
     public FarmChange _farmChange;
     public WeatherManager _weatherManager;
     public BuffManager _buffManager;
@@ -36,6 +37,7 @@ public class SystemManager : MonoBehaviour
     public bool[] _purification = new bool[_sector_size];
     public WorldTree _worldTree;
     public Altar _altar;
+    [SerializeField] private Dirt[] _dirts;
 
     public SectorObject _sectorTest;
     [SerializeField] private SectorObject[] _sectors;
@@ -66,6 +68,7 @@ public class SystemManager : MonoBehaviour
         _worldTree = GameObject.Find("WorldTree").GetComponent<WorldTree>();
         _buildings = GameObject.Find("Buildings").GetComponentsInChildren<BuildingChange>();
         _houseChange = GameObject.Find("Player House").GetComponent<HouseChange>();
+        _interiorChange = GameObject.Find("Interior").GetComponent<HouseChange>();
         _farmChange = GameObject.Find("Map").transform.GetChild(4).transform.GetChild(0).transform.GetChild(2).GetComponent<FarmChange>();
         // _buiding1 = GameObject.Find("ClothshopPlace").GetComponent<BuildingChange>();
         _altar = GameObject.Find("Altar").GetComponent<Altar>();
@@ -307,8 +310,15 @@ public class SystemManager : MonoBehaviour
         }
         // _sectorTest.DayEnd();
         _UIManager.DayStart();
-        Debug.Log("시스템 데이스탕트1");
+        // Debug.Log("시스템 데이스탕트1");
         _PrayBuff.DayStart();
+        foreach (var dirt in _dirts)
+        {
+            if (dirt)
+            {
+                dirt.DayStart();
+            }
+        }
 
         // _buiding1.DayStart();
         foreach (var building in _buildings)
@@ -429,6 +439,7 @@ public class SystemManager : MonoBehaviour
             _farmChange.ChangeFarm();
             // 집 자라기
             _houseChange.ChangeHouse();
+            _interiorChange.ChangeHouse();
             _worldTree.ChangeTreeLevel();
             // 제단 텔레포트 active
             GameObject.Find("Teleport").transform.GetChild(0).gameObject.SetActive(true);
@@ -443,6 +454,7 @@ public class SystemManager : MonoBehaviour
             _farmChange.ChangeFarm();
             // 집 자라기
             _houseChange.ChangeHouse();
+            _interiorChange.ChangeHouse();
             _worldTree.ChangeTreeLevel();
         }
     }
