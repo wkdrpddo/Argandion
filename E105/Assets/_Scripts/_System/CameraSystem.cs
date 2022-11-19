@@ -22,6 +22,7 @@ public class CameraSystem : MonoBehaviour
 
     public void CookingCamera(float xRot, float yRot, float zRot)
     {
+        Debug.Log("쿠킹 카메라");
         Vector3 pos = new Vector3(_po.transform.position.x + 2.17f, _po.transform.position.y + 2.51f, _po.transform.position.z + 1.7f);
         Quaternion rot = Quaternion.Euler(xRot, yRot, zRot);
         _cam.transform.SetPositionAndRotation(pos, rot);
