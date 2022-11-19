@@ -106,8 +106,8 @@ public class PlayerSystem : MonoBehaviour
         changeItem();
         checkHand();
         Interaction();
-        watering();
-        fff();
+        // watering();
+        // fff();
     }
 
     void GetBuff()
@@ -330,6 +330,14 @@ public class PlayerSystem : MonoBehaviour
             _delayedTimer = Mathf.Max(0, _delayedTimer);
         }
         _character.position = transform.position;
+        if (Input.GetButtonDown("next"))
+        {
+            QEItemEquip(1);
+        }
+        if (Input.GetButtonDown("prev"))
+        {
+            QEItemEquip(-1);
+        }
         if (_runtime > 1)
         {
             _runtime -= 1;
@@ -377,6 +385,25 @@ public class PlayerSystem : MonoBehaviour
                 _UIManager.setEquipPointer(7);
             }
         }
+    }
+
+    private void QEItemEquip(int value)
+    {
+        if (value > 0)
+        {
+            _equipItem += 1;
+            if (_equipItem > 6) {
+                _equipItem -= 7;
+            }
+        }
+        else if (value < 0)
+        {
+            _equipItem -= 1;
+            if (_equipItem < 0) {
+                _equipItem += 7;
+            }
+        }
+        _UIManager.setEquipPointer(_equipItem+1);
     }
 
     private void checkHand()
