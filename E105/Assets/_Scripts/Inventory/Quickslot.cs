@@ -10,14 +10,14 @@ public class Quickslot : MonoBehaviour
     private GameObject go_SlotsParent;  // Slot들의 부모인 Grid Setting 
 
     public Slot[] slots;  // 슬롯들 배열
-    [SerializeField] private UIManager ui;
+    // [SerializeField] private UIManager ui;
 
-    void Start()
+    void Awake()
     {
         go_InventoryBase = transform.GetChild(0).gameObject;
         go_SlotsParent = go_InventoryBase.transform.GetChild(0).gameObject;
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
-        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
 
         for (int i = 0; i < slots.Length; i++)
         {
@@ -81,20 +81,20 @@ public class Quickslot : MonoBehaviour
                     {
                         if (slots[i].itemCount + _count <= 99)
                         {
-                            ui.setPlayerQuickSlot(i, _item.ItemCode, slots[i].itemCount + _count);
+                            UIManager._uimanagerInstance.setPlayerQuickSlot(i, _item.ItemCode, slots[i].itemCount + _count);
                             slots[i].SetSlotCount(_count);
 
-                            ui.syncQuickSlot();
+                            UIManager._uimanagerInstance.syncQuickSlot();
                             return;
                         }
                         else
                         {
                             int temp = slots[i].itemCount;
-                            ui.setPlayerQuickSlot(i, _item.ItemCode, 99);
+                            UIManager._uimanagerInstance.setPlayerQuickSlot(i, _item.ItemCode, 99);
                             slots[i].SetSlotCount(99 - slots[i].itemCount);
                             AcquireItem(_item, _count + temp - 99);
 
-                            ui.syncQuickSlot();
+                            UIManager._uimanagerInstance.syncQuickSlot();
                             return;
                         }
                     }
@@ -106,10 +106,10 @@ public class Quickslot : MonoBehaviour
         {
             if (slots[i].itemCount == 0)
             {
-                ui.setPlayerQuickSlot(i, _item.ItemCode, _count);
+                UIManager._uimanagerInstance.setPlayerQuickSlot(i, _item.ItemCode, _count);
                 slots[i].AddItem(_item, _count);
 
-                ui.syncQuickSlot();
+                UIManager._uimanagerInstance.syncQuickSlot();
                 return;
             }
 
@@ -134,7 +134,7 @@ public class Quickslot : MonoBehaviour
                         {
                             slots[i].SetSlotCount(_count);
 
-                            ui.syncQuickSlot();
+                            UIManager._uimanagerInstance.syncQuickSlot();
                             return;
                         }
                         else
@@ -143,7 +143,7 @@ public class Quickslot : MonoBehaviour
                             slots[i].SetSlotCount(99 - slots[i].itemCount);
                             AcquireItem(_item, _count + temp - 99);
 
-                            ui.syncQuickSlot();
+                            UIManager._uimanagerInstance.syncQuickSlot();
                             return;
                         }
                     }
@@ -157,7 +157,7 @@ public class Quickslot : MonoBehaviour
             {
                 slots[i].AddItem(_item, _count);
 
-                ui.syncQuickSlot();
+                UIManager._uimanagerInstance.syncQuickSlot();
                 return;
             }
 
@@ -182,15 +182,15 @@ public class Quickslot : MonoBehaviour
     {
         if (slots[slotIdx].itemCount - count == 0)
         {
-            ui.setPlayerQuickSlot(slotIdx, 0, 0);
+            UIManager._uimanagerInstance.setPlayerQuickSlot(slotIdx, 0, 0);
         }
         else
         {
-            ui.setPlayerQuickSlot(slotIdx, slots[slotIdx].item.ItemCode, slots[slotIdx].itemCount - count);
+            UIManager._uimanagerInstance.setPlayerQuickSlot(slotIdx, slots[slotIdx].item.ItemCode, slots[slotIdx].itemCount - count);
         }
         slots[slotIdx].SetSlotCount(count * -1);
 
-        ui.syncQuickSlot();
+        UIManager._uimanagerInstance.syncQuickSlot();
     }
 
     public Slot[] getInventorySlots()

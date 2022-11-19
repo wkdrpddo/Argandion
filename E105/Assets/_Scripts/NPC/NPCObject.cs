@@ -23,45 +23,49 @@ public class NPCObject : MonoBehaviour
     {
         _animator.SetTrigger("move");
 
-        if(this.name == "Spirit"){
-            this.transform.LookAt(_PlayerObject.transform.position + new Vector3(0,this.transform.position.y,0));
-        }else{
+        if (this.name == "Spirit")
+        {
+            this.transform.LookAt(_PlayerObject.transform.position + new Vector3(0, this.transform.position.y, 0));
+        }
+        else
+        {
             this.transform.LookAt(_PlayerObject.transform);
         }
-        
+
         ConversationStart();
     }
 
 
+
     public void ConversationStart()
     {
-        switch(this.name)
+        switch (this.name)
         {
-            case "NPC1" :
+            case "NPC1":
                 _UIManager.GetComponent<UIManager>().OnConversationPanel(1);
                 break;
-            case "NPC2" :
+            case "NPC2":
                 _UIManager.GetComponent<UIManager>().OnConversationPanel(2);
                 break;
-            case "NPC3" :
+            case "NPC3":
                 _UIManager.GetComponent<UIManager>().OnConversationPanel(3);
                 break;
-            case "NPC4" :
+            case "NPC4":
                 _UIManager.GetComponent<UIManager>().OnConversationPanel(4);
                 break;
-            case "NPC5" :
+            case "NPC5":
                 _UIManager.GetComponent<UIManager>().OnConversationPanel(5);
                 break;
-            case "NPC6" :
+            case "NPC6":
                 _UIManager.GetComponent<UIManager>().OnConversationPanel(6);
                 break;
-            case "NPC7" :
+            case "NPC7":
                 _UIManager.GetComponent<UIManager>().OnConversationPanel(7);
                 break;
-            case "NPC8" :
+            case "NPC8":
                 _UIManager.GetComponent<UIManager>().OnConversationPanel(8);
                 break;
-            case "Spirit" :
+            case "Spirit":
                 _UIManager.GetComponent<UIManager>().OnConversationPanel(10);
                 break;
         }

@@ -14,11 +14,11 @@ public class Storage : MonoBehaviour
 
     public Slot[] slots;  // 슬롯들 배열
 
-    [SerializeField] private UIManager ui;
+    // [SerializeField] private UIManager ui;
 
-    void Start()
+    void Awake()
     {
-        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
 
         go_InventoryBase = transform.GetChild(0).gameObject;
         go_SlotsParent = go_InventoryBase.transform.GetChild(0).gameObject;
@@ -55,7 +55,7 @@ public class Storage : MonoBehaviour
         {
             slots[slotIndex].transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0);
             slots[slotIndex].transform.GetChild(1).gameObject.SetActive(false);
-            slots[slotIndex].transform.GetChild(0).GetComponent<Image>().sprite = ui.getItemIcon(_item.ItemCode);
+            slots[slotIndex].transform.GetChild(0).GetComponent<Image>().sprite = UIManager._uimanagerInstance.getItemIcon(_item.ItemCode);
         }
     }
 

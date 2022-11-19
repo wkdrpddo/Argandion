@@ -129,7 +129,7 @@ public class UIManager : MonoBehaviour
         GameObject.Find("Down").SetActive(false);
         _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
         GameObject.Find("Up").SetActive(false);
-        // _alter = GameObject.Find("Altar").GetComponent<Altar>();
+        _alter = GameObject.Find("Altar").GetComponent<Altar>();
 
         _systemmanager.setPlayerGold(9999999);
 
@@ -160,8 +160,8 @@ public class UIManager : MonoBehaviour
         _inventory = gameObject.transform.Find("Inventory").gameObject;
         _invenMoney = _inventory.transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
         _invenMoney.text = _systemmanager.getPlayerGold().ToString();
-        _notificationpanel = GameObject.Find("NotificationPanel");
         _resultnotificationpanel = gameObject.transform.Find("ResultNotificationPanel").GetComponent<ResultNotificationPanel>();
+        _notificationpanel = GameObject.Find("NotificationPanel");
         _transactiondoublecheck = gameObject.transform.Find("TransactionDoubleCheckModal").GetComponent<TransactionDoubleCheck>();
         _eventAnnounce = GameObject.Find("EventUIAnnounce");
         _announceTitle = _eventAnnounce.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
@@ -243,15 +243,12 @@ public class UIManager : MonoBehaviour
         ItemObject item22 = findItem(505);
         acquireItem(item22, 60);
 
-        //검 테스트
-        // ItemObject item304 = findItem(304);
-        // acquireItem(item304, 1);
-        // ItemObject item309 = findItem(309);
-        // acquireItem(item309, 1);
-        // ItemObject item314 = findItem(314);
-        // acquireItem(item314, 1);
-        // ItemObject item319 = findItem(319);
-        // acquireItem(item319, 1);
+
+        ItemObject item106 = findItem(106);
+        acquireItem(item106, 1);
+
+
+
 
 
         _systemmanager.setPlayerGold(9999999);
@@ -409,6 +406,7 @@ public class UIManager : MonoBehaviour
 
     public void OnNotificationPanel()
     {
+        Debug.Log("On");
         _notificationpanel.GetComponent<NotificationPanel>().handleNoti();
     }
 

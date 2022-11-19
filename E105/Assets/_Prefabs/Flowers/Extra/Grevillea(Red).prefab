@@ -57,6 +57,8 @@ MonoBehaviour:
   _inventory: {fileID: 0}
   _item: {fileID: 0}
   _isremain: 0
+  _isHave: 0
+  _fruit: {fileID: 0}
 --- !u!54 &2943677927231671031
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -123,6 +125,7 @@ GameObject:
   - component: {fileID: 2943677927610756823}
   - component: {fileID: 2943677927610756821}
   - component: {fileID: 2943677927610756820}
+  - component: {fileID: 3549082498056547746}
   m_Layer: 9
   m_Name: Flower_AB (2)
   m_TagString: Untagged
@@ -195,6 +198,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3549082498056547746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2943677927610756822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 0.7924528, g: 0, b: 0, a: 1}
+  outlineWidth: 8
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2943677928582523618
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +227,7 @@ GameObject:
   - component: {fileID: 2943677928582523619}
   - component: {fileID: 2943677928582523617}
   - component: {fileID: 2943677928582523616}
+  - component: {fileID: 5786832258446726192}
   m_Layer: 9
   m_Name: Flower_AB (1)
   m_TagString: Untagged
@@ -278,6 +300,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5786832258446726192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2943677928582523618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 0.7924528, g: 0, b: 0, a: 1}
+  outlineWidth: 8
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &6997719237507772781
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,6 +329,7 @@ GameObject:
   - component: {fileID: 7662650734959209431}
   - component: {fileID: 6771425561516319858}
   - component: {fileID: 8798935131373883576}
+  - component: {fileID: 2913057510636961189}
   m_Layer: 9
   m_Name: Flower_AB
   m_TagString: Untagged
@@ -361,3 +402,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2913057510636961189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6997719237507772781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 0.7924528, g: 0, b: 0, a: 1}
+  outlineWidth: 8
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

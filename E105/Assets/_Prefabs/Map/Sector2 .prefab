@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -53,13 +54,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -828,7 +828,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 16
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672555608051586
 MeshFilter:
@@ -1559,7 +1559,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672555639744775
 MeshFilter:
@@ -3809,7 +3809,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 17
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672555731033225
 MeshFilter:
@@ -6238,7 +6238,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 12
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672555848396058
 MeshFilter:
@@ -7752,7 +7752,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672555889709785
 MeshFilter:
@@ -10413,7 +10413,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672556038429564
 MeshFilter:
@@ -11169,7 +11169,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672556088475684
 MeshFilter:
@@ -16172,7 +16172,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 13
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672556365591186
 MeshFilter:
@@ -19424,7 +19424,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672556525243663
 MeshFilter:
@@ -21896,125 +21896,6 @@ LODGroup:
     renderers:
     - renderer: {fileID: 31672557356443391}
   m_Enabled: 1
---- !u!1 &31672556671083907
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 31672556671083906}
-  - component: {fileID: 31672556671083910}
-  - component: {fileID: 31672556671083911}
-  - component: {fileID: 31672556671083904}
-  - component: {fileID: 31672556671083905}
-  m_Layer: 0
-  m_Name: SM_Rock_Small_02 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!4 &31672556671083906
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672556671083907}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -50.7, y: 2, z: 18.69}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &31672556671083910
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672556671083907}
-  m_Mesh: {fileID: 4300000, guid: a5a9957d8a5fe934bb4e90b07d3f8973, type: 3}
---- !u!23 &31672556671083911
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672556671083907}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: b72e16591230315448c77c827b522ae1, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &31672556671083904
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672556671083907}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a5a9957d8a5fe934bb4e90b07d3f8973, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &31672556671083905
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672556671083907}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: a5a9957d8a5fe934bb4e90b07d3f8973, type: 3}
 --- !u!1 &31672556678518557
 GameObject:
   m_ObjectHideFlags: 0
@@ -22131,7 +22012,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672556680185897
 MeshFilter:
@@ -22416,6 +22297,12 @@ Transform:
   - {fileID: 31672555631664597}
   - {fileID: 31672556625682123}
   - {fileID: 31672556154733352}
+  - {fileID: 6124287467746473487}
+  - {fileID: 1259301415109224045}
+  - {fileID: 1878975678042604431}
+  - {fileID: 1853518995051959632}
+  - {fileID: 8674982138099834696}
+  - {fileID: 8612773597913580987}
   m_Father: {fileID: 629855769739830779}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24701,125 +24588,6 @@ LODGroup:
     renderers:
     - renderer: {fileID: 31672556440708678}
   m_Enabled: 1
---- !u!1 &31672556821830651
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 31672556821830650}
-  - component: {fileID: 31672556821830654}
-  - component: {fileID: 31672556821830655}
-  - component: {fileID: 31672556821830648}
-  - component: {fileID: 31672556821830649}
-  m_Layer: 0
-  m_Name: SM_Rock_Rounded_01 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!4 &31672556821830650
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672556821830651}
-  m_LocalRotation: {x: 0, y: 0.3420201, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: -50.79, y: 2.083055, z: 15.79}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 40, z: 0}
---- !u!33 &31672556821830654
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672556821830651}
-  m_Mesh: {fileID: 4300000, guid: fe518ac5d5cfa0d45b8ad961535da30f, type: 3}
---- !u!23 &31672556821830655
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672556821830651}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: b72e16591230315448c77c827b522ae1, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &31672556821830648
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672556821830651}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: fe518ac5d5cfa0d45b8ad961535da30f, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &31672556821830649
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672556821830651}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: fe518ac5d5cfa0d45b8ad961535da30f, type: 3}
 --- !u!1 &31672556823053348
 GameObject:
   m_ObjectHideFlags: 0
@@ -25771,7 +25539,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672556882799786
 MeshFilter:
@@ -29890,7 +29658,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 10
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672557180044334
 MeshFilter:
@@ -31298,7 +31066,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 11
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672557228130267
 MeshFilter:
@@ -31469,11 +31237,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 31672556821830650}
   - {fileID: 31672556038429560}
-  - {fileID: 31672556671083906}
   - {fileID: 31672556525243659}
-  - {fileID: 31672557535405771}
   - {fileID: 31672556882799830}
   - {fileID: 31672555889709765}
   - {fileID: 31672556088475680}
@@ -32877,7 +32642,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 14
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672557313288520
 MeshFilter:
@@ -35992,7 +35757,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31672557486969107}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -39.59, y: 0.71, z: 49.93}
+  m_LocalPosition: {x: -39.59, y: 0.71, z: 51.54}
   m_LocalScale: {x: 2, y: 1, z: 2.3852699}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36675,125 +36440,6 @@ LODGroup:
     renderers:
     - renderer: {fileID: 31672557220403101}
   m_Enabled: 1
---- !u!1 &31672557535405812
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 31672557535405771}
-  - component: {fileID: 31672557535405775}
-  - component: {fileID: 31672557535405768}
-  - component: {fileID: 31672557535405769}
-  - component: {fileID: 31672557535405770}
-  m_Layer: 0
-  m_Name: SM_Rock_Small_02 (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!4 &31672557535405771
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672557535405812}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -49.76, y: 2, z: 22.14}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &31672557535405775
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672557535405812}
-  m_Mesh: {fileID: 4300000, guid: a5a9957d8a5fe934bb4e90b07d3f8973, type: 3}
---- !u!23 &31672557535405768
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672557535405812}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: b72e16591230315448c77c827b522ae1, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &31672557535405769
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672557535405812}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a5a9957d8a5fe934bb4e90b07d3f8973, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &31672557535405770
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31672557535405812}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: a5a9957d8a5fe934bb4e90b07d3f8973, type: 3}
 --- !u!1 &31672557536738163
 GameObject:
   m_ObjectHideFlags: 0
@@ -39059,7 +38705,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31672557240738402}
-  m_RootOrder: 15
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &31672557671537107
 MeshFilter:
@@ -40093,6 +39739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -40100,13 +39747,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -40156,6 +39802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -40163,13 +39810,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -40206,7 +39852,7 @@ Transform:
   m_Children:
   - {fileID: 629855769559508027}
   m_Father: {fileID: 629855770435805582}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 145, z: 0}
 --- !u!33 &629855768579549785
 MeshFilter:
@@ -40625,107 +40271,10 @@ Transform:
   - {fileID: 629855768682121348}
   - {fileID: 629855768778949504}
   - {fileID: 31672556693372944}
+  - {fileID: 7568164083133509799}
   m_Father: {fileID: 1719340853385098536}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &629855769766485258
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 629855769766485257}
-  - component: {fileID: 629855769766485270}
-  - component: {fileID: 629855769766485271}
-  - component: {fileID: 629855769766485256}
-  m_Layer: 0
-  m_Name: bridge
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &629855769766485257
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 629855769766485258}
-  m_LocalRotation: {x: -0.014066883, y: -0.5311375, z: -0.007671074, w: 0.8471342}
-  m_LocalPosition: {x: 0.57, y: 0.8, z: 19.79}
-  m_LocalScale: {x: 2, y: 1, z: 2.3852699}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 629855770435805582}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -1.833, y: -64.176, z: 0.112}
---- !u!33 &629855769766485270
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 629855769766485258}
-  m_Mesh: {fileID: 4300000, guid: 6d0246924bf2bfd4583cbe081c6d5ea6, type: 3}
---- !u!23 &629855769766485271
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 629855769766485258}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: b72e16591230315448c77c827b522ae1, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &629855769766485256
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 629855769766485258}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 6d0246924bf2bfd4583cbe081c6d5ea6, type: 3}
 --- !u!1 &629855770015422376
 GameObject:
   m_ObjectHideFlags: 0
@@ -40912,7 +40461,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 629855769766485257}
   - {fileID: 629855768579549788}
   m_Father: {fileID: 629855769739830779}
   m_RootOrder: 1
@@ -41086,6 +40634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -41093,13 +40642,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -41149,6 +40697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -41156,16 +40705,98 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &1007291663541930418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7173421569166215719}
+  - component: {fileID: 9158045030931076006}
+  - component: {fileID: 2471535214200133746}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01_LOD0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &7173421569166215719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007291663541930418}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1259301415109224045}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &9158045030931076006
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007291663541930418}
+  m_Mesh: {fileID: -2637313515946168265, guid: 4da3e848ad01ab24b90028b043f28867, type: 3}
+--- !u!23 &2471535214200133746
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007291663541930418}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 220714b8c92ca8544a4cbf3ea2c79b7a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1277982279868149302
 GameObject:
   m_ObjectHideFlags: 0
@@ -41212,6 +40843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -41219,13 +40851,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -41275,6 +40906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -41282,16 +40914,98 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &1700063937855906108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2199224115233799117}
+  - component: {fileID: 6952549717789877651}
+  - component: {fileID: 7177833977257735061}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01_LOD1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &2199224115233799117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700063937855906108}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1853518995051959632}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &6952549717789877651
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700063937855906108}
+  m_Mesh: {fileID: -8232216902156225159, guid: 4da3e848ad01ab24b90028b043f28867, type: 3}
+--- !u!23 &7177833977257735061
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700063937855906108}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 220714b8c92ca8544a4cbf3ea2c79b7a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1831529928125541162
 GameObject:
   m_ObjectHideFlags: 0
@@ -41338,6 +41052,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -41345,13 +41060,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -41401,6 +41115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -41408,13 +41123,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -41464,6 +41178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -41471,13 +41186,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -41527,6 +41241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -41534,13 +41249,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -41590,6 +41304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -41597,13 +41312,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -41653,6 +41367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -41660,13 +41375,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -41716,6 +41430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -41723,13 +41438,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -41744,7 +41458,7 @@ GameObject:
   - component: {fileID: 1719340853385098536}
   - component: {fileID: 1719340853385098539}
   - component: {fileID: 1020069956085325640}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: 'Sector2 '
   m_TagString: sector
   m_Icon: {fileID: 0}
@@ -41768,6 +41482,7 @@ Transform:
   - {fileID: 6545015969462999000}
   - {fileID: 5289766276062801556}
   - {fileID: 31672556047401744}
+  - {fileID: 5809563054903224212}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -41821,8 +41536,8 @@ MonoBehaviour:
   _animal_wolf_count_factor: 00000000000000000400000005000000
   _animal_bear_count_factor: 
   _SectorCollider:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 6545015968132692898}
+  - {fileID: 6545015969612984959}
   _SectorArea: []
   _floweObject: {fileID: 4783104584564589389, guid: cd1112311a88e014c9dcaea2523556c1, type: 3}
   _items: {fileID: 0}
@@ -41885,6 +41600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -41892,13 +41608,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -41948,6 +41663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -41955,13 +41671,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -42011,6 +41726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -42018,16 +41734,98 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &3185964764760106385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6292180146034030836}
+  - component: {fileID: 8764938118916305167}
+  - component: {fileID: 1538794970974791576}
+  m_Layer: 0
+  m_Name: SM_Env_Tree_Birch_03_Branches_LOD0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &6292180146034030836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185964764760106385}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5084272408328635132}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &8764938118916305167
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185964764760106385}
+  m_Mesh: {fileID: -117490761349975581, guid: 8716d682237b73641990a60363aedc25, type: 3}
+--- !u!23 &1538794970974791576
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185964764760106385}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a059ec20efefda1498b2a3ea275d06e1, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3243131089654705775
 GameObject:
   m_ObjectHideFlags: 0
@@ -42074,6 +41872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -42081,13 +41880,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -42137,6 +41935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -42144,13 +41943,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -42200,6 +41998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -42207,13 +42006,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -42263,6 +42061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -42270,16 +42069,98 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &3961059765188265150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3090009223980618486}
+  - component: {fileID: 8509303950185554643}
+  - component: {fileID: 7007328926384761467}
+  m_Layer: 0
+  m_Name: SM_Env_Tree_Birch_03_LOD2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &3090009223980618486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3961059765188265150}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5084272408328635132}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &8509303950185554643
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3961059765188265150}
+  m_Mesh: {fileID: 5139523175010599481, guid: 8716d682237b73641990a60363aedc25, type: 3}
+--- !u!23 &7007328926384761467
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3961059765188265150}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 0f271b3268bd2404e8b9415f8e7209b4, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4206476590155314914
 GameObject:
   m_ObjectHideFlags: 0
@@ -47887,6 +47768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -47894,16 +47776,155 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &4794961063918522306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1878975678042604431}
+  - component: {fileID: 2105444528939043230}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01 (15)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1878975678042604431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4794961063918522306}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.67, y: 2, z: 64.43}
+  m_LocalScale: {x: 1, y: 0.9, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2471724429717522155}
+  - {fileID: 2335653831584266140}
+  m_Father: {fileID: 31672556693372944}
+  m_RootOrder: 59
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &2105444528939043230
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4794961063918522306}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0.47313002, z: 0.07381645}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.03747955
+    fadeTransitionWidth: 0.1
+    renderers:
+    - renderer: {fileID: 8189509650593328098}
+  - screenRelativeHeight: 0.0059148613
+    fadeTransitionWidth: 0.2
+    renderers:
+    - renderer: {fileID: 6546766037263480086}
+  m_Enabled: 1
+--- !u!1 &5017542193916803473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6116319532999295979}
+  - component: {fileID: 7169699216961086460}
+  - component: {fileID: 2676312743396542614}
+  m_Layer: 0
+  m_Name: SM_Env_Tree_Birch_03_LOD1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &6116319532999295979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5017542193916803473}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5084272408328635132}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7169699216961086460
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5017542193916803473}
+  m_Mesh: {fileID: 7660372542465130856, guid: 8716d682237b73641990a60363aedc25, type: 3}
+--- !u!23 &2676312743396542614
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5017542193916803473}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 0f271b3268bd2404e8b9415f8e7209b4, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5021734652255887469
 GameObject:
   m_ObjectHideFlags: 0
@@ -47950,6 +47971,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -47957,13 +47979,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -48013,6 +48034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -48020,13 +48042,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -48076,6 +48097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -48083,13 +48105,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -48139,6 +48160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -48146,13 +48168,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -48202,6 +48223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -48209,13 +48231,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -48265,6 +48286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -48272,16 +48294,98 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &5427347142304574231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1778631195822537917}
+  - component: {fileID: 6917842831989444963}
+  - component: {fileID: 3155419789109041028}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01_LOD0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1778631195822537917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5427347142304574231}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1853518995051959632}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &6917842831989444963
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5427347142304574231}
+  m_Mesh: {fileID: -2637313515946168265, guid: 4da3e848ad01ab24b90028b043f28867, type: 3}
+--- !u!23 &3155419789109041028
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5427347142304574231}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 220714b8c92ca8544a4cbf3ea2c79b7a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5449689736048974683
 GameObject:
   m_ObjectHideFlags: 0
@@ -48328,6 +48432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -48335,13 +48440,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -48391,6 +48495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -48398,13 +48503,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -51156,6 +51260,7 @@ Transform:
   - {fileID: 5771404790760214087}
   - {fileID: 5771404790348459296}
   - {fileID: 5771404791594345231}
+  - {fileID: 5084272408328635132}
   m_Father: {fileID: 5771404789998525815}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -65729,7 +65834,7 @@ Terrain:
   m_TreeMaximumFullLODCount: 50
   m_DetailObjectDistance: 80
   m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 5
+  m_HeightmapPixelError: 1
   m_SplatMapDistance: 1000
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
@@ -65890,7 +65995,7 @@ Terrain:
   m_TreeMaximumFullLODCount: 50
   m_DetailObjectDistance: 80
   m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 5
+  m_HeightmapPixelError: 1
   m_SplatMapDistance: 1000
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
@@ -66344,6 +66449,7 @@ Transform:
   - {fileID: 5970351416744177510}
   - {fileID: 5970351417498487323}
   - {fileID: 5970351417294970180}
+  - {fileID: 6944255351174378111}
   m_Father: {fileID: 1719340853385098536}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -66430,6 +66536,89 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6096243682209725506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2335653831584266140}
+  - component: {fileID: 8136189122191182037}
+  - component: {fileID: 6546766037263480086}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01_LOD1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &2335653831584266140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6096243682209725506}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1878975678042604431}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &8136189122191182037
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6096243682209725506}
+  m_Mesh: {fileID: -8232216902156225159, guid: 4da3e848ad01ab24b90028b043f28867, type: 3}
+--- !u!23 &6546766037263480086
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6096243682209725506}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 220714b8c92ca8544a4cbf3ea2c79b7a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6148975938245139065
 GameObject:
   m_ObjectHideFlags: 0
@@ -66476,6 +66665,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -66483,16 +66673,98 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &6346175313566567460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2471724429717522155}
+  - component: {fileID: 3353592325610766250}
+  - component: {fileID: 8189509650593328098}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01_LOD0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &2471724429717522155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346175313566567460}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1878975678042604431}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3353592325610766250
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346175313566567460}
+  m_Mesh: {fileID: -2637313515946168265, guid: 4da3e848ad01ab24b90028b043f28867, type: 3}
+--- !u!23 &8189509650593328098
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346175313566567460}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 220714b8c92ca8544a4cbf3ea2c79b7a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6379326917001126004
 GameObject:
   m_ObjectHideFlags: 0
@@ -66827,6 +67099,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -66834,13 +67107,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -66890,6 +67162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -66897,13 +67170,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -66953,6 +67225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -66960,16 +67233,181 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &7519458130485358169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3582272637184514226}
+  - component: {fileID: 6937610793999618165}
+  - component: {fileID: 1278365162746612058}
+  m_Layer: 0
+  m_Name: SM_Env_Tree_Birch_03_Branches_LOD1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &3582272637184514226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519458130485358169}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5084272408328635132}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &6937610793999618165
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519458130485358169}
+  m_Mesh: {fileID: -3452342166785550081, guid: 8716d682237b73641990a60363aedc25, type: 3}
+--- !u!23 &1278365162746612058
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519458130485358169}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a059ec20efefda1498b2a3ea275d06e1, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7543408786559758240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3274948196973314853}
+  - component: {fileID: 3913522729428176950}
+  - component: {fileID: 3536372398129046873}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01_LOD0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &3274948196973314853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7543408786559758240}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8612773597913580987}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3913522729428176950
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7543408786559758240}
+  m_Mesh: {fileID: -2637313515946168265, guid: 4da3e848ad01ab24b90028b043f28867, type: 3}
+--- !u!23 &3536372398129046873
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7543408786559758240}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 220714b8c92ca8544a4cbf3ea2c79b7a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7604885850780660923
 GameObject:
   m_ObjectHideFlags: 0
@@ -67016,6 +67454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67023,13 +67462,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -67079,6 +67517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67086,16 +67525,98 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &7702125081076737820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3561498968968913708}
+  - component: {fileID: 2329016456485411697}
+  - component: {fileID: 8251708251167207184}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01_LOD1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &3561498968968913708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7702125081076737820}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8674982138099834696}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2329016456485411697
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7702125081076737820}
+  m_Mesh: {fileID: -8232216902156225159, guid: 4da3e848ad01ab24b90028b043f28867, type: 3}
+--- !u!23 &8251708251167207184
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7702125081076737820}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 220714b8c92ca8544a4cbf3ea2c79b7a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7791618678388091722
 GameObject:
   m_ObjectHideFlags: 0
@@ -67142,6 +67663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67149,16 +67671,98 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &7818002347800397935
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1571946207926080497}
+  - component: {fileID: 8458589985808322421}
+  - component: {fileID: 6696279833019763760}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01_LOD1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1571946207926080497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7818002347800397935}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8612773597913580987}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &8458589985808322421
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7818002347800397935}
+  m_Mesh: {fileID: -8232216902156225159, guid: 4da3e848ad01ab24b90028b043f28867, type: 3}
+--- !u!23 &6696279833019763760
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7818002347800397935}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 220714b8c92ca8544a4cbf3ea2c79b7a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7899149120484997019
 GameObject:
   m_ObjectHideFlags: 0
@@ -67205,6 +67809,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67212,13 +67817,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -67268,6 +67872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67275,13 +67880,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -67331,6 +67935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67338,13 +67943,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -67394,6 +67998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67401,13 +68006,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -67457,6 +68061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67464,13 +68069,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -67520,6 +68124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67527,13 +68132,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -67583,6 +68187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67590,13 +68195,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -67646,6 +68250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67653,13 +68258,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -67709,6 +68313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67716,13 +68321,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -67772,6 +68376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67779,13 +68384,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -67835,6 +68439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67842,13 +68447,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -67898,6 +68502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67905,13 +68510,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -67961,6 +68565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -67968,13 +68573,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -68024,6 +68628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68031,13 +68636,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -68087,6 +68691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68094,13 +68699,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -68150,6 +68754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68157,13 +68762,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -68213,6 +68817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68220,13 +68825,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -68276,6 +68880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68283,13 +68888,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -68339,6 +68943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68346,13 +68951,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -68402,6 +69006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68409,13 +69014,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -68465,6 +69069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68472,13 +69077,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -68528,6 +69132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68535,13 +69140,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -68591,6 +69195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68598,13 +69203,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -68654,6 +69258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68661,13 +69266,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -68717,6 +69321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68724,13 +69329,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
@@ -68780,6 +69384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68787,16 +69392,466 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &7922547771452980650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1259301415109224045}
+  - component: {fileID: 8208249029572875706}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01 (14)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1259301415109224045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7922547771452980650}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.8, y: 2, z: 62.46}
+  m_LocalScale: {x: 1, y: 0.9, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7173421569166215719}
+  - {fileID: 9108262349490920687}
+  m_Father: {fileID: 31672556693372944}
+  m_RootOrder: 58
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &8208249029572875706
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7922547771452980650}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0.47313002, z: 0.07381645}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.03747955
+    fadeTransitionWidth: 0.1
+    renderers:
+    - renderer: {fileID: 2471535214200133746}
+  - screenRelativeHeight: 0.0059148613
+    fadeTransitionWidth: 0.2
+    renderers:
+    - renderer: {fileID: 5315275255441183901}
+  m_Enabled: 1
+--- !u!1 &7978834806497545422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8612773597913580987}
+  - component: {fileID: 5197001462849513978}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01 (18)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &8612773597913580987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7978834806497545422}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.86, y: 2, z: 61.53}
+  m_LocalScale: {x: 1, y: 0.9, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3274948196973314853}
+  - {fileID: 1571946207926080497}
+  m_Father: {fileID: 31672556693372944}
+  m_RootOrder: 62
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &5197001462849513978
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7978834806497545422}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0.47313002, z: 0.07381645}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.03747955
+    fadeTransitionWidth: 0.1
+    renderers:
+    - renderer: {fileID: 3536372398129046873}
+  - screenRelativeHeight: 0.0059148613
+    fadeTransitionWidth: 0.2
+    renderers:
+    - renderer: {fileID: 6696279833019763760}
+  m_Enabled: 1
+--- !u!1 &8133730759265281942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 17738725271812546}
+  - component: {fileID: 2631969699655414062}
+  - component: {fileID: 5179234869630542267}
+  m_Layer: 0
+  m_Name: SM_Env_Tree_Birch_03_LOD0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &17738725271812546
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133730759265281942}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5084272408328635132}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2631969699655414062
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133730759265281942}
+  m_Mesh: {fileID: 2329980425000038357, guid: 8716d682237b73641990a60363aedc25, type: 3}
+--- !u!23 &5179234869630542267
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133730759265281942}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 0f271b3268bd2404e8b9415f8e7209b4, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8258562236090903807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1853518995051959632}
+  - component: {fileID: 3781528212036971835}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01 (16)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1853518995051959632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8258562236090903807}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.91, y: 2, z: 64.66}
+  m_LocalScale: {x: 1, y: 0.9, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1778631195822537917}
+  - {fileID: 2199224115233799117}
+  m_Father: {fileID: 31672556693372944}
+  m_RootOrder: 60
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &3781528212036971835
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8258562236090903807}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0.47313002, z: 0.07381645}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.03747955
+    fadeTransitionWidth: 0.1
+    renderers:
+    - renderer: {fileID: 3155419789109041028}
+  - screenRelativeHeight: 0.0059148613
+    fadeTransitionWidth: 0.2
+    renderers:
+    - renderer: {fileID: 7177833977257735061}
+  m_Enabled: 1
+--- !u!1 &8361894999884136221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8674982138099834696}
+  - component: {fileID: 5310071924895414772}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01 (17)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &8674982138099834696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8361894999884136221}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.95, y: 2, z: 63.6}
+  m_LocalScale: {x: 1, y: 0.9, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4101039019046005362}
+  - {fileID: 3561498968968913708}
+  m_Father: {fileID: 31672556693372944}
+  m_RootOrder: 61
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &5310071924895414772
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8361894999884136221}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0.47313002, z: 0.07381645}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.03747955
+    fadeTransitionWidth: 0.1
+    renderers:
+    - renderer: {fileID: 2555361626699471546}
+  - screenRelativeHeight: 0.0059148613
+    fadeTransitionWidth: 0.2
+    renderers:
+    - renderer: {fileID: 8251708251167207184}
+  m_Enabled: 1
+--- !u!1 &8520138837523633699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6124287467746473487}
+  - component: {fileID: 1380905892460151007}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01 (13)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &6124287467746473487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8520138837523633699}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.11, y: 2, z: 60.88}
+  m_LocalScale: {x: 1, y: 0.9, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1623985337677768249}
+  - {fileID: 4439926347194565833}
+  m_Father: {fileID: 31672556693372944}
+  m_RootOrder: 57
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &1380905892460151007
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8520138837523633699}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0.47313002, z: 0.07381645}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.03747955
+    fadeTransitionWidth: 0.1
+    renderers:
+    - renderer: {fileID: 208576779086374194}
+  - screenRelativeHeight: 0.0059148613
+    fadeTransitionWidth: 0.2
+    renderers:
+    - renderer: {fileID: 1950462787995592821}
+  m_Enabled: 1
+--- !u!1 &8598649635369573258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3556978724267143535}
+  - component: {fileID: 487918551290156687}
+  - component: {fileID: 1016034887659056445}
+  m_Layer: 0
+  m_Name: SM_Env_Tree_Birch_03_LOD3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &3556978724267143535
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8598649635369573258}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5084272408328635132}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &487918551290156687
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8598649635369573258}
+  m_Mesh: {fileID: 3420997352261237095, guid: 8716d682237b73641990a60363aedc25, type: 3}
+--- !u!23 &1016034887659056445
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8598649635369573258}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 08608de388a2513479d07ba2e50b5d6c, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8670022466671524059
 GameObject:
   m_ObjectHideFlags: 0
@@ -68843,6 +69898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68850,16 +69906,184 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &8779601777846153892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5084272408328635132}
+  - component: {fileID: 1576290991502729476}
+  - component: {fileID: 1342745376291142404}
+  m_Layer: 0
+  m_Name: SM_Env_Tree_Birch_03 (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &5084272408328635132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8779601777846153892}
+  m_LocalRotation: {x: 0, y: 0.86602545, z: 0, w: 0.49999994}
+  m_LocalPosition: {x: -14.63, y: 0, z: 2.64}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6292180146034030836}
+  - {fileID: 3582272637184514226}
+  - {fileID: 17738725271812546}
+  - {fileID: 6116319532999295979}
+  - {fileID: 3090009223980618486}
+  - {fileID: 3556978724267143535}
+  m_Father: {fileID: 5771404790201581908}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 120, z: 0}
+--- !u!205 &1576290991502729476
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8779601777846153892}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.097921014, y: 2.1105206, z: -0.030627966}
+  m_Size: 5.234669
+  m_FadeMode: 1
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.31826118
+    fadeTransitionWidth: 0.1
+    renderers:
+    - renderer: {fileID: 1538794970974791576}
+    - renderer: {fileID: 5179234869630542267}
+  - screenRelativeHeight: 0.13664259
+    fadeTransitionWidth: 0.1
+    renderers:
+    - renderer: {fileID: 1278365162746612058}
+    - renderer: {fileID: 2676312743396542614}
+  - screenRelativeHeight: 0.04723128
+    fadeTransitionWidth: 0.1
+    renderers:
+    - renderer: {fileID: 7007328926384761467}
+  - screenRelativeHeight: 0.0062740166
+    fadeTransitionWidth: 0.1
+    renderers:
+    - renderer: {fileID: 1016034887659056445}
+  m_Enabled: 1
+--- !u!64 &1342745376291142404
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8779601777846153892}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 543953597455342938, guid: 525eee429f2e8db418d8b8c292252531, type: 3}
+--- !u!1 &8862558164978648953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4101039019046005362}
+  - component: {fileID: 9167286920817139699}
+  - component: {fileID: 2555361626699471546}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01_LOD0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &4101039019046005362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8862558164978648953}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8674982138099834696}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &9167286920817139699
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8862558164978648953}
+  m_Mesh: {fileID: -2637313515946168265, guid: 4da3e848ad01ab24b90028b043f28867, type: 3}
+--- !u!23 &2555361626699471546
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8862558164978648953}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 220714b8c92ca8544a4cbf3ea2c79b7a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8977041165507366847
 GameObject:
   m_ObjectHideFlags: 0
@@ -68906,6 +70130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68913,16 +70138,98 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &8996012841587564186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9108262349490920687}
+  - component: {fileID: 6345072999732901587}
+  - component: {fileID: 5315275255441183901}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01_LOD1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &9108262349490920687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8996012841587564186}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1259301415109224045}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &6345072999732901587
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8996012841587564186}
+  m_Mesh: {fileID: -8232216902156225159, guid: 4da3e848ad01ab24b90028b043f28867, type: 3}
+--- !u!23 &5315275255441183901
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8996012841587564186}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 220714b8c92ca8544a4cbf3ea2c79b7a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &9012558640773675147
 GameObject:
   m_ObjectHideFlags: 0
@@ -68969,6 +70276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -68976,16 +70284,98 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &9091433440947487887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1623985337677768249}
+  - component: {fileID: 5774403344190015368}
+  - component: {fileID: 208576779086374194}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01_LOD0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1623985337677768249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9091433440947487887}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6124287467746473487}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5774403344190015368
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9091433440947487887}
+  m_Mesh: {fileID: -2637313515946168265, guid: 4da3e848ad01ab24b90028b043f28867, type: 3}
+--- !u!23 &208576779086374194
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9091433440947487887}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 220714b8c92ca8544a4cbf3ea2c79b7a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &9096370853164689013
 GameObject:
   m_ObjectHideFlags: 0
@@ -69032,6 +70422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sector: {fileID: 1719340853385098539}
   _trees:
+  - {fileID: 6540791282333545219, guid: e2bb7ef55b1f0794ea29ec93df3ecda3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -69039,16 +70430,98 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  _branch: {fileID: 0}
-  _stone: {fileID: 0}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
   _ores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7843403735286229279, guid: 6a047e8c1989aa244a8ac18e2fb150d1, type: 3}
+  - {fileID: 6400464738278475154, guid: f4c19d7aa44b1d14eb43d5910c37a674, type: 3}
+  - {fileID: 8526591931111342678, guid: 4f8c89b5585096448bff071cbe56e9a8, type: 3}
   _tree_spawn_percent: 0
   _base_transform: {fileID: 0}
   _ore_spawn: 0
+--- !u!1 &9177152975050243622
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4439926347194565833}
+  - component: {fileID: 1221853439551898060}
+  - component: {fileID: 1950462787995592821}
+  m_Layer: 0
+  m_Name: SM_Env_Grass_Tall_Clump_01_LOD1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &4439926347194565833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9177152975050243622}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6124287467746473487}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1221853439551898060
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9177152975050243622}
+  m_Mesh: {fileID: -8232216902156225159, guid: 4da3e848ad01ab24b90028b043f28867, type: 3}
+--- !u!23 &1950462787995592821
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9177152975050243622}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 220714b8c92ca8544a4cbf3ea2c79b7a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1001 &343247927314102439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69110,6 +70583,130 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1474091447687252889, guid: d5e378fcc5adfd84fba9a024f9830670, type: 3}
   m_PrefabInstance: {fileID: 343247927314102439}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1677674171249318938
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1719340853385098536}
+    m_Modifications:
+    - target: {fileID: 5176884560261331841, guid: cef4b2040215b54449fc86d2725db08a, type: 3}
+      propertyPath: m_Name
+      value: point
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176884560261331854, guid: cef4b2040215b54449fc86d2725db08a, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176884560261331854, guid: cef4b2040215b54449fc86d2725db08a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 155.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176884560261331854, guid: cef4b2040215b54449fc86d2725db08a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176884560261331854, guid: cef4b2040215b54449fc86d2725db08a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 236.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176884560261331854, guid: cef4b2040215b54449fc86d2725db08a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176884560261331854, guid: cef4b2040215b54449fc86d2725db08a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176884560261331854, guid: cef4b2040215b54449fc86d2725db08a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176884560261331854, guid: cef4b2040215b54449fc86d2725db08a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176884560261331854, guid: cef4b2040215b54449fc86d2725db08a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176884560261331854, guid: cef4b2040215b54449fc86d2725db08a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176884560261331854, guid: cef4b2040215b54449fc86d2725db08a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cef4b2040215b54449fc86d2725db08a, type: 3}
+--- !u!4 &5809563054903224212 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5176884560261331854, guid: cef4b2040215b54449fc86d2725db08a, type: 3}
+  m_PrefabInstance: {fileID: 1677674171249318938}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2224457207662279177
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 629855769739830779}
+    m_Modifications:
+    - target: {fileID: 8636031796071271073, guid: 11ad15ab558d4b14db8bdb717c25480a, type: 3}
+      propertyPath: m_Name
+      value: sector2_Design2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636031796071271086, guid: 11ad15ab558d4b14db8bdb717c25480a, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636031796071271086, guid: 11ad15ab558d4b14db8bdb717c25480a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636031796071271086, guid: 11ad15ab558d4b14db8bdb717c25480a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636031796071271086, guid: 11ad15ab558d4b14db8bdb717c25480a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636031796071271086, guid: 11ad15ab558d4b14db8bdb717c25480a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636031796071271086, guid: 11ad15ab558d4b14db8bdb717c25480a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636031796071271086, guid: 11ad15ab558d4b14db8bdb717c25480a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636031796071271086, guid: 11ad15ab558d4b14db8bdb717c25480a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636031796071271086, guid: 11ad15ab558d4b14db8bdb717c25480a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636031796071271086, guid: 11ad15ab558d4b14db8bdb717c25480a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636031796071271086, guid: 11ad15ab558d4b14db8bdb717c25480a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 11ad15ab558d4b14db8bdb717c25480a, type: 3}
+--- !u!4 &7568164083133509799 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8636031796071271086, guid: 11ad15ab558d4b14db8bdb717c25480a, type: 3}
+  m_PrefabInstance: {fileID: 2224457207662279177}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2319522528318696989
 PrefabInstance:
@@ -69916,4 +71513,66 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4100212781336806378, guid: 44845796aa46eae419ecee2d410f24d4, type: 3}
   m_PrefabInstance: {fileID: 5125355675763842907}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8912833634136316257
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5970351417565182746}
+    m_Modifications:
+    - target: {fileID: 2012631316243409693, guid: 425e36e7d61eb2f479528b9e0974924a, type: 3}
+      propertyPath: m_Name
+      value: sector2_Design1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012631316243409694, guid: 425e36e7d61eb2f479528b9e0974924a, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012631316243409694, guid: 425e36e7d61eb2f479528b9e0974924a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012631316243409694, guid: 425e36e7d61eb2f479528b9e0974924a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012631316243409694, guid: 425e36e7d61eb2f479528b9e0974924a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012631316243409694, guid: 425e36e7d61eb2f479528b9e0974924a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012631316243409694, guid: 425e36e7d61eb2f479528b9e0974924a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012631316243409694, guid: 425e36e7d61eb2f479528b9e0974924a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012631316243409694, guid: 425e36e7d61eb2f479528b9e0974924a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012631316243409694, guid: 425e36e7d61eb2f479528b9e0974924a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012631316243409694, guid: 425e36e7d61eb2f479528b9e0974924a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012631316243409694, guid: 425e36e7d61eb2f479528b9e0974924a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 425e36e7d61eb2f479528b9e0974924a, type: 3}
+--- !u!4 &6944255351174378111 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2012631316243409694, guid: 425e36e7d61eb2f479528b9e0974924a, type: 3}
+  m_PrefabInstance: {fileID: 8912833634136316257}
   m_PrefabAsset: {fileID: 0}
