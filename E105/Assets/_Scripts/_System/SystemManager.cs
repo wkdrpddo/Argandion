@@ -45,6 +45,9 @@ public class SystemManager : MonoBehaviour
     [SerializeField] private BuildingChange _buiding1;
     public GameObject[] _randomNPC = new GameObject[2];
 
+    [SerializeField] private Material[] _SkyBoxMat;
+    [SerializeField] private bool _isnight;
+
     public int[,] _timezone = new int[,] { { 6, 7, 18, 19 }, { 6, 6, 19, 20 }, { 6, 7, 18, 19 }, { 7, 8, 18, 19 } };
     // Start is called before the first frame update
     void Start()
@@ -209,6 +212,18 @@ public class SystemManager : MonoBehaviour
             {
                 _light.transform.rotation = Quaternion.Euler(200, -30, _light.transform.rotation.z);
             }
+
+            if (_timezone[_season, 0] <= _hour && _isnight)
+            {
+                RenderSettings.skybox = _SkyBoxMat[0];
+                _isnight = false;
+            }
+            if (_timezone[_season, 2] <= _hour && !_isnight)
+            {
+                RenderSettings.skybox = _SkyBoxMat[1];
+                _isnight = true;
+            }
+            RenderSettings.skybox.SetFloat("_Rotation", Time.time * 0.5f);
         }
     }
 
