@@ -63,26 +63,35 @@ public class CookingPanel : MonoBehaviour
     public void onClickCooking()
     {
         Debug.LogWarning("========== 요리하기 클릭 ============");
-        UIManager._uimanagerInstance.runCookingAnimation();
-        Invoke("completeCooking", 7f);
 
-        Debug.LogWarning("========== after animation call ============");
         bool isContainInventory;
         ItemObject craftItem = UIManager._uimanagerInstance.findItem(itemData[index].Result);
         isContainInventory = UIManager._uimanagerInstance.checkInventory(craftItem, 1);
+        gameObject.transform.GetChild(0).GetComponent<Button>().interactable = false;
 
         if (isContainInventory)
         {
+
+            gameObject.transform.GetChild(2).GetChild(2).GetComponent<Button>().interactable = false;
+            Invoke("onCancelBtn", 7f);
+            Invoke("completeCooking", 7f);
+            UIManager._uimanagerInstance.runCookingAnimation();
+            Debug.LogWarning("========== after animation call ============");
+
             gameObject.GetComponent<CombFood>().Trade(index, 1);
+            syncCanmakeList();
         }
         else
         {
             UIManager._uimanagerInstance.OnResultNotificationPanel("인벤토리에 빈 공간이 없습니다.");
         }
 
-        gameObject.transform.GetChild(0).GetComponent<Button>().interactable = false;
-        syncCanmakeList();
         deleteRecipeList();
+    }
+
+    private void onCancelBtn()
+    {
+        gameObject.transform.GetChild(2).GetChild(2).GetComponent<Button>().interactable = true;
     }
 
     public void completeCooking()
