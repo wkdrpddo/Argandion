@@ -24,7 +24,7 @@ public class PlayerSystem : MonoBehaviour
     private SoundManager _soundManager;
 
     // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대 7씨앗), 이동불가 시간, 작업시간}
-    public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 0, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 320, 6, 0, 0, 1 }, { 20, 0, 0, 0, 10 }, { 502, 0, 0, 0, 60 } };
+    public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 1.5f, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 320, 6, 0, 0, 1 }, { 20, 0, 0, 0, 10 }, { 502, 0, 0, 0, 60 } };
     public GameObject[] _equipment = new GameObject[7];
     public int _equipItem = 0;
 
@@ -209,10 +209,18 @@ public class PlayerSystem : MonoBehaviour
                 _UIManager.quickUse((int)_equipList[_equipItem, 0], 1, _equipItem);
             }
 
-            // 장비 휘두르기 (도끼 곡괭이 검)
+            // 장비 휘두르기 (괭이 도끼 곡괭이 검)
             if (_equipList[_equipItem, 1] >= 3 && _equipList[_equipItem, 1] <= 5)
             {
                 _playerAnimator.SetInteger("action", ((int)_equipList[_equipItem, 1]));
+                _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
+                _movedDelay = _equipList[_equipItem, 3] / _act_speed;
+                _equipment[(int)_equipList[_equipItem, 1]].SetActive(true);
+                _setHand = true;
+            }
+            if (_equipList[_equipItem, 1] == 2)
+            {
+                _playerAnimator.SetInteger("action", 15);
                 _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
                 _movedDelay = _equipList[_equipItem, 3] / _act_speed;
                 _equipment[(int)_equipList[_equipItem, 1]].SetActive(true);
@@ -235,56 +243,68 @@ public class PlayerSystem : MonoBehaviour
                 }
             }
 
-            // 괭이 사용
             if (_equipList[_equipItem, 1] == 2)
             {
-                Collider[] soils = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f), new Vector3(0.5f, 1.5f, 0.5f));
-                foreach (var soil in soils)
+                Collider[] dirts = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f), new Vector3(0.5f, 1.5f, 0.5f));
+                foreach (var dirt in dirts)
                 {
-                    if (soil.tag == "dirt")
+                    if (dirt.CompareTag("dirt") && dirt.TryGetComponent(out Dirt dir))
                     {
-                        soil.gameObject.TryGetComponent(out Dirt D);
-                        {
-                            if (!D.isReady)
-                            {
-                                D.Ready();
-                            }
-                            else if (!D.fullWater)
-                            {
-                                D.Water();
-                            }
-                            else
-                            {
-                                Debug.Log("농사준비완료!");
-                            }
-                        }
+                        dir.Hoe();
                     }
                 }
             }
 
+            // 괭이 사용
+            // if (_equipList[_equipItem, 1] == 2)
+            // {
+            //     Collider[] soils = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f), new Vector3(0.5f, 1.5f, 0.5f));
+            //     foreach (var soil in soils)
+            //     {
+            //         if (soil.tag == "dirt")
+            //         {
+            //             soil.gameObject.TryGetComponent(out Dirt D);
+            //             {
+            //                 if (!D.isReady)
+            //                 {
+            //                     D.Ready();
+            //                 }
+            //                 else if (!D.fullWater)
+            //                 {
+            //                     D.Water();
+            //                 }
+            //                 else
+            //                 {
+            //                     Debug.Log("농사준비완료!");
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+
             // 씨앗 사용
-            if (_equipList[_equipItem, 1] == 7)
-            {
-                Collider[] soils = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z), new Vector3(0, 1.5f, 0));
-                foreach (var soil in soils)
-                {
-                    if (soil.tag == "dirt")
-                    {
-                        soil.gameObject.TryGetComponent(out Dirt D);
-                        {
-                            if (D.fullWater && !_nearCrops)
-                            {
-                                Instantiate(_crops[(int)_equipList[_equipItem, 0] - 212], nearSoil(_character.position), _character.rotation);
-                                _UIManager.quickUse((int)_equipList[_equipItem, 0], 1, _equipItem);
-                            }
-                            else
-                            {
-                                Debug.Log("씨앗못심기");
-                            }
-                        }
-                    }
-                }
-            }
+            // if (_equipList[_equipItem, 1] == 7)
+            // {
+            //     Collider[] soils = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z), new Vector3(0, 1.5f, 0));
+            //     foreach (var soil in soils)
+            //     {
+            //         if (soil.tag == "dirt")
+            //         {
+            //             soil.gameObject.TryGetComponent(out Dirt D);
+            //             {
+            //                 if (D.fullWater && !_nearCrops)
+            //                 {
+            //                     Instantiate(_crops[(int)_equipList[_equipItem, 0] - 212], nearSoil(_character.position), _character.rotation);
+            //                     _UIManager.quickUse((int)_equipList[_equipItem, 0], 1, _equipItem);
+            //                 }
+            //                 else
+            //                 {
+            //                     Debug.Log("씨앗못심기");
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
 
             // 도끼 사용
             if (_equipList[_equipItem, 1] == 3)
@@ -393,13 +413,13 @@ public class PlayerSystem : MonoBehaviour
         {
             Vector3 pos = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
             _colset = Physics.OverlapSphere(pos, _interactRadius, layerMask: 1633);
-            Debug.Log(_colset.Length);
+            // Debug.Log(_colset.Length);
             foreach (var col in _colset)
             {
-                Debug.Log(col);
+                // Debug.Log(col);
                 if (col.TryGetComponent(out Interactable inter))
                 {
-                    Debug.Log("if 안 " + col);
+                    Debug.Log(col);
                     if (50 <= _equipList[_equipItem, 0] && _equipList[_equipItem, 0] <= 56 && col.TryGetComponent(out WorldTreeSpirit fairy))
                     {
                         fairy.FlowerInteraction((int)_equipList[_equipItem, 0]);
@@ -412,6 +432,36 @@ public class PlayerSystem : MonoBehaviour
                             npc.Interaction();
                             break;
                         }
+                    }
+                    if (col.TryGetComponent(out Dirt dirt))
+                    {
+                        if (!dirt.fullWater)
+                        {
+                            dirt.Water();
+                            _delayedTimer = 3f / _delay_speed;
+                            _movedDelay = 3f / _act_speed;
+                            _equipment[0].SetActive(true);
+                            setAnimator(14,3f/_act_speed);
+                            _canInteract = false;
+                            Invoke("EndWatering",3f/_act_speed);
+                            break;
+                        }
+                    }
+                    if (_equipList[_equipItem, 1] == 7 && col.TryGetComponent(out CropPosition crop))
+                    {
+                        if (crop._pd.fullWater) {
+                            if (crop._state==-1)
+                            {
+                                crop.Interaction((int)_equipList[_equipItem, 0]);
+                                _UIManager.quickUse((int)_equipList[_equipItem, 0],1,_equipItem);
+                                break;
+                            }
+                        }
+                    }
+                    if (col.TryGetComponent(out Harvested harv))
+                    {
+                        harv.Harvesting();
+                        break;
                     }
                     if (col.TryGetComponent(out WorldTreeInteraction worldTreeInteraction))
                     {
@@ -869,6 +919,12 @@ public class PlayerSystem : MonoBehaviour
     public void setCanAction(bool value)
     {
         _canAction = value;
+    }
+
+    private void EndWatering()
+    {
+        _canInteract = true;
+        _equipment[0].SetActive(false);
     }
 
     public void toggleCanInteract()
