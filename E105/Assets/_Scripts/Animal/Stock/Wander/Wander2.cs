@@ -208,7 +208,7 @@ public class Wander2 : MonoBehaviour
             randomPoint = originalPos + Random.insideUnitSphere * wanderRange;
         }
         // 목장 내 구역 y 값 2로 고정 후 사용
-        ret = new Vector3(randomPoint.x, 0, randomPoint.z);
+        ret = new Vector3(randomPoint.x, transform.position.y, randomPoint.z);
         return ret;
     }
 
