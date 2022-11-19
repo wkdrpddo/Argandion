@@ -8,7 +8,9 @@ public class Harvested : MonoBehaviour
     public Transform self;
     public int[] howMany;
     public GameObject _buffManagerObject;
-    private BuffManager _buff;  
+    private BuffManager _buff;
+    public CropPosition _pCpo;
+    public Dirt _pd;
 
     // Start is called before the first frame update
     Vector3 aboveSoil(Vector3 pos) {
@@ -23,6 +25,12 @@ public class Harvested : MonoBehaviour
 
     public void Harvesting()
     {
+        if (_pCpo)
+        {
+            _pCpo._plant = null;
+            _pCpo._state = 0;
+            _pd._is_icon_dig = true;
+        }
         Destroy(gameObject);
         int many = howMany[Random.Range(0, howMany.Length)];
         if ( _buff.orangePray ) {

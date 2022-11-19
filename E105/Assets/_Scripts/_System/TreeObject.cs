@@ -27,7 +27,7 @@ public class TreeObject : MonoBehaviour
         // Debug.Log(other.gameObject.layer);
         if (other.gameObject.layer == 0)
         {
-            Debug.Log(other.gameObject);
+            // Debug.Log(other.gameObject);
             // Debug.Log(other.gameObject.layer);
             // Debug.Log("충돌 판정");
             gameObject.GetComponent<Rigidbody>().useGravity = false;

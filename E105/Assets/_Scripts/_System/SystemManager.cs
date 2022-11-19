@@ -37,6 +37,7 @@ public class SystemManager : MonoBehaviour
     public bool[] _purification = new bool[_sector_size];
     public WorldTree _worldTree;
     public Altar _altar;
+    [SerializeField] private Dirt[] _dirts;
 
     public SectorObject _sectorTest;
     [SerializeField] private SectorObject[] _sectors;
@@ -309,8 +310,15 @@ public class SystemManager : MonoBehaviour
         }
         // _sectorTest.DayEnd();
         _UIManager.DayStart();
-        Debug.Log("시스템 데이스탕트1");
+        // Debug.Log("시스템 데이스탕트1");
         _PrayBuff.DayStart();
+        foreach (var dirt in _dirts)
+        {
+            if (dirt)
+            {
+                dirt.DayStart();
+            }
+        }
 
         // _buiding1.DayStart();
         foreach (var building in _buildings)
