@@ -161,6 +161,7 @@ public class PlayerSystem : MonoBehaviour
                 // transform.position += moveDir * Time.deltaTime * _runspeed;
                 speed = moveDir * _runspeed * _movement_percent / 100 * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
                 // speed.y = -1f;
+                _soundManager.playerEffectSound("RUNNING");
                 if (_onAir == 0)
                 {
                     speed.y = -_gravity;
@@ -174,6 +175,7 @@ public class PlayerSystem : MonoBehaviour
                 // transform.position += moveDir * Time.deltaTime * _walkspeed;
                 speed = moveDir * _walkspeed * _movement_percent / 100 * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
                 // speed.y = -1f;
+                _soundManager.playerEffectSound("MOVING");
                 if (_onAir == 0)
                 {
                     speed.y = -_gravity;
@@ -731,6 +733,7 @@ public class PlayerSystem : MonoBehaviour
 
         if (other.gameObject.CompareTag("droppedItem"))
         {
+            _soundManager.playEffectSound("GETITEM");
             Debug.Log("아이템 가까이에 있음");
             _nearObject = other.gameObject;
             DroppedItem item = _nearObject.GetComponent<DroppedItem>();
