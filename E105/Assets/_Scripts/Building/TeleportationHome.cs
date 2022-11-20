@@ -88,6 +88,19 @@ public class TeleportationHome : MonoBehaviour
     {
         return _isInside;
     }
+
+    public void DayEndTeleport()
+    {
+        _isInside = true;
+        _homeLight.SetActive(true);
+        _directionalLight.SetActive(false);
+        _uiManager.setIsHome(_isInside);
+        _weatherManager.playWeatherFX(_systemManager._weather, _isInside);
+        _particleFX.SetActive(false);
+        var camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        camera.backgroundColor = Color.black;
+        camera.clearFlags = CameraClearFlags.SolidColor;
+    }
 }
 
 
