@@ -39,9 +39,23 @@ public class TreeObject : MonoBehaviour
         }
     }
 
-    public void Damaged(float damage)
+    public void Damaged(int itemcode)
     {
-        _health -= damage;
+        switch(itemcode)
+        {
+            case 301:
+                _health -= 10;
+                break;
+            case 306:
+                _health -= 15;
+                break;
+            case 311:
+                _health -= 20;
+                break;
+            case 316:
+                _health -= 30;
+                break;
+        }
         _soundManager.playEffectSound("AXING");
         if (_health <=0 )
         {

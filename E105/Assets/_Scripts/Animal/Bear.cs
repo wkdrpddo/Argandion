@@ -179,7 +179,6 @@ public class Bear : MonoBehaviour
 
             if (!isDead && Vector3.Distance(this.transform.position, playerPos.position) <= 3f)
             {
-                Debug.Log("곰이 플레이어 공격 시도");
                 if (!isAttacking)
                 {
                     StartCoroutine(AttackCoroutine());
@@ -190,8 +189,6 @@ public class Bear : MonoBehaviour
 
     IEnumerator AttackCoroutine()
     {
-
-        Debug.Log("AttackCoroutine 호출");
 
         isAttacking = true;
         //nav.ResetPath();
@@ -206,13 +203,11 @@ public class Bear : MonoBehaviour
         RaycastHit _hit;
         if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out _hit, 3, targetMask))
         {
-            Debug.Log("플레이어 적중!");
             _playerSystem.changeHealth(30);
 
         }
         else
         {
-            Debug.Log("플레이어 빗나감");
         }
 
         yield return new WaitForSeconds(attackDelay);

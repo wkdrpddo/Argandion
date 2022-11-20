@@ -28,10 +28,10 @@ public class PrayBuff : MonoBehaviour
 
     public void DayStart()
     {
-        Debug.Log("데이스타트");
+        // Debug.Log("데이스타트");
         if (tempDay != systemManager._day)
         {
-            Debug.Log("뉴데이 호출");
+            // Debug.Log("뉴데이 호출");
             NewDay();
             tempDay = systemManager._day;
         }
@@ -50,7 +50,7 @@ public class PrayBuff : MonoBehaviour
             todayPray = true;
             if (flowerIdx != itemCode)
             {
-                Debug.Log("다름");
+                // Debug.Log("다름");
                 flowerIdx = itemCode;
                 prayDay = 1;
             }

@@ -24,7 +24,8 @@ public class PlayerSystem : MonoBehaviour
     private SoundManager _soundManager;
 
     // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대 7씨앗), 이동불가 시간, 작업시간}
-    public float[,] _equipList = new float[,] { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 1.5f, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 320, 6, 0, 0, 1 }, { 20, 0, 0, 0, 10 }, { 502, 0, 0, 0, 60 } };
+    public float[,] _equipList = new float[8,5];
+    // { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 1.5f, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 320, 6, 0, 0, 1 }, { 20, 0, 0, 0, 10 }, { 502, 0, 0, 0, 60 } };
     public GameObject[] _equipment = new GameObject[7];
     public int _equipItem = 0;
 
@@ -241,7 +242,7 @@ public class PlayerSystem : MonoBehaviour
                     {
                         ore.gameObject.TryGetComponent(out OreObject O);
                         {
-                            O.Damaged(15);
+                            O.Damaged((int)_equipList[_equipItem,0]);
                         }
                     }
                 }
@@ -323,7 +324,7 @@ public class PlayerSystem : MonoBehaviour
                     {
                         tree.gameObject.TryGetComponent(out TreeObject T);
                         {
-                            T.Damaged(15);
+                            T.Damaged((int)_equipList[_equipItem,0]);
                         }
                     }
                 }
@@ -454,7 +455,6 @@ public class PlayerSystem : MonoBehaviour
                 // Debug.Log(col);
                 if (col.TryGetComponent(out Interactable inter))
                 {
-                    Debug.Log(col);
                     if (50 <= _equipList[_equipItem, 0] && _equipList[_equipItem, 0] <= 56 && col.TryGetComponent(out WorldTreeSpirit fairy))
                     {
                         fairy.FlowerInteraction((int)_equipList[_equipItem, 0]);
@@ -507,18 +507,20 @@ public class PlayerSystem : MonoBehaviour
                     {
                         if (Gat._isremain == false)
                         {
-                            damageStamina(1f);
                             Gat.Interaction(_equipList[_equipItem, 1]);
                             _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
                             _movedDelay = _equipList[_equipItem, 3] / _act_speed;
+                            setCanInteract(false);
+                            Invoke("onCanInteract",_movedDelay);
                             break;
                         }
                         else if (Gat._isHave)
                         {
-                            damageStamina(1f);
                             Gat.Interaction(_equipList[_equipItem, 1]);
                             _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
                             _movedDelay = _equipList[_equipItem, 3] / _act_speed;
+                            setCanInteract(false);
+                            Invoke("onCanInteract",_movedDelay);
                             break;
                         }
                     }
@@ -592,90 +594,87 @@ public class PlayerSystem : MonoBehaviour
         return new Vector3(tempx, pos.y, tempz);
     }
 
-    void fff()
-    {
-        if (_readyToHarvest && Input.GetKeyDown(KeyCode.F))
-        {
-            Harvested harvested = _nearObject.GetComponent<Harvested>();
-            harvested.Harvesting();
-            _nearCrops = false;
-            _nearObject = null;
-            _readyToHarvest = false;
-            return;
-        }
+    // void fff()
+    // {
+    //     if (_readyToHarvest && Input.GetKeyDown(KeyCode.F))
+    //     {
+    //         Harvested harvested = _nearObject.GetComponent<Harvested>();
+    //         harvested.Harvesting();
+    //         _nearCrops = false;
+    //         _nearObject = null;
+    //         _readyToHarvest = false;
+    //         return;
+    //     }
 
-        if (_nearItem && Input.GetKeyDown(KeyCode.F))
-        {
-            Item item = _nearObject.GetComponent<Item>();
-            ItemObject itemObject = item.itemObject;
-            if (itemObject != null)
-            {
-                _theInventory.AcquireItem(itemObject);
-            }
-        }
+    //     if (_nearItem && Input.GetKeyDown(KeyCode.F))
+    //     {
+    //         Item item = _nearObject.GetComponent<Item>();
+    //         ItemObject itemObject = item.itemObject;
+    //         if (itemObject != null)
+    //         {
+    //             _theInventory.AcquireItem(itemObject);
+    //         }
+    //     }
 
 
-        if (_nearCarpentor && Input.GetButtonDown("fff"))
-        {
-            CombCarpentor combCarpentor = _nearObject.GetComponent<CombCarpentor>();
-            combCarpentor.Trade(2, 2);
-        }
+    //     if (_nearCarpentor && Input.GetButtonDown("fff"))
+    //     {
+    //         CombCarpentor combCarpentor = _nearObject.GetComponent<CombCarpentor>();
+    //         combCarpentor.Trade(2, 2);
+    //     }
 
-        if (_nearChest && Input.GetButtonDown("fff"))
-        {
-            ItemObject item = _theInventory.StoreItem(invenIdx, -invenCount);
-            Debug.Log(item);
-            _theChest.PutItem(item, invenCount);
-        }
+    //     if (_nearChest && Input.GetButtonDown("fff"))
+    //     {
+    //         ItemObject item = _theInventory.StoreItem(invenIdx, -invenCount);
+    //         _theChest.PutItem(item, invenCount);
+    //     }
 
-        if (_nearChest && Input.GetKeyDown(KeyCode.G))
-        {
-            ItemObject item = _theChest.TakeItem(chestIdx, -chestCount);
-            Debug.Log("햇당");
-            Debug.Log(item);
-            _theInventory.AcquireItem(item, chestCount);
-        }
+    //     if (_nearChest && Input.GetKeyDown(KeyCode.G))
+    //     {
+    //         ItemObject item = _theChest.TakeItem(chestIdx, -chestCount);
+    //         _theInventory.AcquireItem(item, chestCount);
+    //     }
 
-        if (_nearSpirit && Input.GetButtonDown("fff"))
-        {
-            if (_buff._isFlowerBuffActived)
-            {
-                Debug.Log("이미 다른버프가 발동중이라구!");
-            }
-            else if (_buff._isPrayBuffActived)
-            {
-                Debug.Log("제단 버프 진행중");
-            }
-            else
-            {
-                ItemObject item = _theInventory.StoreItem(0, -1);
-                if (item.Category == "꽃")
-                {
-                    SpiritBuff spirit = _nearObject.GetComponent<SpiritBuff>();
-                    // spirit.Spirit(item);
-                    _buff._isFlowerBuffActived = true;
-                }
-                else if (item.ItemCode == 0)
-                {
-                    Debug.Log("아무것도 없는데?");
-                }
-                else
-                {
-                    _theInventory.AcquireItem(item, 1);
-                    Debug.Log("이건뭐야?");
-                }
-            }
-        }
-    }
-    void watering()
-    {
-        if (_onSoil && Input.GetKeyDown(KeyCode.G))
-        {
-            Debug.Log("물줬당");
-            Dirt dirt = _nearBiome.GetComponent<Dirt>();
-            dirt.Water();
-        }
-    }
+    //     if (_nearSpirit && Input.GetButtonDown("fff"))
+    //     {
+    //         if (_buff._isFlowerBuffActived)
+    //         {
+    //             Debug.Log("이미 다른버프가 발동중이라구!");
+    //         }
+    //         else if (_buff._isPrayBuffActived)
+    //         {
+    //             Debug.Log("제단 버프 진행중");
+    //         }
+    //         else
+    //         {
+    //             ItemObject item = _theInventory.StoreItem(0, -1);
+    //             if (item.Category == "꽃")
+    //             {
+    //                 SpiritBuff spirit = _nearObject.GetComponent<SpiritBuff>();
+    //                 // spirit.Spirit(item);
+    //                 _buff._isFlowerBuffActived = true;
+    //             }
+    //             else if (item.ItemCode == 0)
+    //             {
+    //                 Debug.Log("아무것도 없는데?");
+    //             }
+    //             else
+    //             {
+    //                 _theInventory.AcquireItem(item, 1);
+    //                 Debug.Log("이건뭐야?");
+    //             }
+    //         }
+    //     }
+    // }
+    // void watering()
+    // {
+    //     if (_onSoil && Input.GetKeyDown(KeyCode.G))
+    //     {
+    //         Debug.Log("물줬당");
+    //         Dirt dirt = _nearBiome.GetComponent<Dirt>();
+    //         dirt.Water();
+    //     }
+    // }
 
     void OnTriggerStay(Collider other)
     {
@@ -974,6 +973,11 @@ public class PlayerSystem : MonoBehaviour
     public void setCanInteract(bool value)
     {
         _canInteract = value;
+    }
+
+    public void onCanInteract()
+    {
+        _canInteract = true;
     }
 
     public void setActionSpeed()

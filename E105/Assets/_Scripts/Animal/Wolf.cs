@@ -168,7 +168,6 @@ public class Wolf : MonoBehaviour
         {
             isHurt = true;
             Invoke("NotHurt", 0.5f);
-            Debug.Log("아얏");
             _sound.clip = attackedSound;
             _sound.Play();
             hp -= _dmg;
@@ -203,7 +202,7 @@ public class Wolf : MonoBehaviour
 
             if (!isDead && Vector3.Distance(this.transform.position, playerPos.position) <= 3f)
             {
-                Debug.Log("늑대가 플레이어 공격 시도");
+                // Debug.Log("늑대가 플레이어 공격 시도");
                 if (!isAttacking)
                 {
                     StartCoroutine(AttackCoroutine());
@@ -217,7 +216,7 @@ public class Wolf : MonoBehaviour
     {
 
 
-        Debug.Log("AttackCoroutine 호출");
+        // Debug.Log("AttackCoroutine 호출");
 
         isAttacking = true;
         //nav.ResetPath();
@@ -234,13 +233,13 @@ public class Wolf : MonoBehaviour
         RaycastHit _hit;
         if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out _hit, 3, targetMask))
         {
-            Debug.Log("플레이어 적중!");
+            // Debug.Log("플레이어 적중!");
             _playerSystem.changeHealth(5);
 
         }
         else
         {
-            Debug.Log("플레이어 빗나감");
+            // Debug.Log("플레이어 빗나감");
         }
 
 

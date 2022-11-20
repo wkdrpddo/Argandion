@@ -97,20 +97,17 @@ public class SectorObject : MonoBehaviour
 
     private void Spawn_Flower()
     {
-        Debug.Log("꽃 생성");
+        // Debug.Log("꽃 생성");
         float rnd = Random.Range(0f,_sumSector);
         int count = 0;
         while (!(_SectorArea[count]<=rnd && rnd<=_SectorArea[count+1]))
         {
             count+=1;
         }
-        Debug.Log(count);
-        Debug.Log("번 지역에 생성");
         Collider tcol = _SectorCollider[count];
         Vector3 pos = new Vector3(tcol.bounds.center.x+Random.Range(-tcol.bounds.extents.x,tcol.bounds.extents.x),tcol.bounds.center.y+3f,tcol.bounds.center.z+Random.Range(-tcol.bounds.extents.z,tcol.bounds.extents.z));
         GameObject flower = Instantiate(_floweObject,pos,new Quaternion(),gameObject.transform);
         flower.GetComponent<GatheringObject>().setFlower(true);
-        Debug.Log(pos);
         _flower_remain += 1;
         _flower_spawn_percent = _flower_spawn_base_percent;
     }

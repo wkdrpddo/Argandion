@@ -120,7 +120,7 @@ public class Inventory : MonoBehaviour
                         if (slots[i].itemCount + _count <= 99)
                         {
                             slots[i].SetSlotCount(_count);
-                            SyncBait(_item, slots[i].getSlotItemCount() + _count);
+                            SyncBait(_item, slots[i].getSlotItemCount());
                             return;
                         }
                         else

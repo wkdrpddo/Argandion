@@ -37,7 +37,7 @@ public class AnimationControl2 : MonoBehaviour {
 
 		int clipIndex = Random.Range(0, numOfClips);
 		string animationName = "Death";
-		Debug.Log (clipIndex);
+		// Debug.Log (clipIndex);
 
 		this.GetComponent<Animator> ().SetInteger (animationName, clipIndex);
 	}

@@ -43,9 +43,23 @@ public class OreObject : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Damaged(float damage)
+    public void Damaged(int itemcode)
     {
-        _health -= damage;
+        switch (itemcode)
+        {
+            case 302:
+                _health -= 10;
+                break;
+            case 307:
+                _health -= 15;
+                break;
+            case 312:
+                _health -= 20;
+                break;
+            case 317:
+                _health -= 30;
+                break;
+        }
         Invoke("DamagedSound", 0.15f);
         if (_health <= 0)
         {

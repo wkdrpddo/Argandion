@@ -29,6 +29,7 @@ public class GatheringObject : MonoBehaviour
     {
         if(_inventory.CheckInven(_item.FindItem(_itemCode),1))
         {
+            _ps.damageStamina(1f);
             Vector3 Direction = (gameObject.transform.position - _ps.gameObject.transform.position);
             Direction.y = 0;
             Direction = Direction.normalized;
@@ -56,7 +57,7 @@ public class GatheringObject : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        else
+        else if(_isHave)
         {
             _inventory.AcquireItem(_item.FindItem(_itemCode),Random.Range(0,3));
             _isHave = false;

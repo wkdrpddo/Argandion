@@ -99,7 +99,6 @@ public class SystemManager : MonoBehaviour
 
     private void UpdateSeason(int index)
     {
-        Debug.Log("계절이 바뀌었습니다.");
         _season = index;
         _MapObject.GetComponent<MapObject>().UpdateFieldManager(index);
         _worldTree.ChangeSeason();
@@ -262,7 +261,6 @@ public class SystemManager : MonoBehaviour
         {
             _EventPanel.activeIcon(_weather + 49);
         }
-        Debug.Log(_weather);
         // 모든 SectorObject의 DayEnd 동작
         foreach (var sector in _sectors)
         {

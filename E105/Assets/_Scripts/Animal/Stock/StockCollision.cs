@@ -27,7 +27,7 @@ public class StockCollision : MonoBehaviour
             // Debug.Log("trigger");
             if ((collision.gameObject.tag != "Untagged") || (collision.gameObject.layer != 0))
             {
-                Debug.Log("Collide");
+                // Debug.Log("Collide");
                 StartCoroutine(wander.StopWalking());
             }
             yield return new WaitForSeconds(1);
