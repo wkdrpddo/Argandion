@@ -14,6 +14,8 @@ public class Rabbit : MonoBehaviour
     private Vector3 destination;  //목적지
 
     //상태 변수
+    private bool isHurt = false;
+    private bool canFootSound = true;
     private bool isAction; //행동중인지 아닌지
     private bool isWalking; //걷는중인지 아닌지
     private bool isRunning; //뛰는중인지 아닌지
@@ -30,6 +32,10 @@ public class Rabbit : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private BoxCollider boxCol;
     private NavMeshAgent nav;
+    [SerializeField] private Transform playerPos;
+    public AudioSource _sound;
+    public AudioClip walkingSound;
+    public AudioClip attackedSound;
 
     //Item
     [SerializeField] private GameObject item20;  //동물의 가죽
@@ -44,6 +50,7 @@ public class Rabbit : MonoBehaviour
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
+        playerPos = GameObject.Find("PlayerObject").transform;
         currentTime = waitTime;
         isAction = true;
     }
@@ -63,6 +70,12 @@ public class Rabbit : MonoBehaviour
         if (isWalking || isRunning)
         {
             nav.SetDestination(this.transform.position + destination * 5f);
+            if ((Vector3.Distance(this.transform.position, playerPos.position) < 20.0f) && canFootSound) {
+                canFootSound = false;
+                _sound.clip = walkingSound;
+                _sound.Play();
+                Invoke("FootSoundTrue", 0.6f);
+            }
         }
     }
 
@@ -129,6 +142,12 @@ public class Rabbit : MonoBehaviour
         isWalking = true;
         anim.SetBool("Walking", isWalking);
         currentTime = walkTime;
+        // if ((Vector3.Distance(this.transform.position, playerPos.position) < 20.0f) && canFootSound) {
+        //     canFootSound = false;
+        //     _sound.clip = walkingSound;
+        //     _sound.Play();
+        //     Invoke("FootSoundTrue", 0.5f);
+        // }
     }
 
     private void Run(Vector3 _targetPos)
@@ -139,14 +158,29 @@ public class Rabbit : MonoBehaviour
         nav.speed = runSpeed;
         anim.SetBool("Walking", isWalking);
         anim.SetBool("Running", isRunning);
+        // if ((Vector3.Distance(this.transform.position, playerPos.position) < 20.0f) && canFootSound) {
+        //     canFootSound = false;
+        //     _sound.clip = walkingSound;
+        //     _sound.Play();
+        //     Invoke("FootSoundTrue", 0.3f);
+        // }
 
         destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
     }
 
+    private void FootSoundTrue()
+    {
+        canFootSound = true;
+    }
+
     public void Damage(int _dmg, Vector3 _targetPos)
     {
-        if (!isDead)
+        if (!isDead && !isHurt)
         {
+            isHurt = true;
+            Invoke("NotHurt", 0.5f);
+            _sound.clip = attackedSound;
+            _sound.Play();
             hp -= _dmg;
             if (hp <= 0)
             {
@@ -155,6 +189,11 @@ public class Rabbit : MonoBehaviour
             }
             Run(_targetPos);
         }
+    }
+
+    private void NotHurt()
+    {
+        isHurt = false;
     }
 
     private void Dead()

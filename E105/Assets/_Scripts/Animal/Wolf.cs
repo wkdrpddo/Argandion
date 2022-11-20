@@ -14,6 +14,7 @@ public class Wolf : MonoBehaviour
     private Vector3 destination;  //목적지
 
     //상태 변수
+    private bool isHurt = false;
     private bool isAction; //행동중인지 아닌지
     private bool isWalking; //걷는중인지 아닌지
     private bool isRunning;  //뛰는중인지 아닌지
@@ -40,6 +41,12 @@ public class Wolf : MonoBehaviour
     private NavMeshAgent nav;
     [SerializeField] private Transform playerPos;
     [SerializeField] private PlayerSystem _playerSystem;
+    public AudioSource _sound;
+    public AudioClip howlingSound;
+    public AudioClip attackSound;
+    public AudioClip attackedSound;
+    public AudioClip idleSound;
+
 
     //Item
     [SerializeField] private GameObject item20;  //동물의 가죽
@@ -131,12 +138,20 @@ public class Wolf : MonoBehaviour
     {
         currentTime = idleTime;
         anim.SetTrigger("Idle");
+        if (Vector3.Distance(this.transform.position, playerPos.position) < 20.0f) {
+            _sound.clip = idleSound;
+            _sound.Play();
+        }
     }
 
     private void Howling()
     {
         currentTime = howlTime;
         anim.SetTrigger("Howl");
+        if (Vector3.Distance(this.transform.position, playerPos.position) < 20.0f) {
+            _sound.clip = howlingSound;
+            _sound.Play();
+        }
     }
 
     private void TryWalk()
@@ -149,8 +164,13 @@ public class Wolf : MonoBehaviour
 
     public void Damage(int _dmg)
     {
-        if (!isDead)
+        if (!isDead && !isHurt)
         {
+            isHurt = true;
+            Invoke("NotHurt", 0.5f);
+            Debug.Log("아얏");
+            _sound.clip = attackedSound;
+            _sound.Play();
             hp -= _dmg;
 
             if (hp <= 0)
@@ -162,6 +182,12 @@ public class Wolf : MonoBehaviour
             Chase();
         }
     }
+
+    private void NotHurt()
+    {
+        isHurt = false;
+    }
+
 
     private void Chase()
     {
@@ -202,7 +228,9 @@ public class Wolf : MonoBehaviour
         transform.LookAt(playerPos);
         anim.SetTrigger("Attack");
         // yield return new WaitForSeconds(0.1f);
-
+        
+        _sound.clip = attackSound;
+        _sound.Play();
         RaycastHit _hit;
         if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out _hit, 3, targetMask))
         {

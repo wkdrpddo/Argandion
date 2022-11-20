@@ -14,6 +14,7 @@ public class Bear : MonoBehaviour
     private Vector3 destination;  //목적지
 
     //상태 변수
+    private bool isHurt = false;
     private bool isAction; //행동중인지 아닌지
     private bool isWalking; //걷는중인지 아닌지
     private bool isRunning;  //뛰는중인지 아닌지
@@ -38,6 +39,9 @@ public class Bear : MonoBehaviour
     private NavMeshAgent nav;
     [SerializeField] private Transform playerPos;
     [SerializeField] private PlayerSystem _playerSystem;
+    public AudioSource _sound;
+    public AudioClip attackedSound;
+
 
     //Item
     [SerializeField] private GameObject item20;  //동물의 가죽
@@ -136,8 +140,12 @@ public class Bear : MonoBehaviour
 
     public void Damage(int _dmg)
     {
-        if (!isDead)
+        if (!isDead && !isHurt)
         {
+            isHurt = true;
+            Invoke("NotHurt", 0.5f);
+            _sound.clip = attackedSound;
+            _sound.Play();
             hp -= _dmg;
 
             if (hp <= 0)
@@ -149,6 +157,13 @@ public class Bear : MonoBehaviour
             Chase();
         }
     }
+
+
+    private void NotHurt()
+    {
+        isHurt = false;
+    }
+
 
     private void Chase()
     {
