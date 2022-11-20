@@ -283,10 +283,10 @@ public class ConversationPanel : MonoBehaviour
     }
 
     // 음악가 - BGM 변경 선택 시, 마무리 대사
-    public void selectMusic(string _bgmName)
+    public void selectMusic()
     {
         _selectpanel.SetActive(false);
-        _nomaltalk.text = "새로운 멜로디를 들려드리죠-\n\n현재 BGM : " + _bgmName;
+        _nomaltalk.text = "새로운 멜로디를 들려드리죠-";
         _nomaltalk.gameObject.SetActive(true);
         isConversation = true;
         selectConversationCount = 4;

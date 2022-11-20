@@ -80,7 +80,7 @@ public class SystemManager : MonoBehaviour
         _buildings = GameObject.Find("Buildings").GetComponentsInChildren<BuildingChange>();
         _houseChange = GameObject.Find("Player House").GetComponent<HouseChange>();
         _interiorChange = GameObject.Find("Interior").GetComponent<HouseChange>();
-        _farmChange = GameObject.Find("Map").transform.GetChild(4).transform.GetChild(0).transform.GetChild(2).GetComponent<FarmChange>();
+        _farmChange = GameObject.Find("Map").transform.GetChild(5).transform.GetChild(0).transform.GetChild(2).GetComponent<FarmChange>();
         // _buiding1 = GameObject.Find("ClothshopPlace").GetComponent<BuildingChange>();
         _altar = GameObject.Find("Altar").GetComponent<Altar>();
         _MapObject.GetComponent<MapObject>().UpdateFieldManager(_season);
@@ -556,5 +556,26 @@ public class SystemManager : MonoBehaviour
 
     public void setBackground(int num){
         _soundManager.FunctionCall(num);
+    }
+
+    public void playerDeath(){
+        animalDestroy();
+        _day += 1;
+        InLoading();
+        if (_day >= 29)
+        {
+            _day -= 28;
+            _month += 1;
+            if (_month >= 9)
+            {
+                _month -= 8;
+                // _weatherManager.SetYearEvent();
+            }
+            if (_month % 2 == 1)
+            {
+                UpdateSeason(_month / 2);
+            }
+        }
+        Invoke("TimeCall",1.5f);
     }
 }

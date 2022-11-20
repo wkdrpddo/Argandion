@@ -843,7 +843,7 @@ public class UIManager : MonoBehaviour
             _foodmanager.UseFood(_itemCode);
         }
 
-        if (_slotIdx == 8)
+        if (_slotIdx == 7)
         {
             reductItem(findItem(_itemCode), -1 * _count);
         }
@@ -1068,9 +1068,9 @@ public class UIManager : MonoBehaviour
         _systemmanager.setBackground(1);
     }
 
-    public void BGMChanger(string _bgmName)
+    public void BGMChanger()
     {
-        _conversationpanel.selectMusic(_bgmName);
+        _conversationpanel.selectMusic();
     }
 
     // 정령 버프 및 제단 관련 코드

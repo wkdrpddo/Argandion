@@ -28,12 +28,14 @@ public class SoundManager : MonoBehaviour
     // option panal
     // public GameObject _optionpanel;
     // public GameObject _optionpanelfrommain;
-
+    void Awake() {
+        Sound_Background = 0.2f;
+    }
 
     void Start()
     {
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
-        Sound_Background = 0.2f;
+        
         playMainTheme();
     }
 
@@ -93,13 +95,11 @@ public class SoundManager : MonoBehaviour
 
         bgmPlayer.Play();
 
-        //UIManager에서 BGMChanger(string bgmName) 호출하기
-        //_UIManager.BGMChanger(bgmName);
+        _UIManager.BGMChanger();
     }
 
     public void playMainTheme()  // 메인 화면
     {
-        Debug.Log("메인 노래");
         bgmPlayer.Stop();
         bgmPlayer.clip = bgmSounds[6].clip;
         bgmPlayer.Play();
