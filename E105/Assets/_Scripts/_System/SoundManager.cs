@@ -46,7 +46,8 @@ public class SoundManager : MonoBehaviour
     // public GameObject _optionpanel;
     // public GameObject _optionpanelfrommain;
     void Awake() {
-        Sound_Background = 0.2f;
+        Sound_Background = 0.4f;
+        bgmPlayer.volume = Sound_Background;
     }
 
     void Start()
