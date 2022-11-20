@@ -14,6 +14,7 @@ public class Altar : MonoBehaviour
 
     private PrayBuff _prayBuff;
     private BuffManager _buffManager;
+    private SoundManager _sound;
 
     private int _dayEndBuffCnt;
     private bool _buffStart;
@@ -22,6 +23,7 @@ public class Altar : MonoBehaviour
     {
         _prayBuff = GameObject.Find("BuffManager").GetComponent<PrayBuff>();
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
+        _sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
     // 하루 끝나면
     public void DayEnd(){
@@ -85,6 +87,7 @@ public class Altar : MonoBehaviour
 
     // 제사를 시도할 때
     public void goPray(int itemCode){
+        _sound.playEffectSound("ALTER");
         _prayBuff.Pray(itemCode); // 제사
         activeFlower(itemCode); // 꽃 올리기
         _dayEndBuffCnt = _prayBuff.prayDay;

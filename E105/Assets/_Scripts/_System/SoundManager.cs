@@ -28,6 +28,11 @@ public class SoundManager : MonoBehaviour
     public AudioClip getItem;
     public AudioClip drinking;
     public AudioClip eating;
+    public AudioClip cooking;
+    public AudioClip fishing;
+    public AudioClip farming;
+    public AudioClip watering;
+    public AudioClip alter;
 
     private bool canplay = true;
     public AudioSource playerSoundPlayer;
@@ -134,6 +139,21 @@ public class SoundManager : MonoBehaviour
                 break;
             case "PICKING":
                 effectSoundPlayer.clip = picking;
+                break;
+            case "COOKING":
+                effectSoundPlayer.clip = cooking;
+                break;
+            case "FISHING":
+                effectSoundPlayer.clip = fishing;
+                break;
+            case "FARMING":
+                effectSoundPlayer.clip = farming;
+                break;
+            case "WATERING":
+                effectSoundPlayer.clip = watering;
+                break;
+            case "ALTER":
+                effectSoundPlayer.clip = alter;
                 break;
         }
         effectSoundPlayer.Play();
