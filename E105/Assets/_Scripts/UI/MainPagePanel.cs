@@ -15,7 +15,18 @@ public class MainPagePanel : MonoBehaviour
 
     public void gameStart()
     {
+        string name = UIManager._uimanagerInstance.getPlayerName();
+
         gameObject.SetActive(false);
-        UIManager._uimanagerInstance.OnCreateCharacter();
+        if (name == "")
+        {
+            UIManager._uimanagerInstance.OnCreateCharacter();
+        }
+        else
+        {
+            UIManager._uimanagerInstance.OnBaseUIPanel();
+            UIManager._uimanagerInstance.setGameState(true);
+            UIManager._uimanagerInstance.delayRunControllKeys();
+        }
     }
 }

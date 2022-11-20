@@ -1037,6 +1037,11 @@ public class UIManager : MonoBehaviour
         _playersystem.setPlayerName(_name);
     }
 
+    public string getPlayerName()
+    {
+        return _playersystem.getPlayerName();
+    }
+
 
     // 플레이어 체력 / 기력
     public void healPlayer()
