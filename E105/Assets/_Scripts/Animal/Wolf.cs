@@ -45,7 +45,7 @@ public class Wolf : MonoBehaviour
     public AudioClip howlingSound;
     public AudioClip attackSound;
     public AudioClip attackedSound;
-    public AudioClip idleSound;
+    // public AudioClip idleSound;
 
 
     //Item
@@ -139,8 +139,8 @@ public class Wolf : MonoBehaviour
         currentTime = idleTime;
         anim.SetTrigger("Idle");
         if (Vector3.Distance(this.transform.position, playerPos.position) < 20.0f) {
-            _sound.clip = idleSound;
-            _sound.Play();
+            // _sound.clip = idleSound;
+            // _sound.Play();
         }
     }
 

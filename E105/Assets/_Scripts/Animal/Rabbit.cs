@@ -34,7 +34,7 @@ public class Rabbit : MonoBehaviour
     private NavMeshAgent nav;
     [SerializeField] private Transform playerPos;
     public AudioSource _sound;
-    public AudioClip walkingSound;
+    // public AudioClip walkingSound;
     public AudioClip attackedSound;
 
     //Item
@@ -72,8 +72,8 @@ public class Rabbit : MonoBehaviour
             nav.SetDestination(this.transform.position + destination * 5f);
             if ((Vector3.Distance(this.transform.position, playerPos.position) < 20.0f) && canFootSound) {
                 canFootSound = false;
-                _sound.clip = walkingSound;
-                _sound.Play();
+                // _sound.clip = walkingSound;
+                // _sound.Play();
                 Invoke("FootSoundTrue", 0.6f);
             }
         }
