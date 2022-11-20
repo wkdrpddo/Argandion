@@ -216,6 +216,7 @@ public class SystemManager : MonoBehaviour
             if (_timezone[_season, 0] <= _hour && _isnight)
             {
                 RenderSettings.skybox = _SkyBoxMat[0];
+                RenderSettings.skybox.SetFloat("_Rotation", 215f);
                 _isnight = false;
             }
             if (_timezone[_season, 2] <= _hour && !_isnight)
