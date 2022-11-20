@@ -36,6 +36,37 @@ Transform:
   m_Father: {fileID: 852924987380741435}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &103386120287583973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2948143082873485249}
+  m_Layer: 0
+  m_Name: TeleportSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2948143082873485249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103386120287583973}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: -3.39}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1807044139302955574}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &112249185571763353
 GameObject:
   m_ObjectHideFlags: 0
@@ -6800,6 +6831,7 @@ Transform:
   - {fileID: 3106564296846591166}
   - {fileID: 852924986690934263}
   - {fileID: 852924986761429610}
+  - {fileID: 2948143082873485249}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6815,8 +6847,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eaf23ffdca917e4189e87541eb27bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _systemManager: {fileID: 0}
-  _devLevelUpTest: 0
 --- !u!1 &1893073286384670910
 GameObject:
   m_ObjectHideFlags: 0
@@ -8992,6 +9022,9 @@ MonoBehaviour:
   _teleportHomeOutside: {fileID: 0}
   _directionalLight: {fileID: 0}
   _homeLight: {fileID: 0}
+  _weatherManager: {fileID: 0}
+  _systemManager: {fileID: 0}
+  _particleFX: {fileID: 0}
 --- !u!1 &3106564296920797250
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,9 +47,12 @@ public class SystemManager : MonoBehaviour
 
     [SerializeField] private Material[] _SkyBoxMat;
     [SerializeField] private bool _isnight;
-    [SerializeField] private RectTransform loadingPage;
+    [SerializeField] private GameObject loadingStartPage;
+    [SerializeField] private GameObject loadingEndPage;
     [SerializeField] private RectTransform loadingBar;
     [SerializeField] private GameObject loadingPanel;
+    [SerializeField] private Transform teleportPosition;
+    [SerializeField] private TeleportationHome tphome;
     private bool _inloading;
 
     public int[,] _timezone = new int[,] { { 6, 7, 18, 19 }, { 6, 6, 19, 20 }, { 6, 7, 18, 19 }, { 7, 8, 18, 19 } };
@@ -88,7 +91,6 @@ public class SystemManager : MonoBehaviour
         TimeSystem();
         if (_inloading)
         {
-            Loading();
             LoadingBar();
         }
     }
@@ -239,7 +241,6 @@ public class SystemManager : MonoBehaviour
         // }
         // _buffManager.DayEnd();
         DayStart();
-        Loading();
         Invoke("OutLoading",5f);
     }
 
@@ -507,19 +508,6 @@ public class SystemManager : MonoBehaviour
         return _purification_sector;
     }
 
-    public void Loading()
-    {
-        if ((-1<= loadingPage.rotation.z && loadingPage.rotation.z <= -0.999f) || (0.999f<=loadingPage.rotation.z && loadingPage.rotation.z <= 1))
-        {
-            loadingPage.rotation = Quaternion.Euler(0,0,-180);            
-        }
-        else
-        {
-            Debug.Log(loadingPage.rotation.z);
-            loadingPage.Rotate(loadingPage.forward * Time.deltaTime * -150);
-        }
-    }
-
     public void LoadingBar()
     {
         loadingBar.Rotate(loadingBar.forward * Time.deltaTime * 160);
@@ -528,7 +516,8 @@ public class SystemManager : MonoBehaviour
     public void InLoading()
     {
         loadingPanel.SetActive(true);
-        loadingPage.rotation = Quaternion.Euler(0,0,0);
+        loadingStartPage.SetActive(true);
+        loadingEndPage.SetActive(false);
         loadingBar.rotation = Quaternion.Euler(0,0,0);
         _player.changeHealth(-1500);
         _player.changeEnergy(-1500);
@@ -536,13 +525,21 @@ public class SystemManager : MonoBehaviour
         _player.setCanAction(false);
         _player.setCanInteract(false);
         _player._canMove = false;
-        // 플레이어 텔레포트
+        GameObject.Find("PlayerObject").transform.position = teleportPosition.position;
+        tphome.DayEndTeleport();
         setTimeSystem(true);
     }
 
     public void OutLoading()
     {
         _inloading = false;
+        loadingStartPage.SetActive(false);
+        loadingEndPage.SetActive(true);
+        Invoke("OutLoadingPage",1.5f);
+    }
+
+    public void OutLoadingPage()
+    {
         loadingPanel.SetActive(false);
         setTimeSystem(false);
         _player.setCanAction(true);
