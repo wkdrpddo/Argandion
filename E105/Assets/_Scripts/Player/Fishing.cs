@@ -103,6 +103,7 @@ public class Fishing : MonoBehaviour
             _ps._canMove = false;
             _ps.setCanAction(false);
             Debug.Log("낚시대 투척!");
+            _ps.damageStamina(2f);
             _ps.setAnimator(9,0);
             // isFishing = true;
             _ps._playerAnimator.SetBool("fishingFail",false);

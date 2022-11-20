@@ -227,11 +227,13 @@ public class PlayerSystem : MonoBehaviour
                 _movedDelay = _equipList[_equipItem, 3] / _act_speed;
                 _equipment[(int)_equipList[_equipItem, 1]].SetActive(true);
                 _setHand = true;
+                damageStamina(1.1f);
             }
 
             // 곡괭이 휘두르기 물리판정
             if (_equipList[_equipItem, 1] == 4)
             {
+                damageStamina(0.7f);
                 Collider[] ores = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f), new Vector3(0.5f, 1.5f, 0.5f));
                 foreach (var ore in ores)
                 {
@@ -312,6 +314,7 @@ public class PlayerSystem : MonoBehaviour
             if (_equipList[_equipItem, 1] == 3)
             {
                 // Debug.Log(_character.forward);
+                damageStamina(0.5f);
                 Vector3 pos = new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f);
                 Collider[] trees = Physics.OverlapBox(pos, new Vector3(0.5f, 1.5f, 0.5f));
                 foreach (var tree in trees)
@@ -324,6 +327,9 @@ public class PlayerSystem : MonoBehaviour
                         }
                     }
                 }
+            }
+            if(_equipList[_equipItem, 1] == 5){
+                damageStamina(1f);
             }
         }
         else
@@ -501,6 +507,7 @@ public class PlayerSystem : MonoBehaviour
                     {
                         if (Gat._isremain == false)
                         {
+                            damageStamina(1f);
                             Gat.Interaction(_equipList[_equipItem, 1]);
                             _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
                             _movedDelay = _equipList[_equipItem, 3] / _act_speed;
@@ -508,6 +515,7 @@ public class PlayerSystem : MonoBehaviour
                         }
                         else if (Gat._isHave)
                         {
+                            damageStamina(1f);
                             Gat.Interaction(_equipList[_equipItem, 1]);
                             _delayedTimer = _equipList[_equipItem, 2] / _delay_speed;
                             _movedDelay = _equipList[_equipItem, 3] / _act_speed;
