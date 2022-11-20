@@ -749,7 +749,7 @@ public class PlayerSystem : MonoBehaviour
             // Debug.Log("작업 영역");
         }
 
-        if (other.tag == "sector")
+        if (other.tag == "sector" && !_SystemManager.GetComponent<SystemManager>().getTimeSystem())
         {
             //현재 들어온 지역
             if (other.transform.GetComponent<SectorObject>()._purifier)  //정화된 구역에 들어왔을때

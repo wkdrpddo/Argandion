@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SystemManager : MonoBehaviour
 {
-    private bool _time_stop;
+    [SerializeField] private bool _time_stop;
     public int _month;
     public int _day;
     public int _season;
@@ -27,6 +27,7 @@ public class SystemManager : MonoBehaviour
     public BuffManager _buffManager;
     public NPCManager _NPCManager;
     public UIManager _UIManager;
+    public SoundManager _soundManager;
     public EventPanel _EventPanel;
     public PrayBuff _PrayBuff;
     public SpiritBuff _SpiritBuff;
@@ -83,6 +84,7 @@ public class SystemManager : MonoBehaviour
         // _buiding1 = GameObject.Find("ClothshopPlace").GetComponent<BuildingChange>();
         _altar = GameObject.Find("Altar").GetComponent<Altar>();
         _MapObject.GetComponent<MapObject>().UpdateFieldManager(_season);
+        _soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -151,6 +153,11 @@ public class SystemManager : MonoBehaviour
     {
         _time_stop = value;
     }
+    public bool getTimeSystem()
+    {
+        return _time_stop;
+    }
+
 
     private void TimeSystem()
     {
@@ -545,5 +552,9 @@ public class SystemManager : MonoBehaviour
         _player.setCanAction(true);
         _player.setCanInteract(true);
         _player._canMove = true;
+    }
+
+    public void setBackground(int num){
+        _soundManager.FunctionCall(num);
     }
 }

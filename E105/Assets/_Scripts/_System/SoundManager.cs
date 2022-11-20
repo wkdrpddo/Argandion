@@ -34,8 +34,20 @@ public class SoundManager : MonoBehaviour
     {
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         Sound_Background = 0.2f;
-        playBGM1();
+        playMainTheme();
     }
+
+    public void FunctionCall(int num){
+        switch(num){
+            case 0:
+                playBGM1();
+                break;
+            case 1:
+                playRandom();
+                break;
+        }
+    }
+
     public void playBGM1()  //정화
     {
         bgmPlayer.Stop();
@@ -83,6 +95,14 @@ public class SoundManager : MonoBehaviour
 
         //UIManager에서 BGMChanger(string bgmName) 호출하기
         //_UIManager.BGMChanger(bgmName);
+    }
+
+    public void playMainTheme()  // 메인 화면
+    {
+        Debug.Log("메인 노래");
+        bgmPlayer.Stop();
+        bgmPlayer.clip = bgmSounds[6].clip;
+        bgmPlayer.Play();
     }
 
     public void setBackgroundSound(Slider volume)

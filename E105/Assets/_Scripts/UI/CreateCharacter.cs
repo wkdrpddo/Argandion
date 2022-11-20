@@ -48,6 +48,7 @@ public class CreateCharacter : MonoBehaviour
         }
         else
         {
+            UIManager._uimanagerInstance.startTime();
             UIManager._uimanagerInstance.OnBaseUIPanel();
             UIManager._uimanagerInstance.selectPlayer();
             UIManager._uimanagerInstance.setPlayerName(_name);

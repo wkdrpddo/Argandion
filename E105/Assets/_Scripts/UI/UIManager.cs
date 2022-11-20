@@ -1065,12 +1065,13 @@ public class UIManager : MonoBehaviour
     // 사운드 관련
     public void playRandomBGM()
     {
-        // GameObject.Find("SoundManager").GetComponent<SoundManager>().playRandom();
+        _systemmanager.setBackground(1);
     }
-    // public void BGMChanger(string _bgmName)
-    // {
-    //     _conversationpanel.selectMusic(_bgmName);
-    // }
+
+    public void BGMChanger(string _bgmName)
+    {
+        _conversationpanel.selectMusic(_bgmName);
+    }
 
     // 정령 버프 및 제단 관련 코드
     public void prayToSpirit(int _flowerCode)
@@ -1137,6 +1138,10 @@ public class UIManager : MonoBehaviour
         _conversationpanel.resetConversationPanel();
     }
 
+    public void startTime(){
+        _systemmanager.setTimeSystem(false);
+    }
+    
     // 게임 시작 종료
     public void setGameState(bool value)
     {

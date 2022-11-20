@@ -7,14 +7,17 @@ using UnityEngine.UI;
 public class MainPagePanel : MonoBehaviour
 {
     // [SerializeField] private UIManager ui;
+    private SystemManager _systemmanager;
 
-    void Start()
+    void Awake()
     {
+        _systemmanager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         // ui = this.GetComponentInParent<UIManager>();
     }
 
     public void gameStart()
     {
+        _systemmanager.setBackground(0);
         string name = UIManager._uimanagerInstance.getPlayerName();
 
         gameObject.SetActive(false);
@@ -24,6 +27,7 @@ public class MainPagePanel : MonoBehaviour
         }
         else
         {
+            UIManager._uimanagerInstance.startTime();
             UIManager._uimanagerInstance.OnBaseUIPanel();
             UIManager._uimanagerInstance.setGameState(true);
             UIManager._uimanagerInstance.delayRunControllKeys();
