@@ -59,58 +59,42 @@ public class Dirt : MonoBehaviour
 
     void NewDay()
     {
-        if (watered > 0)
+        if (_buff.bluePray || _system._weather == 1 || _system._weather == 5)
         {
-            Debug.Log("물빠짐!");
+            watered = 1500;
+            fullWater = true;
+            foreach (CropPosition cpo in _cropPos)
+            {
+                if (cpo._plant)
+                {
+                    if (cpo._plant.TryGetComponent(out Crop cro))
+                    {
+                        cro.growUp();
+                    }
+                }
+            }
+        }
+        else if (watered >= minusWater)
+        {
             watered -= minusWater;
             fullWater = false;
-            if (_buff.bluePray)
+            foreach (CropPosition cpo in _cropPos)
             {
-                watered += 25 * howMany;
-                if (watered >= 1500) {
-                    watered = 1500;
-                    fullWater = true;
-                }
-            }
-            if (_system._weather == 1 || _system._weather == 5)
-            {
-                if (watered <= 1500) {
-                    watered = 1500;
-                    fullWater = true;
-                }
-            }
-            if (watered < 0)
-            {
-                watered = 0;
-                fullWater = false;
-            }
-            else
-            {
-                foreach (CropPosition cpo in _cropPos)
+                if (cpo._plant)
                 {
-                    if (cpo._plant)
+                    if (cpo._plant.TryGetComponent(out Crop cro))
                     {
-                        if (cpo._plant.TryGetComponent(out Crop cro))
-                        {
-                            cro.growUp();
-                        }
+                        cro.growUp();
                     }
-                    
                 }
-                // for (int i = 0; i < _nearObjects.Length; i++)
-                // {
-                //     if (_nearObjects[i] != null)
-                //     {
-                //         Crop crop = _nearObjects[i].GetComponent<Crop>();
-                //         crop.growUp();
-                //     }
-                //     else
-                //     {
-                //     }
-                // }
             }
-            checkWater();
         }
+        else
+        {
+            watered = 0;
+            fullWater = false;
+        }
+        checkWater();
     }
 
     public void Water()
