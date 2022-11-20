@@ -14,6 +14,7 @@ public class Deer : MonoBehaviour
     private Vector3 destination;  //목적지
 
     //상태 변수
+    private bool isHurt = false;
     private bool isAction; //행동중인지 아닌지
     private bool isWalking; //걷는중인지 아닌지
     private bool isRunning; //뛰는중인지 아닌지
@@ -30,6 +31,7 @@ public class Deer : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private BoxCollider boxCol;
     private NavMeshAgent nav;
+    public AudioSource _sound;
 
     //Item
     [SerializeField] private GameObject item20;  //동물의 가죽
@@ -133,8 +135,10 @@ public class Deer : MonoBehaviour
 
     public void Damage(int _dmg, Vector3 _targetPos)
     {
-        if (!isDead)
+        if (!isDead && !isHurt)
         {
+            isHurt = true;
+            Invoke("NotHurt", 0.5f);
             hp -= _dmg;
 
             if (hp <= 0)
@@ -146,6 +150,12 @@ public class Deer : MonoBehaviour
             Run(_targetPos);
         }
     }
+
+    private void NotHurt()
+    {
+        isHurt = false;
+    }
+
 
     private void Dead()
     {

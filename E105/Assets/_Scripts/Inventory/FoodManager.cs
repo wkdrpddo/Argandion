@@ -28,6 +28,7 @@ public class FoodManager : MonoBehaviour
     // private UIManager _uiManager;s
     public EventPanel _eventPanel;
     private ParticleSystem _particle;
+    private SoundManager _sound;
 
     private int[] drinks = { 128, 129, 130 };
     private int[] foods = { 120, 121, 122, 123, 124, 125, 126, 127, 131, 132 };
@@ -51,6 +52,7 @@ public class FoodManager : MonoBehaviour
     {
         _player = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
+        _sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         _particle = _player.transform.Find("PlayerBody").transform.Find("Particle").GetComponent<ParticleSystem>();
         _particle.Stop();
         // time = 0; // 테스트 용
@@ -130,9 +132,11 @@ public class FoodManager : MonoBehaviour
             _player.changeHealth((-1) * hp * (_foodBuff[_buffIdx] ? 0.75f : 1) * (_foodBuff[5] ? 2 : 1));
             _player.changeEnergy((-1) * sp * (_foodBuff[_buffIdx] ? 0.75f : 1) * (_foodBuff[5] ? 2 : 1));
             Drinking();
+            _sound.playEffectSound("DRINKING");
         }
         else if (IsExist(_itemCode, foods))
         { // 음식을 먹었을 경우
+            _sound.playEffectSound("EATING");
             // Debug.Log("음식 먹음 체킹");
             if (_itemCode == 120)
             { // 지금 먹는게 빵일 때
@@ -203,6 +207,7 @@ public class FoodManager : MonoBehaviour
             // Debug.Log("음식재료 및 우유 먹음 체킹");
             if (_itemCode == 110)
             { // 지금 먹는게 우유일 때
+                _sound.playEffectSound("DRINKING");
                 if (!_foodBuff[_buffIdx])
                 {
                     // 직전에 먹은게 빵일 때
@@ -218,6 +223,7 @@ public class FoodManager : MonoBehaviour
             }
             else
             {
+                _sound.playEffectSound("EATING");
                 destroyPreviousBuff(_eventCode);
             }
             _player.changeHealth((-1) * hp);
