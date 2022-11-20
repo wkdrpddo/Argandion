@@ -30,6 +30,7 @@ public class Fishing : MonoBehaviour
     private BuffManager _buff;
     public GameObject _po;
     public PlayerSystem _ps;
+    private SoundManager _sound;
 
     private Vector3 _Dpos;
     private GameObject _cha;
@@ -44,6 +45,7 @@ public class Fishing : MonoBehaviour
         _cha = _po.transform.Find("PlayerBody").gameObject;
         _ps = _po.GetComponent<PlayerSystem>();
         _Dpos = gameObject.transform.forward;
+        _sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     public void Interaction(float rodNumber, float baitNum)
@@ -146,7 +148,12 @@ public class Fishing : MonoBehaviour
             isFishing = true;
             _ps.setAnimator(11,0);
             phase = 2;
+            Invoke("FishingSound", 0.1f);
         }
+    }
+
+    private void FishingSound() {
+        _sound.playEffectSound("FISHING");
     }
 
     void FishingSuccess()
