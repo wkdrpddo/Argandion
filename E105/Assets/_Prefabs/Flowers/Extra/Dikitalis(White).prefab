@@ -71,7 +71,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &6065032735055853819
 BoxCollider:
@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fc5337f0185f24fbc27ecde5d0ae5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 0}
-  _rigidbody: {fileID: 0}
+  _collider: {fileID: 6065032735055853819}
+  _rigidbody: {fileID: 6065032735055853816}
 --- !u!114 &6065032735055853701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +123,6 @@ GameObject:
   - component: {fileID: 7646408161272951934}
   - component: {fileID: 6751639251183303643}
   - component: {fileID: 8815325033079344913}
-  - component: {fileID: 9089683787406563855}
   m_Layer: 9
   m_Name: Flower_D
   m_TagString: Untagged
@@ -196,21 +195,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &9089683787406563855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7013985992908615364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 1
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 8
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
