@@ -246,7 +246,7 @@ public class UIManager : MonoBehaviour
         acquireItem(item22, 60);
 
 
-        ItemObject item106 = findItem(106);
+        ItemObject item106 = findItem(400);
         acquireItem(item106, 1);
 
 
@@ -590,24 +590,35 @@ public class UIManager : MonoBehaviour
             if (getGameState())
             {
                 _optionpanel.handelPanel();
+                stopControllKeys();
             }
             else
             {
                 _optionfrommain.handelPanel();
+                handleMainBtnInteractable(false);
             }
-            stopControllKeys();
         }
         else
         {
             if (getGameState())
             {
                 _optionpanel.handelPanel();
+                runControllKeys();
             }
             else
             {
                 _optionfrommain.handelPanel();
+                handleMainBtnInteractable(true);
             }
-            runControllKeys();
+        }
+    }
+
+    public void handleMainBtnInteractable(bool value)
+    {
+        Button[] mainBtns = _mainpage.GetComponentsInChildren<Button>();
+        foreach (Button btn in mainBtns)
+        {
+            btn.interactable = value;
         }
     }
 
@@ -931,6 +942,11 @@ public class UIManager : MonoBehaviour
     public void setCanAction(bool value)
     {
         _playersystem.setCanAction(value);
+    }
+
+    public void delayStopControllKeys()
+    {
+        Invoke("stopControllKeys", 0.25f);
     }
 
     public void stopControllKeys()

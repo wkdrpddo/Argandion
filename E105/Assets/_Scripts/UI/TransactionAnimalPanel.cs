@@ -34,7 +34,7 @@ public class TransactionAnimalPanel : MonoBehaviour
         if (gameObject.activeSelf)
         {
             transform.GetChild(1).GetChild(4).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = UIManager._uimanagerInstance.getPlayerGold().ToString();
-            UIManager._uimanagerInstance.stopControllKeys();
+            UIManager._uimanagerInstance.delayStopControllKeys();
         }
         else
         {
