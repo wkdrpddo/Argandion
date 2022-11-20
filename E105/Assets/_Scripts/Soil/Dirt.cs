@@ -15,7 +15,7 @@ public class Dirt : MonoBehaviour
 
     public CropPosition[] _cropPos = new CropPosition[9];
     ParticleSystem particleObject;
-
+    private SoundManager _sound;
     public SystemManager _system;
     public GameObject _buffManagerObject;
     private BuffManager _buff;
@@ -33,6 +33,7 @@ public class Dirt : MonoBehaviour
         _buffManagerObject = GameObject.Find("BuffManager");
         _buff = _buffManagerObject.GetComponent<BuffManager>();
         _cropPos = gameObject.GetComponentsInChildren<CropPosition>();
+        _sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         checkHoe();
         checkWater();
         checkIcon();
@@ -49,6 +50,11 @@ public class Dirt : MonoBehaviour
     public void Ready()
     {
         isReady = true;
+        Invoke("FarmingSound",0.0f);
+    }
+
+    private void FarmingSound(){
+        _sound.playEffectSound("FARMING");
     }
 
     void NewDay()
@@ -109,6 +115,7 @@ public class Dirt : MonoBehaviour
 
     public void Water()
     {
+        _sound.playEffectSound("WATERING");
         fullWater = true;
         watered = 1500;
         checkWater();

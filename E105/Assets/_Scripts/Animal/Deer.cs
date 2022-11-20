@@ -32,6 +32,7 @@ public class Deer : MonoBehaviour
     [SerializeField] private BoxCollider boxCol;
     private NavMeshAgent nav;
     public AudioSource _sound;
+    public AudioClip attackedSound;
 
     //Item
     [SerializeField] private GameObject item20;  //동물의 가죽
@@ -137,6 +138,8 @@ public class Deer : MonoBehaviour
     {
         if (!isDead && !isHurt)
         {
+            _sound.clip = attackedSound;
+            _sound.Play();
             isHurt = true;
             Invoke("NotHurt", 0.5f);
             hp -= _dmg;
