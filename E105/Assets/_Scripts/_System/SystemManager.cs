@@ -353,7 +353,7 @@ public class SystemManager : MonoBehaviour
         _PrayBuff.DayStart();
         foreach (var dirt in _dirts)
         {
-            if (dirt)
+            if (dirt.isActiveAndEnabled)
             {
                 dirt.DayStart();
             }

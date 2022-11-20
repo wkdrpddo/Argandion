@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
 
 
     // Panel var
-    [SerializeField] private GameObject _baseuipanel;
+    [SerializeField] public GameObject _baseuipanel;
     [SerializeField] private GameObject _mapuipanel;
     [SerializeField] private MainPagePanel _mainpage;
     [SerializeField] private OptionPanel _optionpanel;
@@ -107,7 +107,7 @@ public class UIManager : MonoBehaviour
     {
 
         conversationNPC = 0;
-        selectCharacter = 0;
+        selectCharacter = -1;
         isPressESC = false;
         isMyHome = false;
         isTransactionOpen = false;
@@ -552,6 +552,11 @@ public class UIManager : MonoBehaviour
     public void setCharacterValue(int value)
     {
         selectCharacter = value;
+
+    }
+    public int getCharacterValue()
+    {
+        return selectCharacter;
     }
 
     // ======================= Base UI 관련 함수
@@ -851,6 +856,7 @@ public class UIManager : MonoBehaviour
         {
             sellItem(_slotIdx, _count, 2);
         }
+        syncQuickSlot();
     }
 
     public Slot[] getInventorySlots()

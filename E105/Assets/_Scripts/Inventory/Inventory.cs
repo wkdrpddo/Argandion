@@ -61,7 +61,6 @@ public class Inventory : MonoBehaviour
                 return false;
             }
         }
-
         return false;
     }
 
@@ -121,6 +120,7 @@ public class Inventory : MonoBehaviour
                         if (slots[i].itemCount + _count <= 99)
                         {
                             slots[i].SetSlotCount(_count);
+                            SyncBait(_item, slots[i].getSlotItemCount() + _count);
                             return;
                         }
                         else
@@ -147,6 +147,14 @@ public class Inventory : MonoBehaviour
             {
                 Debug.Log("꽉찼엉");
             }
+        }
+        
+    }
+    public void SyncBait(ItemObject _item, int _count){
+        if (_item.ItemCode >= 502 && _item.ItemCode <= 504)
+        {
+            UIManager._uimanagerInstance.setPlayerQuickSlot(7, _item.ItemCode, _count);
+            UIManager._uimanagerInstance._baseuipanel.transform.GetChild(3).GetChild(1).GetComponentInChildren<Slot>().AddItem(_item, _count);
         }
     }
 

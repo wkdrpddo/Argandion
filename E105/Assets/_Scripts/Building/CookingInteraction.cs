@@ -10,7 +10,7 @@ public class CookingInteraction : MonoBehaviour
     private PlayerSystem _playerSystem;
     private GameObject _playerBody;
     [SerializeField] private GameObject _cookingLight; // 시작 전에 끼워 넣기
-    private SoundManager _sound;
+    // private SoundManager _sound;
 
     void Awake()
     {
@@ -18,7 +18,7 @@ public class CookingInteraction : MonoBehaviour
         _playerBody = GameObject.Find("PlayerObject").transform.GetChild(0).gameObject;
         _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _cameraSystem = GameObject.Find("PlayerObject").GetComponent<CameraSystem>();
-        _sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        // _sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();s
         Debug.Log(_cameraSystem);
     }
 
@@ -40,7 +40,7 @@ public class CookingInteraction : MonoBehaviour
         _cameraSystem.CookingCamera();
         _cookingLight.SetActive(true);
         _shelf.SetActive(false);
-        _sound.playEffectSound("COOKING");
+        // _sound.playEffectSound("COOKING");
     }
 
     public void CookingEnd()

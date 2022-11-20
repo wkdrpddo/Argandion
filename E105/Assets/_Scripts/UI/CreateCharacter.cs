@@ -45,6 +45,9 @@ public class CreateCharacter : MonoBehaviour
         if (_name == "")
         {
             UIManager._uimanagerInstance.OnResultNotificationPanel("이름은 공백일 수 없습니다-");
+        }else if (UIManager._uimanagerInstance.getCharacterValue() == -1)
+        {
+            UIManager._uimanagerInstance.OnResultNotificationPanel("캐릭터를 선택해 주십시오-");
         }
         else
         {
@@ -66,7 +69,7 @@ public class CreateCharacter : MonoBehaviour
         manImg = transform.GetChild(5).GetChild(0).GetComponent<Image>();
         womanImg = transform.GetChild(6).GetChild(0).GetComponent<Image>();
 
-        selectWoman();
+        // selectWoman();
     }
 
     public void getName()

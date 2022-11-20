@@ -30,6 +30,7 @@ public class CookingPanel : MonoBehaviour
     private combFoodEffectObject[] effectData;
     private int[] canMakeList;
     private int index;
+    private bool isCooking;
 
     // Start is called before the first frame update
     void Awake()
@@ -37,6 +38,7 @@ public class CookingPanel : MonoBehaviour
         // ui = gameObject.GetComponentInParent<UIManager>();
         DishContent = transform.GetChild(1).GetChild(1).GetChild(0).GetChild(0).gameObject;
         RecipeContent = transform.GetChild(2).GetChild(1).GetChild(0).GetChild(0).gameObject;
+        isCooking = false;
     }
 
     public void handelPanel()
@@ -69,12 +71,18 @@ public class CookingPanel : MonoBehaviour
         isContainInventory = UIManager._uimanagerInstance.checkInventory(craftItem, 1);
         gameObject.transform.GetChild(0).GetComponent<Button>().interactable = false;
 
-        if (isContainInventory)
+        if (isCooking)
         {
-
+            UIManager._uimanagerInstance.OnResultNotificationPanel("이미 요리를 하고있습니다. 완성되기까지 기다려주세요-!");
+        }
+        else if (isContainInventory && !isCooking)
+        {
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().playEffectSound("COOKING");
+            isCooking = true;
             gameObject.transform.GetChild(2).GetChild(2).GetComponent<Button>().interactable = false;
             Invoke("onCancelBtn", 7f);
             Invoke("completeCooking", 7f);
+            Invoke("offIsCookinig", 7f);
             UIManager._uimanagerInstance.runCookingAnimation();
             Debug.LogWarning("========== after animation call ============");
 
@@ -87,6 +95,11 @@ public class CookingPanel : MonoBehaviour
         }
 
         deleteRecipeList();
+    }
+
+    private void offIsCooking()
+    {
+        isCooking = false;
     }
 
     private void onCancelBtn()
