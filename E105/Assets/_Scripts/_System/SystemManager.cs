@@ -47,6 +47,10 @@ public class SystemManager : MonoBehaviour
 
     [SerializeField] private Material[] _SkyBoxMat;
     [SerializeField] private bool _isnight;
+    [SerializeField] private RectTransform loadingPage;
+    [SerializeField] private RectTransform loadingBar;
+    [SerializeField] private GameObject loadingPanel;
+    private bool _inloading;
 
     public int[,] _timezone = new int[,] { { 6, 7, 18, 19 }, { 6, 6, 19, 20 }, { 6, 7, 18, 19 }, { 7, 8, 18, 19 } };
     // Start is called before the first frame update
@@ -82,7 +86,11 @@ public class SystemManager : MonoBehaviour
     void Update()
     {
         TimeSystem();
-
+        if (_inloading)
+        {
+            Loading();
+            LoadingBar();
+        }
     }
 
     private void UpdateSeason(int index)
@@ -161,6 +169,7 @@ public class SystemManager : MonoBehaviour
                 {
                     _hour = ((_buffManager.whitePray || _buffManager.whiteSpirit) ? 5 : 6);
                     _day += 1;
+                    InLoading();
 
                     if (_day >= 29)
                     {
@@ -177,15 +186,7 @@ public class SystemManager : MonoBehaviour
                             UpdateSeason(_month / 2);
                         }
                     }
-
-                    DayEnd();
-                    // _weatherManager.SetWeather(_season);
-                    // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
-                    // {
-                    //     _buffManager.FlowerBuffEnd();
-                    // }
-                    // _buffManager.DayEnd();
-                    DayStart();
+                    Invoke("TimeCall",1.5f);
                 }
             }
 
@@ -226,6 +227,20 @@ public class SystemManager : MonoBehaviour
             }
             RenderSettings.skybox.SetFloat("_Rotation", Time.time * 0.5f);
         }
+    }
+
+    private void TimeCall()
+    {
+        DayEnd();
+        // _weatherManager.SetWeather(_season);
+        // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
+        // {
+        //     _buffManager.FlowerBuffEnd();
+        // }
+        // _buffManager.DayEnd();
+        DayStart();
+        Loading();
+        Invoke("OutLoading",5f);
     }
 
     public void DayEnd()
@@ -490,5 +505,48 @@ public class SystemManager : MonoBehaviour
     public int getPuriCount()
     {
         return _purification_sector;
+    }
+
+    public void Loading()
+    {
+        if ((-1<= loadingPage.rotation.z && loadingPage.rotation.z <= -0.999f) || (0.999f<=loadingPage.rotation.z && loadingPage.rotation.z <= 1))
+        {
+            loadingPage.rotation = Quaternion.Euler(0,0,-180);            
+        }
+        else
+        {
+            Debug.Log(loadingPage.rotation.z);
+            loadingPage.Rotate(loadingPage.forward * Time.deltaTime * -150);
+        }
+    }
+
+    public void LoadingBar()
+    {
+        loadingBar.Rotate(loadingBar.forward * Time.deltaTime * 160);
+    }
+
+    public void InLoading()
+    {
+        loadingPanel.SetActive(true);
+        loadingPage.rotation = Quaternion.Euler(0,0,0);
+        loadingBar.rotation = Quaternion.Euler(0,0,0);
+        _player.changeHealth(-1500);
+        _player.changeEnergy(-1500);
+        _inloading = true;
+        _player.setCanAction(false);
+        _player.setCanInteract(false);
+        _player._canMove = false;
+        // 플레이어 텔레포트
+        setTimeSystem(true);
+    }
+
+    public void OutLoading()
+    {
+        _inloading = false;
+        loadingPanel.SetActive(false);
+        setTimeSystem(false);
+        _player.setCanAction(true);
+        _player.setCanInteract(true);
+        _player._canMove = true;
     }
 }
