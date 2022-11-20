@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4723618186581976984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4723618186581976986}
+  - component: {fileID: 4723618186581976985}
+  m_Layer: 0
+  m_Name: GridObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4723618186581976986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4723618186581976984}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4723618186581976985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4723618186581976984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d27d7f2c1e3664caefdcceceff2d0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Sector: {fileID: 0}
+  _trees:
+  - {fileID: 2688403955753452925, guid: b5068e3c69c1657469d62b6a6f27b7d9, type: 3}
+  - {fileID: 2688403955753452925, guid: b5068e3c69c1657469d62b6a6f27b7d9, type: 3}
+  - {fileID: 2688403955753452925, guid: b5068e3c69c1657469d62b6a6f27b7d9, type: 3}
+  - {fileID: 2688403955753452925, guid: b5068e3c69c1657469d62b6a6f27b7d9, type: 3}
+  - {fileID: 2688403955753452925, guid: b5068e3c69c1657469d62b6a6f27b7d9, type: 3}
+  - {fileID: 2688403955753452925, guid: b5068e3c69c1657469d62b6a6f27b7d9, type: 3}
+  - {fileID: 2688403955753452925, guid: b5068e3c69c1657469d62b6a6f27b7d9, type: 3}
+  - {fileID: 2688403955753452925, guid: b5068e3c69c1657469d62b6a6f27b7d9, type: 3}
+  _branch: {fileID: 5170848866153877265, guid: 02c5ce442af9d0740aad47a2a42cd29e, type: 3}
+  _stone: {fileID: 6060400838447964328, guid: 6a1551813ed6d9a49ae467b57bc1128c, type: 3}
+  _ores:
+  - {fileID: 1894982720226970, guid: b26e035715d763f409a7e837ae204dab, type: 3}
+  - {fileID: 1179169510983948, guid: bc72ab628c0e69243ba6d91b4db64d46, type: 3}
+  - {fileID: 1377553248450764, guid: 9e157c8bfffe8c444a7226ed60eac6d2, type: 3}
+  _tree_spawn_percent: 0
+  _base_transform: {fileID: 4723618186581976986}
+  _ore_spawn: 0
