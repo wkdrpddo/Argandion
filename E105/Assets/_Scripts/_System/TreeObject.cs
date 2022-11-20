@@ -12,11 +12,14 @@ public class TreeObject : MonoBehaviour
     public Collider _box;
     public GameObject _itemParent;
     private SectorObject _sector;
+    private SoundManager _soundManager;
+
     void Start()
     {
         _buff = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         _itemParent = GameObject.Find("Items");
         _sector = gameObject.transform.parent.GetComponent<SectorObject>();
+        _soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
     public void DayEnd()
     {
@@ -39,6 +42,7 @@ public class TreeObject : MonoBehaviour
     public void Damaged(float damage)
     {
         _health -= damage;
+        _soundManager.playEffectSound("AXING");
         if (_health <=0 )
         {
             DestroyWood();

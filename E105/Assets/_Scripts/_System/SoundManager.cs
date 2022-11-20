@@ -26,8 +26,8 @@ public class SoundManager : MonoBehaviour
     private UIManager _UIManager;
     public AudioSource effectSoundPlayer;
     public AudioClip getItem;
-    public AudioClip drinking;
-    public AudioClip eating;
+    // public AudioClip drinking;
+    // public AudioClip eating;
 
     private bool canplay = true;
     public AudioSource playerSoundPlayer;
@@ -143,12 +143,12 @@ public class SoundManager : MonoBehaviour
             case "GETITEM":
                 effectSoundPlayer.clip = getItem;
                 break;
-            case "DRINKING":
-                effectSoundPlayer.clip = drinking;
-                break;
-            case "EATING":
-                effectSoundPlayer.clip = eating;
-                break;
+            // case "DRINKING":
+            //     effectSoundPlayer.clip = drinking;
+            //     break;
+            // case "EATING":
+            //     effectSoundPlayer.clip = eating;
+            //     break;
             case "AXING":
                 effectSoundPlayer.clip = axing;
                 break;
@@ -171,7 +171,7 @@ public class SoundManager : MonoBehaviour
                 case "RUNNING":
                     playerSoundPlayer.clip = moving;
                     canplay = false;
-                    Invoke("CanPlayTrue", 0.35f);
+                    Invoke("CanPlayTrue", 0.2f);
                     break;
                 case "AXING":
                     playerSoundPlayer.clip = axing;
