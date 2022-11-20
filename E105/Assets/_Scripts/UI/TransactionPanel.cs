@@ -50,7 +50,7 @@ public class TransactionPanel : MonoBehaviour
         UIManager._uimanagerInstance.OnInventory(2);
         if (gameObject.activeSelf)
         {
-            UIManager._uimanagerInstance.stopControllKeys();
+            UIManager._uimanagerInstance.delayStopControllKeys();
             setBuyPanelList(value);
         }
         else

@@ -32,11 +32,13 @@ public class OptionPanel : MonoBehaviour
             background.value = _soundmanager.getBackgroundSound();
             effect.value = _soundmanager.getEffectSound();
             UIManager._uimanagerInstance.isPressESC = true;
+            UIManager._uimanagerInstance.handleMainBtnInteractable(false);
         }
         else
         {
             UIManager._uimanagerInstance.isPressESC = false;
-            UIManager._uimanagerInstance.delayRunControllKeys();
+            UIManager._uimanagerInstance.handleMainBtnInteractable(true);
+            // UIManager._uimanagerInstance.delayRunControllKeys();
         }
     }
 }
