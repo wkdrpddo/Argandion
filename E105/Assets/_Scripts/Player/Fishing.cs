@@ -118,6 +118,7 @@ public class Fishing : MonoBehaviour
         if (!fishingDelay) {
             Debug.Log("낚시시작!");
             for (int idx = 0; idx < 3; idx++) {
+                
                 if (fishingRod[idx] == myRod) {
                     reactionTime = reaction[idx];
 
@@ -132,6 +133,7 @@ public class Fishing : MonoBehaviour
                     break;
                 }
             }
+            _ps._UIManager.quickUse((int)_ps._equipList[7, 0], 1, 7);
 
             for (int idx = 0; idx < 3; idx++) {
                 if (bait[idx] == myBait) {

@@ -525,7 +525,7 @@ public class PlayerSystem : MonoBehaviour
                     if (_equipList[_equipItem, 1] == 6 && _equipList[7, 4] > 0 && col.TryGetComponent(out Fishing fis))
                     {
                         fis.Interaction(_equipList[_equipItem, 0], _equipList[7, 0]);
-                        _UIManager.quickUse((int)_equipList[7, 0], 1, 7);
+                        // _UIManager.quickUse((int)_equipList[7, 0], 1, 7);
                         break;
                     }
                     //제사창
