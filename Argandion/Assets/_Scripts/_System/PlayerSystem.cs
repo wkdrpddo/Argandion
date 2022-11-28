@@ -759,7 +759,6 @@ public class PlayerSystem : MonoBehaviour
 
     private void playerDeath()
     {
-        // Debug.Log("플레이어 체력 또는 기력 0");
         _SystemManager.GetComponent<SystemManager>().playerDeath();
     }
 
