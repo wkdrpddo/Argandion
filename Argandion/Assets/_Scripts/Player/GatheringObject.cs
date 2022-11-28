@@ -16,8 +16,6 @@ public class GatheringObject : MonoBehaviour
     public bool _isHave;
     public GameObject _fruit;
 
-    // Update is called once per frame
-
     void Start()
     {
         _ps = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();

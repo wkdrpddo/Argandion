@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CropPosition : MonoBehaviour
 {
-    // Start is called before the first frame update
     public int _num;
     public int _parent_dirt;
     public int _state;
@@ -31,8 +30,7 @@ public class CropPosition : MonoBehaviour
 
     public void Interaction(int itemCode)
     {
-        Debug.Log("심기 동작");
-        Debug.Log(itemCode);
+        // Debug.Log("심기");
         _plant = Instantiate(_crops[itemCode - 212], gameObject.transform.position, gameObject.transform.rotation,gameObject.transform);
         _plant.GetComponent<Crop>()._pCpo = this;
         _plant.GetComponent<Crop>()._pd = _pd;

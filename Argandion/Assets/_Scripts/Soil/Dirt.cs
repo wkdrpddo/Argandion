@@ -122,10 +122,8 @@ public class Dirt : MonoBehaviour
 
     public void checkHoe()
     {
-        Debug.Log("Check Hoe 길이 : "+_cropPos.Length);
         foreach (CropPosition cpo in _cropPos)
         {
-            Debug.Log(cpo);
             if (cpo._state == 0)
             {
                 _is_icon_dig = true;
@@ -168,38 +166,4 @@ public class Dirt : MonoBehaviour
         }
         Invoke("checkIcon",3f);
     }
-
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.gameObject.CompareTag("crop"))
-    //     {
-    //         if (!other.gameObject.GetComponent<Crop>().isIn)
-    //         {
-    //             for (int idx = 0; idx < 25; idx++)
-    //             {
-    //                 if (_nearObjects[idx] == null)
-    //                 {
-    //                     Debug.Log(idx + "에 넣었어!");
-    //                     _nearObjects[idx] = other.gameObject;
-    //                     other.gameObject.GetComponent<Crop>().isIn = true;
-    //                     howMany += 1;
-    //                     break;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
-    // public void CropGrowUp(GameObject crop)
-    // {
-    //     for (int idx = 0; idx < 25; idx++)
-    //     {
-    //         if (_nearObjects[idx] == crop)
-    //         {
-    //             _nearObjects[idx] = null;
-    //             howMany -= 1;
-    //             break;
-    //         }
-    //     }
-    // }
 }

@@ -50,18 +50,17 @@ public class Fishing : MonoBehaviour
 
     public void Interaction(float rodNumber, float baitNum)
     {
-        Debug.Log("낚시 상호작용");
         DoFishing((int)rodNumber, (int)baitNum);
     }
 
     void Update() {
         if (isFishing) {
             myWaitingTime += Time.deltaTime;
-            Debug.Log("물기 기다리는중...");
+            // Debug.Log("물기 기다리는중...");
             if ( myWaitingTime > waitingTime ) {
                 isBaiting = true;
                 phase = 3;
-                Debug.Log("미끼를 물었다!");
+                // Debug.Log("미끼를 물었다!");
                 _ps.setAnimator(12,0);
             }
         }
@@ -74,7 +73,7 @@ public class Fishing : MonoBehaviour
                 myWaitingTime = 0.0f;
                 myReactionTime = 0.0f;
                 phase = 5;
-                Debug.Log("물고기가 튀었어");
+                // Debug.Log("물고기 도망감");
                 _ps._canMove = true;
                 _ps.setCanAction(true);
                 _ps._playerAnimator.SetBool("fishingFail",true);
@@ -90,7 +89,7 @@ public class Fishing : MonoBehaviour
     public void DoFishing (int rodIdx, int baitIdx)
     {
         if (_buff.inColdWave && !_buff.redPray) {
-            Debug.Log("호수가 얼어있어 낚시를 하지못합니다 T.T");
+            // Debug.Log("호수가 얼어있어 낚시를 하지못합니다 T.T");
             return ;
         }
 
@@ -102,10 +101,9 @@ public class Fishing : MonoBehaviour
             _cha.transform.forward = _Dpos;
             _ps._canMove = false;
             _ps.setCanAction(false);
-            Debug.Log("낚시대 투척!");
+            // Debug.Log("낚시대 투척!");
             _ps.damageStamina(2f);
             _ps.setAnimator(9,0);
-            // isFishing = true;
             _ps._playerAnimator.SetBool("fishingFail",false);
             Invoke("FishingStart", 2.0f);
         } else if ( isBaiting ) {
@@ -116,7 +114,7 @@ public class Fishing : MonoBehaviour
     void FishingStart()
     {   
         if (!fishingDelay) {
-            Debug.Log("낚시시작!");
+            // Debug.Log("낚시시작!");
             for (int idx = 0; idx < 3; idx++) {
                 
                 if (fishingRod[idx] == myRod) {
@@ -129,7 +127,6 @@ public class Fishing : MonoBehaviour
                     } else {
                         waitingTime = Random.Range(2.0f, 6.0f);
                     }
-
                     break;
                 }
             }
@@ -146,7 +143,6 @@ public class Fishing : MonoBehaviour
                 waitingTime *= 0.5f;
             }
 
-            Debug.Log(waitingTime);
             fishingDelay = true;
             isFishing = true;
             _ps.setAnimator(11,0);
@@ -162,7 +158,7 @@ public class Fishing : MonoBehaviour
     void FishingSuccess()
     {
         if ( myReactionTime > 0.0f && myReactionTime < reactionTime) {
-            Debug.Log("낚시 성공");
+            // Debug.Log("낚시 성공");
             theInventory.AcquireItem(item.FindItem(106),1);
             phase = 4;
             isBaiting = false;
@@ -172,7 +168,7 @@ public class Fishing : MonoBehaviour
             _ps.setAnimator(13,0);
             Invoke("FishingDelay", 3.0f);
         } else {
-            Debug.Log("아직 미끼를 물지 않았습니다!");
+            // Debug.Log("아직 미끼를 물지 않았습니다!");
         }
     }
 
