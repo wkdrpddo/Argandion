@@ -81,7 +81,6 @@ public class Inventory : MonoBehaviour
                         }
                         else
                         {
-                            // Debug.Log("혹시 여기 들어오니??");
                             int temp = slots[i].itemCount;
                             slots[i].SetSlotCount(99 - slots[i].itemCount);
                             AcquireItem(_item, _count + temp - 99);
@@ -102,7 +101,7 @@ public class Inventory : MonoBehaviour
 
             if (i + 1 == slots.Length)
             {
-                Debug.Log("꽉찼엉");
+                // Debug.Log("꽉찼음");
             }
         }
     }
@@ -145,7 +144,7 @@ public class Inventory : MonoBehaviour
 
             if (i + 1 == slots.Length)
             {
-                Debug.Log("꽉찼엉");
+                // Debug.Log("꽉찼음");
             }
         }
         

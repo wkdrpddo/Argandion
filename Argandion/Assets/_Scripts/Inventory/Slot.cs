@@ -15,22 +15,14 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     [SerializeField]
     private TextMeshProUGUI text_Count;
-    // private Text text_Count;
     [SerializeField]
     private GameObject go_CountImage;
 
-    // [SerializeField] private UIManager ui;
-
     void Awake()
     {
-        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         itemImage = gameObject.transform.GetChild(0).GetComponent<Image>();
         text_Count = gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
     }
-
-    // private void Update() {
-    //     ItemUse();
-    // }
 
     public ItemObject getSlotItemData()
     {
@@ -59,12 +51,9 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         item = _item;
         itemCount = _count;
         LoadImage(item.ItemCode);
-        
-        // Debug.Log("이건 값이 얼마일까?" + _item.ItemCode + " : " + _count);
 
         if (item.Category != "장비" && _item.Category != "옷")
         {
-            // go_CountImage.SetActive(true);
             text_Count.text = itemCount.ToString();
             text_Count.gameObject.SetActive(true);
         }
@@ -72,7 +61,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         {
             text_Count.text = "0";
             text_Count.gameObject.SetActive(false);
-            // go_CountImage.SetActive(false);
         }
 
         SetColor(1);
@@ -86,24 +74,20 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void SetSlotCount(int _count)
     {
-        // Debug.Log("itemCount : " + itemCount);
         itemCount += _count;
         text_Count.text = itemCount.ToString();
 
         if (itemCount <= 0)
         {
-            // Debug.Log("ClearSlot");
             if(!(gameObject.transform.parent.parent.parent.gameObject.name == "StorageScroll")) {
                 ClearSlot();
             }
             itemCount = 0;
-
         }
     }
 
     public void ClearSlot()
     {
-        // Debug.Log("======== clear slot " + idx);
         item = null;
         itemCount = 0;
         itemImage.sprite = null;
@@ -156,7 +140,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             }
 
             if(UIManager._uimanagerInstance.getIsLeftClickInInven()) {
-                Debug.Log("두 번째 클릭");
+                // Debug.Log("두 번째 클릭");
                 if(gameObject.transform.parent.parent.parent.gameObject.name == "QuickSlot") {
                     if(itemCount == 0) {
                         UIManager._uimanagerInstance.setSecondClick(2, idx, 0, 0);
@@ -171,7 +155,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
                     UIManager._uimanagerInstance.setSecondClick(1, idx, item.ItemCode, itemCount);
                 }
             } else {
-                Debug.Log("첫 번째 클릭");
+                // Debug.Log("첫 번째 클릭");
                 if(gameObject.transform.parent.parent.parent.gameObject.name == "QuickSlot") {
                     if(itemCount == 0) {
                         UIManager._uimanagerInstance.setFirstClick(2, idx, 0, 0);
@@ -191,15 +175,15 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         // 우클릭 시, 인벤토리가 열려있는 경우
         if (eventData.button == PointerEventData.InputButton.Right && UIManager._uimanagerInstance.getIsOpenInventory() && itemCount != 0)
         {
-            Debug.LogWarning("인벤토리 우클릭");
+            // Debug.LogWarning("인벤토리 우클릭");
             if (gameObject.transform.parent.parent.parent.gameObject.name == "QuickSlot" || gameObject.transform.parent.name == "Equipment")
             {
-                Debug.Log("여긴 퀵 슬롯 또는 장비 슬롯");
+                // Debug.Log("여긴 퀵 슬롯 또는 장비 슬롯");
                 UIManager._uimanagerInstance.clickRightSlotModal(4, Input.mousePosition - new Vector3(2, -2, 0), item, itemCount, idx);
             }
             else if (gameObject.transform.parent.parent.parent.gameObject.name == "Bag")
             {
-                Debug.Log("여긴 인벤토리");
+                // Debug.Log("여긴 인벤토리");
                 switch (item.Category)
                 {
                     case "옷":

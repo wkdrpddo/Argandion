@@ -10,14 +10,12 @@ public class Quickslot : MonoBehaviour
     private GameObject go_SlotsParent;  // Slot들의 부모인 Grid Setting 
 
     public Slot[] slots;  // 슬롯들 배열
-    // [SerializeField] private UIManager ui;
 
     void Awake()
     {
         go_InventoryBase = transform.GetChild(0).gameObject;
         go_SlotsParent = go_InventoryBase.transform.GetChild(0).gameObject;
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
-        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
 
         for (int i = 0; i < slots.Length; i++)
         {
@@ -83,7 +81,6 @@ public class Quickslot : MonoBehaviour
                         {
                             UIManager._uimanagerInstance.setPlayerQuickSlot(i, _item.ItemCode, slots[i].itemCount + _count);
                             slots[i].SetSlotCount(_count);
-
                             UIManager._uimanagerInstance.syncQuickSlot();
                             return;
                         }
@@ -115,7 +112,7 @@ public class Quickslot : MonoBehaviour
 
             if (i + 1 == slots.Length)
             {
-                Debug.Log("꽉찼엉");
+                // Debug.Log("꽉찼음");
             }
         }
     }
@@ -163,7 +160,7 @@ public class Quickslot : MonoBehaviour
 
             if (i + 1 == slots.Length)
             {
-                Debug.Log("꽉찼엉");
+                // Debug.Log("꽉찼음");
             }
         }
     }

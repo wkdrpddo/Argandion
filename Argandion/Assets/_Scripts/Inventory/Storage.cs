@@ -14,12 +14,8 @@ public class Storage : MonoBehaviour
 
     public Slot[] slots;  // 슬롯들 배열
 
-    // [SerializeField] private UIManager ui;
-
     void Awake()
     {
-        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
-
         go_InventoryBase = transform.GetChild(0).gameObject;
         go_SlotsParent = go_InventoryBase.transform.GetChild(0).gameObject;
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
