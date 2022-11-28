@@ -26,7 +26,6 @@ public class TradeModal : MonoBehaviour
 
     [SerializeField] private GameObject _npcmanager;
     [SerializeField] private Ranch _ranch;
-    // [SerializeField] private UIManager ui;
     [SerializeField] private int tradeMod;
     [SerializeField] private int tradeCost;
     [SerializeField] private string iconName;
@@ -87,7 +86,6 @@ public class TradeModal : MonoBehaviour
     {
         int tradeCount = (int)gameObject.GetComponentInChildren<Slider>().value;
 
-        Debug.Log("====== click On function ======");
         if (tradeMod == 0)
         {
             sellEvent(tradeCount);
@@ -101,7 +99,6 @@ public class TradeModal : MonoBehaviour
         }
         else if (tradeMod == 2)
         {
-            // Debug.LogWarning("여기까지는 왔니?");
             switch (storeIndex)
             {
                 case 1:
@@ -124,7 +121,6 @@ public class TradeModal : MonoBehaviour
             int itemCode = Int32.Parse(iconName);
             syncBaitSlot(itemCode);
 
-            Debug.Log("Item Code : " + iconName);
             UIManager._uimanagerInstance.addToStorage(UIManager._uimanagerInstance.findItem(Int32.Parse(iconName)), tradeCount, itemIndex);
         }
         else if (tradeMod == 4)
@@ -138,7 +134,6 @@ public class TradeModal : MonoBehaviour
 
     private void sellEvent(int tradeCnt)
     {
-        Debug.Log("------ ------ sellEvent function ------ ------");
         if (storeIndex == 5)
         {
             switch (itemIndex)
@@ -153,7 +148,7 @@ public class TradeModal : MonoBehaviour
                     _npcmanager.GetComponent<Ranch>().SellCow(tradeCnt);
                     break;
                 default:
-                    Debug.LogError("인수 관계가 잘못되었습니다");
+                    // Debug.LogError("인수 관계가 잘못되었습니다");
                     break;
             }
             UIManager._uimanagerInstance.syncAnimalPanel(_ranch.getPoint(), _ranch.sheeps, _ranch.chicks, _ranch.cows);
@@ -203,7 +198,7 @@ public class TradeModal : MonoBehaviour
         }
         else
         {
-            Debug.LogError("=== 상점구매 상점idx 정보가 맞지 않음 ===");
+            // Debug.LogError("=== 상점구매 상점idx 정보가 맞지 않음 ===");
         }
     }
 
@@ -211,16 +206,14 @@ public class TradeModal : MonoBehaviour
     {
         transform.GetChild(4).GetComponentInChildren<TextMeshProUGUI>().text = gameObject.GetComponentInChildren<Slider>().value.ToString();
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         _ranch = GameObject.Find("NPCManager").GetComponent<Ranch>();
-        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         _npcmanager = GameObject.Find("NPCManager").gameObject;
     }
 
     private void syncBaitSlot(int itemCode, int key = 0) {
-        Debug.Log("key value : " + key);
         int tradeCount = (int)gameObject.GetComponentInChildren<Slider>().value;
 
         if(UIManager._uimanagerInstance.getBaitSlotData() != null && itemCode != UIManager._uimanagerInstance.getBaitSlotData().ItemCode) {
@@ -229,12 +222,10 @@ public class TradeModal : MonoBehaviour
 
         if(itemCode >= 502 && itemCode <= 504) {
             Slot[] slots = UIManager._uimanagerInstance.getInventorySlots();
-            Debug.Log("itemCode : " + itemCode);
             foreach(Slot slot in slots) {
                 if(slot.itemCount == 0) {
                     continue;
                 }
-                Debug.Log("slotItemCode : " + slot.item.ItemCode);
                 if(key == 1) {
                     if(slot.item.ItemCode == itemCode) {
                         UIManager._uimanagerInstance.rightEquip(UIManager._uimanagerInstance.findItem(itemCode), slot.itemCount, slot.idx);

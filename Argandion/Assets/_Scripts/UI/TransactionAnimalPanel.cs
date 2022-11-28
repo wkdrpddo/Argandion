@@ -6,8 +6,6 @@ using TMPro;
 
 public class TransactionAnimalPanel : MonoBehaviour
 {
-    // private 
-    // [SerializeField] private UIManager ui;
     [SerializeField] private Ranch _ranch;
 
     public void callCellModal(int value)
@@ -45,11 +43,8 @@ public class TransactionAnimalPanel : MonoBehaviour
 
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        // ui = gameObject.GetComponentInParent<UIManager>();
-
         gameObject.transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.OnTransactionDoubleCheckPanel("닭", 5, 2, -1));
         gameObject.transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.OnTransactionDoubleCheckPanel("소", 5, 3, -1));
         gameObject.transform.GetChild(0).GetChild(2).GetChild(2).GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.OnTransactionDoubleCheckPanel("양", 5, 1, -1));

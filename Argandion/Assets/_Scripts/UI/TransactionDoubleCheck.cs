@@ -11,12 +11,9 @@ public class TransactionDoubleCheck : MonoBehaviour
     [SerializeField] private BuyingFisher _fisher;
     [SerializeField] private BuyingHunter _hunter;
     [SerializeField] private BuyingSmith _smith;
-    // [SerializeField] private UIManager ui;
     [SerializeField] private int storeIndex;
     [SerializeField] private int itemIndex;
     [SerializeField] private int itemCode;
-
-    // public Inventory _inventory;
 
     public void handleModal()
     {
@@ -25,7 +22,6 @@ public class TransactionDoubleCheck : MonoBehaviour
 
     public void setData(string name, int storeIdx, int itemIdx, int itemCode)
     {
-        // Debug.Log("name : " + name + " | itemcode : " + itemCode);
         gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name + " 을(를) 구매하시겠습니까?";
         storeIndex = storeIdx;
         itemIndex = itemIdx;
@@ -63,7 +59,7 @@ public class TransactionDoubleCheck : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("인수관계가 잘못 되었습니다.");
+                    // Debug.LogError("인수관계가 잘못 되었습니다.");
                 }
 
                 UIManager._uimanagerInstance.syncAnimalPanel(_ranch.getPoint(), _ranch.sheeps, _ranch.chicks, _ranch.cows);
@@ -74,10 +70,9 @@ public class TransactionDoubleCheck : MonoBehaviour
         }
         handleModal();
     }
-    // Start is called before the first frame update
+
     void Awake()
     {
-        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         _ranch = GameObject.Find("NPCManager").GetComponent<Ranch>();
         _carpentor = GameObject.Find("NPCManager").GetComponent<BuyingCarpentor>();
         _designer = GameObject.Find("NPCManager").GetComponent<BuyingDesigner>();

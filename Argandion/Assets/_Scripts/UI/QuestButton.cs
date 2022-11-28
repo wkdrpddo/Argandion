@@ -10,10 +10,4 @@ public class QuestButton : MonoBehaviour
     //     EventPanel obj = this.GetComponentInParent<EventPanel>();
     //     obj.deleteObject(gameObject);
     // }
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
 }

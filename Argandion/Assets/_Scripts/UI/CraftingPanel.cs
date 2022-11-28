@@ -25,7 +25,6 @@ public class combObject
 
 public class CraftingPanel : MonoBehaviour
 {
-    // [SerializeField] private UIManager ui;
     public GameObject _craftItemButton;
     public GameObject _metarialsCard;
     [SerializeField] private GameObject _scrollcontent;
@@ -36,10 +35,8 @@ public class CraftingPanel : MonoBehaviour
     [SerializeField] private int index;
     [SerializeField] private int storeIdx;
 
-    // Start is called before the first frame update
     void Awake()
     {
-        // ui = gameObject.GetComponentInParent<UIManager>();
         _scrollcontent = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).gameObject;
         _metarialsgrid = transform.GetChild(1).GetChild(1).gameObject;
     }
@@ -48,7 +45,6 @@ public class CraftingPanel : MonoBehaviour
     {
         gameObject.SetActive(!gameObject.activeSelf);
 
-        Debug.Log("craft 토글");
         if (gameObject.activeSelf)
         {
             UIManager._uimanagerInstance.stopControllKeys();
@@ -93,7 +89,6 @@ public class CraftingPanel : MonoBehaviour
 
     private void setCraftData(int value)
     {
-        Debug.Log(value);
         storeIdx = value;
         deleteCraftList();
 
@@ -111,7 +106,6 @@ public class CraftingPanel : MonoBehaviour
                 canMakeList = gameObject.GetComponent<CombCarpentor>().getCanMakeList();
                 break;
             case 4:
-                Debug.Log("체크");
                 jsonInputString += "/CombSmith.json";
                 gameObject.GetComponent<CombSmith>().Hello();
                 canMakeList = gameObject.GetComponent<CombSmith>().getCanMakeList();

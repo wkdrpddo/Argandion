@@ -7,7 +7,6 @@ using System;
 
 public class BuildEventPanel : MonoBehaviour
 {
-    //    [SerializeField] private UIManager ui;
     [SerializeField] private Image buildIcon;
     [SerializeField] private TextMeshProUGUI buildName;
     [SerializeField] private TextMeshProUGUI flowerName;
@@ -29,7 +28,6 @@ public class BuildEventPanel : MonoBehaviour
     [SerializeField] private Slot[] slots;
     [SerializeField] private bool canBuild;
     [SerializeField] private ItemObject[] usedItem;
-
     [SerializeField] private int _key;
     [SerializeField] private int step;
 
@@ -42,14 +40,10 @@ public class BuildEventPanel : MonoBehaviour
     [SerializeField] private BuildingChange hunterHouse;
     [SerializeField] private BuildingChange workShop;
 
-
-    // Start is called before the first frame update
     void Awake()
     {
         isOnPanel = false;
         canBuild = false;
-
-        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         buildIcon = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>();
         buildName = transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
         flowerName = transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>();
@@ -82,21 +76,14 @@ public class BuildEventPanel : MonoBehaviour
         workShop = GameObject.Find("WorkshopPlace").GetComponent<BuildingChange>();
     }
 
-    void Start()
-    {
-
-    }
-
     public void handelPanel(int value)
     {
         _key = value;
 
         if (!checkIsBuild())
         {
-            UIManager._uimanagerInstance.OnResultNotificationPanel("이미 건설이 진행중인 건물입니다.");
+            UIManager._uimanagerInstance.OnResultNotificationPanel("이미 건설이 진행 중인 건물입니다.");
             UIManager._uimanagerInstance.runControllPlayer();
-            // ui.OnResultNotificationPanel("이미 건설이 진행중인 건물입니다.");
-            // ui.runControllPlayer();
         }
         else
         {
@@ -109,15 +96,11 @@ public class BuildEventPanel : MonoBehaviour
             setBuildCondition(value);
             UIManager._uimanagerInstance.stopControllKeys();
             UIManager._uimanagerInstance.setIsOpenBuildEvent(true);
-            // ui.stopControllKeys();
-            // ui.setIsOpenBuildEvent(true);
         }
         else
         {
             UIManager._uimanagerInstance.runControllKeys();
             UIManager._uimanagerInstance.setIsOpenBuildEvent(false);
-            // ui.runControllKeys();
-            // ui.setIsOpenBuildEvent(false);
         }
     }
 
@@ -264,7 +247,6 @@ public class BuildEventPanel : MonoBehaviour
     {
         if (canBuild)
         {
-            Debug.Log("============= 건설 시작 =============");
             switch (_key)
             {
                 case 1:
@@ -304,22 +286,16 @@ public class BuildEventPanel : MonoBehaviour
 
     private void Build()
     {
-        // Debug.Log("꽃 소모");
         UIManager._uimanagerInstance.acquireItem(usedItem[0], -1 * buildCost[step, 1]);
-        // ui.acquireItem(usedItem[0], -1 * buildCost[step, 1]);
         for (int i = 1; i < 7; i++)
         {
             if (usedItem[i] == null)
             {
                 break;
             }
-            // Debug.Log("재료 소모 : " + buildConditionCount[_key - 1, i]);
             UIManager._uimanagerInstance.acquireItem(usedItem[i], -1 * buildConditionCount[_key - 1, i]);
-            // ui.acquireItem(usedItem[i], -1 * buildConditionCount[_key - 1, i]);
         }
-        // Debug.Log("골드 소모");
         UIManager._uimanagerInstance.addPlayerGold(-1 * buildCost[step, 0]);
-        // ui.addPlayerGold(-1 * buildCost[step, 0]);
         step++;
     }
 

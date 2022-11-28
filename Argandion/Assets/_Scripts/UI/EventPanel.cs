@@ -20,65 +20,17 @@ public class EventPanel : MonoBehaviour
     public GameObject _otherPanel; // 미리 끌어서 넣기
     public GameObject _foodPanel; // 미리 끌어서 넣기
 
-    // public bool _onSpiritBuff;
-
     private GameObject[] _iconObject;
     private DescriptObj[] _descData;
 
-    // 아이콘 활성화 개수인데 이건 스크립트 위치 바뀔 수 있음
     private byte _foodIconACnt;
     private byte _otherIconACnt;
 
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>(); // 아이콘 이미지
 
-    // 테스트용 코드 시작 =======================================================================
-    // public bool _setTest;
-    // public bool _delTest;
-    // public int _testNum;
-
-
-
-
-    // 테스트용 업데이트
-    // void Update()
-    // {
-    //     if (_setTest)
-    //     {
-    //         // activeIcon(3);
-    //         _setTest = false;
-    //     }
-    //     if (_delTest)
-    //     {
-    //         // inactiveIcon(1);
-    //         // inactiveIcon(56);
-    //         // inactiveIcon(50);
-    //         _delTest = false;
-    //     }
-    // }
-
-    // 테스트 코드
-    // public void arrayLog()
-    // {
-    //     for (int i = 0; i < _iconObject.Length; i++)
-    //     {
-    //         Debug.Log(_iconObject[i]);
-    //     }
-    //     activeIcon(1);
-    //     activeIcon(100);
-    //     activeIcon(56);
-    //     activeIcon(50);
-
-    //     // activeIcon(3);
-    //     // _panelObject[EventIndexArray.arr[0]].SetActive(true);
-    //     // _panelObject[EventIndexArray.arr[100]].SetActive(true);
-    // }
-
-    // 테스트용 코드 끝 =======================================================================
-
     // 패널 생성하기
     public void setting()
     {
-        Debug.Log("이벤트 패널 세팅 콜");
         setDescriptObj();
         createAllPanel();
     }
@@ -192,8 +144,6 @@ public class EventPanel : MonoBehaviour
         {
             _foodPanel.SetActive(true);
         }
-
     }
-
 }
 

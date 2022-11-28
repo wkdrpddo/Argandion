@@ -15,23 +15,17 @@ public class UIManager : MonoBehaviour
         firstClick = new int[4];
     }
 
-
     // Panel var
     [SerializeField] public GameObject _baseuipanel;
     [SerializeField] private GameObject _mapuipanel;
     [SerializeField] private MainPagePanel _mainpage;
     [SerializeField] private OptionPanel _optionpanel;
     [SerializeField] private OptionPanel _optionfrommain;
-
     [SerializeField] private CreateCharacter _createcharacter;
-
     [SerializeField] private ConversationPanel _conversationpanel;
-
     [SerializeField] private CraftingPanel _craftingpanel;
     [SerializeField] private CookingPanel _cookingpanel;
-
     [SerializeField] private BuildEventPanel _buildeventpanel;
-
     [SerializeField] private TransactionAnimalPanel _transactionanimalpanel;
     [SerializeField] private TransactionPanel _transactionpanel;
     [SerializeField] private InventoryPanel _inventorypanel;
@@ -39,7 +33,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TradeModal _trademodal;
     [SerializeField] private GameObject _inventory;
     [SerializeField] private TextMeshProUGUI _invenMoney;
-
     [SerializeField] private GameObject _notificationpanel;
     [SerializeField] private ResultNotificationPanel _resultnotificationpanel;
     [SerializeField] private TransactionDoubleCheck _transactiondoublecheck;
@@ -47,7 +40,6 @@ public class UIManager : MonoBehaviour
     public GameObject _eventAnnounce;
     public TextMeshProUGUI _announceTitle;
     public TextMeshProUGUI _announceText;
-
     private GameObject _nowequip;
 
     [SerializeField] private SystemManager _systemmanager;
@@ -86,9 +78,7 @@ public class UIManager : MonoBehaviour
     private bool isInvenLeftClick;
     private int[] firstClick;
 
-    // 주연 추가
     public GameObject _eventpanel;
-    // private EventManager _eventmanager;
     public FoodManager _foodmanager;
 
     [SerializeField] private GameObject _teleport;
@@ -96,6 +86,7 @@ public class UIManager : MonoBehaviour
     // Sprite 이미지 저장 Map
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>();
     private Dictionary<int, Sprite> storageDic = new Dictionary<int, Sprite>();
+
     // Sprite 탐색 해서 저장하는 함수
     public Sprite getItemIcon(int key)
     {
@@ -116,10 +107,9 @@ public class UIManager : MonoBehaviour
         storageDic.Add(key, icon);
         return icon;
     }
-    // Start is called before the first frame update
+
     public void Start()
     {
-
         conversationNPC = 0;
         selectCharacter = -1;
         isPressESC = false;
@@ -221,12 +211,10 @@ public class UIManager : MonoBehaviour
         _systemmanager.setPlayerGold(1000);
     }
 
-    // Update is called once per frame
     void Update()
     {
         setTimer();
 
-        // if (Input.GetKeyDown("optionKey"))
         if (Input.GetButtonDown("optionKey"))
         {
             if((!isConversationOpen && isPanelOpen()) || _mapuipanel.activeSelf) {
@@ -279,13 +267,11 @@ public class UIManager : MonoBehaviour
                         case 0:
                             if (conversationNPC == 9)
                             {
-                                Debug.Log("두번재 대화 스킵");
                                 break;
                             }
                             _conversationpanel.GetComponent<ConversationPanel>().secondConversation();
                             break;
                         case 1:
-                            Debug.Log("세번째 대화");
                             _conversationpanel.GetComponent<ConversationPanel>().thirdConversation();
                             break;
                     }
@@ -293,8 +279,6 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-
-    // ======================== UI 호출 함수 Start
 
     // UI 전체 닫기
     public void closeAllPanel() {
@@ -353,7 +337,6 @@ public class UIManager : MonoBehaviour
 
     public void OnCookingPanel()
     {
-        // Debug.Log("온쿠킹");
         _cookingpanel.GetComponent<CookingPanel>().handelPanel();
     }
 
@@ -408,19 +391,16 @@ public class UIManager : MonoBehaviour
 
     public void OnNotificationPanel()
     {
-        Debug.Log("On");
         _notificationpanel.GetComponent<NotificationPanel>().handleNoti();
     }
 
     public void OnResultNotificationPanel(string text)
     {
-        Debug.Log("On");
         _resultnotificationpanel.GetComponent<ResultNotificationPanel>().handelNoti(text);
     }
 
     public void OnTransactionDoubleCheckPanel(string name, int store, int itemIdx, int itemCode)
     {
-        // Debug.Log("============ " + itemIdx);
         if (conversationNPC != 5 && !checkInventory(findItem(itemCode), 1))
         {
             OnResultNotificationPanel("구매가 불가능 합니다. \n인벤토리를 확인 해 주세요!!");
@@ -440,13 +420,11 @@ public class UIManager : MonoBehaviour
 
         // sell 요청 시, storeIdx는 인벤토리/퀵슬롯 구분자
         // 1 : 인벤 // 2 : 퀵슬롯
-
         int _storeKey = storeIdx;
         if (_storeKey == -1)
         {
             _storeKey = conversationNPC;
         }
-        // Debug.Log(_storeKey);
         _trademodal.GetComponent<TradeModal>().setModal(name, iconName, maxCnt, cost, checkMod, _storeKey, itemIdx);
     }
 
@@ -475,8 +453,6 @@ public class UIManager : MonoBehaviour
         _inventory.gameObject.SetActive(!_inventory.gameObject.activeSelf);
         getPlayerGold();
     }
-
-    // ======================= UI 호출 함수 End
 
     // 인벤 좌클릭 관련 함수
     public bool getIsLeftClickInInven() {
@@ -634,7 +610,6 @@ public class UIManager : MonoBehaviour
         return selectCharacter;
     }
 
-    // ======================= Base UI 관련 함수
     public void setHealthBar(float value,float maxValue)
     {
         _healthbar.value = value/maxValue;
@@ -655,8 +630,6 @@ public class UIManager : MonoBehaviour
         _baseuipanel.transform.GetChild(2).GetChild(6).GetComponent<TextMeshProUGUI>().text = timeText;
     }
 
-    // ======================= Base UI 관련 함수 끝
-
     // 동물 수 동기화 함수
     public void syncAnimalPanel(int capacity, int sheepCnt, int chickenCnt, int cowCnt)
     {
@@ -666,7 +639,6 @@ public class UIManager : MonoBehaviour
     // ESC 클릭 시 동작
     public void pressedESC()
     {
-        // Debug.Log("여기 들어옴?");
         isPressESC = !isPressESC;
 
         if (isPressESC)
@@ -769,7 +741,6 @@ public class UIManager : MonoBehaviour
     public void clickRightSlotModal(int _key, Vector3 _position, ItemObject _item, int _count, int _index)
     {
         isInvenRightModal = true;
-        Debug.LogWarning("마우스 우클릭 모달 호출");
         _inventory.transform.GetChild(4).gameObject.SetActive(true);
         _inventory.transform.GetChild(4).transform.position = _position;
         switch (_key)
@@ -812,7 +783,6 @@ public class UIManager : MonoBehaviour
     // 인벤토리 아이템 처리 - 우클릭
     public void rightEquip(ItemObject _item, int _count, int invenIdx)
     {
-        // Debug.Log("여기 몇 번 동작해?");
         ItemObject itemObj = null;
         int equiptCnt = -1;
         switch (_item.ItemCode)
@@ -865,7 +835,6 @@ public class UIManager : MonoBehaviour
             case 502:
             case 503:
             case 504:
-                Debug.Log("장착 동작 확인");
                 int _cnt = _inventory.transform.GetChild(1).GetComponent<Inventory>().getLessBaitCount(_item.ItemCode);
                 if(_cnt > _count) {
                     _cnt = _count;
@@ -927,7 +896,6 @@ public class UIManager : MonoBehaviour
 
     public void rightUse(ItemObject _item, int _count, int _index)
     {
-        Debug.Log(_item.ItemCode);
         _foodmanager.UseFood(_item.ItemCode);
         sellItem(_index, 1, 1);
         closeInvenRightClickModal();
@@ -1031,11 +999,7 @@ public class UIManager : MonoBehaviour
 
     public void runCookingAnimation()
     {
-        Debug.LogWarning("======== ui cooking call ========");
-        // _playersystem._playerAnimator.SetInteger("action", 6);
         _playersystem.setAnimator(6, 5.0f);
-        Debug.LogWarning(_playersystem._playerAnimator);
-        Debug.LogWarning(_playersystem._playerAnimator.GetInteger("action"));
     }
 
     // input 관련 함수
@@ -1204,7 +1168,6 @@ public class UIManager : MonoBehaviour
 
     public void prayToAltar(int _nowFlowerCode, int _newFlowerCode, int quickIdx)
     {
-        Debug.Log("prayToAltar 콜");
         int nowCode = _nowFlowerCode;
         if (_systemmanager._buffManager._isPrayBuffActived && _nowFlowerCode != _newFlowerCode)
         {
@@ -1228,7 +1191,7 @@ public class UIManager : MonoBehaviour
         _alter.buffEnd();
     }
 
-    // 제사 몇 일 째인지 얻어오는 함수
+    // 제사 며칠 째인지 얻어오는 함수
     public int getNowPrayDate()
     {
         return _systemmanager._PrayBuff.prayDay;
@@ -1286,8 +1249,6 @@ public class UIManager : MonoBehaviour
     // 0 : 인벤 || 1 : 퀵슬롯 || 2. 장비 || 3. 창고
     public void loadItemData(int[,] data, int _key)
     {
-        Debug.Log(data.Length);
-
         Slot[] slots = null;
         switch (_key)
         {
@@ -1321,8 +1282,6 @@ public class UIManager : MonoBehaviour
             if(_key == 3) {
                 slots[i/2].transform.GetChild(0).GetComponent<Image>().color = new Color(255, 255, 255);
             }
-
-            Debug.Log(data[i/2, 0]);
             slots[i/2].AddItem(findItem(data[i/2, 0]), data[i/2, 1]);
         }
 

@@ -6,7 +6,6 @@ using TMPro;
 
 public class CreateCharacter : MonoBehaviour
 {
-    // [SerializeField] private UIManager ui;
     [SerializeField] private Image manImg;
     [SerializeField] private Image womanImg;
     public Sprite unselectedMan;
@@ -63,14 +62,11 @@ public class CreateCharacter : MonoBehaviour
             UIManager._uimanagerInstance.startInvenSet();
         }
     }
-    // Start is called before the first frame update
+
     void Start()
     {
-        // ui = gameObject.GetComponentInParent<UIManager>();
         manImg = transform.GetChild(5).GetChild(0).GetComponent<Image>();
         womanImg = transform.GetChild(6).GetChild(0).GetComponent<Image>();
-
-        // selectWoman();
     }
 
     public void getName()

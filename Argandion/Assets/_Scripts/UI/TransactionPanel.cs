@@ -25,7 +25,6 @@ public class TransactionPanel : MonoBehaviour
     public GameObject storeItemCard;
 
     [SerializeField] private GameObject ScrollContent;
-    // [SerializeField] private UIManager ui;
     [SerializeField] private Item _itemmanager;
 
     private string jsonStringBase;
@@ -40,7 +39,6 @@ public class TransactionPanel : MonoBehaviour
         jsonStringBase = Application.dataPath + "/Data/Json";
         _itemmanager = GameObject.Find("ItemManager").GetComponent<Item>();
         ScrollContent = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).gameObject;
-        // ui = gameObject.GetComponentInParent<UIManager>();
     }
 
     public void handelPanel(int value)
@@ -104,7 +102,6 @@ public class TransactionPanel : MonoBehaviour
                 break;
         }
 
-        Debug.Log(jsonInputString);
         jsonString = File.ReadAllText(jsonInputString);
         itemData = JsonHelper.FromJson<buyingObject>(jsonString);
 
@@ -112,8 +109,6 @@ public class TransactionPanel : MonoBehaviour
         {
             buyingObject = itemData[i];
             itemObject = _itemmanager.FindItem(buyingObject.Result);
-
-            // Debug.Log("현재 아이템 데이터 : " + buyingObject.Result);
 
             GameObject productBtn = Instantiate(storeItemCard, ScrollContent.transform);
 
@@ -127,10 +122,9 @@ public class TransactionPanel : MonoBehaviour
             int itemCode = itemObject.ItemCode;
             int buyCost = buyingObject.Cost;
             int pos = Array.IndexOf(multiBuyItemCode, buyingObject.Result);
-            // Debug.Log(pos);
+
             if (pos == -1)
             {
-                // Debug.Log("name : " + itemObject.Name + " | itemCode : " + itemObject.ItemCode);
                 productBtn.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.OnTransactionDoubleCheckPanel(name, value, itemIdx, itemCode));
             }
             else

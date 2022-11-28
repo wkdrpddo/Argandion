@@ -26,7 +26,6 @@ public class ConversationPanel : MonoBehaviour
     [SerializeField] private int conversationCount;        // -1 : 대화 전, 0 : 대화 시작, 1 : 마지막 대화
 
     [SerializeField] public GameObject conversationButton;
-    // [SerializeField] private UIManager ui;
     // 선택창 '대화' 선택 시 관련 변수
     private bool isConversation;
     private int selectConversationCount;
@@ -51,16 +50,12 @@ public class ConversationPanel : MonoBehaviour
         return isInformation;
     }
 
-    // Start is called before the first frame update
     void Awake()
     {
-        // ui = gameObject.GetComponentInParent<UIManager>();
         _npcname = transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
         _nomaltalk = transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
         conversationCount = -1;
-
         _selectpanel = transform.GetChild(0).GetChild(0).gameObject;
-
         isConversation = false;
         selectConversationCount = 0;
         isInformation = false;
@@ -71,9 +66,7 @@ public class ConversationPanel : MonoBehaviour
     // NPC 및 상호작용 대화 최초 시작
     public void setConversationNPC(int value)
     {
-        Debug.Log(value);
         UIManager._uimanagerInstance.conversationNPC = value;
-        // ui.conversationNPC = value;
 
         int randCnt = Random.Range(0, 3);
         conversationCount++;
@@ -125,10 +118,7 @@ public class ConversationPanel : MonoBehaviour
                 _selectpanel.SetActive(true);
                 break;
         }
-        Debug.Log("초기대화 시작");
-
         UIManager._uimanagerInstance.setIsOpenConversation(true);
-        // ui.setIsOpenConversation(true);
         setSelectList();
         gameObject.SetActive(true);
     }
@@ -149,7 +139,6 @@ public class ConversationPanel : MonoBehaviour
         helpBtn.GetComponent<Button>().onClick.AddListener(() => selectInfo(-1));
 
         int npcNumber = UIManager._uimanagerInstance.conversationNPC;
-        // int npcNumber = ui.conversationNPC;
         if (npcNumber == 1 || npcNumber == 7 || npcNumber == 8)
         {
             Destroy(helpBtn.gameObject);
@@ -162,12 +151,10 @@ public class ConversationPanel : MonoBehaviour
             case 3:
             case 4:
             case 5:
-                // case 6:
                 GameObject tradeBtn = Instantiate(conversationButton, _selectpanel.transform);
                 RectTransform tradeBtnRect = tradeBtn.GetComponent<RectTransform>();
                 tradeBtnRect.SetLocalPositionAndRotation(new Vector3(0, -11, 0), UIManager._uimanagerInstance.rotateZero);
                 tradeBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "거래";
-
                 if (npcNumber == 1)
                 {
                     tradeBtnRect.SetLocalPositionAndRotation(new Vector3(0, 22, 0), UIManager._uimanagerInstance.rotateZero);
@@ -199,7 +186,6 @@ public class ConversationPanel : MonoBehaviour
             case 10:
                 helpBtn.GetComponent<Button>().onClick.RemoveAllListeners();
                 helpBtn.GetComponent<Button>().onClick.AddListener(spiritInfoSelect);
-
                 GameObject seedBtn = Instantiate(conversationButton, _selectpanel.transform);
                 RectTransform seedBtnRect = seedBtn.GetComponent<RectTransform>();
                 seedBtnRect.SetLocalPositionAndRotation(new Vector3(0, -11, 0), UIManager._uimanagerInstance.rotateZero);
@@ -229,7 +215,6 @@ public class ConversationPanel : MonoBehaviour
     // 선택창 전 대사 출력
     public void secondConversation()
     {
-        Debug.Log("초기 대화 두번째");
         _nomaltalk.text = conversations[UIManager._uimanagerInstance.conversationNPC - 1, 3];
         conversationCount++;
     }
@@ -237,7 +222,6 @@ public class ConversationPanel : MonoBehaviour
     // 선택창 출력
     public void thirdConversation()
     {
-        Debug.Log("초기 대화 세번째");
         _nomaltalk.gameObject.SetActive(false);
         _selectpanel.SetActive(true);
     }
@@ -245,7 +229,6 @@ public class ConversationPanel : MonoBehaviour
     // Conversation Panel 초기화
     public void resetConversationPanel()
     {
-        Debug.Log("모든 대화 상호작용 종료");
         _nomaltalk.gameObject.SetActive(true);
         _selectpanel.SetActive(false);
         gameObject.SetActive(false);
@@ -268,9 +251,7 @@ public class ConversationPanel : MonoBehaviour
                 Destroy(selectObjectList[i].gameObject);
             }
         }
-
         UIManager._uimanagerInstance.delayRunControllKeys();
-        // ui.runControllKeys();
     }
 
     // 순례자 - 기도 선택 시, 마무리 대사
@@ -342,8 +323,6 @@ public class ConversationPanel : MonoBehaviour
                 Destroy(selectObjectList[i].gameObject);
             }
         }
-        // Debug.Log(_nomaltalk.GetComponent<RectTransform>().localPosition);
-        // Debug.Log(_selectpanel.GetComponent<RectTransform>().localPosition);
 
         _nomaltalk.GetComponent<RectTransform>().localPosition = new Vector3(12, 120, 0);
         _selectpanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 55, 0);
@@ -351,6 +330,7 @@ public class ConversationPanel : MonoBehaviour
         GameObject teleportBtn = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform teleportBtnRect = teleportBtn.GetComponent<RectTransform>();
         teleportBtnRect.SetLocalPositionAndRotation(new Vector3(0, 33, 0), UIManager._uimanagerInstance.rotateZero);
+
         if (_key == 0)
         {
             teleportBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "제단으로 이동합니다.";
@@ -362,7 +342,6 @@ public class ConversationPanel : MonoBehaviour
             teleportBtn.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.downTeleport());
         }
 
-        Debug.Log("체킹");
         GameObject teleportBtn2 = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform teleportBtnRect2 = teleportBtn2.GetComponent<RectTransform>();
         teleportBtnRect2.SetLocalPositionAndRotation(new Vector3(0, 0, 0), UIManager._uimanagerInstance.rotateZero);
@@ -373,7 +352,6 @@ public class ConversationPanel : MonoBehaviour
     // NPC 선택지 중 - 대화 선택 시 setting
     private void selectConversation()
     {
-        Debug.Log("선택지 대화 시작");
         isConversation = true;
         _selectpanel.SetActive(false);
         _nomaltalk.gameObject.SetActive(true);
@@ -388,14 +366,12 @@ public class ConversationPanel : MonoBehaviour
     {
         if (selectConversationCount < 4)
         {
-            Debug.Log("선택지 대화");
             int randCnt = Random.Range(0, 3);
             _nomaltalk.text = conversations[UIManager._uimanagerInstance.GetComponent<UIManager>().conversationNPC - 1, randCnt];
             selectConversationCount++;
         }
         else
         {
-            Debug.Log("선택지 대화 종료");
             resetConversationPanel();
         }
     }
@@ -404,9 +380,6 @@ public class ConversationPanel : MonoBehaviour
     private void spiritInfoSelect()
     {
         Transform[] selectBtns = _selectpanel.GetComponentsInChildren<Transform>();
-        // Debug.LogError(selectBtns[1].name);
-        // Debug.LogError(selectBtns[3].name);
-        // Debug.LogError(selectBtns[5].name);
 
         selectBtns[1].GetChild(0).GetComponent<TextMeshProUGUI>().text = "농사";
         selectBtns[1].GetComponent<Button>().onClick.RemoveAllListeners();
@@ -425,7 +398,6 @@ public class ConversationPanel : MonoBehaviour
     // NPC 선택지 중 - 도움말 선택 시 setting
     private void selectInfo(int _key)
     {
-        Debug.Log("도움말 대화 시작");
         isInformation = true;
         _selectpanel.SetActive(false);
         _nomaltalk.gameObject.SetActive(true);
@@ -462,7 +434,6 @@ public class ConversationPanel : MonoBehaviour
 
         if (informationCount < maxLen)
         {
-            Debug.Log("도움말 대화");
             if (isSpirit >= 0)
             {
                 _nomaltalk.text = spiritInformations[_key, informationCount];
@@ -475,7 +446,6 @@ public class ConversationPanel : MonoBehaviour
         }
         else
         {
-            Debug.Log("도움말 대화 종료");
             resetConversationPanel();
         }
     }
@@ -517,7 +487,6 @@ public class ConversationPanel : MonoBehaviour
     // 제단 제사 선택
     public void selectWhenAlterPray(int nowCode, int newCode, int quickIdx)
     {
-        Debug.Log("selectWhenAlterPray 콜");
         gameObject.SetActive(true);
 
         string flowerName = "";
@@ -557,10 +526,9 @@ public class ConversationPanel : MonoBehaviour
         GameObject prayBtn1 = Instantiate(conversationButton, _selectpanel.transform);
         RectTransform prayBtnRect1 = prayBtn1.GetComponent<RectTransform>();
         prayBtn1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "꽃을 제단에 바친다.";
-        Debug.Log("===============" + UIManager._uimanagerInstance.getNowPrayDate());
+
         if (nowCode == -1 && UIManager._uimanagerInstance.getNowPrayDate() == 0)
         {
-            Debug.Log("fx 리셋 콜");
             prayBtn1.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.resetPrayBuffFx());
         }
         prayBtn1.GetComponent<Button>().onClick.AddListener(() => UIManager._uimanagerInstance.callPrayBuff(newCode));

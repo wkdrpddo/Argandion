@@ -16,7 +16,6 @@ public class combFoodEffectObject
 
 public class CookingPanel : MonoBehaviour
 {
-    // [SerializeField] private UIManager ui;
     public CookingInteraction _cookingInteraction;
 
     public GameObject RecipeCard;
@@ -32,10 +31,8 @@ public class CookingPanel : MonoBehaviour
     private int index;
     private bool isCooking;
 
-    // Start is called before the first frame update
     void Awake()
     {
-        // ui = gameObject.GetComponentInParent<UIManager>();
         DishContent = transform.GetChild(1).GetChild(1).GetChild(0).GetChild(0).gameObject;
         RecipeContent = transform.GetChild(2).GetChild(1).GetChild(0).GetChild(0).gameObject;
         isCooking = false;
@@ -64,8 +61,6 @@ public class CookingPanel : MonoBehaviour
 
     public void onClickCooking()
     {
-        Debug.LogWarning("========== 요리하기 클릭 ============");
-
         bool isContainInventory;
         ItemObject craftItem = UIManager._uimanagerInstance.findItem(itemData[index].Result);
         isContainInventory = UIManager._uimanagerInstance.checkInventory(craftItem, 1);
@@ -84,7 +79,6 @@ public class CookingPanel : MonoBehaviour
             Invoke("completeCooking", 7f);
             Invoke("offIsCooking", 7f);
             UIManager._uimanagerInstance.runCookingAnimation();
-            Debug.LogWarning("========== after animation call ============");
 
             gameObject.GetComponent<CombFood>().Trade(index, 1);
             syncCanmakeList();
