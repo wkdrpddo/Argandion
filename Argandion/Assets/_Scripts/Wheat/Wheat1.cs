@@ -12,14 +12,12 @@ public class Wheat1 : MonoBehaviour
     public GameObject _buffManagerObject;
     private BuffManager _buffManager;
 
-    // Start is called before the first frame update
     void Start()
     {
         _buffManagerObject = GameObject.Find("BuffManager");
         _buffManager = _buffManagerObject.GetComponent<BuffManager>();
     }
 
-    // Update is called once per frame
     public void growUp()
     {
         if (onWet) {
@@ -28,20 +26,6 @@ public class Wheat1 : MonoBehaviour
                 Instantiate(wheat2, wheat1.position, wheat1.rotation);
                 Destroy(gameObject);
             }
-            // if(update > nextPhaseTime)
-            // {
-            //     Instantiate(wheat2, wheat1.position, wheat1.rotation);
-            //     Destroy(gameObject);
-            //     Debug.Log("다 자랐다!");
-            // }
-            // else
-            // {
-            //     if (_buffManager.whiteSpirit) {
-            //         Debug.Log("버프 적용중!");
-            //     }
-            //     updateTime += Time.deltaTime * (_buffManager.whiteSpirit ? 1.2f : 1);
-            //     Debug.Log(updateTime);
-            // }
         }
     }
 

@@ -7,7 +7,6 @@ public class WheatItem : MonoBehaviour
     private Rigidbody rigid;
     private Transform trans;
 
-    // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -15,7 +14,6 @@ public class WheatItem : MonoBehaviour
         rigid.AddForce(Vector3.up * 1.5f, ForceMode.Impulse);
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.Rotate(Vector3.up * 100 * Time.deltaTime);

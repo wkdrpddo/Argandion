@@ -12,14 +12,12 @@ public class Wheat2 : MonoBehaviour
     public GameObject _buffManagerObject;
     private BuffManager _buffManager;
 
-    // Start is called before the first frame update
     void Start()
     {
         _buffManagerObject = GameObject.Find("BuffManager");
         _buffManager = _buffManagerObject.GetComponent<BuffManager>();
     }
 
-    // Update is called once per frame
     public void growUp()
     {
         if (onWet) {
