@@ -49,7 +49,6 @@ public class Bear : MonoBehaviour
     [SerializeField] private GameObject item104;   //고기
     [SerializeField] private GameObject item105;   //두툼고기
 
-    // Start is called before the first frame update
     void Start()
     {
         nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -59,7 +58,6 @@ public class Bear : MonoBehaviour
         playerPos = GameObject.Find("PlayerObject").transform;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isDead)
@@ -74,11 +72,11 @@ public class Bear : MonoBehaviour
 
         if (isWalking)
         {
-            nav.SetDestination(this.transform.position + destination * 5f);  //이동할땐 랜덤지역으로 이동
+            nav.SetDestination(this.transform.position + destination * 5f);  //이동할 때는 랜덤지역으로 이동
         }
         if (isChasing)
         {
-            nav.SetDestination(playerPos.position);   //쫒을때는 플레이어를 목적지로 설정
+            nav.SetDestination(playerPos.position);   //쫒을 때는 플레이어를 목적지로 설정
         }
 
     }
@@ -88,11 +86,11 @@ public class Bear : MonoBehaviour
         if (isAction)
         {
             currentTime -= Time.deltaTime;
-            if (currentTime <= 0 && !isAttacking)    ////////////isAttacking 빼보기
+            if (currentTime <= 0 && !isAttacking)
             {
                 //다음 랜덤 행동 개시
                 ReSet();
-                StopCoroutine(AttackCoroutine());   ///////이거 빼보기 
+                StopCoroutine(AttackCoroutine());
             }
         }
     }
@@ -147,23 +145,19 @@ public class Bear : MonoBehaviour
             _sound.clip = attackedSound;
             _sound.Play();
             hp -= _dmg;
-
             if (hp <= 0)
             {
                 Dead();
                 return;
             }
-
             Chase();
         }
     }
-
 
     private void NotHurt()
     {
         isHurt = false;
     }
-
 
     private void Chase()
     {
@@ -191,30 +185,18 @@ public class Bear : MonoBehaviour
     {
 
         isAttacking = true;
-        //nav.ResetPath();
         isChasing = false;
         anim.SetBool("Running", isChasing);
-
-        // yield return new WaitForSeconds(0.5f);
         transform.LookAt(playerPos);
         anim.SetTrigger("Attack");
-        // yield return new WaitForSeconds(0.1f);
-
         RaycastHit _hit;
         if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out _hit, 3, targetMask))
         {
             _playerSystem.changeHealth(30);
-
         }
-        else
-        {
-        }
-
         yield return new WaitForSeconds(attackDelay);
         isAttacking = false;
-
         Chase();
-
     }
 
     private void Dead()

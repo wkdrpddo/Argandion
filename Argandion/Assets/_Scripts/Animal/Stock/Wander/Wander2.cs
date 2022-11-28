@@ -149,21 +149,13 @@ public class Wander2 : MonoBehaviour
             // 일정시간 이상 이동하면 목적지 재설정
             if (ElapseTime > 10f)
             {
-                // Debug.Log("예외처리 적용됨: " + ElapseTime);
                 yield return null;
                 break;
             }
-
             rigidbody.MovePosition(transform.position + transform.TransformDirection(Vector3.forward) * walkSpeed * 0.025f);
-            // Debug.Log("MovePosition " + animator.GetBool("isWalking"));
             Vector3 relativePos = target - transform.position;
             Quaternion rotation = Quaternion.LookRotation(relativePos);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * currentTurnSpeed);
-
-            // prevent X axis rotation
-            // Quaternion q = transform.rotation;
-            // q.eulerAngles = new Vector3(0, q.eulerAngles.y, q.eulerAngles.z);
-            // transform.rotation = q;
 
             currentTurnSpeed += Time.deltaTime;
             ElapseTime += Time.deltaTime;
@@ -220,12 +212,9 @@ public class Wander2 : MonoBehaviour
     public IEnumerator StopWalking()
     {
         animator.SetBool("isWalking", false);
-        // Debug.Log("stopwalking");
         rigidbody.isKinematic = true;
         yield return new WaitForSeconds(2);
         StopAllCoroutines();
         StartCoroutine(Idle(GetIdleTime()));
     }
-
-
 }

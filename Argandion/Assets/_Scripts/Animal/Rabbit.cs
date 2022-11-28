@@ -7,7 +7,6 @@ public class Rabbit : MonoBehaviour
 {
     [SerializeField] private string animalName; //동물의 이름
     [SerializeField] private int hp;
-
     [SerializeField] private float walkSpeed; //걷기 속도
     [SerializeField] private float runSpeed; //뛰기 속도
 
@@ -16,15 +15,15 @@ public class Rabbit : MonoBehaviour
     //상태 변수
     private bool isHurt = false;
     private bool canFootSound = true;
-    private bool isAction; //행동중인지 아닌지
-    private bool isWalking; //걷는중인지 아닌지
-    private bool isRunning; //뛰는중인지 아닌지
+    private bool isAction; //행동 중인지 아닌지
+    private bool isWalking; //걷는 중인지 아닌지
+    private bool isRunning; //뛰는 중인지 아닌지
     private bool isDead;  //죽었는지 아닌지
 
-    [SerializeField] private float waitTime;  //대기시간
+    [SerializeField] private float waitTime;  //대기 시간
     [SerializeField] private float idleTime;
     [SerializeField] private float eatTime;
-    [SerializeField] private float walkTime;  //얼마동안 걸을지
+    [SerializeField] private float walkTime;  //얼마 동안 걸을지
     [SerializeField] private float runTime;
     private float currentTime;
 
@@ -34,7 +33,6 @@ public class Rabbit : MonoBehaviour
     private NavMeshAgent nav;
     [SerializeField] private Transform playerPos;
     public AudioSource _sound;
-    // public AudioClip walkingSound;
     public AudioClip attackedSound;
 
     //Item
@@ -43,10 +41,6 @@ public class Rabbit : MonoBehaviour
     [SerializeField] private GameObject item103;   //작은 고기
     [SerializeField] private GameObject item104;   //고기
 
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
@@ -55,7 +49,6 @@ public class Rabbit : MonoBehaviour
         isAction = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isDead)
@@ -72,13 +65,10 @@ public class Rabbit : MonoBehaviour
             nav.SetDestination(this.transform.position + destination * 5f);
             if ((Vector3.Distance(this.transform.position, playerPos.position) < 20.0f) && canFootSound) {
                 canFootSound = false;
-                // _sound.clip = walkingSound;
-                // _sound.Play();
                 Invoke("FootSoundTrue", 0.6f);
             }
         }
     }
-
 
     //시간 경과 함수
     private void ElapseTime()
@@ -92,7 +82,6 @@ public class Rabbit : MonoBehaviour
                 ReSet();
             }
         }
-
     }
 
     private void ReSet()
@@ -120,7 +109,6 @@ public class Rabbit : MonoBehaviour
             Eat();
         else if (_random >= 5 && _random <= 9)  // 5/10 확률
             TryWalk();
-
     }
 
     private void Idle()
@@ -142,12 +130,6 @@ public class Rabbit : MonoBehaviour
         isWalking = true;
         anim.SetBool("Walking", isWalking);
         currentTime = walkTime;
-        // if ((Vector3.Distance(this.transform.position, playerPos.position) < 20.0f) && canFootSound) {
-        //     canFootSound = false;
-        //     _sound.clip = walkingSound;
-        //     _sound.Play();
-        //     Invoke("FootSoundTrue", 0.5f);
-        // }
     }
 
     private void Run(Vector3 _targetPos)
@@ -158,13 +140,6 @@ public class Rabbit : MonoBehaviour
         nav.speed = runSpeed;
         anim.SetBool("Walking", isWalking);
         anim.SetBool("Running", isRunning);
-        // if ((Vector3.Distance(this.transform.position, playerPos.position) < 20.0f) && canFootSound) {
-        //     canFootSound = false;
-        //     _sound.clip = walkingSound;
-        //     _sound.Play();
-        //     Invoke("FootSoundTrue", 0.3f);
-        // }
-
         destination = new Vector3(transform.position.x - _targetPos.x, 0f, transform.position.z - _targetPos.z).normalized;
     }
 
@@ -200,12 +175,9 @@ public class Rabbit : MonoBehaviour
     {
         isWalking = false;
         isRunning = false;
-
         anim.SetBool("Walking", isWalking);
         anim.SetBool("Running", isRunning);
-
         isDead = true;
-
         Destroy(this.gameObject, 1f);
         Item();
     }
@@ -228,7 +200,7 @@ public class Rabbit : MonoBehaviour
         }
 
         random_index = Random.Range(1, 3);
-        for (int i = 0; i < random_index; i++)  // 작은고기
+        for (int i = 0; i < random_index; i++)  // 작은 고기
         {
             Instantiate(item103, this.transform.position + new Vector3(Random.Range(-2f, 2f), 1f, Random.Range(-2f, 2f)), Quaternion.identity).transform.parent = GameObject.Find("Items").transform;
         }

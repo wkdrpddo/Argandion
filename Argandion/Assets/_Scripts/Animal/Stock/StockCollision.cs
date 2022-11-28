@@ -10,10 +10,6 @@ public class StockCollision : MonoBehaviour
     public Wander2 wander;
     private bool _checker;
 
-    private void Awake()
-    {
-
-    }
     void Start()
     {
         wander = GetComponent<Wander2>();
@@ -24,10 +20,8 @@ public class StockCollision : MonoBehaviour
         if (!_checker)
         {
             _checker = true;
-            // Debug.Log("trigger");
             if ((collision.gameObject.tag != "Untagged") || (collision.gameObject.layer != 0))
             {
-                // Debug.Log("Collide");
                 StartCoroutine(wander.StopWalking());
             }
             yield return new WaitForSeconds(1);

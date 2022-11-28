@@ -15,15 +15,15 @@ public class Deer : MonoBehaviour
 
     //상태 변수
     private bool isHurt = false;
-    private bool isAction; //행동중인지 아닌지
-    private bool isWalking; //걷는중인지 아닌지
-    private bool isRunning; //뛰는중인지 아닌지
+    private bool isAction; //행동 중인지 아닌지
+    private bool isWalking; //걷는 중인지 아닌지
+    private bool isRunning; //뛰는 중인지 아닌지
     private bool isDead;  //죽었는지 아닌지
 
-    [SerializeField] private float waitTime;  //대기시간 
-    [SerializeField] private float eatTime;   //먹는시간
-    [SerializeField] private float walkTime;  //얼마동안 걸을지
-    [SerializeField] private float runTime;  //뛰는시간
+    [SerializeField] private float waitTime;  //대기 시간 
+    [SerializeField] private float eatTime;   //먹는 시간
+    [SerializeField] private float walkTime;  //얼마 동안 걸을지
+    [SerializeField] private float runTime;  //뛰는 시간
     private float currentTime;
 
 
@@ -40,7 +40,6 @@ public class Deer : MonoBehaviour
     [SerializeField] private GameObject item104;   //고기
     [SerializeField] private GameObject item105;   //두툼고기
 
-    // Start is called before the first frame update
     void Start()
     {
         nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -48,7 +47,6 @@ public class Deer : MonoBehaviour
         isAction = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isDead)
@@ -66,7 +64,6 @@ public class Deer : MonoBehaviour
         }
     }
 
-
     //시간 경과 함수
     private void ElapseTime()
     {
@@ -79,7 +76,6 @@ public class Deer : MonoBehaviour
                 ReSet();
             }
         }
-
     }
 
     private void ReSet()
@@ -98,9 +94,7 @@ public class Deer : MonoBehaviour
     private void RandomAction()
     {
         isAction = true;
-
         int _random = Random.Range(0, 10); // eat, walk
-
         if (_random >= 0 && _random <= 1)   // 2/10 활률 
             Eat();
         else if (_random >= 2 && _random <= 9)  // 8/10 확률
@@ -159,7 +153,6 @@ public class Deer : MonoBehaviour
         isHurt = false;
     }
 
-
     private void Dead()
     {
         isWalking = false;
@@ -188,7 +181,6 @@ public class Deer : MonoBehaviour
         {
             Instantiate(item22, this.transform.position + new Vector3(Random.Range(-2f, 2f), 1f, Random.Range(-2f, 2f)), Quaternion.identity).transform.parent = GameObject.Find("Items").transform;
         }
-
 
         random_index = Random.Range(1, 3);
         for (int i = 0; i < random_index; i++)  // 고기
