@@ -11,6 +11,7 @@ public class Harvested : MonoBehaviour
     private BuffManager _buff;
     public CropPosition _pCpo;
     public Dirt _pd;
+    public int _cropCode;
 
     // Start is called before the first frame update
     Vector3 aboveSoil(Vector3 pos) {

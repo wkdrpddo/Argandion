@@ -228,7 +228,22 @@ public class PlayerSystem : MonoBehaviour
                 _movedDelay = _equipList[_equipItem, 3] / _act_speed;
                 _equipment[(int)_equipList[_equipItem, 1]].SetActive(true);
                 _setHand = true;
-                damageStamina(1.1f);
+                if (_equipList[_equipItem, 0] == 303)
+                {
+                    damageStamina(3.0f);
+                }
+                else if (_equipList[_equipItem, 0] == 308)
+                {
+                    damageStamina(2.0f);
+                }
+                else if (_equipList[_equipItem, 0] == 313)
+                {
+                    damageStamina(1.5f);
+                }
+                else if (_equipList[_equipItem, 0] == 318)
+                {
+                    damageStamina(1.0f);
+                }
             }
 
             // 곡괭이 휘두르기 물리판정
@@ -347,9 +362,9 @@ public class PlayerSystem : MonoBehaviour
         {
             QEItemEquip(-1);
         }
-        if (_runtime > 1)
+        if (_runtime >= 3)
         {
-            _runtime -= 1;
+            _runtime -= 3;
             damageStamina(1);
         }
     }
@@ -478,6 +493,7 @@ public class PlayerSystem : MonoBehaviour
                             _equipment[0].SetActive(true);
                             setAnimator(14,3f/_act_speed);
                             _canInteract = false;
+                            damageStamina(1f);
                             Invoke("EndWatering",3f/_act_speed);
                             break;
                         }
@@ -747,9 +763,9 @@ public class PlayerSystem : MonoBehaviour
             if (_theInventory.CheckInven(item.itemObject))
             {
                 _theInventory.AcquireItem(item.itemObject, 1);
+                Destroy(_nearObject.transform.parent.gameObject);
             }
             Debug.Log(_nearObject.transform.parent);
-            Destroy(_nearObject.transform.parent.gameObject);
         }
 
         // Debug.Log("OnTriggerEnter(): " + other.tag);
@@ -863,7 +879,7 @@ public class PlayerSystem : MonoBehaviour
         {
             _health = _health_max;
         }
-        _UIManager.setHealthBar(_health / _health_max);
+        _UIManager.setHealthBar(_health,_health_max);
     }
 
     public void damageHealth(float value)
@@ -884,7 +900,7 @@ public class PlayerSystem : MonoBehaviour
             _health = 0;
             playerDeath();
         }
-        _UIManager.setHealthBar(_health / _health_max);
+        _UIManager.setHealthBar(_health,_health_max);
     }
 
     public void changeEnergy(float value)
@@ -899,7 +915,7 @@ public class PlayerSystem : MonoBehaviour
         {
             _stamina = _stamina_max;
         }
-        _UIManager.setEnergyBar(_stamina / _stamina_max);
+        _UIManager.setEnergyBar(_stamina,_stamina_max);
     }
 
     public void damageStamina(float value)
@@ -920,7 +936,7 @@ public class PlayerSystem : MonoBehaviour
             _stamina = 0;
             playerDeath();
         }
-        _UIManager.setEnergyBar(_stamina / _stamina_max);
+        _UIManager.setEnergyBar(_stamina,_stamina_max);
     }
 
     private void playerDeath()
@@ -942,6 +958,7 @@ public class PlayerSystem : MonoBehaviour
     public void setPlayerType(int index)
     {
         _playertype = index;
+        ChangePlayerCharacter(index);
     }
 
     public int getPlayerType()

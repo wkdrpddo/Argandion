@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         _uimanagerInstance = this;
+        firstClick = new int[4];
     }
 
 
@@ -82,6 +83,9 @@ public class UIManager : MonoBehaviour
     private bool isMapOpen;
     private bool isConversationOpen;
 
+    private bool isInvenLeftClick;
+    private int[] firstClick;
+
     // 주연 추가
     public GameObject _eventpanel;
     // private EventManager _eventmanager;
@@ -91,6 +95,7 @@ public class UIManager : MonoBehaviour
 
     // Sprite 이미지 저장 Map
     private Dictionary<int, Sprite> Dic = new Dictionary<int, Sprite>();
+    private Dictionary<int, Sprite> storageDic = new Dictionary<int, Sprite>();
     // Sprite 탐색 해서 저장하는 함수
     public Sprite getItemIcon(int key)
     {
@@ -100,6 +105,15 @@ public class UIManager : MonoBehaviour
         }
         Sprite icon = Resources.Load<Sprite>("Sprites/" + key);
         Dic.Add(key, icon);
+        return icon;
+    }
+
+    public Sprite getItemIconInStorage(int key) {
+        if(storageDic.ContainsKey(key)) {
+            return storageDic[key];
+        }
+        Sprite icon = Resources.Load<Sprite>("StorageCloth/" + key);
+        storageDic.Add(key, icon);
         return icon;
     }
     // Start is called before the first frame update
@@ -131,8 +145,6 @@ public class UIManager : MonoBehaviour
         _alterup = GameObject.Find("teleportUp").GetComponent<TeleportAltar>();
         GameObject.Find("Up").SetActive(false);
         _alter = GameObject.Find("Altar").GetComponent<Altar>();
-
-        _systemmanager.setPlayerGold(9999999);
 
         _baseuipanel = gameObject.transform.Find("BaseUIPanel").gameObject;
         _healthbar = _baseuipanel.transform.GetChild(0).GetComponent<Slider>();
@@ -189,73 +201,24 @@ public class UIManager : MonoBehaviour
         _inventory.gameObject.SetActive(false);
         _eventAnnounce.SetActive(false);
 
-        // 테스트 꽃
-        // ItemObject item1 = findItem(318);
-        // acquireItem(item1, 1);
-        // ItemObject item2 = findItem(212);
-        // acquireItem(item2, 10);
-        ItemObject item1 = findItem(50);
-        acquireItem(item1, 10);
-        ItemObject item2 = findItem(51);
-        acquireItem(item2, 10);
-        ItemObject item3 = findItem(52);
-        acquireItem(item3, 10);
-        ItemObject item4 = findItem(53);
-        acquireItem(item4, 10);
-        ItemObject item5 = findItem(54);
-        acquireItem(item5, 10);
-        ItemObject item10 = findItem(55);
-        acquireItem(item10, 10);
-        ItemObject item11 = findItem(56);
-        acquireItem(item11, 10);
-        // 그 외 재료
-        ItemObject item6 = findItem(1);
-        acquireItem(item6, 40);
-        ItemObject item7 = findItem(2);
-        acquireItem(item7, 27);
-        ItemObject item8 = findItem(3);
-        acquireItem(item8, 27);
-        ItemObject item9 = findItem(4);
-        acquireItem(item9, 99);
-        acquireItem(item9, 71);
+        isInvenLeftClick = false;
+    }
 
-        ItemObject item12 = findItem(10);
-        acquireItem(item12, 99);
-        acquireItem(item12, 41);
-        ItemObject item13 = findItem(11);
-        acquireItem(item13, 10);
-        ItemObject item14 = findItem(12);
-        acquireItem(item14, 40);
-        ItemObject item15 = findItem(13);
-        acquireItem(item15, 2);
-        ItemObject item16 = findItem(14);
-        acquireItem(item16, 5);
+    public void startInvenSet() {
+        ItemObject item1 = findItem(300);
+        acquireItem(item1, 1);
+        ItemObject item2 = findItem(301);
+        acquireItem(item2, 1);
+        ItemObject item3 = findItem(302);
+        acquireItem(item3, 1);
+        ItemObject item4 = findItem(303);
+        acquireItem(item4, 1);
+        ItemObject item5 = findItem(304);
+        acquireItem(item5, 1);
+        ItemObject item10 = findItem(320);
+        acquireItem(item10, 1);
 
-        ItemObject item17 = findItem(20);
-        acquireItem(item17, 40);
-        ItemObject item18 = findItem(21);
-        acquireItem(item18, 15);
-        ItemObject item19 = findItem(22);
-        acquireItem(item19, 35);
-
-        ItemObject item20 = findItem(104);
-        acquireItem(item20, 20);
-        ItemObject item21 = findItem(112);
-        acquireItem(item21, 25);
-        ItemObject item22 = findItem(505);
-        acquireItem(item22, 60);
-
-
-        ItemObject item106 = findItem(400);
-        acquireItem(item106, 1);
-
-
-
-
-
-        _systemmanager.setPlayerGold(9999999);
-
-
+        _systemmanager.setPlayerGold(1000);
     }
 
     // Update is called once per frame
@@ -266,7 +229,11 @@ public class UIManager : MonoBehaviour
         // if (Input.GetKeyDown("optionKey"))
         if (Input.GetButtonDown("optionKey"))
         {
-            pressedESC();
+            if((!isConversationOpen && isPanelOpen()) || _mapuipanel.activeSelf) {
+                closeAllPanel();
+            } else {
+                pressedESC();
+            }
         }
 
         // 다른 키 다 X, inventory key만 동작
@@ -328,6 +295,39 @@ public class UIManager : MonoBehaviour
     }
 
     // ======================== UI 호출 함수 Start
+
+    // UI 전체 닫기
+    public void closeAllPanel() {
+        _transactiondoublecheck.gameObject.SetActive(false);
+        _resultnotificationpanel.gameObject.SetActive(false);
+        _notificationpanel.SetActive(false);
+        _mapuipanel.SetActive(false);
+        _optionpanel.gameObject.SetActive(false);
+        _optionfrommain.gameObject.SetActive(false);
+        _createcharacter.gameObject.SetActive(false);
+        _conversationpanel.gameObject.SetActive(false);
+        _cookingpanel.gameObject.SetActive(false);
+        _craftingpanel.gameObject.SetActive(false);
+        _buildeventpanel.gameObject.SetActive(false);
+        _transactionanimalpanel.gameObject.SetActive(false);
+        _transactionpanel.closeTransaction();
+        _inventorypanel.gameObject.SetActive(false);
+        _storagepanel.SetActive(false);
+        _trademodal.gameObject.SetActive(false);
+        _inventory.gameObject.SetActive(false);
+        _eventAnnounce.SetActive(false);
+        
+        isTransactionOpen = false;
+        isInventoryOpen = false;
+        isStorageOpen = false;
+        isCraftOpen = false;
+        isCookOpen = false;
+        isBuildEventOpen = false;
+        isMapOpen = false;
+        isConversationOpen = false;
+
+        runControllKeys();
+    }
 
     public void OnBaseUIPanel()
     {
@@ -434,7 +434,7 @@ public class UIManager : MonoBehaviour
     {
         if ((checkMod == 1 || checkMod == 4) && !checkInventory(findItem(Int32.Parse(iconName)), 1))
         {
-            OnResultNotificationPanel("구매가 불가능 합니다. \n인벤토리를 확인 해 주세요!!");
+            OnResultNotificationPanel("인벤토리에 빈 공간이 없습니다. \n인벤토리를 확인 해 주세요!!");
             return;
         }
 
@@ -473,9 +473,84 @@ public class UIManager : MonoBehaviour
                 break;
         }
         _inventory.gameObject.SetActive(!_inventory.gameObject.activeSelf);
+        getPlayerGold();
     }
 
     // ======================= UI 호출 함수 End
+
+    // 인벤 좌클릭 관련 함수
+    public bool getIsLeftClickInInven() {
+        return isInvenLeftClick;
+    }
+
+    // key 1 = 인벤  2 = 퀵슬롯
+    // idx : 슬롯 idx
+    // code : 아이템 코드
+    public void setFirstClick(int key, int idx, int code, int count) {
+        firstClick[0] = key;
+        firstClick[1] = idx;
+        firstClick[2] = code;
+        firstClick[3] = count;
+        isInvenLeftClick = true;
+    }
+    public void setSecondClick(int key, int idx, int code, int count) {
+        Slot[] invenSlot = _inventory.transform.GetChild(1).GetComponent<Inventory>().getInventorySlots();
+        Slot[] quickSlot = _inventory.transform.GetChild(0).GetComponent<Quickslot>().getInventorySlots();
+
+        if(key != firstClick[0] && ((code >= 502 && code <= 504) || firstClick[2] >= 502 && firstClick[2] <= 504)) {
+            isInvenLeftClick = false;
+            return;
+        }
+
+        string firstCate = findItem(firstClick[2]).Category;
+        string secondCate = findItem(code).Category;
+
+        if(key != firstClick[0] && 
+            !(
+             (firstCate == "장비" || firstCate == "꽃" || firstCate == "씨앗" || firstCate == "식량") ||
+             (secondCate == "장비" || secondCate == "꽃" || secondCate == "씨앗" || secondCate == "식량")
+            )
+          ) 
+        {
+            isInvenLeftClick = false;
+            return;
+        }
+
+        if(key == 1) {
+            if(firstClick[2] == 0) {
+                invenSlot[idx].ClearSlot();
+            } else {
+                invenSlot[idx].AddItem(findItem(firstClick[2]), firstClick[3]);
+            }
+        } else {
+            if(firstClick[2] == 0) {
+                quickSlot[idx].ClearSlot();
+                setPlayerQuickSlot(idx, 0, 0);
+            } else {
+                quickSlot[idx].AddItem(findItem(firstClick[2]), firstClick[3]);
+                setPlayerQuickSlot(idx, firstClick[2], firstClick[3]);
+            }
+        }
+
+        if(firstClick[0] == 1) {
+            if(code == 0) {
+                invenSlot[firstClick[1]].ClearSlot();
+            } else {
+                invenSlot[firstClick[1]].AddItem(findItem(code), count);
+            }
+        } else {
+            if(code == 0) {
+                quickSlot[firstClick[1]].ClearSlot();
+                setPlayerQuickSlot(firstClick[1], 0, 0);
+            } else {
+                quickSlot[firstClick[1]].AddItem(findItem(code), count);
+                setPlayerQuickSlot(firstClick[1], code, count);
+            }
+        }
+
+        syncQuickSlot();
+        isInvenLeftClick = false;
+    }
 
     // 패널 오픈 여부 함수
     public bool getIsOpenTransaction()
@@ -560,20 +635,24 @@ public class UIManager : MonoBehaviour
     }
 
     // ======================= Base UI 관련 함수
-    public void setHealthBar(float value)
+    public void setHealthBar(float value,float maxValue)
     {
-        _healthbar.value = value;
+        _healthbar.value = value/maxValue;
+        _healthbar.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = (value).ToString();
     }
 
-    public void setEnergyBar(float value)
+    public void setEnergyBar(float value,float maxValue)
     {
-        _energybar.value = value;
+        _energybar.value = value/maxValue;
+        _energybar.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = (value).ToString();
     }
 
     public void setTimer()
     {
         float angle = (_systemmanager._hour_display - 6) * 15 + (_systemmanager._minute_display / 4);
         _timer.rotation = Quaternion.Euler(180, 0, angle);
+        string timeText = _systemmanager._month + "월 " + _systemmanager._day + "일   " + _systemmanager._hour_display + "시 " + _systemmanager._minute_display + "분";
+        _baseuipanel.transform.GetChild(2).GetChild(6).GetComponent<TextMeshProUGUI>().text = timeText;
     }
 
     // ======================= Base UI 관련 함수 끝
@@ -786,7 +865,11 @@ public class UIManager : MonoBehaviour
             case 502:
             case 503:
             case 504:
+                Debug.Log("장착 동작 확인");
                 int _cnt = _inventory.transform.GetChild(1).GetComponent<Inventory>().getLessBaitCount(_item.ItemCode);
+                if(_cnt > _count) {
+                    _cnt = _count;
+                }
                 _baseuipanel.transform.GetChild(3).GetChild(1).GetComponentInChildren<Slot>().AddItem(_item, _cnt);
                 setPlayerQuickSlot(7, _item.ItemCode, _cnt);
                 break;
@@ -800,6 +883,15 @@ public class UIManager : MonoBehaviour
         }
 
         closeInvenRightClickModal();
+    }
+
+    public void clearBaitSlot() {
+        _baseuipanel.transform.GetChild(3).GetChild(1).GetComponentInChildren<Slot>().ClearSlot();
+        setPlayerQuickSlot(7, 0, 0);
+    }
+
+    public ItemObject getBaitSlotData() {
+        return _baseuipanel.transform.GetChild(3).GetChild(1).GetComponentInChildren<Slot>().item;
     }
 
     public void rightQuick(ItemObject _item, int _count, int _index)
@@ -864,6 +956,18 @@ public class UIManager : MonoBehaviour
         return _inventory.transform.GetChild(1).GetComponent<Inventory>().getInventorySlots();
     }
 
+    public Slot[] getQuickSlots() {
+        return _inventory.transform.GetChild(0).GetComponent<Quickslot>().getInventorySlots();
+    }
+
+    public Slot[] getStorageSlots() {
+        return _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().getInventorySlots();
+    }
+
+    public Slot[] getEquipSlots() {
+        return _inventorypanel.transform.GetChild(0).GetChild(2).GetComponentsInChildren<Slot>();
+    }
+
     // 창고 관련
     public void addToStorage(ItemObject _item, int _count, int slotIdx)
     {
@@ -900,6 +1004,11 @@ public class UIManager : MonoBehaviour
         {
             acquireItem(_item, nowCnt);
             _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().AcquireItem(_item, -1 * nowCnt);
+        }
+
+        if(_item.ItemCode == getBaitSlotData().ItemCode) {
+            int _cnt = _inventory.transform.GetChild(1).GetComponent<Inventory>().getLessBaitCount(_item.ItemCode);
+            rightEquip(_item, _cnt, 0);
         }
     }
 
@@ -1089,6 +1198,7 @@ public class UIManager : MonoBehaviour
         else
         {
             _conversationpanel.conversationWhenAlterBuff(_flowerCode);
+            quickUse(_flowerCode, 1, _playersystem._equipItem);
         }
     }
 
@@ -1147,6 +1257,11 @@ public class UIManager : MonoBehaviour
     public void startTime(){
         _systemmanager.setTimeSystem(false);
     }
+
+    // 하루 종료 함수 call
+    public void sleep() {
+        _systemmanager.playerDeath();
+    }
     
     // 게임 시작 종료
     public void setGameState(bool value)
@@ -1171,37 +1286,44 @@ public class UIManager : MonoBehaviour
     // 0 : 인벤 || 1 : 퀵슬롯 || 2. 장비 || 3. 창고
     public void loadItemData(int[,] data, int _key)
     {
+        Debug.Log(data.Length);
+
         Slot[] slots = null;
         switch (_key)
         {
             case 0:
-                slots = _inventory.transform.GetChild(1).GetComponent<Inventory>().getInventorySlots();
+                slots = getInventorySlots();
                 break;
             case 1:
-                slots = _inventory.transform.GetChild(0).GetComponent<Quickslot>().getInventorySlots();
+                slots = getQuickSlots();
                 break;
             case 2:
-                slots = _inventorypanel.transform.GetChild(0).GetChild(2).GetComponentsInChildren<Slot>();
+                slots = getEquipSlots();
                 break;
             case 3:
-                slots = _storagepanel.transform.GetChild(1).GetChild(4).GetComponent<Storage>().getInventorySlots();
+                slots = getStorageSlots();
                 break;
         }
 
-        for (int i = 0; i < data.Length; i++)
+        for (int i = 0; i < data.Length; i+=2)
         {
-            if (data[i, 0] == 0)
+            if (data[i/2, 0] == 0)
             {
                 continue;
             }
 
-            if (_key == 1 && i == 7)
+            if (_key == 1 && i/2 == 7)
             {
-                _baseuipanel.transform.GetChild(3).GetChild(1).GetComponentInChildren<Slot>().AddItem(findItem(data[i, 0]), data[i, 1]);
+                _baseuipanel.transform.GetChild(3).GetChild(1).GetComponentInChildren<Slot>().AddItem(findItem(data[i/2, 0]), data[i/2, 1]);
                 continue;
             }
 
-            slots[i].AddItem(findItem(data[i, 0]), data[i, 1]);
+            if(_key == 3) {
+                slots[i/2].transform.GetChild(0).GetComponent<Image>().color = new Color(255, 255, 255);
+            }
+
+            Debug.Log(data[i/2, 0]);
+            slots[i/2].AddItem(findItem(data[i/2, 0]), data[i/2, 1]);
         }
 
         if (_key == 1)

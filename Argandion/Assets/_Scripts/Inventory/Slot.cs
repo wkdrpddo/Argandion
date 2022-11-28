@@ -59,6 +59,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         item = _item;
         itemCount = _count;
         LoadImage(item.ItemCode);
+        
+        // Debug.Log("이건 값이 얼마일까?" + _item.ItemCode + " : " + _count);
 
         if (item.Category != "장비" && _item.Category != "옷")
         {
@@ -91,12 +93,15 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (itemCount <= 0)
         {
             // Debug.Log("ClearSlot");
-            ClearSlot();
+            if(!(gameObject.transform.parent.parent.parent.gameObject.name == "StorageScroll")) {
+                ClearSlot();
+            }
+            itemCount = 0;
 
         }
     }
 
-    private void ClearSlot()
+    public void ClearSlot()
     {
         // Debug.Log("======== clear slot " + idx);
         item = null;
@@ -136,6 +141,50 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             else if (gameObject.transform.parent.parent.parent.gameObject.name == "StorageScroll")
             {
                 UIManager._uimanagerInstance.OnTradeModal(item.Name, item.ItemCode.ToString(), itemCount, item.SellCost, 4, -1, idx);
+            }
+        }
+
+        // 좌클릭 시, 인벤토리가 열려있는 경우
+        if(eventData.button == PointerEventData.InputButton.Left && UIManager._uimanagerInstance.getIsOpenInventory()) {
+            if(itemCount != 0 && item.Category == "옷") {
+                if(gameObject.transform.parent.parent.parent.gameObject.name == "Bag") {
+                    UIManager._uimanagerInstance.rightEquip(item, itemCount, idx);
+                } else if(gameObject.transform.parent.name == "Equipment") {
+                    UIManager._uimanagerInstance.rightDismiss(item, itemCount, idx);
+                }
+                return;
+            }
+
+            if(UIManager._uimanagerInstance.getIsLeftClickInInven()) {
+                Debug.Log("두 번째 클릭");
+                if(gameObject.transform.parent.parent.parent.gameObject.name == "QuickSlot") {
+                    if(itemCount == 0) {
+                        UIManager._uimanagerInstance.setSecondClick(2, idx, 0, 0);
+                        return;
+                    }
+                    UIManager._uimanagerInstance.setSecondClick(2, idx, item.ItemCode, itemCount);
+                } else if(gameObject.transform.parent.parent.parent.gameObject.name == "Bag") {
+                    if(itemCount == 0) {
+                        UIManager._uimanagerInstance.setSecondClick(1, idx, 0, 0);
+                        return;
+                    }
+                    UIManager._uimanagerInstance.setSecondClick(1, idx, item.ItemCode, itemCount);
+                }
+            } else {
+                Debug.Log("첫 번째 클릭");
+                if(gameObject.transform.parent.parent.parent.gameObject.name == "QuickSlot") {
+                    if(itemCount == 0) {
+                        UIManager._uimanagerInstance.setFirstClick(2, idx, 0, 0);
+                        return;
+                    }
+                    UIManager._uimanagerInstance.setFirstClick(2, idx, item.ItemCode, itemCount);
+                } else if(gameObject.transform.parent.parent.parent.gameObject.name == "Bag") {
+                    if(itemCount == 0) {
+                        UIManager._uimanagerInstance.setFirstClick(1, idx, 0, 0);
+                        return;
+                    }
+                    UIManager._uimanagerInstance.setFirstClick(1, idx, item.ItemCode, itemCount);
+                }
             }
         }
 
@@ -179,19 +228,28 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (UIManager._uimanagerInstance.getIsOpenTransaction() && itemCount != 0)
+        if (itemCount != 0)
         {
-            Vector3 vec3 = Input.mousePosition - new Vector3(2, -2, 0);
-            string _text = item.Name;
-            if (item.SellCost == -1)
-            {
-                _text += "\n판매불가 아이템";
+            if(UIManager._uimanagerInstance.getIsOpenTransaction()) {
+                Vector3 vec3 = Input.mousePosition - new Vector3(2, -5, 0);
+                string _text = item.Name;
+                if (item.SellCost == -1)
+                {
+                    _text += "\n판매불가 아이템";
+                }
+                else
+                {
+                    _text += "\n가격 : " + item.SellCost;
+                }
+                UIManager._uimanagerInstance.onSlotOverModal(_text, vec3);
+            } else {
+                Vector3 vec3 = Input.mousePosition - new Vector3(2, -5, 0);
+                string _text = item.Name + "\n" + item.Desc;
+                if(item.Category == "옷") {
+                    _text += "\n[우클릭 사용]";
+                }
+                UIManager._uimanagerInstance.onSlotOverModal(_text, vec3);
             }
-            else
-            {
-                _text += "\n가격 : " + item.SellCost;
-            }
-            UIManager._uimanagerInstance.onSlotOverModal(_text, vec3);
         }
     }
 

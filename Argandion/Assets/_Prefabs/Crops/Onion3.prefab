@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9055070741347680975}
   - component: {fileID: 6076084083990184068}
   - component: {fileID: 745328318482328662}
+  - component: {fileID: -965577868075155080}
   m_Layer: 0
   m_Name: Onion3
   m_TagString: harvested
@@ -117,6 +118,9 @@ MonoBehaviour:
   self: {fileID: 3724247831116902877}
   howMany: 040000000500000006000000
   _buffManagerObject: {fileID: 0}
+  _pCpo: {fileID: 0}
+  _pd: {fileID: 0}
+  _cropCode: 114
 --- !u!54 &6076084083990184068
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -146,3 +150,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.20243713, y: 0.5321781, z: 0.17878051}
   m_Center: {x: 0, y: 0.17465709, z: 0}
+--- !u!114 &-965577868075155080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3721612243675543813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e474ae330fa99ff48953c33d7a701857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

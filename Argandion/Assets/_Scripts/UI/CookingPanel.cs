@@ -82,7 +82,7 @@ public class CookingPanel : MonoBehaviour
             gameObject.transform.GetChild(2).GetChild(2).GetComponent<Button>().interactable = false;
             Invoke("onCancelBtn", 7f);
             Invoke("completeCooking", 7f);
-            Invoke("offIsCookinig", 7f);
+            Invoke("offIsCooking", 7f);
             UIManager._uimanagerInstance.runCookingAnimation();
             Debug.LogWarning("========== after animation call ============");
 

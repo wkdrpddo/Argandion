@@ -60,6 +60,7 @@ public class CreateCharacter : MonoBehaviour
             gameObject.SetActive(false);
 
             UIManager._uimanagerInstance.delayRunControllKeys();
+            UIManager._uimanagerInstance.startInvenSet();
         }
     }
     // Start is called before the first frame update

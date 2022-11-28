@@ -55,7 +55,11 @@ public class Storage : MonoBehaviour
         {
             slots[slotIndex].transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0);
             slots[slotIndex].transform.GetChild(1).gameObject.SetActive(false);
-            slots[slotIndex].transform.GetChild(0).GetComponent<Image>().sprite = UIManager._uimanagerInstance.getItemIcon(_item.ItemCode);
+            if(_item.ItemCode >= 400 && _item.ItemCode <= 404) {
+                slots[slotIndex].transform.GetChild(0).GetComponent<Image>().sprite = UIManager._uimanagerInstance.getItemIconInStorage(_item.ItemCode);
+            } else {
+                slots[slotIndex].transform.GetChild(0).GetComponent<Image>().sprite = UIManager._uimanagerInstance.getItemIcon(_item.ItemCode);
+            }
         }
     }
 

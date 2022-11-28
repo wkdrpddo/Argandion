@@ -78,7 +78,7 @@ public class EventPanel : MonoBehaviour
     // 패널 생성하기
     public void setting()
     {
-        // Debug.Log("이벤트 패널 세팅 콜");
+        Debug.Log("이벤트 패널 세팅 콜");
         setDescriptObj();
         createAllPanel();
     }

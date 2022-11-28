@@ -121,6 +121,9 @@ public class TradeModal : MonoBehaviour
         }
         else if (tradeMod == 3)
         {
+            int itemCode = Int32.Parse(iconName);
+            syncBaitSlot(itemCode);
+
             Debug.Log("Item Code : " + iconName);
             UIManager._uimanagerInstance.addToStorage(UIManager._uimanagerInstance.findItem(Int32.Parse(iconName)), tradeCount, itemIndex);
         }
@@ -168,6 +171,9 @@ public class TradeModal : MonoBehaviour
         {
             if (tradeCnt != 0)
             {
+                int itemCode = Int32.Parse(iconName);
+                syncBaitSlot(itemCode);
+
                 UIManager._uimanagerInstance.sellItem(itemIndex, tradeCnt, 1);
                 UIManager._uimanagerInstance.addPlayerGold((tradeCost * tradeCnt));
             }
@@ -183,6 +189,9 @@ public class TradeModal : MonoBehaviour
         else if (storeIndex == 3)
         {
             _npcmanager.GetComponent<BuyingFisher>().Buy(itemIndex, tradeCnt);
+
+            int itemCode = Int32.Parse(iconName);
+            syncBaitSlot(itemCode, 1);
         }
         else if (storeIndex == 6)
         {
@@ -208,6 +217,45 @@ public class TradeModal : MonoBehaviour
         _ranch = GameObject.Find("NPCManager").GetComponent<Ranch>();
         // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         _npcmanager = GameObject.Find("NPCManager").gameObject;
+    }
+
+    private void syncBaitSlot(int itemCode, int key = 0) {
+        Debug.Log("key value : " + key);
+        int tradeCount = (int)gameObject.GetComponentInChildren<Slider>().value;
+
+        if(UIManager._uimanagerInstance.getBaitSlotData() != null && itemCode != UIManager._uimanagerInstance.getBaitSlotData().ItemCode) {
+            return;
+        }
+
+        if(itemCode >= 502 && itemCode <= 504) {
+            Slot[] slots = UIManager._uimanagerInstance.getInventorySlots();
+            Debug.Log("itemCode : " + itemCode);
+            foreach(Slot slot in slots) {
+                if(slot.itemCount == 0) {
+                    continue;
+                }
+                Debug.Log("slotItemCode : " + slot.item.ItemCode);
+                if(key == 1) {
+                    if(slot.item.ItemCode == itemCode) {
+                        UIManager._uimanagerInstance.rightEquip(UIManager._uimanagerInstance.findItem(itemCode), slot.itemCount, slot.idx);
+                        break;
+                    }
+                    continue;
+                }
+                else if(slot.idx == itemIndex && slot.itemCount == tradeCount) {
+                    UIManager._uimanagerInstance.clearBaitSlot();
+                    continue;
+                }
+                else if(slot.idx == itemIndex && slot.itemCount != tradeCount) {
+                    UIManager._uimanagerInstance.rightEquip(UIManager._uimanagerInstance.findItem(itemCode), slot.itemCount-tradeCount, slot.idx);
+                    break;
+                }
+                else if(slot.item.ItemCode == itemCode) {
+                    UIManager._uimanagerInstance.rightEquip(UIManager._uimanagerInstance.findItem(itemCode), slot.itemCount, slot.idx);
+                    break;
+                }
+            }
+        }
     }
 
     private string[] iconNameInString = new string[] { "chicken", "cow", "sheep" };

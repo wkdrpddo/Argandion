@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5536675029008738004}
   - component: {fileID: 8635723036140112971}
   - component: {fileID: 1485784538043215029}
+  - component: {fileID: 8616678419283469255}
   m_Layer: 0
   m_Name: Lettuce3
   m_TagString: harvested
@@ -117,6 +118,9 @@ MonoBehaviour:
   self: {fileID: 6024397068939180755}
   howMany: 040000000500000006000000
   _buffManagerObject: {fileID: 0}
+  _pCpo: {fileID: 0}
+  _pd: {fileID: 0}
+  _cropCode: 115
 --- !u!65 &8635723036140112971
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -146,3 +150,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8616678419283469255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6021820103703918859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e474ae330fa99ff48953c33d7a701857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

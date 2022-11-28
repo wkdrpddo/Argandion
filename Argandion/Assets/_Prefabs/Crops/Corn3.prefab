@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3889141358609562332}
   - component: {fileID: 4515120284834470222}
   - component: {fileID: 7653656895290651365}
+  - component: {fileID: 5686901210436935890}
   m_Layer: 0
   m_Name: Corn3
   m_TagString: harvested
@@ -102,6 +103,9 @@ MonoBehaviour:
   self: {fileID: 4156498552563341016}
   howMany: 060000000700000008000000
   _buffManagerObject: {fileID: 0}
+  _pCpo: {fileID: 0}
+  _pd: {fileID: 0}
+  _cropCode: 117
 --- !u!65 &4515120284834470222
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -131,3 +135,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5686901210436935890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4153820249256503498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e474ae330fa99ff48953c33d7a701857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

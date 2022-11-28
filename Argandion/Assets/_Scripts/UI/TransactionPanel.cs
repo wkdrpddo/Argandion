@@ -45,9 +45,14 @@ public class TransactionPanel : MonoBehaviour
 
     public void handelPanel(int value)
     {
+        if(value == -1) {
+            return;
+        }
+        
         gameObject.SetActive(!gameObject.activeSelf);
         UIManager._uimanagerInstance.setIsOpenTransaction(gameObject.activeSelf);
         UIManager._uimanagerInstance.OnInventory(2);
+
         if (gameObject.activeSelf)
         {
             UIManager._uimanagerInstance.delayStopControllKeys();
@@ -99,6 +104,7 @@ public class TransactionPanel : MonoBehaviour
                 break;
         }
 
+        Debug.Log(jsonInputString);
         jsonString = File.ReadAllText(jsonInputString);
         itemData = JsonHelper.FromJson<buyingObject>(jsonString);
 

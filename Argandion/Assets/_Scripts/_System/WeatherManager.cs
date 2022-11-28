@@ -47,7 +47,6 @@ public class WeatherManager : MonoBehaviour
         _season = season;
         if (_buffManager.blueSpirit) { // 파랑색 정령버프가 있으면 무조건 비가 온다.
             systemManager._weather = 1;
-            _buffManager.blueSpirit = false;
             playFX(1);
             return ;
         }
@@ -318,5 +317,10 @@ public class WeatherManager : MonoBehaviour
                 _snow.Stop();
                 break;
         }
+    }
+
+    public void PlayFXWeather(int weather)
+    {
+        playFX(weather);
     }
 }

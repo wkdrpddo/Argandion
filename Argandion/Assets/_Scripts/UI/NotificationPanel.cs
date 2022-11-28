@@ -16,4 +16,9 @@ public class NotificationPanel : MonoBehaviour
             UIManager._uimanagerInstance.runControllKeys();
         }
     }
+
+    public void sleep() {
+        handleNoti();
+        UIManager._uimanagerInstance.sleep();
+    }
 }

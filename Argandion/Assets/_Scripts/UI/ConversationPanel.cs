@@ -71,6 +71,7 @@ public class ConversationPanel : MonoBehaviour
     // NPC 및 상호작용 대화 최초 시작
     public void setConversationNPC(int value)
     {
+        Debug.Log(value);
         UIManager._uimanagerInstance.conversationNPC = value;
         // ui.conversationNPC = value;
 

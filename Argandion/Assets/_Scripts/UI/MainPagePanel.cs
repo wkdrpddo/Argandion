@@ -31,6 +31,14 @@ public class MainPagePanel : MonoBehaviour
             UIManager._uimanagerInstance.OnBaseUIPanel();
             UIManager._uimanagerInstance.setGameState(true);
             UIManager._uimanagerInstance.delayRunControllKeys();
+            _systemmanager.InLoading();
+            _systemmanager.DayStart();
+            Invoke("offLoading",1.5f);
         }
+    }
+
+    private void offLoading()
+    {
+        _systemmanager.OutLoading();
     }
 }

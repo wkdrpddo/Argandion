@@ -77,7 +77,10 @@ public class Dirt : MonoBehaviour
         else if (watered >= minusWater)
         {
             watered -= minusWater;
-            fullWater = false;
+            if (watered < 1500)
+            {
+                fullWater = false;
+            }
             foreach (CropPosition cpo in _cropPos)
             {
                 if (cpo._plant)
@@ -119,8 +122,10 @@ public class Dirt : MonoBehaviour
 
     public void checkHoe()
     {
+        Debug.Log("Check Hoe 길이 : "+_cropPos.Length);
         foreach (CropPosition cpo in _cropPos)
         {
+            Debug.Log(cpo);
             if (cpo._state == 0)
             {
                 _is_icon_dig = true;

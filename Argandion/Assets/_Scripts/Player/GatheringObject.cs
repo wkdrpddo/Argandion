@@ -29,7 +29,22 @@ public class GatheringObject : MonoBehaviour
     {
         if(_inventory.CheckInven(_item.FindItem(_itemCode),1))
         {
-            _ps.damageStamina(1f);
+            if (_ps._equipList[_ps._equipItem,0] == 300)
+            {
+                _ps.damageStamina(1.4f);
+            }
+            else if (_ps._equipList[_ps._equipItem,0] == 305)
+            {
+                _ps.damageStamina(1.2f);
+            }
+            else if (_ps._equipList[_ps._equipItem,0] == 310)
+            {
+                _ps.damageStamina(0.9f);
+            }
+            else if (_ps._equipList[_ps._equipItem,0] == 315)
+            {
+                _ps.damageStamina(0.6f);
+            }
             Vector3 Direction = (gameObject.transform.position - _ps.gameObject.transform.position);
             Direction.y = 0;
             Direction = Direction.normalized;
@@ -52,6 +67,7 @@ public class GatheringObject : MonoBehaviour
         if (_isFlower)
         {
             gameObject.transform.parent.GetComponent<SectorObject>()._flower_remain -= 1;
+            _ps.damageStamina(2.2f);
         }
         if (!_isremain)
         {

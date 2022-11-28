@@ -54,6 +54,7 @@ public class SystemManager : MonoBehaviour
     [SerializeField] private GameObject loadingPanel;
     [SerializeField] private Transform teleportPosition;
     [SerializeField] private TeleportationHome tphome;
+    [SerializeField] private SaveSystem _save;
     private bool _inloading;
 
     public int[,] _timezone = new int[,] { { 6, 7, 18, 19 }, { 6, 6, 19, 20 }, { 6, 7, 18, 19 }, { 7, 8, 18, 19 } };
@@ -85,6 +86,10 @@ public class SystemManager : MonoBehaviour
         _altar = GameObject.Find("Altar").GetComponent<Altar>();
         _MapObject.GetComponent<MapObject>().UpdateFieldManager(_season);
         _soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        _save = gameObject.GetComponent<SaveSystem>();
+
+        Invoke("LoadGame", 2.0f);
+        // LoadGame();
     }
 
     // Update is called once per frame
@@ -97,7 +102,7 @@ public class SystemManager : MonoBehaviour
         }
     }
 
-    private void UpdateSeason(int index)
+    public void UpdateSeason(int index)
     {
         _season = index;
         _MapObject.GetComponent<MapObject>().UpdateFieldManager(index);
@@ -246,6 +251,7 @@ public class SystemManager : MonoBehaviour
         //     _buffManager.FlowerBuffEnd();
         // }
         // _buffManager.DayEnd();
+        _save.Save(_save._savedata);
         DayStart();
         Invoke("OutLoading",5f);
     }
@@ -338,7 +344,7 @@ public class SystemManager : MonoBehaviour
         }
     }
 
-    private void DayStart()
+    public void DayStart()
     {
         // 모든 SectorObject의 DayEnd 동작
         foreach (var sector in _sectors)
@@ -365,7 +371,19 @@ public class SystemManager : MonoBehaviour
             building.DayStart();
             }
         }
+    }
 
+    public void LoadWeather()
+    {
+        Debug.Log(_weather);
+        if (1 <= _weather && _weather <= 9)
+        {
+            Debug.Log("액티브 아이콘 "+_weather);
+            _EventPanel.activeIcon(_weather + 49);
+        }
+        _weatherManager.PlayFXWeather(_weather);
+        _EventPanel._foodPanel.SetActive(true);
+        _EventPanel._otherPanel.SetActive(true);
     }
 
     //정화된 구역 중에서 랜덤 한 구역 정하기
@@ -495,11 +513,45 @@ public class SystemManager : MonoBehaviour
             _worldTree.ChangeTreeLevel();
         }
     }
+    
+    public void LoadDevelopLevel(int level){
+        if(level == 1){
+            return;
+        }else if(level >= 2){
+            //실행문
+            // npc 부르기
+            _NPCManager.NPCActive(6);
+            // 밭 활성화
+            _farmChange.ChangeFarm();
+            // 집 자라기
+            _houseChange.ChangeHouse();
+            _interiorChange.ChangeHouse();
+            _worldTree.ChangeTreeLevel();
+            // 제단 텔레포트 active
+            GameObject.Find("Teleport").transform.GetChild(0).gameObject.SetActive(true);
+            GameObject.Find("Teleport").transform.GetChild(1).gameObject.SetActive(true);
+        }else if(level == 3){
+            //실행문
+            // npc 부르기
+            _NPCManager.NPCActive(7);
+            // 밭 활성화
+            _farmChange.ChangeFarm();
+            // 집 자라기
+            _houseChange.ChangeHouse();
+            _interiorChange.ChangeHouse();
+            _worldTree.ChangeTreeLevel();
+        }
+    }
 
     // 발전도 확인
     public int getDevelopLevel()
     {
         return _development_level;
+    }
+
+    public int getSeason()
+    {
+        return _season;
     }
 
     // 정화 여부 확인 (섹터 1번부터 8번까지)
@@ -559,6 +611,8 @@ public class SystemManager : MonoBehaviour
     public void playerDeath(){
         animalDestroy();
         _day += 1;
+        _hour = ((_buffManager.whitePray || _buffManager.whiteSpirit) ? 5 : 6);
+        _minute = 0;
         InLoading();
         if (_day >= 29)
         {
@@ -574,6 +628,12 @@ public class SystemManager : MonoBehaviour
                 UpdateSeason(_month / 2);
             }
         }
+        UIManager._uimanagerInstance.closeAllPanel();
         Invoke("TimeCall",1.5f);
+    }
+
+    public void LoadGame()
+    {
+        _save.Load();
     }
 }

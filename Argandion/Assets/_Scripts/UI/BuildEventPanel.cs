@@ -123,8 +123,12 @@ public class BuildEventPanel : MonoBehaviour
 
     private void setting(int _buildKey)
     {
+        // 아이템 배열 초기화
+        myItems = new int[25];
+        howItems = new int[25];
+        canMake = new bool[7];
+
         slots = UIManager._uimanagerInstance.getInventorySlots();
-        // slots = ui.getInventorySlots();
 
         foreach (Slot slot in slots)
         {

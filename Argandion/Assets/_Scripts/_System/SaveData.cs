@@ -52,12 +52,17 @@ public class SaveData
     // 정령 버프 확인용
     public bool[] _flowerBuffBoolList = new bool[16];
 
-    // 각 농작물의 작물 번호(위치), 생장 수
-    public int[,] _farm = new int [729,2];
+    // 각 농작물의 농토 번호(위치), 농토 세부 위치(0-9), 코드 및 생장 수
+    public int[,] _farm = new int [81,4];
 
     // 각 농토의 번호(위치), 잔여 수분량
     public int[,] _dirt = new int [81,2];
 
     // 정령 버프 제사 진행도 및 꽃의 번호
     public int[] pray = new int[2];
+
+    public int _rainy_month;
+    public int _rainy_day;
+    public int _coldwave_month;
+    public int _coldwave_day;
 }
