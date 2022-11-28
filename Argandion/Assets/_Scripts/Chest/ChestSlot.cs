@@ -26,7 +26,6 @@ public class ChestSlot : MonoBehaviour
     {
         item = _item;
         itemCount = _count;
-        // itemImage.sprite = item.itemImage;
 
         if(item.Category != "장비")
         {
@@ -39,14 +38,11 @@ public class ChestSlot : MonoBehaviour
             // go_CountImage.SetActive(false);
         }
 
-        // SetColor(1);
     }
 
     public void SetSlotCount(int _count)
     {
         itemCount += _count;
-        // text_Count.text = itemCount.ToString();
-
         if (itemCount <= 0)
             ClearSlot();
     }
@@ -55,10 +51,5 @@ public class ChestSlot : MonoBehaviour
     {
         item = null;
         itemCount = 0;
-        // itemImage.sprite = null;
-        // SetColor(0);
-
-        // text_Count.text = "0";
-        // go_CountImage.SetActive(false);
     }
 }

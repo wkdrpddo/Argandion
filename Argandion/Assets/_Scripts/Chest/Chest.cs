@@ -37,7 +37,6 @@ public class Chest : MonoBehaviour
     private void Page1()
     {   if(Input.GetKeyDown(KeyCode.Keypad1)) {
             slots = go_ChestSlotsParent1.GetComponentsInChildren<ChestSlot>();
-            Debug.Log(slots[0].item.Name);
         }
     }
 
@@ -45,7 +44,6 @@ public class Chest : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Keypad2)) {
             slots = go_ChestSlotsParent2.GetComponentsInChildren<ChestSlot>();
-            Debug.Log(slots[0].item.Name);
         }
     }
 
@@ -53,7 +51,6 @@ public class Chest : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Keypad3)) {
             slots = go_ChestSlotsParent3.GetComponentsInChildren<ChestSlot>();
-            Debug.Log(slots[0].item.Name);
         }
     }
 
@@ -61,7 +58,6 @@ public class Chest : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Keypad4)) {
             slots = go_ChestSlotsParent4.GetComponentsInChildren<ChestSlot>();
-            Debug.Log(slots[0].item.Name);
         }
     }
 
@@ -69,34 +65,8 @@ public class Chest : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Keypad5)) {
             slots = go_ChestSlotsParent5.GetComponentsInChildren<ChestSlot>();
-            Debug.Log(slots[0].item.Name);
         }
     }
-
-    
-    // private void TryOpenChest()
-    // {
-    //     if(Input.GetKeyDown(KeyCode.I))
-    //     {
-    //         chestActivated = !chestActivated;
-
-    //         if (chestActivated)
-    //             OpenChest();
-    //         else
-    //             CloseChest();
-
-    //     }
-    // }
-
-    // private void OpenChest()
-    // {
-    //     go_ChestBase.SetActive(true);
-    // }
-
-    // private void CloseChest()
-    // {
-    //     go_ChestBase.SetActive(false);
-    // }
 
     public void PutItem(ItemObject _item, int _count = 1) {
         for (int i = 0; i < slots.Length; i++ ) {
@@ -115,7 +85,6 @@ public class Chest : MonoBehaviour
             }
 
             if (i+1 == slots.Length) {
-                Debug.Log("꽉찼엉");
                 return;
             }
         }
@@ -159,7 +128,7 @@ public class Chest : MonoBehaviour
             }
 
             if ( i + 1 == slots.Length) {
-                Debug.Log("꽉찼엉");
+
             }
         }
     }

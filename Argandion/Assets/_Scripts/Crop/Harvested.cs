@@ -13,7 +13,6 @@ public class Harvested : MonoBehaviour
     public Dirt _pd;
     public int _cropCode;
 
-    // Start is called before the first frame update
     Vector3 aboveSoil(Vector3 pos) {
         return new Vector3(pos.x, pos.y + 1, pos.z); 
     }
