@@ -2,11 +2,23 @@
 
 ![banner](https://user-images.githubusercontent.com/79687246/203693240-556fbe13-6203-4207-b0fa-2f30c5ecbfc8.png)
 
+
 <!-- ----------------------- pv 영상 ----------------------- -->
+
+<br/>
+
+## beta 버전 pv
+[![Argandion beta pv 1](http://img.youtube.com/vi/npUWMUzc4rA/sddefault.jpg)](https://youtu.be/npUWMUzc4rA?t=0s) 
+
+--- 
 
 > 아르간디온에서 다양한 체험을 하며 여유를 즐겨보세요!
 
-'Argandion'는 가상의 숲 아르간디온을 가꿔나가는 3D 힐링 게임입니다. 자체 개발한 오픈월드 맵에서 플레이하며 다양한 힐링요소를 느껴보세요!
+
+### 'Argandion'는 가상의 숲 아르간디온을 가꿔나가는 3D 힐링 게임입니다.  
+### 자체 개발한 오픈월드 맵에서 플레이하며 다양한 힐링요소를 느껴보세요!
+
+<br/>
 
 ## 주요기능
 - 다양한 방법으로 자원을 획득하고, 숲의 구역을 정화해보세요.
@@ -63,6 +75,7 @@
     - 마우스 커서 아이콘 추가
     - 장비 사용 시 스테미나 감소 추가
   - `FIX`
+    - 밸런스 패치 - 전반적인 아이템 가격 조정, 달리기 스태미너 감소율 조정
     - '리데이사의 가호' 아이콘이 정상적으로 사라지지 않는 현상 수정
     - 건물 건설 시 필요한 자원이 정상적으로 표기되지 않는 현상 수정
     - 인벤토리의 아이템이 - 개수로 내려가는 현상 수정
@@ -77,6 +90,5 @@
     
 
 ## Download
-
-[Argandion 다운로드 바로가기](https://drive.google.com/uc?export=download&id=1cqAThoLmw8c946hfLi0jkljD84jVmieV)
+[Argandion 다운로드 바로가기](https://drive.google.com/uc?export=download&id=1QuTpq51AGaH3QMUH8K7SEvd-dQseZivy)
 
