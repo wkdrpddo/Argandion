@@ -13,7 +13,6 @@ public class SleepInteraction : MonoBehaviour
 
     public void Interaction()
     {
-        Debug.Log("잠자기 콜");
         _uiManager.OnNotificationPanel();
     }
 }

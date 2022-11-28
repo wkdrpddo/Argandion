@@ -10,7 +10,6 @@ public class CookingInteraction : MonoBehaviour
     private PlayerSystem _playerSystem;
     private GameObject _playerBody;
     [SerializeField] private GameObject _cookingLight; // 시작 전에 끼워 넣기
-    // private SoundManager _sound;
 
     void Awake()
     {
@@ -18,29 +17,19 @@ public class CookingInteraction : MonoBehaviour
         _playerBody = GameObject.Find("PlayerObject").transform.GetChild(0).gameObject;
         _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _cameraSystem = GameObject.Find("PlayerObject").GetComponent<CameraSystem>();
-        // _sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();s
-        Debug.Log(_cameraSystem);
     }
 
     public void Interaction()
     {
-        // Debug.Log("빵 "+gameObject.transform.position);
-        // Debug.Log("빵 rot "+gameObject.transform.rotation.eulerAngles);
-        // Debug.Log("플레이어 "+GameObject.Find("PlayerObject").transform.position);
         _playerBody.transform.rotation = Quaternion.Euler(gameObject.transform.rotation.eulerAngles);
         _uiManager.OnCookingPanel();
     }
 
     public void CookingStart()
     {
-        // _cameraSystem = GameObject.Find("PlayerObject").GetComponent<CameraSystem>();
-        // float yRot = GameObject.Find("CookingPlace").transform.rotation.eulerAngles.y + 180f;
-        // Debug.Log("rot "+yRot);
-        // Debug.Log(_cameraSystem);
         _cameraSystem.CookingCamera();
         _cookingLight.SetActive(true);
         _shelf.SetActive(false);
-        // _sound.playEffectSound("COOKING");
     }
 
     public void CookingEnd()

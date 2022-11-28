@@ -19,7 +19,6 @@ public class TeleportationHome : MonoBehaviour
     {
         _playerSystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
         _directionalLight = GameObject.Find("Directional Light");
-        // _homeLight = GameObject.Find("Home Light");
         _teleportHomeInside = GameObject.Find("teleportHomeInside");
         _teleportHomeOutside = GameObject.Find("teleportHomeOutside");
         _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
@@ -30,7 +29,6 @@ public class TeleportationHome : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("트리거");
         if (gameObject == _teleportHomeInside && other.gameObject.layer == 3)
         {
             var camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -41,7 +39,6 @@ public class TeleportationHome : MonoBehaviour
 
     public void Interaction()
     {
-        Debug.Log("인터렉션");
         var camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         camera.backgroundColor = Color.black;
         camera.clearFlags = CameraClearFlags.SolidColor;
@@ -51,7 +48,6 @@ public class TeleportationHome : MonoBehaviour
 
     private void goInside()
     {
-        // Debug.Log("안으로");
         _isInside = true;
         // 집 빛 켜주기, 밖 빛 꺼주기
         setLight();
@@ -66,11 +62,9 @@ public class TeleportationHome : MonoBehaviour
     private void goOutside()
     {
         _particleFX.SetActive(true);
-        // Debug.Log("밖으로");
         _isInside = false;
         // 집 빛 꺼주기, 밖 빛 켜주기
         setLight();
-        // Directional Light
         // 플레이어 이동
         _playerSystem.transform.position = new Vector3(_teleportHomeOutside.transform.position.x, _teleportHomeOutside.transform.position.y, _teleportHomeOutside.transform.position.z - 0.5f);
         _playerSystem.transform.GetChild(0).gameObject.transform.localEulerAngles = new Vector3(0f, 180f, 0f);

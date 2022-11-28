@@ -24,30 +24,11 @@ public class TeleportAltar : MonoBehaviour
 
     }
 
-    // 테스트 코드 ========================================================
-    // public bool _goup;
-    // public bool _godown;
-
-    // private void Update() {
-    //     if(_goup){
-    //         goUp();
-    //         _goup = false;
-    //     }if(_godown){
-    //         goDown();
-    //         _godown = false;
-    //     }
-    // }
-    // ==================================================================
-
     public void Interaction()
     {
-        Debug.Log("인터렉션");
-        // 게임오브젝트 == 으로 비교 가능?
         if(gameObject == _teleportDown){ // 올라가기
-            Debug.Log("올라가기");
             _uiManager.OnConversationPanel(11);
         }else if(gameObject == _teleportUp){ // 내려가기
-            Debug.Log("내려가기");
             _uiManager.OnConversationPanel(12);
         }
     }
@@ -82,7 +63,6 @@ public class TeleportAltar : MonoBehaviour
         _playerSystem._canMove = false;
         yield return new WaitForSeconds(0.5f);
         // 이동
-        Debug.Log(_teleportUp.transform.position.y);
         _playerSystem.transform.position = new Vector3(_teleportUp.transform.position.x, _teleportUp.transform.position.y, _teleportUp.transform.position.z);
         // 사운드
         _soundManager.playBGM4();
@@ -101,7 +81,6 @@ public class TeleportAltar : MonoBehaviour
         _playerSystem._canMove = false;
         yield return new WaitForSeconds(0.5f);
         // 이동
-        Debug.Log(_teleportDown.transform.position.y);
         _playerSystem.transform.position = new Vector3(_teleportDown.transform.position.x, _teleportDown.transform.position.y, _teleportDown.transform.position.z);
         // 사운드
         if(_sector8._purifier){

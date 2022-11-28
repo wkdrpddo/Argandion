@@ -14,18 +14,6 @@ public class WorldTree : MonoBehaviour
         _systemManager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         _playerSystem = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
     }
-    // 테스트 코드 ========================================================
-    // public bool _go0;
-
-    // private void Update() {
-    //     if(_go0){
-    //         doTeleport(0);
-    //         _go0 = false;
-    //     }
-    // }
-    // ==================================================================
-
-    
 
     // '발전도' 변하면 call하기
     public void ChangeTreeLevel()

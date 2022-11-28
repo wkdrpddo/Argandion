@@ -9,9 +9,6 @@ public class SpiritBuff : MonoBehaviour
     private BuffManager buffManager;
     public GameObject[] buildings;
 
-    // public int testSpirit;
-    // public bool testCode;
-
     private void Start() {
         _buffManagerObject = GameObject.Find("BuffManager");
         buffManager = _buffManagerObject.GetComponent<BuffManager>();
@@ -41,10 +38,10 @@ public class SpiritBuff : MonoBehaviour
                 WhiteSpirit();
                 systemManager.callActiveIcon(11);
             } else {
-                Debug.Log("꽃이 아니야!");
+                // Debug.Log("꽃이 아님");
             }
         } else {
-            Debug.Log("다른 꽃 버프가 활성중 입니다!");
+            // Debug.Log("다른 꽃 버프가 활성 중");
         }
     }
 
@@ -60,7 +57,7 @@ public class SpiritBuff : MonoBehaviour
                 buffManager._flowerBuffTargetMonth -= 8;
             }
         }
-        Debug.Log("나는 하얀색정령버프");
+        // Debug.Log("나는 하얀색정령버프");
     }
 
     public void OrangeSpirit(){
@@ -75,8 +72,7 @@ public class SpiritBuff : MonoBehaviour
                 buffManager._flowerBuffTargetMonth -= 8;
             }
         }
-        // buildings = GameObject.FindGameObjectsWithLayer(10)
-        Debug.Log("나는 주황색정령버프");
+        // Debug.Log("나는 주황색정령버프");
     }
     
     public void BlueSpirit(){
@@ -91,7 +87,7 @@ public class SpiritBuff : MonoBehaviour
                 buffManager._flowerBuffTargetMonth -= 8;
             }
         }
-        Debug.Log("나는 파랑색정령버프");
+        // Debug.Log("나는 파랑색정령버프");
     }
     
     public void RedSpirit(){
@@ -106,7 +102,7 @@ public class SpiritBuff : MonoBehaviour
                 buffManager._flowerBuffTargetMonth -= 8;
             }
         }
-        Debug.Log("나는 빨강색정령버프");
+        // Debug.Log("나는 빨강색정령버프");
     }
     
     public void PinkSpirit(){
@@ -121,7 +117,7 @@ public class SpiritBuff : MonoBehaviour
                 buffManager._flowerBuffTargetMonth -= 8;
             }
         }
-        Debug.Log("나는 분홍색정령버프");
+        // Debug.Log("나는 분홍색정령버프");
     }
     
     public void YellowSpirit(){
@@ -136,7 +132,7 @@ public class SpiritBuff : MonoBehaviour
                 buffManager._flowerBuffTargetMonth -= 8;
             }
         }
-        Debug.Log("나는 노랑색정령버프");
+        // Debug.Log("나는 노랑색정령버프");
     }
     
     public void SkySpirit(){
@@ -151,6 +147,6 @@ public class SpiritBuff : MonoBehaviour
                 buffManager._flowerBuffTargetMonth -= 8;
             }
         }
-        Debug.Log("나는 하늘색정령버프");
+        // Debug.Log("나는 하늘색정령버프");
     }
 }

@@ -12,7 +12,6 @@ public class WorldTreeInteraction : MonoBehaviour
 
     public void Interaction()
     {
-        Debug.Log("인터렉션 콜111");
         _uiManager.OnConversationPanel(9);
     }
 }

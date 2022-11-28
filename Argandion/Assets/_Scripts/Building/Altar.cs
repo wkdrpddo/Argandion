@@ -25,18 +25,14 @@ public class Altar : MonoBehaviour
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         _sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
-    // 하루 끝나면
-    public void DayEnd(){
-        Debug.Log("데이엔드");
+
+    public void DayEnd(){ // 하루 끝나면 fx 바꾸기
         if(_buffStart){ // 버프 시작하면(조건 만족)
-            Debug.Log("버프 시작");
             _dayEndBuffCnt = 0;
             _effect.SetActive(false); // 이펙트 빼고
-            // 라이트 켜고
-            _tableLight.SetActive(true);
+            _tableLight.SetActive(true); // 라이트 켜고
 
         }else{ // 버프 시작 안 하면
-            Debug.Log("버프 시작 안 함");
             if(_onFlower!=null){
                 _onFlower.SetActive(false); // 테이블 위 꽃 없애기
                 turnOnEffect(_dayEndBuffCnt); // 테이블 이펙트 바꿔주기
@@ -55,7 +51,6 @@ public class Altar : MonoBehaviour
                 _runeLight[i-1].SetActive(true);
                 _effect.transform.GetChild(i-1).gameObject.SetActive(true);
             }
-
         }else if(_dayEndBuffCnt==3 || _buffManager._isPrayBuffActived){ // 제사 시작 && 제사 중
             _dayEndBuffCnt = 0; // 날짜 갱신 
             _effect.SetActive(false); // 이펙트 빼고
@@ -82,12 +77,11 @@ public class Altar : MonoBehaviour
         _runeLight[2].SetActive(false);
         // 라이트 끄기
         _tableLight.SetActive(false);
-        
     }
 
     // 제사를 시도할 때
     public void goPray(int itemCode){
-        _sound.playEffectSound("ALTER");
+        _sound.playEffectSound("ALTER"); // 제단 소리
         _prayBuff.Pray(itemCode); // 제사
         activeFlower(itemCode); // 꽃 올리기
         _dayEndBuffCnt = _prayBuff.prayDay;
@@ -112,8 +106,6 @@ public class Altar : MonoBehaviour
     private void turnOnRune(int level)
     {
         _runeLight[level-1].SetActive(true);
-        _runeEffect[level-1].SetActive(true); // active로 자동 실행 되나? // 그리고 자동으로 꺼짐?
+        _runeEffect[level-1].SetActive(true);
     }
-
-
 }

@@ -28,10 +28,8 @@ public class PrayBuff : MonoBehaviour
 
     public void DayStart()
     {
-        // Debug.Log("데이스타트");
         if (tempDay != systemManager._day)
         {
-            // Debug.Log("뉴데이 호출");
             NewDay();
             tempDay = systemManager._day;
         }
@@ -50,7 +48,6 @@ public class PrayBuff : MonoBehaviour
             todayPray = true;
             if (flowerIdx != itemCode)
             {
-                // Debug.Log("다름");
                 flowerIdx = itemCode;
                 prayDay = 1;
             }
@@ -76,7 +73,7 @@ public class PrayBuff : MonoBehaviour
             flowerIdx = 0;
         }
         else
-        { // ??
+        { 
             todayPray = false;
         }
         if(prayDay==3){
@@ -139,7 +136,7 @@ public class PrayBuff : MonoBehaviour
         {
             buffManager._flowerBuffTargetMonth -= 8;
         }
-        Debug.Log("나는 하얀색제단버프");
+        // Debug.Log("나는 하얀색제단버프");
     }
 
     public void OrangePray()
@@ -154,7 +151,7 @@ public class PrayBuff : MonoBehaviour
         {
             buffManager._flowerBuffTargetMonth -= 8;
         }
-        Debug.Log("나는 주황색제단버프");
+        // Debug.Log("나는 주황색제단버프");
     }
 
     public void BluePray()
@@ -169,7 +166,7 @@ public class PrayBuff : MonoBehaviour
         {
             buffManager._flowerBuffTargetMonth -= 8;
         }
-        Debug.Log("나는 파랑색제단버프");
+        // Debug.Log("나는 파랑색제단버프");
     }
 
     public void RedPray()
@@ -184,7 +181,7 @@ public class PrayBuff : MonoBehaviour
         {
             buffManager._flowerBuffTargetMonth -= 8;
         }
-        Debug.Log("나는 빨강색제단버프");
+        // Debug.Log("나는 빨강색제단버프");
     }
 
     public void PinkPray()
@@ -199,7 +196,7 @@ public class PrayBuff : MonoBehaviour
         {
             buffManager._flowerBuffTargetMonth -= 8;
         }
-        Debug.Log("나는 분홍색제단버프");
+        // Debug.Log("나는 분홍색제단버프");
     }
 
     public void YellowPray()
@@ -214,7 +211,7 @@ public class PrayBuff : MonoBehaviour
         {
             buffManager._flowerBuffTargetMonth -= 8;
         }
-        Debug.Log("나는 노랑색제단버프");
+        // Debug.Log("나는 노랑색제단버프");
     }
 
     public void SkyPray()
@@ -229,7 +226,7 @@ public class PrayBuff : MonoBehaviour
         {
             buffManager._flowerBuffTargetMonth -= 8;
         }
-        Debug.Log("나는 하늘색제단버프");
+        // Debug.Log("나는 하늘색제단버프");
     }
 
 }

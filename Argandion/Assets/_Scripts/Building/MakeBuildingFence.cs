@@ -22,7 +22,6 @@ public class MakeBuildingFence : MonoBehaviour
     // 연결 스크립트
     public SystemManager _systemManager;
     public MakeSign _makeSign;
-    // public RectTransform _uiSet;
 
     // 지역 위치
     public int _sectorNum;
@@ -88,7 +87,6 @@ public class MakeBuildingFence : MonoBehaviour
             Instantiate(_fencePrefabs[Random.Range(0, 5)], new Vector3(_colliderCenter.x - _colliderSize.x / 2, fencePositionY, _colliderCenter.z + _colliderSize.z / 2 - cnt * (_fenceSizeMax.x + zGap)), Quaternion.Euler(0, -90, 0), _fences.transform);
             cnt++;
         }
-
         // 표지판 생성
         _makeSign.makeSign(_colliderCenter.x, fencePositionY, _colliderCenter.z - _colliderSize.z / 2 - 0.12f, _fences.transform, _icon, true, _sectorNum);
 

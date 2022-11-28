@@ -14,8 +14,6 @@ public class CraftingTableInteraction : MonoBehaviour
 
     public void Interaction()
     {
-        // Debug.Log("인터렉션 콜");
         _uiManager.OnCraftingPanel(_sectorNum);
-        // _uiManager.OnCraftingPanel();
     }
 }

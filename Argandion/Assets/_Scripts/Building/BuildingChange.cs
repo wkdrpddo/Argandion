@@ -29,49 +29,15 @@ public class BuildingChange : MonoBehaviour
     // building finish y 회전값
     public float _fBuildingRotY;
 
-    // ==================================================== 지울 위치 (시작) ==================================
-
-    // 테스트용 변수
-    public bool _fulfillTest;
-    public bool _dayEndTest;
-    public GameObject _tableObject;
-
-    void Start()
-    {
-        _systemManager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
-    }
-
-    // 테스트용 update();
-    // void Update()
-    // {
-    //     if (_fulfillTest)
-    //     {
-    //         Debug.Log("condition fulfill");
-    //         _fulfillTest = false; // 테스트용 변수
-    //         _phase = 1;
-    //     }
-    //     if (_dayEndTest)
-    //     {
-    //         Debug.Log("dayEnd");
-    //         DayStart();
-    //         _dayEndTest = false;
-    //     }
-
-    // }
-
-    // ==================================================== 지울 위치 (끝) ==================================
-
     // 상호작용해서 건축 시작하기 => 자재 건축물 넣기
     public void BuildStart()
     {
         // 건축 과정 건축물 만들기
         _constructionSet = Instantiate(_constructionPrefab, new Vector3(gameObject.transform.position.x + _constructionX, gameObject.transform.position.y + _constructionY, gameObject.transform.position.z + _constructionZ), Quaternion.identity, gameObject.transform);
-
         // build 1 Collider 가지고 있는 Object
         GameObject floor = _constructionSet.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
         // 표지판 만들기
         _makeSign.makeSign(gameObject.transform.position.x, gameObject.transform.parent.position.y, gameObject.transform.position.z - floor.GetComponent<BoxCollider>().size.z * floor.transform.localScale.z / 2, _constructionSet.transform, _makeFences._icon, false, 0);
-
         // 펜스 지우기
         Destroy(_makeFences._fences);
         Destroy(gameObject.GetComponent<BoxCollider>());
@@ -124,6 +90,4 @@ public class BuildingChange : MonoBehaviour
             _tableObject.SetActive(true);
         }
     }
-
-
 }
