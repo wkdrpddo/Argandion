@@ -11,7 +11,6 @@ public class Ranch : MonoBehaviour
     private BuffManager _buff;
     public Inventory theInventory;
     public GameObject item;
-    // private UIManager ui;
 
     public int cows = 0;
     public int chicks = 0;
@@ -43,7 +42,6 @@ public class Ranch : MonoBehaviour
 
     void Awake()
     {
-        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
         system = GameObject.Find("SystemManager").GetComponent<SystemManager>();
         _buffManagerObject = GameObject.Find("BuffManager");
         _buff = _buffManagerObject.GetComponent<BuffManager>();
@@ -53,7 +51,6 @@ public class Ranch : MonoBehaviour
         _buff = _buffManagerObject.GetComponent<BuffManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (temp != system._day)
@@ -207,17 +204,17 @@ public class Ranch : MonoBehaviour
         int tempPoint = point + 2;
         if (UIManager._uimanagerInstance.getPlayerGold() < 350)
         {
-            Debug.Log("소지금 부족 오류");
+            // Debug.Log("소지금 부족");
             UIManager._uimanagerInstance.OnResultNotificationPanel("소지금이 부족합니다.");
         }
         else if (tempPoint > maxPoint)
         {
-            Debug.Log("수용량 부족 오류");
+            // Debug.Log("수용량 부족");
             UIManager._uimanagerInstance.OnResultNotificationPanel("농장의 수용량이 부족합니다.");
         }
         else
         {
-            Debug.Log("정상 동작");
+            // Debug.Log("정상 동작");
             GameObject addData = Instantiate(sheepPrefab, getRandonPoint(), Quaternion.identity);
             sheepPrefabs.Add(addData);
 
@@ -244,9 +241,6 @@ public class Ranch : MonoBehaviour
             UIManager._uimanagerInstance.addPlayerGold((howMany * 500));
             point -= 4 * howMany;
         }
-
-        // destory cow prefabs
-
     }
 
     public void SellChick(int howMany)

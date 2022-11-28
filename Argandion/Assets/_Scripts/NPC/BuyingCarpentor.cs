@@ -18,19 +18,15 @@ public class Products
 
 public class BuyingCarpentor : MonoBehaviour
 {
-    // public Inventory theInventory;
     public Product[] myData;
     public GameObject item;
     private UIManager ui;
 
-    // Start is called before the first frame update
     void Awake()
     {
         string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/BuyingCarpentor.json");
         var buyDatas = JsonHelper.FromJson<Product>(jsonString);
         myData = buyDatas;
-
-        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
     public void Buy(int idx, int howMany = 1)

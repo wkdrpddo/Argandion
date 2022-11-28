@@ -9,14 +9,11 @@ public class BuyingFisher : MonoBehaviour
     public GameObject item;
     private UIManager ui;
 
-    // Start is called before the first frame update
     void Awake()
     {
         string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/BuyingFisher.json");
         var buyDatas = JsonHelper.FromJson<Product>(jsonString);
         myData = buyDatas;
-
-        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
     public void Buy(int idx, int howMany = 1)

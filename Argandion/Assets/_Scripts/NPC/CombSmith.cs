@@ -10,8 +10,6 @@ public class CombSmith : MonoBehaviour
     public CombRecipe[] myData;
     public GameObject item;
 
-    // private UIManager ui;
-
     private int[] myItems = new int[25];
     private int[] howItems = new int[25];
     private int[] canMake = new int[12];
@@ -20,8 +18,6 @@ public class CombSmith : MonoBehaviour
 
     void Awake()
     {
-        // ui = GameObject.Find("UIManager").GetComponent<UIManager>();
-        // slots = go_SlotsParent.GetComponentsInChildren<Slot>();
         string jsonString = File.ReadAllText(Application.dataPath + "/Data/Json/CombSmith.json");
         var combDatas = JsonHelper.FromJson<CombRecipe>(jsonString);
         myData = combDatas;
@@ -57,9 +53,9 @@ public class CombSmith : MonoBehaviour
             int canMakeNum = CanMake(rec, myItems, howItems);
             canMake[canMakeIdx] = canMakeNum;
             if (canMakeNum > 0)
-                Debug.Log(UIManager._uimanagerInstance.findItem(rec.Result).Name + "는(은) " + CanMake(rec, myItems, howItems) + "개 만들 수 있습니다.");
+                // Debug.Log(UIManager._uimanagerInstance.findItem(rec.Result).Name + "는(은) " + CanMake(rec, myItems, howItems) + "개 만들 수 있습니다.");
             else
-                Debug.Log(UIManager._uimanagerInstance.findItem(rec.Result).Name + "는(은) 만들 수 없습니다 T.T");
+                // Debug.Log(UIManager._uimanagerInstance.findItem(rec.Result).Name + "는(은) 만들 수 없습니다 T.T");
 
             canMakeIdx += 1;
         }
@@ -86,7 +82,6 @@ public class CombSmith : MonoBehaviour
                 UIManager._uimanagerInstance.reductItem(UIManager._uimanagerInstance.findItem(myData[idx].Material5), -myData[idx].Cost5 * howMany);
             if (myData[idx].Material6 > 0)
                 UIManager._uimanagerInstance.reductItem(UIManager._uimanagerInstance.findItem(myData[idx].Material6), -myData[idx].Cost6 * howMany);
-            // canMake[idx] -= howMany;
             Hello();
         }
     }

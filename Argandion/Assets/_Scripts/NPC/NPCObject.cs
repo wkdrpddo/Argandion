@@ -10,14 +10,12 @@ public class NPCObject : MonoBehaviour
     private GameObject _PlayerObject;
     private GameObject _UIManager;
 
-
     void Start()
     {
         _animator = GetComponent<Animator>();
         _PlayerObject = GameObject.Find("PlayerObject");
         _UIManager = GameObject.Find("UIManager");
     }
-
 
     public void Interaction()
     {
@@ -34,8 +32,6 @@ public class NPCObject : MonoBehaviour
 
         ConversationStart();
     }
-
-
 
     public void ConversationStart()
     {

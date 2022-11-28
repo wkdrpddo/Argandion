@@ -7,7 +7,7 @@ public class NPCManager : MonoBehaviour
 
     private GameObject parent_NPC;
     [SerializeField] private GameObject[] NPC = new GameObject[8];
-    // Start is called before the first frame update
+
     void Start()
     {
         parent_NPC = GetComponent<Transform>().parent.gameObject;
