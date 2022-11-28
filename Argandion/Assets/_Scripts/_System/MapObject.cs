@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class MapObject : MonoBehaviour
 {
-    // Start is called before the first frame update
     public GameObject[] SectorObject;
     public SystemManager _systemManager;
+    
     void Start()
     {
-        // SectorObject = GameObject.FindGameObjectsWithTag("sector");
         _systemManager = GameObject.Find("SystemManager").GetComponent<SystemManager>();
     }
 

@@ -9,18 +9,13 @@ public class MushroomSpawn : MonoBehaviour
     public Transform _base_transform;
     public float _radius;
     private Collider[] _buffer;
-    // Start is called before the first frame update
+
     void Start()
     {
         _Sector = this.GetComponentInParent<SectorObject>();
         _base_transform = gameObject.transform;
     }
 
-    // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
     public void DayStart()
     {
         Check_Mushroom();

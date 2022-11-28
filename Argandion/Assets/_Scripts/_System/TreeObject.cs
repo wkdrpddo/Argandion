@@ -27,12 +27,8 @@ public class TreeObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Debug.Log(other.gameObject.layer);
         if (other.gameObject.layer == 0)
         {
-            // Debug.Log(other.gameObject);
-            // Debug.Log(other.gameObject.layer);
-            // Debug.Log("충돌 판정");
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             gameObject.GetComponent<Rigidbody>().isKinematic = true;
             _box.gameObject.SetActive(false);

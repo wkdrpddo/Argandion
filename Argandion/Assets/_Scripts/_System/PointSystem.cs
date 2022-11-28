@@ -9,7 +9,7 @@ public class PointSystem : MonoBehaviour
     public GameObject[] _animals = new GameObject[4];
     public Transform _base_transform;
     public int num;
-    // Start is called before the first frame update
+
     void Start()
     {
         _Sector = this.GetComponentInParent<SectorObject>();
@@ -19,7 +19,6 @@ public class PointSystem : MonoBehaviour
 
     public void DayStart()
     {
-        // Debug.Log("Point sys dayend");
         switch (_isDen)
         {
             case 0:
@@ -59,7 +58,6 @@ public class PointSystem : MonoBehaviour
                     {
                         index += 1;
                     }
-                    // Debug.Log(index);
                     Spawn_Animal(0, index + 1);
                 }
                 else if (rnd < _Sector._animal_type_base_factor[1])
@@ -70,7 +68,6 @@ public class PointSystem : MonoBehaviour
                     {
                         index += 1;
                     }
-                    // Debug.Log(index);
                     Spawn_Animal(1, index + 1);
                 }
                 else if (rnd < _Sector._animal_type_base_factor[2])
@@ -81,7 +78,6 @@ public class PointSystem : MonoBehaviour
                     {
                         index += 1;
                     }
-                    // Debug.Log(index);
                     Spawn_Animal(2, index + 1);
                 }
                 else if (rnd < _Sector._animal_type_base_factor[3])
@@ -92,7 +88,6 @@ public class PointSystem : MonoBehaviour
                     {
                         index += 1;
                     }
-                    // Debug.Log(index);
                     Spawn_Animal(3, index + 1);
                 }
             }
@@ -110,7 +105,6 @@ public class PointSystem : MonoBehaviour
                     {
                         index += 1;
                     }
-                    // Debug.Log(index);
                     Spawn_Animal(0, index + 1);
                 }
                 else if (rnd < _Sector._animal_type_ruin_factor[1])
@@ -121,7 +115,6 @@ public class PointSystem : MonoBehaviour
                     {
                         index += 1;
                     }
-                    // Debug.Log(index);
                     Spawn_Animal(1, index + 1);
                 }
                 else if (rnd < _Sector._animal_type_ruin_factor[2])
@@ -132,7 +125,6 @@ public class PointSystem : MonoBehaviour
                     {
                         index += 1;
                     }
-                    // Debug.Log(index);
                     Spawn_Animal(2, index + 1);
                 }
                 else if (rnd < _Sector._animal_type_ruin_factor[3])
@@ -143,7 +135,6 @@ public class PointSystem : MonoBehaviour
                     {
                         index += 1;
                     }
-                    // Debug.Log(index);
                     Spawn_Animal(3, index + 1);
                 }
             }

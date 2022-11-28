@@ -10,7 +10,7 @@ public class CameraSystem : MonoBehaviour
     private GameObject _cam;
     private GameObject _po;
     private GameObject _worldtree;
-    // Start is called before the first frame update
+
     void Start()
     {
         _po = GameObject.Find("PlayerObject");
@@ -59,14 +59,4 @@ public class CameraSystem : MonoBehaviour
 
         _cam.transform.SetPositionAndRotation(pos, rot);
     }
-
-    // test code
-    // void Update()
-    // {
-    //     if (_hold_cam)
-    //     {
-    //         CookingCamera();
-    //         _hold_cam = false;
-    //     }
-    // }
 }

@@ -25,7 +25,6 @@ public class PlayerSystem : MonoBehaviour
 
     // { itemcode, 장비코드(0그외 1채집 2괭이 3도끼 4곡괭이 5검 6낚싯대 7씨앗), 이동불가 시간, 작업시간}
     public float[,] _equipList = new float[8,5];
-    // { { 300, 1, 1f, 1f, 1 }, { 301, 3, 0.8f, 0.8f, 1 }, { 302, 4, 0.8f, 0.8f, 1 }, { 303, 2, 1.5f, 1.5f, 1 }, { 304, 5, 0.6f, 0.6f, 1 }, { 320, 6, 0, 0, 1 }, { 20, 0, 0, 0, 10 }, { 502, 0, 0, 0, 60 } };
     public GameObject[] _equipment = new GameObject[7];
     public int _equipItem = 0;
 
@@ -81,10 +80,8 @@ public class PlayerSystem : MonoBehaviour
     private int _defense_percent = 100;
     private int _movement_percent = 100;
     private int[] _slot_equipment = new int[] { 0, 0, 0, 0 };
+    private int _current_region;  //플레이어가 현재 어느 지역에 있는지 상태 저장 
 
-    private int _current_region;  //플레이어가 현재 어느 있는 지역의 상태 
-
-    // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -98,17 +95,13 @@ public class PlayerSystem : MonoBehaviour
         _theInventory = GameObject.Find("UIManager").transform.GetChild(8).transform.GetChild(1).GetComponent<Inventory>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // GetBuff();
         GetInput();
         Move();
         changeItem();
         checkHand();
         Interaction();
-        // watering();
-        // fff();
     }
 
     void GetBuff()
@@ -144,7 +137,6 @@ public class PlayerSystem : MonoBehaviour
         bool _MoveMag = moveInput.magnitude != 0;
         if (!_MoveMag)
         {
-            // speed = moveInput * 0;
             speed.Set(moveInput.x * 0, 0, moveInput.y * 0);
             if (_onAir == 0)
             {
@@ -153,15 +145,12 @@ public class PlayerSystem : MonoBehaviour
             rb.velocity = (speed);
         }
         if (_movedDelay <= 0 && _canMove && _MoveMag)
-        // if (_movedDelay <= 0 && _canMove)
         {
             Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.y).normalized;
             _character.forward = moveDir;
             if (Input.GetAxisRaw("run") != 0)
             {
-                // transform.position += moveDir * Time.deltaTime * _runspeed;
                 speed = moveDir * _runspeed * _movement_percent / 100 * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
-                // speed.y = -1f;
                 _soundManager.playerEffectSound("RUNNING");
                 if (_onAir == 0)
                 {
@@ -173,9 +162,7 @@ public class PlayerSystem : MonoBehaviour
             }
             else
             {
-                // transform.position += moveDir * Time.deltaTime * _walkspeed;
                 speed = moveDir * _walkspeed * _movement_percent / 100 * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
-                // speed.y = -1f;
                 _soundManager.playerEffectSound("MOVING");
                 if (_onAir == 0)
                 {
@@ -246,7 +233,7 @@ public class PlayerSystem : MonoBehaviour
                 }
             }
 
-            // 곡괭이 휘두르기 물리판정
+            // 곡괭이 휘두르기 물리 판정
             if (_equipList[_equipItem, 1] == 4)
             {
                 damageStamina(0.7f);
@@ -275,61 +262,9 @@ public class PlayerSystem : MonoBehaviour
                 }
             }
 
-            // 괭이 사용
-            // if (_equipList[_equipItem, 1] == 2)
-            // {
-            //     Collider[] soils = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f), new Vector3(0.5f, 1.5f, 0.5f));
-            //     foreach (var soil in soils)
-            //     {
-            //         if (soil.tag == "dirt")
-            //         {
-            //             soil.gameObject.TryGetComponent(out Dirt D);
-            //             {
-            //                 if (!D.isReady)
-            //                 {
-            //                     D.Ready();
-            //                 }
-            //                 else if (!D.fullWater)
-            //                 {
-            //                     D.Water();
-            //                 }
-            //                 else
-            //                 {
-            //                     Debug.Log("농사준비완료!");
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
-
-            // 씨앗 사용
-            // if (_equipList[_equipItem, 1] == 7)
-            // {
-            //     Collider[] soils = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z), new Vector3(0, 1.5f, 0));
-            //     foreach (var soil in soils)
-            //     {
-            //         if (soil.tag == "dirt")
-            //         {
-            //             soil.gameObject.TryGetComponent(out Dirt D);
-            //             {
-            //                 if (D.fullWater && !_nearCrops)
-            //                 {
-            //                     Instantiate(_crops[(int)_equipList[_equipItem, 0] - 212], nearSoil(_character.position), _character.rotation);
-            //                     _UIManager.quickUse((int)_equipList[_equipItem, 0], 1, _equipItem);
-            //                 }
-            //                 else
-            //                 {
-            //                     Debug.Log("씨앗못심기");
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
-
             // 도끼 사용
             if (_equipList[_equipItem, 1] == 3)
             {
-                // Debug.Log(_character.forward);
                 damageStamina(0.5f);
                 Vector3 pos = new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f);
                 Collider[] trees = Physics.OverlapBox(pos, new Vector3(0.5f, 1.5f, 0.5f));
@@ -464,10 +399,8 @@ public class PlayerSystem : MonoBehaviour
         {
             Vector3 pos = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
             _colset = Physics.OverlapSphere(pos, _interactRadius, layerMask: 1633);
-            // Debug.Log(_colset.Length);
             foreach (var col in _colset)
             {
-                // Debug.Log(col);
                 if (col.TryGetComponent(out Interactable inter))
                 {
                     if (50 <= _equipList[_equipItem, 0] && _equipList[_equipItem, 0] <= 56 && col.TryGetComponent(out WorldTreeSpirit fairy))
@@ -543,16 +476,13 @@ public class PlayerSystem : MonoBehaviour
                     if (_equipList[_equipItem, 1] == 6 && _equipList[7, 4] > 0 && col.TryGetComponent(out Fishing fis))
                     {
                         fis.Interaction(_equipList[_equipItem, 0], _equipList[7, 0]);
-                        // _UIManager.quickUse((int)_equipList[7, 0], 1, 7);
                         break;
                     }
-                    //제사창
                     if (_equipList[_equipItem, 0] >= 50 && _equipList[_equipItem, 0] <= 56 && col.TryGetComponent(out AltarTableInteraction alt))
                     {
                         alt.Interaction((int)_equipList[_equipItem, 0], _equipItem);
                         break;
                     }
-                    // building쪽 ==============
                     if (col.TryGetComponent(out SignInteraction signInteraction))
                     {
                         signInteraction.Interaction();
@@ -588,7 +518,6 @@ public class PlayerSystem : MonoBehaviour
                         teleportAltar.Interaction();
                         break;
                     }
-                    // ===========================
                 }
             }
         }
@@ -610,88 +539,6 @@ public class PlayerSystem : MonoBehaviour
         return new Vector3(tempx, pos.y, tempz);
     }
 
-    // void fff()
-    // {
-    //     if (_readyToHarvest && Input.GetKeyDown(KeyCode.F))
-    //     {
-    //         Harvested harvested = _nearObject.GetComponent<Harvested>();
-    //         harvested.Harvesting();
-    //         _nearCrops = false;
-    //         _nearObject = null;
-    //         _readyToHarvest = false;
-    //         return;
-    //     }
-
-    //     if (_nearItem && Input.GetKeyDown(KeyCode.F))
-    //     {
-    //         Item item = _nearObject.GetComponent<Item>();
-    //         ItemObject itemObject = item.itemObject;
-    //         if (itemObject != null)
-    //         {
-    //             _theInventory.AcquireItem(itemObject);
-    //         }
-    //     }
-
-
-    //     if (_nearCarpentor && Input.GetButtonDown("fff"))
-    //     {
-    //         CombCarpentor combCarpentor = _nearObject.GetComponent<CombCarpentor>();
-    //         combCarpentor.Trade(2, 2);
-    //     }
-
-    //     if (_nearChest && Input.GetButtonDown("fff"))
-    //     {
-    //         ItemObject item = _theInventory.StoreItem(invenIdx, -invenCount);
-    //         _theChest.PutItem(item, invenCount);
-    //     }
-
-    //     if (_nearChest && Input.GetKeyDown(KeyCode.G))
-    //     {
-    //         ItemObject item = _theChest.TakeItem(chestIdx, -chestCount);
-    //         _theInventory.AcquireItem(item, chestCount);
-    //     }
-
-    //     if (_nearSpirit && Input.GetButtonDown("fff"))
-    //     {
-    //         if (_buff._isFlowerBuffActived)
-    //         {
-    //             Debug.Log("이미 다른버프가 발동중이라구!");
-    //         }
-    //         else if (_buff._isPrayBuffActived)
-    //         {
-    //             Debug.Log("제단 버프 진행중");
-    //         }
-    //         else
-    //         {
-    //             ItemObject item = _theInventory.StoreItem(0, -1);
-    //             if (item.Category == "꽃")
-    //             {
-    //                 SpiritBuff spirit = _nearObject.GetComponent<SpiritBuff>();
-    //                 // spirit.Spirit(item);
-    //                 _buff._isFlowerBuffActived = true;
-    //             }
-    //             else if (item.ItemCode == 0)
-    //             {
-    //                 Debug.Log("아무것도 없는데?");
-    //             }
-    //             else
-    //             {
-    //                 _theInventory.AcquireItem(item, 1);
-    //                 Debug.Log("이건뭐야?");
-    //             }
-    //         }
-    //     }
-    // }
-    // void watering()
-    // {
-    //     if (_onSoil && Input.GetKeyDown(KeyCode.G))
-    //     {
-    //         Debug.Log("물줬당");
-    //         Dirt dirt = _nearBiome.GetComponent<Dirt>();
-    //         dirt.Water();
-    //     }
-    // }
-
     void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("dirt") || other.gameObject.CompareTag("wateredDirt"))
@@ -711,18 +558,11 @@ public class PlayerSystem : MonoBehaviour
             _readyToHarvest = true;
             _nearObject = other.gameObject;
         }
-
         if (other.gameObject.CompareTag("item"))
         {
             _nearObject = other.gameObject;
             _nearItem = true;
         }
-
-        // if (other.gameObject.CompareTag("droppedItem")){
-        //     _nearObject = other.gameObject;
-        //     _nearDroppedItem = true;
-        // }
-
         if (other.gameObject.CompareTag("chest"))
         {
             _nearObject = other.gameObject;
@@ -741,9 +581,6 @@ public class PlayerSystem : MonoBehaviour
             _nearAlter = true;
         }
     }
-
-
-
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("carpentor"))
@@ -757,7 +594,7 @@ public class PlayerSystem : MonoBehaviour
         if (other.gameObject.CompareTag("droppedItem"))
         {
             _soundManager.playEffectSound("GETITEM");
-            Debug.Log("아이템 가까이에 있음");
+            // Debug.Log("아이템 가까이에 있음"); 
             _nearObject = other.gameObject;
             DroppedItem item = _nearObject.GetComponent<DroppedItem>();
             if (_theInventory.CheckInven(item.itemObject))
@@ -765,22 +602,13 @@ public class PlayerSystem : MonoBehaviour
                 _theInventory.AcquireItem(item.itemObject, 1);
                 Destroy(_nearObject.transform.parent.gameObject);
             }
-            Debug.Log(_nearObject.transform.parent);
         }
-
-        // Debug.Log("OnTriggerEnter(): " + other.tag);
-        if (other.tag == "CraftingTable" || other.tag == "Sign")
-        {
-            _nearObject = other.gameObject;
-            // Debug.Log("작업 영역");
-        }
-
         if (other.tag == "sector" && !_SystemManager.GetComponent<SystemManager>().getTimeSystem())
         {
             //현재 들어온 지역
             if (other.transform.GetComponent<SectorObject>()._purifier)  //정화된 구역에 들어왔을때
             {
-                if (_current_region != 0)  //이전 구역이 정화구역이 아니었을때만 사운드 체인지
+                if (_current_region != 0)  //이전 구역이 정화구역이 아니었을 때만 사운드 체인지
                 {
                     _soundManager.playBGM1();
                     _current_region = 0;
@@ -788,14 +616,13 @@ public class PlayerSystem : MonoBehaviour
             }
             else  //황폐화 구역에 들어왔을때
             {
-                if (_current_region != 1) //이전 구역이 황폐화구역이 아니었을때만 사운드 체인지
+                if (_current_region != 1) //이전 구역이 황폐화구역이 아니었을 때만 사운드 체인지
                 {
                     _soundManager.playBGM2();
                     _current_region = 1;
                 }
             }
         }
-
         if (other.tag == "forest")   //숲으로 이동
         {
             if (_current_region != 2)
@@ -804,9 +631,6 @@ public class PlayerSystem : MonoBehaviour
                 _current_region = 2;
             }
         }
-
-
-
     }
 
     void OnTriggerExit(Collider other)
@@ -858,12 +682,6 @@ public class PlayerSystem : MonoBehaviour
             _nearObject = null;
             _nearAlter = false;
         }
-
-        // if (other.gameObject.CompareTag("droppedItem"))
-        // {
-        //     _nearObject = null;
-        // }
-
     }
 
 

@@ -41,10 +41,6 @@ public class SoundManager : MonoBehaviour
     public AudioClip axing;
     public AudioClip picking;
 
-
-    // option panal
-    // public GameObject _optionpanel;
-    // public GameObject _optionpanelfrommain;
     void Awake() {
         Sound_Background = 0.4f;
         bgmPlayer.volume = Sound_Background;

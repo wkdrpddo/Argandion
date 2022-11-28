@@ -48,7 +48,7 @@ public class BuffManager : MonoBehaviour
         if (_flowerBuffTargetMonth == _systemManager._month && _flowerBuffTargetDay == _systemManager._day)
         {
             FlowerBuffEnd(20);
-            Debug.Log("버프 아이콘 제거");
+            // Debug.Log("버프 아이콘 제거");
         }
 
         if (_endMonth == _systemManager._month && _endDay == _systemManager._day)
@@ -57,7 +57,6 @@ public class BuffManager : MonoBehaviour
             if(inColdWave)
             {
                 inColdWave = false;
-                // _systemManager._EventPanel.inactiveIcon(58);
                 if (isColdWaveIcons) {
                     _systemManager.callInactiveIcon(58);
                     isColdWaveIcons = false;
@@ -111,7 +110,7 @@ public class BuffManager : MonoBehaviour
 
     public void FlowerBuffEnd(int index)
     {
-        Debug.Log("버프 아이콘 제거 "+index);
+        // Debug.Log("버프 아이콘 제거 "+index);
         _flowerBuffTargetMonth = 0;
         _flowerBuffTargetDay = 0;
         _isFlowerBuffActived = false;
@@ -120,49 +119,49 @@ public class BuffManager : MonoBehaviour
         {
             whiteSpirit = false;
             _systemManager.callInactiveIcon(11);
-            Debug.Log("백색 정령 아이콘 제거");
+            // Debug.Log("백색 정령 아이콘 제거");
         }
         if (index != 1 && whitePray)
         {
             whitePray = false;
             _systemManager.callInactiveIcon(1);
-            Debug.Log("백색 제단 아이콘 제거");
+            // Debug.Log("백색 제단 아이콘 제거");
         }
         if (index != 12 && orangeSpirit)
         {
             orangeSpirit = false;
             _systemManager.callInactiveIcon(12);
-            Debug.Log("주황색 정령 아이콘 제거");
+            // Debug.Log("주황색 정령 아이콘 제거");
         }
         if (index != 2 && orangePray)
         {
             orangePray = false;
             _systemManager.callInactiveIcon(2);
-            Debug.Log("주황색 제단 아이콘 제거");
+            // Debug.Log("주황색 제단 아이콘 제거");
         }
         if (index != 13 && blueSpirit)
         {
             blueSpirit = false;
             _systemManager.callInactiveIcon(13);
-            Debug.Log("청색 정령 아이콘 제거");
+            // Debug.Log("청색 정령 아이콘 제거");
         }
         if (index != 3 && bluePray)
         {
             bluePray = false;
             _systemManager.callInactiveIcon(3);
-            Debug.Log("청색 제단 아이콘 제거");
+            // Debug.Log("청색 제단 아이콘 제거");
         }
         if (index != 14 && redSpirit)
         {
             redSpirit = false;
             _systemManager.callInactiveIcon(14);
-            Debug.Log("적색 정령 아이콘 제거");
+            // Debug.Log("적색 정령 아이콘 제거");
         }
         if (index != 4 && redPray)
         {
             redPray = false;
             _systemManager.callInactiveIcon(4);
-            Debug.Log("적색 제단 아이콘 제거");
+            // Debug.Log("적색 제단 아이콘 제거");
             if (inColdWave && !isColdWaveIcons)
             {
                 isColdWaveIcons = true;
@@ -173,49 +172,37 @@ public class BuffManager : MonoBehaviour
         {
             pinkSpirit = false;
             _systemManager.callInactiveIcon(15);
-            Debug.Log("분홍색 정령 아이콘 제거");
+            // Debug.Log("분홍색 정령 아이콘 제거");
         }
         if (index != 5 && pinkPray)
         {
             pinkPray = false;
             _systemManager.callInactiveIcon(5);
-            Debug.Log("분홍색 제단 아이콘 제거");
+            // Debug.Log("분홍색 제단 아이콘 제거");
         }
         if (index != 16 && yellowSpirit)
         {
             yellowSpirit = false;
             _systemManager.callInactiveIcon(16);
-            Debug.Log("황색 정령 아이콘 제거");
+            // Debug.Log("황색 정령 아이콘 제거");
         }
         if (index != 6 && yellowPray)
         {
             yellowPray = false;
             _systemManager.callInactiveIcon(6);
-            Debug.Log("황색 제단 아이콘 제거");
+            // Debug.Log("황색 제단 아이콘 제거");
         }
         if (index != 17 && skySpirit)
         {
             skySpirit = false;
             _systemManager.callInactiveIcon(17);
-            Debug.Log("하늘색 정령 아이콘 제거");
+            // Debug.Log("하늘색 정령 아이콘 제거");
         }
         if (index != 7 && skyPray)
         {
             skyPray = false;
             _systemManager.callInactiveIcon(7);
-            Debug.Log("하늘색 제단 아이콘 제거");
+            // Debug.Log("하늘색 제단 아이콘 제거");
         }
-        // whiteSpirit = false;
-        // whitePray = false;
-        // orangePray = false;
-        // bluePray = false;
-        // redSpirit = false;
-        // redPray = false;
-        // pinkSpirit = false;
-        // pinkPray = false;
-        // yellowSpirit = false;
-        // yellowPray = false;
-        // skySpirit = false;
-        // skyPray = false;
     }
 }

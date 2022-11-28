@@ -47,7 +47,7 @@ public class SectorObject : MonoBehaviour
     public GameObject _items;
     private BuffManager _BuffManager;
     private float _sumSector;
-    // Start is called before the first frame update
+
     void Start()
     {
         _items = GameObject.Find("Items");
@@ -56,12 +56,10 @@ public class SectorObject : MonoBehaviour
         foreach (Collider col in _SectorCollider)
         {
             float sumArea = (col.bounds.extents.x*2) * (col.bounds.extents.z*2);
-            // Debug.Log(sumArea);
             _sumSector += sumArea;
             _SectorArea.Add(_sumSector);
         }
     }
-
 
     public void DayEnd()
     {
@@ -97,7 +95,6 @@ public class SectorObject : MonoBehaviour
 
     private void Spawn_Flower()
     {
-        // Debug.Log("꽃 생성");
         float rnd = Random.Range(0f,_sumSector);
         int count = 0;
         while (!(_SectorArea[count]<=rnd && rnd<=_SectorArea[count+1]))
@@ -134,7 +131,5 @@ public class SectorObject : MonoBehaviour
     public void Purifier()
     {
         _purifier = true;
-        
-        //나무 오브젝트 등등 정화된 걸로 바꾸기
     }
 }

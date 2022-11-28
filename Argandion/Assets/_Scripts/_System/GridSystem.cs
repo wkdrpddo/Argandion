@@ -14,6 +14,7 @@ public class GridSystem : MonoBehaviour
     private Collider[] _buffer;
     private bool _purified;
     public bool _ore_spawn;
+    
     void Start()
     {
         _Sector = this.GetComponentInParent<SectorObject>();

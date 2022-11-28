@@ -58,7 +58,7 @@ public class SystemManager : MonoBehaviour
     private bool _inloading;
 
     public int[,] _timezone = new int[,] { { 6, 7, 18, 19 }, { 6, 6, 19, 20 }, { 6, 7, 18, 19 }, { 7, 8, 18, 19 } };
-    // Start is called before the first frame update
+
     void Start()
     {
         _month = 1;
@@ -82,17 +82,14 @@ public class SystemManager : MonoBehaviour
         _houseChange = GameObject.Find("Player House").GetComponent<HouseChange>();
         _interiorChange = GameObject.Find("Interior").GetComponent<HouseChange>();
         _farmChange = GameObject.Find("Map").transform.GetChild(5).transform.GetChild(0).transform.GetChild(2).GetComponent<FarmChange>();
-        // _buiding1 = GameObject.Find("ClothshopPlace").GetComponent<BuildingChange>();
         _altar = GameObject.Find("Altar").GetComponent<Altar>();
         _MapObject.GetComponent<MapObject>().UpdateFieldManager(_season);
         _soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         _save = gameObject.GetComponent<SaveSystem>();
 
         Invoke("LoadGame", 2.0f);
-        // LoadGame();
     }
 
-    // Update is called once per frame
     void Update()
     {
         TimeSystem();
@@ -107,9 +104,7 @@ public class SystemManager : MonoBehaviour
         _season = index;
         _MapObject.GetComponent<MapObject>().UpdateFieldManager(index);
         _worldTree.ChangeSeason();
-
     }
-
 
     //건물이 모두 지어지면 호출
     public void UpdatePurification(int index)  //1번부터 
@@ -139,8 +134,10 @@ public class SystemManager : MonoBehaviour
             idx4 = true;
             _purification_sector -= 1;
         }
+
         _purification[index] = true;
         _purification_sector += 1;
+
         if (_purification_sector > 2 && _development_level < 2)
         {
             _development_level = 2;
@@ -157,11 +154,11 @@ public class SystemManager : MonoBehaviour
     {
         _time_stop = value;
     }
+
     public bool getTimeSystem()
     {
         return _time_stop;
     }
-
 
     private void TimeSystem()
     {
@@ -192,7 +189,6 @@ public class SystemManager : MonoBehaviour
                         if (_month >= 9)
                         {
                             _month -= 8;
-                            // _weatherManager.SetYearEvent();
                         }
                         if (_month % 2 == 1)
                         {
@@ -245,12 +241,6 @@ public class SystemManager : MonoBehaviour
     private void TimeCall()
     {
         DayEnd();
-        // _weatherManager.SetWeather(_season);
-        // if (_buffManager._flowerBuffTargetMonth == _month && _buffManager._flowerBuffTargetDay == _day)
-        // {
-        //     _buffManager.FlowerBuffEnd();
-        // }
-        // _buffManager.DayEnd();
         _save.Save(_save._savedata);
         DayStart();
         Invoke("OutLoading",5f);
@@ -274,15 +264,9 @@ public class SystemManager : MonoBehaviour
         }
         _altar.DayEnd();
 
-        // _sectorTest.DayEnd();
-
+        //순례자, 음악가 랜덤위치 생성
         int npc1_position = RandomPurification();
         int npc2_position = RandomPurification();
-
-        // //순례자, 음악가 랜덤위치 생성
-        // _randomNPC[0].transform.position = NPCRandomPosition(npc1_position);
-        // _randomNPC[1].transform.position = NPCRandomPosition(npc2_position);
-
 
         // 필드의 동물, 떨어진 아이템, 매일 새로 생성되는 자원 제거
         GameObject[] rabbits = GameObject.FindGameObjectsWithTag("Rabbit");
@@ -351,9 +335,7 @@ public class SystemManager : MonoBehaviour
         {
             sector.DayStart();
         }
-        // _sectorTest.DayEnd();
         _UIManager.DayStart();
-        // Debug.Log("시스템 데이스탕트1");
         _PrayBuff.DayStart();
         foreach (var dirt in _dirts)
         {
@@ -362,8 +344,6 @@ public class SystemManager : MonoBehaviour
                 dirt.DayStart();
             }
         }
-
-        // _buiding1.DayStart();
         foreach (var building in _buildings)
         {
             if(building)
@@ -375,10 +355,8 @@ public class SystemManager : MonoBehaviour
 
     public void LoadWeather()
     {
-        Debug.Log(_weather);
         if (1 <= _weather && _weather <= 9)
         {
-            Debug.Log("액티브 아이콘 "+_weather);
             _EventPanel.activeIcon(_weather + 49);
         }
         _weatherManager.PlayFXWeather(_weather);
@@ -438,9 +416,7 @@ public class SystemManager : MonoBehaviour
                 position = new Vector3(Random.Range(180.0f, 194.0f), 1.9f, Random.Range(81.0f, 110.0f));
                 break;
         }
-
         return position;
-
     }
 
     public void setGameState(bool value)
@@ -621,7 +597,6 @@ public class SystemManager : MonoBehaviour
             if (_month >= 9)
             {
                 _month -= 8;
-                // _weatherManager.SetYearEvent();
             }
             if (_month % 2 == 1)
             {

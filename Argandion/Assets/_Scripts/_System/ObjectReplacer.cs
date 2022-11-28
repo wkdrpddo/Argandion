@@ -7,6 +7,7 @@ public class ObjectReplacer : MonoBehaviour
     public GameObject[] _Object= new GameObject[8];
     public bool _purification;
     public SectorObject _parent_sector;
+    
     public void Awake()
     {
         GameObject pos = gameObject;

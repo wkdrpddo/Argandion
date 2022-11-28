@@ -151,7 +151,6 @@ public class SaveSystem : MonoBehaviour
                     {
                         _savedata._farm[i,2] = crop.cropCode;
                         _savedata._farm[i,3] = crop.updateDay;
-                        Debug.Log("Dirt Num : "+i+" State : "+_crpo._state+" Crop Num : "+crop.cropCode);
                     }
                     else if (_crpo._plant.gameObject.TryGetComponent(out Harvested harv))
                     {
@@ -171,40 +170,11 @@ public class SaveSystem : MonoBehaviour
         _savedata.pray[0] = _pb.prayDay;
         _savedata.pray[1] = _pb.flowerIdx;
 
-
-
         string filePath = "saveFile.dat";
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(filePath, FileMode.Create);
         formatter.Serialize(stream, _data);
         stream.Close();
-
-        // JsonSave saveJson = new JsonSave();
-        // GameObject[] trees = GameObject.FindGameObjectsWithTag("tree");
-        // for (int i = 0; i < trees.Length; i++)
-        // {
-        //     saveJson.treepos.Add(trees[i].transform.position.x);
-        //     saveJson.treepos.Add(trees[i].transform.position.y);
-        //     saveJson.treepos.Add(trees[i].transform.position.z);
-        //     saveJson.treeday.Add(trees[i].GetComponent<TreeObject>()._days);
-        //     saveJson.treeSector.Add(trees[i].GetComponent<TreeObject>().getSector()._sectorNumber);
-        //     saveJson.treebool.Add(trees[i].GetComponent<TreeObject>()._isFallen);
-        // }
-        // saveJson.treecount = trees.Length;
-
-        // GameObject[] flowers = GameObject.FindGameObjectsWithTag("flower");
-        // for (int i = 0; i < flowers.Length; i++)
-        // {
-        //     saveJson.flowerpos.Add(flowers[i].transform.position.x);
-        //     saveJson.flowerpos.Add(flowers[i].transform.position.y);
-        //     saveJson.flowerpos.Add(flowers[i].transform.position.z);
-        //     saveJson.flowerIndex.Add(flowers[i].GetComponent<GatheringObject>()._itemCode);
-        //     saveJson.flowerSector.Add(flowers[i].transform.parent.GetComponent<SectorObject>()._sectorNumber);
-        // }
-        // saveJson.flowercount = flowers.Length;
-
-        // string json = JsonUtility.ToJson(saveJson, true);
-        // File.WriteAllText("jsonSave.json", json);
     }
 
     public void Load()
@@ -221,8 +191,7 @@ public class SaveSystem : MonoBehaviour
         if (stream != null && stream.Length > 0)
         {
             SaveData _LoadData = (SaveData)formatter.Deserialize(stream);
-            Debug.Log("로드 동작");
-
+            // Debug.Log("로드 동작");
             _ps.setPlayerName(_LoadData._playerName);
             _sys.setPlayerGold(_LoadData._playerMoney);
             _ps.setPlayerType(_LoadData._playertype);
@@ -231,26 +200,10 @@ public class SaveSystem : MonoBehaviour
             _sys._weather = _LoadData._weather;
             _sys._season = _LoadData._season;
             _ps.setPlayerType(_LoadData._playertype);
-            // _sm.setBackgroundSound(_LoadData._sound1);
-            // _sm.setEffectSound(_LoadData._sound2);
-
-            // 인벤토리 아이템 호출
-            // Slot[] inventorySlot = GameObject.Find("InventorySlotParent").GetComponentsInChildren<Slot>();
-            // for (int i=0;i<25;i++)
-            // {
-            //     inventorySlot[i].AddItem(_item.FindItem(_LoadData._inventory[i,0]),_LoadData._inventory[i,1]);
-            // }
             _ui.loadItemData(_LoadData._inventory,0);
             _ui.loadItemData(_LoadData._quickslot,1);
             _ui.loadItemData(_LoadData._equipment,2);
             _ui.loadItemData(_LoadData._storage,3);
-
-            // 저장고 아이템 호출
-            // Slot[] storageSlot = GameObject.Find("StorageSlotParent").GetComponentsInChildren<Slot>();
-            // for (int i=0;i<100;i++)
-            // {
-            //     storageSlot[i].AddItem(_item.FindItem(_LoadData._storage[i,0]),_LoadData._storage[i,1]);
-            // }
 
             for (int i = 0; i < 7; i++)
             {
@@ -261,9 +214,6 @@ public class SaveSystem : MonoBehaviour
             {
                 _ps.setEquipItem(_LoadData._equipment[i,0],i);
             }
-
-            // _sys._purification_sector = _LoadData._sectorPurifierCount;
-            // _sys._development_level = _LoadData._PurifierLevel;
             for (int i = 0; i < 8; i++)
             {
                 _sys._purification[i] = _LoadData._sectorPurifierInfo[i];
@@ -275,7 +225,6 @@ public class SaveSystem : MonoBehaviour
             _bm._flowerBuffTargetMonth = _LoadData._flowerBuffTargetMonth;
             _bm._flowerBuffTargetDay = _LoadData._flowerBuffTargetDay;
             
-
             // 버프 지속시간
         
             // 버프 종류 확인
@@ -354,13 +303,9 @@ public class SaveSystem : MonoBehaviour
                 if (_Dirts[i].isActiveAndEnabled)
                 {
                     _Dirts[i].watered = _LoadData._dirt[i,0];
-                    // _Dirts[i].minusWater = _LoadData._dirt[i,1];
-
                     CropPosition[] _croppos = _Dirts[i].gameObject.GetComponentsInChildren<CropPosition>();
                     foreach (CropPosition _crpo in _croppos)
                     {
-                        // _savedata._farm[i,0] = _crpo._parent_dirt;
-                        // _savedata._farm[i,1] = _crpo._state;
                         _crpo._state = _LoadData._farm[i,1];
                         if (_crpo._state > 0)
                         {
@@ -388,7 +333,6 @@ public class SaveSystem : MonoBehaviour
                             _savedata._farm[i,3] = 0;
                         }
                     }
-                    Debug.Log("인덱스 번호 : "+i+" 실제 번호 : "+_Dirts[i]._dirt_number);
                     _Dirts[i]._is_icon_dig = false;
                     _Dirts[i].checkHoe();
                     _Dirts[i].checkWater();
@@ -398,63 +342,6 @@ public class SaveSystem : MonoBehaviour
             _sys.UpdateSeason(_sys._season);
             _sys.LoadWeather();
             stream.Close();
-            // JsonSave loadJson = new JsonSave();
-            // loadJson = JsonUtility.FromJson<JsonSave>("jsonSave");
-
-            // if (loadJson != null)
-            // {
-            //     Vector3 pos = new Vector3();
-            //     Quaternion rot = Quaternion.Euler(0,0,0);
-            //     for (int i = 0; i<loadJson.treecount; i++)
-            //     {
-            //         pos.x = loadJson.treepos[i*3];
-            //         pos.y = loadJson.treepos[i*3+1];
-            //         pos.z = loadJson.treepos[i*3+2];
-            //         rot.y = Random.Range(0f,360f);
-            //         GameObject tree = Instantiate(_tree[0],pos,rot,_MapObject.SectorObject[loadJson.treeSector[i]-1].gameObject.transform);
-            //         TreeObject treeData = tree.GetComponent<TreeObject>();
-            //         treeData._days = loadJson.treeday[i];
-            //         treeData._isFallen = loadJson.treebool[i];
-            //         tree.transform.parent.gameObject.GetComponent<SectorObject>()._tree_remain += 1;
-            //     }
-
-            //     for (int i = 0; i<loadJson.flowercount; i++)
-            //     {
-            //         pos.x = loadJson.flowerpos[i*3];
-            //         pos.y = loadJson.flowerpos[i*3+1];
-            //         pos.z = loadJson.flowerpos[i*3+2];
-            //         GameObject flower = Instantiate(_flowers[loadJson.flowerIndex[i]-50],pos,rot,_MapObject.SectorObject[loadJson.flowerSector[i]].gameObject.transform);
-            //         GatheringObject flowerData = flower.GetComponent<GatheringObject>();
-            //         flower.transform.parent.gameObject.GetComponent<SectorObject>()._flower_remain += 1;
-            //     }
-            //     _sys.DayEnd();
-            // }
-            // JsonSave saveJson = new JsonSave();
-            // GameObject[] trees = GameObject.FindGameObjectsWithTag("tree");
-            // for (int i = 0; i < trees.Length; i++)
-            // {
-            //     saveJson.treepos.Add(trees[i].transform.position.x);
-            //     saveJson.treepos.Add(trees[i].transform.position.y);
-            //     saveJson.treepos.Add(trees[i].transform.position.z);
-            //     saveJson.treeday.Add(trees[i].GetComponent<TreeObject>()._days);
-            //     saveJson.treeSector.Add(trees[i].GetComponent<TreeObject>().getSector()._sectorNumber);
-            //     saveJson.treebool.Add(trees[i].GetComponent<TreeObject>()._isFallen);
-            // }
-            // saveJson.treecount = trees.Length;
-
-            // GameObject[] flowers = GameObject.FindGameObjectsWithTag("flower");
-            // for (int i = 0; i < flowers.Length; i++)
-            // {
-            //     saveJson.flowerpos.Add(flowers[i].transform.position.x);
-            //     saveJson.flowerpos.Add(flowers[i].transform.position.y);
-            //     saveJson.flowerpos.Add(flowers[i].transform.position.z);
-            //     saveJson.flowerIndex.Add(flowers[i].GetComponent<GatheringObject>()._itemCode);
-            //     saveJson.flowerSector.Add(flowers[i].transform.parent.GetComponent<SectorObject>()._sectorNumber);
-            // }
-            // saveJson.flowercount = flowers.Length;
-
-            // string json = JsonUtility.ToJson(saveJson, true);
-            // File.WriteAllText("jsonSave.json", json);
         }
     }
 

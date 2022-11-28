@@ -61,6 +61,7 @@ public class SaveData
     // 정령 버프 제사 진행도 및 꽃의 번호
     public int[] pray = new int[2];
 
+    // 장마, 한파 날짜
     public int _rainy_month;
     public int _rainy_day;
     public int _coldwave_month;

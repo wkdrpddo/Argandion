@@ -28,15 +28,15 @@ public class WeatherManager : MonoBehaviour
 
     private bool after4 = false; // 폭설 후
     private bool while4 = false; // 폭설 중 (폭설 - 폭설 - 비를 구현하기 위한 변수)
-    private int how4 = 0; // 폭설 몇일째인지 (폭설 - 폭설 - 비를 구현하기 위한 변수)
+    private int how4 = 0; // 폭설 며칠째인지 (폭설 - 폭설 - 비를 구현하기 위한 변수)
 
     private bool after5 = false; // 태풍 후
     private bool while5 = false; // 태풍 중 (태풍-태풍-비를 구현하기 위한 변수)
-    private int how5 = 0; // 태풍 몇일째인지 (태풍-태풍-비를 구현하기 위한 변수)
+    private int how5 = 0; // 태풍 며칠째인지 (태풍-태풍-비를 구현하기 위한 변수)
 
     private void Start() {
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
-        SetYearEvent(); // 나중에 변경/삭제 해야함
+        SetYearEvent(); 
         _snow = GameObject.Find("Main Camera").transform.GetChild(0).transform.GetChild(0).GetComponent<ParticleSystem>();
         _rain = GameObject.Find("Main Camera").transform.GetChild(0).transform.GetChild(1).GetComponent<ParticleSystem>();
     }
