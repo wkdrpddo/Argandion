@@ -12,7 +12,6 @@ public class DroppedItem : MonoBehaviour
     public int itemCode;
     public ItemObject itemObject;
 
-    // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -24,12 +23,4 @@ public class DroppedItem : MonoBehaviour
 
 
     }
-
-    // Update is called once per frame 
-    // void Update()
-    // {
-    //     transform.Rotate(Vector3.up * 100 * Time.deltaTime);
-
-    // }
-
 }

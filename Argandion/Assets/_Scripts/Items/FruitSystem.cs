@@ -13,7 +13,7 @@ public class FruitSystem : MonoBehaviour
     {
         _sector = gameObject.transform.parent.GetComponent<SectorObject>()._sectorNumber;
     }
-    // Start is called before the first frame update
+
     public void DayStart()
     {
         int rnd = Random.Range(0,3);

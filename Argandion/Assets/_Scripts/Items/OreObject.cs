@@ -37,7 +37,7 @@ public class OreObject : MonoBehaviour
                 break;
         }
     }
-    // Start is called before the first frame update
+
     public void DayEnd()
     {
         Destroy(gameObject);
