@@ -9,14 +9,13 @@ import {
 
 import './assets/scss/style.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import * as ReactBootstrap from "react-bootstrap";
 
 import MainPage from "./views/mainPage/mainIndex.jsx";
 import downloadPage from "./views/subPage/download.jsx";
 import introductionPage from "./views/subPage/introduction.jsx";
 import guidePage from "./views/subPage/guide.jsx";
 import copyrightPage from "./views/subPage/copyright.jsx";
-
+import releasePage from "./views/subPage/release.jsx";
 var hist = createBrowserHistory();
 
 ReactDOM.render(
@@ -26,6 +25,7 @@ ReactDOM.render(
             <Route path="/introduction" component={introductionPage} />
             <Route path="/guide" component={guidePage} />
             <Route path="/copyright" component={copyrightPage} />
+            <Route path="/release" component={releasePage} />
             <Route component={MainPage} />
         </Switch>
     </HashRouter>,
