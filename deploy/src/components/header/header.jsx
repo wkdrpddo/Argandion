@@ -39,6 +39,11 @@ const HeaderComponent = () => {
                                         저작권
                                     </Link>
                                 </NavItem>
+                                <NavItem>
+                                    <Link className="nav-link font-weight-bold" to={"release"}>
+                                        릴리스 노트
+                                    </Link>
+                                </NavItem>
                             </Nav>
                         </Collapse>
                     </Navbar>
