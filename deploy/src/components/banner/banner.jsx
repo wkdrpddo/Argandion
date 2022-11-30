@@ -9,7 +9,7 @@ const HeaderBanner = () => {
             <Container>
                 <Row className="justify-content-center">
                     <Col lg="8" md="6" className="align-self-center text-center">
-                        <img src={logo}></img><br/>
+                        <img src={logo} alt="로고"></img><br/>
                         <a id="downloadButton" href='./Argandion.zip' download>
                             <Button to="/#coming" className="btn-lg m-t-30 btn-success-gradiant font-16">
                             무료 다운로드

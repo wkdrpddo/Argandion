@@ -9,7 +9,6 @@ import {
 
 import './assets/scss/style.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import * as ReactBootstrap from "react-bootstrap";
 
 import MainPage from "./views/mainPage/mainIndex.jsx";
 import downloadPage from "./views/subPage/download.jsx";
